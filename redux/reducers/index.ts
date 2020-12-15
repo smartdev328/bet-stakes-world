@@ -1,5 +1,4 @@
-import {userReducer, UserReducerState} from './user';
-
+import { userReducer, UserReducerState } from './user';
 
 export const reducers = {
   user: userReducer,

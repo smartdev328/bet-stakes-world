@@ -16,8 +16,15 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "@styles/*": ["./styles/*"],
+      "@types/*": ["./types/*"],
+      "@redux/*": ["./redux/*"],
+      "@components/*": ["./components/*"],
+    }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "pages/_app.js"]
 }

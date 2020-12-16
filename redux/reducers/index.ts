@@ -1,7 +1,7 @@
 import { userReducer, UserReducerState } from './user';
 
 export const reducers = {
-  user: userReducer,
+  user: userReducer
 };
 
 export type ReducerKeys = keyof typeof reducers;

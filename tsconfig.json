@@ -22,7 +22,7 @@
       "@styles/*": ["./styles/*"],
       "@types/*": ["./types/*"],
       "@redux/*": ["./redux/*"],
-      "@components/*": ["./components/*"],
+      "@components/*": ["./components/*"]
     }
   },
   "exclude": ["node_modules"],

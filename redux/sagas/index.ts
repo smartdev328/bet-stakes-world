@@ -7,20 +7,18 @@ function* loadDataSaga() {
     const data = yield res.json();
     yield put({
       type: LOAD_USER_SUCCESS,
-      payload: data,
+      payload: data
     });
   } catch (error) {
     yield put({
       error,
-      type: LOAD_USER_FAILURE,
+      type: LOAD_USER_FAILURE
     });
   }
 }
 
 function* rootSaga() {
-  yield all([
-    takeLatest(LOAD_USER, loadDataSaga),
-  ]);
+  yield all([takeLatest(LOAD_USER, loadDataSaga)]);
 }
 
 export default rootSaga;

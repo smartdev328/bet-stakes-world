@@ -1,7 +1,26 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  node: circleci/node@4.0.0
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:14.15.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run TSLint
+          command: npm run tslint
+
 workflows:
-  node-tests:
+  lint-tests:
     jobs:
-      - node/test
+      - lint

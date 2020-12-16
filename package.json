@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
+    "tslint": "tslint -p . -c tslint.json",
     "postbuild": "next-sitemap"
   },
   "dependencies": {

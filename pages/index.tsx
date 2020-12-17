@@ -1,34 +1,18 @@
 import Head from 'next/head';
-import { Typography } from 'antd';
 
-import styles from '@styles/Home.module.css';
-
-const { Title } = Typography;
+import AppLayout from '@components/AppLayout';
+// import styles from '@styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
+        <title>The Daily Stakes</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <Typography>
-          <Title>
-            Welcome to <a href="https://nextjs.org">Next.js!</a>
-          </Title>
-        </Typography>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer">
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <AppLayout>
+        <h1>Daily Stakes Content</h1>
+      </AppLayout>
+    </>
   );
 }

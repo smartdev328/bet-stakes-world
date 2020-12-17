@@ -1,0 +1,112 @@
+.header {
+  background-color: var(--primaryColor);
+  padding: 25px 50px;
+}
+
+.info {
+  color: #fff;
+  margin: 0;
+}
+
+.info strong {
+  font-weight: 600;
+}
+
+.countdownBox {
+  position: relative;
+}
+
+.countdownBox:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -14px;
+  width: 6px;
+  height: 100%;
+  background-color: var(--actionYellowColor); 
+}
+
+.countdownBox_desc {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--backgroundColor);
+}
+
+.countdownBox_countdown_timer {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 38px;
+  display: flex;
+  align-items: center;
+  color: var(--backgroundColor);
+}
+
+.yellowBoldLink {
+  font-size: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration-line: underline;
+  text-align: left;
+  color: var(--actionYellowColor);
+}
+
+.dateBar a {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--backgroundColor);
+}
+
+.dateBar .dateBarDivider {
+  border-left-color: #C4C4C4;
+  width: 2px;
+  height: 25px;
+  margin: 0 13px;
+}
+
+.ctaBtns .subscribeBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  background-color: var(--lightGreyColor);
+  margin-right: 14px;
+  padding:  7.5px 24px;
+  height: auto;
+  outline: none;
+  border: none;
+}
+
+.ctaBtns .loginBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding:  6.5px 24px;
+  color: var(--lightGreyColor);
+  border: 1px solid var(--lightGreyColor);
+  height: auto;
+  outline: none;
+}
+
+.header .headerLeftCol {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.header .headerRightCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}

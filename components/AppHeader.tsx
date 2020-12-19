@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Row, Col, Image, Button, Divider, Menu } from 'antd';
 import Link from 'next/link';
-import { UserOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
 import styles from './AppHeader.module.css';
@@ -434,7 +434,10 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
             <Button type="primary" className={styles.subscribeBtn}>
               Subscribe Now
             </Button>
-            <Button type="ghost" icon={<UserOutlined />} className={styles.loginBtn}>
+            <Button
+              type="ghost"
+              icon={<Image src="/images/identity_icon.svg" className={styles.user_icon} />}
+              className={styles.loginBtn}>
               Log In
             </Button>
           </div>

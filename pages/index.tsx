@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import Head from 'next/head';
 import { Image, Carousel, Button, Dropdown, Menu } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
@@ -41,6 +42,7 @@ export default function Home() {
       </Head>
       <AppLayout>
         <HeroBanner />
+        <MembershipOfferings />
       </AppLayout>
     </>
   );
@@ -334,5 +336,102 @@ function HeroBanner() {
         </div>
       </div>
     </section>
+  );
+}
+
+function MembershipOfferings() {
+  return (
+    <div className={styles.membershipOffers}>
+      <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
+      <div className={styles.membershipOffers_desc}>
+        Parturient luctus egestas venenatis ante euismod vitae. At molestie vitae pellentesque elit
+        nam elementum nunc.
+      </div>
+      <div className={styles.membershipOffers_plans}>
+        <div className={styles.plan}>
+          <div className={styles.plan_content}>
+            <div className={styles.plan_content_info}>
+              <div className={styles.plan_content_title}>Sports Card</div>
+              <div className={styles.plan_content_desc}>
+                <span>3.2k Active Players</span>
+                <span>100k Total Winnings</span>
+              </div>
+            </div>
+            <div className={styles.plan_content_details}>
+              <div className={styles.price_view}>
+                <div>
+                  <strong>1 sport weekly</strong> Starting at
+                </div>
+                <span className={styles.price}>$89.00</span>
+              </div>
+              <ul className={styles.plan_content_details_desc}>
+                <li>Lorem ipsum dolor sit amet, consectetur</li>
+                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
+                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
+                <li>Vignissim nisl risus vulputate Faucibus libero</li>
+                <li>Morbi viverra</li>
+              </ul>
+              <Button className={styles.learn_more_btn}>Learn More</Button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.plan}>
+          <div className={styles.plan_content}>
+            <div className={styles.plan_content_info}>
+              <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
+              <div className={styles.plan_content_desc}>
+                <span>3.2k Active Players</span>
+                <span>100k Total Winnings</span>
+              </div>
+            </div>
+            <div className={styles.plan_content_details}>
+              <div className={styles.price_view}>
+                <img src="/images/deal_circle.svg" className={styles.deal_circle} />
+                <div>
+                  <strong>All sports Daily</strong> Starting at
+                </div>
+                <div className={styles.price}>$40.00</div>
+              </div>
+              <ul className={styles.plan_content_details_desc}>
+                <li>Lorem ipsum dolor sit amet, consectetur</li>
+                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
+                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
+                <li>Vignissim nisl risus vulputate Faucibus libero</li>
+                <li>Morbi viverra</li>
+              </ul>
+              <Button className={styles.learn_more_btn}>Learn More</Button>
+            </div>
+          </div>
+          <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
+        </div>
+        <div className={styles.plan}>
+          <div className={styles.plan_content}>
+            <div className={styles.plan_content_info}>
+              <div className={styles.plan_content_title}>Fantasy</div>
+              <div className={styles.plan_content_desc}>
+                <span>3.2k Active Players</span>
+                <span>100k Total Winnings</span>
+              </div>
+            </div>
+            <div className={styles.plan_content_details}>
+              <div className={styles.price_view}>
+                <div>
+                  <strong>Daily Lineups</strong> Starting at
+                </div>
+                <div className={styles.price}>$10.00</div>
+              </div>
+              <ul className={styles.plan_content_details_desc}>
+                <li>Lorem ipsum dolor sit amet, consectetur</li>
+                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
+                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
+                <li>Vignissim nisl risus vulputate Faucibus libero</li>
+                <li>Morbi viverra</li>
+              </ul>
+              <Button className={styles.learn_more_btn}>Learn More</Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -22,7 +22,8 @@
       "@styles/*": ["./styles/*"],
       "@types/*": ["./types/*"],
       "@redux/*": ["./redux/*"],
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@images/*": ["./public/images/*"]
     }
   },
   "exclude": ["node_modules"],

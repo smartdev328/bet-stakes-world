@@ -9,7 +9,8 @@
           "@components": "./components",
           "@styles": "./styles",
           "@types": "./types",
-          "@redux": "./redux"
+          "@redux": "./redux",
+          "@images": "./public/images"
         }
       }
     ],

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import Head from 'next/head';
 import { Image, Carousel, Button, Dropdown, Menu } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
@@ -375,7 +374,7 @@ function MembershipOfferings() {
             </div>
           </div>
         </div>
-        <div className={styles.plan}>
+        <div className={`${styles.plan} ${styles.main_plan}`}>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -386,7 +385,11 @@ function MembershipOfferings() {
             </div>
             <div className={styles.plan_content_details}>
               <div className={styles.price_view}>
-                <img src="/images/deal_circle.svg" className={styles.deal_circle} />
+                <img
+                  src="/images/deal_circle.svg"
+                  className={styles.deal_circle}
+                  alt="Big Deal Circle"
+                />
                 <div>
                   <strong>All sports Daily</strong> Starting at
                 </div>

@@ -386,7 +386,7 @@ li .square_icon {
   margin-right: 0;
 }
 .plan_content_info {
-  padding: 16px 50px 21px;
+  padding: 16px 0 21px;
   background: #fff;
 }
 .plan_content_title {
@@ -449,7 +449,7 @@ li .square_icon {
   line-height: 184.4%;
   color: #FFFFFF;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .plan_content_details_desc li:before { 
   content: '';
@@ -458,6 +458,7 @@ li .square_icon {
   height: 4px;
   background: #FFC700;
   margin-right: 10px;
+  margin-top: 13px;
 }
 .learn_more_btn {
   background: #FFC700;
@@ -470,6 +471,7 @@ li .square_icon {
   border: none;
   height: auto;
   width: 100%;
+  margin-top: 0.6em;
 }
 
 .plan_extra_content {
@@ -489,4 +491,206 @@ li .square_icon {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 135%;
+}
+
+@media (max-width: 1400px) and (min-width: 1241px) {
+  .membershipOffers {
+    padding: 118px 50px 130px;
+  }
+  .membershipOffers_title {
+    font-size: 62px;
+  }
+  .membershipOffers_desc {
+    font-size: 30px;
+  }
+  .plan {
+    min-width: 360px;
+    max-width: 390px;
+    margin-right: 25px;
+    flex: 1;
+    text-align: left;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .plan_content_details {
+    padding: 24px;
+  }
+  .price_view {
+    padding: 15px;
+    font-size: 13px;
+  }
+  .price_view .price {
+    font-size: 80px;
+    margin: 12px 0;
+  }
+  .learn_more_btn {
+    padding: 10.5px 24px;
+  }
+  .plan_extra_content {
+    font-size: 40px;
+  }
+  .deal_circle {
+    width: 128%;
+  }
+}
+
+@media (max-width: 1240px) and (min-width: 1025px) {
+  .membershipOffers {
+    padding: 98px 30px 100px;
+  }
+  .membershipOffers_title {
+    font-size: 54px;
+    margin-bottom: 0.3em;
+  }
+  .membershipOffers_desc {
+    font-size: 24px;
+    max-width: 75%;
+  }
+  .plan {
+    min-width: 300px;
+    max-width: 360px;
+    margin-right: 20px;
+  }
+  .plan_content_info {
+    padding: 14px 0 16px;
+  }
+  .plan_content_title {
+    font-size: 20px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .plan_content_desc span:last-child {
+    margin-left: 10px;
+  }
+  .plan_content_details {
+    padding: 16px;
+  }
+  .price_view {
+    padding: 14px;
+    font-size: 12px;
+  }
+  .plan_content_details_desc li {
+    font-size: 14px;
+  }
+  .plan_content_details_desc li:before { 
+    margin-right: 6px;
+    margin-top: 11px;
+  }
+  .price_view .price {
+    font-size: 70px;
+    margin: 8px 0;
+  }
+  .learn_more_btn {
+    padding: 7.5px 24px;
+    font-size: 14px;
+  }
+  .plan_extra_content {
+    font-size: 36px;
+  }
+  .deal_circle {
+    width: 124%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .membershipOffers {
+    padding: 78px 18px 60px;
+  }
+  .membershipOffers_title {
+    font-size: 48px;
+    margin-bottom: 0.5em;
+    padding: 0 1em;
+  }
+  .membershipOffers_desc {
+    font-size: 20px;
+    max-width: 640px;
+  }
+  .membershipOffers_plans {
+    flex-direction: column;
+  }
+  .plan {
+    order: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-right: 0;
+    margin-bottom: 2em;
+  }
+  .main_plan {
+    order: 0;
+  }
+  .plan_content_info {
+    padding: 16px 0;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .price_view {
+    padding: 16px;
+    font-size: 13px;
+  }
+  .price_view .price {
+    font-size: 82px;
+  }
+  .plan_extra_content {
+    font-size: 42px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  .deal_circle {
+    width: 128%;
+  }
+}
+
+@media (max-width: 600px) {
+  .membershipOffers {
+    padding: 38px 20px 0px;
+  }
+  .membershipOffers_title {
+    font-size: 40px;
+    line-height: 117.9%;
+  }
+  .membershipOffers_desc {
+    font-size: 18px;
+    line-height: 129.9%;
+  }
+  .plan {
+    width: 100%;
+  }
+  .plan_extra_content {
+    font-size: 32px;
+    line-height: 59px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .price_view .price {
+    font-size: 64px;
+    margin: 12px 0;
+  }
+  .price_view {
+    font-size: 12px;
+  }
+  .plan_content_details_desc li {
+    font-size: 12px;
+  }
+  .plan_content_details_desc li:before {
+    margin-right: 8px;
+    margin-top: 10px;
+  }
+  .learn_more_btn {
+    font-size: 12.6px;
+    line-height: 19px;
+    padding: 10px 24px;
+  }
+  .plan_content_details {
+    padding: 24px;
+  }
 }

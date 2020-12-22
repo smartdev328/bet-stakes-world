@@ -42,6 +42,7 @@ export default function Home() {
       <AppLayout>
         <HeroBanner />
         <MembershipOfferings />
+        <OurDailyStandards />
       </AppLayout>
     </>
   );
@@ -432,6 +433,86 @@ function MembershipOfferings() {
               </ul>
               <Button className={styles.learn_more_btn}>Learn More</Button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OurDailyStandards() {
+  return (
+    <div className={styles.daily_standards}>
+      <div className={styles.daily_standards_title}>
+        Our daily
+        <br />
+        standards
+      </div>
+      <div className={styles.daily_standards_list}>
+        <div className={styles.daily_standards_item}>
+          <Image
+            src={'/images/daily_standards_analytics.svg'}
+            className={styles.daily_standards_icon}
+          />
+          <div className={styles.daily_standards_content}>
+            <div className={styles.daily_standards_content_title}>
+              <h4>Analytical Driven</h4>
+              <img src="/images/wave.svg" alt="wave" className={styles.wave_img} />
+            </div>
+            <p>
+              Numbers tell the story to everything we do. Every pick, every play, every action is
+              researched and analysed to ensure our plays are a step ahead of the field. We never
+              release a pick for the sake of filling our card (NO Fluff Picks)
+            </p>
+          </div>
+        </div>
+        <div className={styles.daily_standards_item}>
+          <Image
+            src={'/images/daily_standards_customer.svg'}
+            className={styles.daily_standards_icon}
+          />
+          <div className={styles.daily_standards_content}>
+            <div className={styles.daily_standards_content_title}>
+              <h4>Customer Focused</h4>
+              <img src="/images/wave.svg" alt="wave" className={styles.wave_img} />
+            </div>
+            <p>
+              Serving our customers remains at the forefront of our business. Our entire team is
+              available by email or by instagram around the clock. Refunds are given if there are
+              any errors receiving picks.
+            </p>
+          </div>
+        </div>
+        <div className={styles.daily_standards_item}>
+          <Image
+            src={'/images/daily_standards_working.svg'}
+            className={styles.daily_standards_icon}
+          />
+          <div className={styles.daily_standards_content}>
+            <div className={styles.daily_standards_content_title}>
+              <h4>Hardest Working</h4>
+              <img src="/images/wave2.svg" alt="wave" className={styles.wave_img} />
+            </div>
+            <p>
+              Plain and simple no one else will ever out work our team. Our objective is clear, help you win more plays.
+            </p>
+          </div>
+        </div>
+        <div className={styles.daily_standards_item}>
+          <Image
+            src={'/images/daily_standards_pedigre.svg'}
+            className={styles.daily_standards_icon}
+          />
+          <div className={styles.daily_standards_content}>
+            <div className={styles.daily_standards_content_title}>
+              <h4>Pedigre</h4>
+              <img src="/images/wave4.svg" alt="wave" className={styles.wave_img} />
+            </div>
+            <p>
+              Time and time again we see our picks come out on top. While we will not claim
+              enormously high and unrealistic win rates, our numbers, our picks, our work, cannot be
+              beat.
+            </p>
           </div>
         </div>
       </div>

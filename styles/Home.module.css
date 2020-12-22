@@ -694,3 +694,140 @@ li .square_icon {
     padding: 24px;
   }
 }
+
+/* Our Daily Standards */
+.daily_standards {
+  padding: 120px 50px 50px;
+  background: url('/images/daily_standards_bg1.png') no-repeat;
+  background-color: #1A1A1A;
+  background-size: cover;
+}
+.daily_standards_title {
+  max-width: 1100px;
+  margin: auto;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #F1F1F1;
+  padding-bottom: 90px;
+}
+.daily_standards_list {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.daily_standards_item {
+  width: 46%;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 75px;
+}
+.daily_standards_icon {
+  width: 62px;
+  height: 62px;
+}
+.daily_standards_content {
+  margin-left: 22px;
+}
+.daily_standards_content h4 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 52px;
+  display: flex;
+  align-items: center;
+  color: #F1F1F1;
+  display: inline-block;
+  margin-bottom: 0;
+}
+.daily_standards_content_title {
+  position: relative;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+.wave_img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.daily_standards_content p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #FFFFFF;
+}
+
+@media (max-width: 1240px) {
+  .daily_standards {
+    padding: 80px 30px 20px;
+  }
+  .daily_standards_title {
+    font-size: 62px;
+    padding-bottom: 50px;
+  }
+  .daily_standards_item {
+    width: 47%;
+  }
+  .daily_standards_content_title {
+    margin-bottom: 20px;
+  }
+  .daily_standards_content p {
+    font-size: 17px;
+  }
+  .daily_standards_icon {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .daily_standards {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .daily_standards_title {
+    text-align: center;
+  }
+  .daily_standards_list {
+    flex-flow: column;
+    align-items: center;
+  }
+  .daily_standards_item {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .daily_standards {
+    padding: 40px 18px 20px;
+  }
+  .daily_standards_title {
+    font-size: 40px;
+    line-height: 117.9%;
+    padding-bottom: 40px;
+  }
+  .daily_standards_content h4 {
+    font-size: 28px;
+    line-height: 44px;
+  }
+  .daily_standards_content p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .daily_standards_icon {
+    width: 42px;
+    height: 42px;
+    margin-left: 12px;
+  }
+  .daily_standards_item {
+    margin-bottom: 25px;
+    margin-right: 4px;
+  }
+}

@@ -494,7 +494,8 @@ function OurDailyStandards() {
               <img src="/images/wave2.svg" alt="wave" className={styles.wave_img} />
             </div>
             <p>
-              Plain and simple no one else will ever out work our team. Our objective is clear, help you win more plays.
+              Plain and simple no one else will ever out work our team. Our objective is clear, help
+              you win more plays.
             </p>
           </div>
         </div>

@@ -341,6 +341,120 @@ li .square_icon {
   .heroBannerRight .container {
     padding-right: 18px;
   }
+  .heroBannerLeft .main_desc {
+    font-size: 45px;
+  }
+  .heroBannerLeft .container {
+    max-width: 530px;
+  }
+  .heroBannerLeft .second_desc {
+    padding: 18px 0;
+  }
+  .heroBannerLeft .second_desc span {
+    font-size: 42px;
+    border-bottom: 8px solid #1a1a1a;
+  } 
+  .heroBannerLeft ul li {
+    font-size: 17px;
+    line-height: 135%;
+    margin-top: 0.8em;
+    align-items: flex-start;
+  }
+  li .square_icon {
+    width: 6px;
+    height: 6px;
+    margin-right: 10px;
+    margin-top: 8px;
+  }
+  .carousel_slide {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 882px) {
+  .heroBanner {
+    flex-direction: column;
+    height: auto;
+  }
+  .heroBannerLeft {
+    flex: none;
+    height: 520px;
+  }
+
+  .heroBannerRight {
+    height: 220px;
+    flex: none;
+  }
+  .heroBannerRight .container {
+    padding-right: 0;
+    padding-top: 0;
+  }
+  .heroBannerRightBg {
+    width: 800px;
+    transform: translate(-40%, -30%);
+  }
+  .carousel {
+    max-width: 100%;
+  }
+  .carousel_slide {
+    padding: 0;
+    height: 220px;
+  }
+  .carousel_slide_text {
+    font-size: 20px;
+    line-height: 130%;
+    max-width: 300px;
+    margin: 0px 0 20px;
+  }
+  .carousel_slide_subscribeBtn {
+    padding: 11.5px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .heroBannerLeft {
+    height: 440px;
+    padding-top: 136px;
+  }
+  .heroBannerLeft .container {
+    max-width: 360px;
+    padding: 0 18px;
+  }
+  .heroBannerLeft .main_desc {
+    font-size: 28px;
+    margin-right: 20px;
+  }
+  .heroBannerLeft .second_desc span {
+    font-size: 28px;
+    border-bottom: 4px solid #1a1a1a;
+  }
+  .heroBannerLeft ul li {
+    font-size: 12px;
+  }
+  li .square_icon {
+    margin-right: 10px;
+    margin-top: 8px;
+  }
+  .sports_and_matches {
+    padding: 0;
+  }
+  .sports_and_matches .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .dropdownBox {
+    margin: 0;
+
+  }
+  .matchesCarouselView {
+    padding: 16px 8px;
+  }
+  .arrow_back_icon {
+    left:  15px;
+  } 
+  .arrow_forward_icon {
+    right: 15px;
+  }
 }
 
 /* Memebership Offerings Section */

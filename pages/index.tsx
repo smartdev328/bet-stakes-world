@@ -5,6 +5,7 @@ import { createRef, RefObject, useState } from 'react';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import AppLayout from '@components/AppLayout';
+import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Home.module.css';
 
 type ArrowIconProps = {
@@ -15,6 +16,15 @@ type ArrowIconProps = {
 type SportInfoType = {
   name: string;
   logo: string;
+};
+
+type SportCardsSelectionType = {
+  nba: boolean;
+  nfl: boolean;
+  mlb: boolean;
+  ufc: boolean;
+  f1: boolean;
+  soccer: boolean;
 };
 
 function ArrowIcon({ className, onClick }: ArrowIconProps) {
@@ -43,6 +53,7 @@ export default function Home() {
         <HeroBanner />
         <MembershipOfferings />
         <OurDailyStandards />
+        <BetOnSports />
       </AppLayout>
     </>
   );
@@ -517,6 +528,232 @@ function OurDailyStandards() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BetOnSports() {
+  const [selectedCards, setSelectedCards] = useState<SportCardsSelectionType>({
+    nba: false,
+    nfl: false,
+    mlb: false,
+    ufc: false,
+    f1: false,
+    soccer: false
+  });
+  const toggleSelectCard = (prop: keyof SportCardsSelectionType) => {
+    const copySelectedCards = Object.assign({}, selectedCards);
+    copySelectedCards[prop] = !copySelectedCards[prop];
+    setSelectedCards(copySelectedCards);
+  };
+  const responsive = [
+    {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 4,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 1150,
+      settings: {
+        slidesToShow: 3,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 882,
+      settings: {
+        slidesToShow: 2,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        dots: true,
+        variableWidth: true,
+        swipeToSlide: true
+      }
+    }
+  ];
+  return (
+    <div className={styles.bet_on_sports}>
+      <div className={styles.bet_on_sports_title}>
+        Bet on any or all of these <strong>Six sports</strong>
+      </div>
+      <div className={styles.bet_on_sports_desc}>
+        <p>Select the sports you would like to bet on and continue to checkout</p>
+        <Button className={styles.checkout_btn}>Continue to checkout</Button>
+      </div>
+      <div className={styles.sports_cards}>
+        <Carousel
+          slidesToShow={6}
+          infinite={false}
+          dots={true}
+          initialSlide={0}
+          responsive={responsive}
+          className="sports-cards-carousel">
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.nba_box} ${
+                  selectedCards.nba && styles.nba_box_active
+                }`}
+                onClick={() => toggleSelectCard('nba')}>
+                {selectedCards.nba && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <NBA_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>NBA</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.nfl_box} ${
+                  selectedCards.nfl && styles.nfl_box_active
+                }`}
+                onClick={() => toggleSelectCard('nfl')}>
+                {selectedCards.nfl && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <NFL_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>NFL</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.mlb_box} ${
+                  selectedCards.mlb && styles.mlb_box_active
+                }`}
+                onClick={() => toggleSelectCard('mlb')}>
+                {selectedCards.mlb && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <MLB_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>MLB</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.ufc_box} ${
+                  selectedCards.ufc && styles.ufc_box_active
+                }`}
+                onClick={() => toggleSelectCard('ufc')}>
+                {selectedCards.ufc && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <UFC_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>UFC</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            </div>
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.f1_box} ${
+                  selectedCards.f1 && styles.f1_box_active
+                }`}
+                onClick={() => toggleSelectCard('f1')}>
+                {selectedCards.f1 && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <F1_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>Formula 1</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            </div>
+          <div>
+            <div className={styles.sports_card}>
+              <div
+                className={`${styles.sports_card_box} ${styles.soccer_box} ${
+                  selectedCards.soccer && styles.soccer_box_active
+                }`}
+                onClick={() => toggleSelectCard('soccer')}>
+                {selectedCards.soccer && (
+                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                )}
+                <SOCCER_SVG className={styles.sports_card_image} />
+                <div className={styles.sports_card_box_content}>
+                  <h3>Soccer</h3>
+                  <div className={styles.desc}>
+                    <div>Current record: 90-0</div>
+                    <div>R.O.I: $1.4k</div>
+                  </div>
+                  <ul>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Adipiscing elit</li>
+                    <li>Volutpat arcu Elit eget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Carousel>
+      </div>
+      <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
     </div>
   );
 }

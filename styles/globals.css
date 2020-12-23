@@ -151,28 +151,45 @@ p {
   text-align: center;
 }
 
-.hero-banner .ant-carousel .slick-dots li {
+.hero-banner .ant-carousel .slick-dots li,
+.sports-cards-carousel .slick-dots li {
   border: 4px solid transparent;
   height: 8px;
   width: 8px;
 }
 
-.hero-banner .ant-carousel .slick-dots li.slick-active {
+.hero-banner .ant-carousel .slick-dots li.slick-active,
+.sports-cards-carousel .slick-dots li.slick-active {
   border: 4px solid #FFFFFF;
   width: 8px;
 }
 
-.hero-banner .ant-carousel .slick-dots li button {
+.hero-banner .ant-carousel .slick-dots li button,
+.sports-cards-carousel .slick-dots li button,
+.sports-cards-carousel .slick-dots li.slick-active button {
   width: 8px;
   height: 8px;
   background: #FFC700;
   opacity: 1;
 }
 
-.hero-banner .slick-dots li button:before {
+.hero-banner .slick-dots li button:before,
+.sports-cards-carousel .slick-dots li button:before {
   display: none;
 }
 
 .matches-carousel .slick-dots {
   display: none !important;
+}
+.sports-cards-carousel {
+  width: 100%;
+}
+.sports-cards-carousel .slick-list {
+  overflow: visible;
+}
+.ant-carousel {
+  width: 100%;
+}
+.sports-cards-carousel .slick-dots-bottom {
+  bottom: -50px;
 }

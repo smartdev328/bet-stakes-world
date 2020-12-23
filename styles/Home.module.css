@@ -663,6 +663,7 @@ li .square_icon {
   }
   .plan {
     width: 100%;
+    max-width: 360px;
   }
   .plan_extra_content {
     font-size: 32px;
@@ -829,5 +830,388 @@ li .square_icon {
   .daily_standards_item {
     margin-bottom: 25px;
     margin-right: 4px;
+  }
+}
+
+
+/* Bets On All Sports */
+.bet_on_sports {
+  background: #F1F1F1;
+  padding: 200px 50px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bet_on_sports_title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1A1A1A;
+}
+.bet_on_sports_desc {
+  display: flex;
+  align-items: center;
+  max-width: 870px;
+  margin: auto;
+  margin-top: 2em;
+}
+.bet_on_sports_desc p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 117.9%;
+  color: #1A1A1A;
+  margin: 0;
+}
+.checkout_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #1A1A1A;
+  background: #FFC700;
+  margin-left: 55px;
+  padding: 15.5px 24px;
+  border: none;
+  height: auto;
+}
+.sports_cards {
+  padding: 100px 0;
+  display: flex;
+  flex-flow: row wrap;
+}
+.sports_card {
+  width: 220px;
+  margin: 0 6px;
+
+}
+.sports_card_box {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #1A1A1A;
+}
+.sports_card_box:hover {
+  transform: scale(1.15, 1.15);
+  border: 2px solid #1A1A1A;
+  box-sizing: border-box;
+  z-index: 10;
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+}
+.sports_card_checkmark {
+  width: 24px;
+  height: 24px;
+  top: 16px;
+  left: 16px;
+  position: absolute;
+  z-index: 3;
+}
+
+.sports_card_image path {
+  fill: #fff;
+}
+.sports_card h3 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  margin-bottom: 5px;
+}
+.sports_card .desc {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #A3A3A3;
+}
+.sports_card .desc div {
+  margin-bottom: 4px;
+}
+.sports_card_box_content {
+  padding: 14px 16px;
+  margin-top: 280px;
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
+}
+.sports_card ul {
+  margin-top: 14px;
+  list-style: none;
+  padding-left: 0;
+}
+.sports_card li {
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  color: #646464;
+  display: flex;
+  align-items: flex-start;
+}
+
+.sports_card li:before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #C4C4C4;
+  margin-right: 10px;
+  margin-top: 13px;
+}
+.nba_box_active {
+  background: #EC4C15;
+  border: 2px solid #1a1a1a;
+}
+.nfl_box_active {
+  background: #91442A;
+  border: 2px solid #1a1a1a;
+}
+.mlb_box_active {
+  background: #1878FB;
+  border: 2px solid #1a1a1a;
+}
+.ufc_box_active {
+  background: #F9282B;
+  border: 2px solid #1a1a1a;
+}
+.f1_box_active {
+  background: #505054;
+  border: 2px solid #1a1a1a;
+}
+.soccer_box_active {
+  background: #6DCF40;
+  border: 2px solid #1a1a1a;
+}
+.sports_card_image {
+  position: absolute;
+}
+.nba_box .sports_card_image {
+  transform: rotate(-90deg);
+  top: -143%;
+  left: -200%;
+  height: 200%;
+}
+.nfl_box .sports_card_image {
+  transform: rotate(90deg);
+  height: 200%;
+  top: 30%;
+  left: -120%;
+}
+.mlb_box .sports_card_image {
+  height: 75%;
+  left: -95%;
+  top: -3%;
+}
+.ufc_box .sports_card_image {
+  height: 55%;
+  top: 5%;
+  left: -60%;
+}
+.ufc_box .sports_card_image path {
+  fill: transparent;
+  stroke-width: 4.8px;
+}
+.f1_box .sports_card_image {
+  height: 38%;
+  left: -165%;
+  top: 10%;
+}
+.f1_box .sports_card_image path {
+  fill: transparent;
+  stroke: #fff;
+}
+.soccer_box .sports_card_image {
+  transform: rotate(-90deg);
+  height: 56%;
+  left: -210%;
+  top: 26%;
+}
+.sports_cards {
+  width: 100%;
+  justify-content: center;
+}
+.mobile_checkout_btn {
+  display: none;
+}
+
+@media (max-width: 1500px) {
+  .bet_on_sports_title {
+    font-size: 62px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 30px;
+  }
+  .nba_box .sports_card_image {
+    top: -133%;
+    left: -230%;
+    height: 160%;
+  }
+  .nfl_box .sports_card_image {
+    height: 200%;
+    top: 38%;
+    left: -140%;
+  }
+  .mlb_box .sports_card_image {
+    height: 75%;
+    left: -115%;
+    top: -3%;
+  }
+  .ufc_box .sports_card_image {
+    height: 55%;
+    top: 5%;
+    left: -75%;
+  }
+  .ufc_box .sports_card_image path {
+    fill: transparent;
+    stroke-width: 4.8px;
+  }
+  .f1_box .sports_card_image {
+    height: 38%;
+    left: -192%;
+    top: 10%;
+  }
+  .soccer_box .sports_card_image {
+    height: 56%;
+    left: -239%;
+    top: 24%;
+  }
+  .sports_card li {
+    font-size: 14px;
+  }
+  .sports_card_box_content {
+    margin-top: 260px;
+  }
+  .sports_card {
+    width: 200px;
+  }
+}
+@media (max-width: 1400px) {
+  .bet_on_sports {
+    padding: 100px 30px 50px;
+  }
+  .bet_on_sports_title {
+    font-size: 58px;
+    text-align: center;
+    max-width: 870px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 26px;
+  }
+  .sports_cards {
+    justify-content: center;
+    max-width: 1082px;
+    overflow: hidden;
+    padding: 100px 30px;
+  }
+  .sports_card {
+    width: 240px;
+    margin: 24px 16px;
+  }
+  .nba_box .sports_card_image {
+    top: -109%;
+    left: -180%;
+    height: 130%;
+  }
+  .nfl_box .sports_card_image {
+    height: 170%;
+    top: 50%;
+    left: -118%;
+  }
+  .mlb_box .sports_card_image {
+    height: 83%;
+    left: -79%;
+    top: -8%;
+  }
+  .ufc_box .sports_card_image {
+    height: 54%;
+    top: 5%;
+    left: -52%;
+  }
+  .f1_box .sports_card_image {
+    height: 40%;
+    left: -150%;
+    top: 10%;
+  }
+  .soccer_box .sports_card_image {
+    height: 56%;
+    left: -190%;
+    top: 25%;
+  }
+  .sports_card_box_content {
+    margin-top: 280px;
+  }
+}
+@media (max-width: 1240px) {
+  .bet_on_sports {
+    padding: 100px 30px 50px;
+  }
+
+}
+@media (max-width: 1152px) {
+  .sports_cards {
+    max-width: 862px;
+    padding: 70px 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .bet_on_sports {
+    padding: 100px 18px 50px;
+  }
+  .bet_on_sports_title {
+    font-size: 52px;
+    max-width: 720px;
+  }
+  .bet_on_sports_desc {
+    flex-direction: column;
+    text-align: center;
+  }
+  .checkout_btn {
+    margin-top: 1.5em;
+    margin-left: 0;
+  }
+}
+@media (max-width: 882px) {
+  .sports_cards {
+    max-width: 550px;
+    padding: 50px 12px 70px;
+  }
+  .sports_card {
+    width: 240px;
+    margin: 24px 8px;
+  }
+}
+@media (max-width: 600px) {
+  .bet_on_sports_title {
+    font-size: 32px;
+    line-height: 117.9%;
+    max-width: 380px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 18px;
+    line-height: 117.9%;
+  }
+  .checkout_btn {
+    display: none;
+  }
+  .mobile_checkout_btn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+    color: #1A1A1A;
+    height: auto;
+    padding: 15.5px 24px;
+    display: block;
+    background: #FFC700;
+    margin-bottom: 25px;
+    border: none;
   }
 }

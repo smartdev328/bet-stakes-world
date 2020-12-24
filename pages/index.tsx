@@ -711,7 +711,7 @@ function BetOnSports() {
                 </div>
               </div>
             </div>
-            </div>
+          </div>
           <div>
             <div className={styles.sports_card}>
               <div
@@ -737,7 +737,7 @@ function BetOnSports() {
                 </div>
               </div>
             </div>
-            </div>
+          </div>
           <div>
             <div className={styles.sports_card}>
               <div

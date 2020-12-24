@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import Head from 'next/head';
 import { Image, Carousel, Button, Dropdown, Menu } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
@@ -15,7 +16,9 @@ type ArrowIconProps = {
 
 type SportInfoType = {
   name: string;
-  logo: string;
+  id: string;
+  background: string;
+  logo: () => JSX.Element;
 };
 
 type SportCardsSelectionType = {
@@ -62,27 +65,39 @@ export default function Home() {
 const SPORTS_INFO = [
   {
     name: 'NBA',
-    logo: '/images/nba_btn.svg'
+    id: 'NBA',
+    background: '#EC4C15',
+    logo: () => <NBA_SVG className={styles.sports_logo} />
   },
   {
     name: 'NFL',
-    logo: '/images/nfl_btn.svg'
+    id: 'NFL',
+    background: '#91442A',
+    logo: () => <NFL_SVG className={styles.sports_logo} />
   },
   {
     name: 'MLB',
-    logo: '/images/mlb_btn.svg'
+    id: 'MLB',
+    background: '#1878FB',
+    logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
     name: 'UFC',
-    logo: '/images/ufc_btn.svg'
+    id: 'UFC',
+    background: '#F9282B',
+    logo: () => <UFC_SVG className={styles.sports_logo} />
   },
   {
     name: 'Formula 1',
-    logo: '/images/f1_btn.svg'
+    id: 'F1',
+    background: '#505054',
+    logo: () => <F1_SVG className={styles.sports_logo} />
   },
   {
     name: 'SOCCER',
-    logo: '/images/soccer_btn.svg'
+    id: 'SOCCER',
+    background: '#6DCF40',
+    logo: () => <SOCCER_SVG className={styles.sports_logo} />
   }
 ];
 
@@ -212,7 +227,6 @@ function HeroBanner() {
       }
     }
   ];
-
   return (
     <section className="hero-banner">
       <div className={styles.heroBanner}>
@@ -281,12 +295,11 @@ function HeroBanner() {
                 onVisibleChange={changeMenuVisible}
                 placement="bottomLeft"
                 trigger={['click']}>
-                <div className={styles.dropdownBtn}>
-                  <Image
-                    preview={false}
-                    src={selectedSport.logo}
-                    className={styles.dropdownBtnImg}
-                  />
+                <div
+                  className={`${styles.dropdownBtn} ${styles['dropdown_' + selectedSport.id]}`}
+                  style={{ background: selectedSport.background }}>
+                  {selectedSport.logo()}
+                  <span>{selectedSport.name}</span>
                   {sportMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
                   {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
                 </div>

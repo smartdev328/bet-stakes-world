@@ -152,6 +152,7 @@ p {
 }
 
 .hero-banner .ant-carousel .slick-dots li,
+.testimonials-carousel .slick-dots li,
 .sports-cards-carousel .slick-dots li {
   border: 4px solid transparent;
   height: 8px;
@@ -159,12 +160,16 @@ p {
 }
 
 .hero-banner .ant-carousel .slick-dots li.slick-active,
+.testimonials-carousel .slick-dots li.slick-active,
 .sports-cards-carousel .slick-dots li.slick-active {
   border: 4px solid #FFFFFF;
   width: 8px;
 }
 
 .hero-banner .ant-carousel .slick-dots li button,
+.hero-banner .ant-carousel .slick-dots.slick-active li button,
+.testimonials-carousel .slick-dots li button,
+.testimonials-carousel .slick-dots li.slick-active button,
 .sports-cards-carousel .slick-dots li button,
 .sports-cards-carousel .slick-dots li.slick-active button {
   width: 8px;
@@ -174,6 +179,7 @@ p {
 }
 
 .hero-banner .slick-dots li button:before,
+.testimonials-carousel  .slick-dots li button:before,
 .sports-cards-carousel .slick-dots li button:before {
   display: none;
 }
@@ -192,4 +198,8 @@ p {
 }
 .sports-cards-carousel .slick-dots-bottom {
   bottom: -50px;
+}
+.testimonials-carousel {
+  max-width: 1200px;
+  margin: auto;
 }

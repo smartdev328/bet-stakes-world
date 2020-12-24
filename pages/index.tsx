@@ -1,12 +1,13 @@
 /* eslint-disable react/display-name */
 import Head from 'next/head';
-import { Image, Carousel, Button, Dropdown, Menu } from 'antd';
+import { Image, Carousel, Button, Dropdown, Menu, Rate } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 import { createRef, RefObject, useState } from 'react';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import AppLayout from '@components/AppLayout';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import { StarSvg } from '@components/SvgIcons';
 import styles from '@styles/Home.module.css';
 
 type ArrowIconProps = {
@@ -57,6 +58,7 @@ export default function Home() {
         <MembershipOfferings />
         <OurDailyStandards />
         <BetOnSports />
+        <Testimonials />
       </AppLayout>
     </>
   );
@@ -767,6 +769,75 @@ function BetOnSports() {
         </Carousel>
       </div>
       <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
+    </div>
+  );
+}
+
+function Testimonials() {
+  return (
+    <div className={styles.testimonials}>
+      <Carousel className="testimonials-carousel" infinite dots initialSlide={0} arrows>
+        <div>
+          <div className={styles.testimonial}>
+            <div className={styles.testimonial_top}>
+              <StarSvg className={styles.black_star} />
+            </div>
+            <div className={styles.testimonial_content}>
+              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <div className={styles.testimonial_content_right}>
+                <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
+                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <Rate allowHalf defaultValue={5} />
+                <div className={styles.testimonial_quote}>
+                  “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
+                  aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
+                  quisque.”
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className={styles.testimonial}>
+            <div className={styles.testimonial_top}>
+              <StarSvg className={styles.black_star} />
+            </div>
+            <div className={styles.testimonial_content}>
+              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <div className={styles.testimonial_content_right}>
+                <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
+                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <Rate allowHalf defaultValue={5} />
+                <div className={styles.testimonial_quote}>
+                  “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
+                  aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
+                  quisque.”
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className={styles.testimonial}>
+            <div className={styles.testimonial_top}>
+              <StarSvg className={styles.black_star} />
+            </div>
+            <div className={styles.testimonial_content}>
+              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <div className={styles.testimonial_content_right}>
+                <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
+                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <Rate allowHalf defaultValue={5} />
+                <div className={styles.testimonial_quote}>
+                  “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
+                  aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
+                  quisque.”
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Carousel>
     </div>
   );
 }

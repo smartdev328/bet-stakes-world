@@ -3,11 +3,12 @@ import Head from 'next/head';
 import { Image, Carousel, Button, Dropdown, Menu, Rate } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 import { createRef, RefObject, useState } from 'react';
+import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import AppLayout from '@components/AppLayout';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { StarSvg } from '@components/SvgIcons';
+import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import styles from '@styles/Home.module.css';
 
 type ArrowIconProps = {
@@ -59,6 +60,7 @@ export default function Home() {
         <OurDailyStandards />
         <BetOnSports />
         <Testimonials />
+        <SportsNewsCarousel />
       </AppLayout>
     </>
   );
@@ -838,6 +840,89 @@ function Testimonials() {
           </div>
         </div>
       </Carousel>
+    </div>
+  );
+}
+
+function SportsNewsCarousel() {
+  return (
+    <div className={styles.news_carousel}>
+      <div className={styles.news_carousel_bg}>
+        <div className={styles.news_carousel_content}>
+          <div className={styles.title_row}>
+            <span>Sports News</span>
+            <Link href="/">
+              <a>View More</a>
+            </Link>
+          </div>
+          <Carousel
+            className="news-carousel"
+            arrows
+            dots={false}
+            centerMode
+            variableWidth
+            nextArrow={
+              <div className="next_arrow">
+                <CarouselArrowIcon />
+              </div>
+            }
+            prevArrow={
+              <div className="prev_arrow">
+                <CarouselArrowIcon />
+              </div>
+            }
+            centerPadding="60px">
+            <div>
+              <div className={styles.news}>
+                <img src="/images/news_bg.jpg" />
+                <div className={styles.news_content}>
+                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
+                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <p className={styles.news_desc}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                  <Link href="/">
+                    <a>Read Article</a>
+                  </Link>
+                </div>
+                <div className="news_overlay" />
+              </div>
+            </div>
+            <div>
+              <div className={styles.news}>
+                <img src="/images/news_bg.jpg" />
+                <div className={styles.news_content}>
+                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
+                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <p className={styles.news_desc}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                  <Link href="/">
+                    <a>Read Article</a>
+                  </Link>
+                </div>
+                <div className="news_overlay" />
+              </div>
+            </div>
+            <div>
+              <div className={styles.news}>
+                <img src="/images/news_bg.jpg" />
+                <div className={styles.news_content}>
+                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
+                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <p className={styles.news_desc}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                  <Link href="/">
+                    <a>Read Article</a>
+                  </Link>
+                </div>
+                <div className="news_overlay" />
+              </div>
+            </div>
+          </Carousel>
+        </div>
+      </div>
     </div>
   );
 }

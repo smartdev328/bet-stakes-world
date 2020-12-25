@@ -18,3 +18,14 @@ export const StarSvg = ({ className }: SVGIconPropType) => {
     </svg>
   );
 };
+
+export const CarouselArrowIcon = () => {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6.71647 0.229493L5.59086 1.35509L10.0454 5.81758L0.330077 5.81758L0.330077 7.41418L10.0454 7.41418L5.59086 11.8767L6.71646 13.0023L13.1029 6.61588L6.71647 0.229493Z"
+        fill="#1A1A1A"
+      />
+    </svg>
+  );
+};

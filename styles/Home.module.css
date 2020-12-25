@@ -1832,3 +1832,230 @@ li .square_icon {
     margin: 0px 16px;
   }
 }
+
+/* Subscribe Now Btn */
+
+.subscribenow {
+  background: #1A1A1A;
+  padding: 198px 50px 180px;
+}
+.subscribenow_container {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.subscribenow_left {
+  width: 55%;
+  position: relative;
+}
+.subscribenow_curve {
+  position: absolute;
+  top: -80px;
+  right: -50px;
+  width: 140px;
+}
+.subscribenow_title1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 100px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.subscribenow_title2 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 100px;
+  text-transform: uppercase;
+  color: #FFC700;
+}
+.subscribenow_desc {
+  margin-top: 22px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  color: #F1F1F1;
+}
+
+.subscribenow_right {
+  width: 45%;
+  padding-left: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.btn_circle img {
+  height: 175px;
+}
+.subscribe_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #050505;
+  background: #fff;
+  border: none;
+  padding: 23.5px 57px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: auto;
+  transform: translate(-50%, -45%);
+}
+
+@media (max-width: 1420px) {
+  .subscribenow {
+    padding: 178px 50px 160px;
+  }
+  .subscribenow_left {
+    max-width: 640px;
+  }
+  .subscribenow_curve {
+    top: -90px;
+    right: -25px;
+    width: 140px;
+  }
+  .subscribenow_title1 {
+    font-size: 54px;
+    line-height: 72px;
+  }
+  .subscribenow_title2 {
+    font-size: 86px;
+    line-height: 92px;
+  }
+  .subscribenow_desc {
+    font-size: 24px;
+    line-height: 38px;
+  }
+  .btn_circle img {
+    height: 160px;
+  }
+  .subscribe_btn {
+    transform: translate(-50%, -45%);
+    padding: 20.5px 53px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .subscribenow {
+    padding: 178px 30px 160px;
+  }
+  .subscribenow_container {
+    max-width: 1000px;
+  }
+  .subscribenow_title1 {
+    font-size: 46px;
+    line-height: 62px;
+  }
+  .subscribenow_title2 {
+    font-size: 76px;
+    line-height: 82px;
+  }
+  .subscribenow_desc {
+    font-size: 20px;
+    line-height: 36px;
+  }
+  .btn_circle img {
+    height: 140px;
+  }
+  .subscribe_btn {
+    padding: 16.5px 46px;
+  }
+}
+@media (max-width: 1024px) {
+  .subscribenow {
+    padding: 148px 20px 130px;
+  }
+  .subscribenow_container {
+    max-width: 780px;
+  }
+  .subscribenow_left {
+    max-width: 420px;
+  }
+  .subscribenow_title1 {
+    font-size: 36px;
+    line-height: 62px;
+  }
+  .subscribenow_title2 {
+    font-size: 66px;
+    line-height: 68px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .btn_circle img {
+    height: 120px;
+  }
+  .subscribe_btn {
+    padding: 12.5px 40px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@media (max-width: 824px) {
+  .subscribenow {
+    padding: 78px 20px 80px;
+  }
+  .subscribenow_container {
+    max-width: 780px;
+    flex-direction: column;
+  }
+  .subscribenow_left {
+    text-align: center;
+    width: 100%;
+  }
+  .subscribenow_curve {
+    display: none;
+  }
+  .subscribenow_title1 {
+    font-size: 30px;
+    line-height: 42px;
+  }
+  .subscribenow_title2 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .subscribenow_right {
+    margin-top: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .subscribenow {
+    padding: 58px 20px 60px;
+  }
+  .subscribenow_title1 {
+    font-size: 24px;
+    line-height: 28px;
+    width: 180px;
+    margin: 0px auto 0.3em;
+  }
+  .subscribenow_title2 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .subscribenow_right {
+    margin-top: 40px;
+    width: 100%;
+  }
+  .btn_circle img {
+    height: auto;
+    width: 100%;
+    max-width: 340px;
+  }
+  .subscribe_btn {
+    padding: 10.5px 28px;
+  }
+}

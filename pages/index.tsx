@@ -61,6 +61,7 @@ export default function Home() {
         <BetOnSports />
         <Testimonials />
         <SportsNewsCarousel />
+        <SubscribeNow />
       </AppLayout>
     </>
   );
@@ -921,6 +922,29 @@ function SportsNewsCarousel() {
               </div>
             </div>
           </Carousel>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SubscribeNow() {
+  return (
+    <div className={styles.subscribenow}>
+      <div className={styles.subscribenow_container}>
+        <div className={styles.subscribenow_left}>
+          <img src="/images/curve_arrow.svg" className={styles.subscribenow_curve} />
+          <div className={styles.subscribenow_title1}>Start winning now,</div>
+          <div className={styles.subscribenow_title2}>it’s Ea$y!</div>
+          <div className={styles.subscribenow_desc}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gravida purus ipsum.
+          </div>
+        </div>
+        <div className={styles.subscribenow_right}>
+          <div className={styles.btn_circle}>
+            <img src="/images/subscribe_btn_circle.svg" />
+            <Button className={styles.subscribe_btn}>Subscribe Now</Button>
+          </div>
         </div>
       </div>
     </div>

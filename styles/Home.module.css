@@ -6,11 +6,12 @@
 .heroBannerLeft {
   flex: 8;
   padding-top: 96px;
-  background: url('/images/hero_banner_left.svg') no-repeat;
+  background: url('/images/hero_banner_left_bg.png') no-repeat;
   background-color: #373D40;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  background-size: 100% 100%;
 }
 
 .heroBannerLeft .container {

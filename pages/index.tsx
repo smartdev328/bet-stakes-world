@@ -779,7 +779,22 @@ function BetOnSports() {
 function Testimonials() {
   return (
     <div className={styles.testimonials}>
-      <Carousel className="testimonials-carousel" infinite dots initialSlide={0} arrows>
+      <Carousel
+        className="testimonials-carousel"
+        infinite
+        dots
+        initialSlide={0}
+        arrows
+        nextArrow={
+          <div className="next_arrow">
+            <CarouselArrowIcon />
+          </div>
+        }
+        prevArrow={
+          <div className="prev_arrow">
+            <CarouselArrowIcon />
+          </div>
+        }>
         <div>
           <div className={styles.testimonial}>
             <div className={styles.testimonial_top}>

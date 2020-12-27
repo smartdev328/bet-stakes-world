@@ -855,6 +855,46 @@ function Testimonials() {
             </div>
           </div>
         </div>
+        <div>
+          <div className={styles.testimonial}>
+            <div className={styles.testimonial_top}>
+              <StarSvg className={styles.black_star} />
+            </div>
+            <div className={styles.testimonial_content}>
+              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <div className={styles.testimonial_content_right}>
+                <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
+                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <Rate allowHalf defaultValue={5} />
+                <div className={styles.testimonial_quote}>
+                  “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
+                  aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
+                  quisque.”
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className={styles.testimonial}>
+            <div className={styles.testimonial_top}>
+              <StarSvg className={styles.black_star} />
+            </div>
+            <div className={styles.testimonial_content}>
+              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <div className={styles.testimonial_content_right}>
+                <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
+                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <Rate allowHalf defaultValue={5} />
+                <div className={styles.testimonial_quote}>
+                  “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
+                  aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
+                  quisque.”
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Carousel>
     </div>
   );

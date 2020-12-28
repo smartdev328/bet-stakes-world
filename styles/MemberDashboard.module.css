@@ -1,0 +1,25 @@
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 992px) {
+  .heroBanner .bgImage {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage {
+    height: 280px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage {
+    height: 240px;
+  }
+}

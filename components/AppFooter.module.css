@@ -64,6 +64,13 @@
   background: #FFC700;
 }
 
+.facebook_icon, .tiktok_icon {
+  width: 16px;
+  height: 16px;
+}
+.facebook_icon path, .tiktok_icon path {
+  fill: #fff;
+}
 @media (max-width: 1240px) {
   .newsletterRow {
     padding-left: 30px;
@@ -131,7 +138,7 @@
 .menuList ul {
   list-style: none;
   padding-left: 0;
-  margin: 14px 42px 42px 0;
+  margin: 14px 25px 42px 0;
 }
 
 .menuList ul li {
@@ -142,7 +149,17 @@
   line-height: 172.9%;
   white-space: nowrap;
 }
-
+.menuList ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.menuList ul li .icon_title {
+  margin-left: 5px;
+}
+.menuList ul li:hover svg path {
+  fill: #40a9ff;
+}
 .mainFooterRow .navbarItem {
   font-style: normal;
   font-weight: 300;
@@ -152,7 +169,9 @@
   color: #FFFFFF;
   margin-right: 32px;
 }
-
+.mainFooterRow .navbarItem:hover {
+  color: #40a9ff;
+}
 .mainFooterLeftCol {
   flex: 1;
 }

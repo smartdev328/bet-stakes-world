@@ -1,51 +1,13 @@
-/* eslint-disable react/display-name */
 import Head from 'next/head';
-import { Image, Carousel, Button, Dropdown, Menu, Rate } from 'antd';
-import { CarouselRef } from 'antd/lib/carousel';
-import { createRef, RefObject, useState } from 'react';
+import { Image, Carousel, Button, Rate } from 'antd';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
-import AppLayout from '@components/AppLayout';
-import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
+import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import { SportCardsSelectionType } from '@type/Main';
 import styles from '@styles/Home.module.css';
-
-type ArrowIconProps = {
-  className: string;
-  onClick: () => void;
-};
-
-type SportInfoType = {
-  name: string;
-  id: string;
-  background: string;
-  logo: () => JSX.Element;
-};
-
-type SportCardsSelectionType = {
-  nba: boolean;
-  nfl: boolean;
-  mlb: boolean;
-  ufc: boolean;
-  f1: boolean;
-  soccer: boolean;
-};
-
-function ArrowIcon({ className, onClick }: ArrowIconProps) {
-  return (
-    <svg
-      width="12"
-      height="20"
-      className={className}
-      viewBox="0 0 12 20"
-      fill="none"
-      onClick={onClick}
-      xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 18.03L1.77 19.8L11.67 9.9L1.77 0L0 1.77L8.13 9.9L0 18.03H0Z" fill="#FFC700" />
-    </svg>
-  );
-}
 
 export default function Home() {
   return (
@@ -67,171 +29,7 @@ export default function Home() {
   );
 }
 
-const SPORTS_INFO = [
-  {
-    name: 'NBA',
-    id: 'NBA',
-    background: '#EC4C15',
-    logo: () => <NBA_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'NFL',
-    id: 'NFL',
-    background: '#91442A',
-    logo: () => <NFL_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'MLB',
-    id: 'MLB',
-    background: '#1878FB',
-    logo: () => <MLB_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'UFC',
-    id: 'UFC',
-    background: '#F9282B',
-    logo: () => <UFC_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'Formula 1',
-    id: 'F1',
-    background: '#505054',
-    logo: () => <F1_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'SOCCER',
-    id: 'SOCCER',
-    background: '#6DCF40',
-    logo: () => <SOCCER_SVG className={styles.sports_logo} />
-  }
-];
-
-const MATCHES = [
-  {
-    name: 'NBA | MON 07/31 3:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 4:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 5:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 6:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 7:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 8:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 9:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  },
-  {
-    name: 'NBA | MON 07/31 10:00PM',
-    team1: 'TOR',
-    team2: 'LAL',
-    value: 'TOR -5.5'
-  }
-];
-
 function HeroBanner() {
-  const [nextArrowVisible, setNextArrowVisible] = useState<boolean>(true);
-  const [prevArrowVisible, setPrevArrowVisible] = useState<boolean>(false);
-  const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
-  const [selectedSport, setSelectedSport] = useState<SportInfoType>(SPORTS_INFO[0]);
-  const carouselRef: RefObject<CarouselRef> = createRef();
-
-  const goCarouselBack = () => {
-    carouselRef.current?.prev();
-  };
-  const goCarouselNext = () => {
-    carouselRef.current?.next();
-  };
-  const changeSport = (sport: SportInfoType) => {
-    setSelectedSport(sport);
-    setSportMenuOpen(false);
-  };
-  const changeMenuVisible = (status: boolean) => {
-    setSportMenuOpen(status);
-  };
-  const beforeSlideChange = (_: number, next: number) => {
-    const slides = document.querySelectorAll('.matches-carousel .slick-dots li').length;
-    if (slides == next + 1) {
-      setNextArrowVisible(false);
-    } else if (next == 0) {
-      setPrevArrowVisible(false);
-    } else {
-      setPrevArrowVisible(true);
-      setNextArrowVisible(true);
-    }
-  };
-
-  const menu = (
-    <Menu className={styles.sportMenu}>
-      {SPORTS_INFO.map((sport) => (
-        <Menu.Item
-          key={sport.name}
-          className={styles.sportMenuItem}
-          onClick={() => changeSport(sport)}>
-          {sport.name}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-
-  const responsive = [
-    {
-      breakpoint: 1240,
-      settings: {
-        slidesToShow: 5,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1120,
-      settings: {
-        slidesToShow: 4,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 940,
-      settings: {
-        slidesToShow: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2,
-        dots: true
-      }
-    }
-  ];
   return (
     <section className="hero-banner">
       <div className={styles.heroBanner}>
@@ -292,77 +90,7 @@ function HeroBanner() {
             </Carousel>
           </div>
         </div>
-        <div className={styles.sports_and_matches}>
-          <div className={styles.container}>
-            <div className={styles.dropdownBox}>
-              <Dropdown
-                overlay={menu}
-                onVisibleChange={changeMenuVisible}
-                placement="bottomLeft"
-                trigger={['click']}>
-                <div
-                  className={`${styles.dropdownBtn} ${styles['dropdown_' + selectedSport.id]}`}
-                  style={{ background: selectedSport.background }}>
-                  {selectedSport.logo()}
-                  <span>{selectedSport.name}</span>
-                  {sportMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-                  {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
-              </Dropdown>
-            </div>
-            <div className={styles.matchesCarouselView}>
-              {prevArrowVisible && (
-                <ArrowIcon className={styles.arrow_back_icon} onClick={goCarouselBack} />
-              )}
-              {nextArrowVisible && (
-                <ArrowIcon className={styles.arrow_forward_icon} onClick={goCarouselNext} />
-              )}
-              <Carousel
-                ref={carouselRef}
-                dots={true}
-                infinite={false}
-                className="matches-carousel"
-                responsive={responsive}
-                initialSlide={0}
-                beforeChange={beforeSlideChange}
-                slidesToShow={6}>
-                {MATCHES.map((match, index) => (
-                  <div key={index}>
-                    <div className={styles.match_view}>
-                      <div className={styles.match_title}>{match.name}</div>
-                      <div className={styles.match_content}>
-                        <div className={styles.match_content_left}>
-                          <div className={styles.team1}>
-                            <div className={styles.team_logo_container}>
-                              <Image
-                                preview={false}
-                                src={'/images/team_tor.png'}
-                                className={styles.team_logo}
-                              />
-                            </div>
-                            <span>{match.team1}</span>
-                          </div>
-                          <div className={styles.team2}>
-                            <div className={styles.team_logo_container}>
-                              <Image
-                                preview={false}
-                                src={'/images/team_lal.png'}
-                                className={styles.team_logo}
-                              />
-                            </div>
-                            <span>{match.team2}</span>
-                          </div>
-                        </div>
-                        <div className={styles.match_content_right}>{match.value}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </Carousel>
-            </div>
-          </div>
-          <div className={styles.gradient_bg}></div>
-        </div>
+        <BannerSportsAndMatches />
       </div>
     </section>
   );
@@ -786,12 +514,12 @@ function Testimonials() {
         initialSlide={0}
         arrows
         nextArrow={
-          <div className="next_arrow">
+          <div key="testimonials-carousel-prev-arrow" className="next_arrow">
             <CarouselArrowIcon />
           </div>
         }
         prevArrow={
-          <div className="prev_arrow">
+          <div key="testimonials-carousel-prev-arrow" className="prev_arrow">
             <CarouselArrowIcon />
           </div>
         }>
@@ -918,12 +646,12 @@ function SportsNewsCarousel() {
             centerMode
             variableWidth
             nextArrow={
-              <div className="next_arrow">
+              <div key="news-carousel-next-arrow" className="next_arrow">
                 <CarouselArrowIcon />
               </div>
             }
             prevArrow={
-              <div className="prev_arrow">
+              <div key="news-carousel-prev-arrow" className="prev_arrow">
                 <CarouselArrowIcon />
               </div>
             }

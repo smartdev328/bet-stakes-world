@@ -1,6 +1,4 @@
-type SVGIconPropType = {
-  className: string;
-};
+import { ClickableArrowIconProps, SVGIconPropType } from '@type/Main';
 
 export const StarSvg = ({ className }: SVGIconPropType) => {
   return (
@@ -60,6 +58,21 @@ export const FacebookIcon = ({ className }: SVGIconPropType) => {
           v20.341H37.29v27.585h23.814v70.761H89.584z"
         />
       </g>
+    </svg>
+  );
+};
+
+export const ClickableArrowIcon = ({ className, onClick }: ClickableArrowIconProps) => {
+  return (
+    <svg
+      width="12"
+      height="20"
+      className={className}
+      viewBox="0 0 12 20"
+      fill="none"
+      onClick={onClick}
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 18.03L1.77 19.8L11.67 9.9L1.77 0L0 1.77L8.13 9.9L0 18.03H0Z" fill="#FFC700" />
     </svg>
   );
 };

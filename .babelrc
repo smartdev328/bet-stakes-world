@@ -8,9 +8,10 @@
         "alias": {
           "@components": "./components",
           "@styles": "./styles",
-          "@types": "./types",
+          "@type": "./types",
           "@redux": "./redux",
-          "@images": "./public/images"
+          "@images": "./public/images",
+          "@constants": "./constants/index.ts"
         }
       }
     ],

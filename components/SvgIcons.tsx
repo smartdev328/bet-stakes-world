@@ -144,3 +144,18 @@ export const MobilePhoneIcon = ({ className }: SVGIconPropType) => {
     </svg>
   );
 };
+
+export const LongArrowIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="30"
+    height="16"
+    className={className}
+    viewBox="0 0 30 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M29.2071 8.70711C29.5976 8.31658 29.5976 7.68342 29.2071 7.29289L22.8431 0.928932C22.4526 0.538408 21.8195 0.538408 21.4289 0.928932C21.0384 1.31946 21.0384 1.95262 21.4289 2.34315L27.0858 8L21.4289 13.6569C21.0384 14.0474 21.0384 14.6805 21.4289 15.0711C21.8195 15.4616 22.4526 15.4616 22.8431 15.0711L29.2071 8.70711ZM0.499998 9L28.5 9V7L0.499998 7V9Z"
+      fill="black"
+    />
+  </svg>
+);

@@ -29,3 +29,8 @@ export type MatchSimpleType = {
   team2: string;
   value: string;
 };
+
+export type SlickArrowType = {
+  slideCount?: number;
+  currentSlide?: number;
+};

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { SportCardsSelectionType } from '@type/Main';
+import { SlickArrowType, SportCardsSelectionType } from '@type/Main';
 import styles from '@styles/Home.module.css';
 
 export default function Home() {
@@ -505,6 +505,17 @@ function BetOnSports() {
 }
 
 function Testimonials() {
+  const NextArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="next_arrow slick-next">
+      <CarouselArrowIcon />
+    </div>
+  );
+  const PrevArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="prev_arrow slick-prev">
+      <CarouselArrowIcon />
+    </div>
+  );
+
   return (
     <div className={styles.testimonials}>
       <Carousel
@@ -513,16 +524,8 @@ function Testimonials() {
         dots
         initialSlide={0}
         arrows
-        nextArrow={
-          <div key="testimonials-carousel-prev-arrow" className="next_arrow">
-            <CarouselArrowIcon />
-          </div>
-        }
-        prevArrow={
-          <div key="testimonials-carousel-prev-arrow" className="prev_arrow">
-            <CarouselArrowIcon />
-          </div>
-        }>
+        nextArrow={<NextArrow />}
+        prevArrow={<PrevArrow />}>
         <div>
           <div className={styles.testimonial}>
             <div className={styles.testimonial_top}>
@@ -629,6 +632,16 @@ function Testimonials() {
 }
 
 function SportsNewsCarousel() {
+  const NextArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="next_arrow slick-next">
+      <CarouselArrowIcon />
+    </div>
+  );
+  const PrevArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="prev_arrow slick-prev">
+      <CarouselArrowIcon />
+    </div>
+  );
   return (
     <div className={styles.news_carousel}>
       <div className={styles.news_carousel_bg}>
@@ -645,16 +658,8 @@ function SportsNewsCarousel() {
             dots={false}
             centerMode
             variableWidth
-            nextArrow={
-              <div key="news-carousel-next-arrow" className="next_arrow">
-                <CarouselArrowIcon />
-              </div>
-            }
-            prevArrow={
-              <div key="news-carousel-prev-arrow" className="prev_arrow">
-                <CarouselArrowIcon />
-              </div>
-            }
+            nextArrow={<NextArrow />}
+            prevArrow={<PrevArrow />}
             centerPadding="60px">
             <div>
               <div className={styles.news}>

@@ -592,3 +592,249 @@
     line-height: 25px;
   }
 }
+
+/* Earliest Games Section */
+.earliest_games {
+  margin-bottom: 40px;
+}
+.earliest_games_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.earliest_games_header  .dropdownBtn {
+  background: rgba(236, 236, 236, 0.3);
+  padding: 10px 30px;
+  margin-right: 24px;
+}
+.earliest_games_header  .dropdownBtn:last-child {
+  margin-right: 0;
+}
+.caret_up, .caret_down {
+  width: 10px;
+  margin-left: 10px;
+}
+.earliest_games_titlebar {
+  background-color: #000;
+  padding: 8px 24px;
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.earliest_games_titlebar strong {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+.earliest_games_titlebar span {
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+}
+
+.game {
+  padding: 24px 0;
+  border-bottom: 1px solid #C4C4C4;
+}
+.game_subinfo {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+}
+.game_subinfo .gameSportType {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+  padding: 0 10px;
+  margin-right: 8px;
+}
+.game_subinfo .gameSportType_NBA {
+  background: #EC4C15;
+}
+.game_subinfo .gameSportType_NFL {
+  background: #91442A;
+}
+.game_subinfo .gameSportType_MLB {
+  background: #1878FB;
+}
+.game_subinfo .gameSportType_UFC {
+  background: #F9282B;
+}
+.game_subinfo .gameSportType_F1 {
+  background: #505054;
+}
+.game_subinfo .gameSportType_SOCCER {
+  background: #6DCF40;
+}
+
+.game_info {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.team_logo {
+  width: 32px;
+  margin-right: 6px;
+}
+.game_team1, .game_team2 {
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+.desc_line {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 50px;
+  color: #000000;
+}
+.long_arrow_icon {
+  width: 28px;
+  margin-right: 8px;
+}
+.units {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  border-bottom: 8px solid #1A1A1A;
+  cursor: pointer;
+}
+.details_section {
+  margin-top: 18px;
+  text-align: center;
+}
+.hide_details {
+  display: flex;
+  align-items: center;
+}
+.hide_details:after,
+.hide_details:before {
+  display: block;
+  content: '';
+  height: 1px;
+  background: #C4C4C4;
+  flex: 1;
+}
+.hide_details_btn {
+  padding: 0 18px;
+  cursor: pointer;
+}
+.hide_details_btn span {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000000;
+}
+.hide_details_btn .caret_up svg {
+  width: 12px;
+}
+.hide_details_btn .caret_up path {
+  fill: rgba(0, 0, 0, 0.54);
+}
+.details_section ul {
+  padding-top: 25px;
+  display: inline-block;
+}
+.details_section ul li {
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.details_section ul li:before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #FFC700;
+  margin-right: 8px;
+  margin-top: 7px;
+}
+
+/* Yesterday Plays */
+.yesterday_plays {
+  margin-bottom: 40px;
+}
+.yesterday_plays .game {
+  display: flex;
+  align-items: center;
+}
+.game_status {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 75.1868px;
+  line-height: 117.9%;
+  text-align: center;
+  color: #000000;
+  width: 100px;
+  margin: 0 16px;
+}
+.game_score {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 117.9%;
+  text-align: center;
+  color: #000000;
+  margin-left: 30px;
+}
+.yesterday_plays .earliest_games_header a {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-decoration-line: underline;
+  color: #1A1A1A;
+}
+.patriots_text {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 117.9%;
+  letter-spacing: 0.205em;
+  color: #000000;
+  text-align: center;
+  width: 100%;
+  margin: 0.5em 0 0em;
+  position: absolute;
+  top: 100%;
+}
+.yesterday_plays .desc_line_section {
+  position: relative;
+}
+.yesterday_plays .desc_line {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.yesterday_plays .strikeLine {
+  position: absolute;
+  top: -7px;
+  left: 0;
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 80px;
+  letter-spacing: -0.235em;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.game.is_patriots {
+  padding-bottom: 60px;
+}

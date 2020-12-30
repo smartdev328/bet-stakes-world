@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
 import Head from 'next/head';
-import { Image, Row, Button, Col } from 'antd';
+import { Image, Row, Button, Col, Dropdown, Menu } from 'antd';
 import Link from 'next/link';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
@@ -9,8 +11,10 @@ import {
   ThickStarIcon,
   CaretDownInCircleIcon,
   ConfigIcon,
-  MobilePhoneIcon
+  MobilePhoneIcon,
+  LongArrowIcon
 } from '@components/SvgIcons';
+import { EarliestGameInfoType, YesterdayPlayInfoType } from '@type/Main';
 
 export default function MemberDashboard() {
   return (
@@ -28,6 +32,16 @@ export default function MemberDashboard() {
             </Col>
             <Col span={6} className={styles.weekly_pro_tip_container}>
               <WeeklyProTip />
+            </Col>
+          </Row>
+          <Row className={styles.nowrapRow}>
+            <Col span={18}>
+              <EarliestGames />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={18}>
+              <YesterdayPlays />
             </Col>
           </Row>
         </div>
@@ -138,6 +152,373 @@ function WeeklyProTip() {
         <Link href="/">
           <a>View previous tips</a>
         </Link>
+      </div>
+    </div>
+  );
+}
+
+const Mock_EarlestGames: EarliestGameInfoType[] = [
+  {
+    id: 1,
+    sportType: 'NBA',
+    startDate: '6:30PM',
+    teams: [
+      {
+        name: 'Utah Jazz',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/utah_jazz.png'
+      },
+      {
+        name: 'Denver Nuggets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/denver_nuggest.png'
+      }
+    ],
+    state: 'Denver Nuggets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  },
+  {
+    id: 2,
+    sportType: 'NFL',
+    startDate: '10:30PM',
+    teams: [
+      {
+        name: 'Cleveland Browns',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Cleveland_browns.png'
+      },
+      {
+        name: 'Pittsburgh Steelers',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Pittsburgh_Steelers.png'
+      }
+    ],
+    state: 'Cleveland Browns Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  },
+  {
+    id: 3,
+    sportType: 'NFL',
+    startDate: '10:30PM',
+    teams: [
+      {
+        name: 'New England Patriots',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png'
+      },
+      {
+        name: 'New York Jets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png'
+      }
+    ],
+    state: 'New York Jets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  }
+];
+
+function EarliestGames() {
+  const [betMenuOpen, setBetMenuOpen] = useState<boolean>(false);
+  const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
+  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
+  const [selectedBetType, setSelectedBetType] = useState<string>('Straight Bets');
+  const [selectedSportType, setSelectedSportType] = useState<string>('All');
+  const changeMenuVisible = (status: boolean) => {
+    setSportMenuOpen(status);
+  };
+  const changeBetMenuVisible = (status: boolean) => {
+    setBetMenuOpen(status);
+  };
+  const menu = (
+    <Menu className={styles.sportMenu}>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedBetType('Straight Bets');
+          setBetMenuOpen(false);
+        }}>
+        Straight Bets
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedBetType('Bets1');
+          setBetMenuOpen(false);
+        }}>
+        Bets1
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedBetType('Bets2');
+          setBetMenuOpen(false);
+        }}>
+        Bets2
+      </Menu.Item>
+    </Menu>
+  );
+  const menu2 = (
+    <Menu className={styles.sportMenu}>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedSportType('All');
+          setSportMenuOpen(false);
+        }}>
+        All
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedSportType('NBA');
+          setSportMenuOpen(false);
+        }}>
+        NBA
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedSportType('NFL');
+          setSportMenuOpen(false);
+        }}>
+        NFL
+      </Menu.Item>
+    </Menu>
+  );
+  const changeDetailsVisibleAt = (index: number, status: boolean) => {
+    showDetailsAt[index] = status;
+    setShowDetailsAt(showDetailsAt.slice());
+  };
+
+  return (
+    <div className={styles.earliest_games}>
+      <div className={styles.earliest_games_header}>
+        <div className={styles.block_title}>Earliest Games</div>
+        <Row>
+          <Dropdown
+            overlay={menu}
+            onVisibleChange={changeBetMenuVisible}
+            placement="bottomLeft"
+            trigger={['click']}>
+            <div className={styles.dropdownBtn}>
+              <span>
+                <strong>Betting Type:&nbsp;</strong>
+                {selectedBetType}
+              </span>
+              {betMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
+              {!betMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
+            </div>
+          </Dropdown>
+          <Dropdown
+            overlay={menu2}
+            onVisibleChange={changeMenuVisible}
+            placement="bottomLeft"
+            trigger={['click']}>
+            <div className={styles.dropdownBtn}>
+              <span>
+                <strong>Sport:&nbsp;</strong>
+                {selectedSportType}
+              </span>
+              {sportMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
+              {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
+            </div>
+          </Dropdown>
+        </Row>
+      </div>
+      <div className={styles.earliest_games_titlebar}>
+        <strong>Straight Bets</strong>
+        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
+      </div>
+      <div className={styles.earliest_games_list}>
+        {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
+          <div className={styles.game} key={game.id}>
+            <div className={styles.game_subinfo}>
+              <span
+                className={`${styles.gameSportType} ${styles['gameSportType_' + game.sportType]}`}>
+                {game.sportType}
+              </span>
+              <span>Game Starts @ {game.startDate}</span>
+            </div>
+            <div className={styles.game_info}>
+              <div className={styles.game_teams}>
+                <Row>
+                  <div className={styles.game_team1}>
+                    <img src={game.teams[0].logo} className={styles.team_logo} />
+                    <span>{game.teams[0].name}&nbsp;@&nbsp;</span>
+                  </div>
+                  <div className={styles.game_team2}>
+                    <img src={game.teams[1].logo} className={styles.team_logo} />
+                    <span>{game.teams[1].name}</span>
+                  </div>
+                </Row>
+                <Row align={'middle'}>
+                  <LongArrowIcon className={styles.long_arrow_icon} />
+                  <span className={styles.desc_line}>
+                    {`${game.state} (${game.odds} odds | ${game.price})`}
+                  </span>
+                </Row>
+              </div>
+              <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
+                {`${game.units.length} Units`}
+              </div>
+            </div>
+            {showDetailsAt[index] && (
+              <div className={styles.details_section}>
+                <div
+                  onClick={() => changeDetailsVisibleAt(index, false)}
+                  className={styles.hide_details}>
+                  <div className={styles.hide_details_btn}>
+                    <span>Hide Details</span>
+                    <CaretUpOutlined className={styles.caret_up} />
+                  </div>
+                </div>
+                <ul>
+                  {game.units.map((unit: string, i: number) => (
+                    <li key={i}>{unit}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [
+  {
+    id: 1,
+    sportType: 'NFL',
+    startDate: '10:30PM',
+    teams: [
+      {
+        name: 'New England Patriots',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
+        score: 35
+      },
+      {
+        name: 'New York Jets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
+        score: 31
+      }
+    ],
+    state: 'New York Jets Money Line',
+    odds: -110,
+    price: 1.9,
+    isWinner: true
+  },
+  {
+    id: 2,
+    sportType: 'NFL',
+    startDate: '10:30PM',
+    teams: [
+      {
+        name: 'New England Patriots',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
+        score: 35
+      },
+      {
+        name: 'New York Jets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
+        score: 31
+      }
+    ],
+    state: 'New York Jets Money Line',
+    odds: -110,
+    price: 1.9,
+    isWinner: false,
+    patriots: true
+  },
+  {
+    id: 3,
+    sportType: 'NFL',
+    startDate: '10:30PM',
+    teams: [
+      {
+        name: 'New England Patriots',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
+        score: 35
+      },
+      {
+        name: 'New York Jets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
+        score: 31
+      }
+    ],
+    state: 'New York Jets Money Line',
+    odds: -110,
+    price: 1.9,
+    isWinner: true
+  }
+];
+
+function YesterdayPlays() {
+  return (
+    <div className={styles.yesterday_plays}>
+      <div className={styles.earliest_games_header}>
+        <div className={styles.block_title}>Yesterday Plays</div>
+        <Link href="/">
+          <a>View All</a>
+        </Link>
+      </div>
+      <div className={styles.earliest_games_titlebar}>
+        <strong>10 Wins in 14 Games</strong>
+      </div>
+      <div className={styles.yesterday_plays_list}>
+        {Mock_YesterdayPlays.map((game: YesterdayPlayInfoType) => (
+          <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={game.id}>
+            <div className={styles.game_status}>{game.isWinner ? 'W' : 'L'}</div>
+            <div className={styles.game_main}>
+              <div className={styles.game_subinfo}>
+                <span
+                  className={`${styles.gameSportType} ${
+                    styles['gameSportType_' + game.sportType]
+                  }`}>
+                  {game.sportType}
+                </span>
+                <span>Yesterday at {game.startDate}</span>
+              </div>
+              <div className={styles.game_info}>
+                <div className={styles.game_teams}>
+                  <Row>
+                    <div className={styles.game_team1}>
+                      <img src={game.teams[0].logo} className={styles.team_logo} />
+                      <span>{game.teams[0].name}&nbsp;@&nbsp;</span>
+                    </div>
+                    <div className={styles.game_team2}>
+                      <img src={game.teams[1].logo} className={styles.team_logo} />
+                      <span>{game.teams[1].name}</span>
+                    </div>
+                  </Row>
+                  <Row align={'middle'} className={styles.desc_line_section}>
+                    <div className={styles.desc_line}>
+                      {`${game.state} ${game.odds} odds | ${game.price}`}
+                      {game.patriots && (
+                        <div className={styles.strikeLine}>--------------------------—</div>
+                      )}
+                    </div>
+                    {game.patriots && <div className={styles.patriots_text}>Patriots</div>}
+                  </Row>
+                </div>
+                <div className={styles.game_score}>35 - 31</div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

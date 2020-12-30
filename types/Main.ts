@@ -34,3 +34,32 @@ export type SlickArrowType = {
   slideCount?: number;
   currentSlide?: number;
 };
+
+type TeamInfo = {
+  name: string;
+  logo: string;
+  score?: number;
+};
+
+export type EarliestGameInfoType = {
+  id: number;
+  startDate: string;
+  sportType: string;
+  teams: TeamInfo[];
+  state: string;
+  odds: number;
+  price: number;
+  units: string[];
+};
+
+export type YesterdayPlayInfoType = {
+  id: number;
+  startDate: string;
+  sportType: string;
+  teams: TeamInfo[];
+  state: string;
+  odds: number;
+  price: number;
+  isWinner: boolean;
+  patriots?: boolean;
+};

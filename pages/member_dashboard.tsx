@@ -35,12 +35,12 @@ export default function MemberDashboard() {
             </Col>
           </Row>
           <Row className={styles.nowrapRow}>
-            <Col span={18}>
+            <Col span={18} className={styles.earliest_games_col}>
               <EarliestGames />
             </Col>
           </Row>
           <Row>
-            <Col span={18}>
+            <Col span={18} className={styles.yesterday_plays_col}>
               <YesterdayPlays />
             </Col>
           </Row>
@@ -364,7 +364,7 @@ function EarliestGames() {
                     <span>{game.teams[1].name}</span>
                   </div>
                 </Row>
-                <Row align={'middle'}>
+                <Row align={'top'} wrap={false}>
                   <LongArrowIcon className={styles.long_arrow_icon} />
                   <span className={styles.desc_line}>
                     {`${game.state} (${game.odds} odds | ${game.price})`}
@@ -504,17 +504,29 @@ function YesterdayPlays() {
                       <span>{game.teams[1].name}</span>
                     </div>
                   </Row>
-                  <Row align={'middle'} className={styles.desc_line_section}>
+                  <Row
+                    align={'middle'}
+                    className={`${styles.desc_line_section} ${
+                      game.patriots && styles.has_patriots
+                    }`}>
                     <div className={styles.desc_line}>
-                      {`${game.state} ${game.odds} odds | ${game.price}`}
+                      <span>{game.state}</span>
                       {game.patriots && (
                         <div className={styles.strikeLine}>--------------------------—</div>
                       )}
                     </div>
-                    {game.patriots && <div className={styles.patriots_text}>Patriots</div>}
+                    <div className={styles.desc_line}>
+                      <span>&nbsp;{`${game.odds} odds | ${game.price}`}</span>
+                      {game.patriots && (
+                        <div className={styles.strikeLine}>--------------------------—</div>
+                      )}
+                    </div>
+                    {game.patriots && <div className={styles.patriots_text}>PATRIOTS</div>}
                   </Row>
                 </div>
-                <div className={styles.game_score}>35 - 31</div>
+                <div className={`${styles.game_score} ${game.patriots && styles.has_patriots}`}>
+                  35 - 31
+                </div>
               </div>
             </div>
           </div>

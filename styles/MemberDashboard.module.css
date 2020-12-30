@@ -701,6 +701,7 @@
 .long_arrow_icon {
   width: 28px;
   margin-right: 8px;
+  margin-top: 18px;
 }
 .units {
   font-weight: 600;
@@ -791,6 +792,7 @@
   text-align: center;
   color: #000000;
   margin-left: 30px;
+  white-space: nowrap;
 }
 .yesterday_plays .earliest_games_header a {
   text-decoration: underline;
@@ -825,7 +827,7 @@
 .yesterday_plays .strikeLine {
   position: absolute;
   top: -7px;
-  left: 0;
+  left: -6px;
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
@@ -834,7 +836,116 @@
   color: #000000;
   white-space: nowrap;
 }
-
+.desc_line span {
+  white-space: nowrap;
+}
 .game.is_patriots {
   padding-bottom: 60px;
+}
+
+@media (max-width: 1240px) {
+  .earliest_games {
+    margin-top: 50px;
+  }
+  .game_team1, .game_team2 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .long_arrow_icon {
+    width: 24px;
+    margin-top: 12px;
+  }
+  .desc_line {
+    font-size: 26px;
+    line-height: 38px;
+  }
+  .units {
+    font-size: 22px;
+    line-height: 24px;
+    white-space: nowrap;
+    margin-left: 30px;
+    border-bottom-width: 5px;
+  }
+  .game_status {
+    font-size: 56px;
+    width: 60px;
+    margin: 0 20px;
+  }
+  .game_score {
+    font-size: 26px;
+  }
+  .yesterday_plays .strikeLine {
+    top: -6px;
+    left: -5px;
+    font-size: 60px;
+  }
+  .team_logo {
+    width: 28px;
+  }
+}
+@media (max-width: 1024px) {
+  .earliest_games_col, .yesterday_plays_col {
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+}
+@media (max-width: 768px) {
+  .game.is_patriots {
+    padding-bottom: 30px;
+  }
+  .yesterday_plays .game_info {
+    flex-direction: column;
+  }
+  .yesterday_plays .patriots_text {
+    top: -1.5em;
+    font-size: 20px;
+  }
+  .yesterday_plays .game_score {
+    margin-top: 16px;
+    text-align: left;
+    font-size: 22px;
+  }
+  .has_patriots.desc_line_section {
+    top: 2.5em;
+  }
+  .has_patriots.game_score {
+    margin-top: 2.5em;
+  }
+  .earliest_games .dropdownBtn {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .game_subinfo {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .game_team1, .game_team2 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .team_logo {
+    width: 24px;
+  }
+  .units {
+    font-size: 14px;
+    line-height: 18px;
+    border-bottom-width: 3px;
+  }
+  .desc_line {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .long_arrow_icon {
+    margin-top: 8px;
+  }
+  .yesterday_plays .game_score {
+    font-size: 24px;
+  }
+  .game_status {
+    font-size: 26px;
+    margin: 0 10px 0 -5px;
+    width: 30px;
+  }
 }

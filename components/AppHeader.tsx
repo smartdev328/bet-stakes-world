@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Row, Col, Image, Button, Divider, Menu } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
+import { LockIcon } from '@components/SvgIcons';
 import styles from './AppHeader.module.css';
-import { useEffect, useState } from 'react';
 
 type HeaderProps = {
   releaseTime: string;
@@ -23,25 +24,6 @@ const DefaultRemainingTime = {
   mins: 0,
   secs: 0
 };
-
-function LockIcon() {
-  return (
-    <svg
-      width="17"
-      height="21"
-      viewBox="0 0 17 21"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={styles.lock_icon}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M13.2422 7H14.2422C15.3422 7 16.2422 7.9 16.2422 9V19C16.2422 20.1 15.3422 21 14.2422 21H2.24219C1.14219 21 0.242188 20.1 0.242188 19V9C0.242188 7.9 1.14219 7 2.24219 7H3.24219V5C3.24219 2.24 5.48219 0 8.24219 0C11.0022 0 13.2422 2.24 13.2422 5V7ZM8.24219 2C6.58219 2 5.24219 3.34 5.24219 5V7H11.2422V5C11.2422 3.34 9.90219 2 8.24219 2ZM2.24219 19V9H14.2422V19H2.24219ZM10.2422 14C10.2422 15.1 9.34219 16 8.24219 16C7.14219 16 6.24219 15.1 6.24219 14C6.24219 12.9 7.14219 12 8.24219 12C9.34219 12 10.2422 12.9 10.2422 14Z"
-        fill="white"
-      />
-    </svg>
-  );
-}
 
 function SubMenu() {
   const [sportPaneVisible, setSportPaneVisible] = useState<boolean>(false);
@@ -139,7 +121,7 @@ function SubMenu() {
                 <div className={styles.submenu_item}>
                   <Link href="/">
                     <a>
-                      <LockIcon />
+                      <LockIcon className={styles.lock_icon} />
                       Baseball
                     </a>
                   </Link>
@@ -147,7 +129,7 @@ function SubMenu() {
                 <div className={styles.submenu_item}>
                   <Link href="/">
                     <a>
-                      <LockIcon />
+                      <LockIcon className={styles.lock_icon} />
                       UFC
                     </a>
                   </Link>
@@ -155,7 +137,7 @@ function SubMenu() {
                 <div className={styles.submenu_item}>
                   <Link href="/">
                     <a>
-                      <LockIcon />
+                      <LockIcon className={styles.lock_icon} />
                       Formula 1
                     </a>
                   </Link>
@@ -163,7 +145,7 @@ function SubMenu() {
                 <div className={styles.submenu_item}>
                   <Link href="/">
                     <a>
-                      <LockIcon />
+                      <LockIcon className={styles.lock_icon} />
                       Soccer
                     </a>
                   </Link>
@@ -193,7 +175,7 @@ function SubMenu() {
                 <div className={styles.submenu_item}>
                   <Link href="/">
                     <a>
-                      <LockIcon />
+                      <LockIcon className={styles.lock_icon} />
                       Baseball
                     </a>
                   </Link>
@@ -250,7 +232,7 @@ function SubMenu() {
                     <div className={styles.submenu_item}>
                       <Link href="/">
                         <a>
-                          <LockIcon />
+                          <LockIcon className={styles.lock_icon} />
                           Baseball
                         </a>
                       </Link>
@@ -258,7 +240,7 @@ function SubMenu() {
                     <div className={styles.submenu_item}>
                       <Link href="/">
                         <a>
-                          <LockIcon />
+                          <LockIcon className={styles.lock_icon} />
                           UFC
                         </a>
                       </Link>
@@ -266,7 +248,7 @@ function SubMenu() {
                     <div className={styles.submenu_item}>
                       <Link href="/">
                         <a>
-                          <LockIcon />
+                          <LockIcon className={styles.lock_icon} />
                           Formula 1
                         </a>
                       </Link>
@@ -274,7 +256,7 @@ function SubMenu() {
                     <div className={styles.submenu_item}>
                       <Link href="/">
                         <a>
-                          <LockIcon />
+                          <LockIcon className={styles.lock_icon} />
                           Soccer
                         </a>
                       </Link>
@@ -320,7 +302,7 @@ function SubMenu() {
                     <div className={styles.submenu_item}>
                       <Link href="/">
                         <a>
-                          <LockIcon />
+                          <LockIcon className={styles.lock_icon} />
                           Baseball
                         </a>
                       </Link>

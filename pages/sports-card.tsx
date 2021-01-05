@@ -1,18 +1,30 @@
 /* eslint-disable react/display-name */
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { Image, Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import moment from 'moment';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
-import { AllSportsBtnBgIcon, LockIcon, TuneIcon } from '@components/SvgIcons';
+import {
+  AllSportsBtnBgIcon,
+  ListIcon,
+  LockIcon,
+  MinusEncloseIcon,
+  MoneyPocketIcon,
+  OpenBookIcon,
+  PlusEncloseIcon,
+  TuneIcon
+} from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import {
   ThickStarIcon,
   CaretDownInCircleIcon,
   ConfigIcon,
-  MobilePhoneIcon
+  MobilePhoneIcon,
+  LongArrowIcon
 } from '@components/SvgIcons';
+import { EarliestGameInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 
 const SPORTS_INFO = [
@@ -65,8 +77,15 @@ export default function SportsCard() {
         <div className={styles.container}>
           <TopSection />
           <Row>
-            <Col span={18}></Col>
-            <Col span={6}></Col>
+            <Col span={18}>
+              <StraightBets />
+              <Parlays />
+            </Col>
+            <Col span={6}>
+              <BankrollManagementSystem />
+              <CommonSportsbooks />
+              <BettingFundamentals />
+            </Col>
           </Row>
         </div>
       </AppLayout>
@@ -77,7 +96,7 @@ export default function SportsCard() {
 function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
-      <Image src="/images/member_dashboard.jpg" preview={false} className={styles.bgImage} />
+      <img src="/images/member_dashboard.jpg" className={styles.bgImage} />
       <BannerSportsAndMatches />
     </div>
   );
@@ -265,5 +284,402 @@ function TopSection() {
         </Dropdown>
       </Row>
     </>
+  );
+}
+
+const Mock_EarlestGames: EarliestGameInfoType[] = [
+  {
+    id: 1,
+    sportType: 'NBA',
+    startDate: '6:30PM',
+    teams: [
+      {
+        name: 'Utah Jazz',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/utah_jazz.png'
+      },
+      {
+        name: 'Denver Nuggets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/denver_nuggest.png'
+      }
+    ],
+    state: 'Denver Nuggets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  },
+  {
+    id: 2,
+    sportType: 'NBA',
+    startDate: '6:30PM',
+    teams: [
+      {
+        name: 'Utah Jazz',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/utah_jazz.png'
+      },
+      {
+        name: 'Denver Nuggets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/denver_nuggest.png'
+      }
+    ],
+    state: 'Denver Nuggets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  },
+  {
+    id: 3,
+    sportType: 'NBA',
+    startDate: '6:30PM',
+    teams: [
+      {
+        name: 'Utah Jazz',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/utah_jazz.png'
+      },
+      {
+        name: 'Denver Nuggets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/denver_nuggest.png'
+      }
+    ],
+    state: 'Denver Nuggets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  },
+  {
+    id: 4,
+    sportType: 'NBA',
+    startDate: '6:30PM',
+    teams: [
+      {
+        name: 'Utah Jazz',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/utah_jazz.png'
+      },
+      {
+        name: 'Denver Nuggets',
+        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/denver_nuggest.png'
+      }
+    ],
+    state: 'Denver Nuggets Money Line',
+    odds: -110,
+    price: 1.9,
+    units: [
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+    ]
+  }
+];
+
+function StraightBets() {
+  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
+  const [hideSection, setHideSection] = useState<boolean>(true);
+  const changeDetailsVisibleAt = (index: number, status: boolean) => {
+    showDetailsAt[index] = status;
+    setShowDetailsAt(showDetailsAt.slice());
+  };
+
+  return (
+    <div className={styles.earliest_games}>
+      <div className={styles.earliest_games_titlebar}>
+        <Row align="middle">
+          {!hideSection && (
+            <CaretDownOutlined className={styles.caret_down} onClick={() => setHideSection(true)} />
+          )}
+          {hideSection && (
+            <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
+          )}
+          <strong>Straight Bets ({Mock_EarlestGames.length})</strong>
+        </Row>
+        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
+      </div>
+      {hideSection && (
+        <div className={styles.earliest_games_list}>
+          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
+            <div className={styles.game} key={game.id}>
+              <div className={styles.game_subinfo}>
+                <span
+                  className={`${styles.gameSportType} ${
+                    styles['gameSportType_' + game.sportType]
+                  }`}>
+                  {game.sportType}
+                </span>
+                <span>Game Starts @ {game.startDate}</span>
+              </div>
+              <div className={styles.game_info}>
+                <div className={styles.game_teams}>
+                  <Row>
+                    <div className={styles.game_team1}>
+                      <img src={game.teams[0].logo} className={styles.team_logo} />
+                      <span>{game.teams[0].name}&nbsp;@&nbsp;</span>
+                    </div>
+                    <div className={styles.game_team2}>
+                      <img src={game.teams[1].logo} className={styles.team_logo} />
+                      <span>{game.teams[1].name}</span>
+                    </div>
+                  </Row>
+                  <Row align={'top'} wrap={false}>
+                    <LongArrowIcon className={styles.long_arrow_icon} />
+                    <span className={styles.desc_line}>
+                      {`${game.state} (${game.odds} odds | ${game.price})`}
+                    </span>
+                  </Row>
+                </div>
+                <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
+                  {`${game.units.length} Units`}
+                </div>
+              </div>
+              {showDetailsAt[index] && (
+                <div className={styles.details_section}>
+                  <div
+                    onClick={() => changeDetailsVisibleAt(index, false)}
+                    className={styles.hide_details}>
+                    <div className={styles.hide_details_btn}>
+                      <span>Hide Details</span>
+                      <CaretUpOutlined className={styles.caret_up} />
+                    </div>
+                  </div>
+                  <ul>
+                    {game.units.map((unit: string, i: number) => (
+                      <li key={i}>{unit}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Parlays() {
+  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
+  const [hideSection, setHideSection] = useState<boolean>(false);
+  const changeDetailsVisibleAt = (index: number, status: boolean) => {
+    showDetailsAt[index] = status;
+    setShowDetailsAt(showDetailsAt.slice());
+  };
+
+  return (
+    <div className={styles.earliest_games}>
+      <div className={styles.earliest_games_titlebar}>
+        <Row align="middle">
+          {!hideSection && (
+            <CaretDownOutlined className={styles.caret_down} onClick={() => setHideSection(true)} />
+          )}
+          {hideSection && (
+            <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
+          )}
+          <strong>Parlays ({Mock_EarlestGames.length})</strong>
+        </Row>
+        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
+      </div>
+      {hideSection && (
+        <div className={styles.earliest_games_list}>
+          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
+            <div className={styles.game} key={game.id}>
+              <div className={styles.game_subinfo}>
+                <span
+                  className={`${styles.gameSportType} ${
+                    styles['gameSportType_' + game.sportType]
+                  }`}>
+                  {game.sportType}
+                </span>
+                <span>Game Starts @ {game.startDate}</span>
+              </div>
+              <div className={styles.game_info}>
+                <div className={styles.game_teams}>
+                  <Row>
+                    <LongArrowIcon className={styles.long_arrow_icon} />
+                    <div className={styles.game_team1}>
+                      <img src={game.teams[0].logo} className={styles.team_logo} />
+                      <span>{game.teams[0].name}&nbsp;-&nbsp;Money Line</span>
+                    </div>
+                  </Row>
+                  <Row>
+                    <LongArrowIcon className={styles.long_arrow_icon} />
+                    <div className={styles.game_team2}>
+                      <img src={game.teams[1].logo} className={styles.team_logo} />
+                      <span>{game.teams[1].name}&nbsp;-&nbsp;Money Line</span>
+                    </div>
+                  </Row>
+                </div>
+                <div className={styles.desc_line}>{`(${game.odds} odds | ${game.price})`}</div>
+                <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
+                  {`${game.units.length} Units`}
+                </div>
+              </div>
+              {showDetailsAt[index] && (
+                <div className={styles.details_section}>
+                  <div
+                    onClick={() => changeDetailsVisibleAt(index, false)}
+                    className={styles.hide_details}>
+                    <div className={styles.hide_details_btn}>
+                      <span>Hide Details</span>
+                      <CaretUpOutlined className={styles.caret_up} />
+                    </div>
+                  </div>
+                  <ul>
+                    {game.units.map((unit: string, i: number) => (
+                      <li key={i}>{unit}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BankrollManagementSystem() {
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Bankroll Management System</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        <Row className={styles.ctaBtns}>
+          <Button className={styles.agressiveBtn}>Aggresive</Button>
+          <Button ghost className={styles.conservativeBtn}>
+            Conservative
+          </Button>
+        </Row>
+        <p>1 unit = 2% Bankroll</p>
+        <p>2 units = 4% Bankroll</p>
+        <p>3 units = 6% Bankroll</p>
+        <p>4 units = 8% Bankroll</p>
+        <div className={styles.footer_desc}>
+          The higher the unit the more confident I am in the play
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommonSportsbooks() {
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <OpenBookIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Common Sportsbooks</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        <Row>
+          <Col span={12} className={styles.company_logo}>
+            <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <img
+              src="/images/draftkings.png"
+              alt="Draftkings SportsBook Logo"
+              width={109}
+              height={29}
+            />
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <img
+              src="/images/williamhill.png"
+              alt="WilliamHill SportsBook Logo"
+              width={120}
+              height={34}
+            />
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+}
+
+const MOCK_BetFundaments = [
+  {
+    id: 1,
+    title: 'Favorites vs. Underdogs',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 2,
+    title: 'Oddsmakers',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 3,
+    title: 'MoneyLine',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 4,
+    title: 'Spreads',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 5,
+    title: 'Over/Under Totals',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  }
+];
+
+function BettingFundamentals() {
+  const [showContent, setShowContent] = useState<boolean[]>([]);
+  const toggleDetailsAt = (id: number) => {
+    showContent[id] = !showContent[id];
+    setShowContent(showContent.slice());
+  };
+
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <ListIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Sports Betting Fundamentals</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        {MOCK_BetFundaments.map((data, index) => (
+          <>
+            <div className={styles.accordionTitle}>
+              {showContent[index] && (
+                <>
+                  <strong>{data.title}</strong>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <MinusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+              {!showContent[index] && (
+                <>
+                  <span>{data.title}</span>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <PlusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+            </div>
+            {showContent[index] && <div className={styles.accordionContent}>{data.content}</div>}
+          </>
+        ))}
+      </div>
+    </div>
   );
 }

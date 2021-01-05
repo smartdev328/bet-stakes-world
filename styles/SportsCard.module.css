@@ -365,3 +365,360 @@
     margin: 8px 0px;
   }
 }
+
+
+/* Earliest Games Section */
+.earliest_games {
+  margin-bottom: 40px;
+}
+.earliest_games_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.earliest_games_header  .dropdownBtn {
+  background: rgba(236, 236, 236, 0.3);
+  padding: 10px 30px;
+  margin-right: 24px;
+}
+.earliest_games_header  .dropdownBtn:last-child {
+  margin-right: 0;
+}
+.caret_up, .caret_down {
+  margin-left: 8px;
+  font-size: 14px !important;
+  line-height: 14px !important;
+}
+.earliest_games_titlebar {
+  background-color: #000;
+  padding: 8px 18px;
+  margin: 0 0 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.earliest_games_titlebar .caret_up,
+.earliest_games_titlebar .caret_down {
+  margin-left: 0;
+  margin-right: 10px;
+}
+.earliest_games_titlebar strong {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+.earliest_games_titlebar span {
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+}
+
+.game {
+  padding: 24px 0;
+  border-bottom: 1px solid #C4C4C4;
+}
+.game_subinfo {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+}
+.game_subinfo .gameSportType {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+  padding: 0 10px;
+  margin-right: 8px;
+}
+.game_subinfo .gameSportType_NBA {
+  background: #EC4C15;
+}
+.game_subinfo .gameSportType_NFL {
+  background: #91442A;
+}
+.game_subinfo .gameSportType_MLB {
+  background: #1878FB;
+}
+.game_subinfo .gameSportType_UFC {
+  background: #F9282B;
+}
+.game_subinfo .gameSportType_F1 {
+  background: #505054;
+}
+.game_subinfo .gameSportType_SOCCER {
+  background: #6DCF40;
+}
+
+.game_info {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.team_logo {
+  width: 32px;
+  margin-right: 6px;
+}
+.game_team1, .game_team2 {
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 50px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+.desc_line {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 50px;
+  color: #000000;
+}
+.long_arrow_icon {
+  width: 28px;
+  margin-right: 8px;
+  margin-top: 18px;
+}
+.units {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  border-bottom: 8px solid #1A1A1A;
+  cursor: pointer;
+}
+.details_section {
+  margin-top: 18px;
+  text-align: center;
+}
+.hide_details {
+  display: flex;
+  align-items: center;
+}
+.hide_details:after,
+.hide_details:before {
+  display: block;
+  content: '';
+  height: 1px;
+  background: #C4C4C4;
+  flex: 1;
+}
+.hide_details_btn {
+  padding: 0 18px;
+  cursor: pointer;
+}
+.hide_details_btn span {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000000;
+}
+.hide_details_btn .caret_up svg {
+  width: 12px;
+}
+.hide_details_btn .caret_up path {
+  fill: rgba(0, 0, 0, 0.54);
+}
+.details_section ul {
+  padding-top: 25px;
+  display: inline-block;
+}
+.details_section ul li {
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.details_section ul li:before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #FFC700;
+  margin-right: 8px;
+  margin-top: 7px;
+}
+
+.desc_line span {
+  white-space: nowrap;
+}
+
+
+@media (max-width: 1240px) {
+  .earliest_games {
+    margin-top: 50px;
+  }
+  .game_team1, .game_team2 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .long_arrow_icon {
+    width: 24px;
+    margin-top: 12px;
+  }
+  .desc_line {
+    font-size: 26px;
+    line-height: 38px;
+  }
+  .units {
+    font-size: 22px;
+    line-height: 24px;
+    white-space: nowrap;
+    margin-left: 30px;
+    border-bottom-width: 5px;
+  }
+  .team_logo {
+    width: 28px;
+  }
+}
+@media (max-width: 1024px) {
+  .earliest_games_col, .yesterday_plays_col {
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+}
+@media (max-width: 768px) {
+  .earliest_games .dropdownBtn {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .game_subinfo {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .game_team1, .game_team2 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .team_logo {
+    width: 24px;
+  }
+  .units {
+    font-size: 14px;
+    line-height: 18px;
+    border-bottom-width: 3px;
+  }
+  .desc_line {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .long_arrow_icon {
+    margin-top: 8px;
+  }
+}
+
+/* Sidebar Blocks */
+.sidebarBlock {
+  background: #F1F1F1;
+  padding: 16px;
+  margin-left: 16px;
+  margin-bottom: 24px;
+}
+.sidebarBlockTitle {
+  display: flex;
+  align-items: center;
+}
+.sidebarBlockTitleIcon {
+  width: 16px;
+  height: 22px;
+  margin-right: 8px;
+}
+.sidebarBlockTitle span {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1a1a1a;
+}
+.sidebarBlockContent {
+  padding: 16px 0;
+}
+.sidebarBlockContent .ctaBtns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.agressiveBtn {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 117.9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: #1A1A1A;
+  border: 1px solid #434343;
+  flex: 1;
+}
+.conservativeBtn {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 117.9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #000000;
+  border: 1px solid #434343;
+  margin-left: 10px;
+  flex: 1;
+}
+.sidebarBlockContent p {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 117.9%;
+  color: #000000;
+  margin-bottom: 1em;
+}
+.sidebarBlockContent .footer_desc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 117.9%;
+  color: #000000;
+}
+.company_logo {
+  margin-bottom: 28px;
+}
+.company_logo:last-child {
+  margin-bottom: 0;
+}
+
+.accordionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.accordionTitle span, .accordionTitle strong {
+  font-size: 16px;
+  line-height: 25px;
+  color: #1A1A1A;
+}
+.accordionTitleIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.ghostBtn {
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.accordionContent {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  margin-bottom: 1em;
+}

@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
@@ -19,6 +19,9 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap"
             rel="stylesheet"
           />
+          <link rel="icon" href="/favicon.ico" />
+          <meta charset="UTF-8" />
+          <meta name="keywords" content="Daily, Stakes, Sport" />
         </Head>
         <body>
           <Main />

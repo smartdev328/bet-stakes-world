@@ -4,7 +4,14 @@ import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { LockIcon } from '@components/SvgIcons';
+import {
+  IdentityIcon,
+  LockIcon,
+  SearchIcon,
+  CartIcon,
+  CloseIcon,
+  HamburgerMenuIcon
+} from '@components/SvgIcons';
 import styles from './AppHeader.module.css';
 
 type HeaderProps = {
@@ -58,11 +65,13 @@ function SubMenu() {
   return (
     <>
       <div className={styles.submenu}>
-        <a className={styles.submenu_main_item}>
-          <span>Memberships</span>
-          <CaretUpOutlined className={styles.caret_up} />
-          <CaretDownOutlined className={styles.caret_down} />
-        </a>
+        <Link href="/">
+          <a className={styles.submenu_main_item}>
+            <span>Memberships</span>
+            <CaretUpOutlined className={styles.caret_up} />
+            <CaretDownOutlined className={styles.caret_down} />
+          </a>
+        </Link>
         <div className={styles.submenu_content}>
           <div className={styles.submenu_content_left}>
             <div className={styles.submenu_desc}>
@@ -186,16 +195,18 @@ function SubMenu() {
         </div>
       </div>
       <div className={styles.mobilesubmenu}>
-        <a
-          className={`${styles.submenu_main_item} ${submenuVisible ? styles.active : ''}`}
-          onClick={() => setSubmenuVisible(!submenuVisible)}>
-          <span>Memberships</span>
-          {!submenuVisible ? (
-            <CaretDownOutlined className={styles.caret_up} />
-          ) : (
-            <CaretUpOutlined className={styles.caret_down} />
-          )}
-        </a>
+        <Link href="/">
+          <a
+            className={`${styles.submenu_main_item} ${submenuVisible ? styles.active : ''}`}
+            onClick={() => setSubmenuVisible(!submenuVisible)}>
+            <span>Memberships</span>
+            {!submenuVisible ? (
+              <CaretDownOutlined className={styles.caret_up} />
+            ) : (
+              <CaretUpOutlined className={styles.caret_down} />
+            )}
+          </a>
+        </Link>
         {submenuVisible && (
           <div className={styles.submenu_content}>
             <div className={styles.submenu_content_left}>
@@ -414,7 +425,7 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
             </Button>
             <Button
               type="ghost"
-              icon={<Image src="/images/identity_icon.svg" className={styles.user_icon} />}
+              icon={<IdentityIcon className={styles.user_icon} />}
               className={styles.loginBtn}>
               Log In
             </Button>
@@ -446,10 +457,13 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
           <div className={styles.navbarSide}>
             <Button
               type="link"
-              icon={<Image src="/images/zoom_in_icon.svg" className={styles.cart_icon} />}></Button>
+              icon={<SearchIcon className={styles.cart_icon} />}
+              aria-label="Search Packages Button"
+            />
             <Button
               type="link"
-              icon={<Image className={styles.cart_icon} src="/images/cart_icon.svg" />}
+              icon={<CartIcon className={styles.cart_icon} />}
+              aria-label="Cart Button"
               className={styles.cart_btn}>
               <span className={styles.text}>2</span>
             </Button>
@@ -461,44 +475,35 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
               {!mobileNavVisible ? (
                 <Button
                   type="link"
-                  icon={
-                    <Image
-                      src="/images/menu_icon.svg"
-                      preview={false}
-                      className={styles.cart_icon}
-                    />
-                  }
+                  icon={<HamburgerMenuIcon className={styles.cart_icon} />}
                   onClick={showMobileNav}
+                  aria-label="Mobile Menu Open Button"
                   className={styles.mobile_navbar_btn}></Button>
               ) : (
                 <Button
                   type="link"
                   onClick={hideMobileNav}
-                  icon={
-                    <Image
-                      src="/images/close_icon.svg"
-                      preview={false}
-                      className={styles.cart_icon}
-                    />
-                  }
+                  icon={<CloseIcon className={styles.cart_icon} />}
+                  aria-label="Mobile Menu Close Button"
                   className={styles.mobile_navbar_btn}></Button>
               )}
             </div>
             <div className={styles.navbarSide}>
               <Button
                 type="link"
-                icon={
-                  <Image src="/images/zoom_in_icon.svg" className={styles.cart_icon} />
-                }></Button>
+                aria-label="Search Packages Button"
+                icon={<SearchIcon className={styles.cart_icon} />}></Button>
               <Button
                 type="link"
-                icon={<Image className={styles.cart_icon} src="/images/cart_icon.svg" />}
+                icon={<CartIcon className={styles.cart_icon} />}
+                aria-label="Cart Button"
                 className={styles.cart_btn}>
                 <span className={styles.text}>2</span>
               </Button>
               <Button
                 type="link"
-                icon={<Image className={styles.cart_icon} src="/images/identity_icon.svg" />}
+                icon={<IdentityIcon className={styles.cart_icon} />}
+                aria-label="User Profile Button"
                 className={styles.cart_btn}></Button>
             </div>
           </Row>

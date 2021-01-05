@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { createRef, RefObject, useState } from 'react';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Carousel, Image } from 'antd';
+import { Dropdown, Menu, Carousel } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
 
 import { ClickableArrowIcon } from '@components/SvgIcons';
@@ -167,9 +167,11 @@ export default function BannerSportsAndMatches() {
                     <div className={styles.match_content_left}>
                       <div className={styles.team1}>
                         <div className={styles.team_logo_container}>
-                          <Image
-                            preview={false}
-                            src={'/images/team_tor.png'}
+                          <img
+                            src={
+                              'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png'
+                            }
+                            alt="Toronto Raptors Logo"
                             className={styles.team_logo}
                           />
                         </div>
@@ -177,9 +179,11 @@ export default function BannerSportsAndMatches() {
                       </div>
                       <div className={styles.team2}>
                         <div className={styles.team_logo_container}>
-                          <Image
-                            preview={false}
-                            src={'/images/team_lal.png'}
+                          <img
+                            alt="Los Angeles Lakers Logo"
+                            src={
+                              'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Los_Angeles_Lakers.png'
+                            }
                             className={styles.team_logo}
                           />
                         </div>

@@ -151,6 +151,10 @@ p {
   text-align: center;
 }
 
+.ant-carousel .slick-list .slick-slide[aria-hidden="true"] {
+  visibility: hidden;
+}
+
 .hero-banner .ant-carousel .slick-dots li,
 .testimonials-carousel .slick-dots li,
 .sports-cards-carousel .slick-dots li {
@@ -176,6 +180,9 @@ p {
   height: 8px;
   background: #FFC700;
   opacity: 1;
+  box-sizing: border-box;
+  padding: 4px;
+  pointer-events: none;
 }
 
 .hero-banner .slick-dots li button:before,

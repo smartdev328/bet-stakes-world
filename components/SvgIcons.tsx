@@ -208,3 +208,95 @@ export const AllSportsBtnBgIcon = ({ className }: SVGIconPropType) => (
     />
   </svg>
 );
+
+export const IdentityIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="16"
+    height="16"
+    className={className}
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0ZM10 4C10 2.9 9.1 2 8 2C6.9 2 6 2.9 6 4C6 5.1 6.9 6 8 6C9.1 6 10 5.1 10 4ZM14 13C13.8 12.29 10.7 11 8 11C5.3 11 2.2 12.29 2 13.01V14H14V13ZM0 13C0 10.34 5.33 9 8 9C10.67 9 16 10.34 16 13V16H0V13Z"
+      fill="#F1F1F1"
+    />
+  </svg>
+);
+
+export const SearchIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="24"
+    height="24"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M16.0686 15.0943H17.1527L24 21.9554L21.9554 24L15.0943 17.1527V16.0686L14.7238 15.6844C13.1595 17.0292 11.1286 17.8388 8.91938 17.8388C3.99314 17.8388 0 13.8456 0 8.91938C0 3.99314 3.99314 0 8.91938 0C13.8456 0 17.8388 3.99314 17.8388 8.91938C17.8388 11.1286 17.0292 13.1595 15.6844 14.7238L16.0686 15.0943ZM2.74446 8.9194C2.74446 12.3362 5.50261 15.0944 8.91942 15.0944C12.3362 15.0944 15.0944 12.3362 15.0944 8.9194C15.0944 5.50259 12.3362 2.74444 8.91942 2.74444C5.50261 2.74444 2.74446 5.50259 2.74446 8.9194Z"
+      fill="white"
+    />
+  </svg>
+);
+
+export const CartIcon = ({ className }: SVGIconPropType) => (
+  <svg width="24" height="24" className={className} viewBox="0 0 24 24" fill="none">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M17.3214 13.0952H8.45238L7.14286 15.4762H21.4286V17.8571H7.14286C5.33333 17.8571 4.19048 15.9167 5.05952 14.3214L6.66667 11.4167L2.38095 2.38095H0V0H3.89286L8.96429 10.7143H17.3214L21.9286 2.38095L24 3.52381L19.4048 11.869C19 12.6071 18.2143 13.0952 17.3214 13.0952ZM7.14287 19.0476C5.83334 19.0476 4.77382 20.119 4.77382 21.4286C4.77382 22.7381 5.83334 23.8095 7.14287 23.8095C8.45239 23.8095 9.52382 22.7381 9.52382 21.4286C9.52382 20.119 8.45239 19.0476 7.14287 19.0476ZM19.0476 19.0476C17.7381 19.0476 16.6786 20.119 16.6786 21.4286C16.6786 22.7381 17.7381 23.8095 19.0476 23.8095C20.3572 23.8095 21.4286 22.7381 21.4286 21.4286C21.4286 20.119 20.3572 19.0476 19.0476 19.0476Z"
+      fill="white"
+    />
+  </svg>
+);
+
+export const CloseIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="16"
+    height="16"
+    className={className}
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16 1.61143L14.3886 0L8 6.38857L1.61143 0L0 1.61143L6.38857 8L0 14.3886L1.61143 16L8 9.61143L14.3886 16L16 14.3886L9.61143 8L16 1.61143Z"
+      fill="white"
+    />
+  </svg>
+);
+
+export const HamburgerMenuIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="24"
+    height="17"
+    className={className}
+    viewBox="0 0 24 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 2.94453V0.166748H24V2.94453H0ZM0 9.88899H24V7.11121H0V9.88899ZM0 16.8334H24V14.0557H0V16.8334Z"
+      fill="white"
+    />
+  </svg>
+);
+
+export const ArrowForwardIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="16"
+    height="17"
+    className={className}
+    viewBox="0 0 16 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M8 0.974609L6.59 2.38461L12.17 7.97461H0V9.97461H12.17L6.59 15.5646L8 16.9746L16 8.97461L8 0.974609Z"
+      fill="#1A1A1A"
+    />
+  </svg>
+);

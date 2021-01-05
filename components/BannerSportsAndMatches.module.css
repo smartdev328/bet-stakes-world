@@ -63,11 +63,12 @@
   width: 24px;
   margin-right: 5px;
   text-align: center;
-  height: 14px;
+  height: 16px;
 }
 .team_logo {
-  height: 14px;
+  height: 16px;
   width: auto;
+  margin: auto;
 }
 .match_content_right {
   font-style: normal;

@@ -64,6 +64,10 @@ export default function SportsCard() {
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />
+          <Row>
+            <Col span={18}></Col>
+            <Col span={6}></Col>
+          </Row>
         </div>
       </AppLayout>
     </>

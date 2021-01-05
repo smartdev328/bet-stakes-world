@@ -2,7 +2,7 @@ import { Input, Button, Image, Row, Col } from 'antd';
 import Link from 'next/link';
 import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
 
-import { TikTokIcon, FacebookIcon } from '@components/SvgIcons';
+import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons';
 import styles from './AppFooter.module.css';
 
 function AppFooter() {
@@ -21,7 +21,8 @@ function AppFooter() {
                 className={styles.newsletterForm_email}
               />
               <Button
-                icon={<Image src="/images/arrow_forward_icon.svg" className={styles.arrow_icon} />}
+                icon={<ArrowForwardIcon className={styles.arrow_icon} />}
+                aria-label="Newsletter Subscribe Button"
                 className={styles.newsletterForm_submit}
               />
             </div>
@@ -115,25 +116,25 @@ function AppFooter() {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <a>
+                    <a href="https://facebook.com">
                       <FacebookIcon className={styles.facebook_icon} />
                       <span className={styles.icon_title}>Facebook</span>
                     </a>
                   </li>
                   <li>
-                    <a>
+                    <a href="https://instagram.com">
                       <InstagramOutlined />
                       <span className={styles.icon_title}>Instagram</span>
                     </a>
                   </li>
                   <li>
-                    <a>
+                    <a href="https://twitter.com">
                       <TwitterOutlined />
                       <span className={styles.icon_title}>Twitter</span>
                     </a>
                   </li>
                   <li>
-                    <a>
+                    <a href="https://tiktok.com">
                       <TikTokIcon className={styles.tiktok_icon} />
                       <span className={styles.icon_title}>TikTok</span>
                     </a>

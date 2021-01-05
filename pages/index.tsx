@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Head>
         <title>The Daily Stakes</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Daily Stakes Homepage" />
       </Head>
       <AppLayout>
         <HeroBanner />
@@ -59,6 +59,7 @@ function HeroBanner() {
           <Image
             preview={false}
             src="/images/hero_banner_right_2.svg"
+            alt="Hero Banner Background Image"
             className={styles.heroBannerRightBg}
           />
           <div className={styles.container}>
@@ -349,7 +350,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('nba')}>
                 {selectedCards.nba && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    src="/images/check_mark.svg"
+                    alt="Check mark Icon"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <NBA_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -375,7 +380,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('nfl')}>
                 {selectedCards.nfl && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    src="/images/check_mark.svg"
+                    alt="Check mark Icon"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <NFL_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -401,7 +410,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('mlb')}>
                 {selectedCards.mlb && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    alt="Check Mark Icon"
+                    src="/images/check_mark.svg"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <MLB_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -427,7 +440,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('ufc')}>
                 {selectedCards.ufc && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    alt="Check Mark Icon"
+                    src="/images/check_mark.svg"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <UFC_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -453,7 +470,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('f1')}>
                 {selectedCards.f1 && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    alt="Check Mark Icon"
+                    src="/images/check_mark.svg"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <F1_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -479,7 +500,11 @@ function BetOnSports() {
                 }`}
                 onClick={() => toggleSelectCard('soccer')}>
                 {selectedCards.soccer && (
-                  <img src="/images/check_mark.svg" className={styles.sports_card_checkmark} />
+                  <img
+                    alt="Check Mark Icon"
+                    src="/images/check_mark.svg"
+                    className={styles.sports_card_checkmark}
+                  />
                 )}
                 <SOCCER_SVG className={styles.sports_card_image} />
                 <div className={styles.sports_card_box_content}>
@@ -721,7 +746,11 @@ function SubscribeNow() {
     <div className={styles.subscribenow}>
       <div className={styles.subscribenow_container}>
         <div className={styles.subscribenow_left}>
-          <img src="/images/curve_arrow.svg" className={styles.subscribenow_curve} />
+          <img
+            alt="Curve Arrow Icon"
+            src="/images/curve_arrow.svg"
+            className={styles.subscribenow_curve}
+          />
           <div className={styles.subscribenow_title1}>Start winning now,</div>
           <div className={styles.subscribenow_title2}>it’s Ea$y!</div>
           <div className={styles.subscribenow_desc}>
@@ -730,7 +759,7 @@ function SubscribeNow() {
         </div>
         <div className={styles.subscribenow_right}>
           <div className={styles.btn_circle}>
-            <img src="/images/subscribe_btn_circle.svg" />
+            <img alt="Subscribe Button Icon" src="/images/subscribe_btn_circle.svg" />
             <Button className={styles.subscribe_btn}>Subscribe Now</Button>
           </div>
         </div>

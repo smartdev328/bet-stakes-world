@@ -1,13 +1,18 @@
 import Head from 'next/head';
-import { Image, Carousel, Button, Rate } from 'antd';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import LazyLoad from 'react-lazyload';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { SlickArrowType, SportCardsSelectionType } from '@type/Main';
 import styles from '@styles/Home.module.css';
+
+const Carousel = dynamic(() => import('antd/lib/carousel'));
+const Rate = dynamic(() => import('antd/lib/rate'));
+const Button = dynamic(() => import('antd/lib/button'));
 
 export default function Home() {
   return (
@@ -56,36 +61,31 @@ function HeroBanner() {
           </div>
         </div>
         <div className={styles.heroBannerRight}>
-          <Image
-            preview={false}
-            src="/images/hero_banner_right_2.svg"
-            alt="Hero Banner Background Image"
-            className={styles.heroBannerRightBg}
-          />
+          <LazyLoad height={683}>
+            <img
+              src={'/images/hero_banner_right_2.svg'}
+              alt="Hero Banner Background Image"
+              className={styles.heroBannerRightBg}
+            />
+          </LazyLoad>
           <div className={styles.container}>
             <Carousel autoplay className={styles.carousel}>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Button type="primary" className={styles.carousel_slide_subscribeBtn}>
-                    Subscribe Now
-                  </Button>
+                  <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Button type="primary" className={styles.carousel_slide_subscribeBtn}>
-                    Subscribe Now
-                  </Button>
+                  <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Button type="primary" className={styles.carousel_slide_subscribeBtn}>
-                    Subscribe Now
-                  </Button>
+                  <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
                 </div>
               </div>
             </Carousel>
@@ -144,11 +144,13 @@ function MembershipOfferings() {
             </div>
             <div className={styles.plan_content_details}>
               <div className={styles.price_view}>
-                <img
-                  src="/images/deal_circle.svg"
-                  className={styles.deal_circle}
-                  alt="Big Deal Circle"
-                />
+                <LazyLoad height={200}>
+                  <img
+                    src="/images/deal_circle.svg"
+                    className={styles.deal_circle}
+                    alt="Big Deal Circle"
+                  />
+                </LazyLoad>
                 <div>
                   <strong>All sports Daily</strong> Starting at
                 </div>
@@ -201,6 +203,13 @@ function MembershipOfferings() {
 function OurDailyStandards() {
   return (
     <div className={styles.daily_standards}>
+      <LazyLoad height={1000}>
+        <img
+          src={'/images/daily_standards_bg1.png'}
+          alt="Daily Standards Background"
+          className={styles.daily_standards_bg}
+        />
+      </LazyLoad>
       <div className={styles.daily_standards_title}>
         Our daily
         <br />
@@ -208,10 +217,13 @@ function OurDailyStandards() {
       </div>
       <div className={styles.daily_standards_list}>
         <div className={styles.daily_standards_item}>
-          <Image
-            src={'/images/daily_standards_analytics.svg'}
-            className={styles.daily_standards_icon}
-          />
+          <LazyLoad height={62}>
+            <img
+              src={'/images/daily_standards_analytics.svg'}
+              alt="Daily Standards Analytics"
+              className={styles.daily_standards_icon}
+            />
+          </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
               <h4>Analytical Driven</h4>
@@ -225,10 +237,13 @@ function OurDailyStandards() {
           </div>
         </div>
         <div className={styles.daily_standards_item}>
-          <Image
-            src={'/images/daily_standards_customer.svg'}
-            className={styles.daily_standards_icon}
-          />
+          <LazyLoad height={62}>
+            <img
+              src={'/images/daily_standards_customer.svg'}
+              alt="Daily Standards Customer"
+              className={styles.daily_standards_icon}
+            />
+          </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
               <h4>Customer Focused</h4>
@@ -242,10 +257,13 @@ function OurDailyStandards() {
           </div>
         </div>
         <div className={styles.daily_standards_item}>
-          <Image
-            src={'/images/daily_standards_working.svg'}
-            className={styles.daily_standards_icon}
-          />
+          <LazyLoad height={62}>
+            <img
+              src={'/images/daily_standards_working.svg'}
+              alt="Daily Standards Working"
+              className={styles.daily_standards_icon}
+            />
+          </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
               <h4>Hardest Working</h4>
@@ -258,10 +276,13 @@ function OurDailyStandards() {
           </div>
         </div>
         <div className={styles.daily_standards_item}>
-          <Image
-            src={'/images/daily_standards_pedigre.svg'}
-            className={styles.daily_standards_icon}
-          />
+          <LazyLoad height={62}>
+            <img
+              src={'/images/daily_standards_pedigre.svg'}
+              alt="Daily Standards Pedigre"
+              className={styles.daily_standards_icon}
+            />
+          </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
               <h4>Pedigre</h4>
@@ -543,6 +564,13 @@ function Testimonials() {
 
   return (
     <div className={styles.testimonials}>
+      <LazyLoad height={990}>
+        <img
+          src={'/images/testimonials.png'}
+          alt="Testimonials Background"
+          className={styles.testimonials_bg}
+        />
+      </LazyLoad>
       <Carousel
         className="testimonials-carousel"
         infinite
@@ -557,11 +585,17 @@ function Testimonials() {
               <StarSvg className={styles.black_star} />
             </div>
             <div className={styles.testimonial_content}>
-              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <LazyLoad height={590}>
+                <img
+                  src="/images/testimonial1.png"
+                  alt="Testimonial Background"
+                  className={styles.testimonial_image}
+                />
+              </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
-                <Rate allowHalf defaultValue={5} />
+                <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
                   aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
@@ -577,11 +611,17 @@ function Testimonials() {
               <StarSvg className={styles.black_star} />
             </div>
             <div className={styles.testimonial_content}>
-              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <LazyLoad height={590}>
+                <img
+                  src="/images/testimonial1.png"
+                  alt="Testimonial Background"
+                  className={styles.testimonial_image}
+                />
+              </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
-                <Rate allowHalf defaultValue={5} />
+                <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
                   aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
@@ -597,11 +637,17 @@ function Testimonials() {
               <StarSvg className={styles.black_star} />
             </div>
             <div className={styles.testimonial_content}>
-              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <LazyLoad height={590}>
+                <img
+                  src="/images/testimonial1.png"
+                  alt="Testimonial Background"
+                  className={styles.testimonial_image}
+                />
+              </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
-                <Rate allowHalf defaultValue={5} />
+                <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
                   aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
@@ -617,11 +663,17 @@ function Testimonials() {
               <StarSvg className={styles.black_star} />
             </div>
             <div className={styles.testimonial_content}>
-              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <LazyLoad height={590}>
+                <img
+                  src="/images/testimonial1.png"
+                  alt="Testimonial Background"
+                  className={styles.testimonial_image}
+                />
+              </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
-                <Rate allowHalf defaultValue={5} />
+                <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
                   aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
@@ -637,11 +689,17 @@ function Testimonials() {
               <StarSvg className={styles.black_star} />
             </div>
             <div className={styles.testimonial_content}>
-              <Image src="/images/testimonial1.png" className={styles.testimonial_image} />
+              <LazyLoad height={590}>
+                <img
+                  src="/images/testimonial1.png"
+                  alt="Testimonial Background"
+                  className={styles.testimonial_image}
+                />
+              </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Louis Wheeler | Toronto</div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
-                <Rate allowHalf defaultValue={5} />
+                <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Pellentesque elit purus integer laoreet sit cursus congue ac maecenas. Etiam
                   aenean dictum quisque nulla imperdiet feugiat duis. Convallis massa cursus non
@@ -669,6 +727,14 @@ function SportsNewsCarousel() {
   );
   return (
     <div className={styles.news_carousel}>
+      <LazyLoad height={990}>
+        <img
+          src={'/images/news_bg.jpg'}
+          alt="News Carousel Background"
+          className={styles.news_carousel_bgimg}
+        />
+      </LazyLoad>
+      <div className={styles.news_carousel_bg_overlay} />
       <div className={styles.news_carousel_bg}>
         <div className={styles.news_carousel_content}>
           <div className={styles.title_row}>
@@ -688,7 +754,9 @@ function SportsNewsCarousel() {
             centerPadding="60px">
             <div>
               <div className={styles.news}>
-                <img src="/images/news_bg.jpg" />
+                <LazyLoad height={590}>
+                  <img src="/images/news_bg.jpg" alt="News Background" />
+                </LazyLoad>
                 <div className={styles.news_content}>
                   <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
                   <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
@@ -704,7 +772,9 @@ function SportsNewsCarousel() {
             </div>
             <div>
               <div className={styles.news}>
-                <img src="/images/news_bg.jpg" />
+                <LazyLoad height={590}>
+                  <img src="/images/news_bg.jpg" alt="News Background" />
+                </LazyLoad>
                 <div className={styles.news_content}>
                   <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
                   <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
@@ -720,7 +790,9 @@ function SportsNewsCarousel() {
             </div>
             <div>
               <div className={styles.news}>
-                <img src="/images/news_bg.jpg" />
+                <LazyLoad height={590}>
+                  <img src="/images/news_bg.jpg" alt="News Background" />
+                </LazyLoad>
                 <div className={styles.news_content}>
                   <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
                   <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
@@ -746,11 +818,13 @@ function SubscribeNow() {
     <div className={styles.subscribenow}>
       <div className={styles.subscribenow_container}>
         <div className={styles.subscribenow_left}>
-          <img
-            alt="Curve Arrow Icon"
-            src="/images/curve_arrow.svg"
-            className={styles.subscribenow_curve}
-          />
+          <LazyLoad height={140}>
+            <img
+              alt="Curve Arrow Icon"
+              src="/images/curve_arrow.svg"
+              className={styles.subscribenow_curve}
+            />
+          </LazyLoad>
           <div className={styles.subscribenow_title1}>Start winning now,</div>
           <div className={styles.subscribenow_title2}>it’s Ea$y!</div>
           <div className={styles.subscribenow_desc}>
@@ -759,7 +833,9 @@ function SubscribeNow() {
         </div>
         <div className={styles.subscribenow_right}>
           <div className={styles.btn_circle}>
-            <img alt="Subscribe Button Icon" src="/images/subscribe_btn_circle.svg" />
+            <LazyLoad height={170}>
+              <img alt="Subscribe Button Icon" src="/images/subscribe_btn_circle.svg" />
+            </LazyLoad>
             <Button className={styles.subscribe_btn}>Subscribe Now</Button>
           </div>
         </div>

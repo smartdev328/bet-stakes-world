@@ -22,8 +22,8 @@
 }
 
 .logo {
-  max-width: 400px;
-  width: 100%;
+  width: 418px;
+  height: 72px;
 }
 
 .info {
@@ -184,7 +184,8 @@
     flex: 1;
   }
   .logo {
-    max-width: 65%;
+    width: 340px;
+    height: auto;
   }
 }
 

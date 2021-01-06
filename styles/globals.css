@@ -139,6 +139,36 @@ p {
   color: #1A1A1A;
 }
 
+a {
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
+}
+a:hover {
+  color: #40a9ff;
+}
+a:active {
+  color: #096dd9;
+}
+a:active,
+a:hover {
+  text-decoration: none;
+  outline: 0;
+}
+a:focus {
+  text-decoration: none;
+  outline: 0;
+}
+a[disabled] {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .text-left {
   text-align: left;
 }
@@ -153,6 +183,10 @@ p {
 
 .ant-carousel .slick-list .slick-slide[aria-hidden="true"] {
   visibility: hidden;
+}
+
+.news-carousel .slick-list .slick-slide[aria-hidden="true"] {
+  visibility: visible;
 }
 
 .hero-banner .ant-carousel .slick-dots li,

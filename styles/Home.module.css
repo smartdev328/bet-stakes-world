@@ -664,10 +664,18 @@ li .square_icon {
 /* Our Daily Standards */
 .daily_standards {
   padding: 120px 50px 50px;
-  background: url('/images/daily_standards_bg1.png') no-repeat;
   background-color: #1A1A1A;
   background-size: cover;
+  position: relative;
 }
+.daily_standards_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .daily_standards_title {
   max-width: 1100px;
   margin: auto;
@@ -1185,9 +1193,16 @@ li .square_icon {
 /* Testimonials */
 .testimonials {
   padding: 100px 50px 60px;
-  background: url('/images/testimonials.png') no-repeat;
   background-color: #1A1A1A;
   background-size: cover;
+  position: relative;
+}
+.testimonials_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .testimonial_top {
   display: flex;
@@ -1327,13 +1342,28 @@ li .square_icon {
 
 /* Sports News Carousel */
 .news_carousel {
-  background: url('/images/news_bg.jpg') no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
+  position: relative;
 }
 .news_carousel_bg {
-  background-color: rgba(202, 202, 202, 0.8);
   padding: 200px 150px 200px;
+  position: relative;
+}
+.news_carousel_bg_overlay {
+  background-color: rgba(202, 202, 202, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.news_carousel_bgimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .news_carousel_content {
   max-width: 1300px;

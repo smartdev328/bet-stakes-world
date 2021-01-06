@@ -160,7 +160,7 @@ export default function BannerSportsAndMatches() {
             beforeChange={beforeSlideChange}
             slidesToShow={6}>
             {MATCHES_MOCK.map((match: MatchSimpleType, index: number) => (
-              <div key={index}>
+              <React.Fragment key={index}>
                 <div className={styles.match_view}>
                   <div className={styles.match_title}>{match.name}</div>
                   <div className={styles.match_content}>
@@ -193,7 +193,7 @@ export default function BannerSportsAndMatches() {
                     <div className={styles.match_content_right}>{match.value}</div>
                   </div>
                 </div>
-              </div>
+              </React.Fragment>
             ))}
           </Carousel>
         </div>

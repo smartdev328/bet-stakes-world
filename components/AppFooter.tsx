@@ -1,20 +1,33 @@
-import { Input, Button, Image, Row, Col } from 'antd';
 import Link from 'next/link';
 import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
+import dynamic from 'next/dynamic';
+import LazyLoad from 'react-lazyload';
 
 import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons';
 import styles from './AppFooter.module.css';
+
+const Row = dynamic(() => import('antd/lib/row'));
+const Col = dynamic(() => import('antd/lib/col'));
+const Button = dynamic(() => import('antd/lib/button'));
 
 function AppFooter() {
   return (
     <footer>
       <div className={styles.newsletterRow}>
         <div className={styles.newsletterCol}>
-          <Image src="/images/logo.svg" className={styles.logo} />
+          <LazyLoad height={72}>
+            <img
+              src="/images/logo.svg"
+              alt="App Logo"
+              width={418}
+              height={72}
+              className={styles.logo}
+            />
+          </LazyLoad>
           <div className={styles.newsletterFormContainer}>
             <label htmlFor="newsletter_email">Sign up for our newsletter</label>
             <div className={styles.newletterForm}>
-              <Input
+              <input
                 id="newsletter_email"
                 type="email"
                 placeholder="User@fakemail.com"

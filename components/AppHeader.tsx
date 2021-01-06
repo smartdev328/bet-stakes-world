@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Row, Col, Image, Button, Divider, Menu } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import moment from 'moment';
+import dynamic from 'next/dynamic';
 
 import {
   IdentityIcon,
@@ -14,16 +13,29 @@ import {
 } from '@components/SvgIcons';
 import styles from './AppHeader.module.css';
 
+const Menu = dynamic(() => import('antd/lib/menu'));
+const MenuItem = dynamic(() => import('antd/lib/menu/MenuItem'));
+const Row = dynamic(() => import('antd/lib/row'));
+const Col = dynamic(() => import('antd/lib/col'));
+const Button = dynamic(() => import('antd/lib/button'));
+
 type HeaderProps = {
-  releaseTime: string;
+  releaseTime: DateObjectType;
   winningRate: number;
   curRecord: string;
+  currentDateTime: string;
 };
 
 type RemainingTimeType = {
   hrs: number;
   mins: number;
   secs: number;
+};
+
+type DateObjectType = {
+  year: number;
+  month: number;
+  date: number;
 };
 
 const DefaultRemainingTime = {
@@ -334,10 +346,10 @@ function SubMenu() {
   );
 }
 
-function getRemainingTime(date: string): RemainingTimeType {
-  const now = moment(new Date()); //todays date
-  const end = moment(date); // another date
-  let diff = moment.duration(end.diff(now)).asSeconds();
+function getRemainingTime(date: DateObjectType): RemainingTimeType {
+  const now = new Date(); //todays date
+  const end = new Date(date.year, date.month, date.date); // another date
+  let diff = (end.getTime() - now.getTime()) / 1000;
   if (diff > 0) {
     const days = Math.floor(diff / 86400);
     diff = diff - 86400 * days;
@@ -354,21 +366,26 @@ function getRemainingTime(date: string): RemainingTimeType {
   return DefaultRemainingTime;
 }
 
-function DateBar() {
+function DateBar({ currentDateTime }: { currentDateTime: string }) {
   return (
     <div className={styles.dateBar}>
       <Link href="/">
         <a>Today’s Bets</a>
       </Link>
-      <Divider type="vertical" className={styles.dateBarDivider} />
+      <div className={styles.dateBarDivider} />
       <Link href="/">
-        <a>{moment().format('dddd,  MMM DD, YYYY')}</a>
+        <a>{currentDateTime}</a>
       </Link>
     </div>
   );
 }
 
-export default function AppHeader({ releaseTime, curRecord, winningRate }: HeaderProps) {
+export default function AppHeader({
+  releaseTime,
+  curRecord,
+  winningRate,
+  currentDateTime
+}: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   useEffect(() => {
@@ -407,7 +424,13 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
         </Col>
         <Col span={10} className={styles.headerMainCol}>
           <div>
-            <Image src="/images/logo.svg" className={styles.logo} />
+            <img
+              src={'/images/logo.svg'}
+              width={418}
+              height={72}
+              alt="App Logo"
+              className={styles.logo}
+            />
           </div>
           <p className={styles.info}>
             <span>
@@ -430,29 +453,29 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
               Log In
             </Button>
           </div>
-          <DateBar />
+          <DateBar currentDateTime={currentDateTime} />
         </Col>
       </Row>
       <div className={styles.navbarContainer}>
         <div className={styles.container}>
           <div className={styles.navbarSide}></div>
           <Menu mode="horizontal" className={styles.navbar}>
-            <Menu.Item key="SHOP" className={styles.navbarItem}>
+            <MenuItem key="SHOP" className={styles.navbarItem}>
               SHOP
-            </Menu.Item>
+            </MenuItem>
             <SubMenu />
-            <Menu.Item key="Sports_News" className={styles.navbarItem}>
+            <MenuItem key="Sports_News" className={styles.navbarItem}>
               Sports News
-            </Menu.Item>
-            <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
+            </MenuItem>
+            <MenuItem key="Yesterdays_Plays" className={styles.navbarItem}>
               Yesterdays Plays
-            </Menu.Item>
-            <Menu.Item key="About_Us" className={styles.navbarItem}>
+            </MenuItem>
+            <MenuItem key="About_Us" className={styles.navbarItem}>
               About Us
-            </Menu.Item>
-            <Menu.Item key="Merchandise" className={styles.navbarItem}>
+            </MenuItem>
+            <MenuItem key="Merchandise" className={styles.navbarItem}>
               Merchandise
-            </Menu.Item>
+            </MenuItem>
           </Menu>
           <div className={styles.navbarSide}>
             <Button
@@ -509,24 +532,24 @@ export default function AppHeader({ releaseTime, curRecord, winningRate }: Heade
           </Row>
           {mobileNavVisible && (
             <div className={styles.mobileNavContent}>
-              <DateBar />
+              <DateBar currentDateTime={currentDateTime} />
               <Menu mode="vertical" className={styles.navbar}>
-                <Menu.Item key="SHOP" className={styles.navbarItem}>
+                <MenuItem key="SHOP" className={styles.navbarItem}>
                   SHOP
-                </Menu.Item>
+                </MenuItem>
                 <SubMenu />
-                <Menu.Item key="Sports_News" className={styles.navbarItem}>
+                <MenuItem key="Sports_News" className={styles.navbarItem}>
                   Sports News
-                </Menu.Item>
-                <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
+                </MenuItem>
+                <MenuItem key="Yesterdays_Plays" className={styles.navbarItem}>
                   Yesterdays Plays
-                </Menu.Item>
-                <Menu.Item key="About_Us" className={styles.navbarItem}>
+                </MenuItem>
+                <MenuItem key="About_Us" className={styles.navbarItem}>
                   About Us
-                </Menu.Item>
-                <Menu.Item key="Merchandise" className={styles.navbarItem}>
+                </MenuItem>
+                <MenuItem key="Merchandise" className={styles.navbarItem}>
                   Merchandise
-                </Menu.Item>
+                </MenuItem>
               </Menu>
               <Button type="primary" className={styles.subscribeBtn}>
                 Subscribe Now

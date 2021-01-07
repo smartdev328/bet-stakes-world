@@ -114,6 +114,7 @@ function TopSection() {
     const items = unlockItems.slice();
     items[index] = !items[index];
     setUnlockItems(items);
+    setUnlockAll(false);
   };
 
   const onUnlockAll = () => {
@@ -266,6 +267,7 @@ function TopSection() {
           overlay={menu}
           onVisibleChange={changeMenuVisible}
           placement="bottomLeft"
+          transitionName=""
           trigger={['click']}>
           <div className={styles.optionBtn}>
             <span>
@@ -276,7 +278,7 @@ function TopSection() {
             {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
           </div>
         </Dropdown>
-        <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
+        <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']} transitionName="">
           <div className={styles.optionBtn}>
             <strong>Filter Cards&nbsp;</strong>
             <TuneIcon className={styles.tune_icon} />

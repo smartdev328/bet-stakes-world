@@ -77,11 +77,11 @@ export default function SportsCard() {
         <div className={styles.container}>
           <TopSection />
           <Row>
-            <Col span={18}>
+            <Col span={18} className={styles.contentMainCol}>
               <StraightBets />
               <Parlays />
             </Col>
-            <Col span={6}>
+            <Col span={6} className={styles.contentSideCol}>
               <BankrollManagementSystem />
               <CommonSportsbooks />
               <BettingFundamentals />
@@ -472,7 +472,7 @@ function Parlays() {
   };
 
   return (
-    <div className={styles.earliest_games}>
+    <div className={`${styles.earliest_games} ${styles.prayers}`}>
       <div className={styles.earliest_games_titlebar}>
         <Row align="middle">
           {!hideSection && (
@@ -500,14 +500,14 @@ function Parlays() {
               </div>
               <div className={styles.game_info}>
                 <div className={styles.game_teams}>
-                  <Row>
+                  <Row wrap={false}>
                     <LongArrowIcon className={styles.long_arrow_icon} />
                     <div className={styles.game_team1}>
                       <img src={game.teams[0].logo} className={styles.team_logo} />
                       <span>{game.teams[0].name}&nbsp;-&nbsp;Money Line</span>
                     </div>
                   </Row>
-                  <Row>
+                  <Row wrap={false}>
                     <LongArrowIcon className={styles.long_arrow_icon} />
                     <div className={styles.game_team2}>
                       <img src={game.teams[1].logo} className={styles.team_logo} />

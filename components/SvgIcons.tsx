@@ -407,3 +407,18 @@ export const PlusEncloseIcon = ({ className }: SVGIconPropType) => (
     />
   </svg>
 );
+
+export const WinnerCupIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="19"
+    height="19"
+    viewBox="0 0 19 19"
+    className={className}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.7432 2.5H14.7432V0.5H4.74316V2.5H2.74316C1.64316 2.5 0.743164 3.4 0.743164 4.5V5.5C0.743164 8.05 2.66316 10.13 5.13316 10.44C5.76316 11.94 7.11316 13.07 8.74316 13.4V16.5H4.74316V18.5H14.7432V16.5H10.7432V13.4C12.3732 13.07 13.7232 11.94 14.3532 10.44C16.8232 10.13 18.7432 8.05 18.7432 5.5V4.5C18.7432 3.4 17.8432 2.5 16.7432 2.5ZM2.74316 5.5V4.5H4.74316V8.32C3.58316 7.9 2.74316 6.8 2.74316 5.5ZM16.7432 5.5C16.7432 6.8 15.9032 7.9 14.7432 8.32V4.5H16.7432V5.5Z"
+      fill="white"
+    />
+  </svg>
+);

@@ -14,7 +14,8 @@ import {
   MoneyPocketIcon,
   OpenBookIcon,
   PlusEncloseIcon,
-  TuneIcon
+  TuneIcon,
+  WinnerCupIcon
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import {
@@ -70,7 +71,7 @@ export default function SportsCard() {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Sports Card</title>
+        <title>The Daily Stakes - VIP All Access Card</title>
       </Head>
       <AppLayout bgColor={'#ffffff'}>
         <HeroBanner />
@@ -105,7 +106,6 @@ function HeroBanner() {
 function TopSection() {
   const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
   const [unlockItems, setUnlockItems] = useState<boolean[]>([]);
-  const [unlockAll, setUnlockAll] = useState<boolean>(false);
   const [selectedSportType, setSelectedSportType] = useState<string>('Largest Profit');
   const changeMenuVisible = (status: boolean) => {
     setSportMenuOpen(status);
@@ -114,16 +114,6 @@ function TopSection() {
     const items = unlockItems.slice();
     items[index] = !items[index];
     setUnlockItems(items);
-    setUnlockAll(false);
-  };
-
-  const onUnlockAll = () => {
-    setUnlockAll(!unlockAll);
-    if (unlockAll) {
-      setUnlockItems([]);
-    } else {
-      setUnlockItems(new Array(SPORTS_INFO.length).fill(true));
-    }
   };
 
   const menu = (
@@ -204,7 +194,7 @@ function TopSection() {
                 <Button ghost className={styles.thick_star_btn}>
                   <ThickStarIcon className={styles.thick_star_icon} />
                 </Button>
-                <span>Sports Card</span>
+                <span>VIP ALL ACCESS CARD</span>
                 <Button ghost className={styles.caret_down_btn}>
                   <CaretDownInCircleIcon className={styles.caret_down_icon} />
                 </Button>
@@ -228,11 +218,10 @@ function TopSection() {
         </Col>
       </Row>
       <Row className={styles.sportsCardList} justify={'center'}>
-        <Button className={styles.dropdownBtnWrapper} onClick={onUnlockAll}>
-          <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
-            {!unlockAll && <LockIcon className={styles.lock_icon} />}
-            <span>VIP ALL ACCESS CARD</span>
-            <AllSportsBtnBgIcon className={styles.dropdownBtnAllBg} />
+        <Button className={styles.dropdownBtnWrapper}>
+          <div className={`${styles.dropdownBtn} ${styles.dropdownBtnVIPAll}`}>
+            <WinnerCupIcon className={styles.lock_icon} />
+            <span>ALL SPORTS</span>
           </div>
         </Button>
         <div className={styles.sportsCardListCarousel}>
@@ -253,7 +242,6 @@ function TopSection() {
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
                     style={{ background: unlockItems[index] ? sport.background : '' }}>
                     {sport.logo()}
-                    {!unlockItems[index] && <LockIcon className={styles.lock_icon} />}
                     <span>{sport.name}</span>
                   </div>
                 </Button>

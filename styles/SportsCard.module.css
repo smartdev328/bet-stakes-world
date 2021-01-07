@@ -229,7 +229,18 @@
 .dropdownBtnAll .lock_icon path {
   fill: #191919;
 }
-
+.dropdownBtnVIPAll {
+  padding: 0 12px;
+  width: 152px;
+  background: #1a1a1a;
+  z-index: 22;
+}
+.dropdownBtnVIPAll span {
+  text-align: center;
+  padding-left: 3px;
+  font-size: 15px;
+  line-height: 18px;
+}
 .dropdown_NBA > .sports_logo {
   width: 300%;
   position: absolute;
@@ -473,6 +484,9 @@
   align-items: center;
   color: #000000;
 }
+.prayers .game_team1, .prayers .game_team2 {
+  font-weight: 600;
+}
 .desc_line {
   font-weight: 600;
   font-size: 32px;
@@ -602,7 +616,6 @@
   .game_team1, .game_team2 {
     font-size: 20px;
     line-height: 32px;
-    font-weight: 600;
   }
   .prayers .game_team2 span {
     width: calc(100vw - 96px);

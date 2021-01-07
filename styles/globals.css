@@ -181,6 +181,8 @@ a[disabled] {
   text-align: center;
 }
 
+.slick-slide, .slick-slide *{ outline: none !important; }
+
 .ant-carousel .slick-list .slick-slide[aria-hidden="true"] {
   visibility: hidden;
 }

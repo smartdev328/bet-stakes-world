@@ -132,6 +132,7 @@ export default function BannerSportsAndMatches() {
             overlay={menu}
             onVisibleChange={changeMenuVisible}
             placement="bottomLeft"
+            transitionName=""
             trigger={['click']}>
             <div
               className={`${styles.dropdownBtn} ${styles['dropdown_' + selectedSport.id]}`}

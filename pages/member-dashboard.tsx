@@ -312,6 +312,7 @@ function EarliestGames() {
             overlay={menu}
             onVisibleChange={changeBetMenuVisible}
             placement="bottomLeft"
+            transitionName=""
             trigger={['click']}>
             <div className={styles.dropdownBtn}>
               <span>
@@ -326,6 +327,7 @@ function EarliestGames() {
             overlay={menu2}
             onVisibleChange={changeMenuVisible}
             placement="bottomLeft"
+            transitionName=""
             trigger={['click']}>
             <div className={styles.dropdownBtn}>
               <span>

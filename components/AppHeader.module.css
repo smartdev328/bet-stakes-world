@@ -80,6 +80,12 @@
   color: var(--actionYellowColor);
 }
 
+.dateBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .dateBar a {
   font-style: normal;
   font-weight: normal;
@@ -89,7 +95,7 @@
 }
 
 .dateBar .dateBarDivider {
-  border-left-color: #C4C4C4;
+  background-color: #C4C4C4;
   width: 2px;
   height: 25px;
   margin: 0 13px;

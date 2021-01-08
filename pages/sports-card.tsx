@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
@@ -24,8 +24,9 @@ import {
   MobilePhoneIcon,
   LongArrowIcon
 } from '@components/SvgIcons';
-import { EarliestGameInfoType } from '@type/Main';
+import { EarliestGameInfoType, SportInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import LazyLoad from 'react-lazyload';
 
 const SPORTS_INFO = [
   {
@@ -67,6 +68,9 @@ const SPORTS_INFO = [
 ];
 
 export default function SportsCard() {
+  const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
+  const lockedItems = ['NBA', 'NFL'];
+
   return (
     <>
       <Head>
@@ -75,18 +79,33 @@ export default function SportsCard() {
       <AppLayout bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection />
-          <Row>
-            <Col span={18} className={styles.contentMainCol}>
-              <StraightBets />
-              <Parlays />
-            </Col>
-            <Col span={6} className={styles.contentSideCol}>
-              <BankrollManagementSystem />
-              <CommonSportsbooks />
-              <BettingFundamentals />
-            </Col>
-          </Row>
+          <TopSection
+            lockedItems={lockedItems}
+            openUnlockModal={(sport: SportInfoType) => {
+              setOpenUnlockModal(sport.name);
+            }}
+          />
+        </div>
+        <div className={styles.containerWrapper}>
+          {openUnlockModal && (
+            <UnLockItemModal
+              sportId={openUnlockModal}
+              closeModal={() => setOpenUnlockModal(undefined)}
+            />
+          )}
+          <div className={styles.container}>
+            <Row className={styles.content}>
+              <Col span={18} className={styles.contentMainCol}>
+                <StraightBets />
+                <Parlays />
+              </Col>
+              <Col span={6} className={styles.contentSideCol}>
+                <BankrollManagementSystem />
+                <CommonSportsbooks />
+                <BettingFundamentals />
+              </Col>
+            </Row>
+          </div>
         </div>
       </AppLayout>
     </>
@@ -102,27 +121,40 @@ function HeroBanner() {
   );
 }
 
-function TopSection() {
+type TopSectionPropsType = {
+  lockedItems: string[];
+  openUnlockModal: (_: SportInfoType) => void;
+};
+
+function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
   const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
-  const [unlockItems, setUnlockItems] = useState<boolean[]>([]);
-  const [unlockAll, setUnlockAll] = useState<boolean>(false);
+  const [sportsStatus, setSportsStatus] = useState<number[]>([]);
   const [selectedSportType, setSelectedSportType] = useState<string>('Largest Profit');
+
+  useEffect(() => {
+    const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
+      const lockedItemIndex = lockedItems.findIndex((item: string) => item === sport.id);
+      if (lockedItemIndex > -1) {
+        return 1;
+      }
+      return 0;
+    });
+    setSportsStatus(selectedStatus);
+  }, [lockedItems]);
+
   const changeMenuVisible = (status: boolean) => {
     setSportMenuOpen(status);
   };
   const onUnlockItemAt = (index: number) => {
-    const items = unlockItems.slice();
-    items[index] = !items[index];
-    setUnlockItems(items);
-    setUnlockAll(false);
-  };
-
-  const onUnlockAll = () => {
-    setUnlockAll(!unlockAll);
-    if (unlockAll) {
-      setUnlockItems([]);
+    const items = sportsStatus.slice();
+    if (items[index] === 1) {
+      items[index] = 2;
+      setSportsStatus(items);
+    } else if (items[index] === 2) {
+      items[index] = 1;
+      setSportsStatus(items);
     } else {
-      setUnlockItems(new Array(SPORTS_INFO.length).fill(true));
+      openUnlockModal(SPORTS_INFO[index]);
     }
   };
 
@@ -228,9 +260,9 @@ function TopSection() {
         </Col>
       </Row>
       <Row className={styles.sportsCardList} justify={'center'}>
-        <Button className={styles.dropdownBtnWrapper} onClick={onUnlockAll}>
+        <Button className={styles.dropdownBtnWrapper}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
-            {!unlockAll && <LockIcon className={styles.lock_icon} />}
+            <LockIcon className={styles.lock_icon} />
             <span>VIP ALL ACCESS CARD</span>
             <AllSportsBtnBgIcon className={styles.dropdownBtnAllBg} />
           </div>
@@ -246,14 +278,16 @@ function TopSection() {
             infinite={false}
             swipeToSlide
             slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport, index) => (
+            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
               <div key={index}>
                 <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
                   <div
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
-                    style={{ background: unlockItems[index] ? sport.background : '' }}>
+                    style={{
+                      background: sportsStatus[index] == 2 ? sport.background : ''
+                    }}>
                     {sport.logo()}
-                    {!unlockItems[index] && <LockIcon className={styles.lock_icon} />}
+                    {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
                     <span>{sport.name}</span>
                   </div>
                 </Button>
@@ -682,6 +716,149 @@ function BettingFundamentals() {
           </React.Fragment>
         ))}
       </div>
+    </div>
+  );
+}
+
+type UnlockItemModalPropsType = {
+  closeModal: () => void;
+  sportId: string;
+};
+
+function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
+  const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
+  const [selectedPackType, setSelectedPackType] = useState<string>('Monthly - $289.00');
+  const [memberTypeMenuOpen, setMemberTypeMenuOpen] = useState<boolean>(false);
+  const [selectedMemberType, setSelectedMemberType] = useState<string>('Monthly - $300.00');
+  const PackTypeMenu = () => (
+    <Menu className={styles.sportMenu}>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedPackType('Monthly - $289.00');
+          setPackTypeMenuOpen(false);
+        }}>
+        Monthly - $289.00
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedPackType('Yearly - $2890.00');
+          setPackTypeMenuOpen(false);
+        }}>
+        Yearly - $2890.00
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedPackType('Weekly - $50.00');
+          setPackTypeMenuOpen(false);
+        }}>
+        Weekly - $50.00
+      </Menu.Item>
+    </Menu>
+  );
+  const MemberTypeMenu = () => (
+    <Menu className={styles.sportMenu}>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedMemberType('Monthly - $289.00');
+          setMemberTypeMenuOpen(false);
+        }}>
+        Monthly - $300.00
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedMemberType('Yearly - $2890.00');
+          setMemberTypeMenuOpen(false);
+        }}>
+        Yearly - $3000.00
+      </Menu.Item>
+      <Menu.Item
+        className={styles.sportMenuItem}
+        onClick={() => {
+          setSelectedMemberType('Weekly - $50.00');
+          setMemberTypeMenuOpen(false);
+        }}>
+        Weekly - $60.00
+      </Menu.Item>
+    </Menu>
+  );
+
+  const changeMemberMenuVisible = (status: boolean) => {
+    setMemberTypeMenuOpen(status);
+  };
+  const changePackMenuVisible = (status: boolean) => {
+    setPackTypeMenuOpen(status);
+  };
+
+  return (
+    <div className={styles.unlockItemModal}>
+      <div className={styles.modalWrapper} onClick={closeModal} />
+      <Row align={'middle'} justify={'center'} className={styles.modalContainer}>
+        <LazyLoad>
+          <img
+            src="/images/new_pack_bg.jpg"
+            alt="Package Add Modal Background"
+            className={styles.modalBg}
+          />
+        </LazyLoad>
+        <div className={styles.modalOverlay} />
+        <div className={styles.modalContent}>
+          <div className={styles.contentTitle}>
+            You need to purchase this pack in order to view the picks
+          </div>
+          <div className={styles.contentDesc}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel amet lorem odio
+            tincidunt sed dolor commodo risus.
+          </div>
+          <Row className={styles.plans} align={'middle'} justify="center">
+            <div className={styles.plan}>
+              <h4>{sportId} Access</h4>
+              <p>Ut aliquam eleifend et fames.</p>
+              <div>
+                <label>Select Pack Type</label>
+                <Dropdown
+                  overlay={PackTypeMenu}
+                  onVisibleChange={changePackMenuVisible}
+                  placement="bottomLeft"
+                  transitionName=""
+                  trigger={['click']}>
+                  <div className={styles.optionBtn}>
+                    <span>{selectedPackType}</span>
+                    {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
+                    {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
+                </Dropdown>
+              </div>
+              <Button className={styles.planSubmitBtn}>Add to Sports Card</Button>
+            </div>
+            <div className={styles.orText}>OR</div>
+            <div className={styles.plan}>
+              <h4>VIP ALL ACCESS CARD</h4>
+              <p>Ut aliquam eleifend et fames.</p>
+              <div>
+                <label>Select Pack Type</label>
+                <Dropdown
+                  overlay={MemberTypeMenu}
+                  onVisibleChange={changeMemberMenuVisible}
+                  placement="bottomLeft"
+                  transitionName=""
+                  trigger={['click']}>
+                  <div className={styles.optionBtn}>
+                    <span>{selectedMemberType}</span>
+                    {memberTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
+                    {!memberTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
+                </Dropdown>
+              </div>
+              <Button className={styles.planSubmitBtn}>Add Membership</Button>
+            </div>
+          </Row>
+        </div>
+      </Row>
     </div>
   );
 }

@@ -1,3 +1,6 @@
+.containerWrapper {
+  position: relative;
+}
 .container {
   max-width: 1440px;
   padding: 0 50px;
@@ -928,5 +931,214 @@
   }
   .sidebarBlockContent {
     padding-bottom: 5px;
+  }
+}
+
+/* Unlock Item Modal */
+.unlockItemModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+.unlockItemModal .modalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(16, 16, 16, 0.8);
+  backdrop-filter: blur(11px);
+}
+.unlockItemModal .modalContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1080px;
+  padding: 130px 178px 116px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.modalBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.modalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #505054;
+  opacity: 0.8;
+}
+.unlockItemModal .modalContent {
+  position: relative;
+
+}
+.contentTitle {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 57px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 35px;
+}
+.contentDesc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 520px;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.plan {
+  width: 220px;
+  padding: 18px;
+  background: #FFFFFF;
+}
+.plan h4 {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  margin: 0;
+}
+.plan p {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 19px;
+  color: #1A1A1A;
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+.plan label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #1A1A1A;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.plan .optionBtn {
+  border: 1px solid #C4C4C4;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+}
+
+.plan .optionBtn span {
+  font-size: 12px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #1A1A1A;
+}
+
+.planSubmitBtn {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  background: #FFC700;
+  width: 100%;
+  padding: 8px;
+  height: auto;
+  border: 1px solid #ffc700;
+}
+
+.orText {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 38px;
+  color: #FFFFFF;
+  margin: 0 1em;
+}
+
+@media (max-width: 1240px) {
+  .unlockItemModal .modalContainer {
+    width: 924px;
+    padding: 100px 100px 100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .unlockItemModal .modalContainer {
+    width: 90%;
+    padding: 80px 60px 80px;
+  }
+  .contentTitle {
+    font-size: 42px;
+    line-height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .unlockItemModal .modalContainer {
+    width: 94%;
+    padding: 80px 15px 80px;
+  }
+  .contentTitle {
+    font-size: 36px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .unlockItemModal {
+    position: relative;
+  }
+  .unlockItemModal .modalContainer {
+    width: 100%;
+    padding: 80px 20px 80px;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+  .contentTitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .contentDesc {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .plans {
+    flex-direction: column;
+  }
+  .modalWrapper {
+    display: none;
+  }
+  .modalBg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    left: auto;
+  }
+  .orText {
+    margin: 1em;
+  }
+  .unlockItemModal + .container {
+    display: none;
   }
 }

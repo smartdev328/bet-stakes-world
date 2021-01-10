@@ -16,13 +16,7 @@ import {
   WinnerCupIcon
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
-import {
-  ThickStarIcon,
-  CaretDownInCircleIcon,
-  ConfigIcon,
-  MobilePhoneIcon,
-  LongArrowIcon
-} from '@components/SvgIcons';
+import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 

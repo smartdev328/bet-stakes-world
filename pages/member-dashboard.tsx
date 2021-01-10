@@ -7,13 +7,7 @@ import moment from 'moment';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
-import {
-  ThickStarIcon,
-  CaretDownInCircleIcon,
-  ConfigIcon,
-  MobilePhoneIcon,
-  LongArrowIcon
-} from '@components/SvgIcons';
+import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, YesterdayPlayInfoType } from '@type/Main';
 
 export default function MemberDashboard() {

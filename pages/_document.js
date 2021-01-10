@@ -22,7 +22,7 @@ class MyDocument extends Document {
             defer
           />
           <link rel="icon" href="/favicon.ico" />
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
           <meta name="keywords" content="Daily, Stakes, Sport" />
         </Head>
         <body>

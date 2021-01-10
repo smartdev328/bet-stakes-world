@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import {
   ThickStarIcon,
@@ -62,28 +62,7 @@ function HeroBanner() {
 function TopSection() {
   return (
     <>
-      <Row className={styles.topSection}>
-        <Col span={12} className={styles.left}>
-          <Row align={'middle'}>
-            <Button ghost className={styles.thick_star_btn}>
-              <ThickStarIcon className={styles.thick_star_icon} />
-            </Button>
-            <span>Member dashboard</span>
-            <Button ghost className={styles.caret_down_btn}>
-              <CaretDownInCircleIcon className={styles.caret_down_icon} />
-            </Button>
-          </Row>
-        </Col>
-        <Col span={12} className={styles.right}>
-          <Button className={styles.sms_send_btn}>
-            <MobilePhoneIcon className={styles.mobile_phone_icon} />
-            Recieve your picks via text!
-          </Button>
-          <Button ghost className={styles.config_btn}>
-            <ConfigIcon className={styles.config_btn_icon} />
-          </Button>
-        </Col>
-      </Row>
+      <DashboardHeader title={'Member Dashboard'} />
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
         <Col className={styles.welcome_left}>Welcome back Nicolas!</Col>
         <Col className={styles.welcome_right}>

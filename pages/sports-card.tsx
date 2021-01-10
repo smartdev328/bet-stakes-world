@@ -5,7 +5,7 @@ import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import {
   AllSportsBtnBgIcon,
   ListIcon,
@@ -228,37 +228,7 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
 
   return (
     <>
-      <Row className={styles.topSection}>
-        <Col span={12} className={styles.left}>
-          <Row>
-            <Col span={24}>
-              <Row align={'middle'}>
-                <Button ghost className={styles.thick_star_btn}>
-                  <ThickStarIcon className={styles.thick_star_icon} />
-                </Button>
-                <span>Sports Card</span>
-                <Button ghost className={styles.caret_down_btn}>
-                  <CaretDownInCircleIcon className={styles.caret_down_icon} />
-                </Button>
-              </Row>
-            </Col>
-            <Col span={24}>
-              <Row align={'middle'}>
-                <p>Monlthy Membership Renews in 20 days</p>
-              </Row>
-            </Col>
-          </Row>
-        </Col>
-        <Col span={12} className={styles.right}>
-          <Button className={styles.sms_send_btn}>
-            <MobilePhoneIcon className={styles.mobile_phone_icon} />
-            Recieve your picks via text!
-          </Button>
-          <Button ghost className={styles.config_btn}>
-            <ConfigIcon className={styles.config_btn_icon} />
-          </Button>
-        </Col>
-      </Row>
+      <DashboardHeader title={'Sports Card'} />
       <Row className={styles.sportsCardList} justify={'center'}>
         <Button className={styles.dropdownBtnWrapper}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>

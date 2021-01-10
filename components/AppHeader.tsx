@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Menu, Row, Col } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
@@ -13,10 +14,6 @@ import {
 } from '@components/SvgIcons';
 import styles from './AppHeader.module.css';
 
-const Menu = dynamic(() => import('antd/lib/menu'));
-const MenuItem = dynamic(() => import('antd/lib/menu/MenuItem'));
-const Row = dynamic(() => import('antd/lib/row'));
-const Col = dynamic(() => import('antd/lib/col'));
 const Button = dynamic(() => import('antd/lib/button'));
 
 type HeaderProps = {
@@ -460,22 +457,22 @@ export default function AppHeader({
         <div className={styles.container}>
           <div className={styles.navbarSide}></div>
           <Menu mode="horizontal" className={styles.navbar}>
-            <MenuItem key="SHOP" className={styles.navbarItem}>
+            <Menu.Item key="SHOP" className={styles.navbarItem}>
               SHOP
-            </MenuItem>
+            </Menu.Item>
             <SubMenu />
-            <MenuItem key="Sports_News" className={styles.navbarItem}>
+            <Menu.Item key="Sports_News" className={styles.navbarItem}>
               Sports News
-            </MenuItem>
-            <MenuItem key="Yesterdays_Plays" className={styles.navbarItem}>
+            </Menu.Item>
+            <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
               Yesterdays Plays
-            </MenuItem>
-            <MenuItem key="About_Us" className={styles.navbarItem}>
+            </Menu.Item>
+            <Menu.Item key="About_Us" className={styles.navbarItem}>
               About Us
-            </MenuItem>
-            <MenuItem key="Merchandise" className={styles.navbarItem}>
+            </Menu.Item>
+            <Menu.Item key="Merchandise" className={styles.navbarItem}>
               Merchandise
-            </MenuItem>
+            </Menu.Item>
           </Menu>
           <div className={styles.navbarSide}>
             <Button
@@ -534,22 +531,22 @@ export default function AppHeader({
             <div className={styles.mobileNavContent}>
               <DateBar currentDateTime={currentDateTime} />
               <Menu mode="vertical" className={styles.navbar}>
-                <MenuItem key="SHOP" className={styles.navbarItem}>
+                <Menu.Item key="SHOP" className={styles.navbarItem}>
                   SHOP
-                </MenuItem>
+                </Menu.Item>
                 <SubMenu />
-                <MenuItem key="Sports_News" className={styles.navbarItem}>
+                <Menu.Item key="Sports_News" className={styles.navbarItem}>
                   Sports News
-                </MenuItem>
-                <MenuItem key="Yesterdays_Plays" className={styles.navbarItem}>
+                </Menu.Item>
+                <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
                   Yesterdays Plays
-                </MenuItem>
-                <MenuItem key="About_Us" className={styles.navbarItem}>
+                </Menu.Item>
+                <Menu.Item key="About_Us" className={styles.navbarItem}>
                   About Us
-                </MenuItem>
-                <MenuItem key="Merchandise" className={styles.navbarItem}>
+                </Menu.Item>
+                <Menu.Item key="Merchandise" className={styles.navbarItem}>
                   Merchandise
-                </MenuItem>
+                </Menu.Item>
               </Menu>
               <Button type="primary" className={styles.subscribeBtn}>
                 Subscribe Now

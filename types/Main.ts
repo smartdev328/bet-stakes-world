@@ -63,3 +63,16 @@ export type YesterdayPlayInfoType = {
   isWinner: boolean;
   patriots?: boolean;
 };
+
+export type DailyLineupType = {
+  id: number;
+  state: string;
+  team_logo: string;
+  lineup_name: string;
+  team1: string;
+  team2: string;
+  startTime: string;
+  fppg: number;
+  oprk: string;
+  price: number;
+};

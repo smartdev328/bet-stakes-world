@@ -422,3 +422,37 @@ export const WinnerCupIcon = ({ className }: SVGIconPropType) => (
     />
   </svg>
 );
+
+export const AntiClockIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="22"
+    height="18"
+    className={className}
+    viewBox="0 0 22 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M3.47656 9C3.47656 4.03 7.50656 0 12.4766 0C17.4466 0 21.4766 4.03 21.4766 9C21.4766 13.97 17.4466 18 12.4766 18C9.98656 18 7.74656 16.99 6.11656 15.36L7.53656 13.94C8.79656 15.21 10.5466 16 12.4766 16C16.3466 16 19.4766 12.87 19.4766 9C19.4766 5.13 16.3466 2 12.4766 2C8.60656 2 5.47656 5.13 5.47656 9H8.47656L4.47656 12.99L0.476562 9H3.47656ZM11.4766 10V5H12.9766V9.15L16.4966 11.24L15.7266 12.52L11.4766 10Z"
+      fill="#EC4C15"
+    />
+  </svg>
+);
+
+export const DateRangeIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="19"
+    height="20"
+    className={className}
+    viewBox="0 0 19 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M16.4766 20C17.5766 20 18.4766 19.1 18.4766 18V4C18.4766 2.9 17.5766 2 16.4766 2H15.4766V0H13.4766V2H5.47656V0H3.47656V2H2.47656C1.36656 2 0.486562 2.9 0.486562 4L0.476562 18C0.476562 19.1 1.36656 20 2.47656 20H16.4766ZM6.47656 11V9H4.47656V11H6.47656ZM2.47656 6H16.4766V4H2.47656V6ZM16.4766 8V18H2.47656V8H16.4766ZM14.4766 11V9H12.4766V11H14.4766ZM10.4766 11H8.47656V9H10.4766V11Z"
+      fill="#EC4C15"
+    />
+  </svg>
+);

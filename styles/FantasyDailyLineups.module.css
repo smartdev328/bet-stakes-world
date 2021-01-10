@@ -1,0 +1,482 @@
+.container {
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+/* Hero Banner */
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 992px) {
+  .heroBanner .bgImage {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage {
+    height: 280px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage {
+    height: 240px;
+  }
+}
+
+.topSection {
+  padding: 24px 0;
+  border-bottom: 1px solid #C4C4C4;
+}
+
+.topSection .right,
+.topSection .left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.topSection .left {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}
+.topSection .left p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+.thick_star_btn, .caret_down_btn {
+  height: auto;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.thick_star_btn {
+  margin-right: 12px;
+}
+.caret_down_btn {
+  margin-left: 10px;
+}
+
+.topSection .right {
+  justify-content: flex-end;
+}
+.sms_send_btn {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  background: #000;
+  padding: 13px 16px;
+  height: auto;
+  border: none;
+}
+.sms_send_btn:hover {
+  background-color: rgba(26, 26, 26, 0.9);
+}
+.sms_send_btn path {
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.sms_send_btn:hover path {
+  fill: #40a9ff;
+}
+
+.mobile_phone_icon {
+  width: 14px;
+  margin-right: 5px;
+}
+.config_btn {
+  margin-left: 26px;
+  border: none;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+.config_btn_icon {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 992px) {
+  .topSection {
+    padding: 20px 0;
+  }  
+  .topSection .left {
+    font-size: 28px;
+    line-height: 42px;
+  }
+  .thick_star_btn {
+    margin-right: 8px;
+  }
+  .thick_star_icon {
+    width: 28px;
+  }
+  .caret_down_icon {
+    width: 16px;
+  }
+  .caret_down_btn {
+    margin-left: 7px;
+  }
+  .sms_send_btn {
+    font-size: 14px;
+    line-height: 22px;
+    padding: 11px 14px;
+  }
+  .config_btn {
+    margin-left: 22px;
+  }
+  .config_btn_icon {
+    width: 26px;
+  }
+  .topSection .left p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+@media (max-width: 786px) {
+  .topSection .right {
+    display: none;
+  }
+  .topSection {
+    padding: 12px 0;
+  }
+  .topSection .left {
+    max-width: 100%;
+    flex: 1;
+  }
+  .thick_star_icon {
+    width: 22px;
+  }
+  .caret_down_icon {
+    width: 18px;
+  }
+  .topSection .left {
+    font-size: 24px;
+    line-height: 38px;
+  }
+  .topSection .left p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.dropdownBtnWrapper {
+  height: auto;
+  border: none;
+  padding: 0;
+  margin: 0 8px;
+}
+.dropdownBtn {
+  width: 138px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  line-height: 25px;
+  cursor: pointer;
+  position: relative;
+  z-index: 21;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+.dropdown_NBA > .sports_logo {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdown_NFL > svg.sports_logo {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -75%;
+  transform: rotate(90deg);
+  top: 50%;
+}
+.dropdown_MLB > svg.sports_logo {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
+.dropdown_UFC > svg.sports_logo {
+  width: 80%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 10%;
+}
+
+.dropdown_F1 > svg.sports_logo {
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 0;
+  top: -5%;
+}
+.dropdown_SOCCER > svg.sports_logo {
+  width: 120%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdownBtn > svg.sports_logo path {
+  fill: rgba(255, 255, 255, 0.3);
+}
+.dropdown_UFC > svg.sports_logo path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.dropdown_F1 > svg.sports_logo path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.sportsCardList {
+  margin-top: 40px;
+  flex-flow: row nowrap;
+}
+.sportsCardListCarousel {
+  width: calc(154px * 3);
+}
+.lock_icon {
+  height: 18px;
+  margin-bottom: 1px;
+  margin-right: 2px;
+}
+.dropdownBtnAllBg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 136%;
+}
+.optionsRow {
+  margin: 40px 0;
+}
+.optionsRow .company_logo {
+  width: 100px;
+  margin-right: 30px;
+}
+
+.optionsRow span {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 38px;
+  text-align: center;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .sportsCardList {
+    flex-flow: column wrap;
+    align-items: center;
+  }
+  .dropdownBtnAll {
+    margin: 1.5em 8px;
+  }
+}
+@media (max-width: 520px) {
+  .sportsCardListCarousel {
+    width: calc(154px * 2);
+  }
+}
+
+/* Lineup Item */
+
+.daily_lineup {
+  padding-bottom: 30px;
+}
+
+.daily_lineup_sidebar {
+  background: #1A1A1A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  width: 64px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.daily_lineup_sidebar_bg {
+  position: absolute;
+  top: 50%;
+  left: -75%;
+  height: auto;
+  width: 400px;
+  transform: translateY(-50%);
+}
+
+.daily_lineup_sidebar_bg path {
+  fill: rgba(255, 255, 255, 0.1);
+}
+.daily_lineup_sidebar_content {
+  position: relative;
+  z-index: 2;
+}
+.daily_lineup_sidebar .divider {
+  width: 100%;
+  height: 2px;
+  background-color: #f9f9f9;
+  margin: 10px 0;
+}
+.daily_lineup_sidebar span {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 94.4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #F9F9F9;
+}
+
+.daily_lineup_sidebar img {
+  width: 32px;
+  height: 32px;
+}
+
+.daily_lineup_main {
+  padding: 30px 0 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+
+
+.daily_lineup_main_content h4 {
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+
+.daily_lineup_main_content > div {
+  font-size: 32px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #373D40;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 18px;
+}
+
+.daily_lineup_main_content > div strong {
+  margin-right: 24px;
+}
+
+.daily_lineup_value {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 94.4%;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 4px 0px;
+  color: #000000;
+  border-bottom: 6px solid #000000;
+}
+.daily_lineup_details {
+  margin-top: -10px;
+}
+.hide_details {
+  display: flex;
+  align-items: center;
+}
+.hide_details:after,
+.hide_details:before {
+  display: block;
+  content: '';
+  height: 1px;
+  background: #C4C4C4;
+  flex: 1;
+}
+.hide_details_btn {
+  padding: 0 12px;
+  cursor: pointer;
+}
+.hide_details_btn span {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000000;
+}
+.hide_details_btn .caret_down svg,
+.hide_details_btn .caret_up svg {
+  width: 12px;
+  margin-left: 8px;
+}
+.hide_details_btn .caret_down path,
+.hide_details_btn .caret_up path {
+  fill: rgba(0, 0, 0, 0.54);
+}
+.details_properties {
+  padding: 40px 100px;
+  border-bottom: solid 1px #c4c4c4;
+}
+.details_property {
+  width: 340px;
+}
+.details_property_title {
+  display: flex;
+  align-items: center;
+}
+.details_property_title span {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #000000;
+  margin-left: 8px;
+}
+
+.details_property_title .identity_icon path {
+  fill: #EC4C15;
+}
+
+.details_property_title .identity_icon:last-child {
+  margin-left: -8px;
+  overflow: hidden;
+}

@@ -42,6 +42,12 @@ const SPORTS_INFO = [
     logo: () => <NBA_SVG className={styles.sports_logo} />
   },
   {
+    name: 'SOCCER',
+    id: 'SOCCER',
+    background: '#6DCF40',
+    logo: () => <SOCCER_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'UFC',
     id: 'UFC',
     background: '#F9282B',
@@ -52,12 +58,6 @@ const SPORTS_INFO = [
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'SOCCER',
-    id: 'SOCCER',
-    background: '#6DCF40',
-    logo: () => <SOCCER_SVG className={styles.sports_logo} />
   }
 ];
 

@@ -433,7 +433,6 @@
 
 .game {
   padding: 24px 0;
-  border-bottom: 1px solid #C4C4C4;
 }
 .game_subinfo {
   font-weight: 400;
@@ -509,10 +508,11 @@
   cursor: pointer;
 }
 .details_section {
-  margin-top: 18px;
   text-align: center;
+  border-bottom: 1px solid #c4c4c4;
 }
 .hide_details {
+  margin-top: 18px;
   display: flex;
   align-items: center;
 }
@@ -527,6 +527,8 @@
 .hide_details_btn {
   padding: 0 18px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .hide_details_btn span {
   font-weight: normal;
@@ -535,14 +537,16 @@
   text-transform: uppercase;
   color: #000000;
 }
-.hide_details_btn .caret_up svg {
+.hide_details_btn .caret_up svg,
+.hide_details_btn .caret_down svg  {
   width: 12px;
 }
-.hide_details_btn .caret_up path {
+.hide_details_btn .caret_up path,
+.hide_details_btn .caret_down path {
   fill: rgba(0, 0, 0, 0.54);
 }
 .details_section ul {
-  padding-top: 25px;
+  padding: 12px 0;
   display: inline-block;
 }
 .details_section ul li {

@@ -570,6 +570,8 @@
 .hide_details_btn {
   padding: 0 18px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .hide_details_btn span {
   font-weight: normal;

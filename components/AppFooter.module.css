@@ -179,7 +179,9 @@
 .mainFooter_leftCol {
   flex: 1;
 }
-
+.mainFooter_RightCol {
+  display: block;
+}
 .subscribeBtn {
   width: 220px;
   background: #EAEAEA;

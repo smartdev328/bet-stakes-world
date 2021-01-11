@@ -149,7 +149,7 @@ function AppFooter() {
               </div>
             </Col>
           </Row>
-          <div>
+          <div className={styles.mainFooter_RightCol}>
             <Button type="primary" className={styles.subscribeBtn}>
               Subscribe Now
             </Button>

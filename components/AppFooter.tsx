@@ -45,7 +45,7 @@ function AppFooter() {
       {/* Main Footer */}
       <div className={styles.mainFooter}>
         <div className={styles.mainFooterRow}>
-          <Row className={styles.mainFooterLeftCol}>
+          <Row className={styles.mainFooter_leftCol}>
             <Col span={8}>
               <div className={styles.menuListTitle}>Memberships</div>
               <div className={styles.menuList}>
@@ -149,7 +149,7 @@ function AppFooter() {
               </div>
             </Col>
           </Row>
-          <div className={styles.mainFooterRightCol}>
+          <div>
             <Button type="primary" className={styles.subscribeBtn}>
               Subscribe Now
             </Button>

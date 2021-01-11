@@ -176,7 +176,7 @@
 .mainFooterRow .navbarItem:hover {
   color: #40a9ff;
 }
-.mainFooterLeftCol {
+.mainFooter_leftCol {
   flex: 1;
 }
 

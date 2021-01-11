@@ -5,7 +5,7 @@ import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import {
   AllSportsBtnBgIcon,
   ListIcon,
@@ -42,6 +42,12 @@ const SPORTS_INFO = [
     logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
+    name: 'Soccer',
+    id: 'SOCCER',
+    background: '#6DCF40',
+    logo: () => <SOCCER_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'UFC',
     id: 'UFC',
     background: '#F9282B',
@@ -52,12 +58,6 @@ const SPORTS_INFO = [
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />
-  },
-  {
-    name: 'Soccer',
-    id: 'SOCCER',
-    background: '#6DCF40',
-    logo: () => <SOCCER_SVG className={styles.sports_logo} />
   }
 ];
 
@@ -381,8 +381,8 @@ const Mock_EarlestGames: EarliestGameInfoType[] = [
 function StraightBets() {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(true);
-  const changeDetailsVisibleAt = (index: number, status: boolean) => {
-    showDetailsAt[index] = status;
+  const changeDetailsVisibleAt = (index: number) => {
+    showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
   };
 
@@ -405,12 +405,7 @@ function StraightBets() {
           {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
             <div className={styles.game} key={game.id}>
               <div className={styles.game_subinfo}>
-                <span
-                  className={`${styles.gameSportType} ${
-                    styles['gameSportType_' + game.sportType]
-                  }`}>
-                  {game.sportType}
-                </span>
+                <SportTile sport={game.sportType} />
                 <span>Game Starts @ {game.startDate}</span>
               </div>
               <div className={styles.game_info}>
@@ -432,20 +427,19 @@ function StraightBets() {
                     </span>
                   </Row>
                 </div>
-                <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
-                  {`${game.units.length} Units`}
+                <div className={styles.units}>{`${game.units.length} Units`}</div>
+              </div>
+              <div className={styles.hide_details}>
+                <div
+                  onClick={() => changeDetailsVisibleAt(index)}
+                  className={styles.hide_details_btn}>
+                  <span>View Details</span>
+                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
                 </div>
               </div>
               {showDetailsAt[index] && (
                 <div className={styles.details_section}>
-                  <div
-                    onClick={() => changeDetailsVisibleAt(index, false)}
-                    className={styles.hide_details}>
-                    <div className={styles.hide_details_btn}>
-                      <span>Hide Details</span>
-                      <CaretUpOutlined className={styles.caret_up} />
-                    </div>
-                  </div>
                   <ul>
                     {game.units.map((unit: string, i: number) => (
                       <li key={i}>{unit}</li>
@@ -464,8 +458,8 @@ function StraightBets() {
 function Parlays() {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
-  const changeDetailsVisibleAt = (index: number, status: boolean) => {
-    showDetailsAt[index] = status;
+  const changeDetailsVisibleAt = (index: number) => {
+    showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
   };
 
@@ -488,12 +482,7 @@ function Parlays() {
           {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
             <div className={styles.game} key={game.id}>
               <div className={styles.game_subinfo}>
-                <span
-                  className={`${styles.gameSportType} ${
-                    styles['gameSportType_' + game.sportType]
-                  }`}>
-                  {game.sportType}
-                </span>
+                <SportTile sport={game.sportType} />
                 <span>Game Starts @ {game.startDate}</span>
               </div>
               <div className={styles.game_info}>
@@ -514,20 +503,19 @@ function Parlays() {
                   </Row>
                 </div>
                 <div className={styles.desc_line}>{`(${game.odds} odds | ${game.price})`}</div>
-                <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
-                  {`${game.units.length} Units`}
+                <div className={styles.units}>{`${game.units.length} Units`}</div>
+              </div>
+              <div className={styles.hide_details}>
+                <div
+                  onClick={() => changeDetailsVisibleAt(index)}
+                  className={styles.hide_details_btn}>
+                  <span>View Details</span>
+                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
                 </div>
               </div>
               {showDetailsAt[index] && (
                 <div className={styles.details_section}>
-                  <div
-                    onClick={() => changeDetailsVisibleAt(index, false)}
-                    className={styles.hide_details}>
-                    <div className={styles.hide_details_btn}>
-                      <span>Hide Details</span>
-                      <CaretUpOutlined className={styles.caret_up} />
-                    </div>
-                  </div>
                   <ul>
                     {game.units.map((unit: string, i: number) => (
                       <li key={i}>{unit}</li>
@@ -579,29 +567,39 @@ function CommonSportsbooks() {
       <div className={styles.sidebarBlockContent}>
         <Row>
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
+            <a href="https://www.bet365.com/#/HO/">
+              <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
+            </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
+            <a href="https://betway.com/">
+              <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
+            </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
+            <a href="https://sportsbook.fanduel.com/">
+              <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
+            </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <img
-              src="/images/draftkings.png"
-              alt="Draftkings SportsBook Logo"
-              width={109}
-              height={29}
-            />
+            <a href="https://sportsbook.draftkings.com">
+              <img
+                src="/images/draftkings.png"
+                alt="Draftkings SportsBook Logo"
+                width={109}
+                height={29}
+              />
+            </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <img
-              src="/images/williamhill.png"
-              alt="WilliamHill SportsBook Logo"
-              width={120}
-              height={34}
-            />
+            <a href="https://www.williamhill.com/us">
+              <img
+                src="/images/williamhill.png"
+                alt="WilliamHill SportsBook Logo"
+                width={120}
+                height={34}
+              />
+            </a>
           </Col>
         </Row>
       </div>

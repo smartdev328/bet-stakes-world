@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, YesterdayPlayInfoType } from '@type/Main';
@@ -271,8 +271,8 @@ function EarliestGames() {
       </Menu.Item>
     </Menu>
   );
-  const changeDetailsVisibleAt = (index: number, status: boolean) => {
-    showDetailsAt[index] = status;
+  const changeDetailsVisibleAt = (index: number) => {
+    showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
   };
 
@@ -321,10 +321,7 @@ function EarliestGames() {
         {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
           <div className={styles.game} key={game.id}>
             <div className={styles.game_subinfo}>
-              <span
-                className={`${styles.gameSportType} ${styles['gameSportType_' + game.sportType]}`}>
-                {game.sportType}
-              </span>
+              <SportTile sport={game.sportType} />
               <span>Game Starts @ {game.startDate}</span>
             </div>
             <div className={styles.game_info}>
@@ -346,20 +343,17 @@ function EarliestGames() {
                   </span>
                 </Row>
               </div>
-              <div className={styles.units} onClick={() => changeDetailsVisibleAt(index, true)}>
-                {`${game.units.length} Units`}
+              <div className={styles.units}>{`${game.units.length} Units`}</div>
+            </div>
+            <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
+              <div className={styles.hide_details_btn}>
+                <span>View Details</span>
+                {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
               </div>
             </div>
             {showDetailsAt[index] && (
               <div className={styles.details_section}>
-                <div
-                  onClick={() => changeDetailsVisibleAt(index, false)}
-                  className={styles.hide_details}>
-                  <div className={styles.hide_details_btn}>
-                    <span>Hide Details</span>
-                    <CaretUpOutlined className={styles.caret_up} />
-                  </div>
-                </div>
                 <ul>
                   {game.units.map((unit: string, i: number) => (
                     <li key={i}>{unit}</li>
@@ -452,6 +446,7 @@ function YesterdayPlays() {
       </div>
       <div className={styles.earliest_games_titlebar}>
         <strong>10 Wins in 14 Games</strong>
+        <span>{moment().subtract(1, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
       <div className={styles.yesterday_plays_list}>
         {Mock_YesterdayPlays.map((game: YesterdayPlayInfoType) => (

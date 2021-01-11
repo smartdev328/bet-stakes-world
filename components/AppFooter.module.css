@@ -125,6 +125,7 @@
 }
 .mainFooterRightCol {
   margin-top: -30px;
+  flex: none;
 }
 .menuListTitle {
   font-style: normal;

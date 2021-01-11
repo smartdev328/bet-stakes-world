@@ -41,138 +41,6 @@
   }
 }
 
-.topSection {
-  padding: 24px 0;
-  border-bottom: 1px solid #C4C4C4;
-}
-
-.topSection .right,
-.topSection .left {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.topSection .left {
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 50px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #000000;
-}
-.thick_star_btn, .caret_down_btn {
-  height: auto;
-  border: none;
-  display: flex;
-  align-items: center;
-  padding: 0;
-}
-.thick_star_btn {
-  margin-right: 12px;
-}
-.caret_down_btn {
-  margin-left: 10px;
-}
-
-.topSection .right {
-  justify-content: flex-end;
-}
-.sms_send_btn {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 25px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #FFFFFF;
-  background: #000;
-  padding: 13px 16px;
-  height: auto;
-  border: none;
-}
-.sms_send_btn:hover {
-  background-color: rgba(26, 26, 26, 0.9);
-}
-.sms_send_btn path {
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-.sms_send_btn:hover path {
-  fill: #40a9ff;
-}
-
-.mobile_phone_icon {
-  width: 14px;
-  margin-right: 5px;
-}
-.config_btn {
-  margin-left: 26px;
-  border: none;
-  height: auto;
-  display: flex;
-  align-items: center;
-  padding: 2px;
-}
-.config_btn_icon {
-  width: 32px;
-  height: 32px;
-}
-
-@media (max-width: 992px) {
-  .topSection {
-    padding: 20px 0;
-  }  
-  .topSection .left {
-    font-size: 28px;
-    line-height: 42px;
-  }
-  .thick_star_btn {
-    margin-right: 8px;
-  }
-  .thick_star_icon {
-    width: 28px;
-  }
-  .caret_down_icon {
-    width: 16px;
-  }
-  .caret_down_btn {
-    margin-left: 7px;
-  }
-  .sms_send_btn {
-    font-size: 14px;
-    line-height: 22px;
-    padding: 11px 14px;
-  }
-  .config_btn {
-    margin-left: 22px;
-  }
-  .config_btn_icon {
-    width: 26px;
-  }
-}
-@media (max-width: 786px) {
-  .topSection .right {
-    display: none;
-  }
-  .topSection {
-    padding: 12px 0;
-  }
-  .topSection .left {
-    max-width: 100%;
-    flex: 1;
-  }
-  .thick_star_icon {
-    width: 22px;
-  }
-  .caret_down_icon {
-    width: 18px;
-  }
-  .topSection .left {
-    font-size: 24px;
-    line-height: 38px;
-  }
-}
-
 /* Welcome Row */
 .welcome_row {
   padding: 24px 0;
@@ -187,7 +55,7 @@
 }
 .welcome_right {
   font-weight: 400;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 38px;
   display: flex;
   align-items: center;
@@ -637,8 +505,7 @@
 }
 
 .game {
-  padding: 24px 0;
-  border-bottom: 1px solid #C4C4C4;
+  padding: 24px 0 0;
 }
 .game_subinfo {
   font-weight: 400;
@@ -647,33 +514,6 @@
   display: flex;
   align-items: center;
 }
-.game_subinfo .gameSportType {
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 22px;
-  color: #fff;
-  padding: 0 10px;
-  margin-right: 8px;
-}
-.game_subinfo .gameSportType_NBA {
-  background: #EC4C15;
-}
-.game_subinfo .gameSportType_NFL {
-  background: #91442A;
-}
-.game_subinfo .gameSportType_MLB {
-  background: #1878FB;
-}
-.game_subinfo .gameSportType_UFC {
-  background: #F9282B;
-}
-.game_subinfo .gameSportType_F1 {
-  background: #505054;
-}
-.game_subinfo .gameSportType_SOCCER {
-  background: #6DCF40;
-}
-
 .game_info {
   margin-top: 8px;
   display: flex;
@@ -711,10 +551,11 @@
   cursor: pointer;
 }
 .details_section {
-  margin-top: 18px;
   text-align: center;
+  border-bottom: 1px solid #c4c4c4;
 }
 .hide_details {
+  margin-top: 18px;
   display: flex;
   align-items: center;
 }
@@ -737,14 +578,16 @@
   text-transform: uppercase;
   color: #000000;
 }
-.hide_details_btn .caret_up svg {
+.hide_details_btn .caret_up svg,
+.hide_details_btn .caret_down svg  {
   width: 12px;
 }
-.hide_details_btn .caret_up path {
+.hide_details_btn .caret_up path,
+.hide_details_btn .caret_down path {
   fill: rgba(0, 0, 0, 0.54);
 }
 .details_section ul {
-  padding-top: 25px;
+  padding: 12px 0;
   display: inline-block;
 }
 .details_section ul li {
@@ -888,6 +731,10 @@
     width: 100%;
     max-width: 100%;
     flex: none;
+  }
+  .hide_details_btn span {
+    font-size: 16px;
+    line-height: 16px;
   }
 }
 @media (max-width: 768px) {

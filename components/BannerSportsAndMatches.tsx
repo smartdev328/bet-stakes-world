@@ -30,13 +30,25 @@ const SPORTS_INFO = [
     logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
+    name: 'NCAAF',
+    id: 'NCAAF',
+    background: '#91442A',
+    logo: () => <NFL_SVG className={styles.sports_logo} />
+  },
+  {
+    name: 'NCAAB',
+    id: 'NCAAB',
+    background: '#EC4C15',
+    logo: () => <NBA_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'UFC',
     id: 'UFC',
     background: '#F9282B',
     logo: () => <UFC_SVG className={styles.sports_logo} />
   },
   {
-    name: 'Formula 1',
+    name: 'FORMULA 1',
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />

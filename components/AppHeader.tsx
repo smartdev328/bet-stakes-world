@@ -148,6 +148,14 @@ function SubMenu() {
                   <Link href="/">
                     <a>
                       <LockIcon className={styles.lock_icon} />
+                      SOCCER
+                    </a>
+                  </Link>
+                </div>
+                <div className={styles.submenu_item}>
+                  <Link href="/">
+                    <a>
+                      <LockIcon className={styles.lock_icon} />
                       UFC
                     </a>
                   </Link>
@@ -156,15 +164,7 @@ function SubMenu() {
                   <Link href="/">
                     <a>
                       <LockIcon className={styles.lock_icon} />
-                      Formula 1
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
-                      Soccer
+                      FORMULA 1
                     </a>
                   </Link>
                 </div>
@@ -261,6 +261,14 @@ function SubMenu() {
                       <Link href="/">
                         <a>
                           <LockIcon className={styles.lock_icon} />
+                          SOCCER
+                        </a>
+                      </Link>
+                    </div>
+                    <div className={styles.submenu_item}>
+                      <Link href="/">
+                        <a>
+                          <LockIcon className={styles.lock_icon} />
                           UFC
                         </a>
                       </Link>
@@ -269,15 +277,7 @@ function SubMenu() {
                       <Link href="/">
                         <a>
                           <LockIcon className={styles.lock_icon} />
-                          Formula 1
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/">
-                        <a>
-                          <LockIcon className={styles.lock_icon} />
-                          Soccer
+                          FORMULA 1
                         </a>
                       </Link>
                     </div>

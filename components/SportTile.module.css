@@ -1,0 +1,92 @@
+.sportTileBtn {
+  padding: 0 10px;
+  position: relative;
+  margin-right: 8px;
+  overflow: hidden;
+}
+.sportTileBtn span {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  color: #fff;
+}
+.sportTile_NBA {
+  background: #EC4C15;
+}
+.sportTile_NFL {
+  background: #91442A;
+}
+.sportTile_MLB {
+  background: #1878FB;
+}
+.sportTile_UFC {
+  background: #F9282B;
+}
+.sportTile_F1 {
+  background: #505054;
+}
+.sportTile_SOCCER {
+  background: #6DCF40;
+}
+.sportTile_NBA > svg {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sportTile_NFL > svg {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -75%;
+  transform: rotate(90deg);
+  top: 50%;
+}
+.sportTile_MLB > svg {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
+.sportTile_UFC > svg {
+  width: 80%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 10%;
+}
+
+.sportTile_F1 > svg {
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 0;
+  top: -5%;
+}
+.sportTile_SOCCER > svg {
+  width: 120%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.sportTileBtn > svg path {
+  fill: rgba(255, 255, 255, 0.4);
+}
+.sportTile_UFC > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.sportTile_F1 > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}

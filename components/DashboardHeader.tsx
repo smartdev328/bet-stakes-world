@@ -33,7 +33,7 @@ const DashboardHeader = ({ title }: DashboardHeaderPropsType) => {
       <Col span={12} className={styles.right}>
         <Button className={styles.sms_send_btn}>
           <MobilePhoneIcon className={styles.mobile_phone_icon} />
-          Recieve your picks via text!
+          Receive alerts via text!
         </Button>
         <Button ghost className={styles.config_btn}>
           <ConfigIcon className={styles.config_btn_icon} />

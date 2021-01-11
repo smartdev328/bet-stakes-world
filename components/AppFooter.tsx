@@ -65,11 +65,6 @@ function AppFooter() {
                       <a>Daily Fantasy</a>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/">
-                      <a>Season Fantasy</a>
-                    </Link>
-                  </li>
                 </ul>
               </div>
             </Col>
@@ -92,13 +87,13 @@ function AppFooter() {
                       <a>MLB</a>
                     </Link>
                   </li>
-                </ul>
-                <ul>
                   <li>
                     <Link href="/">
                       <a>NCAAF</a>
                     </Link>
                   </li>
+                </ul>
+                <ul>
                   <li>
                     <Link href="/">
                       <a>NCAAB</a>
@@ -106,11 +101,9 @@ function AppFooter() {
                   </li>
                   <li>
                     <Link href="/">
-                      <a>Soccer</a>
+                      <a>SOCCER</a>
                     </Link>
                   </li>
-                </ul>
-                <ul>
                   <li>
                     <Link href="/">
                       <a>UFC</a>
@@ -118,7 +111,7 @@ function AppFooter() {
                   </li>
                   <li>
                     <Link href="/">
-                      <a>Formula 1</a>
+                      <a>FORMULA 1</a>
                     </Link>
                   </li>
                 </ul>

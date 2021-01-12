@@ -1,0 +1,100 @@
+.containerWrapper {
+  position: relative;
+}
+.container {
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+/* Hero Banner */
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+.heroBannerContent {
+  width: 520px;
+  margin: auto;
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  padding-top: 56px;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.heroBannerContent h1 {
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+.heroBannerContent p {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 117.9%;
+  color: #fff;
+  margin: 0.5em 0;
+}
+@media (max-width: 992px) {
+  .heroBannerContent {
+    padding-top: 40px;
+    width: 450px;
+  }
+  .heroBannerContent h1 {
+    font-size: 56px;
+  }
+  .heroBannerContent p {
+    font-size: 20px;
+  }
+  .heroBanner .bgImage {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage {
+    height: 280px;
+  }
+  .heroBannerContent h1 {
+    font-size: 42px;
+  }
+  .heroBannerContent p {
+    font-size: 18px;
+  }
+  .heroBannerContent {
+    padding-top: 30px;
+    width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage {
+    height: 260px;
+  }
+  .heroBannerContent h1 {
+    font-size: 32px;
+  }
+  .heroBannerContent p {
+    font-size: 14px;
+  }
+  .heroBannerContent {
+    padding-top: 50px;
+    width: 300px;
+  }
+}

@@ -372,6 +372,8 @@
 .daily_lineup_sidebar img {
   width: 32px;
   height: 32px;
+  margin: auto;
+  display: block;
 }
 
 .daily_lineup_main {

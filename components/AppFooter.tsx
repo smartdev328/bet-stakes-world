@@ -149,12 +149,12 @@ function AppFooter() {
               </div>
             </Col>
           </Row>
-          <div className={styles.mainFooter_RightCol}>
+          <Row className={styles.mainFooter_RightCol} align={'middle'} justify={'end'}>
             <Button type="primary" className={styles.subscribeBtn}>
               Subscribe Now
             </Button>
             <Button className={styles.loginBtn}>Log In</Button>
-          </div>
+          </Row>
         </div>
         <div className={`${styles.mainFooterRow} ${styles.mainFooterNavmenu}`}>
           <Link href="/">

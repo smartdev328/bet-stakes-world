@@ -456,3 +456,66 @@ export const DateRangeIcon = ({ className }: SVGIconPropType) => (
     />
   </svg>
 );
+
+export const PlusIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="25"
+    height="25"
+    className={className}
+    viewBox="0 0 25 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M15.2838 0.145508H10.4838V9.74551H0.883789V14.5455H10.4838V24.1455H15.2838V14.5455H24.8838V9.74551H15.2838V0.145508Z"
+      fill="#646262"
+    />
+  </svg>
+);
+
+export const CheckedCircleIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="25"
+    height="25"
+    className={className}
+    viewBox="0 0 25 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0.348633 12.6626C0.348633 6.0386 5.72463 0.662598 12.3486 0.662598C18.9726 0.662598 24.3486 6.0386 24.3486 12.6626C24.3486 19.2866 18.9726 24.6626 12.3486 24.6626C5.72463 24.6626 0.348633 19.2866 0.348633 12.6626ZM9.94856 15.2668L17.8566 7.35876L19.5486 9.06277L9.94856 18.6628L5.14856 13.8628L6.84056 12.1708L9.94856 15.2668Z"
+      fill="#1A1A1A"
+    />
+  </svg>
+);
+
+export const EmptyCircleIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="26"
+    height="26"
+    className={className}
+    viewBox="0 0 26 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M13.3486 0.807129C6.44849 0.807129 0.848633 6.40699 0.848633 13.3071H1.84863C1.84863 6.95927 7.00078 1.80713 13.3486 1.80713V0.807129ZM0.848633 13.3071C0.848633 20.2073 6.44849 25.8071 13.3486 25.8071V24.8071C7.00078 24.8071 1.84863 19.655 1.84863 13.3071H0.848633ZM13.3486 25.8071C20.2488 25.8071 25.8486 20.2073 25.8486 13.3071H24.8486C24.8486 19.655 19.6965 24.8071 13.3486 24.8071V25.8071ZM25.8486 13.3071C25.8486 6.40699 20.2488 0.807129 13.3486 0.807129V1.80713C19.6965 1.80713 24.8486 6.95927 24.8486 13.3071H25.8486Z"
+      fill="#F1F1F1"
+    />
+  </svg>
+);
+
+export const NormalCheckIcon = ({ className }: SVGIconPropType) => (
+  <svg
+    width="19"
+    height="14"
+    className={className}
+    viewBox="0 0 19 14"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M6.47379 10.5915L2.30379 6.42147L0.883789 7.83147L6.47379 13.4215L18.4738 1.42147L17.0638 0.0114746L6.47379 10.5915Z"
+      fill="black"
+      fillOpacity="0.54"
+    />
+  </svg>
+);

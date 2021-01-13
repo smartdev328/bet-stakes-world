@@ -98,3 +98,426 @@
     width: 300px;
   }
 }
+
+/* Shop Plans */
+.membershipOffers_plans {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plan {
+  width: 425px;
+  margin-right: 35px;
+  text-align: left;
+}
+
+.plan_content {
+  border: 1px solid #1a1a1a;
+}
+.plan:last-child {
+  margin-right: 0;
+}
+.plan_content_info {
+  padding: 19px 0 22px;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+.main_plan img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  left: 50%;
+  width: 108%;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+.plan_content_title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  margin-bottom: 6px;
+}
+.plan_content_desc {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #A3A3A3;
+  display: flex;
+  justify-content: center;
+}
+.plan.active .plan_content_info {
+  background-color: #1a1a1a;
+}
+.plan.active .plan_content_title {
+  color: #fff;
+}
+.plan_content_desc span:last-child {
+  margin-left: 15px;
+}
+.plan_extra_content {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: 0.8em;
+}
+
+@media (max-width: 1400px) and (min-width: 1241px) {
+  .plan {
+    min-width: 360px;
+    max-width: 390px;
+    margin-right: 25px;
+    flex: 1;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1240px) and (min-width: 1025px) {
+  .plan {
+    min-width: 300px;
+    max-width: 360px;
+    margin-right: 20px;
+  }
+  .plan_content_title {
+    font-size: 20px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .plan_content_desc span:last-child {
+    margin-left: 10px;
+  }
+  .plan_content_details {
+    padding: 16px;
+  }
+  .plan_extra_content {
+    font-size: 20px;
+  }
+  .deal_circle {
+    width: 124%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .membershipOffers_plans {
+    flex-direction: column;
+  }
+  .plan {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+    margin-bottom: 2em;
+  }
+  .main_plan {
+    order: 0;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .main_plan img {
+    top: 40%;
+  }
+  .plan_extra_content {
+    font-size: 20px;
+    margin-top: 1em;
+  }
+  .deal_circle {
+    width: 128%;
+  }
+}
+
+@media (max-width: 600px) {
+  .plan {
+    width: 100%;
+    max-width: 360px;
+  }
+  .plan_extra_content {
+    font-size: 18px;
+  }
+}
+
+/* Offering details */
+.offering_details {
+  padding: 40px 92px;
+}
+.sectionTitle {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.introSection {
+  margin-bottom: 50px;
+}
+.introSectionBg {
+  background: #1A1A1A;
+  border: 1.5px solid #ffc700;
+  margin-right: 12px;
+  height: 100px;
+  width: 100px;
+}
+.introSectionBg img {
+  width: 100%;
+  height: 100%;
+}
+.introDesc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  color: #000000;
+  margin-top: 6px;
+  width: 400px;
+}
+.introSection ul {
+  margin: 24px 0;
+  padding: 0;
+}
+.introSection ul li {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.extra_info {
+  font-size: 14px;
+  line-height: 184.4%;
+  color: #000000;
+  width: 400px;
+}
+.list_check_icon {
+  width: 18px;
+  margin-right: 6px;
+  margin-top: 4px;
+}
+
+.sportsCards {
+  margin-bottom: 48px;
+  position: relative;
+}
+.sportsCards ul {
+  margin: 18px 0;
+  padding: 0;
+  width: 724px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.sportsCards ul li {
+  border: 1px solid #F1F1F1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 8px 16px;
+  margin: 0;
+  margin-bottom: 24px;
+  height: 88px;
+  width: 350px;
+  cursor: pointer;
+  transition: all linear 0.3s;
+}
+.sportsCards ul li.active {
+  border: 1px solid #FFC700;
+  box-sizing: border-box;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+}
+.sportsCards ul li svg {
+  width: 24px;
+  height: 24px;
+}
+.sportsCard_name {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 107.9%;
+  color: #000000;
+  display: inline-block;
+  text-align: center;
+  width: 140px;
+  text-transform: uppercase;
+}
+.sportsCard_value {
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #1A1A1A;
+  border-bottom: solid 4px #1a1a1a;
+}
+
+.packageAddOns {
+  margin-bottom: 48px;
+}
+.packageAddOns ul {
+  margin: 18px 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.packageAddOns ul li {
+  border: 1px solid #F1F1F1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 8px 16px;
+  margin: 0;
+  margin-bottom: 24px;
+  height: 88px;
+  width: 560px;
+  cursor: pointer;
+  transition: all linear 0.3s;
+}
+.packageAddOns ul li.active {
+  border: 1px solid #1A1A1A;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.packageAddOns ul li svg {
+  width: 24px;
+  height: 24px;
+}
+.packageAddOns .sportsCard_name {
+  text-align: left;
+  width: auto;
+  line-height: 28px;
+}
+.packageAddOns .sportsCard_name_row {
+  padding: 0 24px;
+  flex: 1;
+}
+.packageAddOns .sportsCard_name_row a {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  text-decoration: underline;
+}
+.sportsCard_value {
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #1A1A1A;
+  border-bottom: solid 4px #1a1a1a;
+}
+
+/* Cart Box */
+.cartBox {
+  position: absolute;
+  bottom: 0;
+  right: -50px;
+  width: 430px;
+  padding: 32px;
+  z-index: 10;
+  background: #1A1A1A;
+}
+.cartBox img {
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 150%;
+  height: auto;
+  z-index: 11;
+  opacity: 0.1;
+}
+.cartBoxContent {
+  position: relative;
+  z-index: 12;
+  text-align: center;
+}
+.cartBoxContent h4 {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 117.9%;
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 0.7em 0;
+}
+.cartBoxContent p {
+  font-size: 18px;
+  line-height: 184.4%;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+.totalPrice {
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 68px;
+  color: #fff;
+  margin: 12px 0 28px;
+  border-bottom: 4px solid #fff;
+  display: inline-block;
+}
+.addToCartBtn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  padding: 19.5px 95px;
+  background: #FFC700;
+  width: 100%;
+  height: auto;
+  border: none;
+  outline: none;
+}
+
+/* FAQ */
+.faqs h4 {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #000000;
+}
+.faqs ul {
+  margin: 28px 0 90px;
+  padding: 0;
+}
+.faqs ul li {
+  border-top: 1px solid #c4c4c4;
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+.faqs ul li:last-child {
+  border-bottom: 1px solid #c4c4c4;
+}
+.faqs ul li span {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 117.9%;
+  color: #000000;
+}
+.faqIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+

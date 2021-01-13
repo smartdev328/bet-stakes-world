@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
-import { CartAddOnType, CartType, CartSportCardType } from '@type/cart';
+import { CartAddOnType, CartType, CartSportCardType } from '@type/Cart';
 import {
   PlusIcon,
   EmptyCircleIcon,
@@ -331,7 +331,8 @@ function IntroForFantasy() {
         <div className={styles.introContent}>
           <div className={styles.sectionTitle}>About the Fantasy Picks</div>
           <div className={styles.introDesc}>
-            Ut ornare amet adipiscing eu augue. Metus eget in maecenas elementum maecenas duis mauris.
+            Ut ornare amet adipiscing eu augue. Metus eget in maecenas elementum maecenas duis
+            mauris.
           </div>
         </div>
       </Row>

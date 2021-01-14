@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { Row, Dropdown, Menu, Button } from 'antd';
+import { Row, Col, Dropdown, Menu, Button } from 'antd';
 import LazyLoad from 'react-lazyload';
+import Link from 'next/link';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { NormalCheckIcon, EmptyCircleIcon, CheckedCircleIcon } from '@components/SvgIcons';
@@ -66,14 +67,14 @@ export default function Registration() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </li>
               </ul>
-              {/* <form>
+              <form>
                 <Row>
                   <Col span={24} className={styles.formGroup}>
                     <label>User Name*</label>
                     <input placeholder="ie: CashmeOut91" />
                   </Col>
                 </Row>
-                <Row>
+                <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.formGroup}>
                     <label>First Name*</label>
                     <input placeholder="ie: Johnny" />
@@ -95,7 +96,7 @@ export default function Registration() {
                     <input placeholder="1-111-111-1111" />
                   </Col>
                 </Row>
-                <Row>
+                <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.formGroup}>
                     <label>Password*</label>
                     <input type="password" placeholder="ie: **********" />
@@ -105,7 +106,7 @@ export default function Registration() {
                     <input type="password" placeholder="ie: **********" />
                   </Col>
                 </Row>
-                <Row>
+                <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.termsSection}>
                     <input type="checkbox" />
                     <div className={styles.termsContent}>
@@ -118,14 +119,16 @@ export default function Registration() {
                       </div>
                     </div>
                   </Col>
-                  <Col span={12} className={styles.formGroup}>
+                  <Col span={12}>
                     <Button className={styles.registerBtn}>Registor Now</Button>
                   </Col>
                 </Row>
               </form>
-              <div className={styles.orText}>Or</div>
+              <div className={styles.orText}>
+                <span>Or</span>
+              </div>
               <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
-              <Button className={styles.register_goggle_btn}>Registor With Google</Button> */}
+              <Button className={styles.register_goggle_btn}>Registor With Google</Button>
             </div>
           </Row>
         </div>

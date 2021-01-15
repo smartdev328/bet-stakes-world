@@ -67,48 +67,48 @@ export default function Registration() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </li>
               </ul>
-              <form>
+              <form autoComplete="off">
                 <Row>
                   <Col span={24} className={styles.formGroup}>
                     <label>User Name*</label>
-                    <input placeholder="ie: CashmeOut91" />
+                    <input name="username" placeholder="ie: CashmeOut91" />
                   </Col>
                 </Row>
                 <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.formGroup}>
                     <label>First Name*</label>
-                    <input placeholder="ie: Johnny" />
+                    <input name="first_name" placeholder="ie: Johnny" />
                   </Col>
                   <Col span={12} className={styles.formGroup}>
                     <label>Last Name*</label>
-                    <input placeholder="ie: Cash" />
+                    <input name="last_name" placeholder="ie: Cash" />
                   </Col>
                 </Row>
                 <Row>
                   <Col span={24} className={styles.formGroup}>
                     <label>Email*</label>
-                    <input type="email" placeholder="ie: j.cash@gmail.com" />
+                    <input name="email" type="email" placeholder="ie: j.cash@gmail.com" />
                   </Col>
                 </Row>
                 <Row>
                   <Col span={24} className={styles.formGroup}>
                     <label>Mobile Number</label>
-                    <input placeholder="1-111-111-1111" />
+                    <input name="mobile_number" placeholder="1-111-111-1111" />
                   </Col>
                 </Row>
                 <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.formGroup}>
                     <label>Password*</label>
-                    <input type="password" placeholder="ie: **********" />
+                    <input name="password" type="password" placeholder="ie: **********" />
                   </Col>
                   <Col span={12} className={styles.formGroup}>
                     <label>Verify Password*</label>
-                    <input type="password" placeholder="ie: **********" />
+                    <input name="verify_password" type="password" placeholder="ie: **********" />
                   </Col>
                 </Row>
                 <Row className={styles.rowWithTwoChild} justify="space-between">
                   <Col span={12} className={styles.termsSection}>
-                    <input type="checkbox" />
+                    <input type="checkbox" name="terms" />
                     <div className={styles.termsContent}>
                       <div className={styles.title}>Communication Policy</div>
                       <div>

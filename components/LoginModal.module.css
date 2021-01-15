@@ -12,7 +12,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .content {
   position: absolute;
@@ -28,7 +28,7 @@
 .logo_section {
   background: #1a1a1a;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 7px;
   position: relative;
 }
 .logo_section img {
@@ -129,4 +129,53 @@
 }
 .closeIcon path {
   fill: #fff;
+}
+.forgotPasswordLink {
+  margin-top: 3px;
+}
+@media (max-width: 768px) {
+  .content {
+    width: 560px;
+  }
+  .logo_section {
+    padding-top: 4px;
+  }
+  .logo_section img {
+    width: 260px;
+  }
+  .content h2 {
+    font-size: 40px;
+  }
+  .signInForm {
+    padding: 25px 0 45px;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    display: none;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    transform: none;
+    top: 0;
+  }
+  .logo_section {
+    padding: 16px 16px 8px;
+    text-align: left;
+  }
+  .logo_section img {
+    width: 220px;
+    height: auto;
+  }
+  .closeBtn {
+    right: 16px;
+  }
+  .signInForm {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+  }
 }

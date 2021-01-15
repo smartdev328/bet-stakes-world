@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
+import { useDispatch } from 'react-redux';
 
 import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons';
 import styles from './AppFooter.module.css';
@@ -11,6 +12,12 @@ const Col = dynamic(() => import('antd/lib/col'));
 const Button = dynamic(() => import('antd/lib/button'));
 
 function AppFooter() {
+  const dispatch = useDispatch();
+
+  const openLoginModal = () => {
+    dispatch({ type: 'OPEN_MODAL' });
+  };
+
   return (
     <footer>
       <div className={styles.newsletterRow}>
@@ -153,7 +160,9 @@ function AppFooter() {
             <Button type="primary" className={styles.subscribeBtn}>
               Subscribe Now
             </Button>
-            <Button className={styles.loginBtn}>Log In</Button>
+            <Button className={styles.loginBtn} onClick={openLoginModal}>
+              Log In
+            </Button>
           </Row>
         </div>
         <div className={`${styles.mainFooterRow} ${styles.mainFooterNavmenu}`}>

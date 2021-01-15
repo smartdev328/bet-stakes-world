@@ -395,6 +395,7 @@ export default function AppHeader({
     }, 1000);
     return () => {
       clearInterval(remainingTimeInterval);
+      dispatch({ type: 'CLOSE_MODAL' });
     };
   }, []);
 
@@ -533,6 +534,7 @@ export default function AppHeader({
                 type="link"
                 icon={<IdentityIcon className={styles.cart_icon} />}
                 aria-label="User Profile Button"
+                onClick={openLoginModal}
                 className={styles.cart_btn}></Button>
             </div>
           </Row>

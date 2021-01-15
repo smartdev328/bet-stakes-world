@@ -60,7 +60,7 @@ function LoginModal() {
             <Col span={24} className={styles.formGroup}>
               <label>Password</label>
               <input type="password" placeholder="Password" />
-              <div>
+              <div className={styles.forgotPasswordLink}>
                 <Link href="/">
                   <a>Forgot Password?</a>
                 </Link>

@@ -3,6 +3,7 @@ import { Menu, Row, Col } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
+import { useDispatch } from 'react-redux';
 
 import {
   IdentityIcon,
@@ -12,6 +13,7 @@ import {
   CloseIcon,
   HamburgerMenuIcon
 } from '@components/SvgIcons';
+import { LoginModal } from '@components/index';
 import styles from './AppHeader.module.css';
 
 const Button = dynamic(() => import('antd/lib/button'));
@@ -385,6 +387,7 @@ export default function AppHeader({
 }: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     const remainingTimeInterval = setInterval(() => {
       const remainingTime = getRemainingTime(releaseTime);
@@ -394,6 +397,10 @@ export default function AppHeader({
       clearInterval(remainingTimeInterval);
     };
   }, []);
+
+  const openLoginModal = () => {
+    dispatch({ type: 'OPEN_MODAL' });
+  };
 
   const showMobileNav = () => {
     setMobileNavVisible(true);
@@ -405,6 +412,7 @@ export default function AppHeader({
 
   return (
     <header className={`${styles.appHeader} ${mobileNavVisible && styles.open}`}>
+      <LoginModal />
       <Row justify="space-between" className={styles.header}>
         <Col span={7} className={styles.headerLeftCol}>
           <div className={styles.countdownBox}>
@@ -446,6 +454,7 @@ export default function AppHeader({
             <Button
               type="ghost"
               icon={<IdentityIcon className={styles.user_icon} />}
+              onClick={openLoginModal}
               className={styles.loginBtn}>
               Log In
             </Button>

@@ -6,14 +6,24 @@
   padding: 100px 30px;
   margin: auto;
 }
+@media (max-width: 1400px) {
+  .container {
+    max-width: 1200px;
+  }
+}
 @media (max-width: 1240px) {
   .container {
-    padding: 0 30px;
+    padding: 80px 30px;
   }
 }
 @media (max-width: 1024px) {
   .container {
-    padding: 0 18px;
+    padding: 60px 18px;
+  }
+}
+@media (max-width: 856px) {
+  .container {
+    max-width: 656px;
   }
 }
 
@@ -144,6 +154,7 @@
   padding: 16px 24px 30px;
   margin-bottom: 18px;
   position: relative;
+  animation: all linear 1s;
 }
 .package.selected {
   border: 1px solid #1A1A1A;
@@ -237,6 +248,7 @@
   z-index: 21;
   overflow: hidden;
   background-color: #1a1a1a;
+  animation: all linear 0.5s;
 }
 .dropdown_NBA > .sports_logo,
 .dropdown_NCAAB > .sports_logo {
@@ -394,4 +406,84 @@
   margin-bottom: 20px;
   width: 300px;
   display: block;
+}
+
+@media (max-width: 1400px) {
+  .packagesCol {
+    width: 540px;
+  }
+  .registrationCol {
+    padding: 24px 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .packagesCol {
+    width: 480px;
+  }
+  .registrationCol {
+    padding: 24px 0;
+  }
+  .package {
+    padding: 16px 18px 24px;
+  }
+  .checkIconBtn {
+    right: 16px;
+  }
+  .list_with_checkmark li {
+    font-size: 14px;
+  }
+  .list_with_checkmark  .list_check_icon {
+    width: 14px;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .packagesCol {
+    width: 424px;
+    margin-right: 32px;
+  }
+  .registrationCol {
+    padding: 0;
+  }
+  .package {
+    padding: 16px 18px 24px;
+  }
+  .checkIconBtn {
+    right: 16px;
+  }
+  .rowWithTwoChild > div {
+    max-width: 100%;
+    flex: 0 0 100%;
+    width: 100%;
+  }
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  .registerBtn {
+    margin-top: 2em;
+  }
+  .orText {
+    margin: 30px 0;
+  }
+}
+
+@media (max-width: 856px) {
+  .packagesCol {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .packageTitle span {
+    font-size: 18px;
+    line-height: 140%;
+  }
 }

@@ -18,8 +18,8 @@ function LoginModal() {
   const { isModalOpen } = useSelector((state: ReduxState) => state.common);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formData, setFormData] = useState<LoginUserType>({
-    email: '',
-    password: ''
+    email: undefined,
+    password: undefined
   });
   const [formValidation, setFormValidation] = useState<LoginUserValidateType>({
     email: true,

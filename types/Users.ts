@@ -20,8 +20,8 @@ export type CreateUserValidateType = {
 };
 
 export type LoginUserType = {
-  email: string;
-  password: string;
+  email: string | undefined;
+  password: string | undefined;
 };
 
 export type LoginUserValidateType = {

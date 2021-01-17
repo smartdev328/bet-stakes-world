@@ -131,14 +131,16 @@
   cursor: pointer;
   padding-left: 5px;
 }
-.dropdown_NBA > svg {
+.dropdown_NBA > svg,
+.dropdown_NCAAB > svg {
   width: 300%;
   position: absolute;
   z-index: 20;
   height: auto;
   left: -10%;
 }
-.dropdown_NFL > svg {
+.dropdown_NFL > svg,
+.dropdown_NCAAF > svg {
   width: 300%;
   position: absolute;
   z-index: 20;

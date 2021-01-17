@@ -1,3 +1,6 @@
+export const API_BASE_URL =
+  'http://daily-proxy-1wsqart4094ps-345811535.us-east-1.elb.amazonaws.com';
+
 export const MATCHES_MOCK = [
   {
     name: 'NBA | MON 07/31 3:00PM',

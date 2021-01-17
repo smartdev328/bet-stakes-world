@@ -11,6 +11,8 @@
           "@type": "./types",
           "@redux": "./redux",
           "@images": "./public/images",
+          "@apis": ["./apis"],
+          "@utils": ["./utils"],
           "@constants": "./constants/index.ts"
         }
       }

@@ -1,3 +1,6 @@
+import { Package } from './Packages';
+import { Sport } from './Sports';
+
 export type SVGIconPropType = {
   className: string;
 };
@@ -75,4 +78,9 @@ export type DailyLineupType = {
   fppg: number;
   oprk: string;
   price: number;
+};
+
+export type PageDefaultProps = {
+  packages: Package[];
+  sports?: Sport[];
 };

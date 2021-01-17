@@ -24,6 +24,8 @@
       "@redux/*": ["./redux/*"],
       "@components/*": ["./components/*"],
       "@images/*": ["./public/images/*"],
+      "@apis/*": ["./apis/*"],
+      "@utils/*": ["./utils/*"],
       "@constants/*": ["./constants/index.ts"]
     }
   },

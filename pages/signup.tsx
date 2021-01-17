@@ -247,7 +247,7 @@ export default function Registration({ packages }: PageDefaultProps) {
 
   useEffect(() => {
     // Show SignUp Error Notification
-    if (signupError) {
+    if (formSubmitted && signupError) {
       notification['error']({
         message: 'Registration Error!',
         description: signupError

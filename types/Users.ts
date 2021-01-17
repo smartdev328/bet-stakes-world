@@ -18,3 +18,13 @@ export type CreateUserValidateType = {
   password: boolean;
   verify_password: boolean;
 };
+
+export type LoginUserType = {
+  email: string;
+  password: string;
+};
+
+export type LoginUserValidateType = {
+  email: boolean;
+  password: boolean;
+};

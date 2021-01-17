@@ -26,7 +26,6 @@ export function commonReducer(state = initialState, action: CommonStateAction) {
     }
 
     case OPEN_MODAL:
-      console.log('------ open modal');
       return {
         ...state,
         ...{ isModalOpen: true }

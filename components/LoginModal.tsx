@@ -1,25 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, notification } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 
 import { ReduxState } from '@redux/reducers';
 import styles from './LoginModal.module.css';
 import { CloseIcon } from './SvgIcons';
+import { LoginUserType, LoginUserValidateType } from '@type/Users';
+import { validateEmail } from '@utils/common';
 
 function LoginModal() {
+  const dispatch = useDispatch();
+
+  const { error: loginError } = useSelector((state: ReduxState) => state.user);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { isModalOpen } = useSelector((state: ReduxState) => state.common);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [formData, setFormData] = useState<LoginUserType>({
+    email: '',
+    password: ''
+  });
+  const [formValidation, setFormValidation] = useState<LoginUserValidateType>({
+    email: true,
+    password: true
+  });
+
   useEffect(() => {
     setModalOpen(isModalOpen);
   }, [isModalOpen]);
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Show LoginError Notification
+    if (loginError) {
+      notification['error']({
+        message: 'LogIn Error!',
+        description: loginError
+      });
+    }
+  }, [loginError]);
 
   const closeModal = () => {
     setModalOpen(false);
     dispatch({ type: 'CLOSE_MODAL' });
   };
+  const changeFormData = (name: keyof LoginUserType, e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    const newFormData = Object.assign({}, formData);
+    newFormData[name] = value;
+    setFormData(newFormData);
+    validateForm(newFormData);
+  };
+  const validateForm = (data: LoginUserType) => {
+    const newValidation = Object.assign({}, formValidation);
+    let isValid = true;
+    if (data.email === '') {
+      newValidation.email = false;
+      isValid = false;
+    } else if (data.email == undefined) {
+      isValid = false;
+    } else if (data.email !== '' && !validateEmail(data.email || '')) {
+      newValidation.email = false;
+      isValid = false;
+    } else {
+      newValidation.email = true;
+    }
+    if (data.password === '' || (data.password && data.password.length < 6)) {
+      newValidation.password = false;
+      isValid = false;
+    } else if (data.password == undefined) {
+      isValid = false;
+    } else {
+      newValidation.password = true;
+    }
+    setFormValidation(newValidation);
+    setIsFormValid(isValid);
+  };
+
+  // Handler for LogIn button
+  const onLogin = () => {
+    dispatch({
+      type: 'LOGIN_USER',
+      payload: formData
+    });
+  };
+
   if (!modalOpen) {
     return null;
   }
@@ -55,18 +120,30 @@ function LoginModal() {
           <Row>
             <Col span={24} className={styles.formGroup}>
               <label>Email</label>
-              <input type="email" placeholder="Email Address" />
+              <input
+                type="email"
+                placeholder="Email Address"
+                className={formValidation.email ? '' : styles.error}
+                onChange={(e) => changeFormData('email', e)}
+              />
             </Col>
             <Col span={24} className={styles.formGroup}>
               <label>Password</label>
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                placeholder="Password"
+                className={formValidation.password ? '' : styles.error}
+                onChange={(e) => changeFormData('password', e)}
+              />
               <div className={styles.forgotPasswordLink}>
                 <Link href="/">
                   <a>Forgot Password?</a>
                 </Link>
               </div>
             </Col>
-            <Button className={styles.signInBtn}>Sign In</Button>
+            <Button className={styles.signInBtn} disabled={!isFormValid} onClick={onLogin}>
+              Sign In
+            </Button>
             <div className={styles.terms_and_conditions}>
               <Link href="/">
                 <a>Privacy</a>

@@ -99,6 +99,9 @@
   line-height: 19px;
   padding: 10px 12px;
 }
+.formGroup input.error {
+  border-color: rgb(236, 76, 21);
+}
 .terms_and_conditions {
   display: flex;
   align-items: center;

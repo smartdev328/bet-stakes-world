@@ -6,9 +6,13 @@ import {
   SIGNUP_USER,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE,
-  SIGNUP_USER_REQUEST
+  SIGNUP_USER_REQUEST,
+  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
+  LOGIN_USER_REQUEST
 } from '../actions';
-import { CreateUserReducerAction } from '@redux/reducers/user';
+import { CreateUserReducerAction, LoginUserReducerAction } from '@redux/reducers/user';
 import UserAPIs from '@apis/user.apis';
 
 function* loadDataSaga() {
@@ -53,8 +57,38 @@ function* registerUserSaga({ payload }: CreateUserReducerAction) {
   }
 }
 
+function* loginUserSaga({ payload }: LoginUserReducerAction) {
+  try {
+    yield put({
+      type: LOGIN_USER_REQUEST
+    });
+    const res = yield UserAPIs.login(payload);
+    const data = yield res.json();
+    if (data.statusCode >= 400) {
+      yield put({
+        type: LOGIN_USER_FAILURE,
+        error: data.message[0].messages[0].message
+      });
+    } else {
+      yield put({
+        type: LOGIN_USER_SUCCESS,
+        payload: data
+      });
+    }
+  } catch (error) {
+    yield put({
+      error: error.message,
+      type: LOGIN_USER_FAILURE
+    });
+  }
+}
+
 function* rootSaga() {
-  yield all([takeLatest(LOAD_USER, loadDataSaga), takeLatest(SIGNUP_USER, registerUserSaga)]);
+  yield all([
+    takeLatest(LOAD_USER, loadDataSaga),
+    takeLatest(SIGNUP_USER, registerUserSaga),
+    takeLatest(LOGIN_USER, loginUserSaga)
+  ]);
 }
 
 export default rootSaga;

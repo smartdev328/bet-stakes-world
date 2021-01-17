@@ -13,7 +13,7 @@ import {
   CheckedCircleIcon,
   NormalCheckIcon
 } from '@components/SvgIcons';
-import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
+import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
 import { SportInfoType } from '@type/Main';
 
@@ -31,8 +31,8 @@ export default function Shop() {
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
-              <Intro />
-              <ProductsAndCartBox />
+              <IntroForSportsCard />
+              <ProductsAndCartBoxForSportsCard />
               <FAQs />
             </div>
           )}
@@ -470,7 +470,7 @@ function ProductsAndCartBoxForFantasy() {
                   <div
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
                     style={{
-                      background: !sportsStatus[index] ? sport.background : ''
+                      background: sportsStatus[index] ? sport.background : ''
                     }}>
                     {sport.logo()}
                     <span>{sport.name}</span>
@@ -479,6 +479,233 @@ function ProductsAndCartBoxForFantasy() {
               </div>
             ))}
           </Carousel>
+        </div>
+      </div>
+      <div className={styles.sportsCards}>
+        <div className={styles.sectionTitle}>Select Card Type</div>
+        <ul>
+          {CardOptions.map((card, index) => (
+            <li
+              key={index}
+              className={cart.sportCard.title === card.title ? styles.active : ''}
+              onClick={() => changeSportCard(card)}>
+              {cart.sportCard.title === card.title && (
+                <CheckedCircleIcon className={styles.checkedStatusIcon} />
+              )}
+              {cart.sportCard.title !== card.title && (
+                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+              )}
+              <span className={styles.sportsCard_name}>{card.title}</span>
+              <span className={styles.sportsCard_value}>${card.price}.00</span>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.cartBox}>
+          <LazyLoad>
+            <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
+          </LazyLoad>
+          <div className={styles.cartBoxContent}>
+            <h4>Package Total</h4>
+            <div>
+              {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
+              {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+            </div>
+            <div className={styles.totalPrice}>${totalPrice}.00</div>
+            <Button className={styles.addToCartBtn}>Add to Cart</Button>
+          </div>
+        </div>
+      </div>
+      <div className={styles.packageAddOns}>
+        <div className={styles.sectionTitle}>Package Add-Ons</div>
+        <ul>
+          {AddOns.map((addOn, index) => (
+            <li
+              key={index}
+              className={cart.addOn.title === addOn.title ? styles.active : ''}
+              onClick={() => changeAddOn(addOn)}>
+              {cart.addOn.title === addOn.title && (
+                <CheckedCircleIcon className={styles.checkedStatusIcon} />
+              )}
+              {cart.addOn.title !== addOn.title && (
+                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+              )}
+              <div className={styles.sportsCard_name_row}>
+                <span className={styles.sportsCard_name}>{addOn.title}</span>
+                <Link href="/">
+                  <a>View Details</a>
+                </Link>
+              </div>
+              <span className={styles.sportsCard_value}>${addOn.price}.00</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function IntroForSportsCard() {
+  return (
+    <div className={styles.introSection}>
+      <Row align={'top'}>
+        <div className={styles.introContent}>
+          <div className={styles.sectionTitle}>About the Sports Card</div>
+          <div className={styles.introDesc}>
+            Includes access to straight bets, parlays and betting strategies for the given sport(s) of your choice.
+          </div>
+        </div>
+      </Row>
+      <ul>
+        <li>
+          <NormalCheckIcon className={styles.list_check_icon} />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </li>
+        <li>
+          <NormalCheckIcon className={styles.list_check_icon} />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </li>
+        <li>
+          <NormalCheckIcon className={styles.list_check_icon} />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function ProductsAndCartBoxForSportsCard() {
+  const CardOptions: CartSportCardType[] = [
+    {
+      title: 'Weekly',
+      price: 89
+    },
+    {
+      title: 'Monthly',
+      price: 289
+    }
+  ];
+  const AddOns: CartAddOnType[] = [
+    {
+      title: 'Expert Bankroll MGMT',
+      id: '',
+      price: 55
+    }
+  ];
+  const [cart, setCart] = useState<CartType>({ sportCard: CardOptions[0], addOn: AddOns[0] });
+  const [sportsStatus, setSportsStatus] = useState<boolean[]>([]);
+
+  const changeSportCard = (card: CartSportCardType) => {
+    if (cart.sportCard.title === card.title) {
+      setCart({
+        ...cart,
+        sportCard: {
+          title: undefined,
+          price: undefined
+        }
+      });
+    } else {
+      setCart({
+        ...cart,
+        sportCard: card
+      });
+    }
+  };
+
+  const changeAddOn = (addOn: CartAddOnType) => {
+    if (cart.addOn.title === addOn.title) {
+      setCart({
+        ...cart,
+        addOn: {
+          title: undefined,
+          price: undefined
+        }
+      });
+    } else {
+      setCart({
+        ...cart,
+        addOn
+      });
+    }
+  };
+
+  const SPORTS_INFO = [
+    {
+      name: 'NBA',
+      id: 'NBA',
+      background: '#EC4C15',
+      logo: () => <NBA_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'NFL',
+      id: 'NFL',
+      background: '#91442A',
+      logo: () => <NFL_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'MLB',
+      id: 'MLB',
+      background: '#1878FB',
+      logo: () => <MLB_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'NCAAF',
+      id: 'NCAAF',
+      background: '#91442A',
+      logo: () => <NFL_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'NCAAB',
+      id: 'NCAAB',
+      background: '#EC4C15',
+      logo: () => <NBA_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'SOCCER',
+      id: 'SOCCER',
+      background: '#6DCF40',
+      logo: () => <SOCCER_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'UFC',
+      id: 'UFC',
+      background: '#F9282B',
+      logo: () => <UFC_SVG className={styles.sports_logo} />
+    },
+    {
+      name: 'FORMULA 1',
+      id: 'F1',
+      background: '#505054',
+      logo: () => <F1_SVG className={styles.sports_logo} />
+    }
+  ];
+
+  const onChangeItemAt = (index: number) => {
+    const items = sportsStatus.slice();
+    items[index] = !items[index];
+    setSportsStatus(items);
+  };
+
+  const totalPrice =
+    (cart.sportCard.price ? cart.sportCard.price : 0) + (cart.addOn.price ? cart.addOn.price : 0);
+  return (
+    <>
+      <div className={styles.sportsCards}>
+        <div className={styles.sectionTitle}>Select any number of sports</div>
+        <div className={styles.sportsTypeContent}>
+          {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+            <div key={index}>
+              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(index)}>
+                <div
+                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                  style={{
+                    background: sportsStatus[index] ? sport.background : ''
+                  }}>
+                  {sport.logo()}
+                  <span>{sport.name}</span>
+                </div>
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
       <div className={styles.sportsCards}>

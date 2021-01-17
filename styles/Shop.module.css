@@ -525,12 +525,15 @@
 
 .sportsTypeContent {
   margin: 24px -8px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 620px;
 }
 .dropdownBtnWrapper {
   height: auto;
   border: none;
   padding: 0;
-  margin: 0 8px;
+  margin: 8px 8px;
 }
 .dropdownBtn {
   width: 138px;
@@ -548,14 +551,16 @@
   overflow: hidden;
   background-color: #1a1a1a;
 }
-.dropdown_NBA > .sports_logo {
+.dropdown_NBA > svg,
+.dropdown_NCAAB > svg {
   width: 300%;
   position: absolute;
   z-index: 20;
   height: auto;
   left: -10%;
 }
-.dropdown_NFL > svg.sports_logo {
+.dropdown_NFL > svg,
+.dropdown_NCAAF > svg  {
   width: 300%;
   position: absolute;
   z-index: 20;
@@ -564,7 +569,7 @@
   transform: rotate(90deg);
   top: 50%;
 }
-.dropdown_MLB > svg.sports_logo {
+.dropdown_MLB > svg {
   width: 180%;
   position: absolute;
   z-index: 20;
@@ -572,6 +577,39 @@
   left: -40%;
   top: -120%;
 }
-.dropdownBtn > svg.sports_logo path {
+.dropdown_UFC > svg {
+  width: 80%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 10%;
+}
+
+.dropdown_F1 > svg {
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 0;
+  top: -5%;
+}
+.dropdown_SOCCER > svg {
+  width: 120%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdownBtn > svg path {
   fill: rgba(255, 255, 255, 0.3);
+}
+.dropdown_UFC > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.dropdown_F1 > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
 }

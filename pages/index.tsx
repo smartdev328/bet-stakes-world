@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
+import { useRouter } from 'next/router';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
@@ -98,6 +99,11 @@ function HeroBanner() {
 }
 
 function MembershipOfferings() {
+  const router = useRouter();
+  const goLearnMore = () => {
+    router.push('/shop');
+  };
+
   return (
     <div className={styles.membershipOffers}>
       <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
@@ -129,7 +135,9 @@ function MembershipOfferings() {
                 <li>Vignissim nisl risus vulputate Faucibus libero</li>
                 <li>Morbi viverra</li>
               </ul>
-              <Button className={styles.learn_more_btn}>Learn More</Button>
+              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
+                Learn More
+              </Button>
             </div>
           </div>
         </div>
@@ -163,7 +171,9 @@ function MembershipOfferings() {
                 <li>Vignissim nisl risus vulputate Faucibus libero</li>
                 <li>Morbi viverra</li>
               </ul>
-              <Button className={styles.learn_more_btn}>Learn More</Button>
+              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
+                Learn More
+              </Button>
             </div>
           </div>
           <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
@@ -191,7 +201,9 @@ function MembershipOfferings() {
                 <li>Vignissim nisl risus vulputate Faucibus libero</li>
                 <li>Morbi viverra</li>
               </ul>
-              <Button className={styles.learn_more_btn}>Learn More</Button>
+              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
+                Learn More
+              </Button>
             </div>
           </div>
         </div>

@@ -23,13 +23,17 @@ function AppFooter() {
       <div className={styles.newsletterRow}>
         <div className={styles.newsletterCol}>
           <LazyLoad height={72}>
-            <img
-              src="/images/logo.svg"
-              alt="App Logo"
-              width={418}
-              height={72}
-              className={styles.logo}
-            />
+            <Link href="/">
+              <a>
+                <img
+                  src="/images/logo.svg"
+                  alt="App Logo"
+                  width={418}
+                  height={72}
+                  className={styles.logo}
+                />
+              </a>
+            </Link>
           </LazyLoad>
           <div className={styles.newsletterFormContainer}>
             <label htmlFor="newsletter_email">Sign up for our newsletter</label>
@@ -58,17 +62,17 @@ function AppFooter() {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <Link href="/">
+                    <Link href="/vip-all-access-card">
                       <a>VIP All Access</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/sports-card">
                       <a>Sports Cards</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/fantasy-daily-lineups">
                       <a>Daily Fantasy</a>
                     </Link>
                   </li>

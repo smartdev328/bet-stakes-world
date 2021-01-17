@@ -86,17 +86,15 @@ function SubMenu() {
         <div className={styles.submenu_content}>
           <div className={styles.submenu_content_left}>
             <div className={styles.submenu_desc}>
-              <Link href="/">
-                <a onMouseOver={hidePanes}>Main Pages</a>
-              </Link>
+              <div onMouseOver={hidePanes}>Main Pages</div>
             </div>
             <div className={styles.submenu_item}>
-              <Link href="/">
+              <Link href="/member-dashboard">
                 <a onMouseOver={hidePanes}>Member Dashboard</a>
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
-              <Link href="/">
+              <Link href="/sports-card">
                 <a onMouseOver={showSportPanel}>
                   <span>Sports Card</span>
                   {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
@@ -105,12 +103,12 @@ function SubMenu() {
               </Link>
             </div>
             <div className={styles.submenu_item}>
-              <Link href="/">
+              <Link href="/vip-all-access-card">
                 <a onMouseOver={hidePanes}>VIP ALL ACCESS CARD</a>
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
-              <Link href="/">
+              <Link href="/fantasy-daily-lineups">
                 <a onMouseOver={showFantasyPanel}>
                   <span>FANTASY PICKS</span>
                   {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
@@ -129,17 +127,17 @@ function SubMenu() {
               <>
                 <div className={styles.submenu_desc}>Yearly subscription — Available Sports</div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>Basketball</a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>Football</a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>
                       <LockIcon className={styles.lock_icon} />
                       Baseball
@@ -147,7 +145,7 @@ function SubMenu() {
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>
                       <LockIcon className={styles.lock_icon} />
                       SOCCER
@@ -155,7 +153,7 @@ function SubMenu() {
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>
                       <LockIcon className={styles.lock_icon} />
                       UFC
@@ -163,7 +161,7 @@ function SubMenu() {
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/sports-card">
                     <a>
                       <LockIcon className={styles.lock_icon} />
                       FORMULA 1
@@ -178,22 +176,22 @@ function SubMenu() {
                   Daily Lineup Subscription — Available Sports
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/fantasy-daily-lineups">
                     <a>All</a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/fantasy-daily-lineups">
                     <a>Basketball</a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/fantasy-daily-lineups">
                     <a>Football</a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
-                  <Link href="/">
+                  <Link href="/fantasy-daily-lineups">
                     <a>
                       <LockIcon className={styles.lock_icon} />
                       Baseball
@@ -206,34 +204,34 @@ function SubMenu() {
         </div>
       </div>
       <div className={styles.mobilesubmenu}>
-        <Link href="/">
-          <a
-            className={`${styles.submenu_main_item} ${submenuVisible ? styles.active : ''}`}
-            onClick={() => setSubmenuVisible(!submenuVisible)}>
-            <span>Memberships</span>
-            {!submenuVisible ? (
-              <CaretDownOutlined className={styles.caret_up} />
-            ) : (
-              <CaretUpOutlined className={styles.caret_down} />
-            )}
-          </a>
-        </Link>
+        <a
+          className={`${styles.submenu_main_item} ${submenuVisible ? styles.active : ''}`}
+          onClick={() => setSubmenuVisible(!submenuVisible)}>
+          <span>Memberships</span>
+          {!submenuVisible ? (
+            <CaretDownOutlined className={styles.caret_up} />
+          ) : (
+            <CaretUpOutlined className={styles.caret_down} />
+          )}
+        </a>
         {submenuVisible && (
           <div className={styles.submenu_content}>
             <div className={styles.submenu_content_left}>
               <div className={styles.submenu_item}>
-                <Link href="/">
+                <Link href="/member-dashboard">
                   <a>Member Dashboard</a>
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                <div
-                  className={sportPaneVisible ? styles.paneActive : ''}
-                  onClick={toggleSportPanel}>
-                  <span>Sports Card</span>
-                  {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
+                <a>
+                  <div
+                    className={sportPaneVisible ? styles.paneActive : ''}
+                    onClick={toggleSportPanel}>
+                    <span>Sports Card</span>
+                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
+                </a>
               </div>
               <div className={styles.pane}>
                 {sportPaneVisible && (
@@ -287,18 +285,20 @@ function SubMenu() {
                 )}
               </div>
               <div className={styles.submenu_item}>
-                <Link href="/">
+                <Link href="/vip-all-access-card">
                   <a>VIP ALL ACCESS CARD</a>
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                <div
-                  className={fantasyPaneVisible ? styles.paneActive : ''}
-                  onClick={toggleFantasyPanel}>
-                  <span>FANTASY PICKS</span>
-                  {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
+                <a>
+                  <div
+                    className={fantasyPaneVisible ? styles.paneActive : ''}
+                    onClick={toggleFantasyPanel}>
+                    <span>FANTASY PICKS</span>
+                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
+                </a>
               </div>
               <div className={styles.pane}>
                 {fantasyPaneVisible && (
@@ -307,7 +307,7 @@ function SubMenu() {
                       Daily Lineup Subscription — Available Sports
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/fantasy-daily-lineups">
                         <a>All</a>
                       </Link>
                     </div>
@@ -430,13 +430,17 @@ export default function AppHeader({
         </Col>
         <Col span={10} className={styles.headerMainCol}>
           <div>
-            <img
-              src={'/images/logo.svg'}
-              width={418}
-              height={72}
-              alt="App Logo"
-              className={styles.logo}
-            />
+            <Link href="/">
+              <a>
+                <img
+                  src={'/images/logo.svg'}
+                  width={418}
+                  height={72}
+                  alt="App Logo"
+                  className={styles.logo}
+                />
+              </a>
+            </Link>
           </div>
           <p className={styles.info}>
             <span>
@@ -468,7 +472,9 @@ export default function AppHeader({
           <div className={styles.navbarSide}></div>
           <Menu mode="horizontal" className={styles.navbar}>
             <Menu.Item key="SHOP" className={styles.navbarItem}>
-              SHOP
+              <Link href="/shop">
+                <a>SHOP</a>
+              </Link>
             </Menu.Item>
             <SubMenu />
             <Menu.Item key="Sports_News" className={styles.navbarItem}>
@@ -543,7 +549,9 @@ export default function AppHeader({
               <DateBar currentDateTime={currentDateTime} />
               <Menu mode="vertical" className={styles.navbar}>
                 <Menu.Item key="SHOP" className={styles.navbarItem}>
-                  SHOP
+                  <Link href="/shop">
+                    <a>SHOP</a>
+                  </Link>
                 </Menu.Item>
                 <SubMenu />
                 <Menu.Item key="Sports_News" className={styles.navbarItem}>

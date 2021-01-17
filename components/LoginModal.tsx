@@ -13,10 +13,11 @@ import { validateEmail } from '@utils/common';
 function LoginModal() {
   const dispatch = useDispatch();
 
-  const { error: loginError } = useSelector((state: ReduxState) => state.user);
+  const { error: loginError, loading } = useSelector((state: ReduxState) => state.user);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { isModalOpen } = useSelector((state: ReduxState) => state.common);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState<LoginUserType>({
     email: undefined,
     password: undefined
@@ -38,7 +39,13 @@ function LoginModal() {
         description: loginError
       });
     }
-  }, [loginError]);
+    if (loginError === null && !loading && formSubmitted) {
+      closeModal();
+      notification['info']({
+        message: 'Successfully Login!'
+      });
+    }
+  }, [loginError, loading]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -81,8 +88,12 @@ function LoginModal() {
   const onLogin = () => {
     dispatch({
       type: 'LOGIN_USER',
-      payload: formData
+      payload: {
+        identifier: formData.email,
+        password: formData.password
+      }
     });
+    setFormSubmitted(true);
   };
 
   if (!modalOpen) {

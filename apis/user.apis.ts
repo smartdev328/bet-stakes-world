@@ -25,5 +25,5 @@ function login(payload: LoginUserType) {
 
 export default {
   createUser,
-  login,
+  login
 };

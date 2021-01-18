@@ -125,9 +125,9 @@ function LoginModal() {
               <a>Register Now</a>
             </Link>
           </Row>
-          <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
-          <Button className={styles.register_goggle_btn}>Registor With Google</Button>
-          <Row justify="center">OR SIGN IN WITH EMAIL</Row>
+          {/* <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
+          <Button className={styles.register_goggle_btn}>Registor With Google</Button> */}
+          {/* <Row justify="center">OR SIGN IN WITH EMAIL</Row> */}
           <Row>
             <Col span={24} className={styles.formGroup}>
               <label>Email</label>

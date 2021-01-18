@@ -235,6 +235,7 @@
   .loginBtn {
     margin-left: 0;
     margin-top: 1em;
+    display: block;
   }
 }
 @media (max-width: 1024px) {
@@ -256,6 +257,15 @@
   }
   .mainFooterRightCol {
     margin: 0 0 42px;
+  }
+  .mainFooter_leftCol > div {
+    flex: none;
+    max-width: 100%;
+    margin-right: 2.5em;
+  }
+  .mainFooter_RightCol {
+    width: 100%;
+    margin-bottom: 3em;
   }
   .mainFooterNavmenu {
     flex-flow: row nowrap;
@@ -281,6 +291,7 @@
     width: 50%;
     margin: 0 0 18px;
   }
+
 }
 @media (max-width: 500px) {
   .mainFooterRightCol {

@@ -3,6 +3,7 @@ import { Sport } from './Sports';
 
 export type SVGIconPropType = {
   className: string;
+  onClick?: () => void;
 };
 
 export type ClickableArrowIconProps = {

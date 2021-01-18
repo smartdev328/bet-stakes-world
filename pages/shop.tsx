@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Carousel } from 'antd';
+import { Row, Button } from 'antd';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
 
@@ -11,7 +11,8 @@ import {
   PlusIcon,
   EmptyCircleIcon,
   CheckedCircleIcon,
-  NormalCheckIcon
+  NormalCheckIcon,
+  MinusIcon
 } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
@@ -33,21 +34,21 @@ export default function Shop() {
             <div className={styles.offering_details}>
               <IntroForSportsCard />
               <ProductsAndCartBoxForSportsCard />
-              <FAQs />
+              <FAQs title={'Sports Card FAQ'} />
             </div>
           )}
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
               <ProductsAndCartBox />
-              <FAQs />
+              <FAQs title={'VIP All Access Card FAQ'} />
             </div>
           )}
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
               <ProductsAndCartBoxForFantasy />
-              <FAQs />
+              <FAQs title={'FANTASY FAQ'} />
             </div>
           )}
         </div>
@@ -122,7 +123,7 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
 function Intro() {
   return (
     <div className={styles.introSection}>
-      <Row align={'top'}>
+      <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <LazyLoad>
           <div className={styles.introSectionBg}>
             <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
@@ -157,31 +158,51 @@ function Intro() {
   );
 }
 
-function FAQs() {
+const FAQs_ARR = [
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?'
+];
+
+function FAQs({ title }: { title: string }) {
+  const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
+  const toggleFAQ = (index: number) => {
+    const updated = faqIsVisible.slice();
+    updated[index] = !updated[index];
+    setFaqIsVisible(updated);
+  };
+
   return (
     <div className={styles.faqs}>
-      <h4>VIP All Access Card FAQ</h4>
+      <h4>{title}</h4>
       <ul>
-        <li>
-          <PlusIcon className={styles.faqIcon} />
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</span>
-        </li>
-        <li>
-          <PlusIcon className={styles.faqIcon} />
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</span>
-        </li>
-        <li>
-          <PlusIcon className={styles.faqIcon} />
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</span>
-        </li>
-        <li>
-          <PlusIcon className={styles.faqIcon} />
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</span>
-        </li>
-        <li>
-          <PlusIcon className={styles.faqIcon} />
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit?</span>
-        </li>
+        {FAQs_ARR.map((faq: string, index: number) => (
+          <li key={index}>
+            <div className={styles.faq_title}>
+              {!faqIsVisible[index] && (
+                <PlusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
+              )}
+              {faqIsVisible[index] && (
+                <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
+              )}
+              <span>{faq}</span>
+            </div>
+            {faqIsVisible[index] && (
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry standard dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries, but also the leap into electronic
+                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                with desktop publishing software like Aldus PageMaker including versions of Lorem
+                Ipsum.
+              </p>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -286,11 +307,13 @@ function ProductsAndCartBox() {
           </LazyLoad>
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
-            <div>
-              {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-              {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+            <div className={styles.cartBoxContentDesc}>
+              <div>
+                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
+                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+              </div>
+              <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <div className={styles.totalPrice}>${totalPrice}.00</div>
             <Button className={styles.addToCartBtn}>Add to Cart</Button>
           </div>
         </div>
@@ -327,7 +350,7 @@ function ProductsAndCartBox() {
 function IntroForFantasy() {
   return (
     <div className={styles.introSection}>
-      <Row align={'top'}>
+      <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
           <div className={styles.sectionTitle}>About the Fantasy Picks</div>
           <div className={styles.introDesc}>
@@ -429,18 +452,6 @@ function ProductsAndCartBoxForFantasy() {
       logo: () => <MLB_SVG className={styles.sports_logo} />
     }
   ];
-
-  const responsive = [
-    {
-      breakpoint: 520,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    }
-  ];
   const onChangeItemAt = (index: number) => {
     const items = sportsStatus.slice();
     items[index] = !items[index];
@@ -454,31 +465,20 @@ function ProductsAndCartBoxForFantasy() {
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select any number of sports</div>
         <div className={styles.sportsTypeContent}>
-          <Carousel
-            arrows={true}
-            dots={false}
-            slidesToShow={3}
-            responsive={responsive}
-            initialSlide={0}
-            variableWidth
-            infinite={false}
-            swipeToSlide
-            slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
-              <div key={index}>
-                <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(index)}>
-                  <div
-                    className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
-                    style={{
-                      background: sportsStatus[index] ? sport.background : ''
-                    }}>
-                    {sport.logo()}
-                    <span>{sport.name}</span>
-                  </div>
-                </Button>
-              </div>
-            ))}
-          </Carousel>
+          {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+            <div key={index}>
+              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(index)}>
+                <div
+                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                  style={{
+                    background: sportsStatus[index] ? sport.background : ''
+                  }}>
+                  {sport.logo()}
+                  <span>{sport.name}</span>
+                </div>
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
       <div className={styles.sportsCards}>
@@ -506,11 +506,13 @@ function ProductsAndCartBoxForFantasy() {
           </LazyLoad>
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
-            <div>
-              {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-              {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+            <div className={styles.cartBoxContentDesc}>
+              <div>
+                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
+                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+              </div>
+              <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <div className={styles.totalPrice}>${totalPrice}.00</div>
             <Button className={styles.addToCartBtn}>Add to Cart</Button>
           </div>
         </div>
@@ -547,14 +549,19 @@ function ProductsAndCartBoxForFantasy() {
 function IntroForSportsCard() {
   return (
     <div className={styles.introSection}>
-      <Row align={'top'}>
+      <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
           <div className={styles.sectionTitle}>About the Sports Card</div>
           <div className={styles.introDesc}>
-            Includes access to straight bets, parlays and betting strategies for the given sport(s) of your choice.
+            Includes access to straight bets, parlays and betting strategies for the given sport(s)
+            of your choice.
           </div>
         </div>
       </Row>
+      <div className={`${styles.introDesc} ${styles.mobile_introDesc}`}>
+        Includes access to straight bets, parlays and betting strategies for the given sport(s) your
+        choice.
+      </div>
       <ul>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
@@ -733,11 +740,13 @@ function ProductsAndCartBoxForSportsCard() {
           </LazyLoad>
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
-            <div>
-              {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-              {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+            <div className={styles.cartBoxContentDesc}>
+              <div>
+                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
+                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+              </div>
+              <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <div className={styles.totalPrice}>${totalPrice}.00</div>
             <Button className={styles.addToCartBtn}>Add to Cart</Button>
           </div>
         </div>

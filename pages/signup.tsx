@@ -138,7 +138,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
         </Button>
       )}
       <div className={styles.packageTitle}>
-        <span>{data.name}</span>
+        <span>{data?.name}</span>
       </div>
       <ul className={styles.list_with_checkmark}>
         <li>
@@ -207,7 +207,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
           transitionName=""
           trigger={['click']}>
           <div className={styles.optionBtn}>
-            <span>{`${selectedPlan.name} - $${selectedPlan.price}.00`}</span>
+            <span>{`${selectedPlan?.name} - $${selectedPlan?.price}.00`}</span>
             {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
             {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
           </div>
@@ -488,11 +488,11 @@ export default function Registration({ packages }: PageDefaultProps) {
                   </Col>
                 </Row>
               </form>
-              <div className={styles.orText}>
+              {/* <div className={styles.orText}>
                 <span>Or</span>
-              </div>
-              <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
-              <Button className={styles.register_goggle_btn}>Registor With Google</Button>
+              </div> */}
+              {/* <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
+              <Button className={styles.register_goggle_btn}>Registor With Google</Button> */}
             </div>
           </Row>
         </div>

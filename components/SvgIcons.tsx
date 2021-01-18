@@ -457,17 +457,36 @@ export const DateRangeIcon = ({ className }: SVGIconPropType) => (
   </svg>
 );
 
-export const PlusIcon = ({ className }: SVGIconPropType) => (
+export const PlusIcon = ({ className, onClick }: SVGIconPropType) => (
   <svg
     width="25"
     height="25"
     className={className}
     viewBox="0 0 25 25"
+    onClick={onClick}
     fill="none"
     xmlns="http://www.w3.org/2000/svg">
     <path
       d="M15.2838 0.145508H10.4838V9.74551H0.883789V14.5455H10.4838V24.1455H15.2838V14.5455H24.8838V9.74551H15.2838V0.145508Z"
       fill="#646262"
+    />
+  </svg>
+);
+
+export const MinusIcon = ({ className, onClick }: SVGIconPropType) => (
+  <svg
+    width="21"
+    height="21"
+    className={className}
+    onClick={onClick}
+    viewBox="0 0 21 21"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M10.4766 0.308838C4.95656 0.308838 0.476562 4.78884 0.476562 10.3088C0.476562 15.8288 4.95656 20.3088 10.4766 20.3088C15.9966 20.3088 20.4766 15.8288 20.4766 10.3088C20.4766 4.78884 15.9966 0.308838 10.4766 0.308838ZM2.47656 10.3088C2.47656 14.7188 6.06656 18.3088 10.4766 18.3088C14.8866 18.3088 18.4766 14.7188 18.4766 10.3088C18.4766 5.89884 14.8866 2.30884 10.4766 2.30884C6.06656 2.30884 2.47656 5.89884 2.47656 10.3088ZM5.47656 9.30884V11.3088H15.4766V9.30884H5.47656Z"
+      fill="#373D40"
     />
   </svg>
 );

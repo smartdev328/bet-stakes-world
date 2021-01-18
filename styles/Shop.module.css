@@ -254,7 +254,7 @@
 
 /* Offering details */
 .offering_details {
-  padding: 40px 92px;
+  padding: 40px 72px;
 }
 .sectionTitle {
   font-weight: normal;
@@ -409,6 +409,8 @@
 .packageAddOns .sportsCard_name_row {
   padding: 0 24px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .packageAddOns .sportsCard_name_row a {
   font-size: 24px;
@@ -500,21 +502,29 @@
 .faqs ul {
   margin: 28px 0 90px;
   padding: 0;
+  list-style: none;
 }
 .faqs ul li {
   border-top: 1px solid #c4c4c4;
+}
+
+.faqs ul li:last-child {
+  border-bottom: 1px solid #c4c4c4;
+}
+.faqs .faq_title {
   display: flex;
   align-items: center;
   height: 56px;
-}
-.faqs ul li:last-child {
-  border-bottom: 1px solid #c4c4c4;
 }
 .faqs ul li span {
   font-weight: 500;
   font-size: 18px;
   line-height: 117.9%;
   color: #000000;
+  text-transform: uppercase;
+}
+.faqs ul li p {
+  margin: 0 0 1.5em 40px;
 }
 .faqIcon {
   width: 20px;
@@ -527,7 +537,8 @@
   margin: 24px -8px;
   display: flex;
   flex-flow: row wrap;
-  width: 620px;
+  max-width: 620px;
+  width: auto;
 }
 .dropdownBtnWrapper {
   height: auto;
@@ -612,4 +623,254 @@
   fill: transparent;
   stroke: rgba(255, 255, 255, 0.3);
   stroke-width: 4.8px;
+}
+.mobile_introDesc {
+  display: none;
+}
+@media (max-width: 1400px) {
+  .offering_details {
+    padding: 40px 42px;
+  }
+}
+@media (max-width: 1340px) {
+  .offering_details {
+    padding: 40px 0px;
+  }
+  .sportsCards ul {
+    width: 692px;
+  }
+  .sportsCards ul li {
+    width: 340px;
+  }
+  .sportsCard_name {
+    font-size: 22px;
+  }
+  .sportsCard_value {
+    font-size: 30px;
+  }
+  .cartBox {
+    right: -10px;
+    width: 420px;
+  }
+}
+@media (max-width: 1240px) {
+  .offering_details {
+    padding: 40px 0px 220px 0;
+    position: relative;
+    max-width: 1024px;
+    margin: auto;
+  }
+  .sportsCards {
+    position: static;
+  }
+  .sportsCards ul {
+    width: 700px;
+  }
+  .sportsCard_name {
+    font-size: 22px;
+  }
+  .sportsCard_value {
+    font-size: 30px;
+  }
+  .cartBox {
+    bottom: 0;
+    right: -18px;
+    width: auto;
+    left: -18px;
+    overflow: hidden;
+    max-width: 586px;
+    margin: auto;
+  }
+  .cartBoxContentDesc {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+  }
+  .cartBoxContentDesc p {
+    text-align: left;
+  }
+  .addToCartBtn {
+    max-width: 340px;
+    font-size: 18px;
+    padding: 16px 95px;
+    font-weight: 800;
+  }
+  .sportsCards ul li {
+    height: 82px;
+  }
+  .packageAddOns ul li {
+    max-width: 49%;
+    height: 82px;
+  }
+  .packageAddOns .sportsCard_name {
+    font-size: 21px;
+    line-height: 20px;
+  }
+  .packageAddOns .sportsCard_name_row {
+    padding: 0 12px 0 16px;
+  }
+  .packageAddOns .sportsCard_name_row a {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .sportsCard_value {
+    font-size: 28px;
+  }
+  .totalPrice {
+    margin: 0;
+  }
+}
+@media (max-width: 1024px) {
+  .packageAddOns ul li {
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .sportsCards ul {
+    width: 100%;
+  }
+  .sectionTitle {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .introContent {
+    flex: 1;
+  }
+  .introDesc {
+    font-size: 16px;
+    width: auto;
+    max-width: 400px;
+  }
+  .faqs ul li span {
+    font-size: 16px;
+  }
+  .packageAddOns {
+    margin-bottom: 32px;
+  }
+  .extra_info {
+    max-width: 400px;
+    width: 100%;
+  }
+  .sportsTypeContent {
+    margin: 12px -7px;
+  }
+  .dropdownBtnWrapper {
+    margin: 7px;
+  }
+  .dropdownBtn {
+    width: 123px;
+    height: 60px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 692px) {
+  .sportsCards ul li {
+    width: 100%;
+  }
+  .sportsCard_name {
+    width: auto;
+    flex: 1;
+    text-align: left;
+    padding-left: 16px;
+    font-size: 20px;
+  }
+  .faqs h4 {
+    font-size: 20px;
+  }
+  .faqs ul li span {
+    font-size: 14px;
+  }
+  .packageAddOns .sportsCard_name {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .introSectionBg {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 600px) {
+  .offering_details {
+    padding: 0 0px 150px 0;
+  }
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .sportsCard_name {
+    font-size: 18px;
+  }
+  .faqs h4 {
+    font-size: 18px;
+  }
+  .faqIcon {
+    margin-right: 10px;
+  }
+  .introContent .introDesc {
+    display: none;
+  }
+  .mobile_introDesc {
+    display: block;
+  }
+  .introSectionRow {
+    align-items: center;
+  }
+  .packageAddOns ul li {
+    flex-flow: row wrap;
+    height: auto;
+    padding: 16px;
+  }
+  .sportsCards ul li {
+    padding: 8px 14px;
+  }
+  .packageAddOns .sportsCard_name_row {
+    padding: 0 0px 0 14px;
+    width: calc(100% - 24px);
+    flex: none;
+  }
+  .packageAddOns .sportsCard_name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .packageAddOns .sportsCard_value {
+    margin-left: 38px;
+    margin-top: 0.3em;
+  }
+  .faqs ul li p {
+    margin: 0 0 1.5em 24px;
+    font-size: 14px;
+  }
+  .cartBoxContent h4 {
+    display: none;
+  }
+  .cartBoxContentDesc {
+    flex-flow: row wrap;
+  }
+  .cartBoxContentDesc p {
+    line-height: 154%;
+  }
+  .totalPrice {
+    font-size: 32px;
+    line-height: 34px;
+    border-bottom: 3px solid #fff;
+    margin: 0.3em 0 0.3em;
+  }
+  .addToCartBtn {
+    font-size: 16px;
+    padding: 10px 95px;
+  }
+  .sportsTypeContent {
+    margin: 10px -5px;
+  }
+  .dropdownBtnWrapper {
+    margin: 5px;
+  }
+  .dropdownBtn {
+    width: 100px;
+    height: 46px;
+    font-size: 12px;
+  }
 }

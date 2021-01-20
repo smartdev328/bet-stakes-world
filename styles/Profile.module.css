@@ -1,0 +1,355 @@
+.containerWrapper {
+  position: relative;
+}
+.container {
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+/* Hero Banner */
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+.heroBannerContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  padding-top: 104px;
+  background: rgba(22, 22, 22, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 38px;
+  color: #fff;
+  transform: none;
+  cursor: pointer;
+}
+.heroBannerContent .uploadCoverBtn {
+  color: #fff;
+}
+@media (max-width: 992px) {
+  .heroBanner .bgImage, .heroBannerContent {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage, .heroBannerContent {
+    height: 280px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage, .heroBannerContent {
+    height: 260px;
+    padding-top: 136px;
+  }
+}
+
+
+.actionBtns {
+  padding: 20px 0 0px;
+}
+.saveBtn, .cancelBtn {
+  font-weight: bold;
+  font-size: 21.8537px;
+  line-height: 34px;
+  text-align: center;
+  color: #D7D7D7;
+  height: 54px;
+  width: 120px;
+  background: transparent;
+}
+.saveBtn:disabled, .cancelBtn:disabled,
+.saveBtn:disabled:hover, .cancelBtn:disabled:hover {
+  border: 1.4px solid #D7D7D7;
+  background: transparent;
+}
+.saveBtn {
+  margin-left: 24px;
+}
+
+@media (max-width: 1024px) {
+  .saveBtn, .cancelBtn {
+    font-size: 18px;
+    line-height: 26px;
+    height: 48px;
+    width: 120px;
+  }
+  .saveBtn {
+    margin-left: 36px;
+  }
+}
+
+
+/* Profile Form */
+.sectionTitle {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 38px;
+  color: #000000;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  margin-top: 32px;
+}
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.formGroup {
+  margin-bottom: 32px;
+}
+.formGroup label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  color: #000000;
+  display: block;
+  margin-bottom: 8px;
+}
+.formGroup input {
+  border: 1px solid #C4C4C4;
+  width: 100%;
+  font-size: 12px;
+  line-height: 19px;
+  padding: 10px 12px;
+}
+.formGroup input.error {
+  border-color: rgb(236, 76, 21);
+}
+.rowWithTwoChild > div {
+  width: 49%;
+  flex: 0 0 49%;
+}
+
+.profileLogoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+.profileLogo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.profileLogo span {
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 1em;
+  color: #fff;
+  border-bottom: 10px solid #C4C4C4;
+}
+.uploadCoverBtn {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 38px;
+  color: #000000;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.resetPassword {
+  max-width: 900px;
+}
+
+@media (max-width: 1024px) {
+  .profileLogo {
+    width: 220px;
+    height: 220px;
+    margin-bottom: 24px;
+  }
+  .profileLogo span {
+    font-size: 76px;
+  }
+  .uploadCoverBtn {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .rowWithTwoChild:not(.resetPassword) > div {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .formGroup {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .resetPassword > div {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .profileLogoWrapper {
+    padding: 20px 0;
+  }
+  .profileLogo {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+  }
+  .profileLogo span {
+    font-size: 64px;
+  }
+  .uploadCoverBtn {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* Current Packages */
+.packages {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+}
+.package {
+  display: flex;
+}
+.package img {
+  width: 110px;
+  height: 110px;
+  display: block;
+}
+.packageContent {
+  width: 250px;
+  padding-top: 8px;
+  margin-left: 24px;
+}
+.packageContent .title {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 184.4%;
+  color: #1A1A1A;
+}
+.packageContent .desc {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 184.4%;
+  color: #1A1A1A;
+}
+.packageContent a {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration-line: underline;
+  color: #1A1A1A;
+}
+
+@media (max-width: 1024px) {
+  .package img {
+    width: 96px;
+    height: 96px;
+  }
+  .packageContent {
+    width: 230px;
+    padding-top: 4px;
+    margin-left: 20px;
+  }
+  .packageContent .title,
+  .packageContent .desc {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .package {
+    margin-bottom: 1em;
+  }
+}
+@media (max-width: 600px) {
+  .packageContent {
+    max-width: 230px;
+    flex: 1;
+  }
+}
+
+/* Notifications */
+.notificationSettingRow {
+  margin-top: 60px;
+}
+.notificationSetting {
+  width: 356px;
+  margin-right: 32px;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+.notificationSetting h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 25px;
+  color: #000000;
+  margin: 0 0 5px 0;
+}
+.notificationSetting .checkboxes > div {
+  margin-right: 1.5em;
+}
+
+@media (max-width: 1024px) {
+  .notificationSetting {
+    width: 320px;
+  }
+  .notificationSetting h6 {
+    font-size: 15px;
+  }
+}
+
+
+
+/* Credit Card Info */
+.creditCardInfoRow {
+  margin-top: 40px;
+  padding-bottom: 150px;
+}
+.creditCardInfoRow h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 25px;
+  color: #000000;
+  margin: 6px 0 12px 0;
+}
+
+@media (max-width: 1024px) {
+  .creditCardInfoRow {
+    padding-bottom: 100px;
+  }
+  .creditCardInfoRow h6 {
+    font-size: 15px;
+  }
+}

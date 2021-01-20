@@ -410,3 +410,14 @@ a[disabled] {
     right: -12px;
   }
 }
+
+.profile-credit-card .rccs {
+  margin-left: 0;
+  margin-top: 22px;
+}
+.profile-credit-card .rccs__card {
+  margin-bottom: 25px;
+  height: 165px;
+  margin-left: 0;
+  margin-right: auto;
+}

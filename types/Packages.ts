@@ -22,6 +22,7 @@ export type Feature = {
 export type Package = {
   id: number;
   name: string;
+  logo?: string;
   description: string | null;
   product_id: string;
   features: Feature[];

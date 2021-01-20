@@ -1,0 +1,36 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.checkbox span {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: #000000;
+  user-select: none;
+}
+.checkedStatusIcon,
+.uncheckedStatusIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+.uncheckedStatusIcon {
+  border: solid 1px #1a1a1a;
+  border-radius: 3px;
+}
+
+@media (max-width: 1024px) {
+  .checkbox span {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .checkedStatusIcon,
+  .uncheckedStatusIcon {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    margin-left: 1px;
+  }
+}

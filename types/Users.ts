@@ -28,3 +28,49 @@ export type LoginUserValidateType = {
   email: boolean;
   password: boolean;
 };
+
+export type UserProfile = {
+  username: string | undefined;
+  first_name: string | undefined;
+  last_name: string | undefined;
+  email: string | undefined;
+  mobile_number: string | undefined;
+  provider: string | undefined;
+};
+
+export type ProfileValidateType = {
+  username: boolean;
+  first_name: boolean;
+  last_name: boolean;
+  email: boolean;
+  password: boolean;
+  verify_password: boolean;
+};
+
+export type UserCreditCard = {
+  number: string;
+  name: string;
+  expiry: string;
+  cvc: string;
+};
+
+export type UserBillingInfo = {
+  full_name: string | undefined;
+  address: string | undefined;
+  zipcode: string | undefined;
+  country: string | undefined;
+  city: string | undefined;
+};
+
+export type NotificationConfig = {
+  sportsCardOrVipAccessPicksEmail: boolean;
+  sportsCardOrVipAccessPicksMsg: boolean;
+  fantasyLineupEmail: boolean;
+  fantasyLineupMsg: boolean;
+  expiringMembershipEmail: boolean;
+  expiringMembershipMsg: boolean;
+  promotionalNotificationEmail: boolean;
+  promotionalNotificationMsg: boolean;
+  blogPostNotificationEmail: boolean;
+  blogPostNotificationMsg: boolean;
+};

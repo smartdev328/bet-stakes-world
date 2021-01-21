@@ -40,6 +40,10 @@ body {
   font-family: 'Saira', sans-serif;
 }
 
+* {
+  font-family: 'Saira', sans-serif;
+}
+
 a {
   color: inherit;
   text-decoration: none;

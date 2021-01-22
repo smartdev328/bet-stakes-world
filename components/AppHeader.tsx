@@ -76,13 +76,11 @@ function SubMenu() {
   return (
     <>
       <div className={styles.submenu}>
-        <Link href="/">
-          <a className={styles.submenu_main_item}>
-            <span>Memberships</span>
-            <CaretUpOutlined className={styles.caret_up} />
-            <CaretDownOutlined className={styles.caret_down} />
-          </a>
-        </Link>
+        <a className={styles.submenu_main_item}>
+          <span>Memberships</span>
+          <CaretUpOutlined className={styles.caret_up} />
+          <CaretDownOutlined className={styles.caret_down} />
+        </a>
         <div className={styles.submenu_content}>
           <div className={styles.submenu_content_left}>
             <div className={styles.submenu_desc}>
@@ -117,7 +115,7 @@ function SubMenu() {
               </Link>
             </div>
             <div className={styles.submenu_item}>
-              <Link href="/">
+              <Link href="/profile">
                 <a onMouseOver={hidePanes}>Settings</a>
               </Link>
             </div>
@@ -240,17 +238,17 @@ function SubMenu() {
                       Yearly subscription — Available Sports
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>Basketball</a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>Football</a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>
                           <LockIcon className={styles.lock_icon} />
                           Baseball
@@ -258,7 +256,7 @@ function SubMenu() {
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>
                           <LockIcon className={styles.lock_icon} />
                           SOCCER
@@ -266,7 +264,7 @@ function SubMenu() {
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>
                           <LockIcon className={styles.lock_icon} />
                           UFC
@@ -274,7 +272,7 @@ function SubMenu() {
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/sports-card">
                         <a>
                           <LockIcon className={styles.lock_icon} />
                           FORMULA 1
@@ -312,17 +310,17 @@ function SubMenu() {
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/fantasy-daily-lineups">
                         <a>Basketball</a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/fantasy-daily-lineups">
                         <a>Football</a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
-                      <Link href="/">
+                      <Link href="/fantasy-daily-lineups">
                         <a>
                           <LockIcon className={styles.lock_icon} />
                           Baseball
@@ -333,7 +331,7 @@ function SubMenu() {
                 )}
               </div>
               <div className={styles.submenu_item}>
-                <Link href="/">
+                <Link href="/profile">
                   <a>Settings</a>
                 </Link>
               </div>
@@ -481,7 +479,9 @@ export default function AppHeader({
               Sports News
             </Menu.Item>
             <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
-              Yesterdays Plays
+              <Link href="/yesterdays-plays">
+                <a>Yesterdays Plays</a>
+              </Link>
             </Menu.Item>
             <Menu.Item key="About_Us" className={styles.navbarItem}>
               About Us
@@ -496,13 +496,17 @@ export default function AppHeader({
               icon={<SearchIcon className={styles.cart_icon} />}
               aria-label="Search Packages Button"
             />
-            <Button
-              type="link"
-              icon={<CartIcon className={styles.cart_icon} />}
-              aria-label="Cart Button"
-              className={styles.cart_btn}>
-              <span className={styles.text}>2</span>
-            </Button>
+            <Link href="/cart">
+              <a>
+                <Button
+                  type="link"
+                  icon={<CartIcon className={styles.cart_icon} />}
+                  aria-label="Cart Button"
+                  className={styles.cart_btn}>
+                  <span className={styles.text}>3</span>
+                </Button>
+              </a>
+            </Link>
           </div>
         </div>
         <div className={styles.mobilecontainer}>
@@ -529,13 +533,17 @@ export default function AppHeader({
                 type="link"
                 aria-label="Search Packages Button"
                 icon={<SearchIcon className={styles.cart_icon} />}></Button>
-              <Button
-                type="link"
-                icon={<CartIcon className={styles.cart_icon} />}
-                aria-label="Cart Button"
-                className={styles.cart_btn}>
-                <span className={styles.text}>2</span>
-              </Button>
+              <Link href="/cart">
+                <a>
+                  <Button
+                    type="link"
+                    icon={<CartIcon className={styles.cart_icon} />}
+                    aria-label="Cart Button"
+                    className={styles.cart_btn}>
+                    <span className={styles.text}>3</span>
+                  </Button>
+                </a>
+              </Link>
               <Button
                 type="link"
                 icon={<IdentityIcon className={styles.cart_icon} />}
@@ -558,7 +566,9 @@ export default function AppHeader({
                   Sports News
                 </Menu.Item>
                 <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
-                  Yesterdays Plays
+                  <Link href="/yesterdays-plays">
+                    <a>Yesterdays Plays</a>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="About_Us" className={styles.navbarItem}>
                   About Us

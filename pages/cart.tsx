@@ -40,7 +40,7 @@ function CartTotalWidget({ mobile }: CartTotalWidgetProps) {
       </LazyLoad>
       <div className={styles.totalPriceWidgetContent}>
         <h5>Cart Totals</h5>
-        <div className={styles.totalCount}>4 Items</div>
+        <div className={styles.totalCount}>3 Items</div>
         <div className={styles.totalPrice}>$399.00</div>
         <div className={styles.taxRow}>
           <span>Tax:</span>

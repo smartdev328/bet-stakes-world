@@ -13,3 +13,11 @@ export type CartType = {
   sportCard: CartSportCardType;
   addOn: CartAddOnType;
 };
+
+export type CartItem = {
+  name: string;
+  desc: string;
+  image: string;
+  price: number;
+  auto_renewal: boolean;
+};

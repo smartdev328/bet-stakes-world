@@ -1,15 +1,73 @@
 import Link from 'next/link';
+import { notification } from 'antd';
 import { TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useDispatch } from 'react-redux';
+import MailchimpSubscribe, { FormHooks } from 'react-mailchimp-subscribe';
 
 import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons';
 import styles from './AppFooter.module.css';
+import { useEffect, useState } from 'react';
+import { validateEmail } from '@utils/common';
 
 const Row = dynamic(() => import('antd/lib/row'));
 const Col = dynamic(() => import('antd/lib/col'));
 const Button = dynamic(() => import('antd/lib/button'));
+const url =
+  '//thedailystakes.us19.list-manage.com/subscribe/post?u=aa5150b7c559aed8ed8c1eaf6&amp;id=4829d57c24';
+
+type SubscriptionFormProps = {
+  status: string | null;
+  message: string | Error | null;
+  onValidated: (_: { EMAIL: string }) => void;
+};
+
+function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
+  const [email, setEmail] = useState<string>('');
+  useEffect(() => {
+    if (status === 'success') {
+      notification['info']({
+        message: 'You are subscribed successfully!',
+        description: null
+      });
+    }
+    if (status === 'error') {
+      notification['error']({
+        message: 'Subscription Error!',
+        description: null
+      });
+    }
+  }, [status, message]);
+  const emailChanged = (e: React.FormEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+  };
+  const submit = () => {
+    if (validateEmail(email)) {
+      onValidated({
+        EMAIL: email
+      });
+    }
+  };
+
+  return (
+    <>
+      <input
+        id="newsletter_email"
+        type="email"
+        placeholder="User@fakemail.com"
+        onChange={emailChanged}
+        className={styles.newsletterForm_email}
+      />
+      <Button
+        icon={<ArrowForwardIcon className={styles.arrow_icon} />}
+        aria-label="Newsletter Subscribe Button"
+        className={styles.newsletterForm_submit}
+        onClick={submit}
+      />
+    </>
+  );
+}
 
 function AppFooter() {
   const dispatch = useDispatch();
@@ -38,16 +96,15 @@ function AppFooter() {
           <div className={styles.newsletterFormContainer}>
             <label htmlFor="newsletter_email">Sign up for our newsletter</label>
             <div className={styles.newletterForm}>
-              <input
-                id="newsletter_email"
-                type="email"
-                placeholder="User@fakemail.com"
-                className={styles.newsletterForm_email}
-              />
-              <Button
-                icon={<ArrowForwardIcon className={styles.arrow_icon} />}
-                aria-label="Newsletter Subscribe Button"
-                className={styles.newsletterForm_submit}
+              <MailchimpSubscribe
+                url={url}
+                render={({ subscribe, status, message }: FormHooks<{ EMAIL: string }>) => (
+                  <CustomForm
+                    status={status}
+                    message={message}
+                    onValidated={(formData) => subscribe(formData)}
+                  />
+                )}
               />
             </div>
           </div>

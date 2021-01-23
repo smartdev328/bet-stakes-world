@@ -27,47 +27,9 @@
   width: 100%;
   height: 400px;
 }
-.heroBannerContent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 400px;
-  padding-top: 104px;
-  background: rgba(22, 22, 22, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 38px;
-  color: #fff;
-  transform: none;
-  cursor: pointer;
-}
-.heroBannerContent .uploadCoverBtn {
-  color: #fff;
-}
-@media (max-width: 992px) {
-  .heroBanner .bgImage, .heroBannerContent {
-    height: 320px;
-  }
-}
-@media (max-width: 768px) {
-  .heroBanner .bgImage, .heroBannerContent {
-    height: 280px;
-  }
-}
-@media (max-width: 600px) {
-  .heroBanner .bgImage, .heroBannerContent {
-    height: 260px;
-    padding-top: 136px;
-  }
-}
-
 
 .actionBtns {
-  padding: 20px 0 0px;
+  padding: 50px 0 20px;
 }
 .saveBtn, .cancelBtn {
   font-weight: bold;
@@ -334,7 +296,6 @@
 /* Credit Card Info */
 .creditCardInfoRow {
   margin-top: 40px;
-  padding-bottom: 150px;
 }
 .creditCardInfoRow h6 {
   font-style: normal;
@@ -351,5 +312,15 @@
   }
   .creditCardInfoRow h6 {
     font-size: 15px;
+  }
+}
+
+.cancelSubscriptionRow {
+  margin-top: 40px;
+  padding-bottom: 150px;
+}
+@media (max-width: 1024px) {
+  .cancelSubscriptionRow {
+    padding-bottom: 100px;
   }
 }

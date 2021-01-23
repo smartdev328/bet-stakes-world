@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Upload, Col } from 'antd';
+import { Row, Button, Upload, Col, Modal } from 'antd';
 import Card from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import LazyLoad from 'react-lazyload';
@@ -24,6 +24,7 @@ import {
 import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
 import { formatCreditCardNumber, formatCVC, formatExpirationDate } from '@utils/creditCard';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
@@ -192,6 +193,7 @@ export default function MemberProfile() {
             changeBillingFormData={updateBillingForm}
             changeCardFormData={updateCardForm}
           />
+          <CancelSubscription />
         </div>
       </AppLayout>
     </>
@@ -202,11 +204,6 @@ function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
       <img src="/images/member_dashboard.jpg" className={styles.bgImage} />
-      <div className={styles.heroBannerContent}>
-        <Upload>
-          <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
-        </Upload>
-      </div>
       <BannerSportsAndMatches />
     </div>
   );
@@ -597,6 +594,31 @@ function CreditCardInfo({
           </Row>
         </Col>
       </Row>
+    </div>
+  );
+}
+
+function CancelSubscription() {
+  const unsubscribe = () => {
+    Modal.confirm({
+      title: 'Subscription Cancellation',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure to cancel Subscription?',
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      }
+    });
+  };
+
+  return (
+    <div className={styles.cancelSubscriptionRow}>
+      <div className={styles.sectionTitle}>Cancel Subscription</div>
+      <div>
+        <Button onClick={unsubscribe}>Unsubscribe</Button>
+      </div>
     </div>
   );
 }

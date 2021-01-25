@@ -119,6 +119,7 @@
   border: none;
   display: inline-flex;
   align-items: center;
+  transition: all ease-in 0.3s;
 }
 
 .ctaBtns .loginBtn {
@@ -133,13 +134,52 @@
   outline: none;
   display: inline-flex;
   align-items: center;
+  transition: all ease-in 0.3s;
+}
+.ctaBtns .myDashboardBtn {
+  background: #FFC700;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 6.5px 24px;
+  border: 1px solid #FFC700;
+  box-sizing: border-box;
+  color: #101010;
+  margin-right: 14px;
+  transition: all ease-in 0.3s;
+}
+.ctaBtns .profileBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding:  6.5px 24px;
+  background: #959799;
+  color: #ffffff;
+  border: 1px solid #F1F1F1;
+  height: auto;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all ease-in 0.3s;
+}
+.ctaBtns .myDashboardBtn:hover,
+.ctaBtns .loginBtn:hover,
+.ctaBtns .subscribeBtn:hover,
+.ctaBtns .profileBtn:hover {
+  color: #fff;
+  background: rgb(255 199 0 / 50%);
 }
 .user_icon {
   width: 16px;
   height: 16px;
   margin-right: 10px;
 }
-
+@media (max-width: 1272px) {
+  .ctaBtns .profileBtn, .ctaBtns .myDashboardBtn {
+    font-size: 13px;
+  }
+}
 @media (max-width: 1240px) {
   .appHeader.open {
     background-color: var(--primaryColor);
@@ -161,7 +201,8 @@
   .dateBar .dateBarDivider {
     height: 20px;
   }
-  .ctaBtns .subscribeBtn, .ctaBtns .loginBtn {
+  .ctaBtns .subscribeBtn, .ctaBtns .loginBtn,
+  .ctaBtns .profileBtn, .ctaBtns .myDashboardBtn {
     padding-right: 20px;
     padding-left: 20px;
   }

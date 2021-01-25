@@ -10,6 +10,7 @@ import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons
 import styles from './AppFooter.module.css';
 import { useEffect, useState } from 'react';
 import { validateEmail } from '@utils/common';
+import { JWT } from '@type/Main';
 
 const Row = dynamic(() => import('antd/lib/row'));
 const Col = dynamic(() => import('antd/lib/col'));
@@ -69,7 +70,7 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
   );
 }
 
-function AppFooter() {
+function AppFooter({ token }: { token: JWT | null }) {
   const dispatch = useDispatch();
 
   const openLoginModal = () => {
@@ -218,12 +219,26 @@ function AppFooter() {
             </Col>
           </Row>
           <Row className={styles.mainFooter_RightCol} align={'middle'} justify={'end'}>
-            <Button type="primary" className={styles.subscribeBtn}>
-              Subscribe Now
-            </Button>
-            <Button className={styles.loginBtn} onClick={openLoginModal}>
-              Log In
-            </Button>
+            {!token && (
+              <>
+                <Button type="primary" className={styles.subscribeBtn}>
+                  Subscribe Now
+                </Button>
+                <Button className={styles.loginBtn} onClick={openLoginModal}>
+                  Log In
+                </Button>
+              </>
+            )}
+            {token && (
+              <>
+                <Link href="/member-dashboard">
+                  <a className={styles.myDashboardBtn}>My Dashboard</a>
+                </Link>
+                <Link href="/profile">
+                  <a className={styles.profileBtn}>My Account</a>
+                </Link>
+              </>
+            )}
           </Row>
         </div>
         <div className={`${styles.mainFooterRow} ${styles.mainFooterNavmenu}`}>

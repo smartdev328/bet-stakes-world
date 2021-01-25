@@ -45,7 +45,13 @@
   border-radius: 0;
   border: none;
   outline: none;
+  border: solid 2px #fff;
+  transition: border ease-in 0.2s;
 }
+.newsletterForm_email:hover {
+  border: solid 2px #40a9ff;
+}
+
 .arrow_icon {
   width: 16px;
   height: 16px;
@@ -60,10 +66,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 0;
+  transition: all ease-in 0.2s;
 }
-.newsletterForm_submit:focus,
 .newsletterForm_submit:hover {
+  background: rgb(255 199 0 / 50%);
+}
+.newsletterForm_submit:focus {
   background: #FFC700;
+}
+
+.newsletterForm_submit:hover .arrow_icon path {
+  fill: #40a9ff;
 }
 
 .facebook_icon, .tiktok_icon {
@@ -182,21 +195,22 @@
 .mainFooter_RightCol {
   display: block;
 }
-.subscribeBtn {
+.subscribeBtn, .myDashboardBtn {
   width: 220px;
   background: #EAEAEA;
   border: 1px solid #EAEAEA;
   opacity: 0.9;
   font-style: normal;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 21px;
   line-height: 34px;
   color: #2E2E2E;
   padding: 8px;
   height: auto;
+  transition: all ease-in 0.3s;
 }
 
-.loginBtn {
+.loginBtn, .profileBtn {
   margin-left: 40px;
   width: 220px;
   height: auto;
@@ -206,9 +220,37 @@
   opacity: 0.9;
   font-style: normal;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 21px;
   line-height: 34px;
   padding: 8px;
+  transition: all ease-in 0.3s;
+}
+
+.myDashboardBtn {
+  background: #FFC700;
+  border: 1px solid #ffc700;
+  color: #2E2E2E;
+  display: inline-block;
+  text-align: center;
+}
+
+.profileBtn {
+  background: #959799;
+  display: inline-block;
+  text-align: center;
+  border: 1.36585px solid #959799;
+}
+
+.subscribeBtn:focus,
+.subscribeBtn:hover,
+.myDashboardBtn:focus,
+.myDashboardBtn:hover,
+.profileBtn:focus,
+.profileBtn:hover,
+.loginBtn:focus,
+.loginBtn:hover {
+  color: #fff;
+  background: rgb(255 199 0 / 50%);
 }
 
 @media (max-width: 1240px) {
@@ -216,7 +258,7 @@
     padding-left: 30px;
     padding-right: 30px;
   }
-  .subscribeBtn, .loginBtn {
+  .subscribeBtn, .loginBtn, .myDashboardBtn, .profileBtn {
     font-size: 19px;
     line-height: 30px;
     width: 200px;
@@ -232,7 +274,7 @@
     flex-direction: column;
     align-self: flex-start;
   }
-  .loginBtn {
+  .loginBtn, .profileBtn {
     margin-left: 0;
     margin-top: 1em;
     display: block;
@@ -300,12 +342,13 @@
     align-items: center;
     width: 100%;
   }
-  .subscribeBtn, .loginBtn {
+  .subscribeBtn, .loginBtn,
+  .myDashboardBtn, .profileBtn {
     font-size: 22px;
     line-height: 34px;
     width: 100%;
   }
-  .loginBtn {
+  .loginBtn, .profileBtn {
     margin-left: 0;
     margin-top: 1em;
   }

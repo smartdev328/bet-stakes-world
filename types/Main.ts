@@ -85,3 +85,8 @@ export type PageDefaultProps = {
   packages: Package[];
   sports?: Sport[];
 };
+
+export type JWT = {
+  id: number;
+  ita: number;
+};

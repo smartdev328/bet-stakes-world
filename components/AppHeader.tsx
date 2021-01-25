@@ -15,6 +15,7 @@ import {
 } from '@components/SvgIcons';
 import { LoginModal } from '@components/index';
 import styles from './AppHeader.module.css';
+import { JWT } from '@type/Main';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
@@ -23,6 +24,7 @@ type HeaderProps = {
   winningRate: number;
   curRecord: string;
   currentDateTime: string;
+  token: JWT | null;
 };
 
 type RemainingTimeType = {
@@ -381,7 +383,8 @@ export default function AppHeader({
   releaseTime,
   curRecord,
   winningRate,
-  currentDateTime
+  currentDateTime,
+  token
 }: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
@@ -450,18 +453,33 @@ export default function AppHeader({
           </p>
         </Col>
         <Col span={7} className={styles.headerRightCol}>
-          <div className={styles.ctaBtns}>
-            <Button type="primary" className={styles.subscribeBtn}>
-              Subscribe Now
-            </Button>
-            <Button
-              type="ghost"
-              icon={<IdentityIcon className={styles.user_icon} />}
-              onClick={openLoginModal}
-              className={styles.loginBtn}>
-              Log In
-            </Button>
-          </div>
+          {!token && (
+            <div className={styles.ctaBtns}>
+              <Button type="primary" className={styles.subscribeBtn}>
+                Subscribe Now
+              </Button>
+              <Button
+                type="ghost"
+                icon={<IdentityIcon className={styles.user_icon} />}
+                onClick={openLoginModal}
+                className={styles.loginBtn}>
+                Log In
+              </Button>
+            </div>
+          )}
+          {token && (
+            <div className={styles.ctaBtns}>
+              <Link href="/member-dashboard">
+                <a className={styles.myDashboardBtn}>My Dashboard</a>
+              </Link>
+              <Link href="/profile">
+                <a className={styles.profileBtn}>
+                  <IdentityIcon className={styles.user_icon} />
+                  My Account
+                </a>
+              </Link>
+            </div>
+          )}
           <DateBar currentDateTime={currentDateTime} />
         </Col>
       </Row>
@@ -544,12 +562,25 @@ export default function AppHeader({
                   </Button>
                 </a>
               </Link>
-              <Button
-                type="link"
-                icon={<IdentityIcon className={styles.cart_icon} />}
-                aria-label="User Profile Button"
-                onClick={openLoginModal}
-                className={styles.cart_btn}></Button>
+              {!token && (
+                <Button
+                  type="link"
+                  icon={<IdentityIcon className={styles.cart_icon} />}
+                  aria-label="User Profile Button"
+                  onClick={openLoginModal}
+                  className={styles.cart_btn}></Button>
+              )}
+              {token && (
+                <Link href="/profile">
+                  <a>
+                    <Button
+                      type="link"
+                      icon={<IdentityIcon className={styles.cart_icon} />}
+                      aria-label="User Profile Button"
+                      className={styles.cart_btn}></Button>
+                  </a>
+                </Link>
+              )}
             </div>
           </Row>
           {mobileNavVisible && (

@@ -7,14 +7,11 @@ import {
   LOGIN_USER_FAILURE
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
-import { CreateUserType, LoginUserType } from '@type/Users';
-
-type PlaceholderDataType = {
-  name: string;
-};
+import { CreateUserType, LoginUserType, UserProfile } from '@type/Users';
 
 export type UserReducerState = {
-  profile: PlaceholderDataType | null;
+  token: string | null;
+  profile: UserProfile | null;
   error: string | null;
   loading: boolean;
 };
@@ -30,7 +27,10 @@ export type LoginUserReducerAction = {
 };
 
 export type UserStateAction = {
-  payload?: PlaceholderDataType;
+  payload?: {
+    user: UserProfile;
+    jwt: string;
+  };
   error?: string;
   loading?: boolean;
   type: string;
@@ -39,6 +39,7 @@ export type UserStateAction = {
 const initialState: UserReducerState = {
   error: null,
   profile: null,
+  token: null,
   loading: false
 };
 
@@ -65,13 +66,18 @@ export function userReducer(state = initialState, action: UserStateAction) {
     case LOGIN_USER_REQUEST:
       return {
         ...state,
-        ...{ loading: true, error: null }
+        ...{ loading: true, error: null, token: null, profile: null }
       };
     case LOGIN_USER_SUCCESS:
-      return {
-        ...state,
-        ...{ profile: action.payload, loading: false }
-      };
+      if (action.payload !== undefined) {
+        const { jwt, user } = action.payload;
+        localStorage.setItem('token', jwt);
+        return {
+          ...state,
+          ...{ profile: user, loading: false, token: jwt }
+        };
+      }
+      return state;
     case LOGIN_USER_FAILURE:
       return {
         ...state,

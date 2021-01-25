@@ -343,6 +343,19 @@
   color: #FFFFFF;
   margin-bottom: 1em;
 }
+.submenu_item a, .submenu_item_for_pane a {
+  display: flex;
+  align-items: center;
+}
+.locked {
+  cursor: default;
+}
+a.locked:active {
+  pointer-events: none;
+}
+.submenu_item a:hover svg path, .submenu_item_for_pane a:hover svg path {
+  fill: #40a9ff;
+}
 .submenu_main_item {
   font-style: normal;
   font-weight: normal;
@@ -357,6 +370,7 @@
 }
 .caret_up, .caret_down {
   font-size: 12px;
+  line-height: 12px;
   margin-left: 3px;
 }
 .submenu_main_item:active, .submenu_main_item:hover {
@@ -399,7 +413,7 @@
   fill: #40a9ff;
 }
 .lock_icon {
-  width: 9px;
+  width: 9px; 
   margin-right: 5px;
 }
 .navbarContainer .mobilecontainer {
@@ -557,5 +571,9 @@
   .dateBar .dateBarDivider {
     height: 25px;
     border-left-color: #fff;
+  }
+  .lock_icon {
+    width: 14px;
+    height: 14px;
   }
 }

@@ -43,3 +43,12 @@ export function parseJwt(token: string) {
 
   return JSON.parse(jsonPayload);
 }
+
+export function tokenAuthHeaders() {
+  const token = localStorage.getItem('token') || '';
+  return {
+    Accept: 'application/json',
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
+}

@@ -12,9 +12,10 @@ type AppLayoutPropsType = {
 export default function AppLayout({ bgColor, children }: AppLayoutPropsType) {
   const [parsedToken, setParsedToken] = useState<JWT | null>(null);
   const today = new Date();
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
     let parsedToken = null;
+    const token = localStorage.getItem('token');
     if (token) {
       parsedToken = parseJwt(token);
     }

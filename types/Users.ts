@@ -1,3 +1,6 @@
+import { BillingPlan } from './Packages';
+import { Sport } from './Sports';
+
 export type CreateUserType = {
   username: string | undefined;
   first_name: string | undefined;
@@ -73,4 +76,15 @@ export type NotificationConfig = {
   promotionalNotificationMsg: boolean;
   blogPostNotificationEmail: boolean;
   blogPostNotificationMsg: boolean;
+};
+
+export type UserSubscription = {
+  id: string;
+  pay_subscription_id: string;
+  valid_from: Date;
+  valid_till: Date;
+  is_active: boolean;
+  owner: UserProfile;
+  plan: BillingPlan;
+  sports: Sport;
 };

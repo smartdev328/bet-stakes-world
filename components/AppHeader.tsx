@@ -13,9 +13,11 @@ import {
   CloseIcon,
   HamburgerMenuIcon
 } from '@components/SvgIcons';
+import SubscriptionsAPIs from '@apis/subscriptions.apis';
 import { LoginModal } from '@components/index';
 import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
+import { UserSubscription } from '@type/Users';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
@@ -45,10 +47,29 @@ const DefaultRemainingTime = {
   secs: 0
 };
 
-function SubMenu() {
+type SubscriptionStatus = 'visitor' | 'unpaid' | 'paid';
+
+function SubMenu({
+  subscriptions,
+  token
+}: {
+  subscriptions: UserSubscription[];
+  token: JWT | null;
+}) {
   const [sportPaneVisible, setSportPaneVisible] = useState<boolean>(false);
   const [fantasyPaneVisible, setFantasyPaneVisible] = useState<boolean>(false);
   const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus>('visitor');
+
+  useEffect(() => {
+    if (!token) {
+      setSubscriptionStatus('visitor');
+    } else if (subscriptions.length === 0) {
+      setSubscriptionStatus('unpaid');
+    } else {
+      setSubscriptionStatus('paid');
+    }
+  }, [token, subscriptions]);
 
   const hidePanes = () => {
     setSportPaneVisible(false);
@@ -75,6 +96,19 @@ function SubMenu() {
     setSportPaneVisible(false);
   };
 
+  const hasSubscription = (sport: string) => {
+    if (
+      subscriptions.findIndex(
+        (subscription: UserSubscription) => subscription.sports.name === sport
+      ) > -1
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  console.log('- subscriptionStatus:', subscriptionStatus);
+
   return (
     <>
       <div className={styles.submenu}>
@@ -90,12 +124,20 @@ function SubMenu() {
             </div>
             <div className={styles.submenu_item}>
               <Link href="/member-dashboard">
-                <a onMouseOver={hidePanes}>Member Dashboard</a>
+                <a
+                  onMouseOver={hidePanes}
+                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  Member Dashboard
+                </a>
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
               <Link href="/sports-card">
-                <a onMouseOver={showSportPanel}>
+                <a
+                  onMouseOver={showSportPanel}
+                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                   <span>Sports Card</span>
                   {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
                   {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
@@ -104,12 +146,20 @@ function SubMenu() {
             </div>
             <div className={styles.submenu_item}>
               <Link href="/vip-all-access-card">
-                <a onMouseOver={hidePanes}>VIP ALL ACCESS CARD</a>
+                <a
+                  onMouseOver={hidePanes}
+                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  VIP ALL ACCESS CARD
+                </a>
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
               <Link href="/fantasy-daily-lineups">
-                <a onMouseOver={showFantasyPanel}>
+                <a
+                  onMouseOver={showFantasyPanel}
+                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                   <span>FANTASY PICKS</span>
                   {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
                   {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
@@ -118,7 +168,12 @@ function SubMenu() {
             </div>
             <div className={styles.submenu_item}>
               <Link href="/profile">
-                <a onMouseOver={hidePanes}>Settings</a>
+                <a
+                  onMouseOver={hidePanes}
+                  className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                  {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
+                  Settings
+                </a>
               </Link>
             </div>
           </div>
@@ -128,42 +183,48 @@ function SubMenu() {
                 <div className={styles.submenu_desc}>Yearly subscription — Available Sports</div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>Basketball</a>
+                    <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
+                      {!hasSubscription('Basketball') && <LockIcon className={styles.lock_icon} />}
+                      Basketball
+                    </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>Football</a>
+                    <a className={!hasSubscription('Football') ? styles.locked : ''}>
+                      {!hasSubscription('Football') && <LockIcon className={styles.lock_icon} />}
+                      Football
+                    </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
+                    <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
+                      {!hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
                       Baseball
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
+                    <a className={!hasSubscription('SOCCER') ? styles.locked : ''}>
+                      {!hasSubscription('SOCCER') && <LockIcon className={styles.lock_icon} />}
                       SOCCER
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
+                    <a className={!hasSubscription('UFC') ? styles.locked : ''}>
+                      {!hasSubscription('UFC') && <LockIcon className={styles.lock_icon} />}
                       UFC
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
+                    <a className={!hasSubscription('FORMULA 1') ? styles.locked : ''}>
+                      {!hasSubscription('FORMULA 1') && <LockIcon className={styles.lock_icon} />}
                       FORMULA 1
                     </a>
                   </Link>
@@ -177,23 +238,41 @@ function SubMenu() {
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a>All</a>
+                    <a
+                      className={
+                        !hasSubscription('Basketball') &&
+                        !hasSubscription('Football') &&
+                        !hasSubscription('Baseball')
+                          ? styles.locked
+                          : ''
+                      }>
+                      {!hasSubscription('Basketball') &&
+                        !hasSubscription('Football') &&
+                        !hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
+                      All
+                    </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a>Basketball</a>
+                    <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
+                      {!hasSubscription('Basketball') && <LockIcon className={styles.lock_icon} />}
+                      Basketball
+                    </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a>Football</a>
+                    <a className={!hasSubscription('Football') ? styles.locked : ''}>
+                      {!hasSubscription('Football') && <LockIcon className={styles.lock_icon} />}
+                      Football
+                    </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a>
-                      <LockIcon className={styles.lock_icon} />
+                    <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
+                      {!hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
                       Baseball
                     </a>
                   </Link>
@@ -219,18 +298,28 @@ function SubMenu() {
             <div className={styles.submenu_content_left}>
               <div className={styles.submenu_item}>
                 <Link href="/member-dashboard">
-                  <a>Member Dashboard</a>
+                  <a
+                    onMouseOver={hidePanes}
+                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    Member Dashboard
+                  </a>
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                <a>
-                  <div
-                    className={sportPaneVisible ? styles.paneActive : ''}
-                    onClick={toggleSportPanel}>
-                    <span>Sports Card</span>
-                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
+                <a
+                  className={
+                    sportPaneVisible
+                      ? styles.paneActive
+                      : subscriptionStatus !== 'paid'
+                      ? styles.locked
+                      : ''
+                  }
+                  onClick={toggleSportPanel}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  <span>Sports Card</span>
+                  {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                  {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                 </a>
               </div>
               <div className={styles.pane}>
@@ -241,42 +330,56 @@ function SubMenu() {
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>Basketball</a>
+                        <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
+                          {!hasSubscription('Basketball') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
+                          Basketball
+                        </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>Football</a>
+                        <a className={!hasSubscription('Football') ? styles.locked : ''}>
+                          {!hasSubscription('Football') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
+                          Football
+                        </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>
-                          <LockIcon className={styles.lock_icon} />
+                        <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
+                          {!hasSubscription('Baseball') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
                           Baseball
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>
-                          <LockIcon className={styles.lock_icon} />
+                        <a className={!hasSubscription('SOCCER') ? styles.locked : ''}>
+                          {!hasSubscription('SOCCER') && <LockIcon className={styles.lock_icon} />}
                           SOCCER
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>
-                          <LockIcon className={styles.lock_icon} />
+                        <a className={!hasSubscription('UFC') ? styles.locked : ''}>
+                          {!hasSubscription('UFC') && <LockIcon className={styles.lock_icon} />}
                           UFC
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a>
-                          <LockIcon className={styles.lock_icon} />
+                        <a className={!hasSubscription('FORMULA 1') ? styles.locked : ''}>
+                          {!hasSubscription('FORMULA 1') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
                           FORMULA 1
                         </a>
                       </Link>
@@ -286,18 +389,28 @@ function SubMenu() {
               </div>
               <div className={styles.submenu_item}>
                 <Link href="/vip-all-access-card">
-                  <a>VIP ALL ACCESS CARD</a>
+                  <a
+                    onMouseOver={hidePanes}
+                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    VIP ALL ACCESS CARD
+                  </a>
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                <a>
-                  <div
-                    className={fantasyPaneVisible ? styles.paneActive : ''}
-                    onClick={toggleFantasyPanel}>
-                    <span>FANTASY PICKS</span>
-                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
+                <a
+                  className={
+                    fantasyPaneVisible
+                      ? styles.paneActive
+                      : subscriptionStatus !== 'paid'
+                      ? styles.locked
+                      : ''
+                  }
+                  onClick={toggleFantasyPanel}>
+                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  <span>FANTASY PICKS</span>
+                  {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                  {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                 </a>
               </div>
               <div className={styles.pane}>
@@ -308,23 +421,38 @@ function SubMenu() {
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/fantasy-daily-lineups">
-                        <a>All</a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a>Basketball</a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a>Football</a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a>
+                        <a className={styles.locked}>
                           <LockIcon className={styles.lock_icon} />
+                          All
+                        </a>
+                      </Link>
+                    </div>
+                    <div className={styles.submenu_item}>
+                      <Link href="/fantasy-daily-lineups">
+                        <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
+                          {!hasSubscription('Basketball') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
+                          Basketball
+                        </a>
+                      </Link>
+                    </div>
+                    <div className={styles.submenu_item}>
+                      <Link href="/fantasy-daily-lineups">
+                        <a className={!hasSubscription('Football') ? styles.locked : ''}>
+                          {!hasSubscription('Football') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
+                          Football
+                        </a>
+                      </Link>
+                    </div>
+                    <div className={styles.submenu_item}>
+                      <Link href="/fantasy-daily-lineups">
+                        <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
+                          {!hasSubscription('Baseball') && (
+                            <LockIcon className={styles.lock_icon} />
+                          )}
                           Baseball
                         </a>
                       </Link>
@@ -334,7 +462,12 @@ function SubMenu() {
               </div>
               <div className={styles.submenu_item}>
                 <Link href="/profile">
-                  <a>Settings</a>
+                  <a
+                    onMouseOver={hidePanes}
+                    className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                    {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
+                    Settings
+                  </a>
                 </Link>
               </div>
             </div>
@@ -388,6 +521,7 @@ export default function AppHeader({
 }: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
+  const [userSubscriptions, setUserSubscriptions] = useState<UserSubscription[]>([]);
   const dispatch = useDispatch();
   useEffect(() => {
     const remainingTimeInterval = setInterval(() => {
@@ -399,6 +533,17 @@ export default function AppHeader({
       dispatch({ type: 'CLOSE_MODAL' });
     };
   }, []);
+
+  // Fetch Subscriptions
+  useEffect(() => {
+    if (token) {
+      SubscriptionsAPIs.getSubscriptions(token.id)
+        .then((res) => res.json())
+        .then((data) => {
+          setUserSubscriptions(data);
+        });
+    }
+  }, [token]);
 
   const openLoginModal = () => {
     dispatch({ type: 'OPEN_MODAL' });
@@ -492,7 +637,7 @@ export default function AppHeader({
                 <a>SHOP</a>
               </Link>
             </Menu.Item>
-            <SubMenu />
+            {!mobileNavVisible && <SubMenu subscriptions={userSubscriptions} token={token} />}
             <Menu.Item key="Sports_News" className={styles.navbarItem}>
               Sports News
             </Menu.Item>
@@ -552,15 +697,13 @@ export default function AppHeader({
                 aria-label="Search Packages Button"
                 icon={<SearchIcon className={styles.cart_icon} />}></Button>
               <Link href="/cart">
-                <a>
-                  <Button
-                    type="link"
-                    icon={<CartIcon className={styles.cart_icon} />}
-                    aria-label="Cart Button"
-                    className={styles.cart_btn}>
-                    <span className={styles.text}>3</span>
-                  </Button>
-                </a>
+                <Button
+                  type="link"
+                  icon={<CartIcon className={styles.cart_icon} />}
+                  aria-label="Cart Button"
+                  className={styles.cart_btn}>
+                  <span className={styles.text}>3</span>
+                </Button>
               </Link>
               {!token && (
                 <Button
@@ -572,13 +715,11 @@ export default function AppHeader({
               )}
               {token && (
                 <Link href="/profile">
-                  <a>
-                    <Button
-                      type="link"
-                      icon={<IdentityIcon className={styles.cart_icon} />}
-                      aria-label="User Profile Button"
-                      className={styles.cart_btn}></Button>
-                  </a>
+                  <Button
+                    type="link"
+                    icon={<IdentityIcon className={styles.cart_icon} />}
+                    aria-label="User Profile Button"
+                    className={styles.cart_btn}></Button>
                 </Link>
               )}
             </div>
@@ -592,7 +733,7 @@ export default function AppHeader({
                     <a>SHOP</a>
                   </Link>
                 </Menu.Item>
-                <SubMenu />
+                <SubMenu subscriptions={userSubscriptions} token={token} />
                 <Menu.Item key="Sports_News" className={styles.navbarItem}>
                   Sports News
                 </Menu.Item>

@@ -4,7 +4,8 @@ import {
   SIGNUP_USER_FAILURE,
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE
+  LOGIN_USER_FAILURE,
+  LOG_OUT
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
 import { CreateUserType, LoginUserType, UserProfile } from '@type/Users';
@@ -82,6 +83,13 @@ export function userReducer(state = initialState, action: UserStateAction) {
       return {
         ...state,
         ...{ error: action.error, loading: false }
+      };
+
+    case LOG_OUT:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        ...{ loading: false, error: null, token: null, profile: null }
       };
 
     default:

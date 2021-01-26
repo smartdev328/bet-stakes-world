@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, Row, Col } from 'antd';
+import { Menu, Row, Col, Dropdown } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
@@ -106,8 +106,6 @@ function SubMenu({
     }
     return false;
   };
-
-  console.log('- subscriptionStatus:', subscriptionStatus);
 
   return (
     <>
@@ -557,6 +555,33 @@ export default function AppHeader({
     setMobileNavVisible(false);
   };
 
+  const logout = () => {
+    dispatch({ type: 'LOG_OUT' });
+  };
+
+  const accountMenu = () => (
+    <Menu className={styles.sportMenu}>
+      <Menu.Item>
+        <Link href="/profile">
+          <a>Settings</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Link href="/contact-us">
+          <a>Help & Support</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Link href="/faqs">
+          <a>FAQs</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item className={styles.topDivider}>
+        <a onClick={logout}>Log Out</a>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <header className={`${styles.appHeader} ${mobileNavVisible && styles.open}`}>
       <LoginModal />
@@ -617,12 +642,16 @@ export default function AppHeader({
               <Link href="/member-dashboard">
                 <a className={styles.myDashboardBtn}>My Dashboard</a>
               </Link>
-              <Link href="/profile">
-                <a className={styles.profileBtn}>
+              <Dropdown
+                overlay={accountMenu}
+                placement="bottomLeft"
+                transitionName=""
+                trigger={['click']}>
+                <div className={styles.profileBtn}>
                   <IdentityIcon className={styles.user_icon} />
                   My Account
-                </a>
-              </Link>
+                </div>
+              </Dropdown>
             </div>
           )}
           <DateBar currentDateTime={currentDateTime} />

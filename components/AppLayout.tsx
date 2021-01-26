@@ -3,6 +3,8 @@ import AppFooter from './AppFooter';
 import { getDayOfWeek, getMonthString, parseJwt } from '@utils/common';
 import { useEffect, useState } from 'react';
 import { JWT } from '@type/Main';
+import { useSelector } from 'react-redux';
+import { ReduxState } from '@redux/reducers';
 
 type AppLayoutPropsType = {
   bgColor?: string;
@@ -11,16 +13,21 @@ type AppLayoutPropsType = {
 
 export default function AppLayout({ bgColor, children }: AppLayoutPropsType) {
   const [parsedToken, setParsedToken] = useState<JWT | null>(null);
+  const { token } = useSelector((state: ReduxState) => state.user);
   const today = new Date();
 
   useEffect(() => {
     let parsedToken = null;
-    const token = localStorage.getItem('token');
     if (token) {
       parsedToken = parseJwt(token);
+    } else {
+      const localToken = localStorage.getItem('token');
+      if (localToken) {
+        parsedToken = parseJwt(localToken);
+      }
     }
     setParsedToken(parsedToken);
-  }, []);
+  }, [token]);
 
   return (
     <>

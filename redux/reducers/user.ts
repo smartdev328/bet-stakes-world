@@ -5,10 +5,13 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
-  LOG_OUT
+  LOG_OUT,
+  FORGOT_PASS_REQUEST,
+  FORGOT_PASS_FAILURE,
+  FORGOT_PASS_SUCCESS
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
-import { CreateUserType, LoginUserType, UserProfile } from '@type/Users';
+import { CreateUserType, LoginUserType, UserProfile, ForgotPasswordForm } from '@type/Users';
 
 export type UserReducerState = {
   token: string | null;
@@ -24,6 +27,11 @@ export type CreateUserReducerAction = {
 
 export type LoginUserReducerAction = {
   payload: LoginUserType;
+  type: string;
+};
+
+export type ForgotResetPassReducerAction = {
+  payload: ForgotPasswordForm;
   type: string;
 };
 
@@ -55,10 +63,15 @@ export function userReducer(state = initialState, action: UserStateAction) {
         ...{ loading: true, error: null }
       };
     case SIGNUP_USER_SUCCESS:
-      return {
-        ...state,
-        ...{ profile: action.payload, loading: false }
-      };
+      if (action.payload !== undefined) {
+        const { jwt, user } = action.payload;
+        localStorage.setItem('token', jwt);
+        return {
+          ...state,
+          ...{ profile: user, token: jwt, loading: false }
+        };
+      }
+      return state;
     case SIGNUP_USER_FAILURE:
       return {
         ...state,
@@ -83,6 +96,21 @@ export function userReducer(state = initialState, action: UserStateAction) {
       return {
         ...state,
         ...{ error: action.error, loading: false }
+      };
+    case FORGOT_PASS_REQUEST:
+      return {
+        ...state,
+        ...{ loading: true, error: null, message: null }
+      };
+    case FORGOT_PASS_SUCCESS:
+      return {
+        ...state,
+        ...{ loading: false, error: null }
+      };
+    case FORGOT_PASS_FAILURE:
+      return {
+        ...state,
+        ...{ error: action.error, loading: false, message: null }
       };
 
     case LOG_OUT:

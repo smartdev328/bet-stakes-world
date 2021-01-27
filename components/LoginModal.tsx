@@ -28,12 +28,18 @@ function LoginModal() {
   });
 
   useEffect(() => {
+    return () => {
+      closeModal();
+    };
+  }, []);
+
+  useEffect(() => {
     setModalOpen(isModalOpen);
   }, [isModalOpen]);
 
   useEffect(() => {
     // Show LoginError Notification
-    if (loginError) {
+    if (loginError && formSubmitted) {
       notification['error']({
         message: 'LogIn Error!',
         description: loginError
@@ -49,7 +55,7 @@ function LoginModal() {
 
   const closeModal = () => {
     setModalOpen(false);
-    dispatch({ type: 'CLOSE_MODAL' });
+    dispatch({ type: 'CLOSE_LOGIN_MODAL' });
   };
   const changeFormData = (name: keyof LoginUserType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -94,6 +100,13 @@ function LoginModal() {
       }
     });
     setFormSubmitted(true);
+  };
+
+  const onForgotPass = () => {
+    dispatch({ type: 'OPEN_FORGOT_PASS_MODAL' });
+    setTimeout(() => {
+      closeModal();
+    }, 10);
   };
 
   if (!modalOpen) {
@@ -147,9 +160,7 @@ function LoginModal() {
                 onChange={(e) => changeFormData('password', e)}
               />
               <div className={styles.forgotPasswordLink}>
-                <Link href="/">
-                  <a>Forgot Password?</a>
-                </Link>
+                <a onClick={onForgotPass}>Forgot Password?</a>
               </div>
             </Col>
             <Button className={styles.signInBtn} disabled={!isFormValid} onClick={onLogin}>

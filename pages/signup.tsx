@@ -255,6 +255,7 @@ export default function Registration({ packages }: PageDefaultProps) {
     }
     // Redirect to dashboard page after registration
     if (!signupError && !loading && formSubmitted) {
+      dispatch({ type: 'SEND_CONFIRM_EMAIL' });
       router.push('/member-dashboard');
     }
   }, [signupError, profile, loading]);

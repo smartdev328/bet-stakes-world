@@ -74,7 +74,7 @@ function AppFooter({ token }: { token: JWT | null }) {
   const dispatch = useDispatch();
 
   const openLoginModal = () => {
-    dispatch({ type: 'OPEN_MODAL' });
+    dispatch({ type: 'OPEN_LOGIN_MODAL' });
   };
 
   return (

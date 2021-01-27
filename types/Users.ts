@@ -88,3 +88,11 @@ export type UserSubscription = {
   plan: BillingPlan;
   sports: Sport;
 };
+
+export type ForgotPasswordForm = {
+  email: string | undefined;
+};
+
+export type ForgotPasswordFormValidate = {
+  email: boolean;
+};

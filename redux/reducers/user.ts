@@ -115,6 +115,7 @@ export function userReducer(state = initialState, action: UserStateAction) {
 
     case LOG_OUT:
       localStorage.removeItem('token');
+      window.location.href = '/';
       return {
         ...state,
         ...{ loading: false, error: null, token: null, profile: null }

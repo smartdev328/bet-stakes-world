@@ -556,6 +556,7 @@ export default function AppHeader({
   };
 
   const logout = () => {
+    setMobileNavVisible(false);
     dispatch({ type: 'LOG_OUT' });
   };
 
@@ -745,13 +746,17 @@ export default function AppHeader({
                   className={styles.cart_btn}></Button>
               )}
               {token && (
-                <Link href="/profile">
+                <Dropdown
+                  overlay={accountMenu}
+                  placement="bottomLeft"
+                  transitionName=""
+                  trigger={['click']}>
                   <Button
                     type="link"
                     icon={<IdentityIcon className={styles.cart_icon} />}
                     aria-label="User Profile Button"
                     className={styles.cart_btn}></Button>
-                </Link>
+                </Dropdown>
               )}
             </div>
           </Row>

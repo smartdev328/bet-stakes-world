@@ -170,7 +170,7 @@ function PlanDropdown({
   );
 }
 
-export default function Cart({ packages }: PageDefaultProps) {
+export default function Cart({ packages, token }: PageDefaultProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>(Mock_CartItems);
   const changeCartItem = (index: number, key: keyof CartItem, value: string | boolean) => {
     const updated = cartItems.slice();
@@ -199,7 +199,7 @@ export default function Cart({ packages }: PageDefaultProps) {
       <Head>
         <title>The Daily Stakes - Cart</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <section className={styles.cartItemsSection}>

@@ -17,7 +17,7 @@ import {
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType } from '@type/Main';
+import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 
 const SPORTS_INFO = [
@@ -59,13 +59,13 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard() {
+export default function SportsCard({ token }: PageProps) {
   return (
     <>
       <Head>
         <title>The Daily Stakes - VIP All Access Card</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />

@@ -25,13 +25,14 @@ import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
 import { formatCreditCardNumber, formatCVC, formatExpirationDate } from '@utils/creditCard';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { PageProps } from '@type/Main';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
   verify_password: string | undefined;
 };
 
-export default function MemberProfile() {
+export default function MemberProfile({ token }: PageProps) {
   const packages: Package[] = [
     {
       id: 1,
@@ -180,7 +181,7 @@ export default function MemberProfile() {
       <Head>
         <title>The Daily Stakes - Sports Card</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />

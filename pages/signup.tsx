@@ -217,7 +217,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
   );
 }
 
-export default function Registration({ packages }: PageDefaultProps) {
+export default function Registration({ packages, token }: PageDefaultProps) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { error: signupError, profile, loading } = useSelector((state: ReduxState) => state.user);
@@ -360,7 +360,7 @@ export default function Registration({ packages }: PageDefaultProps) {
       <Head>
         <title>The Daily Stakes - Registration</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <div className={styles.sectionTitle}>Select a Membership package</div>

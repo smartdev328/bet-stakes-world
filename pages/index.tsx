@@ -8,21 +8,21 @@ import { useRouter } from 'next/router';
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { SlickArrowType, SportCardsSelectionType } from '@type/Main';
+import { PageProps, SlickArrowType, SportCardsSelectionType } from '@type/Main';
 import styles from '@styles/Home.module.css';
 
 const Carousel = dynamic(() => import('antd/lib/carousel'));
 const Rate = dynamic(() => import('antd/lib/rate'));
 const Button = dynamic(() => import('antd/lib/button'));
 
-export default function Home() {
+export default function Home({ token }: PageProps) {
   return (
     <>
       <Head>
         <title>The Daily Stakes</title>
         <meta name="description" content="Daily Stakes Homepage" />
       </Head>
-      <AppLayout>
+      <AppLayout token={token}>
         <HeroBanner />
         <MembershipOfferings />
         <OurDailyStandards />

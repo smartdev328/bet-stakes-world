@@ -8,15 +8,15 @@ import moment from 'moment';
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, YesterdayPlayInfoType } from '@type/Main';
+import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
 
-export default function MemberDashboard() {
+export default function MemberDashboard({ token }: PageProps) {
   return (
     <>
       <Head>
         <title>The Daily Stakes - Member Dashboard</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />

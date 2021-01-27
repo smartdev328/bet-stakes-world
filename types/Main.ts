@@ -1,6 +1,10 @@
 import { Package } from './Packages';
 import { Sport } from './Sports';
 
+export type PageProps = {
+  token: JWT | null;
+};
+
 export type SVGIconPropType = {
   className: string;
   onClick?: () => void;
@@ -84,6 +88,7 @@ export type DailyLineupType = {
 export type PageDefaultProps = {
   packages: Package[];
   sports?: Sport[];
+  token: JWT | null;
 };
 
 export type JWT = {

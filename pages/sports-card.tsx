@@ -18,7 +18,7 @@ import {
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, SportInfoType } from '@type/Main';
+import { EarliestGameInfoType, PageProps, SportInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import LazyLoad from 'react-lazyload';
 
@@ -61,7 +61,7 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard() {
+export default function SportsCard({ token }: PageProps) {
   const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
   const lockedItems = ['NBA', 'NFL'];
 
@@ -70,7 +70,7 @@ export default function SportsCard() {
       <Head>
         <title>The Daily Stakes - Sports Card</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection

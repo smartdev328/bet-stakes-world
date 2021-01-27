@@ -9,7 +9,7 @@ import LazyLoad from 'react-lazyload';
 import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import { AntiClockIcon, DateRangeIcon, IdentityIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
-import { DailyLineupType, SportInfoType } from '@type/Main';
+import { DailyLineupType, PageProps, SportInfoType } from '@type/Main';
 import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
 
 const SPORTS_INFO = [
@@ -33,7 +33,7 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard() {
+export default function SportsCard({ token }: PageProps) {
   const lockedItems = ['NBA'];
 
   return (
@@ -41,7 +41,7 @@ export default function SportsCard() {
       <Head>
         <title>The Daily Stakes - Fantasy Daily Lineups</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection lockedItems={lockedItems} openUnlockModal={() => {}} />

@@ -16,9 +16,9 @@ import {
 } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
-import { SportInfoType } from '@type/Main';
+import { SportInfoType, PageProps } from '@type/Main';
 
-export default function Shop() {
+export default function Shop({ token }: PageProps) {
   const [currentPlan, setCurrentPlan] = useState<string>('all');
 
   return (
@@ -26,7 +26,7 @@ export default function Shop() {
       <Head>
         <title>The Daily Stakes - Shop</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />

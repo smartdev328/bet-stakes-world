@@ -8,7 +8,7 @@ import LazyLoad from 'react-lazyload';
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import { LockIcon } from '@components/SvgIcons';
 import styles from '@styles/YesterdaysPlays.module.css';
-import { SportInfoType, YesterdayPlayInfoType } from '@type/Main';
+import { PageProps, SportInfoType, YesterdayPlayInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 
 const SPORTS_INFO = [
@@ -159,7 +159,7 @@ const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [
   }
 ];
 
-export default function YesterdaysPlays() {
+export default function YesterdaysPlays({ token }: PageProps) {
   const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
   const lockedItems = ['NBA', 'NFL'];
   const [yesterdayPlays, setYesterdayPlays] = useState<YesterdayPlayInfoType[]>(
@@ -182,7 +182,7 @@ export default function YesterdaysPlays() {
       <Head>
         <title>The Daily Stakes - Yesterdays plays</title>
       </Head>
-      <AppLayout bgColor={'#ffffff'}>
+      <AppLayout token={token} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Image, Row, Button, Col, Dropdown, Menu, notification, Spin } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, notification, Spin } from 'antd';
 import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -18,7 +18,11 @@ import { Sport } from '@type/Sports';
 function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
-      <Image src="/images/member_dashboard.jpg" preview={false} className={styles.bgImage} />
+      <img
+        src="/images/member_dashboard.jpg"
+        alt="Member Dashboard Background"
+        className={styles.bgImage}
+      />
       <BannerSportsAndMatches />
     </div>
   );
@@ -48,7 +52,11 @@ function CurrentPackages({ subscriptions }: { subscriptions: UserSubscription[] 
             <div className={styles.package_card}>
               <div className={styles.package_status}>Renews in 23 days</div>
               <div className={styles.package_card_content}>
-                <Image src="/images/sports_card_bg.png" className={styles.package_card_img} />
+                <img
+                  alt="Sports Card Background"
+                  src="/images/sports_card_bg.png"
+                  className={styles.package_card_img}
+                />
                 <div className={styles.package_title}>
                   <h3>Sports Card</h3>
                   <p>Monthly Picks</p>
@@ -60,7 +68,11 @@ function CurrentPackages({ subscriptions }: { subscriptions: UserSubscription[] 
             <div className={styles.package_card}>
               <div className={styles.package_status}>Expired 2 day ago</div>
               <div className={styles.package_card_content}>
-                <Image src="/images/daily_lineups_bg.png" className={styles.package_card_img} />
+                <img
+                  alt="Daily lineups Background"
+                  src="/images/daily_lineups_bg.png"
+                  className={styles.package_card_img}
+                />
                 <div className={styles.package_title}>
                   <h3>Fantasy</h3>
                   <p>Daily lineups</p>
@@ -95,7 +107,11 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
       <div className={styles.block_title}>Weekly Pro Tip</div>
       <div className={styles.block_content}>
         <p className={styles.weekly_pro_tip_intro}>{data.slug}</p>
-        <Image src="/images/badminton_player.jpg" className={styles.weekly_pro_tip_img} />
+        <img
+          alt="Weekly Pro Tip Image"
+          src="/images/badminton_player.jpg"
+          className={styles.weekly_pro_tip_img}
+        />
         <h4>{data.title}</h4>
         <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
       </div>

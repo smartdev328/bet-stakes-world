@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
       setSports(data);
     }
     if (parsedToken && subscriptions.length === 0) {
-      const res2 = SubscriptionsAPIs.getSubscriptions(parsedToken.id);
+      const res2 = await SubscriptionsAPIs.getSubscriptions(parsedToken.id);
       const data2 = await res2.json();
       setSubscriptions(data2);
     }

@@ -18,7 +18,7 @@ import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@compone
 import styles from '@styles/Shop.module.css';
 import { SportInfoType, PageProps } from '@type/Main';
 
-export default function Shop({ token }: PageProps) {
+export default function Shop({ token, subscriptions }: PageProps) {
   const [currentPlan, setCurrentPlan] = useState<string>('all');
 
   return (
@@ -26,7 +26,7 @@ export default function Shop({ token }: PageProps) {
       <Head>
         <title>The Daily Stakes - Shop</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />

@@ -5,6 +5,7 @@ import { UserSubscription } from './Users';
 export type PageProps = {
   token: JWT | null;
   sports: Sport[];
+  packages?: Package[];
   subscriptions: UserSubscription[];
 };
 
@@ -99,12 +100,6 @@ export type DailyLineupType = {
   fppg: number;
   oprk: string;
   price: number;
-};
-
-export type PageDefaultProps = {
-  packages: Package[];
-  sports?: Sport[];
-  token: JWT | null;
 };
 
 export type JWT = {

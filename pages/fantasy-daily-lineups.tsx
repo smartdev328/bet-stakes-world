@@ -41,7 +41,7 @@ export default function SportsCard({ token }: PageProps) {
       <Head>
         <title>The Daily Stakes - Fantasy Daily Lineups</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection lockedItems={lockedItems} openUnlockModal={() => {}} />

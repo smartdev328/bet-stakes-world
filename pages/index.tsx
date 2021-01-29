@@ -15,14 +15,14 @@ const Carousel = dynamic(() => import('antd/lib/carousel'));
 const Rate = dynamic(() => import('antd/lib/rate'));
 const Button = dynamic(() => import('antd/lib/button'));
 
-export default function Home({ token }: PageProps) {
+export default function Home({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
         <title>The Daily Stakes</title>
         <meta name="description" content="Daily Stakes Homepage" />
       </Head>
-      <AppLayout token={token}>
+      <AppLayout token={token} subscriptions={subscriptions}>
         <HeroBanner />
         <MembershipOfferings />
         <OurDailyStandards />

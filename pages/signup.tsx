@@ -11,7 +11,7 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { NormalCheckIcon, EmptyCircleIcon, CheckedCircleIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { PageDefaultProps, SportInfoType } from '@type/Main';
+import { PageProps, SportInfoType } from '@type/Main';
 import { BillingPlan, Package, PackageBillingPlan } from '@type/Packages';
 import { CreateUserType, CreateUserValidateType } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
@@ -217,7 +217,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
   );
 }
 
-export default function Registration({ packages, token }: PageDefaultProps) {
+export default function Registration({ packages, token, subscriptions }: PageProps) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { error: signupError, profile, loading } = useSelector((state: ReduxState) => state.user);
@@ -360,13 +360,13 @@ export default function Registration({ packages, token }: PageDefaultProps) {
       <Head>
         <title>The Daily Stakes - Registration</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <div className={styles.sectionTitle}>Select a Membership package</div>
           <Row>
             <div className={styles.packagesCol}>
-              {packages.map((pack: Package) => (
+              {packages?.map((pack: Package) => (
                 <SportsCardPackage
                   key={pack.id}
                   data={pack}

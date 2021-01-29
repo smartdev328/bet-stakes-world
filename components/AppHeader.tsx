@@ -124,8 +124,8 @@ function SubMenu({
               <Link href="/member-dashboard">
                 <a
                   onMouseOver={hidePanes}
-                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                  {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
                   Member Dashboard
                 </a>
               </Link>

@@ -9,7 +9,7 @@ import { AppLayout, BannerSportsAndMatches, YellowCheckBox } from '@components/i
 import styles from '@styles/Cart.module.css';
 import { CartItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
-import { PageDefaultProps } from '@type/Main';
+import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
 
 function HeroBanner() {
@@ -170,7 +170,7 @@ function PlanDropdown({
   );
 }
 
-export default function Cart({ packages, token }: PageDefaultProps) {
+export default function Cart({ packages, token, subscriptions }: PageProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>(Mock_CartItems);
   const changeCartItem = (index: number, key: keyof CartItem, value: string | boolean) => {
     const updated = cartItems.slice();
@@ -199,7 +199,7 @@ export default function Cart({ packages, token }: PageDefaultProps) {
       <Head>
         <title>The Daily Stakes - Cart</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <section className={styles.cartItemsSection}>

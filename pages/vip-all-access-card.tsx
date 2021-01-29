@@ -59,13 +59,13 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token }: PageProps) {
+export default function SportsCard({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
         <title>The Daily Stakes - VIP All Access Card</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />

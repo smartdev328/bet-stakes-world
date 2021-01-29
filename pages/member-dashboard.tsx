@@ -239,59 +239,62 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
             </Col>
           </Row>
         )}
-        {games.map((game: EarliestGameInfoType, index: number) => (
-          <div className={styles.game} key={game.id}>
-            <div className={styles.game_subinfo}>
-              <SportTile sport={game.sport.name} />
-              <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-            </div>
-            <div className={styles.game_info}>
-              <div className={styles.game_teams}>
-                <Row>
-                  <div className={styles.game_team1}>
-                    <img
-                      src={'https://via.placeholder.com/100'}
-                      alt="Team Logo"
-                      className={styles.team_logo}
-                    />
-                    <span>{game.schedules[0].team}&nbsp;@&nbsp;</span>
-                  </div>
-                  <div className={styles.game_team2}>
-                    <img
-                      src={'https://via.placeholder.com/100'}
-                      alt="Team Logo"
-                      className={styles.team_logo}
-                    />
-                    <span>{game.schedules[0].home_team}</span>
-                  </div>
-                </Row>
-                <Row align={'top'} wrap={false}>
-                  <LongArrowIcon className={styles.long_arrow_icon} />
-                  <span className={styles.desc_line}>
-                    {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
-                  </span>
-                </Row>
+        {!loading &&
+          games.map((game: EarliestGameInfoType, index: number) => (
+            <div className={styles.game} key={game.id}>
+              <div className={styles.game_subinfo}>
+                <SportTile sport={game.sport.name} />
+                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
               </div>
-              <div className={styles.units}>{`${game.units} Unit${game.units > 1 ? 's' : ''}`}</div>
-            </div>
-            <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-              <div className={styles.hide_details_btn}>
-                <span>View Details</span>
-                {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+              <div className={styles.game_info}>
+                <div className={styles.game_teams}>
+                  <Row>
+                    <div className={styles.game_team1}>
+                      <img
+                        src={'https://via.placeholder.com/100'}
+                        alt="Team Logo"
+                        className={styles.team_logo}
+                      />
+                      <span>{game.schedules[0].team}&nbsp;@&nbsp;</span>
+                    </div>
+                    <div className={styles.game_team2}>
+                      <img
+                        src={'https://via.placeholder.com/100'}
+                        alt="Team Logo"
+                        className={styles.team_logo}
+                      />
+                      <span>{game.schedules[0].home_team}</span>
+                    </div>
+                  </Row>
+                  <Row align={'top'} wrap={false}>
+                    <LongArrowIcon className={styles.long_arrow_icon} />
+                    <span className={styles.desc_line}>
+                      {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
+                    </span>
+                  </Row>
+                </div>
+                <div className={styles.units}>{`${game.units} Unit${
+                  game.units > 1 ? 's' : ''
+                }`}</div>
               </div>
-            </div>
-            {showDetailsAt[index] && (
-              <div className={styles.details_section}>
-                <ul>
-                  {game.detail.split('\n').map((unit: string, i: number) => (
-                    <li key={i}>{unit.replace('-', '')}</li>
-                  ))}
-                </ul>
+              <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
+                <div className={styles.hide_details_btn}>
+                  <span>View Details</span>
+                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+              {showDetailsAt[index] && (
+                <div className={styles.details_section}>
+                  <ul>
+                    {game.detail.split('\n').map((unit: string, i: number) => (
+                      <li key={i}>{unit.replace('-', '')}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );

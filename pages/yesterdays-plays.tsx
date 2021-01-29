@@ -159,7 +159,7 @@ const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [
   }
 ];
 
-export default function YesterdaysPlays({ token }: PageProps) {
+export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
   const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
   const lockedItems = ['NBA', 'NFL'];
   const [yesterdayPlays, setYesterdayPlays] = useState<YesterdayPlayInfoType[]>(
@@ -182,7 +182,7 @@ export default function YesterdaysPlays({ token }: PageProps) {
       <Head>
         <title>The Daily Stakes - Yesterdays plays</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection

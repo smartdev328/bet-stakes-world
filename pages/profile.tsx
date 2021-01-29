@@ -32,7 +32,7 @@ type ProfileFormType = UserProfile & {
   verify_password: string | undefined;
 };
 
-export default function MemberProfile({ token }: PageProps) {
+export default function MemberProfile({ token, subscriptions }: PageProps) {
   const packages: Package[] = [
     {
       id: 1,
@@ -181,7 +181,7 @@ export default function MemberProfile({ token }: PageProps) {
       <Head>
         <title>The Daily Stakes - Sports Card</title>
       </Head>
-      <AppLayout token={token} bgColor={'#ffffff'}>
+      <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
           <TopSection />

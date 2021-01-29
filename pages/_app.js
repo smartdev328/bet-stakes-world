@@ -15,6 +15,7 @@ import 'antd/lib/carousel/style/index.css';
 import 'antd/lib/rate/style/index.css';
 import 'antd/lib/notification/style/index.css';
 import 'antd/lib/modal/style/index.css';
+import 'antd/lib/spin/style/index.css';
 import '../styles/globals.css';
 
 const FULL_ACCESS_ROUTES = [

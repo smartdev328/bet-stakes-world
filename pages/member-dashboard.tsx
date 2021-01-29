@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Image, Row, Button, Col, Dropdown, Menu, notification } from 'antd';
+import { Image, Row, Button, Col, Dropdown, Menu, notification, Spin } from 'antd';
 import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -110,6 +110,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
   const [selectedBetType, setSelectedBetType] = useState<number>(0);
   const [selectedSportType, setSelectedSportType] = useState<number>(-1);
   const [games, setGames] = useState<EarliestGameInfoType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const SportBetTypes = [
     {
@@ -128,6 +129,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
 
   useEffect(() => {
     // Fetch Earliest games
+    setLoading(true);
     SportsAPIs.getSportEntries(
       SportBetTypes[selectedBetType].id,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
@@ -135,6 +137,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
       .then((res) => res.json())
       .then((data) => {
         setGames(data);
+        setLoading(false);
       });
   }, [selectedBetType, selectedSportType]);
 
@@ -225,10 +228,17 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
         </Row>
       </div>
       <div className={styles.earliest_games_titlebar}>
-        <strong>Straight Bets</strong>
+        <strong>{SportBetTypes[selectedBetType].name}</strong>
         <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
       </div>
       <div className={styles.earliest_games_list}>
+        {loading && (
+          <Row justify={'center'}>
+            <Col>
+              <Spin />
+            </Col>
+          </Row>
+        )}
         {games.map((game: EarliestGameInfoType, index: number) => (
           <div className={styles.game} key={game.id}>
             <div className={styles.game_subinfo}>

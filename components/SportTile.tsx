@@ -59,7 +59,9 @@ const SPORTS_INFO = [
 ];
 
 const SportTile = ({ sport }: SportTilePropsType) => {
-  const selectedSport = SPORTS_INFO.filter((sp) => sp.name === sport)[0];
+  const selectedSport = SPORTS_INFO.filter(
+    (sp) => sp.name.toLowerCase() === sport.toLowerCase()
+  )[0];
   return (
     <div
       className={`${styles.sportTileBtn} ${styles['sportTile_' + selectedSport.id]}`}

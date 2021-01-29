@@ -1,8 +1,11 @@
 import { Package } from './Packages';
 import { Sport } from './Sports';
+import { UserSubscription } from './Users';
 
 export type PageProps = {
   token: JWT | null;
+  sports: Sport[];
+  subscriptions: UserSubscription[];
 };
 
 export type SVGIconPropType = {
@@ -43,31 +46,45 @@ export type SlickArrowType = {
   currentSlide?: number;
 };
 
-type TeamInfo = {
+export type Schedule = {
+  active: boolean;
+  home_team: number;
+  id: number;
   name: string;
-  logo: string;
-  score?: number;
+  published_at: Date;
+  status: boolean;
+  team: number;
+  time: Date;
 };
 
 export type EarliestGameInfoType = {
+  bet_text: string;
+  detail: string;
   id: number;
-  startDate: string;
-  sportType: string;
-  teams: TeamInfo[];
-  state: string;
   odds: number;
-  price: number;
-  units: string[];
+  odds_decimal: number;
+  outcome: number | null;
+  publish_date: Date;
+  schedules: Schedule[];
+  score: number | null;
+  sport: Sport;
+  type: 'straight' | 'wilcard' | 'parlay';
+  units: number;
 };
 
 export type YesterdayPlayInfoType = {
+  bet_text: string;
+  detail: string;
   id: number;
-  startDate: string;
-  sportType: string;
-  teams: TeamInfo[];
-  state: string;
   odds: number;
-  price: number;
+  odds_decimal: number;
+  outcome: number | null;
+  publish_date: Date;
+  schedules: Schedule[];
+  score: number | null;
+  sport: Sport;
+  type: 'straight' | 'wilcard' | 'parlay';
+  units: number;
   isWinner: boolean;
   patriots?: boolean;
 };

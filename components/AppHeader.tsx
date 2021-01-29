@@ -13,7 +13,6 @@ import {
   CloseIcon,
   HamburgerMenuIcon
 } from '@components/SvgIcons';
-import SubscriptionsAPIs from '@apis/subscriptions.apis';
 import { LoginModal, ForgotPasswordModal, ResetPasswordModal } from '@components/index';
 import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
@@ -27,6 +26,7 @@ type HeaderProps = {
   curRecord: string;
   currentDateTime: string;
   token: JWT | null;
+  subscriptions: UserSubscription[];
 };
 
 type RemainingTimeType = {
@@ -515,11 +515,11 @@ export default function AppHeader({
   curRecord,
   winningRate,
   currentDateTime,
-  token
+  token,
+  subscriptions: userSubscriptions
 }: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
-  const [userSubscriptions, setUserSubscriptions] = useState<UserSubscription[]>([]);
   const dispatch = useDispatch();
   useEffect(() => {
     const remainingTimeInterval = setInterval(() => {
@@ -528,20 +528,8 @@ export default function AppHeader({
     }, 1000);
     return () => {
       clearInterval(remainingTimeInterval);
-      dispatch({ type: 'CLOSE_MODAL' });
     };
   }, []);
-
-  // Fetch Subscriptions
-  useEffect(() => {
-    if (token) {
-      SubscriptionsAPIs.getSubscriptions(token.id)
-        .then((res) => res.json())
-        .then((data) => {
-          setUserSubscriptions(data);
-        });
-    }
-  }, [token]);
 
   const openLoginModal = () => {
     dispatch({ type: 'OPEN_LOGIN_MODAL' });

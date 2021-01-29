@@ -1,11 +1,6 @@
 import { Row, Button, Col } from 'antd';
 
-import {
-  ThickStarIcon,
-  CaretDownInCircleIcon,
-  ConfigIcon,
-  MobilePhoneIcon
-} from '@components/SvgIcons';
+import { ThickStarIcon, MobilePhoneIcon } from '@components/SvgIcons';
 import styles from './DashboardHeader.module.css';
 
 type DashboardHeaderPropsType = {
@@ -23,9 +18,6 @@ const DashboardHeader = ({ title }: DashboardHeaderPropsType) => {
                 <ThickStarIcon className={styles.thick_star_icon} />
               </Button>
               <span>{title}</span>
-              <Button ghost className={styles.caret_down_btn}>
-                <CaretDownInCircleIcon className={styles.caret_down_icon} />
-              </Button>
             </Row>
           </Col>
         </Row>
@@ -34,9 +26,6 @@ const DashboardHeader = ({ title }: DashboardHeaderPropsType) => {
         <Button className={styles.sms_send_btn}>
           <MobilePhoneIcon className={styles.mobile_phone_icon} />
           Receive alerts via text!
-        </Button>
-        <Button ghost className={styles.config_btn}>
-          <ConfigIcon className={styles.config_btn_icon} />
         </Button>
       </Col>
     </Row>

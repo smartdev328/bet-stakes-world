@@ -344,7 +344,7 @@ function YesterdayPlays() {
         {games.map((game: YesterdayPlayInfoType, index: number) => (
           <React.Fragment key={index}>
             <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={game.id}>
-              <div className={styles.game_status}>{game.isWinner ? 'W' : 'L'}</div>
+              <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
               <div className={styles.game_main}>
                 <div className={styles.game_subinfo}>
                   <SportTile sport={game.sport.name} />
@@ -391,7 +391,7 @@ function YesterdayPlays() {
                     </Row>
                   </div>
                   <div className={`${styles.game_score} ${game.patriots && styles.has_patriots}`}>
-                    35 - 31
+                    {game.score}
                   </div>
                 </div>
               </div>

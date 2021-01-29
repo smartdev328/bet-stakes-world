@@ -78,14 +78,13 @@ export type YesterdayPlayInfoType = {
   id: number;
   odds: number;
   odds_decimal: number;
-  outcome: number | null;
+  outcome: 'LOSS' | 'WIN' | 'PUSH';
   publish_date: Date;
   schedules: Schedule[];
-  score: number | null;
+  score: string | null;
   sport: Sport;
   type: 'straight' | 'wilcard' | 'parlay';
   units: number;
-  isWinner: boolean;
   patriots?: boolean;
 };
 

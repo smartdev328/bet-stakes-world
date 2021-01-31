@@ -3,10 +3,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { Row, Button } from 'antd';
 import LazyLoad from 'react-lazyload';
-import Link from 'next/link';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
-import { CartAddOnType, CartType, CartSportCardType } from '@type/Cart';
+import { CartItem } from '@type/Cart';
 import {
   PlusIcon,
   EmptyCircleIcon,
@@ -16,10 +15,15 @@ import {
 } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
-import { SportInfoType, PageProps } from '@type/Main';
+import { PageProps } from '@type/Main';
+import PackageAPIs from '@apis/package.apis';
+import { BillingPlan, Package } from '@type/Packages';
+import { Sport } from '@type/Sports';
 
-export default function Shop({ token, subscriptions }: PageProps) {
+export default function Shop({ token, subscriptions, packages, sports }: PageProps) {
   const [currentPlan, setCurrentPlan] = useState<string>('all');
+
+  console.log('-------- packages:', packages);
 
   return (
     <>
@@ -33,21 +37,35 @@ export default function Shop({ token, subscriptions }: PageProps) {
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
               <IntroForSportsCard />
-              <ProductsAndCartBoxForSportsCard />
+              {packages && (
+                <ProductsAndCartBoxForSportsCard
+                  sports={sports}
+                  pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
+                />
+              )}
               <FAQs title={'Sports Card FAQ'} />
             </div>
           )}
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
-              <ProductsAndCartBox />
+              {packages && (
+                <ProductsAndCartBox
+                  pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
+                />
+              )}
               <FAQs title={'VIP All Access Card FAQ'} />
             </div>
           )}
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
-              <ProductsAndCartBoxForFantasy />
+              {packages && (
+                <ProductsAndCartBoxForFantasy
+                  sports={sports}
+                  pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
+                />
+              )}
               <FAQs title={'FANTASY FAQ'} />
             </div>
           )}
@@ -208,96 +226,53 @@ function FAQs({ title }: { title: string }) {
   );
 }
 
-function ProductsAndCartBox() {
-  const CardOptions: CartSportCardType[] = [
-    {
-      title: '* Daily *',
-      price: 40
-    },
-    {
-      title: 'Weekly',
-      price: 120
-    },
-    {
-      title: 'Monthly',
-      price: 300
-    },
-    {
-      title: 'Quarterly',
-      price: 600
-    },
-    {
-      title: 'Semi-Annual',
-      price: 850
-    },
-    {
-      title: 'Annual',
-      price: 1000
-    }
-  ];
-  const AddOns: CartAddOnType[] = [
-    {
-      title: 'Expert Bankroll MGMT',
-      id: '',
-      price: 55
-    }
-  ];
-  const [cart, setCart] = useState<CartType>({ sportCard: CardOptions[0], addOn: AddOns[0] });
+function ProductsAndCartBox({ pack }: { pack: Package }) {
+  const [tempCart, setTempCart] = useState<BillingPlan[]>([]);
 
-  const changeSportCard = (card: CartSportCardType) => {
-    if (cart.sportCard.title === card.title) {
-      setCart({
-        ...cart,
-        sportCard: {
-          title: undefined,
-          price: undefined
-        }
-      });
-    } else {
-      setCart({
-        ...cart,
-        sportCard: card
-      });
-    }
+  const changeSportCard = (plan: BillingPlan) => {
+    const newCart = tempCart.slice();
+    newCart[0] = plan;
+    setTempCart(newCart);
   };
 
-  const changeAddOn = (addOn: CartAddOnType) => {
-    if (cart.addOn.title === addOn.title) {
-      setCart({
-        ...cart,
-        addOn: {
-          title: undefined,
-          price: undefined
-        }
-      });
+  const changeAddOn = (plan: BillingPlan) => {
+    const newCart = tempCart.slice();
+    if (plan.id === newCart[1].id) {
+      delete newCart[1];
     } else {
-      setCart({
-        ...cart,
-        addOn
-      });
+      newCart[1] = plan;
     }
+    setTempCart(newCart);
   };
 
-  const totalPrice =
-    (cart.sportCard.price ? cart.sportCard.price : 0) + (cart.addOn.price ? cart.addOn.price : 0);
+  let totalPrice = 0;
+  tempCart.forEach((item) => {
+    totalPrice += item.price;
+  });
+
+  pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
+  const billingPlans = pack.billing_plans.filter(
+    (plan) => plan.description === null || plan.description === ''
+  );
+
   return (
     <>
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
-          {CardOptions.map((card, index) => (
+          {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={cart.sportCard.title === card.title ? styles.active : ''}
-              onClick={() => changeSportCard(card)}>
-              {cart.sportCard.title === card.title && (
+              className={tempCart[0]?.name === plan.name ? styles.active : ''}
+              onClick={() => changeSportCard(plan)}>
+              {tempCart[0]?.name === plan.name && (
                 <CheckedCircleIcon className={styles.checkedStatusIcon} />
               )}
-              {cart.sportCard.title !== card.title && (
+              {tempCart[0]?.name !== plan.name && (
                 <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
               )}
-              <span className={styles.sportsCard_name}>{card.title}</span>
-              <span className={styles.sportsCard_value}>${card.price}.00</span>
+              <span className={styles.sportsCard_name}>{plan.duration}</span>
+              <span className={styles.sportsCard_value}>${plan.price}.00</span>
             </li>
           ))}
         </ul>
@@ -309,8 +284,8 @@ function ProductsAndCartBox() {
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
               <div>
-                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+                {tempCart[0] && <p>{tempCart[0]?.name}</p>}
+                {tempCart[1] && <p>{`+ ${tempCart[1]?.name}`}</p>}
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
@@ -318,31 +293,30 @@ function ProductsAndCartBox() {
           </div>
         </div>
       </div>
-      <div className={styles.packageAddOns}>
-        <div className={styles.sectionTitle}>Package Add-Ons</div>
-        <ul>
-          {AddOns.map((addOn, index) => (
-            <li
-              key={index}
-              className={cart.addOn.title === addOn.title ? styles.active : ''}
-              onClick={() => changeAddOn(addOn)}>
-              {cart.addOn.title === addOn.title && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {cart.addOn.title !== addOn.title && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <div className={styles.sportsCard_name_row}>
-                <span className={styles.sportsCard_name}>{addOn.title}</span>
-                <Link href="/">
-                  <a>View Details</a>
-                </Link>
-              </div>
-              <span className={styles.sportsCard_value}>${addOn.price}.00</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* {pack.addOns && (
+        <div className={styles.packageAddOns}>
+          <div className={styles.sectionTitle}>Package Add-Ons</div>
+          <ul>
+            {pack.addOns.map((addOn, index) => (
+              <li
+                key={index}
+                className={tempCart[1]?.name === addOn.name ? styles.active : ''}
+                onClick={() => changeAddOn(addOn)}>
+                {tempCart[1]?.name === addOn.name && (
+                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                )}
+                {tempCart[1]?.name !== addOn.name && (
+                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                )}
+                <div className={styles.sportsCard_name_row}>
+                  <span className={styles.sportsCard_name}>{addOn.name}</span>
+                </div>
+                <span className={styles.sportsCard_value}>${addOn.price}.00</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
     </>
   );
 }
@@ -377,59 +351,34 @@ function IntroForFantasy() {
   );
 }
 
-function ProductsAndCartBoxForFantasy() {
-  const CardOptions: CartSportCardType[] = [
-    {
-      title: 'Daily Lineups',
-      price: 10
-    },
-    {
-      title: 'Seasonal Lineups',
-      price: 100
-    }
-  ];
-  const AddOns: CartAddOnType[] = [
-    {
-      title: 'Season Lineup Changes',
-      id: '',
-      price: 40
-    }
-  ];
-  const [cart, setCart] = useState<CartType>({ sportCard: CardOptions[0], addOn: AddOns[0] });
-  const [sportsStatus, setSportsStatus] = useState<boolean[]>([]);
+function ProductsAndCartBoxForFantasy({ sports, pack }: { sports: Sport[]; pack: Package }) {
+  const [tempCart, setTempCart] = useState<CartItem[]>([]);
+  const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
-  const changeSportCard = (card: CartSportCardType) => {
-    if (cart.sportCard.title === card.title) {
-      setCart({
-        ...cart,
-        sportCard: {
-          title: undefined,
-          price: undefined
-        }
-      });
+  const changeSportCard = (plan: BillingPlan) => {
+    const newCart = tempCart.slice();
+    const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+    if (itemIdx > -1) {
+      if (newCart[itemIdx].plan.duration !== plan.duration) {
+        newCart.splice(itemIdx, 1);
+        newCart.push({
+          sports: activeSport,
+          plan,
+          auto_renewal: false,
+          owner: 10
+        });
+      } else {
+        newCart.splice(itemIdx, 1);
+      }
     } else {
-      setCart({
-        ...cart,
-        sportCard: card
+      newCart.push({
+        sports: activeSport,
+        plan,
+        auto_renewal: false,
+        owner: 10
       });
     }
-  };
-
-  const changeAddOn = (addOn: CartAddOnType) => {
-    if (cart.addOn.title === addOn.title) {
-      setCart({
-        ...cart,
-        addOn: {
-          title: undefined,
-          price: undefined
-        }
-      });
-    } else {
-      setCart({
-        ...cart,
-        addOn
-      });
-    }
+    setTempCart(newCart);
   };
 
   const SPORTS_INFO = [
@@ -452,28 +401,48 @@ function ProductsAndCartBoxForFantasy() {
       logo: () => <MLB_SVG className={styles.sports_logo} />
     }
   ];
-  const onChangeItemAt = (index: number) => {
-    const items = sportsStatus.slice();
-    items[index] = !items[index];
-    setSportsStatus(items);
+
+  const onChangeItemAt = (sport: Sport) => {
+    setActiveSport(sport);
   };
 
-  const totalPrice =
-    (cart.sportCard.price ? cart.sportCard.price : 0) + (cart.addOn.price ? cart.addOn.price : 0);
+  let totalPrice = 0;
+  tempCart.forEach((item) => {
+    totalPrice += item.plan.price;
+  });
+  pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
+  const billingPlans = pack.billing_plans.filter(
+    (plan) => plan.description === null || plan.description === ''
+  );
+
   return (
     <>
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select any number of sports</div>
         <div className={styles.sportsTypeContent}>
-          {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+          {sports.slice(0, 3).map((sport: Sport, index: number) => (
             <div key={index}>
-              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(index)}>
+              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(sport)}>
                 <div
-                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                  className={`${styles.dropdownBtn} ${
+                    styles[
+                      'dropdown_' +
+                        SPORTS_INFO.filter(
+                          (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                        )[0]?.id
+                    ]
+                  }`}
                   style={{
-                    background: sportsStatus[index] ? sport.background : ''
+                    background:
+                      activeSport.id === sport.id
+                        ? SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.background
+                        : ''
                   }}>
-                  {sport.logo()}
+                  {SPORTS_INFO.filter(
+                    (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                  )[0]?.logo()}
                   <span>{sport.name}</span>
                 </div>
               </Button>
@@ -484,19 +453,25 @@ function ProductsAndCartBoxForFantasy() {
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
-          {CardOptions.map((card, index) => (
+          {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={cart.sportCard.title === card.title ? styles.active : ''}
-              onClick={() => changeSportCard(card)}>
-              {cart.sportCard.title === card.title && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {cart.sportCard.title !== card.title && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <span className={styles.sportsCard_name}>{card.title}</span>
-              <span className={styles.sportsCard_value}>${card.price}.00</span>
+              className={
+                tempCart.filter(
+                  (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                ).length > 0
+                  ? styles.active
+                  : ''
+              }
+              onClick={() => changeSportCard(plan)}>
+              {tempCart.filter(
+                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+              ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
+              {tempCart.filter(
+                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+              ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+              <span className={styles.sportsCard_name}>{plan.duration}</span>
+              <span className={styles.sportsCard_value}>${plan.price}.00</span>
             </li>
           ))}
         </ul>
@@ -508,8 +483,11 @@ function ProductsAndCartBoxForFantasy() {
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
               <div>
-                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+                {tempCart.map((item, index) => (
+                  <p key={index}>
+                    {item.sports.name} - {item.plan.duration}
+                  </p>
+                ))}
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
@@ -517,7 +495,7 @@ function ProductsAndCartBoxForFantasy() {
           </div>
         </div>
       </div>
-      <div className={styles.packageAddOns}>
+      {/* <div className={styles.packageAddOns}>
         <div className={styles.sectionTitle}>Package Add-Ons</div>
         <ul>
           {AddOns.map((addOn, index) => (
@@ -541,7 +519,7 @@ function ProductsAndCartBoxForFantasy() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </>
   );
 }
@@ -580,60 +558,53 @@ function IntroForSportsCard() {
   );
 }
 
-function ProductsAndCartBoxForSportsCard() {
-  const CardOptions: CartSportCardType[] = [
-    {
-      title: 'Weekly',
-      price: 89
-    },
-    {
-      title: 'Monthly',
-      price: 289
-    }
-  ];
-  const AddOns: CartAddOnType[] = [
-    {
-      title: 'Expert Bankroll MGMT',
-      id: '',
-      price: 55
-    }
-  ];
-  const [cart, setCart] = useState<CartType>({ sportCard: CardOptions[0], addOn: AddOns[0] });
-  const [sportsStatus, setSportsStatus] = useState<boolean[]>([]);
+function ProductsAndCartBoxForSportsCard({ sports, pack }: { sports: Sport[]; pack: Package }) {
+  const [tempCart, setTempCart] = useState<CartItem[]>([]);
+  // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
+  const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
-  const changeSportCard = (card: CartSportCardType) => {
-    if (cart.sportCard.title === card.title) {
-      setCart({
-        ...cart,
-        sportCard: {
-          title: undefined,
-          price: undefined
-        }
-      });
+  const changeSportCard = (plan: BillingPlan) => {
+    const newCart = tempCart.slice();
+    const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+    if (itemIdx > -1) {
+      if (newCart[itemIdx].plan.duration !== plan.duration) {
+        newCart.splice(itemIdx, 1);
+        newCart.push({
+          sports: activeSport,
+          plan,
+          auto_renewal: false,
+          owner: 10
+        });
+      } else {
+        newCart.splice(itemIdx, 1);
+      }
     } else {
-      setCart({
-        ...cart,
-        sportCard: card
+      newCart.push({
+        sports: activeSport,
+        plan,
+        auto_renewal: false,
+        owner: 10
       });
     }
+    setTempCart(newCart);
   };
 
-  const changeAddOn = (addOn: CartAddOnType) => {
-    if (cart.addOn.title === addOn.title) {
-      setCart({
-        ...cart,
-        addOn: {
-          title: undefined,
-          price: undefined
-        }
-      });
-    } else {
-      setCart({
-        ...cart,
-        addOn
-      });
-    }
-  };
+  // const changeAddOn = (plan: BillingPlan) => {
+  //   const newCart = addOnTempCart.slice();
+  //   const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+  //   if (itemIdx > -1) {
+  //     newCart.splice(itemIdx, 1);
+  //     if (newCart[itemIdx].plan.duration !== plan.duration) {
+  //       newCart.push({
+  //         sports: activeSport,
+  //         plan,
+  //         auto_renewal: false,
+  //         owner: 10
+  //       });
+  //     }
+  //   }
+  //   setAddOnTempCart(newCart);
+  // };
 
   const SPORTS_INFO = [
     {
@@ -686,28 +657,48 @@ function ProductsAndCartBoxForSportsCard() {
     }
   ];
 
-  const onChangeItemAt = (index: number) => {
-    const items = sportsStatus.slice();
-    items[index] = !items[index];
-    setSportsStatus(items);
+  const onChangeItemAt = (sport: Sport) => {
+    setActiveSport(sport);
   };
 
-  const totalPrice =
-    (cart.sportCard.price ? cart.sportCard.price : 0) + (cart.addOn.price ? cart.addOn.price : 0);
+  let totalPrice = 0;
+  tempCart.forEach((item) => {
+    totalPrice += item.plan.price;
+  });
+
+  pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
+  const billingPlans = pack.billing_plans.filter(
+    (plan) => plan.description === null || plan.description === ''
+  );
+
   return (
     <>
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select any number of sports</div>
         <div className={styles.sportsTypeContent}>
-          {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+          {sports.map((sport: Sport, index: number) => (
             <div key={index}>
-              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(index)}>
+              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(sport)}>
                 <div
-                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                  className={`${styles.dropdownBtn} ${
+                    styles[
+                      'dropdown_' +
+                        SPORTS_INFO.filter(
+                          (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                        )[0]?.id
+                    ]
+                  }`}
                   style={{
-                    background: sportsStatus[index] ? sport.background : ''
+                    background:
+                      activeSport.id === sport.id
+                        ? SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.background
+                        : ''
                   }}>
-                  {sport.logo()}
+                  {SPORTS_INFO.filter(
+                    (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                  )[0]?.logo()}
                   <span>{sport.name}</span>
                 </div>
               </Button>
@@ -718,19 +709,25 @@ function ProductsAndCartBoxForSportsCard() {
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
-          {CardOptions.map((card, index) => (
+          {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={cart.sportCard.title === card.title ? styles.active : ''}
-              onClick={() => changeSportCard(card)}>
-              {cart.sportCard.title === card.title && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {cart.sportCard.title !== card.title && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <span className={styles.sportsCard_name}>{card.title}</span>
-              <span className={styles.sportsCard_value}>${card.price}.00</span>
+              className={
+                tempCart.filter(
+                  (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                ).length > 0
+                  ? styles.active
+                  : ''
+              }
+              onClick={() => changeSportCard(plan)}>
+              {tempCart.filter(
+                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+              ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
+              {tempCart.filter(
+                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+              ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+              <span className={styles.sportsCard_name}>{plan.duration}</span>
+              <span className={styles.sportsCard_value}>${plan.price}.00</span>
             </li>
           ))}
         </ul>
@@ -742,8 +739,11 @@ function ProductsAndCartBoxForSportsCard() {
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
               <div>
-                {cart.sportCard.title && <p>{cart.sportCard.title}</p>}
-                {cart.addOn.title && <p>{`+ ${cart.addOn.title}`}</p>}
+                {tempCart.map((item, index) => (
+                  <p key={index}>
+                    {item.sports.name} - {item.plan.duration}
+                  </p>
+                ))}
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
@@ -751,31 +751,39 @@ function ProductsAndCartBoxForSportsCard() {
           </div>
         </div>
       </div>
-      <div className={styles.packageAddOns}>
-        <div className={styles.sectionTitle}>Package Add-Ons</div>
-        <ul>
-          {AddOns.map((addOn, index) => (
-            <li
-              key={index}
-              className={cart.addOn.title === addOn.title ? styles.active : ''}
-              onClick={() => changeAddOn(addOn)}>
-              {cart.addOn.title === addOn.title && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {cart.addOn.title !== addOn.title && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <div className={styles.sportsCard_name_row}>
-                <span className={styles.sportsCard_name}>{addOn.title}</span>
-                <Link href="/">
-                  <a>View Details</a>
-                </Link>
-              </div>
-              <span className={styles.sportsCard_value}>${addOn.price}.00</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* {pack.addOns && (
+        <div className={styles.packageAddOns}>
+          <div className={styles.sectionTitle}>Package Add-Ons</div>
+          <ul>
+            {pack.addOns.map((addOn, index) => (
+              <li
+                key={index}
+                className={tempCart[0]?.plan.name === plan.name ? styles.active : ''}
+                onClick={() => changeSportCard(plan)}>
+                {tempCart[0]?.plan.name === plan.name && (
+                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                )}
+                {tempCart[0]?.plan.name !== plan.name && (
+                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                )}
+                <span className={styles.sportsCard_name}>{plan.duration}</span>
+                <span className={styles.sportsCard_value}>${plan.price}.00</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )} */}
     </>
   );
+}
+
+export async function getStaticProps() {
+  const res = await PackageAPIs.getPackages();
+  const packages = await res.json();
+
+  return {
+    props: {
+      packages
+    }
+  };
 }

@@ -1,5 +1,4 @@
-export const API_BASE_URL =
-  'http://daily-proxy-1wsqart4094ps-345811535.us-east-1.elb.amazonaws.com';
+export const API_BASE_URL = 'https://api.tdsdevelopment.info';
 
 export const MATCHES_MOCK = [
   {

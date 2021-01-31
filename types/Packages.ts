@@ -6,7 +6,7 @@ export type BillingPlan = {
   description: string;
   price_id: string;
   duration: string;
-  package: string;
+  package: number;
   created_by: string;
   updated_by: string;
 };
@@ -27,6 +27,7 @@ export type Package = {
   product_id: string;
   features: Feature[];
   billing_plans: BillingPlan[];
+  addOns?: BillingPlan[];
 };
 
 export type PackageBillingPlan = {

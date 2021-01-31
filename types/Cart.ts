@@ -1,3 +1,6 @@
+import { BillingPlan } from './Packages';
+import { Sport } from './Sports';
+
 export type CartSportCardType = {
   title: string | undefined;
   price: number | undefined;
@@ -15,9 +18,8 @@ export type CartType = {
 };
 
 export type CartItem = {
-  name: string;
-  desc: string;
-  image: string;
-  price: number;
+  owner: number;
+  plan: BillingPlan;
+  sports: Sport;
   auto_renewal: boolean;
 };

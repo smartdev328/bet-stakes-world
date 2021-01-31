@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Row, Button } from 'antd';
 import LazyLoad from 'react-lazyload';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { CartItem } from '@type/Cart';
@@ -19,11 +20,63 @@ import { PageProps } from '@type/Main';
 import PackageAPIs from '@apis/package.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { Sport } from '@type/Sports';
+import { ReduxState } from '@redux/reducers';
+
+type ProductsAndCartBoxProps = {
+  sports: Sport[];
+  pack: Package;
+  cartItems: CartItem[];
+  addToCart: (pack: Package, _: CartItem[]) => void;
+  changeTempCart: (pack: Package, _: CartItem[]) => void;
+};
 
 export default function Shop({ token, subscriptions, packages, sports }: PageProps) {
   const [currentPlan, setCurrentPlan] = useState<string>('all');
+  const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
+  const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
+  const dispatch = useDispatch();
 
-  console.log('-------- packages:', packages);
+  useEffect(() => {
+    setTempCartItems(cartItems);
+  }, []);
+
+  const changeTempCart = (pack: Package, items: CartItem[]) => {
+    const newItems = tempCartItems.filter((item) => item.plan.package !== pack.id);
+    if (pack.name.indexOf('VIP All Access') > -1) {
+      items.forEach((item) => {
+        newItems.push(item);
+      });
+    } else {
+      items.forEach((item) => {
+        const idx = newItems.findIndex(
+          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports.id === item.sports.id
+        );
+        if (idx < 0) {
+          newItems.push(item);
+        }
+      });
+    }
+    setTempCartItems(newItems);
+  };
+
+  const addToCart = (pack: Package, items: CartItem[]) => {
+    const newItems = cartItems.filter((item) => item.plan.package !== pack.id);
+    if (pack.name.indexOf('VIP All Access') > -1) {
+      items.forEach((item) => {
+        newItems.push(item);
+      });
+    } else {
+      items.forEach((item) => {
+        const idx = newItems.findIndex(
+          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports.id === item.sports.id
+        );
+        if (idx < 0) {
+          newItems.push(item);
+        }
+      });
+    }
+    dispatch({ type: 'UPDATE_CART', payload: newItems });
+  };
 
   return (
     <>
@@ -40,6 +93,9 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
               {packages && (
                 <ProductsAndCartBoxForSportsCard
                   sports={sports}
+                  cartItems={tempCartItems}
+                  addToCart={addToCart}
+                  changeTempCart={changeTempCart}
                   pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
                 />
               )}
@@ -51,6 +107,10 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
               <Intro />
               {packages && (
                 <ProductsAndCartBox
+                  sports={sports}
+                  cartItems={tempCartItems}
+                  addToCart={addToCart}
+                  changeTempCart={changeTempCart}
                   pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
                 />
               )}
@@ -63,6 +123,9 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
               {packages && (
                 <ProductsAndCartBoxForFantasy
                   sports={sports}
+                  cartItems={tempCartItems}
+                  changeTempCart={changeTempCart}
+                  addToCart={addToCart}
                   pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
                 />
               )}
@@ -226,28 +289,43 @@ function FAQs({ title }: { title: string }) {
   );
 }
 
-function ProductsAndCartBox({ pack }: { pack: Package }) {
-  const [tempCart, setTempCart] = useState<BillingPlan[]>([]);
+function ProductsAndCartBox({
+  pack,
+  addToCart,
+  sports,
+  cartItems,
+  changeTempCart
+}: ProductsAndCartBoxProps) {
+  const [tempCart, setTempCart] = useState<CartItem[]>(
+    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+  );
 
   const changeSportCard = (plan: BillingPlan) => {
-    const newCart = tempCart.slice();
-    newCart[0] = plan;
+    const newCart = [
+      {
+        sports: sports[0],
+        plan,
+        auto_renewal: false,
+        owner: 10
+      }
+    ];
     setTempCart(newCart);
+    changeTempCart(pack, newCart);
   };
 
-  const changeAddOn = (plan: BillingPlan) => {
-    const newCart = tempCart.slice();
-    if (plan.id === newCart[1].id) {
-      delete newCart[1];
-    } else {
-      newCart[1] = plan;
-    }
-    setTempCart(newCart);
-  };
+  // const changeAddOn = (plan: BillingPlan) => {
+  //   const newCart = tempCart.slice();
+  //   if (plan.id === newCart[1].id) {
+  //     delete newCart[1];
+  //   } else {
+  //     newCart[1] = plan;
+  //   }
+  //   setTempCart(newCart);
+  // };
 
   let totalPrice = 0;
   tempCart.forEach((item) => {
-    totalPrice += item.price;
+    totalPrice += item.plan.price;
   });
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
@@ -263,12 +341,12 @@ function ProductsAndCartBox({ pack }: { pack: Package }) {
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={tempCart[0]?.name === plan.name ? styles.active : ''}
+              className={tempCart[0]?.plan.id === plan.id ? styles.active : ''}
               onClick={() => changeSportCard(plan)}>
-              {tempCart[0]?.name === plan.name && (
+              {tempCart[0]?.plan.id === plan.id && (
                 <CheckedCircleIcon className={styles.checkedStatusIcon} />
               )}
-              {tempCart[0]?.name !== plan.name && (
+              {tempCart[0]?.plan.id !== plan.id && (
                 <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
               )}
               <span className={styles.sportsCard_name}>{plan.duration}</span>
@@ -283,13 +361,12 @@ function ProductsAndCartBox({ pack }: { pack: Package }) {
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>
-                {tempCart[0] && <p>{tempCart[0]?.name}</p>}
-                {tempCart[1] && <p>{`+ ${tempCart[1]?.name}`}</p>}
-              </div>
+              <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <Button className={styles.addToCartBtn}>Add to Cart</Button>
+            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>
@@ -351,8 +428,16 @@ function IntroForFantasy() {
   );
 }
 
-function ProductsAndCartBoxForFantasy({ sports, pack }: { sports: Sport[]; pack: Package }) {
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
+function ProductsAndCartBoxForFantasy({
+  sports,
+  pack,
+  addToCart,
+  cartItems,
+  changeTempCart
+}: ProductsAndCartBoxProps) {
+  const [tempCart, setTempCart] = useState<CartItem[]>(
+    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+  );
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
   const changeSportCard = (plan: BillingPlan) => {
@@ -379,6 +464,7 @@ function ProductsAndCartBoxForFantasy({ sports, pack }: { sports: Sport[]; pack:
       });
     }
     setTempCart(newCart);
+    changeTempCart(pack, newCart);
   };
 
   const SPORTS_INFO = [
@@ -491,7 +577,9 @@ function ProductsAndCartBoxForFantasy({ sports, pack }: { sports: Sport[]; pack:
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <Button className={styles.addToCartBtn}>Add to Cart</Button>
+            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>
@@ -558,8 +646,16 @@ function IntroForSportsCard() {
   );
 }
 
-function ProductsAndCartBoxForSportsCard({ sports, pack }: { sports: Sport[]; pack: Package }) {
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
+function ProductsAndCartBoxForSportsCard({
+  sports,
+  pack,
+  addToCart,
+  cartItems,
+  changeTempCart
+}: ProductsAndCartBoxProps) {
+  const [tempCart, setTempCart] = useState<CartItem[]>(
+    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+  );
   // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
@@ -587,6 +683,7 @@ function ProductsAndCartBoxForSportsCard({ sports, pack }: { sports: Sport[]; pa
       });
     }
     setTempCart(newCart);
+    changeTempCart(pack, newCart);
   };
 
   // const changeAddOn = (plan: BillingPlan) => {
@@ -747,7 +844,9 @@ function ProductsAndCartBoxForSportsCard({ sports, pack }: { sports: Sport[]; pa
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>
-            <Button className={styles.addToCartBtn}>Add to Cart</Button>
+            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>

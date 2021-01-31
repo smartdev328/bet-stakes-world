@@ -3,7 +3,7 @@ import { Menu, Row, Col, Dropdown } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   IdentityIcon,
@@ -17,6 +17,7 @@ import { LoginModal, ForgotPasswordModal, ResetPasswordModal } from '@components
 import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
+import { ReduxState } from '@redux/reducers';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
@@ -520,6 +521,8 @@ export default function AppHeader({
 }: HeaderProps) {
   const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
+  const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const remainingTimeInterval = setInterval(() => {
@@ -686,7 +689,9 @@ export default function AppHeader({
                   icon={<CartIcon className={styles.cart_icon} />}
                   aria-label="Cart Button"
                   className={styles.cart_btn}>
-                  <span className={styles.text}>3</span>
+                  <span className={styles.text}>
+                    {cartItems.length === 0 ? '' : cartItems.length}
+                  </span>
                 </Button>
               </a>
             </Link>
@@ -722,7 +727,9 @@ export default function AppHeader({
                   icon={<CartIcon className={styles.cart_icon} />}
                   aria-label="Cart Button"
                   className={styles.cart_btn}>
-                  <span className={styles.text}>3</span>
+                  <span className={styles.text}>
+                    {cartItems.length === 0 ? '' : cartItems.length}
+                  </span>
                 </Button>
               </Link>
               {!token && (

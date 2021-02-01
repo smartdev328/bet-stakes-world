@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
+import moment from 'moment';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import { LockIcon } from '@components/SvgIcons';
@@ -50,114 +51,7 @@ const SPORTS_INFO = [
   }
 ];
 
-const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [
-  {
-    id: 1,
-    sportType: 'NFL',
-    startDate: '10:30PM',
-    teams: [
-      {
-        name: 'New England Patriots',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
-        score: 35
-      },
-      {
-        name: 'New York Jets',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
-        score: 31
-      }
-    ],
-    state: 'New York Jets Money Line',
-    odds: -110,
-    price: 1.9,
-    isWinner: true
-  },
-  {
-    id: 2,
-    sportType: 'NFL',
-    startDate: '10:30PM',
-    teams: [
-      {
-        name: 'Cincinnati Bengals',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
-        score: 10
-      },
-      {
-        name: 'Los Angeles Rams',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
-        score: 3
-      }
-    ],
-    state: 'Los Angeles Rams Money Line',
-    odds: -110,
-    price: 1.9,
-    isWinner: true
-  },
-  {
-    id: 3,
-    sportType: 'NBA',
-    startDate: '10:30PM',
-    teams: [
-      {
-        name: 'Washington Wizards',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
-        score: 92
-      },
-      {
-        name: 'Orlando Magic',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
-        score: 89
-      }
-    ],
-    state: 'New York Jets Money Line',
-    odds: -110,
-    price: 1.9,
-    isWinner: true
-  },
-  {
-    id: 4,
-    sportType: 'NFL',
-    startDate: '10:30PM',
-    teams: [
-      {
-        name: 'New Orleans Saints',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
-        score: 27
-      },
-      {
-        name: 'Denver Broncos',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
-        score: 14
-      }
-    ],
-    state: 'New Orleans Saints Money Line',
-    odds: -110,
-    price: 1.9,
-    isWinner: false,
-    patriots: true
-  },
-  {
-    id: 5,
-    sportType: 'NBA',
-    startDate: '10:30PM',
-    teams: [
-      {
-        name: 'Boston Celtics',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_England_Patriots.png',
-        score: 81
-      },
-      {
-        name: 'Miami Heat',
-        logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/New_York_Jets.png',
-        score: 73
-      }
-    ],
-    state: 'Miami Heats Money Line',
-    odds: -110,
-    price: 1.9,
-    isWinner: true
-  }
-];
+const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [];
 
 export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
   const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
@@ -350,22 +244,30 @@ function YesterdayPlays({ plays }: { plays: YesterdayPlayInfoType[] }) {
       <div className={styles.yesterday_plays_list}>
         {plays.map((game: YesterdayPlayInfoType, index: number) => (
           <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={index}>
-            <div className={styles.game_status}>{game.isWinner ? 'W' : 'L'}</div>
+            <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
             <div className={styles.game_main}>
               <div className={styles.game_subinfo}>
-                <SportTile sport={game.sportType} />
-                <span>Yesterday at {game.startDate}</span>
+                <SportTile sport={game.sport.name} />
+                <span>Yesterday at {moment(game.publish_date).format('hh:mm a')}</span>
               </div>
               <div className={styles.game_info}>
                 <div className={styles.game_teams}>
                   <Row>
                     <div className={styles.game_team1}>
-                      <img src={game.teams[0].logo} className={styles.team_logo} />
-                      <span>{game.teams[0].name}&nbsp;@&nbsp;</span>
+                      <img
+                        src={'https://via.placeholder.com/100'}
+                        alt="Team Logo"
+                        className={styles.team_logo}
+                      />
+                      <span>{game.schedules[0].team}&nbsp;@&nbsp;</span>
                     </div>
                     <div className={styles.game_team2}>
-                      <img src={game.teams[1].logo} className={styles.team_logo} />
-                      <span>{game.teams[1].name}</span>
+                      <img
+                        src={'https://via.placeholder.com/100'}
+                        alt="Team Logo"
+                        className={styles.team_logo}
+                      />
+                      <span>{game.schedules[0].home_team}</span>
                     </div>
                   </Row>
                   <Row
@@ -374,13 +276,13 @@ function YesterdayPlays({ plays }: { plays: YesterdayPlayInfoType[] }) {
                       game.patriots && styles.has_patriots
                     }`}>
                     <div className={styles.desc_line}>
-                      <span>{game.state}</span>
+                      <span>{game.bet_text}</span>
                       {game.patriots && (
                         <div className={styles.strikeLine}>--------------------------—</div>
                       )}
                     </div>
                     <div className={styles.desc_line}>
-                      <span>&nbsp;{`${game.odds} odds | ${game.price}`}</span>
+                      <span>&nbsp;{`${game.odds} odds | ${game.odds_decimal}`}</span>
                       {game.patriots && (
                         <div className={styles.strikeLine}>--------------------------—</div>
                       )}
@@ -389,7 +291,7 @@ function YesterdayPlays({ plays }: { plays: YesterdayPlayInfoType[] }) {
                   </Row>
                 </div>
                 <div className={`${styles.game_score} ${game.patriots && styles.has_patriots}`}>
-                  {`${game.teams[0].score} - ${game.teams[1].score}`}
+                  {game.score}
                 </div>
               </div>
             </div>

@@ -33,7 +33,7 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token }: PageProps) {
+export default function SportsCard({ token, subscriptions }: PageProps) {
   const lockedItems = ['NBA'];
 
   return (

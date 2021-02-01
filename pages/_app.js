@@ -25,7 +25,10 @@ const FULL_ACCESS_ROUTES = [
   '/cart',
   '/faqs',
   '/contact-us',
-  '/yesterdays-plays'
+  '/yesterdays-plays',
+  '/aboutus',
+  '/terms',
+  '/privacy'
 ];
 
 function MyApp({ Component, pageProps }) {

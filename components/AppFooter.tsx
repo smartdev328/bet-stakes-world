@@ -56,7 +56,7 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
       <input
         id="newsletter_email"
         type="email"
-        placeholder="User@fakemail.com"
+        placeholder="johnnycash@gmail.com"
         onChange={emailChanged}
         className={styles.newsletterForm_email}
       />
@@ -191,25 +191,25 @@ function AppFooter({ token }: { token: JWT | null }) {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <a href="https://facebook.com">
+                    <a href="https://www.facebook.com/Thedaily-Stakes-101743668565673">
                       <FacebookIcon className={styles.facebook_icon} />
                       <span className={styles.icon_title}>Facebook</span>
                     </a>
                   </li>
                   <li>
-                    <a href="https://instagram.com">
+                    <a href="https://www.instagram.com/thedailystakes/?hl=en">
                       <InstagramOutlined />
                       <span className={styles.icon_title}>Instagram</span>
                     </a>
                   </li>
                   <li>
-                    <a href="https://twitter.com">
+                    <a href="https://twitter.com/TheDailyStakes">
                       <TwitterOutlined />
                       <span className={styles.icon_title}>Twitter</span>
                     </a>
                   </li>
                   <li>
-                    <a href="https://tiktok.com">
+                    <a href="https://vm.tiktok.com/ZMJopkEV7/">
                       <TikTokIcon className={styles.tiktok_icon} />
                       <span className={styles.icon_title}>TikTok</span>
                     </a>
@@ -242,19 +242,19 @@ function AppFooter({ token }: { token: JWT | null }) {
           </Row>
         </div>
         <div className={`${styles.mainFooterRow} ${styles.mainFooterNavmenu}`}>
-          <Link href="/">
+          <Link href="/aboutus">
             <a className={styles.navbarItem}>About us</a>
           </Link>
-          <Link href="/">
+          <Link href="/contactus">
             <a className={styles.navbarItem}>Contact us</a>
           </Link>
-          <Link href="/">
+          <Link href="/faqs">
             <a className={styles.navbarItem}>FAQ</a>
           </Link>
-          <Link href="/">
+          <Link href="/terms">
             <a className={styles.navbarItem}>Terms of use</a>
           </Link>
-          <Link href="/">
+          <Link href="/privacy">
             <a className={styles.navbarItem}>Privacy Policy</a>
           </Link>
         </div>
@@ -262,7 +262,7 @@ function AppFooter({ token }: { token: JWT | null }) {
       {/* Footer Info */}
       <div className={styles.infobar}>
         <div className={styles.infobarRow}>
-          <span>Copyright © 2020 The daily stakes All Rights Reserved</span>
+          <span>Copyright © 2021 The Daily Stakes All Rights Reserved</span>
         </div>
       </div>
     </footer>

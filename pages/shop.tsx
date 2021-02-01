@@ -99,7 +99,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
                 />
               )}
-              <FAQs title={'Sports Card FAQ'} />
+              <FAQs title={'Sports Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
           {currentPlan === 'all' && (
@@ -114,7 +114,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
                 />
               )}
-              <FAQs title={'VIP All Access Card FAQ'} />
+              <FAQs title={'VIP All Access Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
           {currentPlan === 'fantasy' && (
@@ -129,7 +129,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
                 />
               )}
-              <FAQs title={'FANTASY FAQ'} />
+              <FAQs title={'FANTASY FAQ'} currentPlan={currentPlan} />
             </div>
           )}
         </div>
@@ -144,7 +144,6 @@ function HeroBanner() {
       <img src="/images/shop_dashboard.jpg" className={styles.bgImage} />
       <div className={styles.heroBannerContent}>
         <h1>The Shop</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
       <BannerSportsAndMatches />
     </div>
@@ -164,8 +163,7 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
           <div className={styles.plan_content_info} onClick={() => changePlan('sports_card')}>
             <div className={styles.plan_content_title}>Sports Card</div>
             <div className={styles.plan_content_desc}>
-              <span>3.2k Active Players</span>
-              <span>100k Total Winnings</span>
+              <span>ALL PLAYS FOR THE SPORT(S) OF YOUR CHOICE.</span>
             </div>
           </div>
         </div>
@@ -176,8 +174,7 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
           <div className={styles.plan_content_info} onClick={() => changePlan('all')}>
             <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
             <div className={styles.plan_content_desc}>
-              <span>3.2k Active Players</span>
-              <span>100k Total Winnings</span>
+              <span>ALL PLAYS. ALL SPORTS.</span>
             </div>
             <LazyLoad>
               <img src="/images/offerings_active_ring.svg" alt="Offerings Active Background" />
@@ -191,8 +188,7 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
           <div className={styles.plan_content_info} onClick={() => changePlan('fantasy')}>
             <div className={styles.plan_content_title}>Fantasy</div>
             <div className={styles.plan_content_desc}>
-              <span>3.2k Active Players</span>
-              <span>100k Total Winnings</span>
+              <span>OPTIMAL DFS LINEUPS</span>
             </div>
           </div>
         </div>
@@ -211,43 +207,93 @@ function Intro() {
           </div>
         </LazyLoad>
         <div className={styles.introContent}>
-          <div className={styles.sectionTitle}>About the VIP All Access Card</div>
+          <div className={styles.sectionTitle}>VIP All Access Card</div>
           <div className={styles.introDesc}>
-            Includes access to straight bets, parlays and betting strategies for ALL sports.
+            Includes Access to Straight Bets, Parlays, Player Props, Bonus Wildcard Parlays, & other
+            Bet Types for All Sports.
           </div>
         </div>
       </Row>
       <ul>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Customized Dashboard Including Automated Record Tracking
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
+        </li>
+        <li>
+          <NormalCheckIcon className={styles.list_check_icon} />
+          Monthly & Annual Packages Include In-Game Bets
         </li>
       </ul>
       <div className={styles.extra_info}>
-        *For Daily Card only. Money back guarantee if over 50% of plays are loses. No Questions
-        asked*
+        *The DailyStakes Protection: For the Daily VIP All Access Card only, if over 50% of the
+        plays are losses, the next day is FREE*
       </div>
     </div>
   );
 }
 
-const FAQs_ARR = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit?'
-];
+type FAQPropsType = {
+  title: string;
+  currentPlan: 'all' | 'sports_card' | 'fantasy';
+};
 
-function FAQs({ title }: { title: string }) {
+const FAQsARR = {
+  all: [
+    'What does the VIP All Access Card include?',
+    'Which sports does the VIP All Access cover?',
+    'What is The DailyStakes Protection?',
+    'What is In-game betting?',
+    'Are the VIP All Access Plays guaranteed winners?',
+    'What is your refund policy?'
+  ],
+  sports_card: [
+    'What does the Sports Card include?',
+    'Which sports does the Sports Card cover?',
+    'What is In-game betting?',
+    'Are the Sports Card Plays guaranteed winners?',
+    'What is your refund policy?'
+  ],
+  fantasy: [
+    'What does the Fantasy Package include?',
+    'Which sports does the Fantasy Package cover?',
+    'Are the Fantasy lineups guaranteed winners?',
+    'What is your refund policy?'
+  ]
+};
+
+const FAQsDesc = {
+  all: [
+    'The VIP All Access Card includes all picks released for a given day for all sports. A breakdown of key stats and trends are included with each pick. A unit is associated with each pick for bankroll management purposes. The VIP All Access card also includes our Weekly Pro Tip.',
+    'We cover the NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. <br><br> *Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.',
+    'The DailyStakes Protection applies only to the Daily VIP All Access Card. If over 50% of the Daily VIP All Access Card are losses for a given day, the next day’s picks are FREE. No questions asked. For example, if 6 picks are released and 4 are losses for a given day. The Daily VIP All Access Card for the next day is free. ** <br><br> This does not happen often, however when it does, we aim to look out in the best interest of our clients and endorse a win-win outcome.',
+    'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
+    'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
+    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+  ],
+  sports_card: [
+    'The Sports Card includes all picks released for the selected sport(s) of your choice. A breakdown of key stats and trends are included with each pick. A unit is associated with each pick for bankroll management purposes. The Sports Card card also includes our Weekly Pro tip.',
+    'You have the option to select amongst the following sports: NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. A sports package for multiple sports can be purchased at varying time frames <br><br>Example: A monthly NBA package & a weekly Soccer package can be purchased at the same time <br><br>*Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others. ',
+    'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
+    'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
+    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+  ],
+  fantasy: [
+    'The Fantasy Card includes optimal Daily Fantasy Sports (“DFS”) lineups for both single game and tournament style formats tailored for the following sportsbooks: DraftKings, Fanduel, and Yahoo Sports. Advanced stats for each selected player are provided such as projected points, expected value, player prop comparison, amongst other insightful statistics.',
+    'Fantasy Packages can be purchased for any or all of the following sports: NBA, NFL, MLB.',
+    'Guaranteed winners do not exist in the daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night.',
+    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+  ]
+};
+
+function FAQs({ title, currentPlan }: FAQPropsType) {
   const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
   const toggleFAQ = (index: number) => {
     const updated = faqIsVisible.slice();
@@ -259,7 +305,7 @@ function FAQs({ title }: { title: string }) {
     <div className={styles.faqs}>
       <h4>{title}</h4>
       <ul>
-        {FAQs_ARR.map((faq: string, index: number) => (
+        {FAQsARR[currentPlan].map((faq: string, index: number) => (
           <li key={index}>
             <div className={styles.faq_title}>
               {!faqIsVisible[index] && (
@@ -271,16 +317,7 @@ function FAQs({ title }: { title: string }) {
               <span>{faq}</span>
             </div>
             {faqIsVisible[index] && (
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry standard dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and scrambled it to make a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                with desktop publishing software like Aldus PageMaker including versions of Lorem
-                Ipsum.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: FAQsDesc[currentPlan][index] }}></p>
             )}
           </li>
         ))}
@@ -404,25 +441,25 @@ function IntroForFantasy() {
     <div className={styles.introSection}>
       <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
-          <div className={styles.sectionTitle}>About the Fantasy Picks</div>
+          <div className={styles.sectionTitle}>Fantasy Picks</div>
           <div className={styles.introDesc}>
-            Ut ornare amet adipiscing eu augue. Metus eget in maecenas elementum maecenas duis
-            mauris.
+            Includes Access to Main Slate & Single Slate Tournaments for DraftKings, Fanduel & Yahoo
+            Sports Formats.
           </div>
         </div>
       </Row>
       <ul>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Advanced Player Stats & Trends for Each Optimal DFS Lineup Released
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Projected Points, Expected Value, Player Prop Comparisons & Bankroll Tips
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Our Annual VIP Fantasy Package Includes NBA, NFL & MLB
         </li>
       </ul>
     </div>
@@ -620,10 +657,10 @@ function IntroForSportsCard() {
     <div className={styles.introSection}>
       <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
-          <div className={styles.sectionTitle}>About the Sports Card</div>
+          <div className={styles.sectionTitle}>Sports Card</div>
           <div className={styles.introDesc}>
-            Includes access to straight bets, parlays and betting strategies for the given sport(s)
-            of your choice.
+            Includes Access to Straight Bets, Parlays, Player Props, Bonus Wildcard Parlays, & other
+            Bet Types for the Sport(s) of Your Choice.
           </div>
         </div>
       </Row>
@@ -634,17 +671,21 @@ function IntroForSportsCard() {
       <ul>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Customized Dashboard Including Automated Record Tracking
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Event Based Sports Available: UFC & Formula 1
         </li>
       </ul>
+      <div className={styles.extra_info}>
+        *Soccer includes all Major Leagues and Tournaments Including the English Premier League,
+        MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.
+      </div>
     </div>
   );
 }

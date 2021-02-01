@@ -305,6 +305,7 @@ function ProductsAndCartBox({
       {
         sports: sports[0],
         plan,
+        pack,
         auto_renewal: false,
         owner: 10
       }
@@ -449,6 +450,7 @@ function ProductsAndCartBoxForFantasy({
         newCart.push({
           sports: activeSport,
           plan,
+          pack,
           auto_renewal: false,
           owner: 10
         });
@@ -459,6 +461,7 @@ function ProductsAndCartBoxForFantasy({
       newCart.push({
         sports: activeSport,
         plan,
+        pack,
         auto_renewal: false,
         owner: 10
       });
@@ -668,6 +671,7 @@ function ProductsAndCartBoxForSportsCard({
         newCart.push({
           sports: activeSport,
           plan,
+          pack,
           auto_renewal: false,
           owner: 10
         });
@@ -678,6 +682,7 @@ function ProductsAndCartBoxForSportsCard({
       newCart.push({
         sports: activeSport,
         plan,
+        pack,
         auto_renewal: false,
         owner: 10
       });

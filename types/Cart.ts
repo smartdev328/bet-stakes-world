@@ -1,4 +1,4 @@
-import { BillingPlan } from './Packages';
+import { BillingPlan, Package } from './Packages';
 import { Sport } from './Sports';
 
 export type CartSportCardType = {
@@ -21,5 +21,6 @@ export type CartItem = {
   owner: number;
   plan: BillingPlan;
   sports: Sport;
+  pack: Package;
   auto_renewal: boolean;
 };

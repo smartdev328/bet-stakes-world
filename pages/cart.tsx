@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Button, Dropdown, Menu } from 'antd';
 import LazyLoad from 'react-lazyload';
+import { useSelector } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import { AppLayout, BannerSportsAndMatches, YellowCheckBox } from '@components/index';
@@ -11,6 +12,7 @@ import { CartItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
 import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
+import { ReduxState } from '@redux/reducers';
 
 function HeroBanner() {
   return (
@@ -29,10 +31,17 @@ function HeroBanner() {
 
 type CartTotalWidgetProps = {
   mobile: boolean;
+  cartItems: CartItem[];
 };
 
-function CartTotalWidget({ mobile }: CartTotalWidgetProps) {
+function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  let totalPrice = 0;
+  cartItems.forEach((item) => {
+    totalPrice += item.plan.price;
+  });
+
   return (
     <div className={`${styles.totalPriceWidget} ${mobile && styles.isMobileVisible}`}>
       <LazyLoad>
@@ -40,8 +49,8 @@ function CartTotalWidget({ mobile }: CartTotalWidgetProps) {
       </LazyLoad>
       <div className={styles.totalPriceWidgetContent}>
         <h5>Cart Totals</h5>
-        <div className={styles.totalCount}>3 Items</div>
-        <div className={styles.totalPrice}>$399.00</div>
+        <div className={styles.totalCount}>{cartItems.length} Items</div>
+        <div className={styles.totalPrice}>{`${totalPrice}.00`}</div>
         <div className={styles.taxRow}>
           <span>Tax:</span>
           <span>15%</span>
@@ -99,30 +108,6 @@ function CartTotalWidget({ mobile }: CartTotalWidgetProps) {
   );
 }
 
-const Mock_CartItems: CartItem[] = [
-  {
-    name: 'Sports Card',
-    desc: 'NBA',
-    image: 'https://via.placeholder.com/100',
-    price: 89,
-    auto_renewal: true
-  },
-  {
-    name: 'VIP All Access',
-    desc: 'All Sports',
-    image: 'https://via.placeholder.com/100',
-    price: 300,
-    auto_renewal: true
-  },
-  {
-    name: 'Fantasy',
-    desc: 'NFL',
-    image: 'https://via.placeholder.com/100',
-    price: 10,
-    auto_renewal: false
-  }
-];
-
 function PlanDropdown({
   pack,
   changePlan
@@ -171,15 +156,16 @@ function PlanDropdown({
 }
 
 export default function Cart({ packages, token, subscriptions }: PageProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(Mock_CartItems);
+  const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
+  const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    setTempCartItems(cartItems);
+  }, [cartItems]);
+
   const changeCartItem = (index: number, key: keyof CartItem, value: string | boolean) => {
-    const updated = cartItems.slice();
+    const updated = tempCartItems.slice();
     switch (key) {
-      case 'name':
-        if (typeof value === 'string') {
-          updated[index].name = value;
-        }
-        break;
       case 'auto_renewal':
         if (typeof value === 'boolean') {
           updated[index].auto_renewal = value;
@@ -187,11 +173,13 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
         break;
       default:
     }
-    setCartItems(updated);
+    setTempCartItems(updated);
   };
 
-  const changedPlan = (plan: BillingPlan) => {
-    console.log('---------- plan changed', plan);
+  const changedPlan = (index: number, plan: BillingPlan) => {
+    const updated = tempCartItems.slice();
+    updated[index].plan = plan;
+    setTempCartItems(updated);
   };
 
   return (
@@ -204,21 +192,32 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
         <div className={styles.container}>
           <section className={styles.cartItemsSection}>
             <div className={styles.cartItems}>
-              {cartItems.map((item, index) => (
+              {tempCartItems.length === 0 && <em>Cart is empty</em>}
+              {tempCartItems.map((item, index) => (
                 <div key={index} className={styles.cartItem}>
                   <div className={styles.cartItemMain}>
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={item.sports.logo || 'https://via.placeholder.com/100'}
+                      alt={item.sports.name}
+                    />
                     <div className={styles.cartItemInfo}>
-                      <span className={styles.cartItemName}>{item.name}</span>
-                      <span className={styles.cartItemDesc}>{item.desc}</span>
+                      <span className={styles.cartItemName}>{item.pack.name}</span>
+                      <span className={styles.cartItemDesc}>
+                        {item.pack.name.indexOf('VIP All Access') > -1
+                          ? 'All Sports'
+                          : item.sports.name}
+                      </span>
                     </div>
                   </div>
                   <div className={styles.cartItemPlans}>
                     <div className={styles.cartItemPlansContent}>
-                      {packages?.map((pack, index: number) => (
-                        <React.Fragment key={index}>
-                          {pack.name.indexOf(item.name) > -1 && (
-                            <PlanDropdown pack={pack} changePlan={changedPlan} />
+                      {packages?.map((pack, idx: number) => (
+                        <React.Fragment key={idx}>
+                          {pack.id === item.plan.package && pack.description === null && (
+                            <PlanDropdown
+                              pack={pack}
+                              changePlan={(plan) => changedPlan(index, plan)}
+                            />
                           )}
                         </React.Fragment>
                       ))}
@@ -233,11 +232,11 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                       </div>
                     </div>
                   </div>
-                  <div className={styles.cartItemPrice}>{`$${item.price}.00`}</div>
+                  <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
                 </div>
               ))}
             </div>
-            <CartTotalWidget mobile={false} />
+            <CartTotalWidget mobile={false} cartItems={tempCartItems} />
           </section>
           <section className={styles.promoCodeSection}>
             <LazyLoad>
@@ -260,7 +259,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               </div>
             </div>
           </section>
-          <CartTotalWidget mobile={true} />
+          <CartTotalWidget mobile={true} cartItems={tempCartItems} />
         </div>
       </AppLayout>
     </>

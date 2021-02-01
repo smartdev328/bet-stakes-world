@@ -41,22 +41,31 @@ function HeroBanner() {
       <div className={styles.heroBanner}>
         <div className={styles.heroBannerLeft}>
           <div className={styles.container}>
-            <div className={styles.main_desc}>sports is not a game of chance,</div>
+            <div className={styles.main_desc}>sports is not a game of chance</div>
             <div className={styles.second_desc}>
               <span>it’s a game of skill</span>
+              <span className={styles.tagline}>OUR WINNING STATS. YOUR WINNING PICKS.</span>
             </div>
             <ul>
+              <span>
+                Complete sports analytics source for all major sports including NFL, NBA, MLB,
+                Soccer, NCAAF, NCAAB, Formula 1 & UFC.
+              </span>
               <li>
                 <div className={styles.square_icon} />
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                <span>Sports Betting Picks & Analysis</span>
               </li>
               <li>
                 <div className={styles.square_icon} />
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                <span>Optimal Daily Fantasy Lineups</span>
               </li>
               <li>
                 <div className={styles.square_icon} />
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                <span>Advanced Stats & Trends</span>
+              </li>
+              <li>
+                <div className={styles.square_icon} />
+                <span>Proven Track Record</span>
               </li>
             </ul>
           </div>
@@ -108,8 +117,9 @@ function MembershipOfferings() {
     <div className={styles.membershipOffers}>
       <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
       <div className={styles.membershipOffers_desc}>
-        Parturient luctus egestas venenatis ante euismod vitae. At molestie vitae pellentesque elit
-        nam elementum nunc.
+        Upon signing up to one our packages, you will receive access to your customized member
+        dashboard which will include your specified picks, key stats & trends, our weekly pro tip,
+        hands on support & an expert bankroll management system.
       </div>
       <div className={styles.membershipOffers_plans}>
         <div className={styles.plan}>
@@ -238,13 +248,15 @@ function OurDailyStandards() {
           </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
-              <h4>Analytical Driven</h4>
+              <h4>Analytical Approach</h4>
               <img src="/images/wave.svg" alt="wave" className={styles.wave_img} />
             </div>
             <p>
-              Numbers tell the story to everything we do. Every pick, every play, every action is
-              researched and analysed to ensure our plays are a step ahead of the field. We never
-              release a pick for the sake of filling our card (NO Fluff Picks)
+              Bet on numbers, not emotions. Stats, trends, and advanced analysis is our top priority
+              at The DailyStakes. Every pick is researched with in depth analytics and back tested
+              using various multi variant models to ensure we are providing the highest value to our
+              clients. We don’t just provide picks, we give you key stats and trends behind each
+              one.
             </p>
           </div>
         </div>
@@ -258,13 +270,14 @@ function OurDailyStandards() {
           </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
-              <h4>Customer Focused</h4>
+              <h4>Client Focused</h4>
               <img src="/images/wave.svg" alt="wave" className={styles.wave_img} />
             </div>
             <p>
-              Serving our customers remains at the forefront of our business. Our entire team is
-              available by email or by instagram around the clock. Refunds are given if there are
-              any errors receiving picks.
+              Whether you’re a sports fan, casual bettor, or a sharp, we have you covered. Our motto
+              is to approach everything from the clients perspective. Our team is made available
+              24/7 to provide the highest quality assistance, ranging from the most basic technical
+              issues to the most complex strategic questions.
             </p>
           </div>
         </div>
@@ -278,12 +291,13 @@ function OurDailyStandards() {
           </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
-              <h4>Hardest Working</h4>
+              <h4>Industrious</h4>
               <img src="/images/wave2.svg" alt="wave" className={styles.wave_img} />
             </div>
             <p>
-              Plain and simple no one else will ever out work our team. Our objective is clear, help
-              you win more plays.
+              The foundation of our success is based on hard work. Keeping up with injury reports,
+              lineup changes, weather conditions, value picks, amongst other key considerations
+              require a tremendous amount of work and diligence. This is embedded in our culture.
             </p>
           </div>
         </div>
@@ -297,13 +311,15 @@ function OurDailyStandards() {
           </LazyLoad>
           <div className={styles.daily_standards_content}>
             <div className={styles.daily_standards_content_title}>
-              <h4>Pedigre</h4>
+              <h4>Credibility</h4>
               <img src="/images/wave4.svg" alt="wave" className={styles.wave_img} />
             </div>
             <p>
-              Time and time again we see our picks come out on top. While we will not claim
-              enormously high and unrealistic win rates, our numbers, our picks, our work, cannot be
-              beat.
+              {`Consistency is key, and we've built a proven track record over time. The sports
+              consulting landscape is currently riddled with “experts” claiming unrealistic win
+              records with the use of shady marketing tactics on social media. We are 100%
+              transparent with all of our results & impose self-regulation via our automated record
+              tracker & yesterday's plays.`}
             </p>
           </div>
         </div>
@@ -361,7 +377,7 @@ function BetOnSports() {
   return (
     <div className={styles.bet_on_sports}>
       <div className={styles.bet_on_sports_title}>
-        Bet on any or all of these <strong>Six sports</strong>
+        Bet on any or all of these <strong>sports</strong>
       </div>
       <div className={styles.bet_on_sports_desc}>
         <p>Select the sports you would like to bet on and continue to checkout</p>
@@ -750,7 +766,7 @@ function SportsNewsCarousel() {
       <div className={styles.news_carousel_bg}>
         <div className={styles.news_carousel_content}>
           <div className={styles.title_row}>
-            <span>Sports News</span>
+            <span>THE DAILY INSIGHTS</span>
             <Link href="/">
               <a>View More</a>
             </Link>
@@ -826,6 +842,11 @@ function SportsNewsCarousel() {
 }
 
 function SubscribeNow() {
+  const router = useRouter();
+  const goSignUp = () => {
+    router.push('/signup');
+  };
+
   return (
     <div className={styles.subscribenow}>
       <div className={styles.subscribenow_container}>
@@ -840,7 +861,7 @@ function SubscribeNow() {
           <div className={styles.subscribenow_title1}>Start winning now,</div>
           <div className={styles.subscribenow_title2}>it’s Ea$y!</div>
           <div className={styles.subscribenow_desc}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gravida purus ipsum.
+            Subscribe Now for Free & Join the Winning Team.
           </div>
         </div>
         <div className={styles.subscribenow_right}>
@@ -848,7 +869,9 @@ function SubscribeNow() {
             <LazyLoad height={170}>
               <img alt="Subscribe Button Icon" src="/images/subscribe_btn_circle.svg" />
             </LazyLoad>
-            <Button className={styles.subscribe_btn}>Subscribe Now</Button>
+            <Button className={styles.subscribe_btn} onClick={goSignUp}>
+              Subscribe Now
+            </Button>
           </div>
         </div>
       </div>

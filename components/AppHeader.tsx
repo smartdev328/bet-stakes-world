@@ -608,12 +608,13 @@ export default function AppHeader({
             </Link>
           </div>
           <p className={styles.info}>
-            <span>
+            <span>PREDICTIVE SPORTS ANALYTICS & PREMIUM CONTENT</span>
+            {/* <span>
               <strong>Our Record:</strong> {curRecord}&nbsp;
             </span>
             <span>
               <strong>Winning Rate:</strong> {winningRate}% Return on investments
-            </span>
+            </span> */}
           </p>
         </Col>
         <Col span={7} className={styles.headerRightCol}>
@@ -661,20 +662,22 @@ export default function AppHeader({
               </Link>
             </Menu.Item>
             {!mobileNavVisible && <SubMenu subscriptions={userSubscriptions} token={token} />}
-            <Menu.Item key="Sports_News" className={styles.navbarItem}>
+            {/* <Menu.Item key="Sports_News" className={styles.navbarItem}>
               Sports News
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
               <Link href="/yesterdays-plays">
                 <a>Yesterdays Plays</a>
               </Link>
             </Menu.Item>
             <Menu.Item key="About_Us" className={styles.navbarItem}>
-              About Us
+              <Link href="/aboutus">
+                <a>About Us</a>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="Merchandise" className={styles.navbarItem}>
+            {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
               Merchandise
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
           <div className={styles.navbarSide}>
             <Button
@@ -765,20 +768,22 @@ export default function AppHeader({
                   </Link>
                 </Menu.Item>
                 <SubMenu subscriptions={userSubscriptions} token={token} />
-                <Menu.Item key="Sports_News" className={styles.navbarItem}>
+                {/* <Menu.Item key="Sports_News" className={styles.navbarItem}>
                   Sports News
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
                   <Link href="/yesterdays-plays">
                     <a>Yesterdays Plays</a>
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="About_Us" className={styles.navbarItem}>
-                  About Us
+                  <Link href="/aboutus">
+                    <a>About Us</a>
+                  </Link>
                 </Menu.Item>
-                <Menu.Item key="Merchandise" className={styles.navbarItem}>
+                {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
                   Merchandise
-                </Menu.Item>
+                </Menu.Item> */}
               </Menu>
               <Button type="primary" className={styles.subscribeBtn}>
                 Subscribe Now

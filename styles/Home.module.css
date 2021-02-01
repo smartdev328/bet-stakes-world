@@ -22,7 +22,7 @@
 .heroBannerLeft .main_desc {
   font-style: normal;
   font-weight: 900;
-  font-size: 72px;
+  font-size: 42px;
   line-height: 117.9%;
   text-transform: uppercase;
   color: #FFFFFF;
@@ -32,6 +32,7 @@
   margin: 1em 0 2em;
   position: relative;
 }
+
 .heroBannerLeft .second_desc:before {
   content: '';
   display: block;
@@ -48,16 +49,39 @@
   left: 0;
   font-style: normal;
   font-weight: 900;
-  font-size: 72px;
+  font-size: 48px;
   line-height: 100%;
   text-transform: uppercase;
   color: #1A1A1A;
   border-bottom: 13px solid #1a1a1a;
   display: inline-block;
 }
+
+.heroBannerLeft .second_desc .tagline {
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  color:white;
+  border-bottom:none;
+  padding-top:5px;
+}
+
 .heroBannerLeft ul {
   list-style: none;
   padding: 0;
+}
+.heroBannerLeft ul span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 117.9%;
+  color: #FFFFFF;
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  line-height: inherit;
 }
 .heroBannerLeft ul li {
   font-style: normal;
@@ -147,16 +171,23 @@ li .square_icon {
     padding: 0 100px 0 50px;
   }
   .heroBannerLeft .main_desc {
-    font-size: 65px;
+    font-size: 42px;
   }
   .heroBannerLeft .second_desc {
     padding: 24px 0;
   }
   .heroBannerLeft .second_desc span {
-    font-size: 65px;
+    font-size: 42px;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
+    display:block;
   }
   .heroBannerLeft ul li {
     font-size: 22px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 18px;
   }
 }
 @media (max-width: 1400px) {
@@ -168,10 +199,16 @@ li .square_icon {
     padding: 0 50px 0 50px;
   }
   .heroBannerLeft .main_desc {
-    font-size: 60px;
+    font-size: 42px;
   }
   .heroBannerLeft .second_desc span {
-    font-size: 60px;
+    font-size: 42px;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 18px;
   }
 }
 
@@ -187,10 +224,16 @@ li .square_icon {
     padding-right: 30px;
   }
   .heroBannerLeft .main_desc {
-    font-size: 52px;
+    font-size: 42px;
   }
   .heroBannerLeft .second_desc span {
-    font-size: 52px;
+    font-size: 42px;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 18px;
   }
   .heroBannerLeft ul li {
     font-size: 20px;
@@ -213,7 +256,7 @@ li .square_icon {
     padding-right: 18px;
   }
   .heroBannerLeft .main_desc {
-    font-size: 45px;
+    font-size: 26px;
   }
   .heroBannerLeft .container {
     max-width: 530px;
@@ -222,9 +265,15 @@ li .square_icon {
     padding: 18px 0;
   }
   .heroBannerLeft .second_desc span {
-    font-size: 42px;
+    font-size: 26px;
     border-bottom: 8px solid #1a1a1a;
   } 
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 18px;
+  }
   .heroBannerLeft ul li {
     font-size: 17px;
     line-height: 135%;
@@ -280,24 +329,30 @@ li .square_icon {
   .carousel_slide_subscribeBtn {
     padding: 11.5px 24px;
   }
+  .heroBannerLeft ul span {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 600px) {
   .heroBannerLeft {
-    height: 440px;
+    height: 530px;
     padding-top: 136px;
   }
   .heroBannerLeft .container {
     max-width: 360px;
-    padding: 0 18px;
+    padding: 0 16px;
   }
   .heroBannerLeft .main_desc {
-    font-size: 28px;
+    font-size: 16px;
     margin-right: 20px;
   }
   .heroBannerLeft .second_desc span {
-    font-size: 28px;
+    font-size: 18px;
     border-bottom: 4px solid #1a1a1a;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
   }
   .heroBannerLeft ul li {
     font-size: 12px;
@@ -305,6 +360,9 @@ li .square_icon {
   li .square_icon {
     margin-right: 10px;
     margin-top: 8px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 14px;
   }
 }
 

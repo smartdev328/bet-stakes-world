@@ -6,7 +6,9 @@ import { AppLayout } from '@components/index';
 import { PageProps } from '@type/Main';
 import styles from '@styles/Static.module.css';
 
-export default function FAQs({ token, subscriptions }: PageProps) {
+function FAQs({ title }: { title: string }) {
+  const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
+
   const FAQsTitle = [
     'What does The DailyStakes offer?',
     'Which sports do you cover?',
@@ -24,7 +26,6 @@ export default function FAQs({ token, subscriptions }: PageProps) {
     'Are the plays guaranteed winners?',
     'What is your refund policy?'
   ];
-
   const FAQsDesc = [
     'The Daily Stakes, Inc. is a North American digital sports consulting & media company focused on the rapidly evolving sports betting and daily fantasy sports landscape. The company uses data driven models to provide users with predictive sports analytics, credible bet recommendations, premium content, and advanced bankroll management strategies via its membership packages. <br><br> Our mission is to be the sports consulting industry leader by providing our clients with the industry’s most versatile content and insightful recommendations.',
     'We cover the NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. <br><br> *Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.',
@@ -43,37 +44,36 @@ export default function FAQs({ token, subscriptions }: PageProps) {
     'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
   ];
 
-  function FAQs({ title }: { title: string }) {
-    const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
-    const toggleFAQ = (index: number) => {
-      const updated = faqIsVisible.slice();
-      updated[index] = !updated[index];
-      setFaqIsVisible(updated);
-    };
+  const toggleFAQ = (index: number) => {
+    const updated = faqIsVisible.slice();
+    updated[index] = !updated[index];
+    setFaqIsVisible(updated);
+  };
 
-    return (
-      <div className={styles.faqs}>
-        <h4>{title}</h4>
-        <ul>
-          {FAQsTitle.map((faq: string, index: number) => (
-            <li key={index}>
-              <div className={styles.faq_title}>
-                {!faqIsVisible[index] && (
-                  <PlusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
-                )}
-                {faqIsVisible[index] && (
-                  <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
-                )}
-                <span>{faq}</span>
-              </div>
-              {faqIsVisible[index] && <p dangerouslySetInnerHTML={{ __html: FAQsDesc[index] }}></p>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.faqs}>
+      <h4>{title}</h4>
+      <ul>
+        {FAQsTitle.map((faq: string, index: number) => (
+          <li key={index}>
+            <div className={styles.faq_title}>
+              {!faqIsVisible[index] && (
+                <PlusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
+              )}
+              {faqIsVisible[index] && (
+                <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
+              )}
+              <span>{faq}</span>
+            </div>
+            {faqIsVisible[index] && <p dangerouslySetInnerHTML={{ __html: FAQsDesc[index] }}></p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
+export default function FAQsPage({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>

@@ -513,8 +513,6 @@ function DateBar({ currentDateTime }: { currentDateTime: string }) {
 
 export default function AppHeader({
   releaseTime,
-  curRecord,
-  winningRate,
   currentDateTime,
   token,
   subscriptions: userSubscriptions

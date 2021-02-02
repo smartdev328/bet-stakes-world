@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@constants/';
-import { CreateUserType, ForgotPasswordForm, LoginUserType } from '@type/Users';
+import { CreateUserType, ForgotPasswordForm, LoginUserType, AddUserPayment } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
 function createUser(payload: CreateUserType) {
@@ -55,10 +55,20 @@ function sendConfirmEmail(payload: ForgotPasswordForm) {
   });
 }
 
+function addPaymentMethod(payload: AddUserPayment) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/billing-plans`, {
+    method: 'post',
+    body: JSON.stringify(payload),
+    headers
+  });
+}
+
 export default {
   createUser,
   login,
   forgotPass,
   resetPass,
-  sendConfirmEmail
+  sendConfirmEmail,
+  addPaymentMethod
 };

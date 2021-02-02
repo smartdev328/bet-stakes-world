@@ -104,6 +104,15 @@
   line-height: 19px;
   padding: 10px 12px;
 }
+.formGroup .input {
+  border: 1px solid #C4C4C4;
+  width: 100%;
+  font-size: 12px;
+  line-height: 19px;
+  padding: 11px 12px;
+  font-weight: 300;
+  height: 41px;
+}
 .formGroup input.error {
   border-color: rgb(236, 76, 21);
 }

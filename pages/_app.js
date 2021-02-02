@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 import { wrapper } from '../redux/store';
 import { parseJwt } from '@utils/common';
 import SportsAPIs from '@apis/sport.apis';
 import SubscriptionsAPIs from '@apis/subscriptions.apis';
+import { STRIPE_API_KEY } from '@constants/';
 
 import 'antd/lib/style/index.css';
 import 'antd/lib/grid/style/index.css';
@@ -38,6 +42,8 @@ function MyApp({ Component, pageProps }) {
   const [subscriptions, setSubscriptions] = useState([]);
   const { token } = useSelector((state) => state.user);
 
+  const stripePromise = loadStripe(STRIPE_API_KEY);
+
   const getDefaultProps = async () => {
     if (sports.length === 0) {
       const res1 = await SportsAPIs.getSports();
@@ -70,7 +76,9 @@ function MyApp({ Component, pageProps }) {
   }, [token, router]);
 
   return (
-    <Component {...pageProps} token={parsedToken} sports={sports} subscriptions={subscriptions} />
+    <Elements stripe={stripePromise}>
+      <Component {...pageProps} token={parsedToken} sports={sports} subscriptions={subscriptions} />
+    </Elements>
   );
 }
 

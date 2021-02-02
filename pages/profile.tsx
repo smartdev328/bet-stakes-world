@@ -1,11 +1,17 @@
 /* eslint-disable react/display-name */
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Upload, Col, Modal } from 'antd';
-import Card from 'react-credit-cards';
+import { Row, Button, Upload, Col, Modal, notification } from 'antd';
 import 'react-credit-cards/es/styles-compiled.css';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
+import {
+  useStripe,
+  useElements,
+  CardExpiryElement,
+  CardCvcElement,
+  CardNumberElement
+} from '@stripe/react-stripe-js';
 
 import {
   AppLayout,
@@ -14,18 +20,12 @@ import {
   YellowCheckBox
 } from '@components/index';
 import styles from '@styles/Profile.module.css';
-import {
-  UserCreditCard,
-  ProfileValidateType,
-  UserProfile,
-  UserBillingInfo,
-  NotificationConfig
-} from '@type/Users';
+import { ProfileValidateType, UserProfile, UserBillingInfo, NotificationConfig } from '@type/Users';
 import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
-import { formatCreditCardNumber, formatCVC, formatExpirationDate } from '@utils/creditCard';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageProps } from '@type/Main';
+import UsersAPIs from '@apis/user.apis';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
@@ -33,6 +33,9 @@ type ProfileFormType = UserProfile & {
 };
 
 export default function MemberProfile({ token, subscriptions }: PageProps) {
+  const stripe = useStripe();
+  const elements = useElements();
+
   const packages: Package[] = [
     {
       id: 1,
@@ -74,12 +77,6 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     password: true,
     verify_password: true
   });
-  const [creditCard, setCreditCard] = useState<UserCreditCard>({
-    expiry: '',
-    name: '',
-    number: '',
-    cvc: ''
-  });
   const [billingInfo, setBillingInfo] = useState<UserBillingInfo>({
     city: undefined,
     address: undefined,
@@ -87,6 +84,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     full_name: undefined,
     country: undefined
   });
+  const [isSavingCardInfo, setIsSavingCardInfo] = useState<boolean>(false);
 
   const changeFormData = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -154,26 +152,64 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     newBillingInfo[name] = value;
     setBillingInfo(newBillingInfo);
   };
-  const updateCardForm = (name: keyof UserCreditCard, e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    const newCreditCard = Object.assign({}, creditCard);
-    switch (name) {
-      case 'number': {
-        newCreditCard[name] = formatCreditCardNumber(value);
-        break;
-      }
-      case 'expiry': {
-        newCreditCard[name] = formatExpirationDate(value);
-        break;
-      }
-      case 'cvc': {
-        newCreditCard[name] = formatCVC(value, creditCard);
-        break;
-      }
-      default:
-        newCreditCard[name] = value;
+  const updateCardForm = async (event: FormEvent<HTMLFormElement>) => {
+    // Block native form submission.
+    event.preventDefault();
+    setIsSavingCardInfo(true);
+
+    if (!stripe || !elements) {
+      console.error('Stripe is not loaded');
+      return;
     }
-    setCreditCard(newCreditCard);
+
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardNumberElement = elements.getElement(CardNumberElement);
+
+    // Use your card Element with other Stripe.js APIs
+    if (cardNumberElement) {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardNumberElement,
+        billing_details: {
+          name: billingInfo.full_name,
+          address: {
+            city: billingInfo.city,
+            country: billingInfo.country,
+            line1: billingInfo.address,
+            postal_code: billingInfo.zipcode
+          }
+        }
+      });
+      if (!paymentMethod) {
+        console.log('[error]', error);
+      } else {
+        await UsersAPIs.addPaymentMethod({ payment_method_id: paymentMethod.id })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.statusCode < 400) {
+              notification['info']({
+                message: 'New Payment Method has been Added!'
+              });
+            } else {
+              notification['error']({
+                message: 'Add New Payment Method Error',
+                description: data.message
+              });
+            }
+          })
+          .catch((error) => {
+            notification['error']({
+              message: 'Add New Payment Method Error',
+              description: error.message
+            });
+          });
+      }
+    } else {
+      console.log('[error] Card Element is not rendered');
+    }
+    setIsSavingCardInfo(false);
   };
 
   return (
@@ -190,9 +226,9 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
           <CurrentPackages packages={packages} />
           <Notifications />
           <CreditCardInfo
-            creditCard={creditCard}
             changeBillingFormData={updateBillingForm}
             changeCardFormData={updateCardForm}
+            loading={isSavingCardInfo}
           />
           <CancelSubscription />
         </div>
@@ -479,122 +515,106 @@ function Notifications() {
 }
 
 type CreditCardInfoType = {
-  creditCard: UserCreditCard;
   changeBillingFormData: (
     name: keyof UserBillingInfo,
     e: React.FormEvent<HTMLInputElement>
   ) => void;
-  changeCardFormData: (name: keyof UserCreditCard, e: React.FormEvent<HTMLInputElement>) => void;
+  changeCardFormData: (e: FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
 };
 
 function CreditCardInfo({
-  creditCard,
   changeBillingFormData,
-  changeCardFormData
+  changeCardFormData,
+  loading
 }: CreditCardInfoType) {
   return (
     <div className={styles.creditCardInfoRow}>
-      <div className={styles.sectionTitle}>Credit Card Information</div>
-      <Row className={styles.rowWithTwoChild} justify="space-between">
-        <Col span={12}>
-          <h6>Billing Information</h6>
-          <Col span={24} className={styles.formGroup}>
-            <label>Full Name</label>
-            <input
-              name="full_name"
-              placeholder="Johnny Cash"
-              onChange={(e) => changeBillingFormData('full_name', e)}
-            />
-          </Col>
-          <Col span={24} className={styles.formGroup}>
-            <label>Billing Address</label>
-            <input
-              name="address"
-              placeholder="-"
-              onChange={(e) => changeBillingFormData('address', e)}
-            />
-          </Col>
-          <Row className={styles.rowWithTwoChild} justify="space-between">
-            <Col span={12} className={styles.formGroup}>
-              <label>City</label>
-              <input
-                name="city"
-                placeholder="ie: Ottawa"
-                onChange={(e) => changeBillingFormData('city', e)}
-              />
-            </Col>
-            <Col span={12} className={styles.formGroup}>
-              <label>Zip code</label>
-              <input
-                name="zipcode"
-                placeholder="ie: 90021"
-                onChange={(e) => changeBillingFormData('zipcode', e)}
-              />
-            </Col>
-          </Row>
-          <Col span={24} className={styles.formGroup}>
-            <label>Country/Region</label>
-            <input
-              name="country"
-              placeholder="Canada"
-              onChange={(e) => changeBillingFormData('country', e)}
-            />
-          </Col>
-        </Col>
-        <Col span={12} className="profile-credit-card">
-          <h6>Credit Card Info</h6>
-          <Card
-            number={creditCard.number || ''}
-            name={creditCard.name || ''}
-            expiry={creditCard.expiry || ''}
-            cvc={creditCard.cvc || ''}
-          />
-          <Row className={styles.rowWithTwoChild} justify="space-between">
-            <Col span={12} className={styles.formGroup}>
-              <label>Card Number</label>
-              <input
-                name="number"
-                type="text"
-                value={creditCard.number}
-                pattern="[\d| ]{16,22}"
-                placeholder="XXXX XXXX XXXX 1234"
-                onChange={(e) => changeCardFormData('number', e)}
-              />
-            </Col>
-            <Col span={12} className={styles.formGroup}>
+      <form onSubmit={changeCardFormData}>
+        <div className={styles.sectionTitle}>Credit Card Information</div>
+        <Row className={styles.rowWithTwoChild} justify="space-between">
+          <Col span={12}>
+            <h6>Billing Information</h6>
+            <Col span={24} className={styles.formGroup}>
               <label>Full Name</label>
               <input
-                name="name"
-                type="text"
+                name="full_name"
                 placeholder="Johnny Cash"
-                onChange={(e) => changeCardFormData('name', e)}
+                onChange={(e) => changeBillingFormData('full_name', e)}
               />
             </Col>
-            <Col span={12} className={styles.formGroup}>
-              <label>Expiry Date</label>
+            <Col span={24} className={styles.formGroup}>
+              <label>Billing Address</label>
               <input
-                name="expiry"
-                type="text"
-                value={creditCard.expiry}
-                pattern="\d\d/\d\d"
-                placeholder="MM/YY"
-                onChange={(e) => changeCardFormData('expiry', e)}
+                name="address"
+                placeholder="-"
+                onChange={(e) => changeBillingFormData('address', e)}
               />
             </Col>
-            <Col span={12} className={styles.formGroup}>
-              <label>CVV</label>
+            <Row className={styles.rowWithTwoChild} justify="space-between">
+              <Col span={12} className={styles.formGroup}>
+                <label>City</label>
+                <input
+                  name="city"
+                  placeholder="ie: Ottawa"
+                  onChange={(e) => changeBillingFormData('city', e)}
+                />
+              </Col>
+              <Col span={12} className={styles.formGroup}>
+                <label>Zip code</label>
+                <input
+                  name="zipcode"
+                  placeholder="ie: 90021"
+                  onChange={(e) => changeBillingFormData('zipcode', e)}
+                />
+              </Col>
+            </Row>
+            <Col span={24} className={styles.formGroup}>
+              <label>Country/Region</label>
               <input
-                name="cvc"
-                type="text"
-                value={creditCard.cvc}
-                pattern="\d{3,4}"
-                placeholder="•••"
-                onChange={(e) => changeCardFormData('cvc', e)}
+                name="country"
+                placeholder="Canada"
+                onChange={(e) => changeBillingFormData('country', e)}
               />
             </Col>
-          </Row>
-        </Col>
-      </Row>
+          </Col>
+          <Col span={12} className="profile-credit-card">
+            <h6>Credit Card Info</h6>
+            <Row>
+              <Col span={24} className={styles.formGroup}>
+                <label>Card Number</label>
+                <CardNumberElement
+                  options={{ placeholder: 'XXXX XXXX XXXX 1234', classes: { base: styles.input } }}
+                />
+              </Col>
+            </Row>
+            <Row className={styles.rowWithTwoChild} justify="space-between">
+              <Col span={12} className={styles.formGroup}>
+                <label>Expiry Date</label>
+                <CardExpiryElement
+                  options={{ placeholder: 'MM/YY', classes: { base: styles.input } }}
+                />
+              </Col>
+              <Col span={12} className={styles.formGroup}>
+                <label>CVV</label>
+                <CardCvcElement options={{ placeholder: '•••', classes: { base: styles.input } }} />
+              </Col>
+            </Row>
+            <Row className={styles.formGroup}></Row>
+            <Row className={styles.formGroup}></Row>
+            <Row className={styles.formGroup}></Row>
+            <Row className={styles.formGroup}></Row>
+            <Row className={styles.formGroup}></Row>
+            <Row justify="end">
+              <Col>
+                <Button loading={loading} htmlType="submit">
+                  Save Payment Method
+                </Button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </form>
     </div>
   );
 }

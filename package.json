@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@stripe/react-stripe-js": "^1.2.2",
+    "@stripe/stripe-js": "^1.11.0",
     "antd": "^4.9.3",
     "moment": "^2.29.1",
     "next": "10.0.3",

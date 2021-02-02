@@ -13,6 +13,9 @@ import PackageAPIs from '@apis/package.apis';
 import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
+import SubscriptionsApis from '@apis/subscriptions.apis';
+
+const TAX_RATE = 0.15;
 
 function HeroBanner() {
   return (
@@ -32,9 +35,10 @@ function HeroBanner() {
 type CartTotalWidgetProps = {
   mobile: boolean;
   cartItems: CartItem[];
+  onCheckout: () => void;
 };
 
-function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
+function CartTotalWidget({ cartItems, mobile, onCheckout }: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
   let totalPrice = 0;
@@ -53,7 +57,7 @@ function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
         <div className={styles.totalPrice}>{`${totalPrice}.00`}</div>
         <div className={styles.taxRow}>
           <span>Tax:</span>
-          <span>15%</span>
+          <span>{`${TAX_RATE * 100}%`}</span>
         </div>
         <div className={styles.discountRow}>
           <span>Discount:</span>
@@ -65,14 +69,16 @@ function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
             Apply Coupon
           </Button>
         </div>
-        <Button className={styles.checkoutBtn}>Proceed to Checkout</Button>
+        <Button className={styles.checkoutBtn} onClick={onCheckout}>
+          Proceed to Checkout
+        </Button>
       </div>
       <div className={styles.totalPriceWidgetContentMobile}>
         {showDetails && <h5>Cart Totals</h5>}
         <div className={styles.priceRow}>
-          <div className={styles.totalCount}>3 Items</div>
+          <div className={styles.totalCount}>{cartItems.length} Items</div>
           <div className={styles.totalPrice}>
-            <span>$399.00</span>
+            <span>{`$${totalPrice}.00`}</span>
             {!showDetails && (
               <CaretUpOutlined className={styles.caret_up} onClick={() => setShowDetails(true)} />
             )}
@@ -88,7 +94,7 @@ function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
           <>
             <div className={styles.taxRow}>
               <span>Tax:</span>
-              <span>15%</span>
+              <span>{TAX_RATE * 100}%</span>
             </div>
             <div className={styles.discountRow}>
               <span>Discount:</span>
@@ -102,7 +108,9 @@ function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
             Apply Coupon
           </Button>
         </div>
-        <Button className={styles.checkoutBtn}>Proceed to Checkout</Button>
+        <Button className={styles.checkoutBtn} onClick={onCheckout}>
+          Proceed to Checkout
+        </Button>
       </div>
     </div>
   );
@@ -110,23 +118,29 @@ function CartTotalWidget({ cartItems, mobile }: CartTotalWidgetProps) {
 
 function PlanDropdown({
   pack,
+  selectedPlan,
   changePlan
 }: {
   pack: Package;
+  selectedPlan: BillingPlan;
   changePlan: (plan: BillingPlan) => void;
 }) {
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<BillingPlan>(pack.billing_plans[0]);
+  const [tempPlan, setTempPlan] = useState<BillingPlan>(selectedPlan);
+
+  const billingPlans = pack.billing_plans.filter(
+    (plan) => plan.description === null || plan.description === ''
+  );
 
   const PackTypeMenu = () => (
     <Menu className={styles.sportMenu}>
-      {pack.billing_plans?.map((plan: BillingPlan, index: number) => (
+      {billingPlans.map((plan: BillingPlan, index: number) => (
         <Menu.Item
           key={index}
           className={styles.sportMenuItem}
           onClick={() => {
             setPackTypeMenuOpen(false);
-            setSelectedPlan(plan);
+            setTempPlan(plan);
             changePlan(plan);
           }}>
           {`${plan.name}`}
@@ -147,7 +161,7 @@ function PlanDropdown({
       transitionName=""
       trigger={['click']}>
       <div className={styles.optionBtn}>
-        <span>{selectedPlan?.name}</span>
+        <span>{tempPlan?.name}</span>
         {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
         {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
       </div>
@@ -180,6 +194,20 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     const updated = tempCartItems.slice();
     updated[index].plan = plan;
     setTempCartItems(updated);
+  };
+
+  const proceedCheckout = () => {
+    tempCartItems.forEach(async (item) => {
+      // Add To Subscriptions
+      await SubscriptionsApis.addSubscription({
+        plan_id: item.plan.id,
+        sports: [item.sports.id]
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('----- data:', data);
+        });
+    });
   };
 
   return (
@@ -216,6 +244,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                           {pack.id === item.plan.package && pack.description === null && (
                             <PlanDropdown
                               pack={pack}
+                              selectedPlan={item.plan}
                               changePlan={(plan) => changedPlan(index, plan)}
                             />
                           )}
@@ -236,7 +265,11 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                 </div>
               ))}
             </div>
-            <CartTotalWidget mobile={false} cartItems={tempCartItems} />
+            <CartTotalWidget
+              mobile={false}
+              cartItems={tempCartItems}
+              onCheckout={proceedCheckout}
+            />
           </section>
           <section className={styles.promoCodeSection}>
             <LazyLoad>
@@ -259,7 +292,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               </div>
             </div>
           </section>
-          <CartTotalWidget mobile={true} cartItems={tempCartItems} />
+          <CartTotalWidget mobile={true} cartItems={tempCartItems} onCheckout={proceedCheckout} />
         </div>
       </AppLayout>
     </>

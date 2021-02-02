@@ -89,10 +89,19 @@ export type UserSubscription = {
   sports: Sport;
 };
 
+export type AddUserSubscription = {
+  plan_id: string;
+  sports: number[];
+};
+
 export type ForgotPasswordForm = {
   email: string | undefined;
 };
 
 export type ForgotPasswordFormValidate = {
   email: boolean;
+};
+
+export type AddUserPayment = {
+  payment_method_id: string;
 };

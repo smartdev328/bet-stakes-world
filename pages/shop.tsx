@@ -5,7 +5,7 @@ import { Row, Button } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, CartDrawer } from '@components/index';
 import { CartItem } from '@type/Cart';
 import {
   PlusIcon,
@@ -34,6 +34,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
   const [currentPlan, setCurrentPlan] = useState<string>('all');
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,6 +61,9 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
   };
 
   const addToCart = (pack: Package, items: CartItem[]) => {
+    if (items.length === 0) {
+      return;
+    }
     const newItems = cartItems.filter((item) => item.plan.package !== pack.id);
     if (pack.name.indexOf('VIP All Access') > -1) {
       items.forEach((item) => {
@@ -76,6 +80,10 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
       });
     }
     dispatch({ type: 'UPDATE_CART', payload: newItems });
+    setIsDrawerOpen(true);
+  };
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
   };
 
   return (
@@ -84,6 +92,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
         <title>The Daily Stakes - Shop</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
+        {packages && <CartDrawer open={isDrawerOpen} onClose={closeDrawer} packages={packages} />}
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />
@@ -329,7 +338,6 @@ function FAQs({ title, currentPlan }: FAQPropsType) {
 function ProductsAndCartBox({
   pack,
   addToCart,
-  sports,
   cartItems,
   changeTempCart
 }: ProductsAndCartBoxProps) {
@@ -535,9 +543,7 @@ function ProductsAndCartBoxForFantasy({
     totalPrice += item.plan.price;
   });
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
-  const billingPlans = pack.billing_plans.filter(
-    (plan) => plan.description === null || plan.description === ''
-  );
+  const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   return (
     <>
@@ -808,9 +814,7 @@ function ProductsAndCartBoxForSportsCard({
   });
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
-  const billingPlans = pack.billing_plans.filter(
-    (plan) => plan.description === null || plan.description === ''
-  );
+  const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   return (
     <>

@@ -23,12 +23,13 @@ const CheckedStatusIcon = ({ className, onClick }: SVGIconPropType) => (
 type PropsType = {
   checked: boolean;
   label: string;
+  isSmall?: boolean;
   onChangeStatus: () => void;
 };
 
-function YellowCheckBox({ label, checked, onChangeStatus }: PropsType) {
+function YellowCheckBox({ label, checked, isSmall, onChangeStatus }: PropsType) {
   return (
-    <div className={styles.checkbox}>
+    <div className={`${styles.checkbox} ${isSmall && styles.small}`}>
       {checked && (
         <CheckedStatusIcon className={styles.checkedStatusIcon} onClick={onChangeStatus} />
       )}

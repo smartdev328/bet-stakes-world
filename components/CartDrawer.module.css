@@ -1,0 +1,144 @@
+.cartDrawerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.cartDrawer {
+  width: 400px;
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: #fff;
+  padding: 32px 16px 0;
+  transform: translateX(100%);
+  transition: all linear 0.3s;
+}
+.cartDrawer.open {
+  transform: translateX(0);
+}
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #959799;
+  height: auto;
+  flex-flow: row wrap;
+  margin: 0 0 20px 0;
+  padding: 16px;
+  position: relative;
+}
+.cartItemMain {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.cartItemMain img {
+  width: 74px;
+  height: 74px;
+  margin-right: 16px;
+}
+.cartItemInfo {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+}
+.cartItemMain .cartItemName {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  color: #000000;
+}
+.cartItemMain .cartItemDesc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #000000;
+}
+.cartItemPlans {
+  margin-top: 1em;
+  flex: 1;
+}
+.cartItemPrice {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 184.4%;
+  color: #000000;
+  width: auto;
+}
+.cartItemPlansContent {
+  display: inline-block;
+}
+.removeCartItemBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.removeCartItemBtn svg {
+  width: 12px;
+  height: 12px;
+}
+.removeCartItemBtn path {
+  fill: #1a1a1a;
+}
+.optionBtn {
+  border: 1px solid #C4C4C4;
+  padding: 6px 6px 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+.optionBtn span {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+.caret_up, .caret_down {
+  margin-left: 8px;
+  font-size: 14px !important;
+  line-height: 14px !important;
+}
+.caret_up path, .caret_down path {
+  fill: rgba(0, 0, 0, 0.54);
+}
+.checkboxContainer span {
+  font-size: 14px;
+  line-height: 22px;
+}
+.cartItems {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.cartItemsMain {
+  flex: 1;
+  overflow-y: auto;
+}
+.goToCartRow {
+  padding: 16px 0;
+}
+.goToCartBtn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  padding: 12.5px 95px;
+  background: #FFC700;
+  width: 100%;
+  height: auto;
+}
+.noItem {
+  font-size: 16px;
+  padding: 1em;
+  font-weight: bold;
+  text-align: center;
+}

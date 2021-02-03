@@ -1,12 +1,13 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Button, Dropdown, Menu } from 'antd';
+import { useRouter } from 'next/router';
+import { Button, Dropdown, Menu, notification, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
-import { AppLayout, BannerSportsAndMatches, YellowCheckBox } from '@components/index';
+import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import styles from '@styles/Cart.module.css';
 import { CartItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
@@ -35,18 +36,18 @@ function HeroBanner() {
 
 type CartTotalWidgetProps = {
   mobile: boolean;
+  loading: boolean;
   cartItems: CartItem[];
   onCheckout: () => void;
 };
 
-function CartTotalWidget({ cartItems, mobile, onCheckout }: CartTotalWidgetProps) {
+function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
   let totalPrice = 0;
   cartItems.forEach((item) => {
     totalPrice += item.plan.price;
   });
-
   return (
     <div className={`${styles.totalPriceWidget} ${mobile && styles.isMobileVisible}`}>
       <LazyLoad>
@@ -54,8 +55,10 @@ function CartTotalWidget({ cartItems, mobile, onCheckout }: CartTotalWidgetProps
       </LazyLoad>
       <div className={styles.totalPriceWidgetContent}>
         <h5>Cart Totals</h5>
-        <div className={styles.totalCount}>{cartItems.length} Items</div>
-        <div className={styles.totalPrice}>{`${totalPrice}.00`}</div>
+        <div className={styles.totalCount}>
+          {cartItems.length > 0 ? `${cartItems.length} Items` : 'No Items'}
+        </div>
+        <div className={styles.totalPrice}>{`$${totalPrice}.00`}</div>
         <div className={styles.taxRow}>
           <span>Tax:</span>
           <span>{`${TAX_RATE * 100}%`}</span>
@@ -70,7 +73,11 @@ function CartTotalWidget({ cartItems, mobile, onCheckout }: CartTotalWidgetProps
             Apply Coupon
           </Button>
         </div>
-        <Button className={styles.checkoutBtn} onClick={onCheckout}>
+        <Button
+          loading={loading}
+          disabled={cartItems.length === 0}
+          className={styles.checkoutBtn}
+          onClick={onCheckout}>
           Proceed to Checkout
         </Button>
       </div>
@@ -109,7 +116,11 @@ function CartTotalWidget({ cartItems, mobile, onCheckout }: CartTotalWidgetProps
             Apply Coupon
           </Button>
         </div>
-        <Button className={styles.checkoutBtn} onClick={onCheckout}>
+        <Button
+          loading={loading}
+          disabled={cartItems.length === 0}
+          className={styles.checkoutBtn}
+          onClick={onCheckout}>
           Proceed to Checkout
         </Button>
       </div>
@@ -171,23 +182,15 @@ function PlanDropdown({
 export default function Cart({ packages, token, subscriptions }: PageProps) {
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
+  const [proceeding, setProceeding] = useState<boolean>(false);
+
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setTempCartItems(cartItems);
   }, [cartItems]);
 
-  const changeCartItem = (index: number, key: keyof CartItem, value: string | boolean) => {
-    const updated = tempCartItems.slice();
-    switch (key) {
-      case 'auto_renewal':
-        if (typeof value === 'boolean') {
-          updated[index].auto_renewal = value;
-        }
-        break;
-      default:
-    }
-    setTempCartItems(updated);
-  };
   const removeCartAt = (index: number) => {
     const updated = tempCartItems.slice();
     updated.splice(index, 1);
@@ -200,17 +203,30 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   };
 
   const proceedCheckout = () => {
-    tempCartItems.forEach(async (item) => {
+    setProceeding(true);
+    const promiseArr: Promise<Response>[] = [];
+    tempCartItems.forEach((item) => {
       // Add To Subscriptions
-      await SubscriptionsApis.addSubscription({
+      const promise = SubscriptionsApis.addSubscription({
         plan_id: item.plan.id,
         sports: item.sports !== undefined ? [item.sports.id] : []
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('----- data:', data);
-        });
+      }).then((res) => res.json());
+      promiseArr.push(promise);
     });
+    Promise.all(promiseArr)
+      .then(() => {
+        setProceeding(false);
+        setTempCartItems([]);
+        dispatch({ type: 'UPDATE_CART', payload: [] });
+        router.push('/member-dashboard');
+      })
+      .catch((error) => {
+        setProceeding(false);
+        notification['error']({
+          message: 'Checkout Error!',
+          description: error.message
+        });
+      });
   };
 
   return (
@@ -221,9 +237,18 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
+          {proceeding && (
+            <div className={styles.containerLoadingWrapper}>
+              <Spin size="large" />
+            </div>
+          )}
           <section className={styles.cartItemsSection}>
             <div className={styles.cartItems}>
-              {tempCartItems.length === 0 && <em>Cart is empty</em>}
+              {tempCartItems.length === 0 && (
+                <p className={styles.noCart}>
+                  <em>Cart is empty</em>
+                </p>
+              )}
               {tempCartItems.map((item, index) => (
                 <div key={index} className={styles.cartItemWrapper}>
                   <div className={styles.cartItem}>
@@ -254,20 +279,12 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                             )}
                           </React.Fragment>
                         ))}
-                        <div className={styles.checkboxContainer}>
-                          <YellowCheckBox
-                            checked={item.auto_renewal}
-                            onChangeStatus={() =>
-                              changeCartItem(index, 'auto_renewal', !item.auto_renewal)
-                            }
-                            label={'Automatic Renewal'}
-                          />
-                        </div>
                       </div>
                     </div>
                     <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
                     <Button
                       type={'link'}
+                      className={styles.removeCartBtn}
                       icon={<MinusIcon className={styles.minusIcon} />}
                       onClick={() => removeCartAt(index)}></Button>
                   </div>
@@ -276,6 +293,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             </div>
             <CartTotalWidget
               mobile={false}
+              loading={proceeding}
               cartItems={tempCartItems}
               onCheckout={proceedCheckout}
             />
@@ -301,7 +319,12 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               </div>
             </div>
           </section>
-          <CartTotalWidget mobile={true} cartItems={tempCartItems} onCheckout={proceedCheckout} />
+          <CartTotalWidget
+            mobile={true}
+            loading={proceeding}
+            cartItems={tempCartItems}
+            onCheckout={proceedCheckout}
+          />
         </div>
       </AppLayout>
     </>

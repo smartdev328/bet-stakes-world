@@ -14,6 +14,8 @@ import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
 import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
+import PackageAPIs from '@apis/package.apis';
+import { Package } from '@type/Packages';
 
 function HeroBanner() {
   return (
@@ -42,46 +44,78 @@ function TopSection() {
   );
 }
 
-function CurrentPackages({ subscriptions }: { subscriptions: UserSubscription[] }) {
+function CurrentPackages({
+  subscriptions,
+  packages
+}: {
+  subscriptions: UserSubscription[];
+  packages: Package[];
+}) {
+  let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
+  packages.forEach((pack) => {
+    if (pack.name.indexOf('VIP All Access') > -1) {
+      vipAllAccessPack = pack.id;
+    } else if (pack.name.indexOf('Fantasy') > -1) {
+      fantasyPack = pack.id;
+    } else {
+      sportsCardPack = pack.id;
+    }
+  });
+  console.log('---- packages ids:', subscriptions);
+
   return (
     <div className={styles.current_packages}>
       <div className={styles.block_title}>Current Packages</div>
       <div className={styles.block_content}>
         {subscriptions.map((subscription) => (
-          <React.Fragment key={subscription.id}>
-            <div className={styles.package_card}>
-              <div className={styles.package_status}>Renews in 23 days</div>
-              <div className={styles.package_card_content}>
+          <div className={styles.package_card} key={subscription.id}>
+            {subscription.is_active && (
+              <div className={styles.package_status}>{`Renews in ${Math.floor(
+                moment.duration(moment(subscription.valid_till).diff(moment())).asDays()
+              )} days`}</div>
+            )}
+            {!subscription.is_active && (
+              <div className={styles.package_status}>{`Expired ${Math.floor(
+                moment.duration(moment().diff(moment(subscription.valid_till))).asDays()
+              )} days ago`}</div>
+            )}
+            <div className={styles.package_card_content}>
+              {subscription.plan.package === vipAllAccessPack && (
                 <img
-                  alt="Sports Card Background"
+                  alt="VIP All Access Background"
                   src="/images/sports_card_bg.png"
                   className={styles.package_card_img}
                 />
-                <div className={styles.package_title}>
-                  <h3>Sports Card</h3>
-                  <p>Monthly Picks</p>
-                </div>
-                <p className={styles.package_desc}>Current record: 90-0</p>
-                <Button className={styles.cta_btn}>View Picks</Button>
-              </div>
-            </div>
-            <div className={styles.package_card}>
-              <div className={styles.package_status}>Expired 2 day ago</div>
-              <div className={styles.package_card_content}>
+              )}
+              {subscription.plan.package !== vipAllAccessPack && (
                 <img
-                  alt="Daily lineups Background"
-                  src="/images/daily_lineups_bg.png"
+                  alt="Sports Logo"
+                  src={
+                    subscription.sports?.logo
+                      ? subscription.sports?.logo
+                      : '/images/daily_lineups_bg.png'
+                  }
                   className={styles.package_card_img}
                 />
-                <div className={styles.package_title}>
-                  <h3>Fantasy</h3>
-                  <p>Daily lineups</p>
-                </div>
-                <p className={styles.package_desc}>Current record: 90-0</p>
-                <Button className={styles.cta_btn}>Reactivate Package</Button>
+              )}
+              <div className={styles.package_title}>
+                {subscription.plan.package === vipAllAccessPack && <h3>VIP All Access</h3>}
+                {subscription.plan.package === sportsCardPack && <h3>Sports Card</h3>}
+                {subscription.plan.package === fantasyPack && <h3>Fantasy</h3>}
+                {subscription.plan.package !== fantasyPack && (
+                  <p>{subscription.plan.duration.toLowerCase()} Picks</p>
+                )}
+                {subscription.plan.package === fantasyPack && (
+                  <p>{subscription.plan.duration.toLowerCase()} lineups</p>
+                )}
               </div>
+              <p className={styles.package_desc}>Current record: 90-0</p>
+              {subscription.is_active && <Button className={styles.cta_btn}>View Picks</Button>}
+              {!subscription.is_active && (
+                <Button className={styles.cta_btn}>Reactivate Package</Button>
+              )}
             </div>
-          </React.Fragment>
+          </div>
         ))}
         <div className={styles.package_card}>
           <Link href="/shop">
@@ -255,6 +289,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
             </Col>
           </Row>
         )}
+        {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
         {!loading &&
           games.map((game: EarliestGameInfoType, index: number) => (
             <div className={styles.game} key={game.id}>
@@ -360,6 +395,7 @@ function YesterdayPlays() {
         <span>{moment().subtract(1, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
       <div className={styles.yesterday_plays_list}>
+        {games.length === 0 && <div className={styles.noData}>No Plays</div>}
         {games.map((game: YesterdayPlayInfoType, index: number) => (
           <React.Fragment key={index}>
             <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={game.id}>
@@ -445,7 +481,7 @@ function YesterdayPlays() {
   );
 }
 
-export default function MemberDashboard({ token, subscriptions, sports }: PageProps) {
+export default function MemberDashboard({ token, subscriptions, sports, packages }: PageProps) {
   const [weeklyTip, setWeeklyTip] = useState<WeeklyTip | undefined>(undefined);
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
@@ -466,7 +502,7 @@ export default function MemberDashboard({ token, subscriptions, sports }: PagePr
           <TopSection />
           <Row className={styles.nowrapRow}>
             <Col span={18} className={styles.current_packages_container}>
-              <CurrentPackages subscriptions={subscriptions} />
+              {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
               <div className={styles.earliest_games_col}>
                 <EarliestGames sports={sports} />
               </div>
@@ -482,4 +518,15 @@ export default function MemberDashboard({ token, subscriptions, sports }: PagePr
       </AppLayout>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const res = await PackageAPIs.getPackages();
+  const packages = await res.json();
+
+  return {
+    props: {
+      packages
+    }
+  };
 }

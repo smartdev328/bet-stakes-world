@@ -49,7 +49,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
     } else {
       items.forEach((item) => {
         const idx = newItems.findIndex(
-          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports.id === item.sports.id
+          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports?.id === item.sports?.id
         );
         if (idx < 0) {
           newItems.push(item);
@@ -68,7 +68,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
     } else {
       items.forEach((item) => {
         const idx = newItems.findIndex(
-          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports.id === item.sports.id
+          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports?.id === item.sports?.id
         );
         if (idx < 0) {
           newItems.push(item);
@@ -340,7 +340,7 @@ function ProductsAndCartBox({
   const changeSportCard = (plan: BillingPlan) => {
     const newCart = [
       {
-        sports: sports[0],
+        sports: undefined,
         plan,
         pack,
         auto_renewal: false,
@@ -367,9 +367,7 @@ function ProductsAndCartBox({
   });
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
-  const billingPlans = pack.billing_plans.filter(
-    (plan) => plan.description === null || plan.description === ''
-  );
+  const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   return (
     <>
@@ -480,7 +478,7 @@ function ProductsAndCartBoxForFantasy({
 
   const changeSportCard = (plan: BillingPlan) => {
     const newCart = tempCart.slice();
-    const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+    const itemIdx = newCart.findIndex((item) => item.sports?.id === activeSport.id);
     if (itemIdx > -1) {
       if (newCart[itemIdx].plan.duration !== plan.duration) {
         newCart.splice(itemIdx, 1);
@@ -584,17 +582,17 @@ function ProductsAndCartBoxForFantasy({
               key={index}
               className={
                 tempCart.filter(
-                  (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                  (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
                 ).length > 0
                   ? styles.active
                   : ''
               }
               onClick={() => changeSportCard(plan)}>
               {tempCart.filter(
-                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
               ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
               {tempCart.filter(
-                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
               ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
               <span className={styles.sportsCard_name}>{plan.duration}</span>
               <span className={styles.sportsCard_value}>${plan.price}.00</span>
@@ -611,7 +609,7 @@ function ProductsAndCartBoxForFantasy({
               <div>
                 {tempCart.map((item, index) => (
                   <p key={index}>
-                    {item.sports.name} - {item.plan.duration}
+                    {item.sports?.name} - {item.plan.duration}
                   </p>
                 ))}
               </div>
@@ -705,7 +703,7 @@ function ProductsAndCartBoxForSportsCard({
 
   const changeSportCard = (plan: BillingPlan) => {
     const newCart = tempCart.slice();
-    const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+    const itemIdx = newCart.findIndex((item) => item.sports?.id === activeSport.id);
     if (itemIdx > -1) {
       if (newCart[itemIdx].plan.duration !== plan.duration) {
         newCart.splice(itemIdx, 1);
@@ -734,7 +732,7 @@ function ProductsAndCartBoxForSportsCard({
 
   // const changeAddOn = (plan: BillingPlan) => {
   //   const newCart = addOnTempCart.slice();
-  //   const itemIdx = newCart.findIndex((item) => item.sports.id === activeSport.id);
+  //   const itemIdx = newCart.findIndex((item) => item.sports?.id === activeSport.id);
   //   if (itemIdx > -1) {
   //     newCart.splice(itemIdx, 1);
   //     if (newCart[itemIdx].plan.duration !== plan.duration) {
@@ -857,17 +855,17 @@ function ProductsAndCartBoxForSportsCard({
               key={index}
               className={
                 tempCart.filter(
-                  (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                  (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
                 ).length > 0
                   ? styles.active
                   : ''
               }
               onClick={() => changeSportCard(plan)}>
               {tempCart.filter(
-                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
               ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
               {tempCart.filter(
-                (item) => item.sports.id === activeSport.id && item.plan.id === plan.id
+                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
               ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
               <span className={styles.sportsCard_name}>{plan.duration}</span>
               <span className={styles.sportsCard_value}>${plan.price}.00</span>
@@ -884,7 +882,7 @@ function ProductsAndCartBoxForSportsCard({
               <div>
                 {tempCart.map((item, index) => (
                   <p key={index}>
-                    {item.sports.name} - {item.plan.duration}
+                    {item.sports?.name} - {item.plan.duration}
                   </p>
                 ))}
               </div>

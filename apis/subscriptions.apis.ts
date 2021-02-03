@@ -12,7 +12,7 @@ function getSubscriptions(userId: number) {
 
 function addSubscription(payload: AddUserSubscription) {
   const headers = tokenAuthHeaders();
-  return fetch(`${API_BASE_URL}/subscriptions`, {
+  return fetch(`${API_BASE_URL}/app/subscriptions/add`, {
     method: 'post',
     body: JSON.stringify(payload),
     headers

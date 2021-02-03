@@ -14,6 +14,7 @@ import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
 import SubscriptionsApis from '@apis/subscriptions.apis';
+import { MinusIcon } from '@components/SvgIcons';
 
 const TAX_RATE = 0.15;
 
@@ -128,9 +129,7 @@ function PlanDropdown({
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [tempPlan, setTempPlan] = useState<BillingPlan>(selectedPlan);
 
-  const billingPlans = pack.billing_plans.filter(
-    (plan) => plan.description === null || plan.description === ''
-  );
+  const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   const PackTypeMenu = () => (
     <Menu className={styles.sportMenu}>
@@ -189,7 +188,11 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     }
     setTempCartItems(updated);
   };
-
+  const removeCartAt = (index: number) => {
+    const updated = tempCartItems.slice();
+    updated.splice(index, 1);
+    setTempCartItems(updated);
+  };
   const changedPlan = (index: number, plan: BillingPlan) => {
     const updated = tempCartItems.slice();
     updated[index].plan = plan;
@@ -201,7 +204,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       // Add To Subscriptions
       await SubscriptionsApis.addSubscription({
         plan_id: item.plan.id,
-        sports: [item.sports.id]
+        sports: item.sports !== undefined ? [item.sports.id] : []
       })
         .then((res) => res.json())
         .then((data) => {
@@ -222,46 +225,52 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             <div className={styles.cartItems}>
               {tempCartItems.length === 0 && <em>Cart is empty</em>}
               {tempCartItems.map((item, index) => (
-                <div key={index} className={styles.cartItem}>
-                  <div className={styles.cartItemMain}>
-                    <img
-                      src={item.sports.logo || 'https://via.placeholder.com/100'}
-                      alt={item.sports.name}
-                    />
-                    <div className={styles.cartItemInfo}>
-                      <span className={styles.cartItemName}>{item.pack.name}</span>
-                      <span className={styles.cartItemDesc}>
-                        {item.pack.name.indexOf('VIP All Access') > -1
-                          ? 'All Sports'
-                          : item.sports.name}
-                      </span>
-                    </div>
-                  </div>
-                  <div className={styles.cartItemPlans}>
-                    <div className={styles.cartItemPlansContent}>
-                      {packages?.map((pack, idx: number) => (
-                        <React.Fragment key={idx}>
-                          {pack.id === item.plan.package && pack.description === null && (
-                            <PlanDropdown
-                              pack={pack}
-                              selectedPlan={item.plan}
-                              changePlan={(plan) => changedPlan(index, plan)}
-                            />
-                          )}
-                        </React.Fragment>
-                      ))}
-                      <div className={styles.checkboxContainer}>
-                        <YellowCheckBox
-                          checked={item.auto_renewal}
-                          onChangeStatus={() =>
-                            changeCartItem(index, 'auto_renewal', !item.auto_renewal)
-                          }
-                          label={'Automatic Renewal'}
-                        />
+                <div key={index} className={styles.cartItemWrapper}>
+                  <div className={styles.cartItem}>
+                    <div className={styles.cartItemMain}>
+                      <img
+                        src={item.sports?.logo || 'https://via.placeholder.com/100'}
+                        alt={item.sports?.name}
+                      />
+                      <div className={styles.cartItemInfo}>
+                        <span className={styles.cartItemName}>{item.pack.name}</span>
+                        <span className={styles.cartItemDesc}>
+                          {item.pack.name.indexOf('VIP All Access') > -1
+                            ? 'All Sports'
+                            : item.sports?.name}
+                        </span>
                       </div>
                     </div>
+                    <div className={styles.cartItemPlans}>
+                      <div className={styles.cartItemPlansContent}>
+                        {packages?.map((pack, idx: number) => (
+                          <React.Fragment key={idx}>
+                            {pack.id === item.plan.package && pack.description !== 'add-on' && (
+                              <PlanDropdown
+                                pack={pack}
+                                selectedPlan={item.plan}
+                                changePlan={(plan) => changedPlan(index, plan)}
+                              />
+                            )}
+                          </React.Fragment>
+                        ))}
+                        <div className={styles.checkboxContainer}>
+                          <YellowCheckBox
+                            checked={item.auto_renewal}
+                            onChangeStatus={() =>
+                              changeCartItem(index, 'auto_renewal', !item.auto_renewal)
+                            }
+                            label={'Automatic Renewal'}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
+                    <Button
+                      type={'link'}
+                      icon={<MinusIcon className={styles.minusIcon} />}
+                      onClick={() => removeCartAt(index)}></Button>
                   </div>
-                  <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
                 </div>
               ))}
             </div>

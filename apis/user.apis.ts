@@ -57,7 +57,7 @@ function sendConfirmEmail(payload: ForgotPasswordForm) {
 
 function addPaymentMethod(payload: AddUserPayment) {
   const headers = tokenAuthHeaders();
-  return fetch(`${API_BASE_URL}/billing-plans`, {
+  return fetch(`${API_BASE_URL}/app/users/post-billing`, {
     method: 'post',
     body: JSON.stringify(payload),
     headers

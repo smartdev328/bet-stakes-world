@@ -20,7 +20,7 @@ export type CartType = {
 export type CartItem = {
   owner: number;
   plan: BillingPlan;
-  sports: Sport;
+  sports: Sport | undefined;
   pack: Package;
   auto_renewal: boolean;
 };

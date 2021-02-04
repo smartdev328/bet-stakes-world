@@ -302,19 +302,21 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
                   <Row>
                     <div className={styles.game_team1}>
                       <img
-                        src={'https://via.placeholder.com/100'}
+                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
                         alt="Team Logo"
                         className={styles.team_logo}
                       />
-                      <span>{game.schedules[0].team}&nbsp;@&nbsp;</span>
+                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
                     </div>
                     <div className={styles.game_team2}>
                       <img
-                        src={'https://via.placeholder.com/100'}
+                        src={
+                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
+                        }
                         alt="Team Logo"
                         className={styles.team_logo}
                       />
-                      <span>{game.schedules[0].home_team}</span>
+                      <span>{game.schedules[0].home_team.name}</span>
                     </div>
                   </Row>
                   <Row align={'top'} wrap={false}>
@@ -410,19 +412,22 @@ function YesterdayPlays() {
                     <Row>
                       <div className={styles.game_team1}>
                         <img
-                          src={'https://via.placeholder.com/100'}
+                          src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
                           alt="Team Logo"
                           className={styles.team_logo}
                         />
-                        <span>{game.schedules[0].team}&nbsp;@&nbsp;</span>
+                        <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
                       </div>
                       <div className={styles.game_team2}>
                         <img
-                          src={'https://via.placeholder.com/100'}
+                          src={
+                            game.schedules[0].home_team.logo.url ||
+                            'https://via.placeholder.com/100'
+                          }
                           alt="Team Logo"
                           className={styles.team_logo}
                         />
-                        <span>{game.schedules[0].home_team}</span>
+                        <span>{game.schedules[0].home_team.name}</span>
                       </div>
                     </Row>
                     <Row

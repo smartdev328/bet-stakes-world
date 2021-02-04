@@ -47,14 +47,22 @@ export type SlickArrowType = {
   currentSlide?: number;
 };
 
+export type Team = {
+  logo: {
+    url: string;
+  };
+  name: string;
+  sport: number;
+};
+
 export type Schedule = {
   active: boolean;
-  home_team: number;
+  home_team: Team;
   id: number;
   name: string;
   published_at: Date;
   status: boolean;
-  team: number;
+  team: Team;
   time: Date;
 };
 

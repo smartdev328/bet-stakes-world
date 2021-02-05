@@ -45,3 +45,7 @@ workflows:
   build-tests:
     jobs:
       - build
+  send-notification:
+      jobs:
+        - notify:
+            context: Slack

@@ -79,7 +79,7 @@ function MyApp({ Component, pageProps }) {
   }, [token, router]);
 
   Sentry.init({
-    dsn: 'https://f8975556672d418b9c11f50942a4bbc7@o516891.ingest.sentry.io/5623944',
+    dsn: 'https://0e9e9b35cbc2485e996e275b36f66bd7@o516904.ingest.sentry.io/5623973',
     integrations: [new Integrations.BrowserTracing()],
 
     // We recommend adjusting this value in production, or using tracesSampler

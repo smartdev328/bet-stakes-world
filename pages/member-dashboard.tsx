@@ -302,7 +302,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
                   <Row>
                     <div className={styles.game_team1}>
                       <img
-                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
+                        src={game.schedules[0]?.team.logo?.url || 'https://via.placeholder.com/100'}
                         alt="Team Logo"
                         className={styles.team_logo}
                       />
@@ -311,7 +311,8 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
                     <div className={styles.game_team2}>
                       <img
                         src={
-                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
+                          game.schedules[0].home_team?.logo?.url ||
+                          'https://via.placeholder.com/100'
                         }
                         alt="Team Logo"
                         className={styles.team_logo}
@@ -340,7 +341,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
               {showDetailsAt[index] && (
                 <div className={styles.details_section}>
                   <ul>
-                    {game.detail.split('\n').map((unit: string, i: number) => (
+                    {game.detail?.split('\n').map((unit: string, i: number) => (
                       <li key={i}>{unit.replace('-', '')}</li>
                     ))}
                   </ul>
@@ -412,7 +413,9 @@ function YesterdayPlays() {
                     <Row>
                       <div className={styles.game_team1}>
                         <img
-                          src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
+                          src={
+                            game.schedules[0].team?.logo?.url || 'https://via.placeholder.com/100'
+                          }
                           alt="Team Logo"
                           className={styles.team_logo}
                         />
@@ -421,7 +424,7 @@ function YesterdayPlays() {
                       <div className={styles.game_team2}>
                         <img
                           src={
-                            game.schedules[0].home_team.logo.url ||
+                            game.schedules[0].home_team?.logo?.url ||
                             'https://via.placeholder.com/100'
                           }
                           alt="Team Logo"

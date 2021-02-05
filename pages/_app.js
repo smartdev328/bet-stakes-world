@@ -10,6 +10,9 @@ import SportsAPIs from '@apis/sport.apis';
 import SubscriptionsAPIs from '@apis/subscriptions.apis';
 import { STRIPE_API_KEY } from '@constants/';
 
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
+
 import 'antd/lib/style/index.css';
 import 'antd/lib/grid/style/index.css';
 import 'antd/lib/button/style/index.css';
@@ -74,6 +77,15 @@ function MyApp({ Component, pageProps }) {
     getDefaultProps();
     setParsedToken(parsedToken);
   }, [token, router]);
+
+  Sentry.init({
+    dsn: 'https://f8975556672d418b9c11f50942a4bbc7@o516891.ingest.sentry.io/5623944',
+    integrations: [new Integrations.BrowserTracing()],
+
+    // We recommend adjusting this value in production, or using tracesSampler
+    // for finer control
+    tracesSampleRate: 1.0
+  });
 
   return (
     <Elements stripe={stripePromise}>

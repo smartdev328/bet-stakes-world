@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Host: http://thedailystakes-dev.s3-website.us-east-2.amazonaws.com
-Sitemap: http://thedailystakes-dev.s3-website.us-east-2.amazonaws.com/sitemap.xml
+Host: https://www.tdsdevelopment.info
+Sitemap: https://www.tdsdevelopment.info/sitemap.xml

@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@4.0.0
+  slack: circleci/slack@4.2.1
 jobs:
   lint:
     docker:

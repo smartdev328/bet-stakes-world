@@ -139,7 +139,7 @@ function MembershipOfferings() {
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>Receive Access to ALL Plays for the Sport(s) of Your Choice</li>
-                <li>Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1</li>
+                <li>Sports Include NBA, NFL, Soccer, MLB, NCAAF, NCAAB, UFC & Formula 1</li>
                 <li>Customized Dashboard Including Automated Record Tracking</li>
                 <li>Weekly, Monthly, Season & Playoff Packages Available. </li>
               </ul>

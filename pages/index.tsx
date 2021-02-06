@@ -127,8 +127,7 @@ function MembershipOfferings() {
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>Sports Card</div>
               <div className={styles.plan_content_desc}>
-                <span>3.2k Active Players</span>
-                <span>100k Total Winnings</span>
+                ALL PLAYS FOR THE SPORT(S) OF YOUR CHOICE.
               </div>
             </div>
             <div className={styles.plan_content_details}>
@@ -139,11 +138,10 @@ function MembershipOfferings() {
                 <span className={styles.price}>$89.00</span>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>Lorem ipsum dolor sit amet, consectetur</li>
-                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
-                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
-                <li>Vignissim nisl risus vulputate Faucibus libero</li>
-                <li>Morbi viverra</li>
+                <li>Receive Access to ALL Plays for the Sport(s) of Your Choice</li>
+                <li>Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1</li>
+                <li>Customized Dashboard Including Automated Record Tracking</li>
+                <li>Weekly, Monthly, Season & Playoff Packages Available. </li>
               </ul>
               <Button className={styles.learn_more_btn} onClick={goLearnMore}>
                 Learn More
@@ -155,10 +153,7 @@ function MembershipOfferings() {
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
-              <div className={styles.plan_content_desc}>
-                <span>3.2k Active Players</span>
-                <span>100k Total Winnings</span>
-              </div>
+              <div className={styles.plan_content_desc}>ALL PLAYS. ALL SPORTS.</div>
             </div>
             <div className={styles.plan_content_details}>
               <div className={styles.price_view}>
@@ -175,11 +170,13 @@ function MembershipOfferings() {
                 <div className={styles.price}>$40.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>Lorem ipsum dolor sit amet, consectetur</li>
-                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
-                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
-                <li>Vignissim nisl risus vulputate Faucibus libero</li>
-                <li>Morbi viverra</li>
+                <li>Receive Access to ALL Plays for ALL Sports, Including BONUS Plays</li>
+                <li>Customized Dashboard Including Automated Record Tracking</li>
+                <li>
+                  Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
+                </li>
+                <li>Daily, Weekly, Monthly & Annual Packages Available. </li>
+                <li>Daily Card Includes TheDailyStakes Protection</li>
               </ul>
               <Button className={styles.learn_more_btn} onClick={goLearnMore}>
                 Learn More
@@ -192,10 +189,7 @@ function MembershipOfferings() {
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>Fantasy</div>
-              <div className={styles.plan_content_desc}>
-                <span>3.2k Active Players</span>
-                <span>100k Total Winnings</span>
-              </div>
+              <div className={styles.plan_content_desc}>OPTIMAL DFS LINEUPS.</div>
             </div>
             <div className={styles.plan_content_details}>
               <div className={styles.price_view}>
@@ -205,11 +199,11 @@ function MembershipOfferings() {
                 <div className={styles.price}>$10.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>Lorem ipsum dolor sit amet, consectetur</li>
-                <li>Adipiscing elit. Sagittis pellentesque nulla</li>
-                <li>Volutpat arcu. Elit, eget at neque auctor.</li>
-                <li>Vignissim nisl risus vulputate Faucibus libero</li>
-                <li>Morbi viverra</li>
+                <li>DFS Lineups for Single Game & Tournament Style Contests</li>
+                <li>Sports Include NBA, NFL & MLB</li>
+                <li>Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks</li>
+                <li>Includes Advanced Stats, Projected Points, Player Props & Other Key Metrics</li>
+                <li>Weekly, Monthly & Annual Packages Available</li>
               </ul>
               <Button className={styles.learn_more_btn} onClick={goLearnMore}>
                 Learn More

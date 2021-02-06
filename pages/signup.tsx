@@ -1,12 +1,10 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import { Row, Col, Dropdown, Menu, Button, notification } from 'antd';
+import { Row, Col, Menu, Button, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { NormalCheckIcon, EmptyCircleIcon, CheckedCircleIcon } from '@components/SvgIcons';

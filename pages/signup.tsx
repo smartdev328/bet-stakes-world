@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Row, Col, Menu, Button, notification } from 'antd';
+import { Row, Col, Button, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -38,7 +38,7 @@ type AccessCardPackagePropsType = {
   onSelectPackage: (id: number, billingPlan: BillingPlan) => void;
 };
 
-function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType) {
+function SportsCardPackage({ data }: AccessCardPackagePropsType) {
   const SPORTS_INFO = [
     {
       name: 'NBA',
@@ -91,29 +91,29 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
   ];
 
   const [selected, setSelected] = useState<boolean>(false);
-  const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<BillingPlan>(data.billing_plans[0]);
+  // const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
+  // const [selectedPlan, setSelectedPlan] = useState<BillingPlan>(data.billing_plans[0]);
   const [sportsStatus, setSportsStatus] = useState<boolean[]>([]);
 
-  const PackTypeMenu = () => (
-    <Menu className={styles.sportMenu}>
-      {data.billing_plans?.map((plan: BillingPlan, index: number) => (
-        <Menu.Item
-          key={index}
-          className={styles.sportMenuItem}
-          onClick={() => {
-            setSelectedPlan(plan);
-            setPackTypeMenuOpen(false);
-            onSelectPackage(data.id, plan);
-          }}>
-          {`${plan.name} - $${plan.price}.00`}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-  const changePackMenuVisible = (status: boolean) => {
-    setPackTypeMenuOpen(status);
-  };
+  // const PackTypeMenu = () => (
+  //   <Menu className={styles.sportMenu}>
+  //     {data.billing_plans?.map((plan: BillingPlan, index: number) => (
+  //       <Menu.Item
+  //         key={index}
+  //         className={styles.sportMenuItem}
+  //         onClick={() => {
+  //           setSelectedPlan(plan);
+  //           setPackTypeMenuOpen(false);
+  //           onSelectPackage(data.id, plan);
+  //         }}>
+  //         {`${plan.name} - $${plan.price}.00`}
+  //       </Menu.Item>
+  //     ))}
+  //   </Menu>
+  // );
+  // const changePackMenuVisible = (status: boolean) => {
+  //   setPackTypeMenuOpen(status);
+  // };
   const clickCheckIcon = () => {
     setSelected(!selected);
   };

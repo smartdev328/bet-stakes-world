@@ -28,7 +28,7 @@ function HeroBanner() {
       </LazyLoad>
       <div className={styles.heroBannerContent}>
         <h1>Registration</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Create an Account for Free</p>
       </div>
       <BannerSportsAndMatches />
     </div>
@@ -140,20 +140,73 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
       <div className={styles.packageTitle}>
         <span>{data?.name}</span>
       </div>
-      <ul className={styles.list_with_checkmark}>
-        <li>
-          <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </li>
-        <li>
-          <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </li>
-        <li>
-          <NormalCheckIcon className={styles.list_check_icon} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </li>
-      </ul>
+      {data.name === 'Sports Card' && (
+        <>
+          <ul className={styles.list_with_checkmark}>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Receive Access to ALL Plays for the Sport(s) of Your Choice
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Customized Dashboard Including Automated Record Tracking
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Weekly, Monthly, Season & Playoff Packages Available.
+            </li>
+          </ul>
+          <div className={styles.extra_info}>
+            * Soccer includes all Major Leagues and Tournaments Including the English Premier
+            League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.
+          </div>
+          <br></br>
+        </>
+      )}
+      {data.name === 'Fantasy' && (
+        <ul className={styles.list_with_checkmark}>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            DFS Lineups for Single Game & Tournament Style Contests
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Includes Advanced Stats, Projected Points, Player Props & Other Key Metrics
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Weekly, Monthly & Annual Packages Available
+          </li>
+        </ul>
+      )}
+      {data.name === 'VIP All Access' && (
+        <ul className={styles.list_with_checkmark}>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Receive Access to ALL Plays for ALL Sports, Including BONUS Plays
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Customized Dashboard Including Automated Record Tracking
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
+          </li>
+          <li>
+            <NormalCheckIcon className={styles.list_check_icon} />
+            Daily, Weekly, Monthly & Annual Packages Available.
+          </li>
+        </ul>
+      )}
       {data.name === 'Sports Card' && (
         <div className={styles.sportsCards}>
           <div className={styles.sectionTitle}>Select any number of sports</div>
@@ -198,7 +251,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
           </div>
         </div>
       )}
-      <div className={styles.billingPlans}>
+      {/* <div className={styles.billingPlans}>
         <div className={styles.sectionTitle}>Select Pack Type</div>
         <Dropdown
           overlay={PackTypeMenu}
@@ -212,7 +265,7 @@ function SportsCardPackage({ data, onSelectPackage }: AccessCardPackagePropsType
             {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
           </div>
         </Dropdown>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -363,7 +416,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <div className={styles.sectionTitle}>Select a Membership package</div>
+          <div className={styles.sectionTitle}>View our Membership Packages</div>
           <Row>
             <div className={styles.packagesCol}>
               {packages?.map((pack: Package) => (
@@ -375,19 +428,23 @@ export default function Registration({ packages, token, subscriptions }: PagePro
               ))}
             </div>
             <div className={styles.registrationCol}>
-              <div className={styles.sectionTitle}>Create Account</div>
+              <div className={styles.sectionTitle}>Create an account</div>
               <ul className={styles.list_with_checkmark}>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Access to TheDailyStakes Monthly Newsletter
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Free Monthly Sports Betting Picks & Optimal DFS Lineups
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Access to Content Including Yesterday's Plays
+                </li>
+                <li>
+                  <NormalCheckIcon className={styles.list_check_icon} />
+                  Exclusive Subscription Based Discounts & Insights
                 </li>
               </ul>
               <form autoComplete="off">
@@ -466,25 +523,28 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                     />
                   </Col>
                 </Row>
-                <Row className={styles.rowWithTwoChild} justify="space-between">
-                  <Col span={12} className={styles.termsSection}>
+                <Row justify="space-between">
+                  <Col className={styles.termsSection}>
                     <input type="checkbox" name="terms" onChange={changeTermsConfirmed} />
                     <div className={styles.termsContent}>
-                      <div className={styles.title}>Communication Policy</div>
+                      <div className={styles.title}></div>
                       <div>
-                        Lorem ipsum dolor sit amet,{' '}
-                        <Link href="/">
-                          <a>Read More</a>
-                        </Link>
+                        By creating an account above, you consent to The Daily Stakes, Inc.'s{' '}
+                        <a href="/terms">Terms of Service</a> and{' '}
+                        <a href="/privacy">Privacy Policy</a>. We use your email to provide you with
+                        news, updates, and promotions.
                       </div>
                     </div>
                   </Col>
+                </Row>
+                <br></br>
+                <Row justify="space-between">
                   <Col span={12}>
                     <Button
                       className={styles.registerBtn}
                       disabled={!isFormValid || !termsConfirmed}
                       onClick={onSignup}>
-                      Registor Now
+                      Register Now
                     </Button>
                   </Col>
                 </Row>

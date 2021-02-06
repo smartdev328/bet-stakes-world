@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button } from 'antd';
+import { Row, Button, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 import { AppLayout, BannerSportsAndMatches, CartDrawer } from '@components/index';
 import { CartItem } from '@type/Cart';
@@ -31,11 +32,22 @@ type ProductsAndCartBoxProps = {
 };
 
 export default function Shop({ token, subscriptions, packages, sports }: PageProps) {
-  const [currentPlan, setCurrentPlan] = useState<string>('all');
+  const { query } = useRouter();
+  const [currentPlan, setCurrentPlan] = useState<string>('');
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (sports.length > 0) {
+      if (typeof query.plan === 'string' && typeof query.plan !== undefined) {
+        setCurrentPlan(query.plan);
+      } else {
+        setCurrentPlan('all');
+      }
+    }
+  }, [query, sports]);
 
   useEffect(() => {
     setTempCartItems(cartItems);
@@ -139,6 +151,11 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                 />
               )}
               <FAQs title={'FANTASY FAQ'} currentPlan={currentPlan} />
+            </div>
+          )}
+          {currentPlan === '' && (
+            <div className={styles.emptyContent}>
+              <Spin size="large" />
             </div>
           )}
         </div>

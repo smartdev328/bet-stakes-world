@@ -874,3 +874,10 @@
     font-size: 12px;
   }
 }
+
+.emptyContent {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

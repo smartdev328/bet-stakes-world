@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useDispatch } from 'react-redux';
 import MailchimpSubscribe, { FormHooks } from 'react-mailchimp-subscribe';
+import { useRouter } from 'next/router';
 
 import { TikTokIcon, FacebookIcon, ArrowForwardIcon } from '@components/SvgIcons';
 import styles from './AppFooter.module.css';
@@ -72,6 +73,11 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
 
 function AppFooter({ token }: { token: JWT | null }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  const goSignUp = () => {
+    router.push('/signup');
+  };
 
   const openLoginModal = () => {
     dispatch({ type: 'OPEN_LOGIN_MODAL' });
@@ -120,17 +126,17 @@ function AppFooter({ token }: { token: JWT | null }) {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <Link href="/vip-all-access-card">
+                    <Link href="/shop">
                       <a>VIP All Access</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/sports-card">
+                    <Link href="/shop">
                       <a>Sports Cards</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/fantasy-daily-lineups">
+                    <Link href="/shop">
                       <a>Daily Fantasy</a>
                     </Link>
                   </li>
@@ -221,7 +227,7 @@ function AppFooter({ token }: { token: JWT | null }) {
           <Row className={styles.mainFooter_RightCol} align={'middle'} justify={'end'}>
             {!token && (
               <>
-                <Button type="primary" className={styles.subscribeBtn}>
+                <Button type="primary" onClick={goSignUp} className={styles.subscribeBtn}>
                   Subscribe Now
                 </Button>
                 <Button className={styles.loginBtn} onClick={openLoginModal}>

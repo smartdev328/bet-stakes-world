@@ -167,11 +167,11 @@ function LoginModal() {
               Sign In
             </Button>
             <div className={styles.terms_and_conditions}>
-              <Link href="/">
+              <Link href="/privacy">
                 <a>Privacy</a>
               </Link>
               <div className={styles.divider} />
-              <Link href="/">
+              <Link href="/terms">
                 <a>Terms</a>
               </Link>
             </div>

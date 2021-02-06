@@ -819,7 +819,7 @@ function ProductsAndCartBoxForSportsCard({
   return (
     <>
       <div className={styles.sportsCards}>
-        <div className={styles.sectionTitle}>Select any number of sports</div>
+        <div className={styles.sectionTitle}>Select a sport</div>
         <div className={styles.sportsTypeContent}>
           {sports.map((sport: Sport, index: number) => (
             <div key={index}>

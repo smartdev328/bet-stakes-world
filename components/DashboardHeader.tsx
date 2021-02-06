@@ -1,6 +1,6 @@
 import { Row, Button, Col } from 'antd';
 
-import { ThickStarIcon, MobilePhoneIcon } from '@components/SvgIcons';
+import { ThickStarIcon } from '@components/SvgIcons';
 import styles from './DashboardHeader.module.css';
 
 type DashboardHeaderPropsType = {
@@ -22,12 +22,12 @@ const DashboardHeader = ({ title }: DashboardHeaderPropsType) => {
           </Col>
         </Row>
       </Col>
-      <Col span={12} className={styles.right}>
+      {/* <Col span={12} className={styles.right}>
         <Button className={styles.sms_send_btn}>
           <MobilePhoneIcon className={styles.mobile_phone_icon} />
           Receive alerts via text!
         </Button>
-      </Col>
+      </Col> */}
     </Row>
   );
 };

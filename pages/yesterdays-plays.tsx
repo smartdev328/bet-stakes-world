@@ -7,10 +7,18 @@ import LazyLoad from 'react-lazyload';
 import moment from 'moment';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
-import { LockIcon } from '@components/SvgIcons';
+import {
+  ListIcon,
+  LockIcon,
+  MinusEncloseIcon,
+  MoneyPocketIcon,
+  OpenBookIcon,
+  PlusEncloseIcon
+} from '@components/SvgIcons';
 import styles from '@styles/YesterdaysPlays.module.css';
 import { PageProps, SportInfoType, YesterdayPlayInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import { useRouter } from 'next/router';
 
 const SPORTS_INFO = [
   {
@@ -95,7 +103,8 @@ export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
-              <Col span={24} className={styles.contentMainCol}>
+              <Col span={18} className={styles.contentMainCol}>
+                <SubscribeNow />
                 <YesterdayPlays plays={yesterdayPlays} />
                 <Row>
                   <Col span={24} className="text-center">
@@ -108,11 +117,203 @@ export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
                   </Col>
                 </Row>
               </Col>
+              <Col span={6} className={styles.contentSideCol}>
+                <BankrollManagementSystem />
+                <CommonSportsbooks />
+                <BettingFundamentals />
+              </Col>
             </Row>
           </div>
         </div>
       </AppLayout>
     </>
+  );
+}
+
+function SubscribeNow() {
+  const router = useRouter();
+  const goSignUp = () => {
+    router.push('/signup');
+  };
+
+  return (
+    <div className={styles.subscribenow}>
+      <div className={styles.subscribenow_container}>
+        <div className={styles.subscribenow_left}>
+          <LazyLoad height={140}>
+            <img
+              alt="Curve Arrow Icon"
+              src="/images/curve_arrow.svg"
+              className={styles.subscribenow_curve}
+            />
+          </LazyLoad>
+          <div className={styles.subscribenow_desc}>
+            Subscribe Now for Free & Join the Winning Team.
+          </div>
+        </div>
+        <div className={styles.subscribenow_right}>
+          <div className={styles.btn_circle}>
+            <LazyLoad height={170}>
+              <img alt="Subscribe Button Icon" src="/images/subscribe_btn_circle.svg" />
+            </LazyLoad>
+            <Button className={styles.subscribe_btn} onClick={goSignUp}>
+              Subscribe Now
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BankrollManagementSystem() {
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Bankroll Management System</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        <Row className={styles.ctaBtns}>
+          <Button className={styles.agressiveBtn}>Aggresive</Button>
+          <Button ghost className={styles.conservativeBtn}>
+            Conservative
+          </Button>
+        </Row>
+        <p>1 unit = 2% Bankroll</p>
+        <p>2 units = 4% Bankroll</p>
+        <p>3 units = 6% Bankroll</p>
+        <p>4 units = 8% Bankroll</p>
+        <div className={styles.footer_desc}>
+          The higher the unit the more confident I am in the play
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommonSportsbooks() {
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <OpenBookIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Common Sportsbooks</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        <Row>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://www.bet365.com/#/HO/">
+              <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://betway.com/">
+              <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://sportsbook.fanduel.com/">
+              <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://sportsbook.draftkings.com">
+              <img
+                src="/images/draftkings.png"
+                alt="Draftkings SportsBook Logo"
+                width={109}
+                height={29}
+              />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://www.williamhill.com/us">
+              <img
+                src="/images/williamhill.png"
+                alt="WilliamHill SportsBook Logo"
+                width={120}
+                height={34}
+              />
+            </a>
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+}
+
+const MOCK_BetFundaments = [
+  {
+    id: 1,
+    title: 'Favorites vs. Underdogs',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 2,
+    title: 'Oddsmakers',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 3,
+    title: 'MoneyLine',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 4,
+    title: 'Spreads',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  },
+  {
+    id: 5,
+    title: 'Over/Under Totals',
+    content:
+      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+  }
+];
+
+function BettingFundamentals() {
+  const [showContent, setShowContent] = useState<boolean[]>([]);
+  const toggleDetailsAt = (id: number) => {
+    showContent[id] = !showContent[id];
+    setShowContent(showContent.slice());
+  };
+
+  return (
+    <div className={styles.sidebarBlock}>
+      <div className={styles.sidebarBlockTitle}>
+        <ListIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Sports Betting Fundamentals</span>
+      </div>
+      <div className={styles.sidebarBlockContent}>
+        {MOCK_BetFundaments.map((data, index) => (
+          <React.Fragment key={index}>
+            <div className={styles.accordionTitle}>
+              {showContent[index] && (
+                <>
+                  <strong>{data.title}</strong>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <MinusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+              {!showContent[index] && (
+                <>
+                  <span>{data.title}</span>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <PlusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+            </div>
+            {showContent[index] && <div className={styles.accordionContent}>{data.content}</div>}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
   );
 }
 

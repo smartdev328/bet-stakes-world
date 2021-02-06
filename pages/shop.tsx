@@ -226,7 +226,7 @@ function Intro() {
       <ul>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
+          Sports Include NBA, MLB, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />

@@ -469,7 +469,7 @@ function YesterdayPlays() {
             {showDetailsAt[index] && (
               <div className={styles.details_section}>
                 <ul>
-                  {game.detail.split('\n').map((unit: string, i: number) => (
+                  {game.detail?.split('\n').map((unit: string, i: number) => (
                     <li key={i}>{unit.replace('-', '')}</li>
                   ))}
                 </ul>

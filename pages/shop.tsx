@@ -341,8 +341,22 @@ function ProductsAndCartBox({
   cartItems,
   changeTempCart
 }: ProductsAndCartBoxProps) {
+  pack.billing_plans.sort(function (a, b) {
+    return a.price - b.price >= 0 ? 1 : -1;
+  });
+  const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
   const [tempCart, setTempCart] = useState<CartItem[]>(
-    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+    itemsFromCart.length > 0
+      ? itemsFromCart
+      : [
+          {
+            sports: undefined,
+            plan: pack.billing_plans[0],
+            pack,
+            auto_renewal: false,
+            owner: 0
+          }
+        ]
   );
 
   const changeSportCard = (plan: BillingPlan) => {
@@ -352,7 +366,7 @@ function ProductsAndCartBox({
         plan,
         pack,
         auto_renewal: false,
-        owner: 10
+        owner: 0
       }
     ];
     setTempCart(newCart);
@@ -479,9 +493,24 @@ function ProductsAndCartBoxForFantasy({
   cartItems,
   changeTempCart
 }: ProductsAndCartBoxProps) {
+  pack.billing_plans.sort(function (a, b) {
+    return a.price - b.price >= 0 ? 1 : -1;
+  });
+  const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
   const [tempCart, setTempCart] = useState<CartItem[]>(
-    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+    itemsFromCart.length > 0
+      ? itemsFromCart
+      : [
+          {
+            sports: sports[0],
+            plan: pack.billing_plans[0],
+            pack,
+            auto_renewal: false,
+            owner: 0
+          }
+        ]
   );
+
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
   const changeSportCard = (plan: BillingPlan) => {
@@ -701,8 +730,22 @@ function ProductsAndCartBoxForSportsCard({
   cartItems,
   changeTempCart
 }: ProductsAndCartBoxProps) {
+  pack.billing_plans.sort(function (a, b) {
+    return a.price - b.price >= 0 ? 1 : -1;
+  });
+  const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
   const [tempCart, setTempCart] = useState<CartItem[]>(
-    cartItems.filter((cartIt) => cartIt.plan.package === pack.id)
+    itemsFromCart.length > 0
+      ? itemsFromCart
+      : [
+          {
+            sports: sports[0],
+            plan: pack.billing_plans[0],
+            pack,
+            auto_renewal: false,
+            owner: 0
+          }
+        ]
   );
   // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);

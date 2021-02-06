@@ -2,7 +2,6 @@
 import React, { FormEvent, useState } from 'react';
 import Head from 'next/head';
 import { Row, Button, Upload, Col, Modal, notification } from 'antd';
-import 'react-credit-cards/es/styles-compiled.css';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
 import {

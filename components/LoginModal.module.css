@@ -1,3 +1,11 @@
+.cartFormContent {
+  margin-right: 2em;
+  flex: 1;
+}
+.rowWithTwoChild > div {
+  width: 49%;
+  flex: 0 0 49%;
+}
 .loginModal {
   position: fixed;
   top: 0;
@@ -188,4 +196,33 @@
 /* Forgot Pass Form style */
 .forgotPassForm h2 {
   font-size: 36px;
+}
+.termsSection {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+.termsContent {
+  font-size: 12px;
+  line-height: 19px;
+  color: #000000;
+  margin-left: 12px;
+}
+.termsContent .title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+}
+.termsContent a {
+  text-decoration: underline;
+}
+.registerBtn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #1A1A1A;
+  background: #FFC700;
+  padding: 7.5px 24px;
+  height: auto;
+  width: 100%;
 }

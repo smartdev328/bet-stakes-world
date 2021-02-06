@@ -333,3 +333,21 @@
     padding-bottom: 100px;
   }
 }
+
+/*  */
+.cartCCForm {
+  flex: 1;
+  margin-right: 2em;
+  margin-top: 0;
+}
+
+.cartCCForm .registerBtn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #1A1A1A;
+  background: #FFC700;
+  padding: 10.5px 44px;
+  height: auto;
+  width: 100%;
+}

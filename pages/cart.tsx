@@ -1,13 +1,20 @@
 /* eslint-disable react/display-name */
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Button, Dropdown, Menu, notification, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { useStripe, useElements, CardNumberElement } from '@stripe/react-stripe-js';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import {
+  AppLayout,
+  BannerSportsAndMatches,
+  CartBillingInfo,
+  CartLoginForm,
+  CartSignupForm
+} from '@components/index';
 import styles from '@styles/Cart.module.css';
 import { CartItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
@@ -16,8 +23,8 @@ import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
 import SubscriptionsApis from '@apis/subscriptions.apis';
 import { MinusIcon } from '@components/SvgIcons';
-
-const TAX_RATE = 0.15;
+import UsersAPIs from '@apis/user.apis';
+import { UserBillingInfo } from '@type/Users';
 
 function HeroBanner() {
   return (
@@ -59,10 +66,6 @@ function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWi
           {cartItems.length > 0 ? `${cartItems.length} Items` : 'No Items'}
         </div>
         <div className={styles.totalPrice}>{`$${totalPrice}.00`}</div>
-        <div className={styles.taxRow}>
-          <span>Tax:</span>
-          <span>{`${TAX_RATE * 100}%`}</span>
-        </div>
         <div className={styles.discountRow}>
           <span>Discount:</span>
           <span>N/A</span>
@@ -100,10 +103,6 @@ function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWi
         </div>
         {showDetails && (
           <>
-            <div className={styles.taxRow}>
-              <span>Tax:</span>
-              <span>{TAX_RATE * 100}%</span>
-            </div>
             <div className={styles.discountRow}>
               <span>Discount:</span>
               <span>N/A</span>
@@ -183,9 +182,20 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
   const [proceeding, setProceeding] = useState<boolean>(false);
+  const [formView, setFormView] = useState<string>('');
+  const [billingInfo, setBillingInfo] = useState<UserBillingInfo>({
+    city: undefined,
+    address: undefined,
+    zipcode: undefined,
+    full_name: undefined,
+    country: undefined
+  });
+  const [isSavingCardInfo, setIsSavingCardInfo] = useState<boolean>(false);
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
 
   useEffect(() => {
     setTempCartItems(cartItems);
@@ -229,6 +239,73 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       });
   };
 
+  const updateBillingForm = (name: keyof UserBillingInfo, e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    const newBillingInfo = Object.assign({}, billingInfo);
+    newBillingInfo[name] = value;
+    setBillingInfo(newBillingInfo);
+  };
+  const updateCardForm = async (event: FormEvent<HTMLFormElement>) => {
+    // Block native form submission.
+    event.preventDefault();
+    setIsSavingCardInfo(true);
+
+    if (!stripe || !elements) {
+      console.error('Stripe is not loaded');
+      return;
+    }
+
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardNumberElement = elements.getElement(CardNumberElement);
+
+    // Use your card Element with other Stripe.js APIs
+    if (cardNumberElement) {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardNumberElement,
+        billing_details: {
+          name: billingInfo.full_name,
+          address: {
+            city: billingInfo.city,
+            country: billingInfo.country,
+            line1: billingInfo.address,
+            postal_code: billingInfo.zipcode
+          }
+        }
+      });
+      if (!paymentMethod) {
+        console.log('[error]', error);
+      } else {
+        await UsersAPIs.addPaymentMethod({ payment_method_id: paymentMethod.id })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === 'success') {
+              notification['info']({
+                message: 'New Payment Method has been Added!'
+              });
+              setFormView('');
+            } else {
+              notification['error']({
+                message: 'Add New Payment Method Error',
+                description: data.message
+              });
+            }
+          })
+          .catch((error) => {
+            notification['error']({
+              message: 'Add New Payment Method Error',
+              description: error.message
+            });
+          });
+      }
+    } else {
+      console.log('[error] Card Element is not rendered');
+    }
+    setIsSavingCardInfo(false);
+  };
+
   return (
     <>
       <Head>
@@ -243,54 +320,79 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             </div>
           )}
           <section className={styles.cartItemsSection}>
-            <div className={styles.cartItems}>
-              {tempCartItems.length === 0 && (
-                <p className={styles.noCart}>
-                  <em>Cart is empty</em>
-                </p>
-              )}
-              {tempCartItems.map((item, index) => (
-                <div key={index} className={styles.cartItemWrapper}>
-                  <div className={styles.cartItem}>
-                    <div className={styles.cartItemMain}>
-                      <img
-                        src={item.sports?.logo || 'https://via.placeholder.com/100'}
-                        alt={item.sports?.name}
-                      />
-                      <div className={styles.cartItemInfo}>
-                        <span className={styles.cartItemName}>{item.pack.name}</span>
-                        <span className={styles.cartItemDesc}>
-                          {item.pack.name.indexOf('VIP All Access') > -1
-                            ? 'All Sports'
-                            : item.sports?.name}
-                        </span>
+            {token && formView === '' && (
+              <div className={styles.cartItems}>
+                {tempCartItems.length === 0 && (
+                  <p className={styles.noCart}>
+                    <em>Cart is empty</em>
+                  </p>
+                )}
+                {tempCartItems.map((item, index) => (
+                  <div key={index} className={styles.cartItemWrapper}>
+                    <div className={styles.cartItem}>
+                      <div className={styles.cartItemMain}>
+                        <img
+                          src={item.sports?.logo || 'https://via.placeholder.com/100'}
+                          alt={item.sports?.name}
+                        />
+                        <div className={styles.cartItemInfo}>
+                          <span className={styles.cartItemName}>{item.pack.name}</span>
+                          <span className={styles.cartItemDesc}>
+                            {item.pack.name.indexOf('VIP All Access') > -1
+                              ? 'All Sports'
+                              : item.sports?.name}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className={styles.cartItemPlans}>
-                      <div className={styles.cartItemPlansContent}>
-                        {packages?.map((pack, idx: number) => (
-                          <React.Fragment key={idx}>
-                            {pack.id === item.plan.package && pack.description !== 'add-on' && (
-                              <PlanDropdown
-                                pack={pack}
-                                selectedPlan={item.plan}
-                                changePlan={(plan) => changedPlan(index, plan)}
-                              />
-                            )}
-                          </React.Fragment>
-                        ))}
+                      <div className={styles.cartItemPlans}>
+                        <div className={styles.cartItemPlansContent}>
+                          {packages?.map((pack, idx: number) => (
+                            <React.Fragment key={idx}>
+                              {pack.id === item.plan.package && pack.description !== 'add-on' && (
+                                <PlanDropdown
+                                  pack={pack}
+                                  selectedPlan={item.plan}
+                                  changePlan={(plan) => changedPlan(index, plan)}
+                                />
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </div>
                       </div>
+                      <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
+                      <Button
+                        type={'link'}
+                        className={styles.removeCartBtn}
+                        icon={<MinusIcon className={styles.minusIcon} />}
+                        onClick={() => removeCartAt(index)}></Button>
                     </div>
-                    <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
-                    <Button
-                      type={'link'}
-                      className={styles.removeCartBtn}
-                      icon={<MinusIcon className={styles.minusIcon} />}
-                      onClick={() => removeCartAt(index)}></Button>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
+            {!token && (
+              <>
+                {formView === '' && (
+                  <CartSignupForm
+                    onAddBillingInfo={() => setFormView('BillingInfo')}
+                    onCartLogin={() => setFormView('Login')}
+                  />
+                )}
+                {formView === 'Login' && (
+                  <CartLoginForm
+                    onLoginCompleted={() => setFormView('BillingInfo')}
+                    onCartSignup={() => setFormView('')}
+                  />
+                )}
+              </>
+            )}
+            {token && formView === 'BillingInfo' && (
+              <CartBillingInfo
+                changeCardFormData={updateCardForm}
+                changeBillingFormData={updateBillingForm}
+                loading={isSavingCardInfo}
+              />
+            )}
             <CartTotalWidget
               mobile={false}
               loading={proceeding}

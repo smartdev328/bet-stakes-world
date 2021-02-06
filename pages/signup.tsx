@@ -438,7 +438,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Access to Content Including Yesterday's Plays
+                  Access to Content Including Yesterday&#39;s Plays
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
@@ -527,7 +527,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                     <div className={styles.termsContent}>
                       <div className={styles.title}></div>
                       <div>
-                        By creating an account above, you consent to The Daily Stakes, Inc.'s{' '}
+                        By creating an account above, you consent to The Daily Stakes, Inc.&#39;s{' '}
                         <a href="/terms">Terms of Service</a> and{' '}
                         <a href="/privacy">Privacy Policy</a>. We use your email to provide you with
                         news, updates, and promotions.

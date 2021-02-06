@@ -619,8 +619,8 @@ function Testimonials() {
                 <div className={styles.testimonial_desc}>VIP All Access</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
-                  “I've tried other cappers and TheDailyStakes is by far the most credible,
-                  transparent, and winning source I've found. Not only are their prices more
+                  “I&#39;ve tried other cappers and TheDailyStakes is by far the most credible,
+                  transparent, and winning source I&#39;ve found. Not only are their prices more
                   affordable, they offer a tremendous amount of value and win consistently. These
                   guys are more than just cappers. They offer the full suite offering and their
                   member dashboard is next level!”
@@ -647,9 +647,10 @@ function Testimonials() {
                 <div className={styles.testimonial_desc}>NBA Sports Card</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
-                  “I'm a fan of ball and purchased the NBA package for my second month in a row. The
-                  best recommendations I've ever had. They help me confirm some of my existing leans
-                  & you can tell they put effort into having the best user experience in mind.”
+                  “I&#39;m a fan of ball and purchased the NBA package for my second month in a row.
+                  The best recommendations I&#39;ve ever had. They help me confirm some of my
+                  existing leans & you can tell they put effort into having the best user experience
+                  in mind.”
                 </div>
               </div>
             </div>
@@ -673,7 +674,7 @@ function Testimonials() {
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
-                  “Best source for sports betting out there. No fluff picks and they don't sell
+                  “Best source for sports betting out there. No fluff picks and they don&#39;t sell
                   unrealistic dreams like other cappers do. Best part is that I’m making money while
                   watching my favorite sports and players! ”
                 </div>
@@ -699,9 +700,9 @@ function Testimonials() {
                 <div className={styles.testimonial_desc}>Fantasy Sports & Football Cards</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
-                  “I've always been a fan of player props and DFS picks. TheDailyStakes takes on a
-                  unique approach to DFS & I love it. Affordable, consistent, and great information.
-                  Excited to jump on their CFB & NFL packages again. 5 stars!”
+                  “I&#39;ve always been a fan of player props and DFS picks. TheDailyStakes takes on
+                  a unique approach to DFS & I love it. Affordable, consistent, and great
+                  information. Excited to jump on their CFB & NFL packages again. 5 stars!”
                 </div>
               </div>
             </div>
@@ -726,9 +727,9 @@ function Testimonials() {
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Best in the industry hands down. From their analysis to service, they got it
-                  covered. I'm subscribed to both the VIP All Access & DFS package. They go out of
-                  their way to answer any questions I have for a given game. They also release great
-                  content on their social media platforms. Gamechangers in the space.”
+                  covered. I&#39;m subscribed to both the VIP All Access & DFS package. They go out
+                  of their way to answer any questions I have for a given game. They also release
+                  great content on their social media platforms. Gamechangers in the space.”
                 </div>
               </div>
             </div>

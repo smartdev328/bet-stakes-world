@@ -7,14 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
-import { NormalCheckIcon, EmptyCircleIcon, CheckedCircleIcon } from '@components/SvgIcons';
-import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { PageProps, SportInfoType } from '@type/Main';
+import { NormalCheckIcon } from '@components/SvgIcons';
 import { BillingPlan, Package, PackageBillingPlan } from '@type/Packages';
 import { CreateUserType, CreateUserValidateType } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
 import { validateEmail } from '@utils/common';
 import PackageAPIs from '@apis/package.apis';
+import { PageProps } from '@type/Main';
 
 import styles from '@styles/Signup.module.css';
 
@@ -39,102 +38,8 @@ type AccessCardPackagePropsType = {
 };
 
 function SportsCardPackage({ data }: AccessCardPackagePropsType) {
-  const SPORTS_INFO = [
-    {
-      name: 'NBA',
-      id: 'NBA',
-      background: '#EC4C15',
-      logo: () => <NBA_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'NFL',
-      id: 'NFL',
-      background: '#91442A',
-      logo: () => <NFL_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'MLB',
-      id: 'MLB',
-      background: '#1878FB',
-      logo: () => <MLB_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'NCAAF',
-      id: 'NCAAF',
-      background: '#91442A',
-      logo: () => <NFL_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'NCAAB',
-      id: 'NCAAB',
-      background: '#EC4C15',
-      logo: () => <NBA_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'SOCCER',
-      id: 'SOCCER',
-      background: '#6DCF40',
-      logo: () => <SOCCER_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'UFC',
-      id: 'UFC',
-      background: '#F9282B',
-      logo: () => <UFC_SVG className={styles.sports_logo} />
-    },
-    {
-      name: 'FORMULA 1',
-      id: 'F1',
-      background: '#505054',
-      logo: () => <F1_SVG className={styles.sports_logo} />
-    }
-  ];
-
-  const [selected, setSelected] = useState<boolean>(false);
-  // const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
-  // const [selectedPlan, setSelectedPlan] = useState<BillingPlan>(data.billing_plans[0]);
-  const [sportsStatus, setSportsStatus] = useState<boolean[]>([]);
-
-  // const PackTypeMenu = () => (
-  //   <Menu className={styles.sportMenu}>
-  //     {data.billing_plans?.map((plan: BillingPlan, index: number) => (
-  //       <Menu.Item
-  //         key={index}
-  //         className={styles.sportMenuItem}
-  //         onClick={() => {
-  //           setSelectedPlan(plan);
-  //           setPackTypeMenuOpen(false);
-  //           onSelectPackage(data.id, plan);
-  //         }}>
-  //         {`${plan.name} - $${plan.price}.00`}
-  //       </Menu.Item>
-  //     ))}
-  //   </Menu>
-  // );
-  // const changePackMenuVisible = (status: boolean) => {
-  //   setPackTypeMenuOpen(status);
-  // };
-  const clickCheckIcon = () => {
-    setSelected(!selected);
-  };
-  const onChangeItemAt = (index: number) => {
-    const items = sportsStatus.slice();
-    items[index] = !items[index];
-    setSportsStatus(items);
-  };
-
   return (
-    <div className={`${styles.package} ${selected && styles.selected}`}>
-      {selected && (
-        <Button className={styles.checkIconBtn} onClick={clickCheckIcon}>
-          <CheckedCircleIcon className={styles.checkedStatusIcon} />
-        </Button>
-      )}
-      {!selected && (
-        <Button className={styles.checkIconBtn} onClick={clickCheckIcon}>
-          <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-        </Button>
-      )}
+    <div className={`${styles.package} ${styles.select}`}>
       <div className={styles.packageTitle}>
         <span>{data?.name}</span>
       </div>
@@ -158,7 +63,6 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
             * Soccer includes all Major Leagues and Tournaments Including the English Premier
             League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.
           </div>
-          <br></br>
         </>
       )}
       {data.name === 'Fantasy' && (
@@ -205,65 +109,6 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
           </li>
         </ul>
       )}
-      {data.name === 'Sports Card' && (
-        <div className={styles.sportsCards}>
-          <div className={styles.sectionTitle}>Select any number of sports</div>
-          <div className={styles.sportsTypeContent}>
-            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
-              <Button
-                key={index}
-                className={styles.dropdownBtnWrapper}
-                onClick={() => onChangeItemAt(index)}>
-                <div
-                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
-                  style={{
-                    background: sportsStatus[index] ? sport.background : ''
-                  }}>
-                  {sport.logo()}
-                  <span>{sport.name}</span>
-                </div>
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
-      {data.name === 'Fantasy' && (
-        <div className={styles.sportsCards}>
-          <div className={styles.sectionTitle}>Select any number of sports</div>
-          <div className={styles.sportsTypeContent}>
-            {SPORTS_INFO.slice(0, 3).map((sport: SportInfoType, index: number) => (
-              <Button
-                key={index}
-                className={styles.dropdownBtnWrapper}
-                onClick={() => onChangeItemAt(index)}>
-                <div
-                  className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
-                  style={{
-                    background: sportsStatus[index] ? sport.background : ''
-                  }}>
-                  {sport.logo()}
-                  <span>{sport.name}</span>
-                </div>
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
-      {/* <div className={styles.billingPlans}>
-        <div className={styles.sectionTitle}>Select Pack Type</div>
-        <Dropdown
-          overlay={PackTypeMenu}
-          onVisibleChange={changePackMenuVisible}
-          placement="bottomLeft"
-          transitionName=""
-          trigger={['click']}>
-          <div className={styles.optionBtn}>
-            <span>{`${selectedPlan?.name} - $${selectedPlan?.price}.00`}</span>
-            {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-            {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-          </div>
-        </Dropdown>
-      </div> */}
     </div>
   );
 }
@@ -537,7 +382,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                 </Row>
                 <br></br>
                 <Row justify="space-between">
-                  <Col span={12}>
+                  <Col span={24}>
                     <Button
                       className={styles.registerBtn}
                       disabled={!isFormValid || !termsConfirmed}

@@ -151,7 +151,7 @@
 .package {
   background: #FFFFFF;
   border: 1px solid #C4C4C4;
-  padding: 16px 24px 30px;
+  padding: 24px 24px 18px;
   margin-bottom: 18px;
   position: relative;
   animation: all linear 1s;
@@ -327,6 +327,9 @@
 .sportsTypeContent {
   margin: -4px;
 }
+.extra_info {
+  margin-bottom: 18px;
+}
 
 /* Registration Form Column */
 .registrationCol form {
@@ -384,6 +387,7 @@
   padding: 7.5px 24px;
   height: auto;
   width: 100%;
+  margin-top: 2em;
 }
 .orText {
   margin: 50px 0;

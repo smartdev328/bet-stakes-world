@@ -66,7 +66,7 @@ function MyApp({ Component, pageProps }) {
       parsedToken = parseJwt(token);
     } else {
       const localToken = localStorage.getItem('token');
-      if (localToken) {
+      if (localToken && localToken !== 'undefined') {
         parsedToken = parseJwt(localToken);
       } else {
         if (FULL_ACCESS_ROUTES.findIndex((route) => route === router.pathname) < 0) {

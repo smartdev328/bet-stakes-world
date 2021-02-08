@@ -86,7 +86,7 @@ export type UserSubscription = {
   is_active: boolean;
   owner: UserProfile;
   plan: BillingPlan;
-  sports: Sport;
+  sports: Sport[];
 };
 
 export type AddUserSubscription = {

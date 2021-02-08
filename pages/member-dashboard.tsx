@@ -91,8 +91,8 @@ function CurrentPackages({
                 <img
                   alt="Sports Logo"
                   src={
-                    subscription.sports?.logo
-                      ? subscription.sports?.logo
+                    subscription.sports[0]?.logo
+                      ? subscription.sports[0]?.logo
                       : '/images/daily_lineups_bg.png'
                   }
                   className={styles.package_card_img}

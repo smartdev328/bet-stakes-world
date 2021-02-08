@@ -100,7 +100,7 @@ function SubMenu({
   const hasSubscription = (sport: string) => {
     if (
       subscriptions.findIndex(
-        (subscription: UserSubscription) => subscription.sports.name === sport
+        (subscription: UserSubscription) => subscription.sports[0]?.name === sport
       ) > -1
     ) {
       return true;
@@ -182,24 +182,24 @@ function SubMenu({
                 <div className={styles.submenu_desc}>Yearly subscription — Available Sports</div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
-                      {!hasSubscription('Basketball') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('NBA') ? styles.locked : ''}>
+                      {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
                       Basketball
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a className={!hasSubscription('Football') ? styles.locked : ''}>
-                      {!hasSubscription('Football') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('NFL') ? styles.locked : ''}>
+                      {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
                       Football
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/sports-card">
-                    <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
-                      {!hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('MLB') ? styles.locked : ''}>
+                      {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
                       Baseball
                     </a>
                   </Link>
@@ -239,39 +239,39 @@ function SubMenu({
                   <Link href="/fantasy-daily-lineups">
                     <a
                       className={
-                        !hasSubscription('Basketball') &&
-                        !hasSubscription('Football') &&
-                        !hasSubscription('Baseball')
+                        !hasSubscription('NBA') &&
+                        !hasSubscription('NFL') &&
+                        !hasSubscription('MLB')
                           ? styles.locked
                           : ''
                       }>
-                      {!hasSubscription('Basketball') &&
-                        !hasSubscription('Football') &&
-                        !hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
+                      {!hasSubscription('NBA') &&
+                        !hasSubscription('NFL') &&
+                        !hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
                       All
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
-                      {!hasSubscription('Basketball') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('NBA') ? styles.locked : ''}>
+                      {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
                       Basketball
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('Football') ? styles.locked : ''}>
-                      {!hasSubscription('Football') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('NFL') ? styles.locked : ''}>
+                      {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
                       Football
                     </a>
                   </Link>
                 </div>
                 <div className={styles.submenu_item}>
                   <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
-                      {!hasSubscription('Baseball') && <LockIcon className={styles.lock_icon} />}
+                    <a className={!hasSubscription('MLB') ? styles.locked : ''}>
+                      {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
                       Baseball
                     </a>
                   </Link>
@@ -329,30 +329,24 @@ function SubMenu({
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
-                          {!hasSubscription('Basketball') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('NBA') ? styles.locked : ''}>
+                          {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
                           Basketball
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a className={!hasSubscription('Football') ? styles.locked : ''}>
-                          {!hasSubscription('Football') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('NFL') ? styles.locked : ''}>
+                          {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
                           Football
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/sports-card">
-                        <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
-                          {!hasSubscription('Baseball') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('MLB') ? styles.locked : ''}>
+                          {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
                           Baseball
                         </a>
                       </Link>
@@ -428,30 +422,24 @@ function SubMenu({
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('Basketball') ? styles.locked : ''}>
-                          {!hasSubscription('Basketball') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('NBA') ? styles.locked : ''}>
+                          {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
                           Basketball
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('Football') ? styles.locked : ''}>
-                          {!hasSubscription('Football') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('NFL') ? styles.locked : ''}>
+                          {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
                           Football
                         </a>
                       </Link>
                     </div>
                     <div className={styles.submenu_item}>
                       <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('Baseball') ? styles.locked : ''}>
-                          {!hasSubscription('Baseball') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
+                        <a className={!hasSubscription('MLB') ? styles.locked : ''}>
+                          {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
                           Baseball
                         </a>
                       </Link>

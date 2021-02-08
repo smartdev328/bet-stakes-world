@@ -224,11 +224,23 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       promiseArr.push(promise);
     });
     Promise.all(promiseArr)
-      .then(() => {
+      .then((values) => {
+        let hasError = false;
+        values.forEach((data) => {
+          if (data.status === 400) {
+            notification['error']({
+              message: 'Add Subscription Error!',
+              description: data
+            });
+            hasError = true;
+          }
+        });
         setProceeding(false);
-        setTempCartItems([]);
-        dispatch({ type: 'UPDATE_CART', payload: [] });
-        router.push('/member-dashboard');
+        if (hasError) {
+          dispatch({ type: 'UPDATE_CART', payload: [] });
+          router.push('/member-dashboard');
+          setTempCartItems([]);
+        }
       })
       .catch((error) => {
         setProceeding(false);

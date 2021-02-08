@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, Carousel, notification } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import moment from 'moment';
@@ -16,9 +16,11 @@ import {
   PlusEncloseIcon
 } from '@components/SvgIcons';
 import styles from '@styles/YesterdaysPlays.module.css';
-import { PageProps, SportInfoType, YesterdayPlayInfoType } from '@type/Main';
+import { PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { useRouter } from 'next/router';
+import SportsAPIs from '@apis/sport.apis';
+import { Sport } from '@type/Sports';
 
 const SPORTS_INFO = [
   {
@@ -40,6 +42,18 @@ const SPORTS_INFO = [
     logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
+    name: 'NCAAF',
+    id: 'NFL',
+    background: '#91442A',
+    logo: () => <NFL_SVG className={styles.sports_logo} />
+  },
+  {
+    name: 'NCAAB',
+    id: 'NBA',
+    background: '#EC4C15',
+    logo: () => <NBA_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'Soccer',
     id: 'SOCCER',
     background: '#6DCF40',
@@ -59,24 +73,53 @@ const SPORTS_INFO = [
   }
 ];
 
-const Mock_YesterdayPlays: YesterdayPlayInfoType[] = [];
-
-export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
-  const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
-  const lockedItems = ['NBA', 'NFL'];
-  const [yesterdayPlays, setYesterdayPlays] = useState<YesterdayPlayInfoType[]>(
-    Mock_YesterdayPlays
-  );
+export default function YesterdaysPlays({ token, subscriptions, sports }: PageProps) {
+  // const [openUnlockModal, setOpenUnlockModal] = useState<Sport | undefined>(undefined);
+  const [unlockedItems, setUnlockedItems] = useState<number[]>();
+  const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
+  const [offset, setOffset] = useState<number>(0);
   const [fetchMoreLoading, setFetchMoreLoading] = useState<boolean>(false);
+  const [filters, setFilters] = useState<number[]>([]);
+
+  useEffect(() => {
+    onLoadMore();
+  }, []);
+
+  useEffect(() => {
+    if (sports.length > 0) {
+      setUnlockedItems([sports[0].id, sports[1].id]);
+    }
+  }, [sports]);
+
+  // Update Filters
+  const updateFilters = (sportId: number, status: boolean) => {
+    const newFilters = filters.slice();
+    if (status) {
+      newFilters.push(sportId);
+    } else {
+      const idx = newFilters.findIndex((filter) => filter === sportId);
+      newFilters.splice(idx, 1);
+    }
+    setFilters(newFilters);
+    // setOpenUnlockModal(undefined);
+  };
 
   const onLoadMore = () => {
     setFetchMoreLoading(true);
-    setTimeout(() => {
-      let plays = yesterdayPlays.slice();
-      plays = plays.concat(Mock_YesterdayPlays.slice(0, 3));
-      setYesterdayPlays(plays);
-      setFetchMoreLoading(false);
-    }, 3000);
+    SportsAPIs.getYesterdaySportEntries(offset)
+      .then((res) => res.json())
+      .then((data) => {
+        setGames(games.concat(data));
+        setOffset(offset + data.length);
+        setFetchMoreLoading(false);
+      })
+      .catch((error) => {
+        notification['error']({
+          message: 'Registration Error!',
+          description: error.message
+        });
+        setFetchMoreLoading(false);
+      });
   };
 
   return (
@@ -87,35 +130,43 @@ export default function YesterdaysPlays({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection
-            lockedItems={lockedItems}
-            openUnlockModal={(sport: SportInfoType) => {
-              setOpenUnlockModal(sport.name);
-            }}
-          />
-        </div>
-        <div className={styles.containerWrapper}>
-          {openUnlockModal && (
-            <UnLockItemModal
-              sportId={openUnlockModal}
-              closeModal={() => setOpenUnlockModal(undefined)}
+          {unlockedItems && sports.length > 0 && (
+            <TopSection
+              unlockedItems={unlockedItems}
+              openUnlockModal={() => {
+                // setOpenUnlockModal(sport);
+              }}
+              sports={sports}
+              onSelectChange={updateFilters}
             />
           )}
+        </div>
+        <div className={styles.containerWrapper}>
+          {/* {openUnlockModal && (
+            <UnLockItemModal
+              sport={openUnlockModal}
+              closeModal={() => setOpenUnlockModal(undefined)}
+            />
+          )} */}
           <div className={styles.container}>
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
-                <SubscribeNow />
-                <YesterdayPlays plays={yesterdayPlays} />
-                <Row>
-                  <Col span={24} className="text-center">
-                    <Button
-                      loading={fetchMoreLoading}
-                      onClick={onLoadMore}
-                      className={styles.loadMoreBtn}>
-                      Load More
-                    </Button>
-                  </Col>
-                </Row>
+                {!token && <SubscribeNow />}
+                {token && (
+                  <>
+                    <YesterdayPlays plays={games} />
+                    <Row>
+                      <Col span={24} className="text-center">
+                        <Button
+                          loading={fetchMoreLoading}
+                          onClick={onLoadMore}
+                          className={styles.loadMoreBtn}>
+                          Load More
+                        </Button>
+                      </Col>
+                    </Row>
+                  </>
+                )}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
                 <BankrollManagementSystem />
@@ -327,34 +378,43 @@ function HeroBanner() {
 }
 
 type TopSectionPropsType = {
-  lockedItems: string[];
-  openUnlockModal: (_: SportInfoType) => void;
+  unlockedItems: number[];
+  sports: Sport[];
+  openUnlockModal: (_: Sport) => void;
+  onSelectChange: (_: number, _status: boolean) => void;
 };
 
-function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
+function TopSection({
+  unlockedItems,
+  sports,
+  openUnlockModal,
+  onSelectChange
+}: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
-    const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
-      const lockedItemIndex = lockedItems.findIndex((item: string) => item === sport.id);
-      if (lockedItemIndex > -1) {
+    const selectedStatus = sports.map((sport: Sport) => {
+      const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
+      if (unlockedItemIndex > -1) {
         return 1;
       }
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, [lockedItems]);
+  }, [unlockedItems]);
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
       items[index] = 2;
       setSportsStatus(items);
+      onSelectChange(sports[index].id, true);
     } else if (items[index] === 2) {
       items[index] = 1;
       setSportsStatus(items);
+      onSelectChange(sports[index].id, false);
     } else {
-      openUnlockModal(SPORTS_INFO[index]);
+      openUnlockModal(sports[index]);
     }
   };
 
@@ -415,17 +475,32 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
             initialSlide={0}
             variableWidth
             infinite={false}
+            draggable
             swipeToSlide
-            slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+            slidesToScroll={1}>
+            {sports.map((sport: Sport, index: number) => (
               <div key={index}>
                 <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
                   <div
-                    className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                    className={`${styles.dropdownBtn} ${
+                      styles[
+                        'dropdown_' +
+                          SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.id
+                      ]
+                    }`}
                     style={{
-                      background: sportsStatus[index] == 2 ? sport.background : ''
+                      background:
+                        sportsStatus[index] == 2
+                          ? SPORTS_INFO.filter(
+                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                            )[0]?.background
+                          : ''
                     }}>
-                    {sport.logo()}
+                    {SPORTS_INFO.filter(
+                      (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                    )[0]?.logo()}
                     {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
                     <span>{sport.name}</span>
                   </div>
@@ -443,6 +518,7 @@ function YesterdayPlays({ plays }: { plays: YesterdayPlayInfoType[] }) {
   return (
     <div className={styles.yesterday_plays}>
       <div className={styles.yesterday_plays_list}>
+        {plays.length === 0 && <div className={styles.noData}>No Plays</div>}
         {plays.map((game: YesterdayPlayInfoType, index: number) => (
           <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={index}>
             <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
@@ -507,10 +583,10 @@ function YesterdayPlays({ plays }: { plays: YesterdayPlayInfoType[] }) {
 
 type UnlockItemModalPropsType = {
   closeModal: () => void;
-  sportId: string;
+  sport: Sport;
 };
 
-function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
+function UnLockItemModal({ sport, closeModal }: UnlockItemModalPropsType) {
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [selectedPackType, setSelectedPackType] = useState<string>('Monthly - $289.00');
   const [memberTypeMenuOpen, setMemberTypeMenuOpen] = useState<boolean>(false);
@@ -601,7 +677,7 @@ function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
           </div>
           <Row className={styles.plans} align={'middle'} justify="center">
             <div className={styles.plan}>
-              <h4>{sportId} Access</h4>
+              <h4>{sport.name} Access</h4>
               <p>Ut aliquam eleifend et fames.</p>
               <div>
                 <label>Select Pack Type</label>

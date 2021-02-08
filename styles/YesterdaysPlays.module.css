@@ -1449,3 +1449,10 @@
     padding: 10.5px 28px;
   }
 }
+
+.noData {
+  padding: 2em;
+  font-size: 1.2em;
+  text-align: center;
+  font-style: italic;
+}

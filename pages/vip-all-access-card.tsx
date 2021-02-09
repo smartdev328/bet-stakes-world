@@ -353,7 +353,6 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
             {title} ({games.length})
           </strong>
         </Row>
-        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
       </div>
       {hideSection && (
         <div className={styles.earliest_games_list}>

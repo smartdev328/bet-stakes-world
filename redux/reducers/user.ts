@@ -65,11 +65,14 @@ export function userReducer(state = initialState, action: UserStateAction) {
     case SIGNUP_USER_SUCCESS:
       if (action.payload !== undefined) {
         const { jwt, user } = action.payload;
-        localStorage.setItem('token', jwt);
-        return {
-          ...state,
-          ...{ profile: user, token: jwt, loading: false }
-        };
+        if (jwt) {
+          localStorage.setItem('token', jwt);
+          return {
+            ...state,
+            ...{ profile: user, token: jwt, loading: false }
+          };
+        }
+        return state;
       }
       return state;
     case SIGNUP_USER_FAILURE:
@@ -85,11 +88,14 @@ export function userReducer(state = initialState, action: UserStateAction) {
     case LOGIN_USER_SUCCESS:
       if (action.payload !== undefined) {
         const { jwt, user } = action.payload;
-        localStorage.setItem('token', jwt);
-        return {
-          ...state,
-          ...{ profile: user, loading: false, token: jwt }
-        };
+        if (jwt) {
+          localStorage.setItem('token', jwt);
+          return {
+            ...state,
+            ...{ profile: user, token: jwt, loading: false }
+          };
+        }
+        return state;
       }
       return state;
     case LOGIN_USER_FAILURE:

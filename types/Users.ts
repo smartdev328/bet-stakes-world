@@ -65,6 +65,14 @@ export type UserBillingInfo = {
   city: string | undefined;
 };
 
+export type UserBillingInfoValidate = {
+  full_name: boolean;
+  address: boolean;
+  zipcode: boolean;
+  country: boolean;
+  city: boolean;
+};
+
 export type NotificationConfig = {
   sportsCardOrVipAccessPicksEmail: boolean;
   sportsCardOrVipAccessPicksMsg: boolean;

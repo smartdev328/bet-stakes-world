@@ -1,22 +1,17 @@
-/* eslint-disable react/display-name */
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Button } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Row, Col } from 'antd';
 
 import { CreateUserType, CreateUserValidateType } from '@type/Users';
-import { ReduxState } from '@redux/reducers';
 import { validateEmail } from '@utils/common';
 
 import styles from './LoginModal.module.css';
 
 type CartRegistration = {
   onCartLogin: () => void;
-  onAddBillingInfo: () => void;
+  signupFormChanged: (_: CreateUserType, _valid: boolean) => void;
 };
 
-export default function CartRegistration({ onCartLogin, onAddBillingInfo }: CartRegistration) {
-  const dispatch = useDispatch();
-  const { error: signupError, profile, loading } = useSelector((state: ReduxState) => state.user);
+export default function CartRegistration({ onCartLogin, signupFormChanged }: CartRegistration) {
   const [formData, setFormData] = useState<CreateUserType>({
     username: undefined,
     first_name: undefined,
@@ -28,9 +23,6 @@ export default function CartRegistration({ onCartLogin, onAddBillingInfo }: Cart
     password: undefined,
     verify_password: undefined
   });
-  const [termsConfirmed, setTermsConfirmed] = useState<boolean>(false);
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formValidation, setFormValidation] = useState<CreateUserValidateType>({
     username: true,
     first_name: true,
@@ -40,25 +32,6 @@ export default function CartRegistration({ onCartLogin, onAddBillingInfo }: Cart
     verify_password: true
   });
 
-  useEffect(() => {
-    // Redirect to dashboard page after registration
-    if (!signupError && !loading && formSubmitted) {
-      console.log('---- registration completed');
-      onAddBillingInfo();
-    }
-  }, [signupError, profile, loading]);
-
-  // Handler for RegisterNow button
-  const onSignup = () => {
-    dispatch({
-      type: 'SIGNUP_USER',
-      payload: {
-        ...formData,
-        provider: 'local'
-      }
-    });
-    setFormSubmitted(true);
-  };
   const changeFormData = (name: keyof CreateUserType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const newFormData = Object.assign({}, formData);
@@ -125,15 +98,13 @@ export default function CartRegistration({ onCartLogin, onAddBillingInfo }: Cart
     } else {
       newValidation.verify_password = true;
     }
+    console.log('--- newValidation', isValid);
     setFormValidation(newValidation);
-    setIsFormValid(isValid);
-  };
-  const changeTermsConfirmed = () => {
-    setTermsConfirmed(!termsConfirmed);
+    signupFormChanged(formData, isValid);
   };
 
   return (
-    <div className={styles.cartFormContent}>
+    <div>
       <h2>Registration</h2>
       <Row align={'middle'} className={styles.register_row}>
         <span>Returning Customer?&nbsp;&nbsp;</span>
@@ -212,30 +183,6 @@ export default function CartRegistration({ onCartLogin, onAddBillingInfo }: Cart
             placeholder="ie: **********"
             onChange={(e) => changeFormData('verify_password', e)}
           />
-        </Col>
-      </Row>
-      <Row justify="space-between">
-        <Col className={styles.termsSection}>
-          <input type="checkbox" name="terms" onChange={changeTermsConfirmed} />
-          <div className={styles.termsContent}>
-            <div className={styles.title}></div>
-            <div>
-              By creating an account above, you consent to The Daily Stakes, Inc.&#39;s{' '}
-              <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>. We
-              use your email to provide you with news, updates, and promotions.
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <br></br>
-      <Row justify="space-between">
-        <Col span={12}>
-          <Button
-            className={styles.registerBtn}
-            disabled={!isFormValid || !termsConfirmed}
-            onClick={onSignup}>
-            Register Now
-          </Button>
         </Col>
       </Row>
     </div>

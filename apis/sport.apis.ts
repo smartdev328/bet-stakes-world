@@ -29,7 +29,11 @@ export function getSportEntries(type: string, sport: number | undefined) {
   );
 }
 
-export function getYesterdaySportEntries(offset: number, limit = 3) {
+export function getYesterdaySportEntries(
+  offset: number,
+  sportFilter: number | undefined,
+  limit = 3
+) {
   const headers = tokenAuthHeaders();
   const today = new Date();
   const startTimestampOfToday = new Date(
@@ -37,6 +41,17 @@ export function getYesterdaySportEntries(offset: number, limit = 3) {
     today.getMonth(),
     today.getDate()
   ).getTime();
+  if (sportFilter) {
+    return fetch(
+      `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&publish_date_gte=${
+        startTimestampOfToday - 86400000
+      }&publish_date_lte=${startTimestampOfToday}&sport=${sportFilter}`,
+      {
+        method: 'get',
+        headers
+      }
+    );
+  }
   return fetch(
     `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&publish_date_gte=${
       startTimestampOfToday - 86400000

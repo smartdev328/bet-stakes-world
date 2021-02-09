@@ -1,5 +1,4 @@
-/* eslint-disable react/display-name */
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Button, Dropdown, Menu, notification, Spin } from 'antd';
@@ -24,7 +23,7 @@ import { ReduxState } from '@redux/reducers';
 import SubscriptionsApis from '@apis/subscriptions.apis';
 import { MinusIcon } from '@components/SvgIcons';
 import UsersAPIs from '@apis/user.apis';
-import { UserBillingInfo } from '@type/Users';
+import { CreateUserType, LoginUserType, UserBillingInfo } from '@type/Users';
 
 function HeroBanner() {
   return (
@@ -46,9 +45,16 @@ type CartTotalWidgetProps = {
   loading: boolean;
   cartItems: CartItem[];
   onCheckout: () => void;
+  disabled: boolean;
 };
 
-function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWidgetProps) {
+function CartTotalWidget({
+  loading,
+  cartItems,
+  mobile,
+  onCheckout,
+  disabled
+}: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
   let totalPrice = 0;
@@ -78,10 +84,10 @@ function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWi
         </div>
         <Button
           loading={loading}
-          disabled={cartItems.length === 0}
+          disabled={disabled}
           className={styles.checkoutBtn}
           onClick={onCheckout}>
-          Proceed to Checkout
+          Place Order
         </Button>
       </div>
       <div className={styles.totalPriceWidgetContentMobile}>
@@ -117,10 +123,10 @@ function CartTotalWidget({ loading, cartItems, mobile, onCheckout }: CartTotalWi
         </div>
         <Button
           loading={loading}
-          disabled={cartItems.length === 0}
+          disabled={disabled}
           className={styles.checkoutBtn}
           onClick={onCheckout}>
-          Proceed to Checkout
+          Place Order
         </Button>
       </div>
     </div>
@@ -178,8 +184,18 @@ function PlanDropdown({
   );
 }
 
+type PromiseResponse = {
+  message: string;
+  status: number;
+  statusCode?: number;
+  raw?: {
+    message: string;
+  };
+};
+
 export default function Cart({ packages, token, subscriptions }: PageProps) {
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
+  const { error, loading } = useSelector((state: ReduxState) => state.user);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
   const [proceeding, setProceeding] = useState<boolean>(false);
   const [formView, setFormView] = useState<string>('');
@@ -190,7 +206,25 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     full_name: undefined,
     country: undefined
   });
-  const [isSavingCardInfo, setIsSavingCardInfo] = useState<boolean>(false);
+  const [isSignupFormValid, setSignUpFormValid] = useState<boolean>(false);
+  const [isBillingFormValid, setBillingFormValid] = useState<boolean>(false);
+  const [loginFormData, setLoginFormData] = useState<LoginUserType>({
+    email: undefined,
+    password: undefined
+  });
+  const [signupFormData, setSignupFormData] = useState<CreateUserType>({
+    username: undefined,
+    first_name: undefined,
+    last_name: undefined,
+    full_name: undefined,
+    email: undefined,
+    provider: undefined,
+    mobile_number: undefined,
+    password: undefined,
+    verify_password: undefined
+  });
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [cartForVisitor] = useState<boolean>(!token);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -200,6 +234,30 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   useEffect(() => {
     setTempCartItems(cartItems);
   }, [cartItems]);
+
+  useEffect(() => {
+    if (error === null && !loading && formSubmitted && formView === 'LOGIN') {
+      console.log('----- successfully login');
+      proceedCheckout();
+    }
+    if (error && !loading && formView === 'LOGIN') {
+      notification['error']({
+        message: 'Login Error!',
+        description: error
+      });
+      setProceeding(false);
+    }
+    if (error === null && !loading && formSubmitted && formView === '') {
+      updateCardForm();
+    }
+    if (formSubmitted && !loading && error && formView === '') {
+      notification['error']({
+        message: 'Registration Error!',
+        description: error
+      });
+      setProceeding(false);
+    }
+  }, [error, loading]);
 
   const removeCartAt = (index: number) => {
     const updated = tempCartItems.slice();
@@ -214,7 +272,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
 
   const proceedCheckout = () => {
     setProceeding(true);
-    const promiseArr: Promise<Response>[] = [];
+    const promiseArr: Promise<PromiseResponse>[] = [];
     tempCartItems.forEach((item) => {
       // Add To Subscriptions
       const promise = SubscriptionsApis.addSubscription({
@@ -226,20 +284,28 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     Promise.all(promiseArr)
       .then((values) => {
         let hasError = false;
-        values.forEach((data) => {
+        values.forEach((data: PromiseResponse) => {
           if (data.status === 400) {
             notification['error']({
               message: 'Add Subscription Error!',
-              description: data
+              description: data.message
+            });
+            hasError = true;
+          } else if (data.statusCode === 400) {
+            notification['error']({
+              message: 'Add Subscription Error!',
+              description: data.raw?.message
             });
             hasError = true;
           }
         });
         setProceeding(false);
-        if (hasError) {
+        if (!hasError) {
           dispatch({ type: 'UPDATE_CART', payload: [] });
           router.push('/member-dashboard');
           setTempCartItems([]);
+        } else {
+          router.push('/profile');
         }
       })
       .catch((error) => {
@@ -251,19 +317,51 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       });
   };
 
-  const updateBillingForm = (name: keyof UserBillingInfo, e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    const newBillingInfo = Object.assign({}, billingInfo);
-    newBillingInfo[name] = value;
-    setBillingInfo(newBillingInfo);
+  const proceedCheckoutForVisitor = () => {
+    //
+    setProceeding(true);
+    console.log('--- proceed checkout', formView);
+    if (formView === 'LOGIN') {
+      dispatch({
+        type: 'LOGIN_USER',
+        payload: {
+          identifier: loginFormData.email,
+          password: loginFormData.password
+        }
+      });
+      setFormSubmitted(true);
+    } else {
+      dispatch({
+        type: 'SIGNUP_USER',
+        payload: {
+          ...signupFormData,
+          provider: 'local'
+        }
+      });
+      setFormSubmitted(true);
+    }
   };
-  const updateCardForm = async (event: FormEvent<HTMLFormElement>) => {
-    // Block native form submission.
-    event.preventDefault();
-    setIsSavingCardInfo(true);
 
+  const updateBillingForm = (data: UserBillingInfo, isValid: boolean) => {
+    setBillingInfo(data);
+    setBillingFormValid(isValid);
+  };
+
+  const cartLoginFormChanged = (formData: LoginUserType, isValid: boolean) => {
+    setLoginFormData(formData);
+    setSignUpFormValid(isValid);
+    setBillingFormValid(isValid);
+  };
+
+  const cartSignupFormChanged = (formData: CreateUserType, isValid: boolean) => {
+    setSignupFormData(formData);
+    setSignUpFormValid(isValid);
+  };
+
+  const updateCardForm = async () => {
     if (!stripe || !elements) {
       console.error('Stripe is not loaded');
+      setProceeding(false);
       return;
     }
 
@@ -289,6 +387,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       });
       if (!paymentMethod) {
         console.log('[error]', error);
+        setProceeding(false);
       } else {
         await UsersAPIs.addPaymentMethod({ payment_method_id: paymentMethod.id })
           .then((res) => res.json())
@@ -297,12 +396,15 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               notification['info']({
                 message: 'New Payment Method has been Added!'
               });
-              setFormView('');
+              setTimeout(() => {
+                proceedCheckout();
+              }, 5000);
             } else {
               notification['error']({
                 message: 'Add New Payment Method Error',
                 description: data.message
               });
+              setProceeding(false);
             }
           })
           .catch((error) => {
@@ -310,12 +412,13 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               message: 'Add New Payment Method Error',
               description: error.message
             });
+            setProceeding(false);
           });
       }
     } else {
       console.log('[error] Card Element is not rendered');
+      setProceeding(false);
     }
-    setIsSavingCardInfo(false);
   };
 
   return (
@@ -332,84 +435,87 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             </div>
           )}
           <section className={styles.cartItemsSection}>
-            {token && formView === '' && (
-              <div className={styles.cartItems}>
-                {tempCartItems.length === 0 && (
-                  <p className={styles.noCart}>
-                    <em>Cart is empty</em>
-                  </p>
-                )}
-                {tempCartItems.map((item, index) => (
-                  <div key={index} className={styles.cartItemWrapper}>
-                    <div className={styles.cartItem}>
-                      <div className={styles.cartItemMain}>
-                        <img
-                          src={item.sports?.logo || 'https://via.placeholder.com/100'}
-                          alt={item.sports?.name}
-                        />
-                        <div className={styles.cartItemInfo}>
-                          <span className={styles.cartItemName}>{item.pack.name}</span>
-                          <span className={styles.cartItemDesc}>
-                            {item.pack.name.indexOf('VIP All Access') > -1
-                              ? 'All Sports'
-                              : item.sports?.name}
-                          </span>
-                        </div>
+            <div className={styles.cartItems}>
+              {cartForVisitor && (
+                <>
+                  {formView === '' && (
+                    <>
+                      <CartSignupForm
+                        signupFormChanged={cartSignupFormChanged}
+                        onCartLogin={() => setFormView('LOGIN')}
+                      />
+                      <CartBillingInfo updateBillingFormData={updateBillingForm} />
+                    </>
+                  )}
+                  {formView === 'LOGIN' && (
+                    <>
+                      <CartLoginForm
+                        loginFormChanged={cartLoginFormChanged}
+                        onCartSignup={() => setFormView('')}
+                      />
+                    </>
+                  )}
+                  <br />
+                  <br />
+                </>
+              )}
+              {tempCartItems.length === 0 && (
+                <p className={styles.noCart}>
+                  <em>Cart is empty</em>
+                </p>
+              )}
+              {tempCartItems.map((item, index) => (
+                <div key={index} className={styles.cartItemWrapper}>
+                  <div className={styles.cartItem}>
+                    <div className={styles.cartItemMain}>
+                      <img
+                        src={item.sports?.logo || 'https://via.placeholder.com/100'}
+                        alt={item.sports?.name}
+                      />
+                      <div className={styles.cartItemInfo}>
+                        <span className={styles.cartItemName}>{item.pack.name}</span>
+                        <span className={styles.cartItemDesc}>
+                          {item.pack.name.indexOf('VIP All Access') > -1
+                            ? 'All Sports'
+                            : item.sports?.name}
+                        </span>
                       </div>
-                      <div className={styles.cartItemPlans}>
-                        <div className={styles.cartItemPlansContent}>
-                          {packages?.map((pack, idx: number) => (
-                            <React.Fragment key={idx}>
-                              {pack.id === item.plan.package && pack.description !== 'add-on' && (
-                                <PlanDropdown
-                                  pack={pack}
-                                  selectedPlan={item.plan}
-                                  changePlan={(plan) => changedPlan(index, plan)}
-                                />
-                              )}
-                            </React.Fragment>
-                          ))}
-                        </div>
-                      </div>
-                      <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
-                      <Button
-                        type={'link'}
-                        className={styles.removeCartBtn}
-                        icon={<MinusIcon className={styles.minusIcon} />}
-                        onClick={() => removeCartAt(index)}></Button>
                     </div>
+                    <div className={styles.cartItemPlans}>
+                      <div className={styles.cartItemPlansContent}>
+                        {packages?.map((pack, idx: number) => (
+                          <React.Fragment key={idx}>
+                            {pack.id === item.plan.package && pack.description !== 'add-on' && (
+                              <PlanDropdown
+                                pack={pack}
+                                selectedPlan={item.plan}
+                                changePlan={(plan) => changedPlan(index, plan)}
+                              />
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
+                    <Button
+                      type={'link'}
+                      className={styles.removeCartBtn}
+                      icon={<MinusIcon className={styles.minusIcon} />}
+                      onClick={() => removeCartAt(index)}></Button>
                   </div>
-                ))}
-              </div>
-            )}
-            {!token && (
-              <>
-                {formView === '' && (
-                  <CartSignupForm
-                    onAddBillingInfo={() => setFormView('BillingInfo')}
-                    onCartLogin={() => setFormView('Login')}
-                  />
-                )}
-                {formView === 'Login' && (
-                  <CartLoginForm
-                    onLoginCompleted={() => setFormView('BillingInfo')}
-                    onCartSignup={() => setFormView('')}
-                  />
-                )}
-              </>
-            )}
-            {token && formView === 'BillingInfo' && (
-              <CartBillingInfo
-                changeCardFormData={updateCardForm}
-                changeBillingFormData={updateBillingForm}
-                loading={isSavingCardInfo}
-              />
-            )}
+                </div>
+              ))}
+            </div>
             <CartTotalWidget
               mobile={false}
               loading={proceeding}
               cartItems={tempCartItems}
-              onCheckout={proceedCheckout}
+              disabled={
+                !cartForVisitor
+                  ? tempCartItems.length === 0
+                  : tempCartItems.length === 0 || !(isSignupFormValid && isBillingFormValid)
+              }
+              onCheckout={!cartForVisitor ? proceedCheckout : proceedCheckoutForVisitor}
             />
           </section>
           <section className={styles.promoCodeSection}>
@@ -436,8 +542,13 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
           <CartTotalWidget
             mobile={true}
             loading={proceeding}
+            disabled={
+              !cartForVisitor
+                ? tempCartItems.length === 0
+                : tempCartItems.length === 0 || !(isSignupFormValid && isBillingFormValid)
+            }
             cartItems={tempCartItems}
-            onCheckout={proceedCheckout}
+            onCheckout={!cartForVisitor ? proceedCheckout : proceedCheckoutForVisitor}
           />
         </div>
       </AppLayout>

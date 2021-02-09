@@ -122,13 +122,16 @@
 /* Cart Items Section */
 .cartItemsSection {
   display: flex;
-
 }
 .cartItems {
   flex: 1;
+  margin-right: 2em;
   min-height: 100px;
 }
-
+.cartFormContent {
+  flex: 1;
+  margin-right: 2em;
+}
 .cartItem {
   height: 144px;
   padding: 24px;
@@ -136,7 +139,7 @@
   align-items: center;
   justify-content: space-between;
   border: 1px solid #959799;
-  margin: 0 32px 24px 0;
+  margin: 0 0 24px 0;
 }
 .cartItemMain {
   display: flex;

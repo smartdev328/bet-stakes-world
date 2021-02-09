@@ -187,7 +187,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
         await UsersAPIs.addPaymentMethod({ payment_method_id: paymentMethod.id })
           .then((res) => res.json())
           .then((data) => {
-            if (data.statusCode < 400) {
+            if (data.status === 'success') {
               notification['info']({
                 message: 'New Payment Method has been Added!'
               });

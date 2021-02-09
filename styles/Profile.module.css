@@ -97,7 +97,7 @@
   display: block;
   margin-bottom: 8px;
 }
-.formGroup input {
+.formGroup input, .formGroup .countrySelectBox {
   border: 1px solid #C4C4C4;
   width: 100%;
   font-size: 12px;

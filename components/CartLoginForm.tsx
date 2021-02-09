@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Button } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { Row, Col } from 'antd';
 
 import styles from './LoginModal.module.css';
 import { LoginUserType, LoginUserValidateType } from '@type/Users';
 import { validateEmail } from '@utils/common';
-import { ReduxState } from '@redux/reducers';
 
 type CartLoginFormProps = {
-  onLoginCompleted: () => void;
   onCartSignup: () => void;
+  loginFormChanged: (_: LoginUserType, _valid: boolean) => void;
 };
 
-function CartLoginForm({ onLoginCompleted, onCartSignup }: CartLoginFormProps) {
-  const dispatch = useDispatch();
-
-  const { error: loginError, loading } = useSelector((state: ReduxState) => state.user);
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+function CartLoginForm({ onCartSignup, loginFormChanged }: CartLoginFormProps) {
   const [formData, setFormData] = useState<LoginUserType>({
     email: undefined,
     password: undefined
@@ -26,13 +19,6 @@ function CartLoginForm({ onLoginCompleted, onCartSignup }: CartLoginFormProps) {
     email: true,
     password: true
   });
-
-  useEffect(() => {
-    if (loginError === null && !loading && formSubmitted) {
-      console.log('----- successfully login');
-      onLoginCompleted();
-    }
-  }, [loginError, loading]);
 
   const changeFormData = (name: keyof LoginUserType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -64,18 +50,7 @@ function CartLoginForm({ onLoginCompleted, onCartSignup }: CartLoginFormProps) {
       newValidation.password = true;
     }
     setFormValidation(newValidation);
-    setIsFormValid(isValid);
-  };
-
-  const onLogin = () => {
-    dispatch({
-      type: 'LOGIN_USER',
-      payload: {
-        identifier: formData.email,
-        password: formData.password
-      }
-    });
-    setFormSubmitted(true);
+    loginFormChanged(data, isValid);
   };
 
   return (
@@ -104,9 +79,6 @@ function CartLoginForm({ onLoginCompleted, onCartSignup }: CartLoginFormProps) {
             onChange={(e) => changeFormData('password', e)}
           />
         </Col>
-        <Button className={styles.signInBtn} disabled={!isFormValid} onClick={onLogin}>
-          Sign In
-        </Button>
       </Row>
     </div>
   );

@@ -11,7 +11,7 @@ export function getSports() {
   });
 }
 
-export function getSportEntries(type: string, sport: number | undefined) {
+export function getTodaySportEntries(type: string, sport: number | undefined) {
   const headers = tokenAuthHeaders();
   const sportFilter = sport ? `&sport=${sport}` : '';
   const today = new Date();
@@ -27,6 +27,15 @@ export function getSportEntries(type: string, sport: number | undefined) {
       headers
     }
   );
+}
+
+export function getSportEntries(type: string, sport: number | undefined) {
+  const headers = tokenAuthHeaders();
+  const sportFilter = sport ? `&sport=${sport}` : '';
+  return fetch(`${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&type=${type}${sportFilter}`, {
+    method: 'get',
+    headers
+  });
 }
 
 export function getYesterdaySportEntries(
@@ -66,5 +75,6 @@ export function getYesterdaySportEntries(
 export default {
   getSports,
   getSportEntries,
+  getTodaySportEntries,
   getYesterdaySportEntries
 };

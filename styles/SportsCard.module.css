@@ -244,14 +244,16 @@
   font-size: 15px;
   line-height: 18px;
 }
-.dropdown_NBA > .sports_logo {
+.dropdown_NBA > .sports_logo,
+.dropdown_NCAAB > .sports_logo {
   width: 300%;
   position: absolute;
   z-index: 20;
   height: auto;
   left: -10%;
 }
-.dropdown_NFL > svg.sports_logo {
+.dropdown_NFL > .sports_logo,
+.dropdown_NCAAF > .sports_logo {
   width: 300%;
   position: absolute;
   z-index: 20;
@@ -1145,4 +1147,10 @@
   .unlockItemModal + .container {
     display: none;
   }
+}
+
+.noData {
+  padding: 2em;
+  text-align: center;
+  font-style: italic;
 }

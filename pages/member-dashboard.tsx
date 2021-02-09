@@ -180,7 +180,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
-    SportsAPIs.getSportEntries(
+    SportsAPIs.getTodaySportEntries(
       SportBetTypes[selectedBetType].id,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
@@ -367,7 +367,7 @@ function YesterdayPlays() {
 
   const onLoadMore = () => {
     setFetchMoreLoading(true);
-    SportsAPIs.getYesterdaySportEntries(offset)
+    SportsAPIs.getYesterdaySportEntries(offset, undefined)
       .then((res) => res.json())
       .then((data) => {
         setGames(games.concat(data));

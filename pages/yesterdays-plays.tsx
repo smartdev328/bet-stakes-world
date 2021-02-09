@@ -9,7 +9,6 @@ import moment from 'moment';
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import {
   ListIcon,
-  LockIcon,
   MinusEncloseIcon,
   MoneyPocketIcon,
   OpenBookIcon,

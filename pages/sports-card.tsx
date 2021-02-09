@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, Carousel, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import LazyLoad from 'react-lazyload';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import {
@@ -18,9 +19,12 @@ import {
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, PageProps, SportInfoType } from '@type/Main';
+import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import LazyLoad from 'react-lazyload';
+import { Sport } from '@type/Sports';
+import SportsAPIs from '@apis/sport.apis';
+import { BillingPlan, Package } from '@type/Packages';
+import PackageAPIs from '@apis/package.apis';
 
 const SPORTS_INFO = [
   {
@@ -42,6 +46,18 @@ const SPORTS_INFO = [
     logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
+    name: 'NCAAF',
+    id: 'NCAAF',
+    background: '#91442A',
+    logo: () => <NFL_SVG className={styles.sports_logo} />
+  },
+  {
+    name: 'NCAAB',
+    id: 'NCAAB',
+    background: '#EC4C15',
+    logo: () => <NBA_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'Soccer',
     id: 'SOCCER',
     background: '#6DCF40',
@@ -61,9 +77,32 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token, subscriptions }: PageProps) {
-  const [openUnlockModal, setOpenUnlockModal] = useState<string | undefined>(undefined);
-  const lockedItems = ['NBA', 'NFL'];
+const SportBetTypes = [
+  {
+    id: 'straight',
+    name: 'Straight Bets'
+  },
+  {
+    id: 'parlay',
+    name: 'Parlays'
+  },
+  {
+    id: 'wildcard',
+    name: 'Bonus Wilcard Plays'
+  }
+];
+
+export default function SportsCard({ token, subscriptions, sports, packages }: PageProps) {
+  const [openUnlockModal, setOpenUnlockModal] = useState<Sport | undefined>(undefined);
+  const [activeSport, setActiveSport] = useState<number>(-1);
+  const [filterType, setFilterType] = useState<string>('');
+
+  const unlockedItems: number[] = [];
+  subscriptions.forEach((subscription) => {
+    if (subscription.plan.name.toLowerCase().indexOf('sports card') > -1) {
+      unlockedItems.push(subscription.sports[0].id);
+    }
+  });
 
   return (
     <>
@@ -74,24 +113,40 @@ export default function SportsCard({ token, subscriptions }: PageProps) {
         <HeroBanner />
         <div className={styles.container}>
           <TopSection
-            lockedItems={lockedItems}
-            openUnlockModal={(sport: SportInfoType) => {
-              setOpenUnlockModal(sport.name);
+            sports={sports}
+            unlockedItems={unlockedItems}
+            changeActiveSport={(sport) => {
+              setActiveSport(sport);
+              setOpenUnlockModal(undefined);
+            }}
+            openUnlockModal={(sport: Sport) => {
+              setOpenUnlockModal(sport);
+            }}
+            filterChanged={(filter) => {
+              setFilterType(filter);
             }}
           />
         </div>
         <div className={styles.containerWrapper}>
-          {openUnlockModal && (
+          {openUnlockModal && packages && (
             <UnLockItemModal
-              sportId={openUnlockModal}
+              sport={openUnlockModal}
+              packages={packages}
               closeModal={() => setOpenUnlockModal(undefined)}
             />
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
-                <StraightBets />
-                <Parlays />
+                {SportBetTypes.map((type) => (
+                  <ListGames
+                    id={type.id}
+                    title={type.name}
+                    key={type.id}
+                    selectedSport={activeSport}
+                    selectedFilterType={filterType}
+                  />
+                ))}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
                 <BankrollManagementSystem />
@@ -116,67 +171,84 @@ function HeroBanner() {
 }
 
 type TopSectionPropsType = {
-  lockedItems: string[];
-  openUnlockModal: (_: SportInfoType) => void;
+  unlockedItems: number[];
+  sports: Sport[];
+  openUnlockModal: (_: Sport) => void;
+  changeActiveSport: (_: number) => void;
+  filterChanged: (_: string) => void;
 };
 
-function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
-  const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
+function TopSection({
+  unlockedItems,
+  sports,
+  openUnlockModal,
+  changeActiveSport,
+  filterChanged
+}: TopSectionPropsType) {
+  const [selectedFilterType, setSelectedFilterType] = useState<string>('');
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
-  const [selectedSportType, setSelectedSportType] = useState<string>('Largest Profit');
 
   useEffect(() => {
-    const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
-      const lockedItemIndex = lockedItems.findIndex((item: string) => item === sport.id);
-      if (lockedItemIndex > -1) {
+    const selectedStatus = sports.map((sport: Sport) => {
+      const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
+      if (unlockedItemIndex > -1) {
         return 1;
       }
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, [lockedItems]);
+  }, []);
 
-  const changeMenuVisible = (status: boolean) => {
-    setSportMenuOpen(status);
-  };
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      items[index] = 2;
-      setSportsStatus(items);
+      const newItems = items.map((item) => {
+        if (item === 2) {
+          item = 1;
+        }
+        return item;
+      });
+      newItems[index] = 2;
+      setSportsStatus(newItems);
+      changeActiveSport(sports[index].id);
     } else if (items[index] === 2) {
-      items[index] = 1;
-      setSportsStatus(items);
+      const newItems = items.slice();
+      newItems[index] = 1;
+      setSportsStatus(newItems);
+      changeActiveSport(-1);
     } else {
-      openUnlockModal(SPORTS_INFO[index]);
+      openUnlockModal(sports[index]);
     }
   };
 
   const menu = (
     <Menu className={styles.sportMenu}>
       <Menu.Item
+        disabled={selectedFilterType === ''}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Largest Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('');
+          filterChanged('');
         }}>
-        Largest Profit
+        None
       </Menu.Item>
       <Menu.Item
+        disabled={selectedFilterType === 'Highest Units'}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Medium Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('Highest Units');
+          filterChanged('Highest Units');
         }}>
-        Medium Profit
+        Highest Units
       </Menu.Item>
       <Menu.Item
+        disabled={selectedFilterType === 'Highest Odds'}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Small Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('Highest Odds');
+          filterChanged('Highest Odds');
         }}>
-        Small Profit
+        Highest Odds
       </Menu.Item>
     </Menu>
   );
@@ -241,17 +313,34 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
             variableWidth
             infinite={false}
             swipeToSlide
-            slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+            draggable
+            slidesToScroll={1}>
+            {sports.map((sport: Sport, index: number) => (
               <div key={index}>
                 <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
                   <div
-                    className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                    className={`${styles.dropdownBtn} ${
+                      styles[
+                        'dropdown_' +
+                          SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.id
+                      ]
+                    }`}
                     style={{
-                      background: sportsStatus[index] == 2 ? sport.background : ''
+                      background:
+                        sportsStatus[index] === 2
+                          ? SPORTS_INFO.filter(
+                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                            )[0]?.background
+                          : ''
                     }}>
-                    {sport.logo()}
-                    {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
+                    {SPORTS_INFO.filter(
+                      (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                    )[0]?.logo()}
+                    {unlockedItems.indexOf(sport.id) < 0 && (
+                      <LockIcon className={styles.lock_icon} />
+                    )}
                     <span>{sport.name}</span>
                   </div>
                 </Button>
@@ -261,24 +350,9 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
         </div>
       </Row>
       <Row className={styles.optionsRow} justify={'center'}>
-        <Dropdown
-          overlay={menu}
-          onVisibleChange={changeMenuVisible}
-          placement="bottomLeft"
-          transitionName=""
-          trigger={['click']}>
-          <div className={styles.optionBtn}>
-            <span>
-              <strong>Sport:&nbsp;</strong>
-              {selectedSportType}
-            </span>
-            {sportMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-            {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-          </div>
-        </Dropdown>
         <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']} transitionName="">
           <div className={styles.optionBtn}>
-            <strong>Filter Cards&nbsp;</strong>
+            <strong>Filter By&nbsp;</strong>
             <TuneIcon className={styles.tune_icon} />
           </div>
         </Dropdown>
@@ -287,11 +361,41 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
   );
 }
 
-const Mock_EarlestGames: EarliestGameInfoType[] = [];
+type ListGamesProps = {
+  title: string;
+  id: string;
+  selectedSport: number;
+  selectedFilterType: string;
+};
 
-function StraightBets() {
+function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesProps) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(true);
+  const [games, setGames] = useState<EarliestGameInfoType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    SportsAPIs.getSportEntries(id, selectedSport !== -1 ? selectedSport : undefined)
+      .then((res) => res.json())
+      .then((data) => {
+        setGames(data);
+        setLoading(false);
+      });
+  }, [selectedSport]);
+
+  useEffect(() => {
+    switch (selectedFilterType) {
+      case 'Highest Units':
+        setGames(games.filter((game) => game.units > 250));
+        break;
+      case 'Highest Odds':
+        setGames(games.filter((game) => game.odds_decimal > 250));
+        break;
+      default:
+    }
+  }, [selectedFilterType]);
+
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
@@ -307,158 +411,81 @@ function StraightBets() {
           {hideSection && (
             <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
           )}
-          <strong>Straight Bets ({Mock_EarlestGames.length})</strong>
+          <strong>
+            {title} ({games.length})
+          </strong>
         </Row>
         <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
       </div>
       {hideSection && (
         <div className={styles.earliest_games_list}>
-          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
-            <div className={styles.game} key={game.id}>
-              <div className={styles.game_subinfo}>
-                <SportTile sport={game.sport.name} />
-                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-              </div>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}>
-                  <Row>
-                    <div className={styles.game_team1}>
-                      <img
-                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                    </div>
-                    <div className={styles.game_team2}>
-                      <img
-                        src={
-                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
-                        }
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].home_team.name}</span>
-                    </div>
-                  </Row>
-                  <Row align={'top'} wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <span className={styles.desc_line}>
-                      {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
-                    </span>
-                  </Row>
-                </div>
-                <div className={styles.units}>{`${game.units} Unit${
-                  game.units > 1 ? 's' : ''
-                }`}</div>
-              </div>
-              <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-                <div className={styles.hide_details_btn}>
-                  <span>View Details</span>
-                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
-              </div>
-              {showDetailsAt[index] && (
-                <div className={styles.details_section}>
-                  <ul>
-                    {game.detail.split('\n').map((unit: string, i: number) => (
-                      <li key={i}>{unit.replace('-', '')}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function Parlays() {
-  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
-  const [hideSection, setHideSection] = useState<boolean>(false);
-  const changeDetailsVisibleAt = (index: number) => {
-    showDetailsAt[index] = !showDetailsAt[index];
-    setShowDetailsAt(showDetailsAt.slice());
-  };
-
-  return (
-    <div className={`${styles.earliest_games} ${styles.prayers}`}>
-      <div className={styles.earliest_games_titlebar}>
-        <Row align="middle">
-          {!hideSection && (
-            <CaretDownOutlined className={styles.caret_down} onClick={() => setHideSection(true)} />
+          {loading && (
+            <Row justify={'center'}>
+              <Col>
+                <Spin />
+              </Col>
+            </Row>
           )}
-          {hideSection && (
-            <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
-          )}
-          <strong>Parlays ({Mock_EarlestGames.length})</strong>
-        </Row>
-        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
-      </div>
-      {hideSection && (
-        <div className={styles.earliest_games_list}>
-          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
-            <div className={styles.game} key={game.id}>
-              <div className={styles.game_subinfo}>
-                <SportTile sport={game.sport.name} />
-                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-              </div>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}>
-                  <Row wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <div className={styles.game_team1}>
-                      <img
-                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                    </div>
-                  </Row>
-                  <Row wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <div className={styles.game_team2}>
-                      <img
-                        src={
-                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
-                        }
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].home_team.name}</span>
-                    </div>
-                  </Row>
+          {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
+          {!loading &&
+            games.map((game: EarliestGameInfoType, index: number) => (
+              <div className={styles.game} key={game.id}>
+                <div className={styles.game_subinfo}>
+                  <SportTile sport={game.sport.name} />
+                  <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
                 </div>
-                <div
-                  className={styles.bet_text}>{`(${game.odds} odds | ${game.odds_decimal})`}</div>
-                <div className={styles.units}>{`${game.units} Unit${
-                  game.units > 1 ? 's' : ''
-                }`}</div>
-              </div>
-              <div className={styles.hide_details}>
-                <div
-                  onClick={() => changeDetailsVisibleAt(index)}
-                  className={styles.hide_details_btn}>
-                  <span>View Details</span>
-                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                <div className={styles.game_info}>
+                  <div className={styles.game_teams}>
+                    <Row>
+                      <div className={styles.game_team1}>
+                        <img
+                          src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
+                          alt="Team Logo"
+                          className={styles.team_logo}
+                        />
+                        <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
+                      </div>
+                      <div className={styles.game_team2}>
+                        <img
+                          src={
+                            game.schedules[0].home_team.logo.url ||
+                            'https://via.placeholder.com/100'
+                          }
+                          alt="Team Logo"
+                          className={styles.team_logo}
+                        />
+                        <span>{game.schedules[0].home_team.name}</span>
+                      </div>
+                    </Row>
+                    <Row align={'top'} wrap={false}>
+                      <LongArrowIcon className={styles.long_arrow_icon} />
+                      <span className={styles.desc_line}>
+                        {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
+                      </span>
+                    </Row>
+                  </div>
+                  <div className={styles.units}>{`${game.units} Unit${
+                    game.units > 1 ? 's' : ''
+                  }`}</div>
                 </div>
-              </div>
-              {showDetailsAt[index] && (
-                <div className={styles.details_section}>
-                  <ul>
-                    {game.detail.split('\n').map((unit: string, i: number) => (
-                      <li key={i}>{unit.replace('-', '')}</li>
-                    ))}
-                  </ul>
+                <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
+                  <div className={styles.hide_details_btn}>
+                    <span>View Details</span>
+                    {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                    {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+                {showDetailsAt[index] && (
+                  <div className={styles.details_section}>
+                    <ul>
+                      {game.detail.split('\n').map((unit: string, i: number) => (
+                        <li key={i}>{unit.replace('-', '')}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
         </div>
       )}
     </div>
@@ -618,68 +645,49 @@ function BettingFundamentals() {
 
 type UnlockItemModalPropsType = {
   closeModal: () => void;
-  sportId: string;
+  sport: Sport;
+  packages: Package[];
 };
 
-function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
+function UnLockItemModal({ sport, closeModal, packages }: UnlockItemModalPropsType) {
+  const sportCardPack = packages.filter((pack) => pack.name.indexOf('Sports Card') > -1)[0];
+  const vipAllAccessPack = packages.filter((pack) => pack.name.indexOf('VIP All Access') > -1)[0];
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
-  const [selectedPackType, setSelectedPackType] = useState<string>('Monthly - $289.00');
+  const [selectedPackType, setSelectedPackType] = useState<BillingPlan>(
+    sportCardPack.billing_plans[0]
+  );
   const [memberTypeMenuOpen, setMemberTypeMenuOpen] = useState<boolean>(false);
-  const [selectedMemberType, setSelectedMemberType] = useState<string>('Monthly - $300.00');
+  const [selectedMemberType, setSelectedMemberType] = useState<BillingPlan>(
+    vipAllAccessPack.billing_plans[0]
+  );
   const PackTypeMenu = () => (
     <Menu className={styles.sportMenu}>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedPackType('Monthly - $289.00');
-          setPackTypeMenuOpen(false);
-        }}>
-        Monthly - $289.00
-      </Menu.Item>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedPackType('Yearly - $2890.00');
-          setPackTypeMenuOpen(false);
-        }}>
-        Yearly - $2890.00
-      </Menu.Item>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedPackType('Weekly - $50.00');
-          setPackTypeMenuOpen(false);
-        }}>
-        Weekly - $50.00
-      </Menu.Item>
+      {sportCardPack.billing_plans?.map((plan) => (
+        <Menu.Item
+          key={plan.id}
+          className={styles.sportMenuItem}
+          onClick={() => {
+            setSelectedPackType(plan);
+            setPackTypeMenuOpen(false);
+          }}>
+          {`${plan.name}`}
+        </Menu.Item>
+      ))}
     </Menu>
   );
   const MemberTypeMenu = () => (
     <Menu className={styles.sportMenu}>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedMemberType('Monthly - $289.00');
-          setMemberTypeMenuOpen(false);
-        }}>
-        Monthly - $300.00
-      </Menu.Item>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedMemberType('Yearly - $2890.00');
-          setMemberTypeMenuOpen(false);
-        }}>
-        Yearly - $3000.00
-      </Menu.Item>
-      <Menu.Item
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedMemberType('Weekly - $50.00');
-          setMemberTypeMenuOpen(false);
-        }}>
-        Weekly - $60.00
-      </Menu.Item>
+      {sportCardPack.billing_plans?.map((plan) => (
+        <Menu.Item
+          key={plan.id}
+          className={styles.sportMenuItem}
+          onClick={() => {
+            setSelectedMemberType(plan);
+            setMemberTypeMenuOpen(false);
+          }}>
+          {`${plan.name}`}
+        </Menu.Item>
+      ))}
     </Menu>
   );
 
@@ -712,7 +720,7 @@ function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
           </div>
           <Row className={styles.plans} align={'middle'} justify="center">
             <div className={styles.plan}>
-              <h4>{sportId} Access</h4>
+              <h4>{sport.name} Access</h4>
               <p>Ut aliquam eleifend et fames.</p>
               <div>
                 <label>Select Pack Type</label>
@@ -723,7 +731,7 @@ function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
                   transitionName=""
                   trigger={['click']}>
                   <div className={styles.optionBtn}>
-                    <span>{selectedPackType}</span>
+                    <span>{selectedPackType.name}</span>
                     {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
                     {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
                   </div>
@@ -744,7 +752,7 @@ function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
                   transitionName=""
                   trigger={['click']}>
                   <div className={styles.optionBtn}>
-                    <span>{selectedMemberType}</span>
+                    <span>{selectedMemberType.name}</span>
                     {memberTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
                     {!memberTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
                   </div>
@@ -757,4 +765,15 @@ function UnLockItemModal({ sportId, closeModal }: UnlockItemModalPropsType) {
       </Row>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await PackageAPIs.getPackages();
+  const packages = await res.json();
+
+  return {
+    props: {
+      packages
+    }
+  };
 }

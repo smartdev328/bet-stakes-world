@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, Carousel, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -15,10 +15,12 @@ import {
   TuneIcon,
   WinnerCupIcon
 } from '@components/SvgIcons';
+import SportsAPIs from '@apis/sport.apis';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
+import { Sport } from '@type/Sports';
 
 const SPORTS_INFO = [
   {
@@ -40,6 +42,18 @@ const SPORTS_INFO = [
     logo: () => <MLB_SVG className={styles.sports_logo} />
   },
   {
+    name: 'NCAAF',
+    id: 'NCAAF',
+    background: '#91442A',
+    logo: () => <NFL_SVG className={styles.sports_logo} />
+  },
+  {
+    name: 'NCAAB',
+    id: 'NCAAB',
+    background: '#EC4C15',
+    logo: () => <NBA_SVG className={styles.sports_logo} />
+  },
+  {
     name: 'Soccer',
     id: 'SOCCER',
     background: '#6DCF40',
@@ -59,7 +73,25 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token, subscriptions }: PageProps) {
+const SportBetTypes = [
+  {
+    id: 'straight',
+    name: 'Straight Bets'
+  },
+  {
+    id: 'parlay',
+    name: 'Parlays'
+  },
+  {
+    id: 'wildcard',
+    name: 'Bonus Wilcard Plays'
+  }
+];
+
+export default function SportsCard({ token, subscriptions, sports }: PageProps) {
+  const [activeSport, setActiveSport] = useState<number>(-1);
+  const [filterType, setFilterType] = useState<string>('');
+
   return (
     <>
       <Head>
@@ -68,11 +100,26 @@ export default function SportsCard({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection />
-          <Row>
+          <TopSection
+            sports={sports}
+            changeActiveSport={(sport) => {
+              setActiveSport(sport);
+            }}
+            filterChanged={(filter) => {
+              setFilterType(filter);
+            }}
+          />
+          <Row className={styles.content}>
             <Col span={18} className={styles.contentMainCol}>
-              <StraightBets />
-              <Parlays />
+              {SportBetTypes.map((type) => (
+                <ListGames
+                  id={type.id}
+                  title={type.name}
+                  key={type.id}
+                  selectedSport={activeSport}
+                  selectedFilterType={filterType}
+                />
+              ))}
             </Col>
             <Col span={6} className={styles.contentSideCol}>
               <BankrollManagementSystem />
@@ -95,44 +142,58 @@ function HeroBanner() {
   );
 }
 
-function TopSection() {
-  const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
-  const [unlockItems, setUnlockItems] = useState<boolean[]>([]);
-  const [selectedSportType, setSelectedSportType] = useState<string>('Largest Profit');
-  const changeMenuVisible = (status: boolean) => {
-    setSportMenuOpen(status);
-  };
+type TopSectionPropsType = {
+  sports: Sport[];
+  changeActiveSport: (_: number) => void;
+  filterChanged: (_: string) => void;
+};
+
+function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionPropsType) {
+  const [selectedFilterType, setSelectedFilterType] = useState<string>('');
+  const [sportsStatus, setSportsStatus] = useState<number[]>([]);
+
   const onUnlockItemAt = (index: number) => {
-    const items = unlockItems.slice();
-    items[index] = !items[index];
-    setUnlockItems(items);
+    const items = sportsStatus.slice();
+    if (items[index] !== 1) {
+      const newItems = items.fill(0);
+      newItems[index] = 1;
+      setSportsStatus(newItems);
+      changeActiveSport(sports[index].id);
+    } else {
+      const newItems = items.fill(0);
+      setSportsStatus(newItems);
+      changeActiveSport(-1);
+    }
   };
 
   const menu = (
     <Menu className={styles.sportMenu}>
       <Menu.Item
+        disabled={selectedFilterType === ''}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Largest Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('');
+          filterChanged('');
         }}>
-        Largest Profit
+        None
       </Menu.Item>
       <Menu.Item
+        disabled={selectedFilterType === 'Highest Units'}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Medium Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('Highest Units');
+          filterChanged('Highest Units');
         }}>
-        Medium Profit
+        Highest Units
       </Menu.Item>
       <Menu.Item
+        disabled={selectedFilterType === 'Highest Odds'}
         className={styles.sportMenuItem}
         onClick={() => {
-          setSelectedSportType('Small Profit');
-          setSportMenuOpen(false);
+          setSelectedFilterType('Highest Odds');
+          filterChanged('Highest Odds');
         }}>
-        Small Profit
+        Highest Odds
       </Menu.Item>
     </Menu>
   );
@@ -196,14 +257,31 @@ function TopSection() {
             variableWidth
             infinite={false}
             swipeToSlide
-            slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport, index) => (
+            draggable
+            slidesToScroll={1}>
+            {sports.map((sport, index) => (
               <div key={index}>
                 <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
                   <div
-                    className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
-                    style={{ background: unlockItems[index] ? sport.background : '' }}>
-                    {sport.logo()}
+                    className={`${styles.dropdownBtn} ${
+                      styles[
+                        'dropdown_' +
+                          SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.id
+                      ]
+                    }`}
+                    style={{
+                      background:
+                        sportsStatus[index] === 1
+                          ? SPORTS_INFO.filter(
+                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                            )[0]?.background
+                          : ''
+                    }}>
+                    {SPORTS_INFO.filter(
+                      (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                    )[0]?.logo()}
                     <span>{sport.name}</span>
                   </div>
                 </Button>
@@ -213,24 +291,9 @@ function TopSection() {
         </div>
       </Row>
       <Row className={styles.optionsRow} justify={'center'}>
-        <Dropdown
-          overlay={menu}
-          onVisibleChange={changeMenuVisible}
-          placement="bottomLeft"
-          transitionName=""
-          trigger={['click']}>
-          <div className={styles.optionBtn}>
-            <span>
-              <strong>Sport:&nbsp;</strong>
-              {selectedSportType}
-            </span>
-            {sportMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-            {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-          </div>
-        </Dropdown>
         <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']} transitionName="">
           <div className={styles.optionBtn}>
-            <strong>Filter Cards&nbsp;</strong>
+            <strong>Filter By&nbsp;</strong>
             <TuneIcon className={styles.tune_icon} />
           </div>
         </Dropdown>
@@ -239,11 +302,38 @@ function TopSection() {
   );
 }
 
-const Mock_EarlestGames: EarliestGameInfoType[] = [];
+type ListGamesProps = {
+  title: string;
+  id: string;
+  selectedSport: number;
+  selectedFilterType: string;
+};
 
-function StraightBets() {
+function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesProps) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(true);
+  const [games, setGames] = useState<EarliestGameInfoType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    SportsAPIs.getSportEntries(id, selectedSport !== -1 ? selectedSport : undefined)
+      .then((res) => res.json())
+      .then((data: EarliestGameInfoType[]) => {
+        switch (selectedFilterType) {
+          case 'Highest Units':
+            setGames(data.filter((game) => game.units > 250));
+            break;
+          case 'Highest Odds':
+            setGames(data.filter((game) => game.odds_decimal > 250));
+            break;
+          default:
+            setGames(data);
+        }
+        setLoading(false);
+      });
+  }, [selectedSport, selectedFilterType]);
+
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
@@ -259,158 +349,81 @@ function StraightBets() {
           {hideSection && (
             <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
           )}
-          <strong>Straight Bets ({Mock_EarlestGames.length})</strong>
+          <strong>
+            {title} ({games.length})
+          </strong>
         </Row>
         <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
       </div>
       {hideSection && (
         <div className={styles.earliest_games_list}>
-          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
-            <div className={styles.game} key={game.id}>
-              <div className={styles.game_subinfo}>
-                <SportTile sport={game.sport.name} />
-                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-              </div>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}>
-                  <Row>
-                    <div className={styles.game_team1}>
-                      <img
-                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                    </div>
-                    <div className={styles.game_team2}>
-                      <img
-                        src={
-                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
-                        }
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].home_team.name}</span>
-                    </div>
-                  </Row>
-                  <Row align={'top'} wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <span className={styles.desc_line}>
-                      {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
-                    </span>
-                  </Row>
-                </div>
-                <div className={styles.units}>{`${game.units} Unit${
-                  game.units > 1 ? 's' : ''
-                }`}</div>
-              </div>
-              <div className={styles.hide_details}>
-                <div
-                  onClick={() => changeDetailsVisibleAt(index)}
-                  className={styles.hide_details_btn}>
-                  <span>View Details</span>
-                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
-              </div>
-              {showDetailsAt[index] && (
-                <div className={styles.details_section}>
-                  <ul>
-                    {game.detail.split('\n').map((unit: string, i: number) => (
-                      <li key={i}>{unit.replace('-', '')}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function Parlays() {
-  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
-  const [hideSection, setHideSection] = useState<boolean>(false);
-  const changeDetailsVisibleAt = (index: number) => {
-    showDetailsAt[index] = !showDetailsAt[index];
-    setShowDetailsAt(showDetailsAt.slice());
-  };
-
-  return (
-    <div className={`${styles.earliest_games} ${styles.prayers}`}>
-      <div className={styles.earliest_games_titlebar}>
-        <Row align="middle">
-          {!hideSection && (
-            <CaretDownOutlined className={styles.caret_down} onClick={() => setHideSection(true)} />
+          {loading && (
+            <Row justify={'center'}>
+              <Col>
+                <Spin />
+              </Col>
+            </Row>
           )}
-          {hideSection && (
-            <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
-          )}
-          <strong>Parlays ({Mock_EarlestGames.length})</strong>
-        </Row>
-        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
-      </div>
-      {hideSection && (
-        <div className={styles.earliest_games_list}>
-          {Mock_EarlestGames.map((game: EarliestGameInfoType, index: number) => (
-            <div className={styles.game} key={game.id}>
-              <div className={styles.game_subinfo}>
-                <SportTile sport={game.sport.name} />
-                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-              </div>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}>
-                  <Row wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <div className={styles.game_team1}>
-                      <img
-                        src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                    </div>
-                  </Row>
-                  <Row wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <div className={styles.game_team2}>
-                      <img
-                        src={
-                          game.schedules[0].home_team.logo.url || 'https://via.placeholder.com/100'
-                        }
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{game.schedules[0].home_team.name}</span>
-                    </div>
-                  </Row>
+          {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
+          {!loading &&
+            games.map((game: EarliestGameInfoType, index: number) => (
+              <div className={styles.game} key={game.id}>
+                <div className={styles.game_subinfo}>
+                  <SportTile sport={game.sport.name} />
+                  <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
                 </div>
-                <div
-                  className={styles.desc_line}>{`(${game.odds} odds | ${game.odds_decimal})`}</div>
-                <div className={styles.units}>{`${game.units} Units`}</div>
-              </div>
-              <div className={styles.hide_details}>
-                <div
-                  onClick={() => changeDetailsVisibleAt(index)}
-                  className={styles.hide_details_btn}>
-                  <span>View Details</span>
-                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                <div className={styles.game_info}>
+                  <div className={styles.game_teams}>
+                    <Row>
+                      <div className={styles.game_team1}>
+                        <img
+                          src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
+                          alt="Team Logo"
+                          className={styles.team_logo}
+                        />
+                        <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
+                      </div>
+                      <div className={styles.game_team2}>
+                        <img
+                          src={
+                            game.schedules[0].home_team.logo.url ||
+                            'https://via.placeholder.com/100'
+                          }
+                          alt="Team Logo"
+                          className={styles.team_logo}
+                        />
+                        <span>{game.schedules[0].home_team.name}</span>
+                      </div>
+                    </Row>
+                    <Row align={'top'} wrap={false}>
+                      <LongArrowIcon className={styles.long_arrow_icon} />
+                      <span className={styles.desc_line}>
+                        {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
+                      </span>
+                    </Row>
+                  </div>
+                  <div className={styles.units}>{`${game.units} Unit${
+                    game.units > 1 ? 's' : ''
+                  }`}</div>
                 </div>
-              </div>
-              {showDetailsAt[index] && (
-                <div className={styles.details_section}>
-                  <ul>
-                    {game.detail.split('\n').map((unit: string, i: number) => (
-                      <li key={i}>{unit.replace('-', '')}</li>
-                    ))}
-                  </ul>
+                <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
+                  <div className={styles.hide_details_btn}>
+                    <span>View Details</span>
+                    {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                    {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+                {showDetailsAt[index] && (
+                  <div className={styles.details_section}>
+                    <ul>
+                      {game.detail.split('\n').map((unit: string, i: number) => (
+                        <li key={i}>{unit.replace('-', '')}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
         </div>
       )}
     </div>

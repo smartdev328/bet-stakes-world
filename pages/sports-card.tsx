@@ -378,23 +378,20 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
     setLoading(true);
     SportsAPIs.getSportEntries(id, selectedSport !== -1 ? selectedSport : undefined)
       .then((res) => res.json())
-      .then((data) => {
-        setGames(data);
+      .then((data: EarliestGameInfoType[]) => {
+        switch (selectedFilterType) {
+          case 'Highest Units':
+            setGames(data.filter((game) => game.units > 250));
+            break;
+          case 'Highest Odds':
+            setGames(data.filter((game) => game.odds_decimal > 250));
+            break;
+          default:
+            setGames(data);
+        }
         setLoading(false);
       });
-  }, [selectedSport]);
-
-  useEffect(() => {
-    switch (selectedFilterType) {
-      case 'Highest Units':
-        setGames(games.filter((game) => game.units > 250));
-        break;
-      case 'Highest Odds':
-        setGames(games.filter((game) => game.odds_decimal > 250));
-        break;
-      default:
-    }
-  }, [selectedFilterType]);
+  }, [selectedSport, selectedFilterType]);
 
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];

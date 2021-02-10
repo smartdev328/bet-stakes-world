@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }) {
       const data = await res1.json();
       setSports(data);
     }
-    if (parsedToken && subscriptions.length === 0) {
+    if (parsedToken) {
       const res2 = await SubscriptionsAPIs.getSubscriptions(parsedToken.id);
       const data2 = await res2.json();
       setSubscriptions(data2);

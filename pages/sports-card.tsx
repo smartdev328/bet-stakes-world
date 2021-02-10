@@ -25,6 +25,7 @@ import { Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
+import { UserSubscription } from '@type/Users';
 
 const SPORTS_INFO = [
   {
@@ -143,6 +144,7 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
                     id={type.id}
                     title={type.name}
                     key={type.id}
+                    subscriptions={subscriptions}
                     selectedSport={activeSport}
                     selectedFilterType={filterType}
                   />
@@ -197,7 +199,7 @@ function TopSection({
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, []);
+  }, [unlockedItems]);
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
@@ -366,9 +368,16 @@ type ListGamesProps = {
   id: string;
   selectedSport: number;
   selectedFilterType: string;
+  subscriptions: UserSubscription[];
 };
 
-function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesProps) {
+function ListGames({
+  title,
+  id,
+  selectedSport,
+  selectedFilterType,
+  subscriptions
+}: ListGamesProps) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(true);
   const [games, setGames] = useState<EarliestGameInfoType[]>([]);
@@ -376,7 +385,7 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, selectedSport !== -1 ? selectedSport : undefined)
+    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {
@@ -391,7 +400,7 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
         }
         setLoading(false);
       });
-  }, [selectedSport, selectedFilterType]);
+  }, [selectedSport, selectedFilterType, subscriptions]);
 
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];

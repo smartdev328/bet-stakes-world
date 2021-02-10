@@ -548,7 +548,7 @@
   justify-content: space-between;
   width: 100%;
 }
-.yesterday_plays .game_info > div {
+.yesterday_plays .game_info .game_teams {
   width: 100%;
 }
 .team_logo {

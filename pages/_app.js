@@ -48,19 +48,6 @@ function MyApp({ Component, pageProps }) {
   const stripePromise = loadStripe(STRIPE_API_KEY);
 
   const getDefaultProps = async () => {
-    if (sports.length === 0) {
-      const res1 = await SportsAPIs.getSports();
-      const data = await res1.json();
-      setSports(data);
-    }
-    if (parsedToken) {
-      const res2 = await SubscriptionsAPIs.getSubscriptions(parsedToken.id);
-      const data2 = await res2.json();
-      setSubscriptions(data2);
-    }
-  };
-
-  useEffect(() => {
     let parsedToken = null;
     if (token) {
       parsedToken = parseJwt(token);
@@ -74,8 +61,25 @@ function MyApp({ Component, pageProps }) {
         }
       }
     }
-    getDefaultProps();
+    if (sports.length === 0) {
+      const res1 = await SportsAPIs.getSports();
+      const data = await res1.json();
+      setSports(data);
+    }
+    if (parsedToken) {
+      const res2 = await SubscriptionsAPIs.getSubscriptions(parsedToken.id);
+      const data2 = await res2.json();
+      setSubscriptions(data2);
+    }
     setParsedToken(parsedToken);
+  };
+
+  useEffect(() => {
+    getDefaultProps();
+  }, []);
+
+  useEffect(() => {
+    getDefaultProps();
   }, [token, router]);
 
   Sentry.init({

@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '@constants/';
+import { UserSubscription } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
 export function getSports() {
@@ -11,7 +12,11 @@ export function getSports() {
   });
 }
 
-export function getTodaySportEntries(type: string, sport: number | undefined) {
+export function getTodaySportEntries(
+  type: string,
+  subscriptions: UserSubscription[],
+  sport: number | undefined
+) {
   const headers = tokenAuthHeaders();
   const sportFilter = sport ? `&sport=${sport}` : '';
   const today = new Date();
@@ -20,8 +25,12 @@ export function getTodaySportEntries(type: string, sport: number | undefined) {
     today.getMonth(),
     today.getDate()
   ).getTime();
+  let subscriptionsQuery = '';
+  subscriptions.map((subscription, index) => {
+    subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
+  });
   return fetch(
-    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}&type=${type}${sportFilter}`,
+    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}&type=${type}${sportFilter}${subscriptionsQuery}`,
     {
       method: 'get',
       headers
@@ -29,13 +38,24 @@ export function getTodaySportEntries(type: string, sport: number | undefined) {
   );
 }
 
-export function getSportEntries(type: string, sport: number | undefined) {
+export function getSportEntries(
+  type: string,
+  subscriptions: UserSubscription[],
+  sport: number | undefined
+) {
   const headers = tokenAuthHeaders();
-  const sportFilter = sport ? `&sport=${sport}` : '';
-  return fetch(`${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&type=${type}${sportFilter}`, {
-    method: 'get',
-    headers
+  let subscriptionsQuery = '';
+  subscriptions.map((subscription, index) => {
+    subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
+  const sportFilter = sport ? `&sport=${sport}` : '';
+  return fetch(
+    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&type=${type}${sportFilter}${subscriptionsQuery}`,
+    {
+      method: 'get',
+      headers
+    }
+  );
 }
 
 export function getYesterdaySportEntries(
@@ -43,31 +63,26 @@ export function getYesterdaySportEntries(
   sportFilter: number | undefined,
   limit = 3
 ) {
-  const headers = tokenAuthHeaders();
-  const today = new Date();
-  const startTimestampOfToday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  ).getTime();
   if (sportFilter) {
     return fetch(
-      `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&publish_date_gte=${
-        startTimestampOfToday - 86400000
-      }&publish_date_lte=${startTimestampOfToday}&sport=${sportFilter}`,
+      `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&yesterday=true&sport=${sportFilter}`,
       {
         method: 'get',
-        headers
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
     );
   }
   return fetch(
-    `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&publish_date_gte=${
-      startTimestampOfToday - 86400000
-    }&publish_date_lte=${startTimestampOfToday}`,
+    `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&yesterday=true`,
     {
       method: 'get',
-      headers
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
   );
 }

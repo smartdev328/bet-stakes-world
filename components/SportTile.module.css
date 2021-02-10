@@ -10,10 +10,12 @@
   line-height: 22px;
   color: #fff;
 }
-.sportTile_NBA {
+.sportTile_NBA,
+.sportTile_NCAAB {
   background: #EC4C15;
 }
-.sportTile_NFL {
+.sportTile_NFL,
+.sportTile_NCAAF {
   background: #91442A;
 }
 .sportTile_MLB {
@@ -28,7 +30,8 @@
 .sportTile_SOCCER {
   background: #6DCF40;
 }
-.sportTile_NBA > svg {
+.sportTile_NBA > svg,
+.sportTile_NCAAB > svg {
   width: 300%;
   position: absolute;
   z-index: 20;
@@ -37,7 +40,8 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.sportTile_NFL > svg {
+.sportTile_NFL > svg,
+.sportTile_NCAAF > svg  {
   width: 300%;
   position: absolute;
   z-index: 20;

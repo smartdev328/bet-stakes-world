@@ -21,6 +21,7 @@ import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
+import { UserSubscription } from '@type/Users';
 
 const SPORTS_INFO = [
   {
@@ -116,6 +117,7 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
                   id={type.id}
                   title={type.name}
                   key={type.id}
+                  subscriptions={subscriptions}
                   selectedSport={activeSport}
                   selectedFilterType={filterType}
                 />
@@ -307,9 +309,16 @@ type ListGamesProps = {
   id: string;
   selectedSport: number;
   selectedFilterType: string;
+  subscriptions: UserSubscription[];
 };
 
-function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesProps) {
+function ListGames({
+  title,
+  id,
+  selectedSport,
+  selectedFilterType,
+  subscriptions
+}: ListGamesProps) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(true);
   const [games, setGames] = useState<EarliestGameInfoType[]>([]);
@@ -317,7 +326,7 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, selectedSport !== -1 ? selectedSport : undefined)
+    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {
@@ -332,7 +341,7 @@ function ListGames({ title, id, selectedSport, selectedFilterType }: ListGamesPr
         }
         setLoading(false);
       });
-  }, [selectedSport, selectedFilterType]);
+  }, [selectedSport, selectedFilterType, subscriptions]);
 
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];

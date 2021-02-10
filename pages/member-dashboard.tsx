@@ -61,7 +61,6 @@ function CurrentPackages({
       sportsCardPack = pack.id;
     }
   });
-  console.log('---- packages ids:', subscriptions);
 
   return (
     <div className={styles.current_packages}>
@@ -153,7 +152,13 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   );
 }
 
-function EarliestGames({ sports }: { sports: Sport[] }) {
+function EarliestGames({
+  sports,
+  subscriptions
+}: {
+  sports: Sport[];
+  subscriptions: UserSubscription[];
+}) {
   const [betMenuOpen, setBetMenuOpen] = useState<boolean>(false);
   const [sportMenuOpen, setSportMenuOpen] = useState<boolean>(false);
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
@@ -182,6 +187,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
     setLoading(true);
     SportsAPIs.getTodaySportEntries(
       SportBetTypes[selectedBetType].id,
+      subscriptions,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
       .then((res) => res.json())
@@ -189,7 +195,7 @@ function EarliestGames({ sports }: { sports: Sport[] }) {
         setGames(data);
         setLoading(false);
       });
-  }, [selectedBetType, selectedSportType]);
+  }, [selectedBetType, selectedSportType, subscriptions]);
 
   const changeMenuVisible = (status: boolean) => {
     setSportMenuOpen(status);
@@ -512,7 +518,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             <Col span={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
               <div className={styles.earliest_games_col}>
-                <EarliestGames sports={sports} />
+                <EarliestGames sports={sports} subscriptions={subscriptions} />
               </div>
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />

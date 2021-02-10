@@ -413,7 +413,7 @@
   justify-content: space-between;
   width: 100%;
 }
-.game_info > div {
+.game_info > .game_teams {
   width: 100%;
 }
 .team_logo {

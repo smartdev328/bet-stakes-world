@@ -407,7 +407,7 @@ function YesterdayPlays() {
         {games.length === 0 && <div className={styles.noData}>No Plays</div>}
         {games.map((game: YesterdayPlayInfoType, index: number) => (
           <React.Fragment key={index}>
-            <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={game.id}>
+            <div className={`${styles.game}`} key={game.id}>
               <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
               <div className={styles.game_main}>
                 <div className={styles.game_subinfo}>
@@ -442,26 +442,23 @@ function YesterdayPlays() {
                     <Row
                       align={'middle'}
                       className={`${styles.desc_line_section} ${
-                        game.patriots && styles.has_patriots
+                        game.outcome === 'LOSS' && styles.has_patriots
                       }`}>
                       <div className={styles.desc_line}>
                         <span>{game.bet_text}</span>
-                        {game.patriots && (
+                        {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}
                       </div>
                       <div className={styles.desc_line}>
                         <span>&nbsp;{`${game.odds} odds | ${game.odds_decimal}`}</span>
-                        {game.patriots && (
+                        {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}
                       </div>
-                      {game.patriots && <div className={styles.patriots_text}>PATRIOTS</div>}
                     </Row>
                   </div>
-                  <div className={`${styles.game_score} ${game.patriots && styles.has_patriots}`}>
-                    {game.score}
-                  </div>
+                  <div className={`${styles.game_score}`}>{game.score}</div>
                 </div>
               </div>
             </div>

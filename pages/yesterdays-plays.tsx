@@ -392,6 +392,13 @@ function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsTy
     setSportsStatus(selectedStatus);
   }, [unlockedItems]);
 
+  const onUnlockAll = () => {
+    const newStatuses = sportsStatus.fill(1);
+    console.log('---newStatuses:', newStatuses);
+    setSportsStatus(newStatuses);
+    onSelectChange(-1, false);
+  };
+
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
@@ -450,7 +457,7 @@ function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsTy
     <>
       <DashboardHeader title={'Yesterdays plays'} />
       <Row className={styles.sportsCardList} justify={'center'}>
-        <Button className={styles.dropdownBtnWrapper}>
+        <Button className={styles.dropdownBtnWrapper} onClick={onUnlockAll}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <span>All</span>
           </div>
@@ -549,26 +556,23 @@ function YesterdayPlays({ loading, plays }: { loading: boolean; plays: Yesterday
                     <Row
                       align={'middle'}
                       className={`${styles.desc_line_section} ${
-                        game.patriots && styles.has_patriots
+                        game.outcome === 'LOSS' && styles.has_patriots
                       }`}>
                       <div className={styles.desc_line}>
                         <span>{game.bet_text}</span>
-                        {game.patriots && (
+                        {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}
                       </div>
                       <div className={styles.desc_line}>
                         <span>&nbsp;{`${game.odds} odds | ${game.odds_decimal}`}</span>
-                        {game.patriots && (
+                        {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}
                       </div>
-                      {game.patriots && <div className={styles.patriots_text}>PATRIOTS</div>}
                     </Row>
                   </div>
-                  <div className={`${styles.game_score} ${game.patriots && styles.has_patriots}`}>
-                    {game.score}
-                  </div>
+                  <div className={styles.game_score}>{game.score}</div>
                 </div>
               </div>
             </div>

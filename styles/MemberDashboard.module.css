@@ -701,8 +701,10 @@
 }
 .yesterday_plays .desc_line {
   position: relative;
-  display: block;
   overflow: hidden;
+  display: inline-block;
+  overflow: hidden;
+  width: max-content;
 }
 .yesterday_plays .strikeLine {
   position: absolute;
@@ -711,7 +713,7 @@
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
-  font-size: 80px;
+  font-size: 70px;
   letter-spacing: -0.235em;
   color: #000000;
   white-space: nowrap;
@@ -789,9 +791,6 @@
     margin-top: 16px;
     text-align: left;
     font-size: 22px;
-  }
-  .has_patriots.desc_line_section {
-    top: 2.5em;
   }
   .has_patriots.game_score {
     margin-top: 2.5em;

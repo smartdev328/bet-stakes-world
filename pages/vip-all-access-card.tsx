@@ -154,6 +154,12 @@ function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionProp
   const [selectedFilterType, setSelectedFilterType] = useState<string>('');
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
+  const onUnlockAll = () => {
+    const newItems = sportsStatus.fill(0);
+    setSportsStatus(newItems);
+    changeActiveSport(-1);
+  };
+
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] !== 1) {
@@ -243,7 +249,7 @@ function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionProp
     <>
       <DashboardHeader title={'VIP ALL ACCESS CARD'} />
       <Row className={styles.sportsCardList} justify={'center'}>
-        <Button className={styles.dropdownBtnWrapper}>
+        <Button className={styles.dropdownBtnWrapper} onClick={onUnlockAll}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnVIPAll}`}>
             <WinnerCupIcon className={styles.lock_icon} />
             <span>ALL SPORTS</span>

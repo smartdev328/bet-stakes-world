@@ -97,13 +97,17 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
   const [openUnlockModal, setOpenUnlockModal] = useState<Sport | undefined>(undefined);
   const [activeSport, setActiveSport] = useState<number>(-1);
   const [filterType, setFilterType] = useState<string>('');
+  const [unlockedItems, setUnlockedItems] = useState<number[]>([]);
 
-  const unlockedItems: number[] = [];
-  subscriptions.forEach((subscription) => {
-    if (subscription.plan.name.toLowerCase().indexOf('sports card') > -1) {
-      unlockedItems.push(subscription.sports[0].id);
-    }
-  });
+  useEffect(() => {
+    const items: number[] = [];
+    subscriptions.forEach((subscription) => {
+      if (subscription.plan.name.toLowerCase().indexOf('sports card') > -1) {
+        items.push(subscription.sports[0].id);
+      }
+    });
+    setUnlockedItems(items);
+  }, [subscriptions]);
 
   return (
     <>
@@ -191,6 +195,7 @@ function TopSection({
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
+    console.log('-- unlockedItems:', unlockedItems);
     const selectedStatus = sports.map((sport: Sport) => {
       const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
       if (unlockedItemIndex > -1) {
@@ -204,12 +209,7 @@ function TopSection({
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      const newItems = items.map((item) => {
-        if (item === 2) {
-          item = 1;
-        }
-        return item;
-      });
+      const newItems = items.fill(1);
       newItems[index] = 2;
       setSportsStatus(newItems);
       changeActiveSport(sports[index].id);

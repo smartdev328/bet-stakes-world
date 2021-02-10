@@ -88,7 +88,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
             <p>
               For more information, please visit our <a href="/faqs">FAQ Page</a> or{' '}
-              <a href="/contactus">Contact Us</a> directly!
+              <a href="/contact">Contact Us</a> directly!
             </p>
           </div>
         </div>

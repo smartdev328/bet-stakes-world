@@ -251,7 +251,7 @@ function AppFooter({ token }: { token: JWT | null }) {
           <Link href="/aboutus">
             <a className={styles.navbarItem}>About us</a>
           </Link>
-          <Link href="/contactus">
+          <Link href="/contact">
             <a className={styles.navbarItem}>Contact us</a>
           </Link>
           <Link href="/faqs">

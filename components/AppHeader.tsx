@@ -771,9 +771,14 @@ export default function AppHeader({
                   Merchandise
                 </Menu.Item> */}
               </Menu>
-              <Button type="primary" className={styles.subscribeBtn}>
-                Subscribe Now
-              </Button>
+              <Link href="/member-dashboard">
+                <Button
+                  type="primary"
+                  className={styles.mobileSubscribeBtn}
+                  onClick={hideMobileNav}>
+                  My Dashboard
+                </Button>
+              </Link>
             </div>
           )}
         </div>

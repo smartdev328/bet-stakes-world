@@ -584,3 +584,18 @@ a.locked:active {
     height: 14px;
   }
 }
+
+.mobileSubscribeBtn {
+  width: 100%;
+  background: #FFC700;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  border: none;
+  margin: 20px 0;
+  padding: 10.5px 16px;
+  height: auto;
+  max-width: 600px;
+}

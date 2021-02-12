@@ -259,7 +259,7 @@ function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionProp
           <Carousel
             arrows={true}
             dots={false}
-            slidesToShow={6}
+            slidesToShow={8}
             responsive={responsive}
             initialSlide={0}
             variableWidth

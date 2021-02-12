@@ -13,7 +13,8 @@ import {
   EmptyCircleIcon,
   CheckedCircleIcon,
   NormalCheckIcon,
-  MinusIcon
+  MinusIcon,
+  CloseIcon
 } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
@@ -514,19 +515,7 @@ function ProductsAndCartBoxForFantasy({
     return a.price - b.price >= 0 ? 1 : -1;
   });
   const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-  const [tempCart, setTempCart] = useState<CartItem[]>(
-    itemsFromCart.length > 0
-      ? itemsFromCart
-      : [
-          {
-            sports: sports[0],
-            plan: pack.billing_plans[0],
-            pack,
-            auto_renewal: false,
-            owner: 0
-          }
-        ]
-  );
+  const [tempCart, setTempCart] = useState<CartItem[]>(itemsFromCart);
 
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
@@ -582,6 +571,12 @@ function ProductsAndCartBoxForFantasy({
 
   const onChangeItemAt = (sport: Sport) => {
     setActiveSport(sport);
+  };
+
+  const removeCartAt = (cart: any, index: number) => {
+    const newCart = cart;
+    newCart.splice(index, 1);
+    changeTempCart(pack, newCart);
   };
 
   let totalPrice = 0;
@@ -662,6 +657,11 @@ function ProductsAndCartBoxForFantasy({
                 {tempCart.map((item, index) => (
                   <p key={index}>
                     {item.sports?.name} - {item.plan.duration}
+                    <Button
+                      type={'link'}
+                      className={styles.removeCartItemBtn}
+                      icon={<CloseIcon className={styles.closeIcon} />}
+                      onClick={() => removeCartAt(tempCart, index)}></Button>
                   </p>
                 ))}
               </div>
@@ -764,6 +764,7 @@ function ProductsAndCartBoxForSportsCard({
           }
         ]
   );
+
   // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
   const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
 
@@ -873,6 +874,12 @@ function ProductsAndCartBoxForSportsCard({
     totalPrice += item.plan.price;
   });
 
+  const removeCartAt = (cart: any, index: number) => {
+    const newCart = cart;
+    newCart.splice(index, 1);
+    changeTempCart(pack, newCart);
+  };
+
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
@@ -947,6 +954,11 @@ function ProductsAndCartBoxForSportsCard({
                 {tempCart.map((item, index) => (
                   <p key={index}>
                     {item.sports?.name} - {item.plan.duration}
+                    <Button
+                      type={'link'}
+                      className={styles.removeCartItemBtn}
+                      icon={<CloseIcon className={styles.closeIcon} />}
+                      onClick={() => removeCartAt(tempCart, index)}></Button>
                   </p>
                 ))}
               </div>

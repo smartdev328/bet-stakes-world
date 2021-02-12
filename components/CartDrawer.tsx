@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ReduxState } from '@redux/reducers';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Menu, Dropdown } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -66,26 +66,28 @@ type CartDrawerProps = {
   packages: Package[];
   open: boolean;
   onClose: () => void;
+  cartItems: CartItem[];
+  onChangeCart: (_: CartItem[]) => void;
 };
 
-export default function CartDrawer({ packages, open, onClose }: CartDrawerProps) {
-  const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
-  const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
+export default function CartDrawer({
+  packages,
+  open,
+  cartItems,
+  onClose,
+  onChangeCart
+}: CartDrawerProps) {
   const [cartClicked, setCartClicked] = useState<boolean>(false);
 
-  useEffect(() => {
-    setTempCartItems(cartItems);
-  }, [cartItems]);
-
   const removeCartAt = (index: number) => {
-    const updated = tempCartItems.slice();
+    const updated = cartItems.slice();
     updated.splice(index, 1);
-    setTempCartItems(updated);
+    onChangeCart(updated);
   };
   const changedPlan = (index: number, plan: BillingPlan) => {
-    const updated = tempCartItems.slice();
+    const updated = cartItems.slice();
     updated[index].plan = plan;
-    setTempCartItems(updated);
+    onChangeCart(updated);
   };
 
   return (
@@ -94,12 +96,12 @@ export default function CartDrawer({ packages, open, onClose }: CartDrawerProps)
       <div className={`${open && styles.open} ${styles.cartDrawer}`}>
         <div className={styles.cartItems}>
           <div className={styles.cartItemsMain}>
-            {tempCartItems.length === 0 && (
+            {cartItems.length === 0 && (
               <p className={styles.noItem}>
                 <em>Cart is empty</em>
               </p>
             )}
-            {tempCartItems.map((item, index) => (
+            {cartItems.map((item, index) => (
               <div key={index} className={styles.cartItem}>
                 <div className={styles.cartItemMain}>
                   <img
@@ -139,7 +141,7 @@ export default function CartDrawer({ packages, open, onClose }: CartDrawerProps)
               </div>
             ))}
           </div>
-          {tempCartItems.length !== 0 && (
+          {cartItems.length !== 0 && (
             <div className={styles.goToCartRow}>
               <Link href="/cart">
                 <Button

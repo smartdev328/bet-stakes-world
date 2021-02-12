@@ -87,7 +87,7 @@ function CartTotalWidget({
           disabled={disabled}
           className={styles.checkoutBtn}
           onClick={onCheckout}>
-          CHECK OUT
+          CHECKOUT
         </Button>
       </div>
       <div className={styles.totalPriceWidgetContentMobile}>

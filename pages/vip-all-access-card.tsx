@@ -380,7 +380,7 @@ function ListGames({
           )}
           {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
           {!loading &&
-            games.length &&
+            games.length > 0 &&
             games.map((game: EarliestGameInfoType, index: number) => (
               <div className={styles.game} key={game.id}>
                 <div className={styles.game_subinfo}>

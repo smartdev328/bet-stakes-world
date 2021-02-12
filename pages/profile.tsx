@@ -19,7 +19,7 @@ import {
   YellowCheckBox
 } from '@components/index';
 import styles from '@styles/Profile.module.css';
-import { ProfileValidateType, UserProfile, UserBillingInfo, NotificationConfig } from '@type/Users';
+import { ProfileValidateType, UserProfile, UserBillingInfo } from '@type/Users';
 import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
 import { ExclamationCircleOutlined } from '@ant-design/icons';

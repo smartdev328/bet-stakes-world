@@ -32,8 +32,8 @@ function HeroBanner() {
         <img src="/images/cart_page_bg.png" className={styles.bgImage} />
       </LazyLoad>
       <div className={styles.heroBannerContent}>
-        <h1>The Cart</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h1>YOUR CART</h1>
+        <p>Guaranteed safe and secure checkout!</p>
       </div>
       <BannerSportsAndMatches />
     </div>
@@ -87,7 +87,7 @@ function CartTotalWidget({
           disabled={disabled}
           className={styles.checkoutBtn}
           onClick={onCheckout}>
-          Place Order
+          CHECK OUT
         </Button>
       </div>
       <div className={styles.totalPriceWidgetContentMobile}>

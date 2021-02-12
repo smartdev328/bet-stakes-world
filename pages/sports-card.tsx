@@ -351,14 +351,15 @@ function TopSection({
           </Carousel>
         </div>
       </Row>
-      <Row className={styles.optionsRow} justify={'center'}>
+      <br></br>
+      {/* <Row className={styles.optionsRow} justify={'center'}>
         <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']} transitionName="">
           <div className={styles.optionBtn}>
             <strong>Filter By&nbsp;</strong>
             <TuneIcon className={styles.tune_icon} />
           </div>
         </Dropdown>
-      </Row>
+      </Row> */}
     </>
   );
 }

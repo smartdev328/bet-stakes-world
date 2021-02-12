@@ -223,7 +223,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
           {/* Profile Section */}
           <ProfileInfo formValidation={formValidation} changeFormData={changeFormData} />
           <CurrentPackages packages={packages} />
-          <Notifications />
+
           <CreditCardInfo
             changeBillingFormData={updateBillingForm}
             changeCardFormData={updateCardForm}

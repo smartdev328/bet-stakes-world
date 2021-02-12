@@ -64,11 +64,11 @@ function CurrentPackages({
   });
   const router = useRouter();
   const goToPackage = (subscription: any) => {
-    switch (subscription) {
-      case subscription.name == 'VIP All Access - Daily':
+    switch (subscription.name) {
+      case 'VIP All Access - Daily':
         router.push('/vip-all-access-card');
         break;
-      case subscription.name == 'Fantasy':
+      case 'Fantasy':
         router.push('/fantasy-daily-lineups');
         break;
       default:

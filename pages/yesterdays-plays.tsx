@@ -15,7 +15,7 @@ import {
   PlusEncloseIcon
 } from '@components/SvgIcons';
 import styles from '@styles/YesterdaysPlays.module.css';
-import { PageProps, YesterdayPlayInfoType } from '@type/Main';
+import { PageProps, Schedule, YesterdayPlayInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { useRouter } from 'next/router';
 import SportsAPIs from '@apis/sport.apis';

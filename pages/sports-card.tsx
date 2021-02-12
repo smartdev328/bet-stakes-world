@@ -19,7 +19,7 @@ import {
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, PageProps } from '@type/Main';
+import { EarliestGameInfoType, PageProps, Schedule } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';

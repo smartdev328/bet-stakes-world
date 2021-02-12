@@ -15,7 +15,7 @@ import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
-import { BillingPlan, Package } from '@type/Packages';
+import { Package } from '@type/Packages';
 import { useRouter } from 'next/router';
 
 function HeroBanner() {

@@ -196,8 +196,8 @@
   margin: 0 8px;
 }
 .dropdownBtn {
-  width: 138px;
-  height: 64px;
+  width: 117px;
+  height: 57px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,7 +311,7 @@
   flex-flow: row nowrap;
 }
 .sportsCardListCarousel {
-  width: calc(154px * 6);
+  /* width: calc(154px * 6); */
 }
 .optionsRow .optionBtn {
   background: rgba(236, 236, 236, 0.3);

@@ -297,7 +297,7 @@ function TopSection({
   return (
     <>
       <DashboardHeader title={'Sports Card'} />
-      <Row className={styles.sportsCardList} justify={'center'}>
+      <Row className={styles.sportsCardList}>
         <Button className={styles.dropdownBtnWrapper}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <LockIcon className={styles.lock_icon} />
@@ -309,7 +309,7 @@ function TopSection({
           <Carousel
             arrows={true}
             dots={false}
-            slidesToShow={6}
+            slidesToShow={8}
             responsive={responsive}
             initialSlide={0}
             variableWidth

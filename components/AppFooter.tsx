@@ -126,12 +126,12 @@ function AppFooter({ token }: { token: JWT | null }) {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <Link href="/shop?plan=sports_card">
+                    <Link href="/shop?plan=all">
                       <a>VIP All Access</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/shop?plan=all">
+                    <Link href="/shop?plan=sports_card">
                       <a>Sports Cards</a>
                     </Link>
                   </li>

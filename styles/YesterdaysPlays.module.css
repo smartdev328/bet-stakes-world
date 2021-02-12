@@ -202,8 +202,8 @@
   margin: 0 8px;
 }
 .dropdownBtn {
-  width: 138px;
-  height: 64px;
+  width: 117px;
+  height: 57px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,7 +314,7 @@
   flex-flow: row nowrap;
 }
 .sportsCardListCarousel {
-  width: calc(154px * 6);
+  /* width: calc(154px * 6); */
 }
 .lock_icon {
   height: 18px;

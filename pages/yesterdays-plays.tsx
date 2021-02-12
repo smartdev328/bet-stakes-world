@@ -466,7 +466,7 @@ function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsTy
           <Carousel
             arrows={true}
             dots={false}
-            slidesToShow={6}
+            slidesToShow={8}
             responsive={responsive}
             initialSlide={0}
             variableWidth

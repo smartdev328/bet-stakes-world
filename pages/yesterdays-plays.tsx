@@ -532,27 +532,30 @@ function YesterdayPlays({ loading, plays }: { loading: boolean; plays: Yesterday
                 </div>
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
-                    <Row>
-                      <div className={styles.game_team1}>
-                        <img
-                          src={game.schedules[0].team.logo.url || 'https://via.placeholder.com/100'}
-                          alt="Team Logo"
-                          className={styles.team_logo}
-                        />
-                        <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                      </div>
-                      <div className={styles.game_team2}>
-                        <img
-                          src={
-                            game.schedules[0].home_team.logo.url ||
-                            'https://via.placeholder.com/100'
-                          }
-                          alt="Team Logo"
-                          className={styles.team_logo}
-                        />
-                        <span>{game.schedules[0].home_team.name}</span>
-                      </div>
-                    </Row>
+                    {game.schedules.map((schedule: Schedule) => (
+                      <>
+                        <Row>
+                          <div className={styles.game_team1}>
+                            <img
+                              src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
+                              alt="Team Logo"
+                              className={styles.team_logo}
+                            />
+                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
+                          </div>
+                          <div className={styles.game_team2}>
+                            <img
+                              src={
+                                schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
+                              }
+                              alt="Team Logo"
+                              className={styles.team_logo}
+                            />
+                            <span>{schedule.home_team.name}</span>
+                          </div>
+                        </Row>
+                      </>
+                    ))}
                     <Row
                       align={'middle'}
                       className={`${styles.desc_line_section} ${

@@ -8,7 +8,7 @@ import moment from 'moment';
 import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
+import { EarliestGameInfoType, Schedule, PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
 import SportsAPIs from '@apis/sport.apis';
@@ -309,38 +309,38 @@ function EarliestGames({
                 <SportTile sport={game.sport.name} />
                 <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
               </div>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}>
+              {game.schedules.map((schedule: Schedule) => (
+                <>
                   <Row>
                     <div className={styles.game_team1}>
                       <img
-                        src={game.schedules[0]?.team.logo?.url || 'https://via.placeholder.com/100'}
+                        src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
                         alt="Team Logo"
                         className={styles.team_logo}
                       />
-                      <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
+                      <span>{schedule.team.name}&nbsp;@&nbsp;</span>
                     </div>
                     <div className={styles.game_team2}>
                       <img
-                        src={
-                          game.schedules[0].home_team?.logo?.url ||
-                          'https://via.placeholder.com/100'
-                        }
+                        src={schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'}
                         alt="Team Logo"
                         className={styles.team_logo}
                       />
-                      <span>{game.schedules[0].home_team.name}</span>
+                      <span>{schedule.home_team.name}</span>
                     </div>
                   </Row>
-                  <Row align={'top'} wrap={false}>
-                    <LongArrowIcon className={styles.long_arrow_icon} />
-                    <span className={styles.desc_line}>
-                      {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
-                        game.odds
-                      } odds | ${game.odds_decimal.toFixed(2)}x)`}
-                    </span>
-                  </Row>
-                </div>
+                </>
+              ))}
+              <Row align={'top'} wrap={false}>
+                <LongArrowIcon className={styles.long_arrow_icon} />
+                <span className={styles.desc_line}>
+                  {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
+                    game.odds
+                  } odds | ${game.odds_decimal.toFixed(2)}x)`}
+                </span>
+              </Row>
+              <div className={styles.game_info}>
+                <div className={styles.game_teams}></div>
                 <div className={styles.units}>{`${game.units} Unit${
                   game.units > 1 ? 's' : ''
                 }`}</div>
@@ -424,29 +424,30 @@ function YesterdayPlays() {
                 </div>
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
-                    <Row>
-                      <div className={styles.game_team1}>
-                        <img
-                          src={
-                            game.schedules[0].team?.logo?.url || 'https://via.placeholder.com/100'
-                          }
-                          alt="Team Logo"
-                          className={styles.team_logo}
-                        />
-                        <span>{game.schedules[0].team.name}&nbsp;@&nbsp;</span>
-                      </div>
-                      <div className={styles.game_team2}>
-                        <img
-                          src={
-                            game.schedules[0].home_team?.logo?.url ||
-                            'https://via.placeholder.com/100'
-                          }
-                          alt="Team Logo"
-                          className={styles.team_logo}
-                        />
-                        <span>{game.schedules[0].home_team.name}</span>
-                      </div>
-                    </Row>
+                    {game.schedules.map((schedule: Schedule) => (
+                      <>
+                        <Row>
+                          <div className={styles.game_team1}>
+                            <img
+                              src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
+                              alt="Team Logo"
+                              className={styles.team_logo}
+                            />
+                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
+                          </div>
+                          <div className={styles.game_team2}>
+                            <img
+                              src={
+                                schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
+                              }
+                              alt="Team Logo"
+                              className={styles.team_logo}
+                            />
+                            <span>{schedule.home_team.name}</span>
+                          </div>
+                        </Row>
+                      </>
+                    ))}
                     <Row
                       align={'middle'}
                       className={`${styles.desc_line_section} ${

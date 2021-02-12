@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { ReduxState } from '@redux/reducers';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Button, Menu, Dropdown } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import Link from 'next/link';

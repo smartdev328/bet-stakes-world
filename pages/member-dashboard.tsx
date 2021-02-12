@@ -15,7 +15,8 @@ import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
-import { Package } from '@type/Packages';
+import { BillingPlan, Package } from '@type/Packages';
+import { useRouter } from 'next/router';
 
 function HeroBanner() {
   return (
@@ -61,6 +62,20 @@ function CurrentPackages({
       sportsCardPack = pack.id;
     }
   });
+  const router = useRouter();
+  const goToPackage = (subscription: any) => {
+    switch (subscription) {
+      case subscription.name == 'VIP All Access - Daily':
+        router.push('/vip-all-access-card');
+        break;
+      case subscription.name == 'Fantasy':
+        router.push('/fantasy-daily-lineups');
+        break;
+      default:
+        router.push('/sports-card');
+        break;
+    }
+  };
 
   return (
     <div className={styles.current_packages}>
@@ -111,7 +126,15 @@ function CurrentPackages({
               <p className={styles.package_desc}>
                 {subscription.sports[0] ? subscription.sports[0].name : ''}
               </p>
-              {subscription.is_active && <Button className={styles.cta_btn}>View Picks</Button>}
+              {subscription.is_active && (
+                <Button
+                  onClick={() => {
+                    goToPackage(subscription.plan);
+                  }}
+                  className={styles.cta_btn}>
+                  View Picks
+                </Button>
+              )}
               {!subscription.is_active && (
                 <Button className={styles.cta_btn}>Reactivate Package</Button>
               )}

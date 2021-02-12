@@ -29,8 +29,9 @@ export function getTodaySportEntries(
   subscriptions.map((subscription, index) => {
     subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
+  const typeFilter = type ? `&type=${type}` : '';
   return fetch(
-    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}&type=${type}${sportFilter}${subscriptionsQuery}`,
+    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}${typeFilter}${sportFilter}${subscriptionsQuery}`,
     {
       method: 'get',
       headers

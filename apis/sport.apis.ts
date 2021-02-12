@@ -49,8 +49,9 @@ export function getSportEntries(
     subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
   const sportFilter = sport ? `&sport=${sport}` : '';
+  const typeFilter = type ? `&type=${type}` : '';
   return fetch(
-    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&type=${type}${sportFilter}${subscriptionsQuery}`,
+    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC${typeFilter}${sportFilter}${subscriptionsQuery}`,
     {
       method: 'get',
       headers

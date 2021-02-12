@@ -471,7 +471,7 @@ function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsTy
             initialSlide={0}
             variableWidth
             infinite={false}
-            draggable
+            draggable={false}
             swipeToSlide
             slidesToScroll={1}>
             {sports.map((sport: Sport, index: number) => (
@@ -565,7 +565,12 @@ function YesterdayPlays({ loading, plays }: { loading: boolean; plays: Yesterday
                         )}
                       </div>
                       <div className={styles.desc_line}>
-                        <span>&nbsp;{`${game.odds} odds | ${game.odds_decimal}`}</span>
+                        <span>
+                          &nbsp;(
+                          {`${game.odds > 0 ? '+' : ''}${
+                            game.odds
+                          } odds | ${game.odds_decimal.toFixed(2)}x)`}
+                        </span>
                         {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}

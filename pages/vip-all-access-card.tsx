@@ -265,7 +265,7 @@ function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionProp
             variableWidth
             infinite={false}
             swipeToSlide
-            draggable
+            draggable={false}
             slidesToScroll={1}>
             {sports.map((sport, index) => (
               <div key={index}>
@@ -380,6 +380,7 @@ function ListGames({
           )}
           {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
           {!loading &&
+            games.length &&
             games.map((game: EarliestGameInfoType, index: number) => (
               <div className={styles.game} key={game.id}>
                 <div className={styles.game_subinfo}>
@@ -412,7 +413,9 @@ function ListGames({
                     <Row align={'top'} wrap={false}>
                       <LongArrowIcon className={styles.long_arrow_icon} />
                       <span className={styles.desc_line}>
-                        {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
+                        {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
+                          game.odds
+                        } odds | ${game.odds_decimal.toFixed(2)}x)`}
                       </span>
                     </Row>
                   </div>

@@ -350,7 +350,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const cartLoginFormChanged = (formData: LoginUserType, isValid: boolean) => {
     setLoginFormData(formData);
     setSignUpFormValid(isValid);
-    setBillingFormValid(isValid);
   };
 
   const cartSignupFormChanged = (formData: CreateUserType, isValid: boolean) => {
@@ -518,7 +517,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               onCheckout={!cartForVisitor ? proceedCheckout : proceedCheckoutForVisitor}
             />
           </section>
-          <section className={styles.promoCodeSection}>
+          {/* <section className={styles.promoCodeSection}>
             <LazyLoad>
               <img
                 className={styles.promoCodeBg}
@@ -538,7 +537,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                 </LazyLoad>
               </div>
             </div>
-          </section>
+          </section> */}
           <CartTotalWidget
             mobile={true}
             loading={proceeding}

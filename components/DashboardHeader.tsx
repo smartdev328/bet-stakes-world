@@ -1,6 +1,5 @@
-import { Row, Button, Col } from 'antd';
+import { Row, Col } from 'antd';
 
-import { ThickStarIcon } from '@components/SvgIcons';
 import styles from './DashboardHeader.module.css';
 
 type DashboardHeaderPropsType = {
@@ -14,9 +13,6 @@ const DashboardHeader = ({ title }: DashboardHeaderPropsType) => {
         <Row>
           <Col span={24}>
             <Row align={'middle'}>
-              <Button ghost className={styles.thick_star_btn}>
-                <ThickStarIcon className={styles.thick_star_icon} />
-              </Button>
               <span>{title}</span>
             </Row>
           </Col>

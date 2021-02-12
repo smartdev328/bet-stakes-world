@@ -68,11 +68,11 @@ function CurrentPackages({
       <div className={styles.block_content}>
         {subscriptions.map((subscription) => (
           <div className={styles.package_card} key={subscription.id}>
-            {subscription.is_active && (
+            {/* {subscription.is_active && (
               <div className={styles.package_status}>{`Renews in ${Math.floor(
                 moment.duration(moment(subscription.valid_till).diff(moment())).asDays()
               )} days`}</div>
-            )}
+            )} */}
             {!subscription.is_active && (
               <div className={styles.package_status}>{`Expired ${Math.floor(
                 moment.duration(moment().diff(moment(subscription.valid_till))).asDays()
@@ -108,7 +108,9 @@ function CurrentPackages({
                   <p>{subscription.plan.duration.toLowerCase()} lineups</p>
                 )}
               </div>
-              <p className={styles.package_desc}>Current record: 90-0</p>
+              <p className={styles.package_desc}>
+                {subscription.sports[0] ? subscription.sports[0].name : ''}
+              </p>
               {subscription.is_active && <Button className={styles.cta_btn}>View Picks</Button>}
               {!subscription.is_active && (
                 <Button className={styles.cta_btn}>Reactivate Package</Button>
@@ -168,6 +170,10 @@ function EarliestGames({
   const [loading, setLoading] = useState<boolean>(false);
 
   const SportBetTypes = [
+    {
+      id: '',
+      name: 'All'
+    },
     {
       id: 'straight',
       name: 'Straight Bets'
@@ -329,7 +335,9 @@ function EarliestGames({
                   <Row align={'top'} wrap={false}>
                     <LongArrowIcon className={styles.long_arrow_icon} />
                     <span className={styles.desc_line}>
-                      {`${game.bet_text} (${game.odds} odds | ${game.odds_decimal})`}
+                      {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
+                        game.odds
+                      } odds | ${game.odds_decimal.toFixed(2)}x)`}
                     </span>
                   </Row>
                 </div>
@@ -451,7 +459,12 @@ function YesterdayPlays() {
                         )}
                       </div>
                       <div className={styles.desc_line}>
-                        <span>&nbsp;{`${game.odds} odds | ${game.odds_decimal}`}</span>
+                        <span>
+                          &nbsp;
+                          {`(${game.odds > 0 ? '+' : ''}${
+                            game.odds
+                          } odds | ${game.odds_decimal.toFixed(2)}x)`}
+                        </span>
                         {game.outcome === 'LOSS' && (
                           <div className={styles.strikeLine}>--------------------------—</div>
                         )}

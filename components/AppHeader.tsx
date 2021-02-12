@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   IdentityIcon,
   LockIcon,
-  SearchIcon,
   CartIcon,
   CloseIcon,
   HamburgerMenuIcon
@@ -666,11 +665,11 @@ export default function AppHeader({
             </Menu.Item> */}
           </Menu>
           <div className={styles.navbarSide}>
-            <Button
+            {/* <Button
               type="link"
               icon={<SearchIcon className={styles.cart_icon} />}
               aria-label="Search Packages Button"
-            />
+            /> */}
             <Link href="/cart">
               <a>
                 <Button
@@ -706,10 +705,10 @@ export default function AppHeader({
               )}
             </div>
             <div className={styles.navbarSide}>
-              <Button
+              {/* <Button
                 type="link"
                 aria-label="Search Packages Button"
-                icon={<SearchIcon className={styles.cart_icon} />}></Button>
+                icon={<SearchIcon className={styles.cart_icon} />}></Button> */}
               <Link href="/cart">
                 <Button
                   type="link"
@@ -771,14 +770,26 @@ export default function AppHeader({
                   Merchandise
                 </Menu.Item> */}
               </Menu>
-              <Link href="/member-dashboard">
-                <Button
-                  type="primary"
-                  className={styles.mobileSubscribeBtn}
-                  onClick={hideMobileNav}>
-                  My Dashboard
-                </Button>
-              </Link>
+              {userSubscriptions.length && (
+                <Link href="/member-dashboard">
+                  <Button
+                    type="primary"
+                    className={styles.mobileSubscribeBtn}
+                    onClick={hideMobileNav}>
+                    My Dashboard
+                  </Button>
+                </Link>
+              )}
+              {!userSubscriptions.length && (
+                <Link href="/signup">
+                  <Button
+                    type="primary"
+                    className={styles.mobileSubscribeBtn}
+                    onClick={hideMobileNav}>
+                    Subscribe Now
+                  </Button>
+                </Link>
+              )}
             </div>
           )}
         </div>

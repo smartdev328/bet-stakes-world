@@ -589,7 +589,7 @@ export default function AppHeader({
               {`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}
             </div>
             <div>
-              <Link href="/">
+              <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
                 <a className={styles.yellowBoldLink}>View Picks</a>
               </Link>
             </div>

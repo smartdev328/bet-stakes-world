@@ -107,6 +107,12 @@ function SubMenu({
     return false;
   };
 
+  const hasPackage = (packageName: string) => {
+    return subscriptions.filter((subscription: UserSubscription) => {
+      return subscription.plan.name.includes(packageName);
+    }).length;
+  };
+
   return (
     <>
       <div className={styles.submenu}>
@@ -131,38 +137,42 @@ function SubMenu({
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
-              <Link href="/sports-card">
-                <a
-                  onMouseOver={showSportPanel}
-                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                  <span>Sports Card</span>
-                  {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </a>
-              </Link>
+              {(hasPackage('Sport') || subscriptionStatus === 'visitor') && (
+                <Link href="/sports-card">
+                  <a onMouseOver={showSportPanel} className={styles.locked}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    <span>Sports Card</span>
+                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </a>
+                </Link>
+              )}
             </div>
             <div className={styles.submenu_item}>
-              <Link href="/vip-all-access-card">
-                <a
-                  onMouseOver={hidePanes}
-                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                  VIP ALL ACCESS CARD
-                </a>
-              </Link>
+              {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
+                <Link href="/vip-all-access-card">
+                  <a
+                    onMouseOver={hidePanes}
+                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    VIP ALL ACCESS CARD
+                  </a>
+                </Link>
+              )}
             </div>
             <div className={styles.submenu_item_for_pane}>
-              <Link href="/fantasy-daily-lineups">
-                <a
-                  onMouseOver={showFantasyPanel}
-                  className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                  <span>FANTASY PICKS</span>
-                  {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </a>
-              </Link>
+              {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
+                <Link href="/fantasy-daily-lineups">
+                  <a
+                    onMouseOver={showFantasyPanel}
+                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    <span>FANTASY PICKS</span>
+                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </a>
+                </Link>
+              )}
             </div>
             <div className={styles.submenu_item}>
               <Link href="/profile">
@@ -305,20 +315,22 @@ function SubMenu({
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                <a
-                  className={
-                    sportPaneVisible
-                      ? styles.paneActive
-                      : subscriptionStatus !== 'paid'
-                      ? styles.locked
-                      : ''
-                  }
-                  onClick={toggleSportPanel}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                  <span>Sports Card</span>
-                  {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </a>
+                {(hasPackage('Sports') || subscriptionStatus === 'visitor') && (
+                  <a
+                    className={
+                      sportPaneVisible
+                        ? styles.paneActive
+                        : subscriptionStatus !== 'paid'
+                        ? styles.locked
+                        : ''
+                    }
+                    onClick={toggleSportPanel}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    <span>Sports Card</span>
+                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </a>
+                )}
               </div>
               <div className={styles.pane}>
                 {sportPaneVisible && (
@@ -380,30 +392,35 @@ function SubMenu({
                 )}
               </div>
               <div className={styles.submenu_item}>
-                <Link href="/vip-all-access-card">
-                  <a
-                    onMouseOver={hidePanes}
-                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                    VIP ALL ACCESS CARD
-                  </a>
-                </Link>
+                {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
+                  <Link href="/vip-all-access-card">
+                    <a
+                      onMouseOver={hidePanes}
+                      className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                      {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                      VIP ALL ACCESS CARD
+                    </a>
+                  </Link>
+                )}
               </div>
+
               <div className={styles.submenu_item_for_pane}>
-                <a
-                  className={
-                    fantasyPaneVisible
-                      ? styles.paneActive
-                      : subscriptionStatus !== 'paid'
-                      ? styles.locked
-                      : ''
-                  }
-                  onClick={toggleFantasyPanel}>
-                  {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                  <span>FANTASY PICKS</span>
-                  {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                  {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
-                </a>
+                {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
+                  <a
+                    className={
+                      fantasyPaneVisible
+                        ? styles.paneActive
+                        : subscriptionStatus !== 'paid'
+                        ? styles.locked
+                        : ''
+                    }
+                    onClick={toggleFantasyPanel}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    <span>FANTASY PICKS</span>
+                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
+                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
+                  </a>
+                )}
               </div>
               <div className={styles.pane}>
                 {fantasyPaneVisible && (
@@ -513,7 +530,7 @@ export default function AppHeader({
     const remainingTimeInterval = setInterval(() => {
       const remainingTime = getRemainingTime(releaseTime);
       setRemainingTime(remainingTime);
-    }, 1000);
+    }, 10000);
     return () => {
       clearInterval(remainingTimeInterval);
     };

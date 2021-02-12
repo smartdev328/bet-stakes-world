@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel, Spin } from 'antd';
+import { Row, Button, Col, Carousel, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
@@ -12,7 +12,6 @@ import {
   MoneyPocketIcon,
   OpenBookIcon,
   PlusEncloseIcon,
-  TuneIcon,
   WinnerCupIcon
 } from '@components/SvgIcons';
 import SportsAPIs from '@apis/sport.apis';
@@ -150,8 +149,7 @@ type TopSectionPropsType = {
   filterChanged: (_: string) => void;
 };
 
-function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionPropsType) {
-  const [selectedFilterType, setSelectedFilterType] = useState<string>('');
+function TopSection({ sports, changeActiveSport }: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   const onUnlockAll = () => {
@@ -174,37 +172,37 @@ function TopSection({ sports, changeActiveSport, filterChanged }: TopSectionProp
     }
   };
 
-  const menu = (
-    <Menu className={styles.sportMenu}>
-      <Menu.Item
-        disabled={selectedFilterType === ''}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('');
-          filterChanged('');
-        }}>
-        None
-      </Menu.Item>
-      <Menu.Item
-        disabled={selectedFilterType === 'Highest Units'}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('Highest Units');
-          filterChanged('Highest Units');
-        }}>
-        Highest Units
-      </Menu.Item>
-      <Menu.Item
-        disabled={selectedFilterType === 'Highest Odds'}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('Highest Odds');
-          filterChanged('Highest Odds');
-        }}>
-        Highest Odds
-      </Menu.Item>
-    </Menu>
-  );
+  // const menu = (
+  //   <Menu className={styles.sportMenu}>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === ''}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('');
+  //         filterChanged('');
+  //       }}>
+  //       None
+  //     </Menu.Item>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === 'Highest Units'}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('Highest Units');
+  //         filterChanged('Highest Units');
+  //       }}>
+  //       Highest Units
+  //     </Menu.Item>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === 'Highest Odds'}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('Highest Odds');
+  //         filterChanged('Highest Odds');
+  //       }}>
+  //       Highest Odds
+  //     </Menu.Item>
+  //   </Menu>
+  // );
 
   const responsive = [
     {

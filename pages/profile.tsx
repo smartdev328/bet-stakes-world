@@ -409,109 +409,109 @@ function CurrentPackages({ packages }: { packages: Package[] }) {
   );
 }
 
-function Notifications() {
-  const [notificationConfig, setNotificationConfig] = useState<NotificationConfig>({
-    sportsCardOrVipAccessPicksEmail: false,
-    sportsCardOrVipAccessPicksMsg: false,
-    fantasyLineupEmail: false,
-    fantasyLineupMsg: false,
-    expiringMembershipEmail: false,
-    expiringMembershipMsg: false,
-    promotionalNotificationEmail: false,
-    promotionalNotificationMsg: false,
-    blogPostNotificationEmail: false,
-    blogPostNotificationMsg: false
-  });
+// function Notifications() {
+//   const [notificationConfig, setNotificationConfig] = useState<NotificationConfig>({
+//     sportsCardOrVipAccessPicksEmail: false,
+//     sportsCardOrVipAccessPicksMsg: false,
+//     fantasyLineupEmail: false,
+//     fantasyLineupMsg: false,
+//     expiringMembershipEmail: false,
+//     expiringMembershipMsg: false,
+//     promotionalNotificationEmail: false,
+//     promotionalNotificationMsg: false,
+//     blogPostNotificationEmail: false,
+//     blogPostNotificationMsg: false
+//   });
 
-  const changeNotificationConfig = (name: keyof NotificationConfig) => {
-    const config = Object.assign({}, notificationConfig);
-    config[name] = !config[name];
-    setNotificationConfig(config);
-  };
+//   const changeNotificationConfig = (name: keyof NotificationConfig) => {
+//     const config = Object.assign({}, notificationConfig);
+//     config[name] = !config[name];
+//     setNotificationConfig(config);
+//   };
 
-  return (
-    <div className={styles.notificationSettingRow}>
-      <div className={styles.sectionTitle}>Notifications</div>
-      <Row>
-        <div className={styles.notificationSetting}>
-          <h6>Recieve Sports Card or VIP All Access Picks</h6>
-          <div className={styles.checkboxes}>
-            <YellowCheckBox
-              checked={notificationConfig.sportsCardOrVipAccessPicksMsg}
-              onChangeStatus={() => changeNotificationConfig('sportsCardOrVipAccessPicksMsg')}
-              label={'Text Message'}
-            />
-            <YellowCheckBox
-              checked={notificationConfig.sportsCardOrVipAccessPicksEmail}
-              onChangeStatus={() => changeNotificationConfig('sportsCardOrVipAccessPicksEmail')}
-              label={'Email'}
-            />
-          </div>
-        </div>
-        <div className={styles.notificationSetting}>
-          <h6>Recieve Fantasy Lineup or Lineup Changes</h6>
-          <div className={styles.checkboxes}>
-            <YellowCheckBox
-              checked={notificationConfig.fantasyLineupMsg}
-              onChangeStatus={() => changeNotificationConfig('fantasyLineupMsg')}
-              label={'Text Message'}
-            />
-            <YellowCheckBox
-              checked={notificationConfig.fantasyLineupEmail}
-              onChangeStatus={() => changeNotificationConfig('fantasyLineupEmail')}
-              label={'Email'}
-            />
-          </div>
-        </div>
-        <div className={styles.notificationSetting}>
-          <h6>Recieve expiring membership notification</h6>
-          <div className={styles.checkboxes}>
-            <YellowCheckBox
-              checked={notificationConfig.expiringMembershipMsg}
-              onChangeStatus={() => changeNotificationConfig('expiringMembershipMsg')}
-              label={'Text Message'}
-            />
-            <YellowCheckBox
-              checked={notificationConfig.expiringMembershipEmail}
-              onChangeStatus={() => changeNotificationConfig('expiringMembershipEmail')}
-              label={'Email'}
-            />
-          </div>
-        </div>
-        <div className={styles.notificationSetting}>
-          <h6>Recieve new promotional notifications</h6>
-          <div className={styles.checkboxes}>
-            <YellowCheckBox
-              checked={notificationConfig.promotionalNotificationMsg}
-              onChangeStatus={() => changeNotificationConfig('promotionalNotificationMsg')}
-              label={'Text Message'}
-            />
-            <YellowCheckBox
-              checked={notificationConfig.promotionalNotificationEmail}
-              onChangeStatus={() => changeNotificationConfig('promotionalNotificationEmail')}
-              label={'Email'}
-            />
-          </div>
-        </div>
-        <div className={styles.notificationSetting}>
-          <h6>Recieve new blog post notifications</h6>
-          <div className={styles.checkboxes}>
-            <YellowCheckBox
-              checked={notificationConfig.blogPostNotificationMsg}
-              onChangeStatus={() => changeNotificationConfig('blogPostNotificationMsg')}
-              label={'Text Message'}
-            />
-            <YellowCheckBox
-              checked={notificationConfig.blogPostNotificationEmail}
-              onChangeStatus={() => changeNotificationConfig('blogPostNotificationEmail')}
-              label={'Email'}
-            />
-          </div>
-        </div>
-      </Row>
-    </div>
-  );
-}
+//   return (
+//     <div className={styles.notificationSettingRow}>
+//       <div className={styles.sectionTitle}>Notifications</div>
+//       <Row>
+//         <div className={styles.notificationSetting}>
+//           <h6>Recieve Sports Card or VIP All Access Picks</h6>
+//           <div className={styles.checkboxes}>
+//             <YellowCheckBox
+//               checked={notificationConfig.sportsCardOrVipAccessPicksMsg}
+//               onChangeStatus={() => changeNotificationConfig('sportsCardOrVipAccessPicksMsg')}
+//               label={'Text Message'}
+//             />
+//             <YellowCheckBox
+//               checked={notificationConfig.sportsCardOrVipAccessPicksEmail}
+//               onChangeStatus={() => changeNotificationConfig('sportsCardOrVipAccessPicksEmail')}
+//               label={'Email'}
+//             />
+//           </div>
+//         </div>
+//         <div className={styles.notificationSetting}>
+//           <h6>Recieve Fantasy Lineup or Lineup Changes</h6>
+//           <div className={styles.checkboxes}>
+//             <YellowCheckBox
+//               checked={notificationConfig.fantasyLineupMsg}
+//               onChangeStatus={() => changeNotificationConfig('fantasyLineupMsg')}
+//               label={'Text Message'}
+//             />
+//             <YellowCheckBox
+//               checked={notificationConfig.fantasyLineupEmail}
+//               onChangeStatus={() => changeNotificationConfig('fantasyLineupEmail')}
+//               label={'Email'}
+//             />
+//           </div>
+//         </div>
+//         <div className={styles.notificationSetting}>
+//           <h6>Recieve expiring membership notification</h6>
+//           <div className={styles.checkboxes}>
+//             <YellowCheckBox
+//               checked={notificationConfig.expiringMembershipMsg}
+//               onChangeStatus={() => changeNotificationConfig('expiringMembershipMsg')}
+//               label={'Text Message'}
+//             />
+//             <YellowCheckBox
+//               checked={notificationConfig.expiringMembershipEmail}
+//               onChangeStatus={() => changeNotificationConfig('expiringMembershipEmail')}
+//               label={'Email'}
+//             />
+//           </div>
+//         </div>
+//         <div className={styles.notificationSetting}>
+//           <h6>Recieve new promotional notifications</h6>
+//           <div className={styles.checkboxes}>
+//             <YellowCheckBox
+//               checked={notificationConfig.promotionalNotificationMsg}
+//               onChangeStatus={() => changeNotificationConfig('promotionalNotificationMsg')}
+//               label={'Text Message'}
+//             />
+//             <YellowCheckBox
+//               checked={notificationConfig.promotionalNotificationEmail}
+//               onChangeStatus={() => changeNotificationConfig('promotionalNotificationEmail')}
+//               label={'Email'}
+//             />
+//           </div>
+//         </div>
+//         <div className={styles.notificationSetting}>
+//           <h6>Recieve new blog post notifications</h6>
+//           <div className={styles.checkboxes}>
+//             <YellowCheckBox
+//               checked={notificationConfig.blogPostNotificationMsg}
+//               onChangeStatus={() => changeNotificationConfig('blogPostNotificationMsg')}
+//               label={'Text Message'}
+//             />
+//             <YellowCheckBox
+//               checked={notificationConfig.blogPostNotificationEmail}
+//               onChangeStatus={() => changeNotificationConfig('blogPostNotificationEmail')}
+//               label={'Email'}
+//             />
+//           </div>
+//         </div>
+//       </Row>
+//     </div>
+//   );
+// }
 
 type CreditCardInfoType = {
   changeBillingFormData: (

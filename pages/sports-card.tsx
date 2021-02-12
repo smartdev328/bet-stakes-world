@@ -14,8 +14,7 @@ import {
   MinusEncloseIcon,
   MoneyPocketIcon,
   OpenBookIcon,
-  PlusEncloseIcon,
-  TuneIcon
+  PlusEncloseIcon
 } from '@components/SvgIcons';
 import styles from '@styles/SportsCard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
@@ -188,10 +187,8 @@ function TopSection({
   unlockedItems,
   sports,
   openUnlockModal,
-  changeActiveSport,
-  filterChanged
+  changeActiveSport
 }: TopSectionPropsType) {
-  const [selectedFilterType, setSelectedFilterType] = useState<string>('');
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
@@ -223,37 +220,37 @@ function TopSection({
     }
   };
 
-  const menu = (
-    <Menu className={styles.sportMenu}>
-      <Menu.Item
-        disabled={selectedFilterType === ''}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('');
-          filterChanged('');
-        }}>
-        None
-      </Menu.Item>
-      <Menu.Item
-        disabled={selectedFilterType === 'Highest Units'}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('Highest Units');
-          filterChanged('Highest Units');
-        }}>
-        Highest Units
-      </Menu.Item>
-      <Menu.Item
-        disabled={selectedFilterType === 'Highest Odds'}
-        className={styles.sportMenuItem}
-        onClick={() => {
-          setSelectedFilterType('Highest Odds');
-          filterChanged('Highest Odds');
-        }}>
-        Highest Odds
-      </Menu.Item>
-    </Menu>
-  );
+  // const menu = (
+  //   <Menu className={styles.sportMenu}>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === ''}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('');
+  //         filterChanged('');
+  //       }}>
+  //       None
+  //     </Menu.Item>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === 'Highest Units'}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('Highest Units');
+  //         filterChanged('Highest Units');
+  //       }}>
+  //       Highest Units
+  //     </Menu.Item>
+  //     <Menu.Item
+  //       disabled={selectedFilterType === 'Highest Odds'}
+  //       className={styles.sportMenuItem}
+  //       onClick={() => {
+  //         setSelectedFilterType('Highest Odds');
+  //         filterChanged('Highest Odds');
+  //       }}>
+  //       Highest Odds
+  //     </Menu.Item>
+  //   </Menu>
+  // );
 
   const responsive = [
     {

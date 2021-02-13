@@ -17,7 +17,7 @@ import {
 import styles from '@styles/Cart.module.css';
 import { CartItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
-import { PageProps } from '@type/Main';
+import { PageProps, PromiseResponse } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
 import SubscriptionsApis from '@apis/subscriptions.apis';
@@ -183,15 +183,6 @@ function PlanDropdown({
     </Dropdown>
   );
 }
-
-type PromiseResponse = {
-  message: string;
-  status: number;
-  statusCode?: number;
-  raw?: {
-    message: string;
-  };
-};
 
 export default function Cart({ packages, token, subscriptions }: PageProps) {
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);

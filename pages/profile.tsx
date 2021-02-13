@@ -1,9 +1,8 @@
 /* eslint-disable react/display-name */
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Row, Button, Upload, Col, Modal, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
-import Link from 'next/link';
 import {
   useStripe,
   useElements,
@@ -12,51 +11,27 @@ import {
   CardNumberElement
 } from '@stripe/react-stripe-js';
 
-import {
-  AppLayout,
-  BannerSportsAndMatches,
-  DashboardHeader,
-  YellowCheckBox
-} from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/Profile.module.css';
-import { ProfileValidateType, UserProfile, UserBillingInfo } from '@type/Users';
+import { ProfileValidateType, UserProfile, UserBillingInfo, UserSubscription } from '@type/Users';
 import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { PageProps } from '@type/Main';
+import { PageProps, PromiseResponse } from '@type/Main';
 import UsersAPIs from '@apis/user.apis';
+import packageApis from '@apis/package.apis';
+import subscriptionsApis from '@apis/subscriptions.apis';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
   verify_password: string | undefined;
 };
 
-export default function MemberProfile({ token, subscriptions }: PageProps) {
+export default function MemberProfile({ token, subscriptions, packages }: PageProps) {
   const stripe = useStripe();
   const elements = useElements();
 
-  const packages: Package[] = [
-    {
-      id: 1,
-      logo: 'https://via.placeholder.com/100',
-      name: 'Monthly Sports Card',
-      description: 'NBA + NFL package',
-      product_id: '',
-      features: [],
-      billing_plans: []
-    },
-    {
-      id: 2,
-      logo: 'https://via.placeholder.com/100',
-      name: 'Daily Fantasy',
-      description: 'MLB package',
-      product_id: '',
-      features: [],
-      billing_plans: []
-    }
-  ];
-
-  const [formData, setFormData] = useState<ProfileFormType>({
+  const [profileForm, setProfileForm] = useState<ProfileFormType>({
     username: undefined,
     first_name: undefined,
     last_name: undefined,
@@ -84,13 +59,33 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     country: undefined
   });
   const [isSavingCardInfo, setIsSavingCardInfo] = useState<boolean>(false);
+  const [formChanged, setFormChanged] = useState<boolean>(false);
 
-  const changeFormData = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    UsersAPIs.fetchProfile()
+      .then((res) => res.json())
+      .then((data) => {
+        const names = data.full_name.split(' ');
+        setProfileForm({
+          first_name: names[0],
+          last_name: names[1],
+          email: data.email,
+          mobile_number: data.mobile_number,
+          username: data.username,
+          provider: data.provider,
+          password: undefined,
+          verify_password: undefined
+        });
+      });
+  }, []);
+
+  const changeProfileForm = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    const newFormData = Object.assign({}, formData);
-    newFormData[name] = value;
-    setFormData(newFormData);
-    validateForm(newFormData);
+    const newProfileForm = Object.assign({}, profileForm);
+    newProfileForm[name] = value;
+    setProfileForm(newProfileForm);
+    validateForm(newProfileForm);
+    setFormChanged(true);
   };
   const validateForm = (data: ProfileFormType) => {
     const newValidation = Object.assign({}, formValidation);
@@ -210,6 +205,30 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     }
     setIsSavingCardInfo(false);
   };
+  const reactivatePack = (packId: number) => {
+    packageApis
+      .reactivatePackage(packId)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.statusCode >= 400) {
+          notification['error']({
+            message: 'Reactivation Package Error',
+            description: data.message
+          });
+        } else {
+          notification['info']({
+            message: 'Reactivation Package',
+            description: 'Package has been successfully reactivated'
+          });
+        }
+      })
+      .catch((error) => {
+        notification['error']({
+          message: 'Reactivation Package Error',
+          description: error.message
+        });
+      });
+  };
 
   return (
     <>
@@ -219,17 +238,20 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection />
+          <TopSection formChanged={formChanged} />
           {/* Profile Section */}
-          <ProfileInfo formValidation={formValidation} changeFormData={changeFormData} />
-          <CurrentPackages packages={packages} />
-
+          <ProfileInfo
+            profileForm={profileForm}
+            formValidation={formValidation}
+            changeProfileForm={changeProfileForm}
+          />
+          <CurrentPackages packages={packages} reactivatePack={reactivatePack} />
           <CreditCardInfo
             changeBillingFormData={updateBillingForm}
             changeCardFormData={updateCardForm}
             loading={isSavingCardInfo}
           />
-          <CancelSubscription />
+          <CancelSubscription subscriptions={subscriptions} />
         </div>
       </AppLayout>
     </>
@@ -245,15 +267,15 @@ function HeroBanner() {
   );
 }
 
-function TopSection() {
+function TopSection({ formChanged }: { formChanged: boolean }) {
   return (
     <>
       <DashboardHeader title={'Settings'} />
       <Row className={styles.actionBtns} justify={'center'}>
-        <Button className={styles.cancelBtn} disabled>
+        <Button className={styles.cancelBtn} disabled={!formChanged}>
           Cancel
         </Button>
-        <Button className={styles.saveBtn} disabled>
+        <Button className={styles.saveBtn} disabled={!formChanged}>
           Save
         </Button>
       </Row>
@@ -271,10 +293,11 @@ function LogoFromName({ first_name, last_name }: { first_name: string; last_name
 
 type ProfileInfoType = {
   formValidation: ProfileValidateType;
-  changeFormData: (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => void;
+  profileForm: ProfileFormType;
+  changeProfileForm: (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => void;
 };
 
-function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
+function ProfileInfo({ profileForm, formValidation, changeProfileForm }: ProfileInfoType) {
   return (
     <>
       <Row className={styles.rowWithTwoChild}>
@@ -286,9 +309,10 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
                 <label>User Name*</label>
                 <input
                   name="username"
+                  value={profileForm.username}
                   className={formValidation.username ? '' : styles.error}
                   placeholder="ie: CashmeOut91"
-                  onChange={(e) => changeFormData('username', e)}
+                  onChange={(e) => changeProfileForm('username', e)}
                 />
               </Col>
             </Row>
@@ -297,18 +321,20 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
                 <label>First Name*</label>
                 <input
                   name="first_name"
+                  value={profileForm.first_name}
                   className={formValidation.first_name ? '' : styles.error}
                   placeholder="ie: Johnny"
-                  onChange={(e) => changeFormData('first_name', e)}
+                  onChange={(e) => changeProfileForm('first_name', e)}
                 />
               </Col>
               <Col span={12} className={styles.formGroup}>
                 <label>Last Name*</label>
                 <input
                   name="last_name"
+                  value={profileForm.last_name}
                   className={formValidation.last_name ? '' : styles.error}
                   placeholder="ie: Cash"
-                  onChange={(e) => changeFormData('last_name', e)}
+                  onChange={(e) => changeProfileForm('last_name', e)}
                 />
               </Col>
             </Row>
@@ -317,10 +343,11 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
                 <label>Email*</label>
                 <input
                   name="email"
+                  value={profileForm.email}
                   className={formValidation.email ? '' : styles.error}
                   type="email"
                   placeholder="ie: j.cash@gmail.com"
-                  onChange={(e) => changeFormData('email', e)}
+                  onChange={(e) => changeProfileForm('email', e)}
                 />
               </Col>
             </Row>
@@ -329,8 +356,9 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
                 <label>Mobile Number</label>
                 <input
                   name="mobile_number"
+                  value={profileForm.mobile_number}
                   placeholder="1-111-111-1111"
-                  onChange={(e) => changeFormData('mobile_number', e)}
+                  onChange={(e) => changeProfileForm('mobile_number', e)}
                 />
               </Col>
             </Row>
@@ -355,7 +383,7 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
             className={formValidation.password ? '' : styles.error}
             type="password"
             placeholder="ie: **********"
-            onChange={(e) => changeFormData('password', e)}
+            onChange={(e) => changeProfileForm('password', e)}
           />
         </Col>
         <Col span={12} className={styles.formGroup}>
@@ -365,7 +393,7 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
             className={formValidation.verify_password ? '' : styles.error}
             type="password"
             placeholder="ie: **********"
-            onChange={(e) => changeFormData('verify_password', e)}
+            onChange={(e) => changeProfileForm('verify_password', e)}
           />
         </Col>
       </Row>
@@ -373,37 +401,39 @@ function ProfileInfo({ formValidation, changeFormData }: ProfileInfoType) {
   );
 }
 
-function CurrentPackages({ packages }: { packages: Package[] }) {
-  const [renewalChecked, setRenewalChecked] = useState<boolean>(false);
+function CurrentPackages({
+  packages,
+  reactivatePack
+}: {
+  packages: Package[] | undefined;
+  reactivatePack: (_: number) => void;
+}) {
   return (
     <>
       <div className={styles.sectionTitle}>Current packages</div>
       <div className={styles.packages}>
-        {packages.map((pack: Package) => (
-          <div className={styles.package} key={pack.id}>
-            <LazyLoad>
-              <img src={pack.logo} />
-            </LazyLoad>
-            <div className={styles.packageContent}>
-              <div className={styles.title}>{pack.name}</div>
-              <div className={styles.desc}>{pack.description}</div>
-              <div className={styles.extra}>
-                {pack.name.indexOf('Sports Card') > -1 && (
-                  <YellowCheckBox
-                    checked={renewalChecked}
-                    onChangeStatus={() => setRenewalChecked(!renewalChecked)}
-                    label={'Auto Renewal'}
-                  />
-                )}
-                {pack.name.indexOf('Fantasy') > -1 && (
-                  <Link href="/">
+        {(!packages || packages.length === 0) && (
+          <div className={styles.noPackages}>
+            <em>There is no Active Package</em>
+          </div>
+        )}
+        {packages &&
+          packages.map((pack: Package) => (
+            <div className={styles.package} key={pack.id}>
+              <LazyLoad>
+                <img src={pack.logo} />
+              </LazyLoad>
+              <div className={styles.packageContent}>
+                <div className={styles.title}>{pack.name}</div>
+                <div className={styles.desc}>{pack.description}</div>
+                <div className={styles.extra}>
+                  <div onClick={() => reactivatePack(pack.id)}>
                     <a>Reactivate Package</a>
-                  </Link>
-                )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );
@@ -618,14 +648,50 @@ function CreditCardInfo({
   );
 }
 
-function CancelSubscription() {
+function CancelSubscription({ subscriptions }: { subscriptions: UserSubscription[] }) {
   const unsubscribe = () => {
     Modal.confirm({
-      title: 'Subscription Cancellation',
+      title: 'Subscriptions Cancellation',
       icon: <ExclamationCircleOutlined />,
-      content: 'Are you sure to cancel Subscription?',
+      content: 'Are you sure to cancel Subscriptions?',
       onOk() {
-        console.log('OK');
+        const promiseArr: Promise<PromiseResponse>[] = [];
+        subscriptions.forEach((item) => {
+          // Add To Subscriptions
+          const promise = subscriptionsApis.cancelSubscription(item.id).then((res) => res.json());
+          promiseArr.push(promise);
+        });
+        Promise.all(promiseArr)
+          .then((values) => {
+            let hasError = false;
+            values.forEach((data: PromiseResponse) => {
+              if (data.status === 400) {
+                notification['error']({
+                  message: 'Cancel Subscription Error',
+                  description: data.message
+                });
+                hasError = true;
+              } else if (data.statusCode === 400) {
+                notification['error']({
+                  message: 'Cancel Subscription Error',
+                  description: data.message
+                });
+                hasError = true;
+              }
+            });
+            if (!hasError) {
+              notification['info']({
+                message: 'Cancel Subscriptions',
+                description: 'Subscriptions have been cancelled'
+              });
+            }
+          })
+          .catch((error) => {
+            notification['error']({
+              message: 'Cancel Subscription Error',
+              description: error.message
+            });
+          });
       },
       onCancel() {
         console.log('Cancel');

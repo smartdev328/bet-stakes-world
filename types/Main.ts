@@ -114,3 +114,12 @@ export type JWT = {
   id: number;
   ita: number;
 };
+
+export type PromiseResponse = {
+  message: string;
+  status: number;
+  statusCode?: number;
+  raw?: {
+    message: string;
+  };
+};

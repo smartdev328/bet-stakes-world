@@ -351,3 +351,7 @@
   height: auto;
   width: 100%;
 }
+
+.noPackages {
+  margin: 1em 0;
+}

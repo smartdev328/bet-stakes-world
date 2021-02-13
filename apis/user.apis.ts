@@ -64,11 +64,20 @@ function addPaymentMethod(payload: AddUserPayment) {
   });
 }
 
+function fetchProfile() {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/users/me`, {
+    method: 'get',
+    headers
+  });
+}
+
 export default {
   createUser,
   login,
   forgotPass,
   resetPass,
   sendConfirmEmail,
-  addPaymentMethod
+  addPaymentMethod,
+  fetchProfile
 };

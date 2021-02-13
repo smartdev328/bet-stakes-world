@@ -19,7 +19,16 @@ function addSubscription(payload: AddUserSubscription) {
   });
 }
 
+function cancelSubscription(subscriptionId: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/subscriptions/${subscriptionId}/cancel`, {
+    method: 'delete',
+    headers
+  });
+}
+
 export default {
   getSubscriptions,
-  addSubscription
+  addSubscription,
+  cancelSubscription
 };

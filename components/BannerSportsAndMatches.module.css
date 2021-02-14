@@ -238,3 +238,13 @@
     top: -360%;
   }
 }
+
+@media (max-width: 600px) {
+  .sidebarBlock {
+    width: 100%;
+    margin-left: 0;
+  }
+  .sidebarBlockContent {
+    padding-bottom: 5px;
+  }
+}

@@ -5,7 +5,13 @@ import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
+import {
+  AppLayout,
+  BannerSportsAndMatches,
+  DashboardHeader,
+  SportTile,
+  SportEntry
+} from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, Schedule, PageProps, YesterdayPlayInfoType } from '@type/Main';
@@ -392,7 +398,6 @@ function EarliestGames({
 }
 
 function YesterdayPlays() {
-  const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [offset, setOffset] = useState<number>(0);
   const [fetchMoreLoading, setFetchMoreLoading] = useState<boolean>(false);
@@ -420,11 +425,6 @@ function YesterdayPlays() {
       });
   };
 
-  const changeDetailsVisibleAt = (index: number) => {
-    showDetailsAt[index] = !showDetailsAt[index];
-    setShowDetailsAt(showDetailsAt.slice());
-  };
-
   return (
     <div className={styles.yesterday_plays}>
       <div className={styles.earliest_games_header}>
@@ -432,99 +432,11 @@ function YesterdayPlays() {
       </div>
       <div className={styles.earliest_games_titlebar}>
         <strong>{`10 Wins in ${14} Games`}</strong>
-        <span>{moment().subtract(1, 'days').format('h:mm a DD/MM/YYYY')}</span>
+        <span>{moment().subtract(0, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
-      <div className={styles.yesterday_plays_list}>
-        {games.length === 0 && <div className={styles.noData}>No Plays</div>}
-        {games.map((game: YesterdayPlayInfoType, index: number) => (
-          <React.Fragment key={index}>
-            <div className={`${styles.game}`} key={game.id}>
-              <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
-              <div className={styles.game_main}>
-                <div className={styles.game_subinfo}>
-                  <SportTile sport={game.sport.name} />
-                  <span>Yesterday at {moment(game.publish_date).format('hh:mm a')}</span>
-                </div>
-                <div className={styles.game_info}>
-                  <div className={styles.game_teams}>
-                    {game.schedules.map((schedule: Schedule) => (
-                      <>
-                        <Row>
-                          <div className={styles.game_team1}>
-                            <img
-                              src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
-                          </div>
-                          <div className={styles.game_team2}>
-                            <img
-                              src={
-                                schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
-                              }
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.home_team.name}</span>
-                          </div>
-                        </Row>
-                      </>
-                    ))}
-                    <Row
-                      align={'middle'}
-                      className={`${styles.desc_line_section} ${
-                        game.outcome === 'LOSS' && styles.has_patriots
-                      }`}>
-                      <div className={styles.desc_line}>
-                        <span>{game.bet_text}</span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
-                      </div>
-                      <div className={styles.desc_line}>
-                        <span>
-                          &nbsp;
-                          {`(${game.odds > 0 ? '+' : ''}${
-                            game.odds
-                          } odds | ${game.odds_decimal.toFixed(2)}x)`}
-                        </span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
-                      </div>
-                    </Row>
-                  </div>
-                  <div className={`${styles.game_score}`}>{game.score}</div>
-                </div>
-              </div>
-            </div>
-            <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-              <div className={styles.hide_details_btn}>
-                <span>View Details</span>
-                {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-              </div>
-            </div>
-            {showDetailsAt[index] && (
-              <div className={styles.details_section}>
-                <ul>
-                  {game.detail?.split('\n').map((unit: string, i: number) => (
-                    <li key={i}>{unit.replace('-', '')}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </React.Fragment>
-        ))}
-        <Row>
-          <Col span={24} className="text-center">
-            <Button loading={fetchMoreLoading} onClick={onLoadMore} className={styles.loadMoreBtn}>
-              Load More
-            </Button>
-          </Col>
-        </Row>
-      </div>
+      <>
+        <SportEntry loading={fetchMoreLoading} plays={games} />
+      </>
     </div>
   );
 }

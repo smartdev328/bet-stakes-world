@@ -1,12 +1,11 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Carousel, notification, Spin } from 'antd';
+import { Row, Button, Col, Carousel, notification } from 'antd';
 // import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
-import moment from 'moment';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportEntry } from '@components/index';
 import {
   ListIcon,
   MinusEncloseIcon,
@@ -15,7 +14,7 @@ import {
   PlusEncloseIcon
 } from '@components/SvgIcons';
 import styles from '@styles/YesterdaysPlays.module.css';
-import { PageProps, Schedule, YesterdayPlayInfoType } from '@type/Main';
+import { PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { useRouter } from 'next/router';
 import SportsAPIs from '@apis/sport.apis';
@@ -149,7 +148,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
                 {!token && <SubscribeNow />}
                 {token && (
                   <>
-                    <YesterdayPlays loading={entireLoading} plays={games} />
+                    <SportEntry loading={entireLoading} plays={games} />
                     <Row>
                       <Col span={24} className="text-center">
                         <Button
@@ -509,86 +508,86 @@ function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsTy
   );
 }
 
-function YesterdayPlays({ loading, plays }: { loading: boolean; plays: YesterdayPlayInfoType[] }) {
-  return (
-    <div className={styles.yesterday_plays}>
-      <div className={styles.yesterday_plays_list}>
-        {loading && (
-          <Row justify={'center'}>
-            <Col>
-              <Spin />
-            </Col>
-          </Row>
-        )}
-        {!loading && plays.length === 0 && <div className={styles.noData}>No Plays</div>}
-        {!loading &&
-          plays.map((game: YesterdayPlayInfoType, index: number) => (
-            <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={index}>
-              <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
-              <div className={styles.game_main}>
-                <div className={styles.game_subinfo}>
-                  <SportTile sport={game.sport?.name} />
-                  <span>Yesterday at {moment(game.publish_date).format('hh:mm a')}</span>
-                </div>
-                <div className={styles.game_info}>
-                  <div className={styles.game_teams}>
-                    {game.schedules.map((schedule: Schedule) => (
-                      <>
-                        <Row>
-                          <div className={styles.game_team1}>
-                            <img
-                              src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
-                          </div>
-                          <div className={styles.game_team2}>
-                            <img
-                              src={
-                                schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
-                              }
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.home_team.name}</span>
-                          </div>
-                        </Row>
-                      </>
-                    ))}
-                    <Row
-                      align={'middle'}
-                      className={`${styles.desc_line_section} ${
-                        game.outcome === 'LOSS' && styles.has_patriots
-                      }`}>
-                      <div className={styles.desc_line}>
-                        <span>{game.bet_text}</span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
-                      </div>
-                      <div className={styles.desc_line}>
-                        <span>
-                          &nbsp;(
-                          {`${game.odds > 0 ? '+' : ''}${
-                            game.odds
-                          } odds | ${game.odds_decimal.toFixed(2)}x)`}
-                        </span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
-                      </div>
-                    </Row>
-                  </div>
-                  <div className={styles.game_score}>{game.score}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
-    </div>
-  );
-}
+// function YesterdayPlays({ loading, plays }: { loading: boolean; plays: YesterdayPlayInfoType[] }) {
+//   return (
+//     <div className={styles.yesterday_plays}>
+//       <div className={styles.yesterday_plays_list}>
+//         {loading && (
+//           <Row justify={'center'}>
+//             <Col>
+//               <Spin />
+//             </Col>
+//           </Row>
+//         )}
+//         {!loading && plays.length === 0 && <div className={styles.noData}>No Plays</div>}
+//         {!loading &&
+//           plays.map((game: YesterdayPlayInfoType, index: number) => (
+//             <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={index}>
+//               <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
+//               <div className={styles.game_main}>
+//                 <div className={styles.game_subinfo}>
+//                   <SportTile sport={game.sport?.name} />
+//                   <span>Yesterday at {moment(game.publish_date).format('hh:mm a')}</span>
+//                 </div>
+//                 <div className={styles.game_info}>
+//                   <div className={styles.game_teams}>
+//                     {game.schedules.map((schedule: Schedule) => (
+//                       <>
+//                         <Row>
+//                           <div className={styles.game_team1}>
+//                             <img
+//                               src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
+//                               alt="Team Logo"
+//                               className={styles.team_logo}
+//                             />
+//                             <span>{schedule.team.name}&nbsp;@&nbsp;</span>
+//                           </div>
+//                           <div className={styles.game_team2}>
+//                             <img
+//                               src={
+//                                 schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
+//                               }
+//                               alt="Team Logo"
+//                               className={styles.team_logo}
+//                             />
+//                             <span>{schedule.home_team.name}</span>
+//                           </div>
+//                         </Row>
+//                       </>
+//                     ))}
+//                     <Row
+//                       align={'middle'}
+//                       className={`${styles.desc_line_section} ${
+//                         game.outcome === 'LOSS' && styles.has_patriots
+//                       }`}>
+//                       <div className={styles.desc_line}>
+//                         <span>{game.bet_text}</span>
+//                         {game.outcome === 'LOSS' && (
+//                           <div className={styles.strikeLine}>--------------------------—</div>
+//                         )}
+//                       </div>
+//                       <div className={styles.desc_line}>
+//                         <span>
+//                           &nbsp;(
+//                           {`${game.odds > 0 ? '+' : ''}${
+//                             game.odds
+//                           } odds | ${game.odds_decimal.toFixed(2)}x)`}
+//                         </span>
+//                         {game.outcome === 'LOSS' && (
+//                           <div className={styles.strikeLine}>--------------------------—</div>
+//                         )}
+//                       </div>
+//                     </Row>
+//                   </div>
+//                   <div className={styles.game_score}>{game.score}</div>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//       </div>
+//     </div>
+//   );
+// }
 
 // type UnlockItemModalPropsType = {
 //   closeModal: () => void;

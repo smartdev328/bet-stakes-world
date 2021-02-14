@@ -338,18 +338,19 @@ function BankrollManagementSystem() {
         <span>Bankroll Management System</span>
       </div>
       <div className={styles.sidebarBlockContent}>
-        <Row className={styles.ctaBtns}>
-          <Button className={styles.agressiveBtn}>Aggresive</Button>
-          <Button ghost className={styles.conservativeBtn}>
-            Conservative
-          </Button>
-        </Row>
+        <p>
+          A unit represents a percentage of your bankroll and should generally represent between 1
+          to 5 percent of your bankroll. Setting a unit percentage for your bankroll is completely
+          at the users discretion. The higher the unit percentage, the more aggressive your
+          bankroll. For example, for a $5,000 starting bankroll, a 1 unit wager would represent
+          $100, i.e. 2% of your bankroll.
+        </p>
         <p>1 unit = 2% Bankroll</p>
         <p>2 units = 4% Bankroll</p>
         <p>3 units = 6% Bankroll</p>
         <p>4 units = 8% Bankroll</p>
         <div className={styles.footer_desc}>
-          The higher the unit the more confident I am in the play
+          TheDailyStakes recommends setting 1 unit as 2% of your bankroll.
         </div>
       </div>
     </div>

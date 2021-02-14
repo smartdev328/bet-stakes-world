@@ -71,6 +71,9 @@ export type UserBillingInfoValidate = {
   zipcode: boolean;
   country: boolean;
   city: boolean;
+  creditNumber?: boolean;
+  creditExp?: boolean;
+  creditCVC?: boolean;
 };
 
 export type NotificationConfig = {

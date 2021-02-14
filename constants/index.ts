@@ -181,3 +181,13 @@ export const FAQsDescPage = [
   'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc.  <br><br>In order to break even in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
   'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
 ];
+export const CREDIT_COUNTRIES = [
+  {
+    id: 'CA',
+    name: 'Canada'
+  },
+  {
+    id: 'US',
+    name: 'United States'
+  }
+];

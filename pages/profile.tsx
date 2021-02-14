@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { FormEvent, useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Row, Button, Upload, Col, Modal, notification } from 'antd';
+import { Row, Button, Upload, Col, Modal, notification, Dropdown, Menu } from 'antd';
 import LazyLoad from 'react-lazyload';
 import {
   useStripe,
@@ -13,7 +13,13 @@ import {
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/Profile.module.css';
-import { ProfileValidateType, UserProfile, UserBillingInfo, UserSubscription } from '@type/Users';
+import {
+  ProfileValidateType,
+  UserProfile,
+  UserBillingInfo,
+  UserSubscription,
+  UserBillingInfoValidate
+} from '@type/Users';
 import { validateEmail } from '@utils/common';
 import { Package } from '@type/Packages';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -21,6 +27,7 @@ import { PageProps, PromiseResponse } from '@type/Main';
 import UsersAPIs from '@apis/user.apis';
 import packageApis from '@apis/package.apis';
 import subscriptionsApis from '@apis/subscriptions.apis';
+import { CREDIT_COUNTRIES } from '@constants/';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
@@ -56,10 +63,21 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     address: undefined,
     zipcode: undefined,
     full_name: undefined,
-    country: undefined
+    country: CREDIT_COUNTRIES[0].id
+  });
+  const [billingFormValid, setBillingFormValid] = useState<UserBillingInfoValidate>({
+    city: false,
+    address: false,
+    zipcode: false,
+    full_name: false,
+    country: true,
+    creditNumber: false,
+    creditExp: false,
+    creditCVC: false
   });
   const [isSavingCardInfo, setIsSavingCardInfo] = useState<boolean>(false);
   const [formChanged, setFormChanged] = useState<boolean>(false);
+  const [isBillingValid, setIsBillingValid] = useState<boolean>(false);
 
   useEffect(() => {
     UsersAPIs.fetchProfile()
@@ -145,6 +163,70 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     const newBillingInfo = Object.assign({}, billingInfo);
     newBillingInfo[name] = value;
     setBillingInfo(newBillingInfo);
+    checkBillingFormValidation(newBillingInfo, billingFormValid);
+  };
+  const changeBillingCountry = (countryId: string) => {
+    const newBillingInfo = Object.assign({}, billingInfo);
+    newBillingInfo.country = countryId;
+    setBillingInfo(newBillingInfo);
+    checkBillingFormValidation(newBillingInfo, billingFormValid);
+  };
+  const creditCartFormChanged = (element: any, name: keyof UserBillingInfoValidate) => {
+    const newValidation = { ...billingFormValid };
+    if (!element.empty && element.complete) {
+      newValidation[name] = true;
+    } else {
+      newValidation[name] = false;
+    }
+    setBillingFormValid(newValidation);
+    checkBillingFormValidation(billingInfo, newValidation);
+  };
+  const checkBillingFormValidation = (
+    newBillingInfo: UserBillingInfo,
+    billingValidations: UserBillingInfoValidate
+  ) => {
+    let isValid = true;
+    if (newBillingInfo.city === '') {
+      billingValidations.city = false;
+      isValid = false;
+    } else if (newBillingInfo.city === undefined) {
+      isValid = false;
+    } else {
+      billingValidations.city = true;
+    }
+    if (newBillingInfo.address === '') {
+      billingValidations.address = false;
+      isValid = false;
+    } else if (newBillingInfo.address == undefined) {
+      isValid = false;
+    } else {
+      billingValidations.address = true;
+    }
+    if (newBillingInfo.zipcode === '') {
+      billingValidations.zipcode = false;
+      isValid = false;
+    } else if (newBillingInfo.zipcode == undefined) {
+      isValid = false;
+    } else {
+      billingValidations.zipcode = true;
+    }
+    if (newBillingInfo.full_name === '') {
+      billingValidations.full_name = false;
+      isValid = false;
+    } else if (newBillingInfo.full_name == undefined) {
+      isValid = false;
+    } else {
+      billingValidations.full_name = true;
+    }
+    setBillingFormValid(billingValidations);
+    if (
+      !billingValidations.creditNumber ||
+      !billingValidations.creditExp ||
+      !billingValidations.creditCVC
+    ) {
+      isValid = false;
+    }
+    setIsBillingValid(isValid);
   };
   const updateCardForm = async (event: FormEvent<HTMLFormElement>) => {
     // Block native form submission.
@@ -248,8 +330,11 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           <CurrentPackages packages={packages} reactivatePack={reactivatePack} />
           <CreditCardInfo
             changeBillingFormData={updateBillingForm}
-            changeCardFormData={updateCardForm}
+            submitCardFormData={updateCardForm}
+            creditCartFormChanged={creditCartFormChanged}
+            changeCountry={changeBillingCountry}
             loading={isSavingCardInfo}
+            isBillingValid={isBillingValid}
           />
           <CancelSubscription subscriptions={subscriptions} />
         </div>
@@ -548,18 +633,42 @@ type CreditCardInfoType = {
     name: keyof UserBillingInfo,
     e: React.FormEvent<HTMLInputElement>
   ) => void;
-  changeCardFormData: (e: FormEvent<HTMLFormElement>) => void;
+  submitCardFormData: (e: FormEvent<HTMLFormElement>) => void;
+  creditCartFormChanged: (e: any, name: keyof UserBillingInfoValidate) => void;
+  changeCountry: (_: string) => void;
   loading: boolean;
+  isBillingValid: boolean;
 };
 
 function CreditCardInfo({
   changeBillingFormData,
-  changeCardFormData,
-  loading
+  submitCardFormData,
+  creditCartFormChanged,
+  changeCountry,
+  loading,
+  isBillingValid
 }: CreditCardInfoType) {
+  const [selectedCountry, setSelectedCountry] = useState<string>(CREDIT_COUNTRIES[0].id);
+  const countryMenu = () => (
+    <Menu className={styles.sportMenu}>
+      {CREDIT_COUNTRIES.map((country) => (
+        <Menu.Item key={country.id}>
+          <div
+            className={styles.countryMenuItem}
+            onClick={() => {
+              changeCountry(country.id);
+              setSelectedCountry(country.id);
+            }}>
+            {country.name}
+          </div>
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
   return (
     <div className={styles.creditCardInfoRow}>
-      <form onSubmit={changeCardFormData}>
+      <form onSubmit={submitCardFormData}>
         <div className={styles.sectionTitle}>Credit Card Information</div>
         <Row className={styles.rowWithTwoChild} justify="space-between">
           <Col span={12}>
@@ -600,11 +709,15 @@ function CreditCardInfo({
             </Row>
             <Col span={24} className={styles.formGroup}>
               <label>Country/Region</label>
-              <input
-                name="country"
-                placeholder="Canada"
-                onChange={(e) => changeBillingFormData('country', e)}
-              />
+              <Dropdown
+                overlay={countryMenu}
+                placement="bottomLeft"
+                transitionName=""
+                trigger={['click']}>
+                <div className={styles.countrySelectBox}>
+                  {CREDIT_COUNTRIES.filter((country) => country.id == selectedCountry)[0].name}
+                </div>
+              </Dropdown>
             </Col>
           </Col>
           <Col span={12} className="profile-credit-card">
@@ -614,6 +727,7 @@ function CreditCardInfo({
                 <label>Card Number</label>
                 <CardNumberElement
                   options={{ placeholder: 'XXXX XXXX XXXX 1234', classes: { base: styles.input } }}
+                  onChange={(e) => creditCartFormChanged(e, 'creditNumber')}
                 />
               </Col>
             </Row>
@@ -621,12 +735,19 @@ function CreditCardInfo({
               <Col span={12} className={styles.formGroup}>
                 <label>Expiry Date</label>
                 <CardExpiryElement
-                  options={{ placeholder: 'MM/YY', classes: { base: styles.input } }}
+                  options={{
+                    placeholder: 'MM/YY',
+                    classes: { base: styles.input }
+                  }}
+                  onChange={(e) => creditCartFormChanged(e, 'creditExp')}
                 />
               </Col>
               <Col span={12} className={styles.formGroup}>
                 <label>CVV</label>
-                <CardCvcElement options={{ placeholder: '•••', classes: { base: styles.input } }} />
+                <CardCvcElement
+                  options={{ placeholder: '•••', classes: { base: styles.input } }}
+                  onChange={(e) => creditCartFormChanged(e, 'creditCVC')}
+                />
               </Col>
             </Row>
             <Row className={styles.formGroup}></Row>
@@ -636,7 +757,7 @@ function CreditCardInfo({
             <Row className={styles.formGroup}></Row>
             <Row justify="end">
               <Col>
-                <Button loading={loading} htmlType="submit">
+                <Button loading={loading} disabled={!isBillingValid} htmlType="submit">
                   Save Payment Method
                 </Button>
               </Col>

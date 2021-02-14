@@ -4,21 +4,11 @@ import { CardExpiryElement, CardCvcElement, CardNumberElement } from '@stripe/re
 
 import styles from '@styles/Profile.module.css';
 import { UserBillingInfo, UserBillingInfoValidate } from '@type/Users';
+import { CREDIT_COUNTRIES } from '@constants/';
 
 type CreditCardInfoType = {
   updateBillingFormData: (_: UserBillingInfo, _valid: boolean) => void;
 };
-
-const Countries = [
-  {
-    id: 'CA',
-    name: 'Canada'
-  },
-  {
-    id: 'US',
-    name: 'United States'
-  }
-];
 
 function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
   const [billingInfo, setBillingInfo] = useState<UserBillingInfo>({
@@ -94,7 +84,7 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
 
   const countryMenu = () => (
     <Menu className={styles.sportMenu}>
-      {Countries.map((country) => (
+      {CREDIT_COUNTRIES.map((country) => (
         <Menu.Item key={country.id}>
           <div className={styles.countryMenuItem} onClick={() => changeCountry(country.id)}>
             {country.name}
@@ -155,7 +145,7 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
               transitionName=""
               trigger={['click']}>
               <div className={styles.countrySelectBox}>
-                {Countries.filter((country) => country.id == billingInfo.country)[0].name}
+                {CREDIT_COUNTRIES.filter((country) => country.id == billingInfo.country)[0].name}
               </div>
             </Dropdown>
           </Col>

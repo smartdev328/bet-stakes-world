@@ -14,3 +14,6 @@ export { default as CartLoginForm } from './CartLoginForm';
 export { default as CartBillingInfo } from './CartBillingInfo';
 export { default as SportEntry } from './SportEntry';
 export { default as SportEntryActive } from './SportEntryActive';
+export { default as CommonSportsBook } from './CommonSportsBook';
+export { default as BankRollManagement } from './BankRollManagement';
+export { default as BettingFundamentals } from './BettingFundamentals';

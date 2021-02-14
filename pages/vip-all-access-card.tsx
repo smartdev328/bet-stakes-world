@@ -4,25 +4,20 @@ import Head from 'next/head';
 import { Row, Button, Col, Carousel } from 'antd';
 import {
   AppLayout,
+  BankRollManagement,
   BannerSportsAndMatches,
+  BettingFundamentals,
+  CommonSportsBook,
   DashboardHeader,
   SportEntryActive
 } from '@components/index';
-import {
-  ListIcon,
-  MinusEncloseIcon,
-  MoneyPocketIcon,
-  OpenBookIcon,
-  PlusEncloseIcon,
-  WinnerCupIcon
-} from '@components/SvgIcons';
+import { WinnerCupIcon } from '@components/SvgIcons';
 import SportsAPIs from '@apis/sport.apis';
 import styles from '@styles/SportsCard.module.css';
 import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
-import { MOCK_BetFundaments } from '@constants/index';
 
 const SPORTS_INFO = [
   {
@@ -125,9 +120,9 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
               ))}
             </Col>
             <Col span={6} className={styles.contentSideCol}>
-              <BankrollManagementSystem />
-              <CommonSportsbooks />
-              <BettingFundamentals />
+              <BankRollManagement />
+              <CommonSportsBook />
+              <BettingFundamentalRender />
             </Col>
           </Row>
         </div>
@@ -331,81 +326,7 @@ function ListGames({
   );
 }
 
-function BankrollManagementSystem() {
-  return (
-    <div className={styles.sidebarBlock}>
-      <div className={styles.sidebarBlockTitle}>
-        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Bankroll Management System</span>
-      </div>
-      <div className={styles.sidebarBlockContent}>
-        <p>
-          A unit represents a percentage of your bankroll and should generally represent between 1
-          to 5 percent of your bankroll. Setting a unit percentage for your bankroll is completely
-          at the users discretion. The higher the unit percentage, the more aggressive your
-          bankroll. For example, for a $5,000 starting bankroll, a 1 unit wager would represent
-          $100, i.e. 2% of your bankroll.
-        </p>
-
-        <div className={styles.footer_desc}>
-          TheDailyStakes recommends setting 1 unit as 2% of your bankroll.
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CommonSportsbooks() {
-  return (
-    <div className={styles.sidebarBlock}>
-      <div className={styles.sidebarBlockTitle}>
-        <OpenBookIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Common Sportsbooks</span>
-      </div>
-      <div className={styles.sidebarBlockContent}>
-        <Row>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://www.bet365.com/#/HO/">
-              <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://betway.com/">
-              <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://sportsbook.fanduel.com/">
-              <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://sportsbook.draftkings.com">
-              <img
-                src="/images/draftkings.png"
-                alt="Draftkings SportsBook Logo"
-                width={109}
-                height={29}
-              />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://www.williamhill.com/us">
-              <img
-                src="/images/williamhill.png"
-                alt="WilliamHill SportsBook Logo"
-                width={120}
-                height={34}
-              />
-            </a>
-          </Col>
-        </Row>
-      </div>
-    </div>
-  );
-}
-
-function BettingFundamentals() {
+function BettingFundamentalRender() {
   const [showContent, setShowContent] = useState<boolean[]>([]);
   const toggleDetailsAt = (id: number) => {
     showContent[id] = !showContent[id];
@@ -413,36 +334,8 @@ function BettingFundamentals() {
   };
 
   return (
-    <div className={styles.sidebarBlock}>
-      <div className={styles.sidebarBlockTitle}>
-        <ListIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Sports Betting Fundamentals</span>
-      </div>
-      <div className={styles.sidebarBlockContent}>
-        {MOCK_BetFundaments.map((data, index) => (
-          <React.Fragment key={index}>
-            <div className={styles.accordionTitle}>
-              {showContent[index] && (
-                <>
-                  <strong>{data.title}</strong>
-                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
-                    <MinusEncloseIcon className={styles.accordionTitleIcon} />
-                  </Button>
-                </>
-              )}
-              {!showContent[index] && (
-                <>
-                  <span>{data.title}</span>
-                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
-                    <PlusEncloseIcon className={styles.accordionTitleIcon} />
-                  </Button>
-                </>
-              )}
-            </div>
-            {showContent[index] && <div className={styles.accordionContent}>{data.content}</div>}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
+    <BettingFundamentals
+      showContentAt={showContent}
+      toggleDetailsAt={toggleDetailsAt}></BettingFundamentals>
   );
 }

@@ -124,7 +124,6 @@
     border-bottom: 8px solid #1A1A1A;
   }
   .details_section {
-    text-align: center;
     border-bottom: 1px solid #c4c4c4;
   }
   .hide_details {
@@ -136,6 +135,7 @@
   .hide_details:before {
     display: block;
     content: '';
+    opacity:0.5;
     height: 1px;
     background: #C4C4C4;
     flex: 1;

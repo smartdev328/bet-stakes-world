@@ -6,6 +6,7 @@ import React from 'react';
 import styles from './SportEntryActive.module.css';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { LongArrowIcon } from './SvgIcons';
+import Markdown from 'react-markdown';
 
 type PropsType = {
   title: string;
@@ -108,11 +109,7 @@ function SportEntryActive({
                 </div>
                 {showDetailsAt[index] && (
                   <div className={styles.details_section}>
-                    <ul>
-                      {game.detail?.split('\n').map((unit: string, i: number) => (
-                        <li key={i}>{unit.replace('-', '')}</li>
-                      ))}
-                    </ul>
+                    <Markdown source={game.detail} />
                   </div>
                 )}
               </div>

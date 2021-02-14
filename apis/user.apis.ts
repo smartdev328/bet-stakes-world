@@ -1,5 +1,13 @@
 import { API_BASE_URL } from '@constants/';
-import { CreateUserType, ForgotPasswordForm, LoginUserType, AddUserPayment } from '@type/Users';
+import {
+  CreateUserType,
+  ForgotPasswordForm,
+  LoginUserType,
+  AddUserPayment,
+  ResetPasswordForm,
+  UserProfile,
+  LogoUploadForm
+} from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
 function createUser(payload: CreateUserType) {
@@ -35,7 +43,7 @@ function forgotPass(payload: ForgotPasswordForm) {
   });
 }
 
-function resetPass(payload: ForgotPasswordForm) {
+function resetPass(payload: ResetPasswordForm) {
   return fetch(`${API_BASE_URL}/auth/reset-password`, {
     method: 'post',
     body: JSON.stringify(payload),
@@ -72,6 +80,26 @@ function fetchProfile() {
   });
 }
 
+function updateProfile(payload: UserProfile) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/users/${payload.id}`, {
+    method: 'put',
+    body: JSON.stringify(payload),
+    headers
+  });
+}
+
+function uploadLogo(payload: FormData) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/upload`, {
+    method: 'post',
+    body: payload,
+    headers: {
+      Authorization: headers.Authorization
+    }
+  });
+}
+
 export default {
   createUser,
   login,
@@ -79,5 +107,7 @@ export default {
   resetPass,
   sendConfirmEmail,
   addPaymentMethod,
-  fetchProfile
+  fetchProfile,
+  updateProfile,
+  uploadLogo
 };

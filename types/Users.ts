@@ -1,3 +1,4 @@
+import { UploadFile } from 'antd/lib/upload/interface';
 import { BillingPlan } from './Packages';
 import { Sport } from './Sports';
 
@@ -33,6 +34,7 @@ export type LoginUserValidateType = {
 };
 
 export type UserProfile = {
+  id?: string;
   username: string | undefined;
   first_name: string | undefined;
   last_name: string | undefined;
@@ -115,4 +117,18 @@ export type ForgotPasswordFormValidate = {
 
 export type AddUserPayment = {
   payment_method_id: string;
+};
+
+export type ResetPasswordForm = {
+  code?: string;
+  password: string;
+  passwordConfirmation: string;
+};
+
+export type LogoUploadForm = {
+  files: UploadFile<any>;
+  ref: string;
+  refId: string;
+  field: string;
+  source: string;
 };

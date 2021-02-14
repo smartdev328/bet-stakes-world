@@ -28,6 +28,8 @@ import UsersAPIs from '@apis/user.apis';
 import packageApis from '@apis/package.apis';
 import subscriptionsApis from '@apis/subscriptions.apis';
 import { CREDIT_COUNTRIES } from '@constants/';
+import { UploadChangeParam } from 'antd/lib/upload';
+import { UploadFile } from 'antd/lib/upload/interface';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
@@ -48,7 +50,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     password: undefined,
     verify_password: undefined
   });
-  // const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [logoFile, setLogoFile] = useState<File | undefined>(undefined);
   // const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formValidation, setFormValidation] = useState<ProfileValidateType>({
     username: true,
@@ -85,6 +88,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       .then((data) => {
         const names = data.full_name.split(' ');
         setProfileForm({
+          id: data.id,
           first_name: names[0],
           last_name: names[1],
           email: data.email,
@@ -156,7 +160,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     }
     setFormValidation(newValidation);
     console.log('-- ', isValid);
-    // setIsFormValid(isValid);
+    setIsFormValid(isValid);
   };
   const updateBillingForm = (name: keyof UserBillingInfo, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -311,6 +315,50 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
         });
       });
   };
+  const onLogoChange = (info: UploadChangeParam<UploadFile<File>>) => {
+    const { file, event } = info;
+    if (event?.percent === 100 && file) {
+      setLogoFile(file.originFileObj as File);
+      setFormChanged(true);
+    }
+    if (!file) {
+      setFormChanged(false);
+    }
+  };
+  const onSaveChanges = () => {
+    // Reset Password
+    // if (formValidation.password && formValidation.verify_password) {
+    //   if (profileForm.password && profileForm.verify_password) {
+    //     UsersAPIs.resetPass({
+    //       password: profileForm.password,
+    //       passwordConfirmation: profileForm.verify_password
+    //     })
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         console.log('--- data: ', data);
+    //       });
+    //   }
+    // }
+    // Save Profile
+    // if (isFormValid) {
+    //   userApis
+    //     .updateProfile(profileForm)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log('--- data ---- ', data);
+    //     });
+    // }
+    // Upload Image
+    if (logoFile) {
+      const formdata = new FormData();
+      formdata.append('files', logoFile);
+      formdata.append('ref', 'user');
+      formdata.append('id', '73');
+      formdata.append('field', 'avatar');
+      formdata.append('source', 'users-permissions');
+      UsersAPIs.uploadLogo(formdata).then((res) => res.json());
+    }
+  };
 
   return (
     <>
@@ -320,12 +368,13 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection formChanged={formChanged} />
+          <TopSection formChanged={formChanged} saveChanges={onSaveChanges} />
           {/* Profile Section */}
           <ProfileInfo
             profileForm={profileForm}
             formValidation={formValidation}
             changeProfileForm={changeProfileForm}
+            onLogoChange={onLogoChange}
           />
           <CurrentPackages packages={packages} reactivatePack={reactivatePack} />
           <CreditCardInfo
@@ -352,7 +401,13 @@ function HeroBanner() {
   );
 }
 
-function TopSection({ formChanged }: { formChanged: boolean }) {
+function TopSection({
+  formChanged,
+  saveChanges
+}: {
+  formChanged: boolean;
+  saveChanges: () => void;
+}) {
   return (
     <>
       <DashboardHeader title={'Settings'} />
@@ -360,7 +415,7 @@ function TopSection({ formChanged }: { formChanged: boolean }) {
         <Button className={styles.cancelBtn} disabled={!formChanged}>
           Cancel
         </Button>
-        <Button className={styles.saveBtn} disabled={!formChanged}>
+        <Button className={styles.saveBtn} disabled={!formChanged} onClick={saveChanges}>
           Save
         </Button>
       </Row>
@@ -380,9 +435,15 @@ type ProfileInfoType = {
   formValidation: ProfileValidateType;
   profileForm: ProfileFormType;
   changeProfileForm: (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => void;
+  onLogoChange: (info: UploadChangeParam<UploadFile<any>>) => void;
 };
 
-function ProfileInfo({ profileForm, formValidation, changeProfileForm }: ProfileInfoType) {
+function ProfileInfo({
+  profileForm,
+  formValidation,
+  changeProfileForm,
+  onLogoChange
+}: ProfileInfoType) {
   return (
     <>
       <Row className={styles.rowWithTwoChild}>
@@ -453,13 +514,13 @@ function ProfileInfo({ profileForm, formValidation, changeProfileForm }: Profile
           <div className={styles.profileLogoWrapper}>
             <LogoFromName first_name="Nicolas" last_name="Patrick" />
             {/* Real Photo */}
-            <Upload>
+            <Upload onChange={onLogoChange} multiple={false}>
               <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
             </Upload>
           </div>
         </Col>
       </Row>
-      <div className={styles.sectionTitle}>Reset Password</div>
+      <div className={styles.sectionTitle}>Change Password</div>
       <Row className={`${styles.rowWithTwoChild} ${styles.resetPassword}`} justify="space-between">
         <Col span={12} className={styles.formGroup}>
           <label>Password*</label>

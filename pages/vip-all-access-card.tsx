@@ -345,10 +345,7 @@ function BankrollManagementSystem() {
           bankroll. For example, for a $5,000 starting bankroll, a 1 unit wager would represent
           $100, i.e. 2% of your bankroll.
         </p>
-        <p>1 unit = 2% Bankroll</p>
-        <p>2 units = 4% Bankroll</p>
-        <p>3 units = 6% Bankroll</p>
-        <p>4 units = 8% Bankroll</p>
+
         <div className={styles.footer_desc}>
           TheDailyStakes recommends setting 1 unit as 2% of your bankroll.
         </div>

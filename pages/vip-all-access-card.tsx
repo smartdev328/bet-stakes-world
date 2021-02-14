@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Carousel, Spin } from 'antd';
+import { Row, Button, Col, Carousel } from 'antd';
 import {
   AppLayout,
   BannerSportsAndMatches,

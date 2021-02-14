@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, notification, Spin } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, notification } from 'antd';
 import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -13,7 +13,7 @@ import {
   SportEntry
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
-import { EarliestGameInfoType, Schedule, PageProps, YesterdayPlayInfoType } from '@type/Main';
+import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
 import SportsAPIs from '@apis/sport.apis';
@@ -275,8 +275,8 @@ function EarliestGames({
     setShowDetailsAt(showDetailsAt.slice());
   };
 
-  const hideDetailsAt = (state: boolean) => {
-    //setHideSection(state);
+  const hideDetailsAt = () => {
+    return null;
   };
 
   console.log('earliest', games);

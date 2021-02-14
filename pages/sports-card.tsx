@@ -1,12 +1,16 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel, Spin } from 'antd';
+import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import moment from 'moment';
 import LazyLoad from 'react-lazyload';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader, SportTile } from '@components/index';
+import {
+  AppLayout,
+  BannerSportsAndMatches,
+  DashboardHeader,
+  SportEntryActive
+} from '@components/index';
 import {
   AllSportsBtnBgIcon,
   ListIcon,
@@ -16,9 +20,9 @@ import {
   OpenBookIcon,
   PlusEncloseIcon
 } from '@components/SvgIcons';
+
 import styles from '@styles/SportsCard.module.css';
-import { LongArrowIcon } from '@components/SvgIcons';
-import { EarliestGameInfoType, PageProps, Schedule } from '@type/Main';
+import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
@@ -220,38 +224,6 @@ function TopSection({
     }
   };
 
-  // const menu = (
-  //   <Menu className={styles.sportMenu}>
-  //     <Menu.Item
-  //       disabled={selectedFilterType === ''}
-  //       className={styles.sportMenuItem}
-  //       onClick={() => {
-  //         setSelectedFilterType('');
-  //         filterChanged('');
-  //       }}>
-  //       None
-  //     </Menu.Item>
-  //     <Menu.Item
-  //       disabled={selectedFilterType === 'Highest Units'}
-  //       className={styles.sportMenuItem}
-  //       onClick={() => {
-  //         setSelectedFilterType('Highest Units');
-  //         filterChanged('Highest Units');
-  //       }}>
-  //       Highest Units
-  //     </Menu.Item>
-  //     <Menu.Item
-  //       disabled={selectedFilterType === 'Highest Odds'}
-  //       className={styles.sportMenuItem}
-  //       onClick={() => {
-  //         setSelectedFilterType('Highest Odds');
-  //         filterChanged('Highest Odds');
-  //       }}>
-  //       Highest Odds
-  //     </Menu.Item>
-  //   </Menu>
-  // );
-
   const responsive = [
     {
       breakpoint: 1240,
@@ -349,14 +321,6 @@ function TopSection({
         </div>
       </Row>
       <br></br>
-      {/* <Row className={styles.optionsRow} justify={'center'}>
-        <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']} transitionName="">
-          <div className={styles.optionBtn}>
-            <strong>Filter By&nbsp;</strong>
-            <TuneIcon className={styles.tune_icon} />
-          </div>
-        </Dropdown>
-      </Row> */}
     </>
   );
 }
@@ -405,99 +369,19 @@ function ListGames({
     setShowDetailsAt(showDetailsAt.slice());
   };
 
+  const hideDetailsAt = (state: boolean) => {
+    setHideSection(state);
+  };
+
   return (
-    <div className={styles.earliest_games}>
-      <div className={styles.earliest_games_titlebar}>
-        <Row align="middle">
-          {!hideSection && (
-            <CaretDownOutlined className={styles.caret_down} onClick={() => setHideSection(true)} />
-          )}
-          {hideSection && (
-            <CaretUpOutlined className={styles.caret_up} onClick={() => setHideSection(false)} />
-          )}
-          <strong>
-            {title} ({games.length})
-          </strong>
-        </Row>
-      </div>
-      {hideSection && (
-        <div className={styles.earliest_games_list}>
-          {loading && (
-            <Row justify={'center'}>
-              <Col>
-                <Spin />
-              </Col>
-            </Row>
-          )}
-          {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
-          {!loading &&
-            games.length > 0 &&
-            games.map((game: EarliestGameInfoType, index: number) => (
-              <div className={styles.game} key={game.id}>
-                <div className={styles.game_subinfo}>
-                  <SportTile sport={game.sport.name} />
-                  <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-                </div>
-                <div className={styles.game_info}>
-                  <div className={styles.game_teams}>
-                    {game.schedules.map((schedule: Schedule) => (
-                      <>
-                        <Row>
-                          <div className={styles.game_team1}>
-                            <img
-                              src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
-                          </div>
-                          <div className={styles.game_team2}>
-                            <img
-                              src={
-                                schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'
-                              }
-                              alt="Team Logo"
-                              className={styles.team_logo}
-                            />
-                            <span>{schedule.home_team.name}</span>
-                          </div>
-                        </Row>
-                      </>
-                    ))}
-                    <Row align={'top'} wrap={false}>
-                      <LongArrowIcon className={styles.long_arrow_icon} />
-                      <span className={styles.desc_line}>
-                        {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
-                          game.odds
-                        } odds | ${game.odds_decimal.toFixed(2)}x)`}
-                      </span>
-                    </Row>
-                  </div>
-                  <div className={styles.units}>{`${game.units} Unit${
-                    game.units > 1 ? 's' : ''
-                  }`}</div>
-                </div>
-                <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-                  <div className={styles.hide_details_btn}>
-                    <span>View Details</span>
-                    {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                    {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
-                </div>
-                {showDetailsAt[index] && (
-                  <div className={styles.details_section}>
-                    <ul>
-                      {game.detail.split('\n').map((unit: string, i: number) => (
-                        <li key={i}>{unit.replace('-', '')}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-        </div>
-      )}
-    </div>
+    <SportEntryActive
+      title={title}
+      loading={loading}
+      hideSection={hideSection}
+      hideDetailsAt={hideDetailsAt}
+      games={games}
+      showDetailsAt={showDetailsAt}
+      changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
   );
 }
 
@@ -580,33 +464,45 @@ function CommonSportsbooks() {
 const MOCK_BetFundaments = [
   {
     id: 1,
-    title: 'Favorites vs. Underdogs',
+    title: 'Oddsmakers',
     content:
-      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
   },
   {
     id: 2,
-    title: 'Oddsmakers',
+    title: 'Moneyline',
     content:
-      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+      'This is the simplest type of bet to grasp. Betting the Moneyline simply means that your team needs to win the game. The minus sign next to the odds denotes the favorite & the plus sign denotes the underdog team.'
   },
   {
     id: 3,
-    title: 'MoneyLine',
+    title: 'Spread',
     content:
-      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+      'Also known as the point spread & one of the most popular forms of betting. A favorite gives points and an underdog gets points. The minus sign (favorite) denotes that that team has to win by more than that margin while the plus sign (underdog) indicates that the other team can lose by that margin, or win the game, and they cover the spread in either case. (Ex: Lakers -5 means the Lakers have to win by more than 5 points to cover the spread).'
   },
   {
     id: 4,
-    title: 'Spreads',
+    title: 'Prop Bet',
     content:
-      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+      'Prop bets are a more exciting way to enhance betting beyond the Moneyline or Point Spread. It provides you a way to place wagers beyond only game outcomes. Player Props are amongst the most popular prop bets..'
   },
   {
     id: 5,
-    title: 'Over/Under Totals',
+    title: 'Over/Unders',
     content:
-      'Also known as bookies, are people who are licensed to create betting lines and take wagers. Our goal is to consistently out outperform the bookies by finding value picks for our clients.'
+      'Also known as a totals bets is wagering on the total for a particular game that is set by oddsmakers based on a particular matchup and how the game will unfold from a scoring point of view. As a person betting on a totals bet, you would need to select if the total number of points scored by both teams will be over or under the total set by oddsmakers.'
+  },
+  {
+    id: 6,
+    title: 'Parlay',
+    content:
+      'A parlay is a single bet that combines two or more wagers. In order to win the bet, the player must win all the wagers for a given parlay. If one of the bets fall through, the entire bet is lost. If the players wins all the wagers for a given parlay, the player wins a greater payout compared to placing the bets separately. '
+  },
+  {
+    id: 7,
+    title: 'Bonus Wildcard Plays',
+    content:
+      "These are unofficial bets proposed by TheDailyStakes. They're intended to be wagered in small amounts making them low risk high return plays. We all love stacked parlays and having a bit of skin in the game for a large wildcard play is always enticing for sports fans, casuals & bettors."
   }
 ];
 

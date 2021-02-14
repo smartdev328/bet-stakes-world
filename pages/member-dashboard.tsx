@@ -9,11 +9,10 @@ import {
   AppLayout,
   BannerSportsAndMatches,
   DashboardHeader,
-  SportTile,
+  SportEntryActive,
   SportEntry
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
-import { LongArrowIcon } from '@components/SvgIcons';
 import { EarliestGameInfoType, Schedule, PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
@@ -89,11 +88,6 @@ function CurrentPackages({
       <div className={styles.block_content}>
         {subscriptions.map((subscription) => (
           <div className={styles.package_card} key={subscription.id}>
-            {/* {subscription.is_active && (
-              <div className={styles.package_status}>{`Renews in ${Math.floor(
-                moment.duration(moment(subscription.valid_till).diff(moment())).asDays()
-              )} days`}</div>
-            )} */}
             {!subscription.is_active && (
               <div className={styles.package_status}>{`Expired ${Math.floor(
                 moment.duration(moment().diff(moment(subscription.valid_till))).asDays()
@@ -281,6 +275,12 @@ function EarliestGames({
     setShowDetailsAt(showDetailsAt.slice());
   };
 
+  const hideDetailsAt = (state: boolean) => {
+    //setHideSection(state);
+  };
+
+  console.log('earliest', games);
+
   return (
     <div className={styles.earliest_games}>
       <div className={styles.earliest_games_header}>
@@ -318,81 +318,15 @@ function EarliestGames({
           </Dropdown>
         </Row>
       </div>
-      <div className={styles.earliest_games_titlebar}>
-        <strong>{SportBetTypes[selectedBetType].name}</strong>
-        <span>{moment().format('h:mm a DD/MM/YYYY')}</span>
-      </div>
-      <div className={styles.earliest_games_list}>
-        {loading && (
-          <Row justify={'center'}>
-            <Col>
-              <Spin />
-            </Col>
-          </Row>
-        )}
-        {!loading && games.length === 0 && <div className={styles.noData}>No Games</div>}
-        {!loading &&
-          games.map((game: EarliestGameInfoType, index: number) => (
-            <div className={styles.game} key={game.id}>
-              <div className={styles.game_subinfo}>
-                <SportTile sport={game.sport.name} />
-                <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
-              </div>
-              {game.schedules.map((schedule: Schedule) => (
-                <>
-                  <Row>
-                    <div className={styles.game_team1}>
-                      <img
-                        src={schedule?.team.logo?.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{schedule.team.name}&nbsp;@&nbsp;</span>
-                    </div>
-                    <div className={styles.game_team2}>
-                      <img
-                        src={schedule.home_team?.logo?.url || 'https://via.placeholder.com/100'}
-                        alt="Team Logo"
-                        className={styles.team_logo}
-                      />
-                      <span>{schedule.home_team.name}</span>
-                    </div>
-                  </Row>
-                </>
-              ))}
-              <Row align={'top'} wrap={false}>
-                <LongArrowIcon className={styles.long_arrow_icon} />
-                <span className={styles.desc_line}>
-                  {`${game.bet_text} (${game.odds > 0 ? '+' : ''}${
-                    game.odds
-                  } odds | ${game.odds_decimal.toFixed(2)}x)`}
-                </span>
-              </Row>
-              <div className={styles.game_info}>
-                <div className={styles.game_teams}></div>
-                <div className={styles.units}>{`${game.units} Unit${
-                  game.units > 1 ? 's' : ''
-                }`}</div>
-              </div>
-              <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-                <div className={styles.hide_details_btn}>
-                  <span>View Details</span>
-                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-                </div>
-              </div>
-              {showDetailsAt[index] && (
-                <div className={styles.details_section}>
-                  <ul>
-                    {game.detail?.split('\n').map((unit: string, i: number) => (
-                      <li key={i}>{unit.replace('-', '')}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-      </div>
+      <br></br>
+      <SportEntryActive
+        title={SportBetTypes[selectedBetType].name}
+        loading={loading}
+        hideSection={true}
+        hideDetailsAt={hideDetailsAt}
+        games={games}
+        showDetailsAt={showDetailsAt}
+        changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
     </div>
   );
 }
@@ -424,6 +358,8 @@ function YesterdayPlays() {
         setFetchMoreLoading(false);
       });
   };
+
+  console.log('yesterdays ', games);
 
   return (
     <div className={styles.yesterday_plays}>

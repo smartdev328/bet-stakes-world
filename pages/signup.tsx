@@ -392,11 +392,6 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                   </Col>
                 </Row>
               </form>
-              {/* <div className={styles.orText}>
-                <span>Or</span>
-              </div> */}
-              {/* <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>
-              <Button className={styles.register_goggle_btn}>Registor With Google</Button> */}
             </div>
           </Row>
         </div>

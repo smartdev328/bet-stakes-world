@@ -23,6 +23,7 @@ import PackageAPIs from '@apis/package.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { Sport } from '@type/Sports';
 import { ReduxState } from '@redux/reducers';
+import { FAQsARR, FAQsDesc } from '@constants/index';
 
 type ProductsAndCartBoxProps = {
   sports: Sport[];
@@ -284,54 +285,6 @@ type FAQPropsType = {
   currentPlan: 'all' | 'sports_card' | 'fantasy';
 };
 
-const FAQsARR = {
-  all: [
-    'What does the VIP All Access Card include?',
-    'Which sports does the VIP All Access cover?',
-    'What is The DailyStakes Protection?',
-    'What is In-game betting?',
-    'Are the VIP All Access Plays guaranteed winners?',
-    'What is your refund policy?'
-  ],
-  sports_card: [
-    'What does the Sports Card include?',
-    'Which sports does the Sports Card cover?',
-    'What is In-game betting?',
-    'Are the Sports Card Plays guaranteed winners?',
-    'What is your refund policy?'
-  ],
-  fantasy: [
-    'What does the Fantasy Package include?',
-    'Which sports does the Fantasy Package cover?',
-    'Are the Fantasy lineups guaranteed winners?',
-    'What is your refund policy?'
-  ]
-};
-
-const FAQsDesc = {
-  all: [
-    'The VIP All Access Card includes all picks released for a given day for all sports. A breakdown of key stats and trends are included with each pick. A unit is associated with each pick for bankroll management purposes. The VIP All Access card also includes our Weekly Pro Tip.',
-    'We cover the NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. <br><br> *Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.',
-    'The DailyStakes Protection applies only to the Daily VIP All Access Card. If over 50% of the Daily VIP All Access Card are losses for a given day, the next day’s picks are FREE. No questions asked. For example, if 6 picks are released and 4 are losses for a given day. The Daily VIP All Access Card for the next day is free. ** <br><br> This does not happen often, however when it does, we aim to look out in the best interest of our clients and endorse a win-win outcome.',
-    'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
-    'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
-  ],
-  sports_card: [
-    'The Sports Card includes all picks released for the selected sport(s) of your choice. A breakdown of key stats and trends are included with each pick. A unit is associated with each pick for bankroll management purposes. The Sports Card card also includes our Weekly Pro tip.',
-    'You have the option to select amongst the following sports: NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. A sports package for multiple sports can be purchased at varying time frames <br><br>Example: A monthly NBA package & a weekly Soccer package can be purchased at the same time <br><br>*Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others. ',
-    'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
-    'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
-  ],
-  fantasy: [
-    'The Fantasy Card includes optimal Daily Fantasy Sports (“DFS”) lineups for both single game and tournament style formats tailored for the following sportsbooks: DraftKings, Fanduel, and Yahoo Sports. Advanced stats for each selected player are provided such as projected points, expected value, player prop comparison, amongst other insightful statistics.',
-    'Fantasy Packages can be purchased for any or all of the following sports: NBA, NFL, MLB.',
-    'Guaranteed winners do not exist in the daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
-  ]
-};
-
 function FAQs({ title, currentPlan }: FAQPropsType) {
   const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
   const toggleFAQ = (index: number) => {
@@ -411,16 +364,6 @@ function ProductsAndCartBox({
     changeTempCart(pack, newCart);
   };
 
-  // const changeAddOn = (plan: BillingPlan) => {
-  //   const newCart = tempCart.slice();
-  //   if (plan.id === newCart[1].id) {
-  //     delete newCart[1];
-  //   } else {
-  //     newCart[1] = plan;
-  //   }
-  //   setTempCart(newCart);
-  // };
-
   let totalPrice = 0;
   tempCart.forEach((item) => {
     totalPrice += item.plan.price;
@@ -466,30 +409,6 @@ function ProductsAndCartBox({
           </div>
         </div>
       </div>
-      {/* {pack.addOns && (
-        <div className={styles.packageAddOns}>
-          <div className={styles.sectionTitle}>Package Add-Ons</div>
-          <ul>
-            {pack.addOns.map((addOn, index) => (
-              <li
-                key={index}
-                className={tempCart[1]?.name === addOn.name ? styles.active : ''}
-                onClick={() => changeAddOn(addOn)}>
-                {tempCart[1]?.name === addOn.name && (
-                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
-                )}
-                {tempCart[1]?.name !== addOn.name && (
-                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-                )}
-                <div className={styles.sportsCard_name_row}>
-                  <span className={styles.sportsCard_name}>{addOn.name}</span>
-                </div>
-                <span className={styles.sportsCard_value}>${addOn.price}.00</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </>
   );
 }
@@ -713,31 +632,6 @@ function ProductsAndCartBoxForFantasy({
           </div>
         </div>
       </div>
-      {/* <div className={styles.packageAddOns}>
-        <div className={styles.sectionTitle}>Package Add-Ons</div>
-        <ul>
-          {AddOns.map((addOn, index) => (
-            <li
-              key={index}
-              className={cart.addOn.title === addOn.title ? styles.active : ''}
-              onClick={() => changeAddOn(addOn)}>
-              {cart.addOn.title === addOn.title && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {cart.addOn.title !== addOn.title && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <div className={styles.sportsCard_name_row}>
-                <span className={styles.sportsCard_name}>{addOn.title}</span>
-                <Link href="/">
-                  <a>View Details</a>
-                </Link>
-              </div>
-              <span className={styles.sportsCard_value}>${addOn.price}.00</span>
-            </li>
-          ))}
-        </ul>
-      </div> */}
     </>
   );
 }
@@ -1017,28 +911,6 @@ function ProductsAndCartBoxForSportsCard({
           </div>
         </div>
       </div>
-      {/* {pack.addOns && (
-        <div className={styles.packageAddOns}>
-          <div className={styles.sectionTitle}>Package Add-Ons</div>
-          <ul>
-            {pack.addOns.map((addOn, index) => (
-              <li
-                key={index}
-                className={tempCart[0]?.plan.name === plan.name ? styles.active : ''}
-                onClick={() => changeSportCard(plan)}>
-                {tempCart[0]?.plan.name === plan.name && (
-                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
-                )}
-                {tempCart[0]?.plan.name !== plan.name && (
-                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-                )}
-                <span className={styles.sportsCard_name}>{plan.duration}</span>
-                <span className={styles.sportsCard_value}>${plan.price}.00</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </>
   );
 }

@@ -22,6 +22,7 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
+import { MOCK_BetFundaments } from '@constants/*';
 
 const SPORTS_INFO = [
   {
@@ -403,51 +404,6 @@ function CommonSportsbooks() {
     </div>
   );
 }
-
-const MOCK_BetFundaments = [
-  {
-    id: 1,
-    title: 'Oddsmakers',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
-  },
-  {
-    id: 2,
-    title: 'Moneyline',
-    content:
-      'This is the simplest type of bet to grasp. Betting the Moneyline simply means that your team needs to win the game. The minus sign next to the odds denotes the favorite & the plus sign denotes the underdog team.'
-  },
-  {
-    id: 3,
-    title: 'Spread',
-    content:
-      'Also known as the point spread & one of the most popular forms of betting. A favorite gives points and an underdog gets points. The minus sign (favorite) denotes that that team has to win by more than that margin while the plus sign (underdog) indicates that the other team can lose by that margin, or win the game, and they cover the spread in either case. (Ex: Lakers -5 means the Lakers have to win by more than 5 points to cover the spread).'
-  },
-  {
-    id: 4,
-    title: 'Prop Bet',
-    content:
-      'Prop bets are a more exciting way to enhance betting beyond the Moneyline or Point Spread. It provides you a way to place wagers beyond only game outcomes. Player Props are amongst the most popular prop bets..'
-  },
-  {
-    id: 5,
-    title: 'Over/Unders',
-    content:
-      'Also known as a totals bets is wagering on the total for a particular game that is set by oddsmakers based on a particular matchup and how the game will unfold from a scoring point of view. As a person betting on a totals bet, you would need to select if the total number of points scored by both teams will be over or under the total set by oddsmakers.'
-  },
-  {
-    id: 6,
-    title: 'Parlay',
-    content:
-      'A parlay is a single bet that combines two or more wagers. In order to win the bet, the player must win all the wagers for a given parlay. If one of the bets fall through, the entire bet is lost. If the players wins all the wagers for a given parlay, the player wins a greater payout compared to placing the bets separately. '
-  },
-  {
-    id: 7,
-    title: 'Bonus Wildcard Plays',
-    content:
-      "These are unofficial bets proposed by TheDailyStakes. They're intended to be wagered in small amounts making them low risk high return plays. We all love stacked parlays and having a bit of skin in the game for a large wildcard play is always enticing for sports fans, casuals & bettors."
-  }
-];
 
 function BettingFundamentals() {
   const [showContent, setShowContent] = useState<boolean[]>([]);

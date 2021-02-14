@@ -29,7 +29,7 @@ import SportsAPIs from '@apis/sport.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
 import { UserSubscription } from '@type/Users';
-import { MOCK_BetFundaments } from '@constants/*';
+import { MOCK_BetFundaments } from '@constants/index';
 
 const SPORTS_INFO = [
   {

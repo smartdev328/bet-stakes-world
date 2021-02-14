@@ -22,7 +22,7 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
-import { MOCK_BetFundaments } from '@constants/*';
+import { MOCK_BetFundaments } from '@constants/index';
 
 const SPORTS_INFO = [
   {

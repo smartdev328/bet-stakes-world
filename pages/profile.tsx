@@ -319,7 +319,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     }
     setIsSavingCardInfo(false);
   };
-  const reactivatePack = (packId: number) => {
+  const reactivatePack = (packId: string) => {
     PackageApis.reactivatePackage(packId)
       .then((res) => res.json())
       .then((data) => {
@@ -382,6 +382,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     if (isFormValid) {
       UsersAPIs.updateProfile({
         ...profileForm,
+        password: undefined,
         full_name: `${profileForm.first_name} ${profileForm.last_name}`
       })
         .then((res) => res.json())
@@ -389,7 +390,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           if (data.statusCode >= 400) {
             notification['error']({
               message: 'Profile Update Error',
-              description: data.message[0].messages[0].message
+              description: data.message ? data.message : data.message[0].messages[0].message
             });
           } else {
             notification['info']({
@@ -457,7 +458,13 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
             changeProfileForm={changeProfileForm}
             onLogoChange={onLogoChange}
           />
-          <CurrentPackages packages={packages} reactivatePack={reactivatePack} />
+          {packages && (
+            <CurrentPackages
+              subscriptions={subscriptions}
+              packages={packages}
+              reactivatePack={reactivatePack}
+            />
+          )}
           <CreditCardInfo
             changeBillingFormData={updateBillingForm}
             submitCardFormData={updateCardForm}
@@ -601,11 +608,11 @@ function ProfileInfo({
               {!profileForm.avatar && (
                 <>
                   <LogoFromName first_name="Nicolas" last_name="Patrick" />
-                  <Upload onChange={onLogoChange} multiple={false}>
-                    <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
-                  </Upload>
                 </>
               )}
+              <Upload key={profileForm.avatar} onChange={onLogoChange} multiple={false}>
+                <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
+              </Upload>
             </div>
           </Col>
         </Row>
@@ -654,12 +661,25 @@ function ProfileInfo({
 }
 
 function CurrentPackages({
+  subscriptions,
   packages,
   reactivatePack
 }: {
-  packages: Package[] | undefined;
-  reactivatePack: (_: number) => void;
+  subscriptions: UserSubscription[] | undefined;
+  packages: Package[];
+  reactivatePack: (_: string) => void;
 }) {
+  let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
+  packages.forEach((pack) => {
+    if (pack.name.indexOf('VIP All Access') > -1) {
+      vipAllAccessPack = pack.id;
+    } else if (pack.name.indexOf('Fantasy') > -1) {
+      fantasyPack = pack.id;
+    } else {
+      sportsCardPack = pack.id;
+    }
+  });
+
   return (
     <>
       <div className={styles.sectionTitle}>Current packages</div>
@@ -669,17 +689,43 @@ function CurrentPackages({
             <em>There is no Active Package</em>
           </div>
         )}
-        {packages &&
-          packages.map((pack: Package) => (
-            <div className={styles.package} key={pack.id}>
-              <LazyLoad>
-                <img src={pack.logo} />
-              </LazyLoad>
+        {subscriptions &&
+          subscriptions.map((subscription: UserSubscription) => (
+            <div className={styles.package} key={subscription.id}>
+              {subscription.plan.package === vipAllAccessPack && (
+                <img
+                  alt="VIP All Access Background"
+                  src="/images/sports_card_bg.png"
+                  className={styles.package_card_img}
+                />
+              )}
+              {subscription.plan.package !== vipAllAccessPack && (
+                <img
+                  alt="Sports Logo"
+                  src={
+                    subscription.sports[0]?.logo
+                      ? subscription.sports[0]?.logo
+                      : '/images/daily_lineups_bg.png'
+                  }
+                  className={styles.package_card_img}
+                />
+              )}
               <div className={styles.packageContent}>
-                <div className={styles.title}>{pack.name}</div>
-                <div className={styles.desc}>{pack.description}</div>
+                <div className={styles.title}>
+                  {subscription.plan.package === vipAllAccessPack && <span>VIP All Access</span>}
+                  {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
+                  {subscription.plan.package === fantasyPack && <span>Fantasy</span>}
+                </div>
+                <div className={styles.desc}>
+                  {subscription.plan.package !== fantasyPack && (
+                    <span>{subscription.plan.duration.toLowerCase()} Picks</span>
+                  )}
+                  {subscription.plan.package === fantasyPack && (
+                    <span>{subscription.plan.duration.toLowerCase()} lineups</span>
+                  )}
+                </div>
                 <div className={styles.extra}>
-                  <div onClick={() => reactivatePack(pack.id)}>
+                  <div onClick={() => reactivatePack(subscription.id)}>
                     <a>Reactivate Package</a>
                   </div>
                 </div>
@@ -995,4 +1041,15 @@ function CancelSubscription({ subscriptions }: { subscriptions: UserSubscription
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await PackageApis.getPackages();
+  const packages = await res.json();
+
+  return {
+    props: {
+      packages
+    }
+  };
 }

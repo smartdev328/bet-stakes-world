@@ -11,7 +11,7 @@ export function getPackages() {
   });
 }
 
-function reactivatePackage(packId: number) {
+function reactivatePackage(packId: string) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/app/subscriptions/${packId}/reactivate`, {
     method: 'patch',

@@ -82,7 +82,7 @@ function fetchProfile() {
 
 function updateProfile(payload: UserProfile) {
   const headers = tokenAuthHeaders();
-  return fetch(`${API_BASE_URL}/users/${payload.id}`, {
+  return fetch(`${API_BASE_URL}/users/me`, {
     method: 'put',
     body: JSON.stringify(payload),
     headers

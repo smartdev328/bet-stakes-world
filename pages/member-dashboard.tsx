@@ -20,8 +20,10 @@ import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
+import UsersAPIs from '@apis/user.apis';
 import { Package } from '@type/Packages';
 import { useRouter } from 'next/router';
+import { profile } from 'console';
 
 function HeroBanner() {
   return (
@@ -36,12 +38,12 @@ function HeroBanner() {
   );
 }
 
-function TopSection() {
+function TopSection({ profileName }: { profileName: string }) {
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
-        <Col className={styles.welcome_left}>Welcome back Nicolas!</Col>
+        <Col className={styles.welcome_left}>Welcome back {profileName}!</Col>
         <Col className={styles.welcome_right}>
           <strong>Overall Record:</strong>&nbsp;123-54
         </Col>
@@ -379,11 +381,20 @@ function YesterdayPlays() {
 
 export default function MemberDashboard({ token, subscriptions, sports, packages }: PageProps) {
   const [weeklyTip, setWeeklyTip] = useState<WeeklyTip | undefined>(undefined);
+  const [profileName, setProfileName] = useState<string>('');
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
       .then((data) => {
         setWeeklyTip(data);
+      });
+    UsersAPIs.fetchProfile()
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.full_name) {
+          const names = data.full_name.split(' ');
+          setProfileName(names[0]);
+        }
       });
   }, []);
 
@@ -395,7 +406,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection />
+          <TopSection profileName={profileName} />
           <Row className={styles.nowrapRow}>
             <Col span={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}

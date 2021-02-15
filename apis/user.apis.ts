@@ -5,8 +5,7 @@ import {
   LoginUserType,
   AddUserPayment,
   ResetPasswordForm,
-  UserProfile,
-  LogoUploadForm
+  UserProfile
 } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 

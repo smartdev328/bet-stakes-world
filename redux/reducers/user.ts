@@ -11,7 +11,13 @@ import {
   FORGOT_PASS_SUCCESS
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
-import { CreateUserType, LoginUserType, UserProfile, ForgotPasswordForm } from '@type/Users';
+import {
+  CreateUserType,
+  LoginUserType,
+  UserProfile,
+  ForgotPasswordForm,
+  ResetPasswordForm
+} from '@type/Users';
 
 export type UserReducerState = {
   token: string | null;
@@ -32,6 +38,11 @@ export type LoginUserReducerAction = {
 
 export type ForgotResetPassReducerAction = {
   payload: ForgotPasswordForm;
+  type: string;
+};
+
+export type ResetPassReducerAction = {
+  payload: ResetPasswordForm;
   type: string;
 };
 

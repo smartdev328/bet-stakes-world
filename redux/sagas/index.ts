@@ -24,7 +24,8 @@ import {
 import {
   CreateUserReducerAction,
   LoginUserReducerAction,
-  ForgotResetPassReducerAction
+  ForgotResetPassReducerAction,
+  ResetPassReducerAction
 } from '@redux/reducers/user';
 import UserAPIs from '@apis/user.apis';
 
@@ -121,7 +122,7 @@ function* forgotPassSaga({ payload }: ForgotResetPassReducerAction) {
   }
 }
 
-function* resetPassSaga({ payload }: ForgotResetPassReducerAction) {
+function* resetPassSaga({ payload }: ResetPassReducerAction) {
   try {
     yield put({
       type: RESET_PASS_REQUEST

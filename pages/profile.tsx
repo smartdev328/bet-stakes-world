@@ -381,6 +381,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     if (isFormValid) {
       UsersAPIs.updateProfile({
         ...profileForm,
+        avatar: undefined,
         full_name: `${profileForm.first_name} ${profileForm.last_name}`
       })
         .then((res) => res.json())

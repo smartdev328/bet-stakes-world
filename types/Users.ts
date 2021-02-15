@@ -35,6 +35,7 @@ export type LoginUserValidateType = {
 
 export type UserProfile = {
   id?: string;
+  avatar?: string | undefined;w
   username: string | undefined;
   first_name: string | undefined;
   last_name: string | undefined;

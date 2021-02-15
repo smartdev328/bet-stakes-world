@@ -83,12 +83,17 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
   const [isBillingValid, setIsBillingValid] = useState<boolean>(false);
 
   useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  const fetchUserInfo = () => {
     UsersAPIs.fetchProfile()
       .then((res) => res.json())
       .then((data) => {
         const names = data.full_name.split(' ');
         setProfileForm({
           id: data.id,
+          avatar: data.avatar ? data.avatar.url : '',
           first_name: names[0],
           last_name: names[1],
           email: data.email,
@@ -98,9 +103,16 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           password: undefined,
           verify_password: undefined
         });
+        setFormValidation({
+          username: true,
+          first_name: true,
+          last_name: true,
+          email: true,
+          password: true,
+          verify_password: true
+        });
       });
-  }, []);
-
+  };
   const changeProfileForm = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const newProfileForm = Object.assign({}, profileForm);
@@ -159,7 +171,6 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       newValidation.verify_password = true;
     }
     setFormValidation(newValidation);
-    console.log('-- ', isValid);
     setIsFormValid(isValid);
   };
   const updateBillingForm = (name: keyof UserBillingInfo, e: React.FormEvent<HTMLInputElement>) => {
@@ -292,8 +303,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     setIsSavingCardInfo(false);
   };
   const reactivatePack = (packId: number) => {
-    PackageApis
-      .reactivatePackage(packId)
+    PackageApis.reactivatePackage(packId)
       .then((res) => res.json())
       .then((data) => {
         if (data.statusCode >= 400) {
@@ -355,10 +365,35 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       const formdata = new FormData();
       formdata.append('files', logoFile);
       formdata.append('ref', 'user');
-      formdata.append('id', '73');
+      formdata.append('refId', `${profileForm.id}`);
       formdata.append('field', 'avatar');
       formdata.append('source', 'users-permissions');
       UsersAPIs.uploadLogo(formdata).then((res) => res.json());
+    }
+  };
+  const resetChanges = () => {
+    fetchUserInfo();
+    setBillingInfo({
+      city: undefined,
+      address: undefined,
+      zipcode: undefined,
+      full_name: undefined,
+      country: CREDIT_COUNTRIES[0].id
+    });
+    const formElement = document.querySelector('#profileForm') as HTMLFormElement;
+    formElement.reset();
+    const billingFormElement = document.querySelector('#billing-form') as HTMLFormElement;
+    billingFormElement.reset();
+    if (elements) {
+      const cardNumberElement = elements.getElement(CardNumberElement);
+      cardNumberElement?.clear();
+      const cardExpElement = elements.getElement(CardExpiryElement);
+      cardExpElement?.clear();
+      const cardCvcElement = elements.getElement(CardCvcElement);
+      cardCvcElement?.clear();
+    }
+    if (logoFile) {
+      setLogoFile(undefined);
     }
   };
 
@@ -370,8 +405,11 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection formChanged={formChanged} saveChanges={onSaveChanges} />
-          {/* Profile Section */}
+          <TopSection
+            formChanged={formChanged}
+            saveChanges={onSaveChanges}
+            resetChanges={resetChanges}
+          />
           <ProfileInfo
             profileForm={profileForm}
             formValidation={formValidation}
@@ -405,16 +443,18 @@ function HeroBanner() {
 
 function TopSection({
   formChanged,
-  saveChanges
+  saveChanges,
+  resetChanges
 }: {
   formChanged: boolean;
   saveChanges: () => void;
+  resetChanges: () => void;
 }) {
   return (
     <>
       <DashboardHeader title={'Settings'} />
       <Row className={styles.actionBtns} justify={'center'}>
-        <Button className={styles.cancelBtn} disabled={!formChanged}>
+        <Button className={styles.cancelBtn} disabled={!formChanged} onClick={resetChanges}>
           Cancel
         </Button>
         <Button className={styles.saveBtn} disabled={!formChanged} onClick={saveChanges}>
@@ -448,9 +488,9 @@ function ProfileInfo({
 }: ProfileInfoType) {
   return (
     <>
-      <Row className={styles.rowWithTwoChild}>
-        <Col span={12}>
-          <form autoComplete="off">
+      <form autoComplete="off" id="profileForm">
+        <Row className={styles.rowWithTwoChild}>
+          <Col span={12}>
             <Row>
               <div className={styles.sectionTitle}>Profile</div>
               <Col span={24} className={styles.formGroup}>
@@ -510,41 +550,51 @@ function ProfileInfo({
                 />
               </Col>
             </Row>
-          </form>
-        </Col>
-        <Col span={12}>
-          <div className={styles.profileLogoWrapper}>
-            <LogoFromName first_name="Nicolas" last_name="Patrick" />
-            {/* Real Photo */}
-            <Upload onChange={onLogoChange} multiple={false}>
-              <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
-            </Upload>
-          </div>
-        </Col>
-      </Row>
-      <div className={styles.sectionTitle}>Change Password</div>
-      <Row className={`${styles.rowWithTwoChild} ${styles.resetPassword}`} justify="space-between">
-        <Col span={12} className={styles.formGroup}>
-          <label>Password*</label>
-          <input
-            name="password"
-            className={formValidation.password ? '' : styles.error}
-            type="password"
-            placeholder="ie: **********"
-            onChange={(e) => changeProfileForm('password', e)}
-          />
-        </Col>
-        <Col span={12} className={styles.formGroup}>
-          <label>Verify Password*</label>
-          <input
-            name="verify_password"
-            className={formValidation.verify_password ? '' : styles.error}
-            type="password"
-            placeholder="ie: **********"
-            onChange={(e) => changeProfileForm('verify_password', e)}
-          />
-        </Col>
-      </Row>
+          </Col>
+          <Col span={12}>
+            <div className={styles.profileLogoWrapper}>
+              {profileForm.avatar && (
+                <img src={profileForm.avatar} alt="" className={styles.avatarLogo} />
+              )}
+              {!profileForm.avatar && (
+                <>
+                  <LogoFromName first_name="Nicolas" last_name="Patrick" />
+                  <Upload onChange={onLogoChange} multiple={false}>
+                    <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
+                  </Upload>
+                </>
+              )}
+            </div>
+          </Col>
+        </Row>
+        <div className={styles.sectionTitle}>Change Password</div>
+        <Row
+          className={`${styles.rowWithTwoChild} ${styles.resetPassword}`}
+          justify="space-between">
+          <Col span={12} className={styles.formGroup}>
+            <label>Password*</label>
+            <input
+              name="password"
+              className={formValidation.password ? '' : styles.error}
+              type="password"
+              placeholder="ie: **********"
+              onChange={(e) => changeProfileForm('password', e)}
+              value={profileForm.password}
+            />
+          </Col>
+          <Col span={12} className={styles.formGroup}>
+            <label>Verify Password*</label>
+            <input
+              name="verify_password"
+              className={formValidation.verify_password ? '' : styles.error}
+              type="password"
+              placeholder="ie: **********"
+              onChange={(e) => changeProfileForm('verify_password', e)}
+              value={profileForm.verify_password}
+            />
+          </Col>
+        </Row>
+      </form>
     </>
   );
 }
@@ -731,7 +781,7 @@ function CreditCardInfo({
 
   return (
     <div className={styles.creditCardInfoRow}>
-      <form onSubmit={submitCardFormData}>
+      <form onSubmit={submitCardFormData} id="billing-form">
         <div className={styles.sectionTitle}>Credit Card Information</div>
         <Row className={styles.rowWithTwoChild} justify="space-between">
           <Col span={12}>

@@ -36,7 +36,6 @@
   font-size: 21.8537px;
   line-height: 34px;
   text-align: center;
-  color: #D7D7D7;
   height: 54px;
   width: 120px;
   background: transparent;
@@ -48,6 +47,7 @@
 }
 .saveBtn {
   margin-left: 24px;
+  background-color: #FFC700;
 }
 
 @media (max-width: 1024px) {
@@ -354,4 +354,11 @@
 
 .noPackages {
   margin: 1em 0;
+}
+
+.avatarLogo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
 }

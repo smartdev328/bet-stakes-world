@@ -25,7 +25,7 @@ import { Package } from '@type/Packages';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageProps, PromiseResponse } from '@type/Main';
 import UsersAPIs from '@apis/user.apis';
-import packageApis from '@apis/package.apis';
+import PackageApis from '@apis/package.apis';
 import subscriptionsApis from '@apis/subscriptions.apis';
 import { CREDIT_COUNTRIES } from '@constants/';
 import { UploadChangeParam } from 'antd/lib/upload';
@@ -292,7 +292,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     setIsSavingCardInfo(false);
   };
   const reactivatePack = (packId: number) => {
-    packageApis
+    PackageApis
       .reactivatePackage(packId)
       .then((res) => res.json())
       .then((data) => {
@@ -339,15 +339,17 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     //       });
     //   }
     // }
+
     // Save Profile
-    // if (isFormValid) {
-    //   userApis
-    //     .updateProfile(profileForm)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log('--- data ---- ', data);
-    //     });
-    // }
+    if (isFormValid) {
+      //   userApis
+      //     .updateProfile(profileForm)
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //       console.log('--- data ---- ', data);
+      //     });
+    }
+
     // Upload Image
     if (logoFile) {
       const formdata = new FormData();

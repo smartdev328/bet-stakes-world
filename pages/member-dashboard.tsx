@@ -23,7 +23,6 @@ import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
 import { Package } from '@type/Packages';
 import { useRouter } from 'next/router';
-import { profile } from 'console';
 
 function HeroBanner() {
   return (

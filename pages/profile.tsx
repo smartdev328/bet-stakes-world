@@ -2,7 +2,6 @@
 import React, { FormEvent, useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Row, Button, Upload, Col, Modal, notification, Dropdown, Menu } from 'antd';
-import LazyLoad from 'react-lazyload';
 import {
   useStripe,
   useElements,
@@ -382,7 +381,6 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     if (isFormValid) {
       UsersAPIs.updateProfile({
         ...profileForm,
-        password: undefined,
         full_name: `${profileForm.first_name} ${profileForm.last_name}`
       })
         .then((res) => res.json())

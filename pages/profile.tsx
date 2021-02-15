@@ -41,6 +41,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
   const elements = useElements();
 
   const [profileForm, setProfileForm] = useState<ProfileFormType>({
+    id: undefined,
+    avatar: undefined,
     username: undefined,
     first_name: undefined,
     last_name: undefined,

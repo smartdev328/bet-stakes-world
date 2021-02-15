@@ -34,11 +34,11 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
     const newBillingInfo = Object.assign({}, billingInfo);
     newBillingInfo[name] = value;
     setBillingInfo(newBillingInfo);
-    validateForm(newBillingInfo);
+    validateForm(newBillingInfo, formValidation);
   };
 
-  const validateForm = (data: UserBillingInfo) => {
-    const newValidation = Object.assign({}, formValidation);
+  const validateForm = (data: UserBillingInfo, validation: UserBillingInfoValidate) => {
+    const newValidation = Object.assign({}, validation);
     let isValid = true;
     if (data.city === '') {
       newValidation.city = false;
@@ -72,6 +72,9 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
     } else {
       newValidation.full_name = true;
     }
+    if (!newValidation.creditNumber || !newValidation.creditExp || !newValidation.creditCVC) {
+      isValid = false;
+    }
     setFormValidation(newValidation);
     updateBillingFormData(data, isValid);
   };
@@ -81,7 +84,16 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
     newBillingInfo.country = name;
     setBillingInfo(newBillingInfo);
   };
-
+  const creditCartFormChanged = (element: any, name: keyof UserBillingInfoValidate) => {
+    const newValidation = { ...formValidation };
+    if (!element.empty && element.complete) {
+      newValidation[name] = true;
+    } else {
+      newValidation[name] = false;
+    }
+    setFormValidation(newValidation);
+    validateForm(billingInfo, newValidation);
+  };
   const countryMenu = () => (
     <Menu className={styles.sportMenu}>
       {CREDIT_COUNTRIES.map((country) => (
@@ -157,6 +169,7 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
               <label>Card Number</label>
               <CardNumberElement
                 options={{ placeholder: 'XXXX XXXX XXXX 1234', classes: { base: styles.input } }}
+                onChange={(e) => creditCartFormChanged(e, 'creditNumber')}
               />
             </Col>
           </Row>
@@ -165,11 +178,15 @@ function CreditCardInfo({ updateBillingFormData }: CreditCardInfoType) {
               <label>Expiry Date</label>
               <CardExpiryElement
                 options={{ placeholder: 'MM/YY', classes: { base: styles.input } }}
+                onChange={(e) => creditCartFormChanged(e, 'creditExp')}
               />
             </Col>
             <Col span={12} className={styles.formGroup}>
               <label>CVV</label>
-              <CardCvcElement options={{ placeholder: '•••', classes: { base: styles.input } }} />
+              <CardCvcElement
+                options={{ placeholder: '•••', classes: { base: styles.input } }}
+                onChange={(e) => creditCartFormChanged(e, 'creditCVC')}
+              />
             </Col>
           </Row>
         </Col>

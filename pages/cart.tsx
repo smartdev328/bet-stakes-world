@@ -410,6 +410,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       setProceeding(false);
     }
   };
+  console.log('-isSignupFormValid && isBillingFormValid', isSignupFormValid, isBillingFormValid);
 
   return (
     <>

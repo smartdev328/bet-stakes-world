@@ -5,7 +5,8 @@ import {
   LoginUserType,
   AddUserPayment,
   ResetPasswordForm,
-  UserProfile
+  UserProfile,
+  ChangePasswordForm
 } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
@@ -99,6 +100,15 @@ function uploadLogo(payload: FormData) {
   });
 }
 
+function changePassword(payload: ChangePasswordForm) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/password`, {
+    method: 'put',
+    body: JSON.stringify(payload),
+    headers
+  });
+}
+
 export default {
   createUser,
   login,
@@ -108,5 +118,6 @@ export default {
   addPaymentMethod,
   fetchProfile,
   updateProfile,
-  uploadLogo
+  uploadLogo,
+  changePassword
 };

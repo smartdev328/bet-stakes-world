@@ -33,6 +33,7 @@ import { UploadFile } from 'antd/lib/upload/interface';
 
 type ProfileFormType = UserProfile & {
   password: string | undefined;
+  new_password: string | undefined;
   verify_password: string | undefined;
 };
 
@@ -50,6 +51,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     provider: undefined,
     mobile_number: undefined,
     password: undefined,
+    new_password: undefined,
     verify_password: undefined
   });
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
@@ -61,6 +63,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     last_name: true,
     email: true,
     password: true,
+    new_password: true,
     verify_password: true
   });
   const [billingInfo, setBillingInfo] = useState<UserBillingInfo>({
@@ -103,6 +106,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           username: data.username,
           provider: data.provider,
           password: undefined,
+          new_password: undefined,
           verify_password: undefined
         });
         setFormValidation({
@@ -111,6 +115,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           last_name: true,
           email: true,
           password: true,
+          new_password: true,
           verify_password: true
         });
       });
@@ -161,16 +166,26 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     } else {
       newValidation.email = true;
     }
-    if (data.verify_password !== data.password) {
+    if (data.verify_password !== data.new_password) {
+      newValidation.new_password = false;
+      newValidation.verify_password = false;
+      isValid = false;
+    } else if (data.new_password && data.new_password.length < 6) {
+      newValidation.new_password = false;
+      newValidation.verify_password = false;
+      isValid = false;
+    } else if (data.new_password && !data.password) {
+      newValidation.new_password = false;
       newValidation.verify_password = false;
       newValidation.password = false;
-      isValid = false;
-    } else if (data.password && data.password.length < 6) {
+    } else if (data.password && !data.new_password) {
+      newValidation.new_password = false;
+      newValidation.verify_password = false;
       newValidation.password = false;
-      isValid = false;
     } else {
-      newValidation.password = true;
+      newValidation.new_password = true;
       newValidation.verify_password = true;
+      newValidation.password = true;
     }
     setFormValidation(newValidation);
     setIsFormValid(isValid);
@@ -338,28 +353,50 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     }
   };
   const onSaveChanges = () => {
-    // Reset Password
-    // if (formValidation.password && formValidation.verify_password) {
-    //   if (profileForm.password && profileForm.verify_password) {
-    //     UsersAPIs.resetPass({
-    //       password: profileForm.password,
-    //       passwordConfirmation: profileForm.verify_password
-    //     })
-    //       .then((res) => res.json())
-    //       .then((data) => {
-    //         console.log('--- data: ', data);
-    //       });
-    //   }
-    // }
+    // Change Password
+    if (formValidation.password && formValidation.new_password && formValidation.verify_password) {
+      if (profileForm.password && profileForm.new_password && profileForm.verify_password) {
+        UsersAPIs.changePassword({
+          password: profileForm.password,
+          identifier: profileForm.email || '',
+          newPassword: profileForm.new_password || '',
+          confirmPassword: profileForm.verify_password
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.statusCode >= 400) {
+              notification['error']({
+                message: 'Change Password Error',
+                description: data.message[0].messages[0].message
+              });
+            } else {
+              notification['info']({
+                message: 'Password has been successfully changed!'
+              });
+            }
+          });
+      }
+    }
 
     // Save Profile
     if (isFormValid) {
-      //   userApis
-      //     .updateProfile(profileForm)
-      //     .then((res) => res.json())
-      //     .then((data) => {
-      //       console.log('--- data ---- ', data);
-      //     });
+      UsersAPIs.updateProfile({
+        ...profileForm,
+        full_name: `${profileForm.first_name} ${profileForm.last_name}`
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.statusCode >= 400) {
+            notification['error']({
+              message: 'Profile Update Error',
+              description: data.message[0].messages[0].message
+            });
+          } else {
+            notification['info']({
+              message: 'Profile has been successfully updated!'
+            });
+          }
+        });
     }
 
     // Upload Image
@@ -372,6 +409,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       formdata.append('source', 'users-permissions');
       UsersAPIs.uploadLogo(formdata).then((res) => res.json());
     }
+    resetChanges();
   };
   const resetChanges = () => {
     fetchUserInfo();
@@ -398,7 +436,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
       setLogoFile(undefined);
     }
   };
-
+  let isAllValid = false;
+  isAllValid = !Object.values(formValidation).some((x) => x !== true);
   return (
     <>
       <Head>
@@ -408,7 +447,7 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
         <HeroBanner />
         <div className={styles.container}>
           <TopSection
-            formChanged={formChanged}
+            formChanged={formChanged && isAllValid}
             saveChanges={onSaveChanges}
             resetChanges={resetChanges}
           />
@@ -533,6 +572,7 @@ function ProfileInfo({
                 <label>Email*</label>
                 <input
                   name="email"
+                  disabled
                   value={profileForm.email}
                   className={formValidation.email ? '' : styles.error}
                   type="email"
@@ -574,7 +614,7 @@ function ProfileInfo({
           className={`${styles.rowWithTwoChild} ${styles.resetPassword}`}
           justify="space-between">
           <Col span={12} className={styles.formGroup}>
-            <label>Password*</label>
+            <label>Old Password*</label>
             <input
               name="password"
               className={formValidation.password ? '' : styles.error}
@@ -582,6 +622,18 @@ function ProfileInfo({
               placeholder="ie: **********"
               onChange={(e) => changeProfileForm('password', e)}
               value={profileForm.password}
+            />
+          </Col>
+          <Col span={12}>&nbsp;</Col>
+          <Col span={12} className={styles.formGroup}>
+            <label>New Password*</label>
+            <input
+              name="new_password"
+              className={formValidation.new_password ? '' : styles.error}
+              type="password"
+              placeholder="ie: **********"
+              onChange={(e) => changeProfileForm('new_password', e)}
+              value={profileForm.new_password}
             />
           </Col>
           <Col span={12} className={styles.formGroup}>

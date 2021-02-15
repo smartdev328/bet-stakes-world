@@ -39,6 +39,7 @@ export type UserProfile = {
   username: string | undefined;
   first_name: string | undefined;
   last_name: string | undefined;
+  full_name?: string;
   email: string | undefined;
   mobile_number: string | undefined;
   provider: string | undefined;
@@ -50,6 +51,7 @@ export type ProfileValidateType = {
   last_name: boolean;
   email: boolean;
   password: boolean;
+  new_password: boolean;
   verify_password: boolean;
 };
 
@@ -132,4 +134,11 @@ export type LogoUploadForm = {
   refId: string;
   field: string;
   source: string;
+};
+
+export type ChangePasswordForm = {
+  identifier: string;
+  password: string;
+  newPassword: string;
+  confirmPassword: string;
 };

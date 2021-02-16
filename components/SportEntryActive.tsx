@@ -72,7 +72,12 @@ function SportEntryActive({
                               alt="Team Logo"
                               className={styles.team_logo}
                             />
-                            <span>{schedule.team.name}&nbsp;@&nbsp;</span>
+                            {game.sport.name !== 'UFC' && (
+                              <span>{schedule.team.name}&nbsp;@&nbsp;</span>
+                            )}
+                            {game.sport.name === 'UFC' && (
+                              <span>{schedule.team.name}&nbsp;vs&nbsp;</span>
+                            )}
                           </div>
                           <div className={styles.game_team2}>
                             <img

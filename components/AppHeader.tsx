@@ -65,40 +65,9 @@ function SubMenu({
     }
   }, [token, subscriptions]);
 
-  const hidePanes = () => {
-    setSportPaneVisible(false);
-    setFantasyPaneVisible(false);
-  };
-
-  const showSportPanel = () => {
-    setFantasyPaneVisible(false);
-    setSportPaneVisible(true);
-  };
-
   const toggleSportPanel = () => {
     setFantasyPaneVisible(false);
     setSportPaneVisible(!sportPaneVisible);
-  };
-
-  const showFantasyPanel = () => {
-    setFantasyPaneVisible(true);
-    setSportPaneVisible(false);
-  };
-
-  const toggleFantasyPanel = () => {
-    setFantasyPaneVisible(!fantasyPaneVisible);
-    setSportPaneVisible(false);
-  };
-
-  const hasSubscription = (sport: string) => {
-    if (
-      subscriptions.findIndex(
-        (subscription: UserSubscription) => subscription.sports[0]?.name === sport
-      ) > -1
-    ) {
-      return true;
-    }
-    return false;
   };
 
   const hasPackage = (packageName: string) => {
@@ -106,6 +75,7 @@ function SubMenu({
       return subscription.plan.name.includes(packageName);
     }).length;
   };
+  console.log('--------- subscriptions:', subscriptions);
 
   return (
     <>
@@ -118,13 +88,11 @@ function SubMenu({
         <div className={styles.submenu_content}>
           <div className={styles.submenu_content_left}>
             <div className={styles.submenu_desc}>
-              <div onMouseOver={hidePanes}>Main Pages</div>
+              <div>Main Pages</div>
             </div>
             <div className={styles.submenu_item}>
               <Link href="/member-dashboard">
-                <a
-                  onMouseOver={hidePanes}
-                  className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                <a className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
                   {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
                   Member Dashboard
                 </a>
@@ -133,11 +101,9 @@ function SubMenu({
             <div className={styles.submenu_item_for_pane}>
               {(hasPackage('Sport') || subscriptionStatus === 'visitor') && (
                 <Link href="/sports-card">
-                  <a onMouseOver={showSportPanel} className={styles.locked}>
+                  <a className={styles.locked}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     <span>Sports Card</span>
-                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                   </a>
                 </Link>
               )}
@@ -145,9 +111,7 @@ function SubMenu({
             <div className={styles.submenu_item}>
               {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
                 <Link href="/vip-all-access-card">
-                  <a
-                    onMouseOver={hidePanes}
-                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     VIP ALL ACCESS CARD
                   </a>
@@ -157,130 +121,21 @@ function SubMenu({
             <div className={styles.submenu_item_for_pane}>
               {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
                 <Link href="/fantasy-daily-lineups">
-                  <a
-                    onMouseOver={showFantasyPanel}
-                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     <span>FANTASY PICKS</span>
-                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                   </a>
                 </Link>
               )}
             </div>
             <div className={styles.submenu_item}>
               <Link href="/profile">
-                <a
-                  onMouseOver={hidePanes}
-                  className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                <a className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
                   {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
                   Settings
                 </a>
               </Link>
             </div>
-          </div>
-          <div className={styles.pane}>
-            {sportPaneVisible && (
-              <>
-                <div className={styles.submenu_desc}>Yearly subscription — Available Sports</div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('NBA') ? styles.locked : ''}>
-                      {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
-                      Basketball
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('NFL') ? styles.locked : ''}>
-                      {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
-                      Football
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('MLB') ? styles.locked : ''}>
-                      {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
-                      Baseball
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('SOCCER') ? styles.locked : ''}>
-                      {!hasSubscription('SOCCER') && <LockIcon className={styles.lock_icon} />}
-                      SOCCER
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('UFC') ? styles.locked : ''}>
-                      {!hasSubscription('UFC') && <LockIcon className={styles.lock_icon} />}
-                      UFC
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/sports-card">
-                    <a className={!hasSubscription('FORMULA 1') ? styles.locked : ''}>
-                      {!hasSubscription('FORMULA 1') && <LockIcon className={styles.lock_icon} />}
-                      FORMULA 1
-                    </a>
-                  </Link>
-                </div>
-              </>
-            )}
-            {fantasyPaneVisible && (
-              <>
-                <div className={styles.submenu_desc}>
-                  Daily Lineup Subscription — Available Sports
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/fantasy-daily-lineups">
-                    <a
-                      className={
-                        !hasSubscription('NBA') &&
-                        !hasSubscription('NFL') &&
-                        !hasSubscription('MLB')
-                          ? styles.locked
-                          : ''
-                      }>
-                      {!hasSubscription('NBA') &&
-                        !hasSubscription('NFL') &&
-                        !hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
-                      All
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('NBA') ? styles.locked : ''}>
-                      {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
-                      Basketball
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('NFL') ? styles.locked : ''}>
-                      {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
-                      Football
-                    </a>
-                  </Link>
-                </div>
-                <div className={styles.submenu_item}>
-                  <Link href="/fantasy-daily-lineups">
-                    <a className={!hasSubscription('MLB') ? styles.locked : ''}>
-                      {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
-                      Baseball
-                    </a>
-                  </Link>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>
@@ -300,9 +155,7 @@ function SubMenu({
             <div className={styles.submenu_content_left}>
               <div className={styles.submenu_item}>
                 <Link href="/member-dashboard">
-                  <a
-                    onMouseOver={hidePanes}
-                    className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     Member Dashboard
                   </a>
@@ -321,76 +174,13 @@ function SubMenu({
                     onClick={toggleSportPanel}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     <span>Sports Card</span>
-                    {sportPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!sportPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                   </a>
-                )}
-              </div>
-              <div className={styles.pane}>
-                {sportPaneVisible && (
-                  <>
-                    <div className={styles.submenu_desc}>
-                      Yearly subscription — Available Sports
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('NBA') ? styles.locked : ''}>
-                          {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
-                          Basketball
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('NFL') ? styles.locked : ''}>
-                          {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
-                          Football
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('MLB') ? styles.locked : ''}>
-                          {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
-                          Baseball
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('SOCCER') ? styles.locked : ''}>
-                          {!hasSubscription('SOCCER') && <LockIcon className={styles.lock_icon} />}
-                          SOCCER
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('UFC') ? styles.locked : ''}>
-                          {!hasSubscription('UFC') && <LockIcon className={styles.lock_icon} />}
-                          UFC
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/sports-card">
-                        <a className={!hasSubscription('FORMULA 1') ? styles.locked : ''}>
-                          {!hasSubscription('FORMULA 1') && (
-                            <LockIcon className={styles.lock_icon} />
-                          )}
-                          FORMULA 1
-                        </a>
-                      </Link>
-                    </div>
-                  </>
                 )}
               </div>
               <div className={styles.submenu_item}>
                 {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
                   <Link href="/vip-all-access-card">
-                    <a
-                      onMouseOver={hidePanes}
-                      className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                       {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                       VIP ALL ACCESS CARD
                     </a>
@@ -407,61 +197,15 @@ function SubMenu({
                         : subscriptionStatus !== 'paid'
                         ? styles.locked
                         : ''
-                    }
-                    onClick={toggleFantasyPanel}>
+                    }>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     <span>FANTASY PICKS</span>
-                    {fantasyPaneVisible && <CaretUpOutlined className={styles.caret_up} />}
-                    {!fantasyPaneVisible && <CaretDownOutlined className={styles.caret_down} />}
                   </a>
-                )}
-              </div>
-              <div className={styles.pane}>
-                {fantasyPaneVisible && (
-                  <>
-                    <div className={styles.submenu_desc}>
-                      Daily Lineup Subscription — Available Sports
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a className={styles.locked}>
-                          <LockIcon className={styles.lock_icon} />
-                          All
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('NBA') ? styles.locked : ''}>
-                          {!hasSubscription('NBA') && <LockIcon className={styles.lock_icon} />}
-                          Basketball
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('NFL') ? styles.locked : ''}>
-                          {!hasSubscription('NFL') && <LockIcon className={styles.lock_icon} />}
-                          Football
-                        </a>
-                      </Link>
-                    </div>
-                    <div className={styles.submenu_item}>
-                      <Link href="/fantasy-daily-lineups">
-                        <a className={!hasSubscription('MLB') ? styles.locked : ''}>
-                          {!hasSubscription('MLB') && <LockIcon className={styles.lock_icon} />}
-                          Baseball
-                        </a>
-                      </Link>
-                    </div>
-                  </>
                 )}
               </div>
               <div className={styles.submenu_item}>
                 <Link href="/profile">
-                  <a
-                    onMouseOver={hidePanes}
-                    className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                  <a className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
                     {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
                     Settings
                   </a>

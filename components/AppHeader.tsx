@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
+import momenttz from 'moment-timezone';
 
 import {
   IdentityIcon,
@@ -17,11 +18,11 @@ import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
+import moment from 'moment';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
 type HeaderProps = {
-  releaseTime: DateObjectType;
   winningRate: number;
   curRecord: string;
   currentDateTime: string;
@@ -33,12 +34,6 @@ type RemainingTimeType = {
   hrs: number;
   mins: number;
   secs: number;
-};
-
-type DateObjectType = {
-  year: number;
-  month: number;
-  date: number;
 };
 
 const DefaultRemainingTime = {
@@ -481,10 +476,16 @@ function SubMenu({
   );
 }
 
-function getRemainingTime(date: DateObjectType): RemainingTimeType {
+function getRemainingTime(): RemainingTimeType {
   const now = new Date(); //todays date
-  const end = new Date(date.year, date.month, date.date); // another date
-  let diff = (end.getTime() - now.getTime()) / 1000;
+  const todayM = now.getMonth() + 1 < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1;
+  const end = moment.tz(
+    `${now.getFullYear()}-${todayM}-${
+      now.getDate() < 10 ? '0' + now.getDate() : now.getDate()
+    } 18:00`,
+    'America/Toronto'
+  );
+  let diff = Math.abs(moment().diff(end, 'seconds'));
   if (diff > 0) {
     const days = Math.floor(diff / 86400);
     diff = diff - 86400 * days;
@@ -516,7 +517,6 @@ function DateBar({ currentDateTime }: { currentDateTime: string }) {
 }
 
 export default function AppHeader({
-  releaseTime,
   currentDateTime,
   token,
   subscriptions: userSubscriptions
@@ -527,8 +527,10 @@ export default function AppHeader({
 
   const dispatch = useDispatch();
   useEffect(() => {
+    const remainingTime = getRemainingTime();
+    setRemainingTime(remainingTime);
     const remainingTimeInterval = setInterval(() => {
-      const remainingTime = getRemainingTime(releaseTime);
+      const remainingTime = getRemainingTime();
       setRemainingTime(remainingTime);
     }, 10000);
     return () => {

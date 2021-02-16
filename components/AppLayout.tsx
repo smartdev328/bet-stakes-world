@@ -16,7 +16,6 @@ export default function AppLayout({ bgColor, children, token, subscriptions }: A
   return (
     <>
       <AppHeader
-        releaseTime={{ year: 2021, month: 12, date: 31 }}
         winningRate={72}
         curRecord={'96 - 36'}
         token={token}

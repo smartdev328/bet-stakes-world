@@ -599,3 +599,10 @@ a.locked:active {
   height: auto;
   max-width: 600px;
 }
+
+.moreInfo {
+  font-weight: 600;
+  padding-left: 1em;
+  color: #FFC700;
+  cursor: pointer;
+}

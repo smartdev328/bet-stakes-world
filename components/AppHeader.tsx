@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Menu, Row, Col, Dropdown } from 'antd';
+import { Menu, Row, Col, Dropdown, Tooltip } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
-import momenttz from 'moment-timezone';
 
 import {
   IdentityIcon,
@@ -18,7 +17,7 @@ import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
@@ -594,6 +593,9 @@ export default function AppHeader({
               <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
                 <a className={styles.yellowBoldLink}>View Picks</a>
               </Link>
+              <Tooltip placement="right" title="prompt text" color={'#f50'}>
+                <span className={styles.moreInfo}>i</span>
+              </Tooltip>
             </div>
           </div>
         </Col>

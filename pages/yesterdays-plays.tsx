@@ -73,6 +73,7 @@ const SPORTS_INFO = [
 
 export default function YesterdaysPlays({ token, subscriptions, sports }: PageProps) {
   const [unlockedItems, setUnlockedItems] = useState<number[]>();
+  const [activeSport, setActiveSport] = useState<number>(-1);
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [offset, setOffset] = useState<number>(0);
   const [fetchMoreLoading, setFetchMoreLoading] = useState<boolean>(false);
@@ -90,6 +91,9 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
 
   // Update Filters
   const updateFilters = (sportId: number, status: boolean) => {
+    if (status) {
+      setActiveSport(sportId);
+    }
     setEntireLoading(true);
     SportsAPIs.getYesterdaySportEntries(0, status ? sportId : undefined)
       .then((res) => res.json())
@@ -109,7 +113,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
 
   const onLoadMore = () => {
     setFetchMoreLoading(true);
-    SportsAPIs.getYesterdaySportEntries(offset, undefined)
+    SportsAPIs.getYesterdaySportEntries(offset, activeSport > 0 ? activeSport : undefined)
       .then((res) => res.json())
       .then((data) => {
         setGames(games.concat(data));

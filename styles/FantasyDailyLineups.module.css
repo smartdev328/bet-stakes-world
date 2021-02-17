@@ -291,8 +291,23 @@
   margin: 40px 0;
 }
 .optionsRow .company_logo {
-  width: 100px;
+  width: 110px;
   margin-right: 30px;
+  border: solid 1px transparent;
+  padding: 0.8em 0.4em 0.8em;
+  cursor: pointer;
+}
+.optionsRow .company_logo.selected {
+  border: solid 1px #000;
+}
+.optionsRow .company_logo img {
+  width: 100%;
+}
+.optionsRow .company_logo.draft_kings {
+  padding-top: 0.4em;
+}
+.optionsRow .company_logo.yahoo_fantasy {
+  padding: 0;
 }
 
 .optionsRow span {

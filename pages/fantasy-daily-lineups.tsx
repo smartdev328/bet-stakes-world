@@ -11,6 +11,7 @@ import { AntiClockIcon, DateRangeIcon, IdentityIcon, LockIcon } from '@component
 import styles from '@styles/FantasyDailyLineups.module.css';
 import { DailyLineupType, PageProps, SportInfoType } from '@type/Main';
 import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
+import { FANTASY_COMPANIES } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -72,6 +73,7 @@ type TopSectionPropsType = {
 
 function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
+  const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].id);
 
   useEffect(() => {
     const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
@@ -95,6 +97,9 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
     } else {
       openUnlockModal(SPORTS_INFO[index]);
     }
+  };
+  const onSelectCompany = (name: string) => {
+    setSelectedCompany(name);
   };
 
   const responsive = [
@@ -144,22 +149,18 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
       </Row>
       <Row className={styles.optionsRow} align={'middle'} justify={'space-between'}>
         <Row align={'middle'}>
-          <LazyLoad>
-            <img
-              src="/images/draft_kings_company.png"
-              alt="Draft kings Company"
-              className={styles.company_logo}
-            />
-          </LazyLoad>
-          <LazyLoad>
-            <img
-              src="/images/fanduel_company.png"
-              alt="Fanduel Company"
-              className={styles.company_logo}
-            />
-          </LazyLoad>
+          {FANTASY_COMPANIES.map((company) => (
+            <LazyLoad key={company.id}>
+              <div
+                className={`${styles.company_logo} ${styles[`${company.id}`]} ${
+                  selectedCompany === company.id && styles.selected
+                }`}
+                onClick={() => onSelectCompany(company.id)}>
+                <img src={company.logo} alt="Draft kings Company" />
+              </div>
+            </LazyLoad>
+          ))}
         </Row>
-        <span>Total Salary: $55,600</span>
       </Row>
     </>
   );

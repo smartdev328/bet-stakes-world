@@ -123,6 +123,15 @@ p {
   color: #000000;
 }
 
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (max-width: 600px) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"], 
+  input[type="tel"], input[type="url"]{ font-size: 16px !important; transform: scaleY(0.9); }
+}
+
 .yellow-blod-link {
   font-family: Saira;
   font-style: normal;

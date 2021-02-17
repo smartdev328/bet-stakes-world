@@ -75,6 +75,10 @@
   color: var(--backgroundColor);
 }
 
+.countdownBox_countdown_timer > span {
+  width: 165px;
+}
+
 .yellowBoldLink {
   font-size: 14px;
   font-weight: 500;
@@ -600,9 +604,17 @@ a.locked:active {
   max-width: 600px;
 }
 
-.moreInfo {
-  font-weight: 600;
-  padding-left: 1em;
-  color: #FFC700;
+.countdownBox_countdown_timer > .moreInfo {
+  color: #c4c4c4;
   cursor: pointer;
+  font-style: italic;
+  font-family: serif;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: solid 1px #c4c4c4;
+  font-size: 12px;
 }

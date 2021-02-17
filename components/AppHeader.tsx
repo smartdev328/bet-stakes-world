@@ -224,7 +224,7 @@ function getRemainingTime(): RemainingTimeType {
   const end = moment.tz(
     `${now.getFullYear()}-${todayM}-${
       now.getDate() < 10 ? '0' + now.getDate() : now.getDate()
-    } 18:00`,
+    } 19:00`,
     'America/Toronto'
   );
   let diff = Math.abs(moment().diff(end, 'seconds'));
@@ -330,15 +330,15 @@ export default function AppHeader({
           <div className={styles.countdownBox}>
             <div className={styles.countdownBox_desc}>Pick Release Countdown</div>
             <div className={styles.countdownBox_countdown_timer}>
-              {`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}
+              <span>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
+              <Tooltip placement="right" title="prompt text" color={'#f50'}>
+                <span className={styles.moreInfo}>i</span>
+              </Tooltip>
             </div>
             <div>
               <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
                 <a className={styles.yellowBoldLink}>View Picks</a>
               </Link>
-              <Tooltip placement="right" title="prompt text" color={'#f50'}>
-                <span className={styles.moreInfo}>i</span>
-              </Tooltip>
             </div>
           </div>
         </Col>

@@ -75,7 +75,6 @@ function SubMenu({
       return subscription.plan.name.includes(packageName);
     }).length;
   };
-  console.log('--------- subscriptions:', subscriptions);
 
   return (
     <>

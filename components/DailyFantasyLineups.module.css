@@ -73,3 +73,9 @@
   margin-right: 10px;
   margin-top: 11px;
 }
+
+@media (max-width: 600px) {
+  .sidebarBlock {
+    margin-left: 0;
+  }
+}

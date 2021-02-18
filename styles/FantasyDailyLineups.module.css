@@ -343,10 +343,18 @@
   .dropdownBtnAll {
     margin: 1.5em 8px;
   }
+
 }
 @media (max-width: 520px) {
   .sportsCardListCarousel {
     width: calc(154px * 2);
+  }
+  .optionsRow {
+    margin: 30px 0;
+  }
+  .optionsRow .company_logo {
+    width: 105px;
+    margin-right: 16px;
   }
 }
 
@@ -695,7 +703,7 @@
 .fantasy_tab.selected {
   font-weight: 800;
 }
-.financialValues {
+.optionsRow .financialValues {
   margin-left: 50px;
 }
 .fantasyLineupInfo {
@@ -719,4 +727,43 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 28px;
+}
+
+@media (max-width: 600px) {
+  .fantasy_tab {
+    width: 200px;
+    margin-bottom: 1em;
+    font-size: 28px;
+    line-height: 40px;
+  }
+  .fantasy_tab:nth-child(2) {
+    width: 150px;
+  }
+  .optionsRow .financialValues {
+    font-size: 18px;
+    line-height: 36px;
+    margin-left: 10px;
+    width: 100%;
+    text-align: left;
+  }
+  .optionsRow .financialValues span {
+    font-size: 18px;
+    line-height: 36px;
+  }
+  .fantasyLineupInfo {
+    font-size: 22px;
+    line-height: 36px;
+    margin-bottom: 1.5em;
+  }
+  .featureValue {
+    margin-bottom: 20px;
+  }
+  .featureValue .featureValueTitle {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .featureValue .featureValueContent {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }

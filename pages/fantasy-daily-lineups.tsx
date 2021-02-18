@@ -422,7 +422,7 @@ type SidebarProps = {
 
 function FantasySidebar({ selectedSport, selectedCompany }: SidebarProps) {
   return (
-    <div className={styles.fantasySidebar}>
+    <>
       {selectedSport === 'NBA' && selectedCompany === 'DraftKings' && (
         <>
           <DailyFantasyLineups />
@@ -432,13 +432,13 @@ function FantasySidebar({ selectedSport, selectedCompany }: SidebarProps) {
           {/* <BankRollManagement /> */}
         </>
       )}
-      {selectedSport !== 'NBA' && selectedCompany !== 'DraftKings' && (
+      {!(selectedSport === 'NBA' && selectedCompany === 'DraftKings') && (
         <>
           <FantasyLineupIncludes />
           <FantasySportsBook />
         </>
       )}
       <BettingFundamentals isFantasy />
-    </div>
+    </>
   );
 }

@@ -211,6 +211,7 @@
 }
 .package {
   display: flex;
+  margin-bottom: 1.5em;
 }
 .package img {
   width: 110px;

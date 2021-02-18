@@ -91,3 +91,11 @@
   text-align: center;
   cursor: pointer;
 }
+
+.successMessage {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 2em 0;
+  text-align: center;
+  height: 200px;
+}

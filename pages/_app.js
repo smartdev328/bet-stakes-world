@@ -32,7 +32,7 @@ const FULL_ACCESS_ROUTES = [
   '/signup',
   '/cart',
   '/faqs',
-  '/contact',
+  '/contact-us',
   '/yesterdays-plays',
   '/aboutus',
   '/terms',

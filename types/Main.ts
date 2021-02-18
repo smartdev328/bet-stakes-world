@@ -107,6 +107,7 @@ export type DailyLineupType = {
   startTime: string;
   fppg: number;
   oprk: string;
+  played: number;
   price: number;
 };
 

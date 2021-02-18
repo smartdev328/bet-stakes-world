@@ -1,5 +1,5 @@
 .container {
-  max-width: 1440px;
+  max-width: 1480px;
   padding: 0 50px;
   margin: auto;
 }
@@ -13,6 +13,23 @@
     padding: 0 18px;
   }
 }
+
+@media (max-width: 1024px) {
+  .contentMainCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .contentSideCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
 
 /* Hero Banner */
 .heroBanner {
@@ -422,7 +439,9 @@
 .daily_lineup_main_content > div strong {
   margin-right: 24px;
 }
-
+.daily_lineup_teams {
+  margin-bottom: 0.5em;
+}
 .daily_lineup_value {
   font-weight: 600;
   font-size: 32px;
@@ -470,15 +489,22 @@
   fill: rgba(0, 0, 0, 0.54);
 }
 .details_properties {
-  padding: 40px 100px;
+  padding: 40px 20px;
   border-bottom: solid 1px #c4c4c4;
 }
 .details_property {
-  width: 340px;
+  max-width: 320px;
+  font-size: 16px;
 }
-.details_property_title {
+.details_property > div {
+  margin-left: 1em;
+}
+.details_property > .details_property_title {
   display: flex;
   align-items: center;
+  height: 44px;
+  margin-bottom: 1em;
+  margin-left: 0;
 }
 .details_property_title span {
   font-weight: 600;
@@ -489,13 +515,11 @@
   margin-left: 8px;
 }
 
-.details_property_title .identity_icon path {
-  fill: #EC4C15;
+.details_property_title .user_double_icon {
+  height: 16px;
 }
-
-.details_property_title .identity_icon:last-child {
-  margin-left: -8px;
-  overflow: hidden;
+.details_property_title .date_range_icon {
+  width: 24px;
 }
 
 @media (max-width: 1400px) {
@@ -658,4 +682,41 @@
   .details_property {
     width: 100%;
   }
+}
+
+/* Fantasy Tabs */
+.fantasy_tab {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 47px;
+  width: 240px;
+  cursor: pointer;
+}
+.fantasy_tab.selected {
+  font-weight: 800;
+}
+.financialValues {
+  margin-left: 50px;
+}
+.fantasyLineupInfo {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 47px;
+  margin-bottom: 1.5em;
+}
+.featureValue {
+  margin-right: 30px;
+  background: #F9F9F9;
+  padding: 16px;
+  display: inline-block;
+}
+.featureValue .featureValueTitle {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 47px;
+}
+.featureValue .featureValueContent {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
 }

@@ -2,16 +2,34 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Carousel } from 'antd';
+import { Row, Button, Carousel, Col, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
+import NumberFormat from 'react-number-format';
 
-import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
-import { AntiClockIcon, DateRangeIcon, IdentityIcon, LockIcon } from '@components/SvgIcons';
+import {
+  AppLayout,
+  DailyFantasyLineups,
+  BannerSportsAndMatches,
+  BettingFundamentals,
+  CommonSportsBook,
+  DashboardHeader,
+  WhereToWatchGame,
+  WhereBuyGear
+} from '@components/index';
+import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
 import { DailyLineupType, PageProps, SportInfoType } from '@type/Main';
 import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
-import { FANTASY_COMPANIES } from '@constants/';
+import {
+  FANTASY_COMPANIES,
+  FANTASY_TABS,
+  FANTASY_LINEUPS_GAMES,
+  FANTASY_LINEUPS_INFO
+} from '@constants/';
+import FantasySportsBook from '@components/FantasySportsBook';
+import FantasyLineupIncludes from '@components/FantasyLineupIncludes';
+import { FantasyTabInfo } from '@type/Sports';
 
 const SPORTS_INFO = [
   {
@@ -34,8 +52,35 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token, subscriptions }: PageProps) {
-  const lockedItems = ['NBA'];
+export default function FantasyDailyLineupsPage({ token, subscriptions }: PageProps) {
+  const lockedItems = ['NBA', 'NFL', 'MLB'];
+  const [lineupList, setLineupList] = useState<DailyLineupType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedSport, setSelectedSport] = useState<string>(SPORTS_INFO[0].name);
+  const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].name);
+
+  useEffect(() => {
+    const lineups = FANTASY_LINEUPS_GAMES.filter(
+      (game) =>
+        game.sport === selectedSport &&
+        game.company === selectedCompany &&
+        game.type === 'MAIN_SLATE'
+    );
+    setLineupList(lineups);
+  }, []);
+
+  const onChangeOptions = (sport: string, company: string, lineupType: string) => {
+    setLoading(true);
+    const lineups = FANTASY_LINEUPS_GAMES.filter(
+      (game) => game.sport === sport && game.company === company && game.type === lineupType
+    );
+    setTimeout(() => {
+      setLineupList(lineups);
+      setLoading(false);
+      setSelectedSport(sport);
+      setSelectedCompany(company);
+    }, 2000);
+  };
 
   return (
     <>
@@ -45,11 +90,23 @@ export default function SportsCard({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection lockedItems={lockedItems} openUnlockModal={() => {}} />
+          <TopSection
+            lockedItems={lockedItems}
+            openUnlockModal={() => {}}
+            onChangeOptions={onChangeOptions}
+          />
         </div>
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
-            <LineupsList />
+            <Row className={styles.content}>
+              <Col span={18} className={styles.contentMainCol}>
+                {!loading && <LineupsList data={lineupList} />}
+                {loading && <Spin />}
+              </Col>
+              <Col span={6} className={styles.contentSideCol}>
+                <FantasySidebar selectedCompany={selectedCompany} selectedSport={selectedSport} />
+              </Col>
+            </Row>
           </div>
         </div>
       </AppLayout>
@@ -69,11 +126,23 @@ function HeroBanner() {
 type TopSectionPropsType = {
   lockedItems: string[];
   openUnlockModal: (_: SportInfoType) => void;
+  onChangeOptions: (sport: string, company: string, lineupType: string) => void;
 };
 
-function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
+function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
-  const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].id);
+  const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].name);
+  const [activeTab, setActiveTab] = useState<string>(FANTASY_TABS[0]);
+  const [activeSport, setActiveSport] = useState<string>(SPORTS_INFO[0].name);
+  const [infoForCurrentTab, setInfoForCurrentTab] = useState<FantasyTabInfo | undefined>(undefined);
+
+  useEffect(() => {
+    const infos = FANTASY_LINEUPS_INFO.filter(
+      (info) =>
+        info.sport === activeSport && info.company === selectedCompany && info.type === activeTab
+    );
+    setInfoForCurrentTab(infos[0]);
+  }, [activeSport, activeTab, selectedCompany]);
 
   useEffect(() => {
     const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
@@ -89,17 +158,26 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      items[index] = 2;
-      setSportsStatus(items);
-    } else if (items[index] === 2) {
-      items[index] = 1;
-      setSportsStatus(items);
+      const newItems = items.slice();
+      newItems.fill(1);
+      newItems[index] = 2;
+      setActiveSport(SPORTS_INFO[index].name);
+      setSportsStatus(newItems);
+      setActiveTab(FANTASY_TABS[0]);
+      setSelectedCompany(FANTASY_COMPANIES[0].name);
+      onChangeOptions(SPORTS_INFO[index].name, FANTASY_COMPANIES[0].name, FANTASY_TABS[0]);
     } else {
       openUnlockModal(SPORTS_INFO[index]);
     }
   };
   const onSelectCompany = (name: string) => {
     setSelectedCompany(name);
+    setActiveTab(FANTASY_TABS[0]);
+    onChangeOptions(activeSport, name, FANTASY_TABS[0]);
+  };
+  const changeTab = (tab: string) => {
+    setActiveTab(tab);
+    onChangeOptions(activeSport, selectedCompany, tab);
   };
 
   const responsive = [
@@ -135,7 +213,7 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
                   <div
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
                     style={{
-                      background: sportsStatus[index] == 2 ? sport.background : ''
+                      background: activeSport === sport.name ? sport.background : ''
                     }}>
                     {sport.logo()}
                     {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
@@ -153,119 +231,73 @@ function TopSection({ lockedItems, openUnlockModal }: TopSectionPropsType) {
             <LazyLoad key={company.id}>
               <div
                 className={`${styles.company_logo} ${styles[`${company.id}`]} ${
-                  selectedCompany === company.id && styles.selected
+                  selectedCompany === company.name && styles.selected
                 }`}
-                onClick={() => onSelectCompany(company.id)}>
+                onClick={() => onSelectCompany(company.name)}>
                 <img src={company.logo} alt="Draft kings Company" />
               </div>
             </LazyLoad>
           ))}
         </Row>
       </Row>
+      <Row className={styles.optionsRow} align={'middle'} justify={'space-between'}>
+        <Row align={'middle'}>
+          {FANTASY_TABS.map((tab) => (
+            <div
+              key={tab}
+              className={`${styles.fantasy_tab} ${activeTab === tab && styles.selected}`}
+              onClick={() => changeTab(tab)}>
+              {tab.replace('_', ' ')}
+            </div>
+          ))}
+        </Row>
+        <Row align={'middle'}>
+          <span className={styles.financialValues}>
+            Salary Cap:&nbsp;
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={true}
+              prefix={'$'}
+              value={infoForCurrentTab?.salaryCap}
+            />
+          </span>
+          <span className={styles.financialValues}>
+            Lineup Salary:&nbsp;
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={true}
+              prefix={'$'}
+              value={infoForCurrentTab?.lineupSalary}
+            />
+          </span>
+        </Row>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <p className={styles.fantasyLineupInfo}>
+            TheDailyStakes suggests entering this lineup in the following contest types
+          </p>
+        </Col>
+        <Col span={24} className={styles.fantasyLineupInfo}>
+          <div className={styles.featureValue}>
+            <div className={styles.featureValueTitle}>Tournament</div>
+            <div className={styles.featureValueContent}>Play up to 15% of your bankroll</div>
+          </div>
+          <div className={styles.featureValue}>
+            <div className={styles.featureValueTitle}>Beat the Score</div>
+            <div className={styles.featureValueContent}>Play up to 25% of your bankroll</div>
+          </div>
+          <div className={styles.featureValue}>
+            <div className={styles.featureValueTitle}>50/50s</div>
+            <div className={styles.featureValueContent}>Play up to 50% of your bankroll</div>
+          </div>
+        </Col>
+      </Row>
     </>
   );
 }
 
-const Mock_DailyLineups = [
-  {
-    id: 1,
-    state: 'PG',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'Damian Lillard',
-    team1: 'LAL',
-    team2: 'POR',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 2,
-    state: 'SG',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'SHAI GILGEOUS-ALEXANDER',
-    team1: 'OKC',
-    team2: 'HOU',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 3,
-    state: 'SF',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'Lebron James',
-    team1: 'LAL',
-    team2: 'POR',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 4,
-    state: 'PF',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'GIANNIS ANTETOKOUNMPO',
-    team1: 'MIL',
-    team2: 'ORL',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 5,
-    state: 'C',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'Rudy Gobert',
-    team1: 'UTA',
-    team2: 'BKN',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 6,
-    state: 'G',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'James Harden',
-    team1: 'HOU',
-    team2: 'DEN',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 7,
-    state: 'F',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'Jaylen Brown',
-    team1: 'BOS',
-    team2: 'MIA',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  },
-  {
-    id: 8,
-    state: 'UTL',
-    team_logo: 'https://dailystakes-assets.s3.us-east-2.amazonaws.com/Toronto_Raptors.png',
-    lineup_name: 'Pascal Siakam',
-    team1: 'TOR',
-    team2: 'BKN',
-    startTime: '6:30 pm',
-    fppg: 38.9,
-    oprk: '7th',
-    price: 7566
-  }
-];
-
-function LineupsList() {
+function LineupsList({ data }: { data: DailyLineupType[] }) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
@@ -274,7 +306,7 @@ function LineupsList() {
 
   return (
     <div className={styles.daily_lineups}>
-      {Mock_DailyLineups.map((lineup: DailyLineupType, index: number) => (
+      {data.map((lineup: DailyLineupType, index: number) => (
         <div className={styles.daily_lineup} key={lineup.id}>
           <Row>
             <div className={styles.daily_lineup_sidebar}>
@@ -293,16 +325,28 @@ function LineupsList() {
               <div className={styles.daily_lineup_main_content}>
                 <h4>{lineup.lineup_name}</h4>
                 <div>
-                  <strong>{`${lineup.team1}@${lineup.team2} ${'Today at 6:30pm'}`}</strong>
+                  <strong
+                    className={
+                      styles.daily_lineup_teams
+                    }>{`${lineup.team1}@${lineup.team2}`}</strong>
                   <div>
                     <span>FPPG:&nbsp;</span>
                     <strong>{lineup.fppg}</strong>
                     <span>oprk:&nbsp;</span>
                     <strong>{lineup.oprk}</strong>
+                    <span>Games Played:&nbsp;</span>
+                    <strong>{lineup.played}</strong>
                   </div>
                 </div>
               </div>
-              <span className={styles.daily_lineup_value}>${lineup.price}</span>
+              <div className={styles.daily_lineup_value}>
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  value={lineup.price}
+                />
+              </div>
             </div>
           </Row>
           <div className={styles.daily_lineup_details}>
@@ -317,45 +361,84 @@ function LineupsList() {
               <Row className={styles.details_properties} justify={'space-between'}>
                 <div className={styles.details_property}>
                   <div className={styles.details_property_title}>
-                    <div>
-                      <IdentityIcon className={styles.identity_icon} />
-                      <IdentityIcon className={styles.identity_icon} />
-                    </div>
-                    <span>Macthup</span>
+                    <AntiClockIcon className={styles.anti_clock_icon} />
+                    <span>THIS SEASON</span>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor quam at massa
-                    auctor. Amet facilisis neque pellentesque adipiscing sed turpis vitae. Amet
-                    semper felis suspendisse a mattis sed.
-                  </p>
+                  <div>
+                    <div>Points per game:</div>
+                    <div>Rebounds per game:</div>
+                    <div>Assists per game:</div>
+                    <div>Steals per game:</div>
+                    <div>
+                      <strong>Fantasy points per game:</strong>
+                    </div>
+                  </div>
                 </div>
                 <div className={styles.details_property}>
                   <div className={styles.details_property_title}>
-                    <AntiClockIcon className={styles.anti_clock_icon} />
-                    <span>Previous game</span>
+                    <div>
+                      <img
+                        alt=""
+                        src="/images/user-double.png"
+                        className={styles.user_double_icon}
+                      />
+                    </div>
+                    <span>PROJECTED POINTS BY THE DAILY STAKES </span>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor quam at massa
-                    auctor. Amet facilisis neque pellentesque adipiscing sed turpis vitae. Amet
-                    semper felis suspendisse a mattis sed.
-                  </p>
+                  <div>
+                    <div>Expected minutes:</div>
+                    <div>Average point per minute:</div>
+                    <div>Project fantasy points:</div>
+                    <div>Projected Ownership%:</div>
+                    <div>
+                      <strong>Expected value against fantasy price:</strong>
+                    </div>
+                  </div>
                 </div>
                 <div className={styles.details_property}>
                   <div className={styles.details_property_title}>
                     <DateRangeIcon className={styles.date_range_icon} />
-                    <span>This Season</span>
+                    <span>PLAYER PROPS BY THE Sportbooks</span>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porttitor quam at massa
-                    auctor. Amet facilisis neque pellentesque adipiscing sed turpis vitae. Amet
-                    semper felis suspendisse a mattis sed.
-                  </p>
+                  <div>
+                    <p>1) Over / Under 22.5 Points</p>
+                    <p>2) Over / Under 6.5 Assists</p>
+                    <p>3) Over / Under 7.5 Rebounds</p>
+                  </div>
                 </div>
               </Row>
             )}
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+type SidebarProps = {
+  selectedSport: string;
+  selectedCompany: string;
+};
+
+function FantasySidebar({ selectedSport, selectedCompany }: SidebarProps) {
+  return (
+    <div className={styles.fantasySidebar}>
+      {selectedSport === 'NBA' && selectedCompany === 'DraftKings' && (
+        <>
+          <DailyFantasyLineups />
+          <CommonSportsBook />
+          <WhereToWatchGame />
+          <WhereBuyGear />
+          {/* <BankRollManagement /> */}
+        </>
+      )}
+      {selectedSport !== 'NBA' && selectedCompany !== 'DraftKings' && (
+        <>
+          <FantasyLineupIncludes />
+          <FantasySportsBook />
+        </>
+      )}
+      <BettingFundamentals isFantasy />
     </div>
   );
 }

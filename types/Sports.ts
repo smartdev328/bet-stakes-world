@@ -5,3 +5,11 @@ export type Sport = {
   active: boolean;
   logo: string | null;
 };
+
+export type FantasyTabInfo = {
+  sport: string;
+  company: string;
+  type: string;
+  salaryCap: number;
+  lineupSalary: number;
+};

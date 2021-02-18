@@ -169,7 +169,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
               <Col span={6} className={styles.contentSideCol}>
                 <BankRollManagement />
                 <CommonSportsBook />
-                <BettingFundamentalRender />
+                <BettingFundamentals />
               </Col>
             </Row>
           </div>
@@ -212,20 +212,6 @@ function SubscribeNow() {
         </div>
       </div>
     </div>
-  );
-}
-
-function BettingFundamentalRender() {
-  const [showContent, setShowContent] = useState<boolean[]>([]);
-  const toggleDetailsAt = (id: number) => {
-    showContent[id] = !showContent[id];
-    setShowContent(showContent.slice());
-  };
-
-  return (
-    <BettingFundamentals
-      showContentAt={showContent}
-      toggleDetailsAt={toggleDetailsAt}></BettingFundamentals>
   );
 }
 

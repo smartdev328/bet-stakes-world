@@ -20,8 +20,7 @@
   color: #1a1a1a;
 }
 .sidebarBlockContent {
-  padding: 16px 0;
-  min-height: 200px;
+  padding: 0 0 16px 0;
 }
 .sidebarBlockContent .ctaBtns {
   display: flex;
@@ -68,6 +67,11 @@
   line-height: 117.9%;
   color: #000000;
 }
+.company_logo {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+}
 
 @media (max-width: 600px) {
   .sidebarBlock {
@@ -77,17 +81,4 @@
   .sidebarBlockContent {
     padding-bottom: 5px;
   }
-}
-
-.company_logo {
-  margin: 0.8em 0;
-}
-
-.sidebarBlock.fantasyLineupIncludes .sidebarBlockContent {
-  margin-top: 0.8em;
-}
-.sidebarBlock.fantasyLineupIncludes .sidebarBlockContent p {
-  font-weight: 400;
-  color: #1a1a1a;
-  margin-bottom: 1.2em;
 }

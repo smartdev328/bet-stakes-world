@@ -122,7 +122,7 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             <Col span={6} className={styles.contentSideCol}>
               <BankRollManagement />
               <CommonSportsBook />
-              <BettingFundamentalRender />
+              <BettingFundamentals />
             </Col>
           </Row>
         </div>
@@ -323,19 +323,5 @@ function ListGames({
       games={games}
       showDetailsAt={showDetailsAt}
       changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
-  );
-}
-
-function BettingFundamentalRender() {
-  const [showContent, setShowContent] = useState<boolean[]>([]);
-  const toggleDetailsAt = (id: number) => {
-    showContent[id] = !showContent[id];
-    setShowContent(showContent.slice());
-  };
-
-  return (
-    <BettingFundamentals
-      showContentAt={showContent}
-      toggleDetailsAt={toggleDetailsAt}></BettingFundamentals>
   );
 }

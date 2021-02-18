@@ -13,16 +13,6 @@ function CommonSportsBook() {
       <div className={styles.sidebarBlockContent}>
         <Row>
           <Col span={12} className={styles.company_logo}>
-            <a href="https://www.bet365.com/#/HO/">
-              <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://betway.com/">
-              <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
-            </a>
-          </Col>
-          <Col span={12} className={styles.company_logo}>
             <a href="https://sportsbook.fanduel.com/">
               <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
             </a>
@@ -38,6 +28,11 @@ function CommonSportsBook() {
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
+            <a href="https://betway.com/">
+              <img src="/images/betway.png" alt="Betway Logo" width={98} height={32} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
             <a href="https://www.williamhill.com/us">
               <img
                 src="/images/williamhill.png"
@@ -45,6 +40,16 @@ function CommonSportsBook() {
                 width={120}
                 height={34}
               />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://www.bet365.com/#/HO/">
+              <img src="/images/bet365.png" alt="Bet365 Logo" width={94} height={31} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://www.williamhill.com/us">
+              <img src="/images/888sport.png" alt="888Sports Logo" width={120} height={34} />
             </a>
           </Col>
         </Row>

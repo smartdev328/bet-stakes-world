@@ -17,3 +17,6 @@ export { default as SportEntryActive } from './SportEntryActive';
 export { default as CommonSportsBook } from './CommonSportsBook';
 export { default as BankRollManagement } from './BankRollManagement';
 export { default as BettingFundamentals } from './BettingFundamentals';
+export { default as DailyFantasyLineups } from './DailyFantasyLineups';
+export { default as WhereBuyGear } from './WhereBuyGear';
+export { default as WhereToWatchGame } from './WhereToWatchGame';

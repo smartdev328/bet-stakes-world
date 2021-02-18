@@ -1,0 +1,75 @@
+.sidebarBlock {
+  background: #1A1A1A;
+  padding: 16px;
+  margin-left: 16px;
+  margin-bottom: 24px;
+  color: #f1f1f1;
+}
+.sidebarBlockTitle {
+  display: flex;
+  align-items: center;
+}
+.sidebarBlockTitleIcon {
+  height: 22px;
+  margin-right: 8px;
+}
+.sidebarBlockTitleIcon path {
+  fill: #FFC700;
+}
+.sidebarBlockTitle span {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 28px;
+  color: #F1F1F1;
+}
+.sidebarBlockContent {
+  padding: 16px 0 0 0;
+}
+.accordionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.accordionTitle > div {
+  display: flex;
+  align-items: center;
+}
+.accordionTitle span, .accordionTitle strong {
+  font-size: 14px;
+  line-height: 22px;
+  color: #f1f1f1;
+}
+.accordionTitleIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.ghostBtn {
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.accordionTitleIcon path {
+  fill: #f1f1f1;
+}
+.accordionContent ul {
+  padding-left: 5px;
+  list-style: none;
+  font-size: 15px;
+  line-height: 26px;
+}
+.accordionContent ul li {
+  display: flex;
+}
+.accordionContent ul li:before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #FFC700;
+  margin-right: 10px;
+  margin-top: 11px;
+}

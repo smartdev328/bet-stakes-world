@@ -1,23 +1,27 @@
-import { MOCK_BetFundaments } from '@constants/index';
 import { Button } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
+
 import styles from './BettingFundamentals.module.css';
 import { ListIcon, MinusEncloseIcon, PlusEncloseIcon } from './SvgIcons';
+import { MOCK_BetFundaments, MOCK_FantasyFundaments } from '@constants/index';
 
 type PropsType = {
   showContentAt: boolean[];
+  isFantasy?: boolean;
   toggleDetailsAt: (index: number) => void;
 };
 
-function BettingFundamentals({ showContentAt, toggleDetailsAt }: PropsType) {
+function BettingFundamentals({ isFantasy, showContentAt, toggleDetailsAt }: PropsType) {
+  const Fundaments = isFantasy ? MOCK_FantasyFundaments : MOCK_BetFundaments;
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
         <ListIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Sports Betting Fundamentals</span>
+        {!isFantasy && <span>Sports Betting Fundamentals</span>}
+        {isFantasy && <span>Daily Fantasy Fundamentals</span>}
       </div>
       <div className={styles.sidebarBlockContent}>
-        {MOCK_BetFundaments.map((data, index) => (
+        {Fundaments.map((data, index) => (
           <React.Fragment key={index}>
             <div className={styles.accordionTitle}>
               {showContentAt[index] && (
@@ -45,4 +49,19 @@ function BettingFundamentals({ showContentAt, toggleDetailsAt }: PropsType) {
   );
 }
 
-export default BettingFundamentals;
+function BettingFundamentalRender({ isFantasy }: { isFantasy?: boolean }) {
+  const [showContent, setShowContent] = useState<boolean[]>([]);
+  const toggleDetailsAt = (id: number) => {
+    showContent[id] = !showContent[id];
+    setShowContent(showContent.slice());
+  };
+
+  return (
+    <BettingFundamentals
+      showContentAt={showContent}
+      isFantasy={isFantasy}
+      toggleDetailsAt={toggleDetailsAt}></BettingFundamentals>
+  );
+}
+
+export default BettingFundamentalRender;

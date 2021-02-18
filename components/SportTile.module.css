@@ -3,6 +3,7 @@
   position: relative;
   margin-right: 8px;
   overflow: hidden;
+  display: inline-block;
 }
 .sportTileBtn span {
   font-weight: bold;

@@ -309,9 +309,13 @@
 .sportsCardList {
   margin-top: 40px;
   flex-flow: row nowrap;
+  align-items: flex-start;
 }
 .sportsCardListCarousel {
-  /* width: calc(154px * 6); */
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
 }
 .optionsRow .optionBtn {
   background: rgba(236, 236, 236, 0.3);
@@ -338,38 +342,29 @@
   width: 136%;
 }
 
-@media (max-width: 1240px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 5);
-  }
-}
-
-@media (max-width: 1024px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 4);
-  }
-}
-
-@media (max-width: 992px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 3);
-  }
-}
 @media (max-width: 768px) {
   .sportsCardList {
     flex-flow: column wrap;
     align-items: center;
   }
-  .sportsCardListCarousel {
-    width: calc(154px * 3);
-  }
   .dropdownBtnAll {
     margin: 1.5em 8px;
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .sportsCardListCarousel {
-    width: calc(154px * 2);
+    width: 100%;
+    justify-content: center;
+  }
+  .dropdownBtnWrapper {
+    margin: 8px 1% 0;
+    width: 31%;
+  }
+  .dropdownBtn {
+    width: 100%;
+  }
+  .dropdownBtnAll {
+    width: auto;
   }
   .optionsRow {
     padding: 30px 0;

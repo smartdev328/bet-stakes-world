@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu, Carousel } from 'antd';
+import { Row, Button, Col, Dropdown, Menu } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 
@@ -219,50 +219,11 @@ function TopSection({
     }
   };
 
-  const responsive = [
-    {
-      breakpoint: 1240,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    },
-    {
-      breakpoint: 520,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    }
-  ];
-
   return (
     <>
       <DashboardHeader title={'Sports Card'} />
       <Row className={styles.sportsCardList}>
-        <Button className={styles.dropdownBtnWrapper}>
+        <Button className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <LockIcon className={styles.lock_icon} />
             <span>VIP ALL ACCESS CARD</span>
@@ -270,49 +231,36 @@ function TopSection({
           </div>
         </Button>
         <div className={styles.sportsCardListCarousel}>
-          <Carousel
-            arrows={true}
-            dots={false}
-            slidesToShow={8}
-            responsive={responsive}
-            initialSlide={0}
-            variableWidth
-            infinite={false}
-            swipeToSlide
-            draggable={false}
-            slidesToScroll={1}>
-            {sports.map((sport: Sport, index: number) => (
-              <div key={index}>
-                <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
-                  <div
-                    className={`${styles.dropdownBtn} ${
-                      styles[
-                        'dropdown_' +
-                          SPORTS_INFO.filter(
-                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
-                          )[0]?.id
-                      ]
-                    }`}
-                    style={{
-                      background:
-                        sportsStatus[index] === 2
-                          ? SPORTS_INFO.filter(
-                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
-                            )[0]?.background
-                          : ''
-                    }}>
-                    {SPORTS_INFO.filter(
-                      (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
-                    )[0]?.logo()}
-                    {unlockedItems.indexOf(sport.id) < 0 && (
-                      <LockIcon className={styles.lock_icon} />
-                    )}
-                    <span>{sport.name}</span>
-                  </div>
-                </Button>
+          {sports.map((sport: Sport, index: number) => (
+            <Button
+              key={index}
+              className={styles.dropdownBtnWrapper}
+              onClick={() => onUnlockItemAt(index)}>
+              <div
+                className={`${styles.dropdownBtn} ${
+                  styles[
+                    'dropdown_' +
+                      SPORTS_INFO.filter(
+                        (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                      )[0]?.id
+                  ]
+                }`}
+                style={{
+                  background:
+                    sportsStatus[index] === 2
+                      ? SPORTS_INFO.filter(
+                          (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                        )[0]?.background
+                      : ''
+                }}>
+                {SPORTS_INFO.filter(
+                  (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                )[0]?.logo()}
+                {unlockedItems.indexOf(sport.id) < 0 && <LockIcon className={styles.lock_icon} />}
+                <span>{sport.name}</span>
               </div>
-            ))}
-          </Carousel>
+            </Button>
+          ))}
         </div>
       </Row>
       <br></br>

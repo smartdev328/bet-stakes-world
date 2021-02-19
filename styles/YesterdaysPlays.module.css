@@ -312,9 +312,14 @@
 .sportsCardList {
   margin-top: 40px;
   flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 .sportsCardListCarousel {
-  /* width: calc(154px * 6); */
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
 }
 .lock_icon {
   height: 18px;
@@ -329,46 +334,37 @@
   width: 136%;
 }
 
-@media (max-width: 1240px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 5);
-  }
-}
-
-@media (max-width: 1024px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 4);
-  }
-}
-
-@media (max-width: 992px) {
-  .sportsCardListCarousel {
-    width: calc(154px * 3);
-  }
-}
 @media (max-width: 768px) {
   .sportsCardList {
     flex-flow: column wrap;
     align-items: center;
   }
-  .sportsCardListCarousel {
-    width: calc(154px * 3);
-  }
   .dropdownBtnAll {
     margin: 1.5em 8px;
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .sportsCardListCarousel {
-    width: calc(136px * 2);
+    width: calc(100% + 2%);
+    margin: 0 -1%;
+    justify-content: center;
   }
-  .dropdownBtnAll {
-    margin: 1em 8px;
-    width: 124px;
-    height: 56px;
+  .dropdownBtnWrapper {
+    margin: 8px 1% 0;
+    width: 31.3%;
   }
   .dropdownBtn {
-    width: 120px;
+    width: 100%;
+  }
+  .dropdownBtnWrapperAll {
+    margin: 0;
+    width: auto;
+    margin-bottom: 1em;
+  }
+  .dropdownBtnAll {
+    width: auto;
+    margin: 1em 8px;
+    width: 124px;
     height: 56px;
   }
 }

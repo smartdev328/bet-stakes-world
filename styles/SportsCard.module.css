@@ -310,6 +310,7 @@
   margin-top: 40px;
   flex-flow: row nowrap;
   align-items: flex-start;
+  justify-content: center;
 }
 .sportsCardListCarousel {
   width: auto;
@@ -353,18 +354,23 @@
 }
 @media (max-width: 600px) {
   .sportsCardListCarousel {
-    width: 100%;
+    width: calc(100% + 2%);
     justify-content: center;
+    margin: 0 -1%;
   }
   .dropdownBtnWrapper {
     margin: 8px 1% 0;
-    width: 31%;
+    width: 31.3%;
   }
   .dropdownBtn {
     width: 100%;
   }
-  .dropdownBtnAll {
+  .dropdownBtnAll, .dropdownBtnWrapperAll {
     width: auto;
+    margin: 0;
+  }
+  .dropdownBtnWrapperAll {
+    margin-bottom: 1em;
   }
   .optionsRow {
     padding: 30px 0;

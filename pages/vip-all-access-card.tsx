@@ -173,7 +173,9 @@ function TopSection({ sports, changeActiveSport }: TopSectionPropsType) {
     <>
       <DashboardHeader title={'VIP ALL ACCESS CARD'} />
       <Row className={styles.sportsCardList} justify={'center'}>
-        <Button className={styles.dropdownBtnWrapper} onClick={onUnlockAll}>
+        <Button
+          className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
+          onClick={onUnlockAll}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnVIPAll}`}>
             <WinnerCupIcon className={styles.lock_icon} />
             <span>ALL SPORTS</span>

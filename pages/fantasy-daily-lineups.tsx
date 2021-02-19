@@ -2,7 +2,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Carousel, Col, Spin } from 'antd';
+import { Row, Button, Col, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import NumberFormat from 'react-number-format';
@@ -116,7 +116,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Fantasy Daily Lineups</title>
+        <title>The Daily Stakes - Daily Fantasy</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
@@ -228,61 +228,39 @@ function TopSection({
     onChangeOptions(activeSport, selectedCompany, tab);
   };
 
-  const responsive = [
-    {
-      breakpoint: 520,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        dots: false,
-        draggable: true
-      }
-    }
-  ];
-
   return (
     <>
-      <DashboardHeader title={'FANTASY DAILY LINEUPS'} />
+      <DashboardHeader title={'Daily Fantasy'} />
       <Row className={styles.sportsCardList} justify={'center'}>
         <div className={styles.sportsCardListCarousel}>
-          <Carousel
-            arrows={true}
-            dots={false}
-            slidesToShow={3}
-            responsive={responsive}
-            initialSlide={0}
-            variableWidth
-            infinite={false}
-            swipeToSlide
-            slidesToScroll={SPORTS_INFO.length}>
-            {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
-              <div key={index}>
-                <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
-                  <div
-                    className={`${styles.dropdownBtn} ${
-                      styles[
-                        'dropdown_' +
-                          SPORTS_INFO.filter(
-                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
-                          )[0]?.id
-                      ]
-                    }`}
-                    style={{
-                      background:
-                        sportsStatus[index] === 2
-                          ? SPORTS_INFO.filter(
-                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
-                            )[0]?.background
-                          : ''
-                    }}>
-                    {sport.logo()}
-                    {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
-                    <span>{sport.name}</span>
-                  </div>
-                </Button>
+          {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
+            <Button
+              key={index}
+              className={styles.dropdownBtnWrapper}
+              onClick={() => onUnlockItemAt(index)}>
+              <div
+                className={`${styles.dropdownBtn} ${
+                  styles[
+                    'dropdown_' +
+                      SPORTS_INFO.filter(
+                        (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                      )[0]?.id
+                  ]
+                }`}
+                style={{
+                  background:
+                    sportsStatus[index] === 2
+                      ? SPORTS_INFO.filter(
+                          (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                        )[0]?.background
+                      : ''
+                }}>
+                {sport.logo()}
+                {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
+                <span>{sport.name}</span>
               </div>
-            ))}
-          </Carousel>
+            </Button>
+          ))}
         </div>
       </Row>
       <Row className={styles.optionsRow} align={'middle'} justify={'space-between'}>

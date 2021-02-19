@@ -12,6 +12,7 @@ import { STRIPE_API_KEY } from '@constants/';
 
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
+import * as gtag from '@utils/gtag';
 
 import 'antd/lib/style/index.css';
 import 'antd/lib/grid/style/index.css';
@@ -78,6 +79,16 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     getDefaultProps();
   }, []);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   useEffect(() => {
     getDefaultProps();

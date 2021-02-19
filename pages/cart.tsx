@@ -228,7 +228,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
 
   useEffect(() => {
     if (error === null && !loading && formSubmitted && formView === 'LOGIN') {
-      console.log('----- successfully login');
       proceedCheckout();
     }
     if (error && !loading && formView === 'LOGIN') {
@@ -253,12 +252,12 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const removeCartAt = (index: number) => {
     const updated = tempCartItems.slice();
     updated.splice(index, 1);
-    setTempCartItems(updated);
+    dispatch({ type: 'UPDATE_CART', payload: updated });
   };
   const changedPlan = (index: number, plan: BillingPlan) => {
     const updated = tempCartItems.slice();
     updated[index].plan = plan;
-    setTempCartItems(updated);
+    dispatch({ type: 'UPDATE_CART', payload: updated });
   };
 
   const proceedCheckout = () => {
@@ -294,7 +293,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
         if (!hasError) {
           dispatch({ type: 'UPDATE_CART', payload: [] });
           router.push('/member-dashboard');
-          setTempCartItems([]);
         } else {
           router.push('/profile');
         }
@@ -311,7 +309,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const proceedCheckoutForVisitor = () => {
     //
     setProceeding(true);
-    console.log('--- proceed checkout', formView);
     if (formView === 'LOGIN') {
       dispatch({
         type: 'LOGIN_USER',
@@ -410,7 +407,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       setProceeding(false);
     }
   };
-  console.log('-isSignupFormValid && isBillingFormValid', isSignupFormValid, isBillingFormValid);
 
   return (
     <>

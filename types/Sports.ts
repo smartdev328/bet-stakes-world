@@ -7,9 +7,13 @@ export type Sport = {
 };
 
 export type FantasyTabInfo = {
-  sport: string;
-  company: string;
-  type: string;
-  salaryCap: number;
-  lineupSalary: number;
+  sport: number;
+  sportsbooks: string;
+  tournament_type: string;
+  total_salary: number;
+  stat: {
+    tournament: string;
+    beat_the_score: string;
+    fifty_to_fifty: string;
+  };
 };

@@ -89,9 +89,31 @@ export function getYesterdaySportEntries(
   );
 }
 
+export function getFantasyParentEntries(sportId: number, subscriptions: UserSubscription[]) {
+  const headers = tokenAuthHeaders();
+  let subscriptionsQuery = '';
+  subscriptions.map((subscription, index) => {
+    subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
+  });
+  return fetch(`${API_BASE_URL}/fantasy-parent-entries?sport=${sportId}${subscriptionsQuery}`, {
+    method: 'get',
+    headers
+  });
+}
+
+export function getFantasyPlayerEntries(parentId: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/fantasy-player-entries?parent=${parentId}`, {
+    method: 'get',
+    headers
+  });
+}
+
 export default {
   getSports,
   getSportEntries,
   getTodaySportEntries,
-  getYesterdaySportEntries
+  getYesterdaySportEntries,
+  getFantasyParentEntries,
+  getFantasyPlayerEntries
 };

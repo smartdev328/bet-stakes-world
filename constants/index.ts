@@ -206,12 +206,21 @@ export const FANTASY_COMPANIES = [
   },
   {
     id: 'yahoo_fantasy',
-    name: 'YahooFantasy',
+    name: 'Yahoo',
     logo: '/images/yahoo-fantasy.png'
   }
 ];
 
-export const FANTASY_TABS = ['MAIN_SLATE', 'SINGLE'];
+export const FANTASY_TABS = [
+  {
+    id: 'Main_Slate',
+    name: 'MAIN SLATE'
+  },
+  {
+    id: 'Single_Slate',
+    name: 'SINGLE'
+  }
+];
 
 export const MOCK_DailyFantasyLineups = [
   {

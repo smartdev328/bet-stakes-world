@@ -99,16 +99,22 @@ export type YesterdayPlayInfoType = {
 
 export type DailyLineupType = {
   id: number;
-  state: string;
   team_logo: string;
-  lineup_name: string;
-  team1: string;
-  team2: string;
-  startTime: string;
-  fppg: number;
+  ffpg: number;
   oprk: string;
-  played: number;
-  price: number;
+  games_played: number;
+  salary: number;
+  name: string;
+  team: Team;
+  schedule: Schedule;
+  position: string;
+  stat: {
+    this_season: string;
+    projected_points: string;
+    player_props: string;
+  };
+  weight: number;
+  parent: string;
 };
 
 export type JWT = {

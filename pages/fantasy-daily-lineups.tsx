@@ -21,15 +21,11 @@ import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
 import { DailyLineupType, PageProps, SportInfoType } from '@type/Main';
 import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
-import {
-  FANTASY_COMPANIES,
-  FANTASY_TABS,
-  FANTASY_LINEUPS_GAMES,
-  FANTASY_LINEUPS_INFO
-} from '@constants/';
+import { FANTASY_COMPANIES, FANTASY_TABS } from '@constants/';
 import FantasySportsBook from '@components/FantasySportsBook';
 import FantasyLineupIncludes from '@components/FantasyLineupIncludes';
-import { FantasyTabInfo } from '@type/Sports';
+import { FantasyTabInfo, Sport } from '@type/Sports';
+import SportsAPIs from '@apis/sport.apis';
 
 const SPORTS_INFO = [
   {
@@ -52,34 +48,69 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function FantasyDailyLineupsPage({ token, subscriptions }: PageProps) {
-  const lockedItems = ['NBA', 'NFL', 'MLB'];
+export default function FantasyDailyLineupsPage({ token, subscriptions, sports }: PageProps) {
   const [lineupList, setLineupList] = useState<DailyLineupType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedSport, setSelectedSport] = useState<string>(SPORTS_INFO[0].name);
+  const [selectedSport, setSelectedSport] = useState<string>('NBA');
   const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].name);
+  const [activeTab, setActiveTab] = useState<string>(FANTASY_TABS[0].id);
+  const [infoForCurrentTab, setInfoForCurrentTab] = useState<FantasyTabInfo | undefined>(undefined);
+  const [unlockedSports, setUnlockedSports] = useState<Sport[]>([]);
+  const [lineupSalary, setLineupSalary] = useState<number>(0);
 
   useEffect(() => {
-    const lineups = FANTASY_LINEUPS_GAMES.filter(
-      (game) =>
-        game.sport === selectedSport &&
-        game.company === selectedCompany &&
-        game.type === 'MAIN_SLATE'
-    );
-    setLineupList(lineups);
-  }, []);
+    const items: Sport[] = [];
+    subscriptions.forEach((subscription) => {
+      if (subscription.plan.name.toLowerCase().indexOf('fantasy') > -1) {
+        items.push(subscription.sports[0]);
+      }
+    });
+    setUnlockedSports(items);
+  }, [subscriptions]);
+
+  useEffect(() => {
+    setLoading(true);
+    if (sports.length > 0 && subscriptions.length > 0) {
+      const fantasySubscriptions = subscriptions.filter(
+        (subscription) => subscription.plan.name.toLowerCase().indexOf('fantasy') > -1
+      );
+      const sportIdx = sports.findIndex((sport) => sport.name === selectedSport);
+
+      SportsAPIs.getFantasyParentEntries(sports[sportIdx].id, fantasySubscriptions)
+        .then((res) => res.json())
+        .then((data) => {
+          const infos = data.filter(
+            (info: FantasyTabInfo) =>
+              info.sportsbooks === selectedCompany && info.tournament_type === activeTab
+          );
+          const parentID = infos[0]?.id;
+          if (parentID) {
+            SportsAPIs.getFantasyPlayerEntries(parentID)
+              .then((res2) => res2.json())
+              .then((entries) => {
+                let total = 0;
+                entries.forEach((entry: DailyLineupType) => {
+                  total += entry.salary;
+                });
+                setInfoForCurrentTab(infos[0]);
+                setLineupSalary(total);
+                setLineupList(entries);
+                setLoading(false);
+              });
+          } else {
+            setInfoForCurrentTab(infos[0]);
+            setLineupList([]);
+            setLineupSalary(0);
+            setLoading(false);
+          }
+        });
+    }
+  }, [selectedSport, selectedCompany, activeTab, sports, subscriptions]);
 
   const onChangeOptions = (sport: string, company: string, lineupType: string) => {
-    setLoading(true);
-    const lineups = FANTASY_LINEUPS_GAMES.filter(
-      (game) => game.sport === sport && game.company === company && game.type === lineupType
-    );
-    setTimeout(() => {
-      setLineupList(lineups);
-      setLoading(false);
-      setSelectedSport(sport);
-      setSelectedCompany(company);
-    }, 2000);
+    setSelectedSport(sport);
+    setSelectedCompany(company);
+    setActiveTab(lineupType);
   };
 
   return (
@@ -91,8 +122,14 @@ export default function FantasyDailyLineupsPage({ token, subscriptions }: PagePr
         <HeroBanner />
         <div className={styles.container}>
           <TopSection
-            lockedItems={lockedItems}
+            unlockedSports={unlockedSports}
             openUnlockModal={() => {}}
+            activeSport={selectedSport}
+            activeTab={activeTab}
+            sports={sports}
+            lineupSalary={lineupSalary}
+            selectedCompany={selectedCompany}
+            infoForCurrentTab={infoForCurrentTab}
             onChangeOptions={onChangeOptions}
           />
         </div>
@@ -101,7 +138,11 @@ export default function FantasyDailyLineupsPage({ token, subscriptions }: PagePr
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
                 {!loading && <LineupsList data={lineupList} />}
-                {loading && <Spin />}
+                {loading && (
+                  <div className={styles.loadingSpin}>
+                    <Spin size="large" />
+                  </div>
+                )}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
                 <FantasySidebar selectedCompany={selectedCompany} selectedSport={selectedSport} />
@@ -124,59 +165,66 @@ function HeroBanner() {
 }
 
 type TopSectionPropsType = {
-  lockedItems: string[];
-  openUnlockModal: (_: SportInfoType) => void;
+  unlockedSports: Sport[];
+  activeSport: string;
+  selectedCompany: string;
+  activeTab: string;
+  sports: Sport[];
+  infoForCurrentTab: FantasyTabInfo | undefined;
+  lineupSalary: number;
+  openUnlockModal: (_: Sport) => void;
   onChangeOptions: (sport: string, company: string, lineupType: string) => void;
 };
 
-function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectionPropsType) {
+function TopSection({
+  unlockedSports,
+  openUnlockModal,
+  onChangeOptions,
+  activeSport,
+  selectedCompany,
+  activeTab,
+  sports,
+  infoForCurrentTab,
+  lineupSalary
+}: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
-  const [selectedCompany, setSelectedCompany] = useState<string>(FANTASY_COMPANIES[0].name);
-  const [activeTab, setActiveTab] = useState<string>(FANTASY_TABS[0]);
-  const [activeSport, setActiveSport] = useState<string>(SPORTS_INFO[0].name);
-  const [infoForCurrentTab, setInfoForCurrentTab] = useState<FantasyTabInfo | undefined>(undefined);
-
-  useEffect(() => {
-    const infos = FANTASY_LINEUPS_INFO.filter(
-      (info) =>
-        info.sport === activeSport && info.company === selectedCompany && info.type === activeTab
-    );
-    setInfoForCurrentTab(infos[0]);
-  }, [activeSport, activeTab, selectedCompany]);
 
   useEffect(() => {
     const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
-      const lockedItemIndex = lockedItems.findIndex((item: string) => item === sport.id);
-      if (lockedItemIndex > -1) {
+      const unlockedItemIndex = unlockedSports.findIndex((item: Sport) => item.name === sport.name);
+      if (unlockedItemIndex > -1) {
+        if (activeSport === sport.name) {
+          return 2;
+        }
         return 1;
       }
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, [lockedItems]);
+  }, [unlockedSports]);
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      const newItems = items.slice();
-      newItems.fill(1);
-      newItems[index] = 2;
-      setActiveSport(SPORTS_INFO[index].name);
+      const newItems = items.map((item, idx) => {
+        if (item > 0) {
+          if (idx === index) {
+            return 2;
+          }
+          return 1;
+        }
+        return 0;
+      });
       setSportsStatus(newItems);
-      setActiveTab(FANTASY_TABS[0]);
-      setSelectedCompany(FANTASY_COMPANIES[0].name);
-      onChangeOptions(SPORTS_INFO[index].name, FANTASY_COMPANIES[0].name, FANTASY_TABS[0]);
-    } else {
-      openUnlockModal(SPORTS_INFO[index]);
+      onChangeOptions(SPORTS_INFO[index].name, FANTASY_COMPANIES[0].name, FANTASY_TABS[0].id);
+    } else if (items[index] !== 2) {
+      openUnlockModal(sports[index]);
     }
   };
   const onSelectCompany = (name: string) => {
-    setSelectedCompany(name);
-    setActiveTab(FANTASY_TABS[0]);
-    onChangeOptions(activeSport, name, FANTASY_TABS[0]);
+    onChangeOptions(activeSport, name, FANTASY_TABS[0].id);
   };
   const changeTab = (tab: string) => {
-    setActiveTab(tab);
     onChangeOptions(activeSport, selectedCompany, tab);
   };
 
@@ -211,9 +259,21 @@ function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectio
               <div key={index}>
                 <Button className={styles.dropdownBtnWrapper} onClick={() => onUnlockItemAt(index)}>
                   <div
-                    className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
+                    className={`${styles.dropdownBtn} ${
+                      styles[
+                        'dropdown_' +
+                          SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.id
+                      ]
+                    }`}
                     style={{
-                      background: activeSport === sport.name ? sport.background : ''
+                      background:
+                        sportsStatus[index] === 2
+                          ? SPORTS_INFO.filter(
+                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                            )[0]?.background
+                          : ''
                     }}>
                     {sport.logo()}
                     {!sportsStatus[index] && <LockIcon className={styles.lock_icon} />}
@@ -244,10 +304,10 @@ function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectio
         <Row align={'middle'}>
           {FANTASY_TABS.map((tab) => (
             <div
-              key={tab}
-              className={`${styles.fantasy_tab} ${activeTab === tab && styles.selected}`}
-              onClick={() => changeTab(tab)}>
-              {tab.replace('_', ' ')}
+              key={tab.id}
+              className={`${styles.fantasy_tab} ${activeTab === tab.id && styles.selected}`}
+              onClick={() => changeTab(tab.id)}>
+              {tab.name}
             </div>
           ))}
         </Row>
@@ -258,16 +318,18 @@ function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectio
               displayType="text"
               thousandSeparator={true}
               prefix={'$'}
-              value={infoForCurrentTab?.salaryCap}
+              key={infoForCurrentTab?.total_salary}
+              value={infoForCurrentTab?.total_salary || 0}
             />
           </span>
           <span className={styles.financialValues}>
             Lineup Salary:&nbsp;
             <NumberFormat
               displayType="text"
+              key={lineupSalary}
               thousandSeparator={true}
               prefix={'$'}
-              value={infoForCurrentTab?.lineupSalary}
+              value={lineupSalary || 0}
             />
           </span>
         </Row>
@@ -281,15 +343,33 @@ function TopSection({ lockedItems, openUnlockModal, onChangeOptions }: TopSectio
         <Col span={24} className={styles.fantasyLineupInfo}>
           <div className={styles.featureValue}>
             <div className={styles.featureValueTitle}>Tournament</div>
-            <div className={styles.featureValueContent}>Play up to 15% of your bankroll</div>
+            <div className={styles.featureValueContent}>
+              {infoForCurrentTab?.stat.tournament ? (
+                infoForCurrentTab?.stat.tournament
+              ) : (
+                <span>&nbsp;</span>
+              )}
+            </div>
           </div>
           <div className={styles.featureValue}>
             <div className={styles.featureValueTitle}>Beat the Score</div>
-            <div className={styles.featureValueContent}>Play up to 25% of your bankroll</div>
+            <div className={styles.featureValueContent}>
+              {infoForCurrentTab?.stat.beat_the_score ? (
+                infoForCurrentTab?.stat.beat_the_score
+              ) : (
+                <span>&nbsp;</span>
+              )}
+            </div>
           </div>
           <div className={styles.featureValue}>
             <div className={styles.featureValueTitle}>50/50s</div>
-            <div className={styles.featureValueContent}>Play up to 50% of your bankroll</div>
+            <div className={styles.featureValueContent}>
+              {infoForCurrentTab?.stat.fifty_to_fifty ? (
+                infoForCurrentTab?.stat.fifty_to_fifty
+              ) : (
+                <span>&nbsp;</span>
+              )}
+            </div>
           </div>
         </Col>
       </Row>
@@ -306,6 +386,7 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
 
   return (
     <div className={styles.daily_lineups}>
+      {data.length === 0 && <div className={styles.noData}>No Data</div>}
       {data.map((lineup: DailyLineupType, index: number) => (
         <div className={styles.daily_lineup} key={lineup.id}>
           <Row>
@@ -314,28 +395,28 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
                 <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
               </LazyLoad>
               <div className={styles.daily_lineup_sidebar_content}>
-                <span>{lineup.state}</span>
+                <span>{lineup.position}</span>
                 <div className={styles.divider} />
                 <LazyLoad>
-                  <img src={lineup.team_logo} alt="Daily Lineup Logo" />
+                  <img src={lineup.team.logo.url} alt="Daily Lineup Logo" />
                 </LazyLoad>
               </div>
             </div>
             <div className={styles.daily_lineup_main}>
               <div className={styles.daily_lineup_main_content}>
-                <h4>{lineup.lineup_name}</h4>
+                <h4>{lineup.name}</h4>
                 <div>
                   <strong
                     className={
                       styles.daily_lineup_teams
-                    }>{`${lineup.team1}@${lineup.team2}`}</strong>
+                    }>{`${lineup.schedule.home_team.name}@${lineup.schedule.team.name}`}</strong>
                   <div>
                     <span>FPPG:&nbsp;</span>
-                    <strong>{lineup.fppg}</strong>
+                    <strong>{lineup.ffpg}</strong>
                     <span>oprk:&nbsp;</span>
                     <strong>{lineup.oprk}</strong>
                     <span>Games Played:&nbsp;</span>
-                    <strong>{lineup.played}</strong>
+                    <strong>{lineup.games_played}</strong>
                   </div>
                 </div>
               </div>
@@ -344,7 +425,7 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
                   displayType="text"
                   thousandSeparator={true}
                   prefix={'$'}
-                  value={lineup.price}
+                  value={lineup.salary}
                 />
               </div>
             </div>
@@ -364,15 +445,7 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
                     <AntiClockIcon className={styles.anti_clock_icon} />
                     <span>THIS SEASON</span>
                   </div>
-                  <div>
-                    <div>Points per game:</div>
-                    <div>Rebounds per game:</div>
-                    <div>Assists per game:</div>
-                    <div>Steals per game:</div>
-                    <div>
-                      <strong>Fantasy points per game:</strong>
-                    </div>
-                  </div>
+                  <div>{lineup.stat.this_season}</div>
                 </div>
                 <div className={styles.details_property}>
                   <div className={styles.details_property_title}>
@@ -385,26 +458,14 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
                     </div>
                     <span>PROJECTED POINTS BY THE DAILY STAKES </span>
                   </div>
-                  <div>
-                    <div>Expected minutes:</div>
-                    <div>Average point per minute:</div>
-                    <div>Project fantasy points:</div>
-                    <div>Projected Ownership%:</div>
-                    <div>
-                      <strong>Expected value against fantasy price:</strong>
-                    </div>
-                  </div>
+                  <div>{lineup.stat.projected_points}</div>
                 </div>
                 <div className={styles.details_property}>
                   <div className={styles.details_property_title}>
                     <DateRangeIcon className={styles.date_range_icon} />
                     <span>PLAYER PROPS BY THE Sportbooks</span>
                   </div>
-                  <div>
-                    <p>1) Over / Under 22.5 Points</p>
-                    <p>2) Over / Under 6.5 Assists</p>
-                    <p>3) Over / Under 7.5 Rebounds</p>
-                  </div>
+                  <div>{lineup.stat.player_props}</div>
                 </div>
               </Row>
             )}

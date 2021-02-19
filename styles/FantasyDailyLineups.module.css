@@ -717,6 +717,7 @@
   background: #F9F9F9;
   padding: 16px;
   display: inline-block;
+  min-width: 250px;
 }
 .featureValue .featureValueTitle {
   font-weight: 600;
@@ -766,4 +767,16 @@
     font-size: 16px;
     line-height: 24px;
   }
+}
+
+.loadingSpin {
+  text-align: center;
+  margin: 3em 0;
+}
+
+.noData {
+  font-size: 18px;
+  padding: 2em 0;
+  font-style: italic;
+  text-align: center;
 }

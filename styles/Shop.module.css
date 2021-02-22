@@ -328,18 +328,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px 8px 16px;
+  padding: 8px 32px 8px 16px;
   margin: 0;
   margin-bottom: 24px;
-  height: 88px;
-  width: 350px;
+  height: auto;
+  width: 620px;
   cursor: pointer;
+  border: solid 1px #1a1a1a;
   transition: all linear 0.3s;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
 }
 .sportsCards ul li.active {
   border: 1px solid #FFC700;
   box-sizing: border-box;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
 }
 .sportsCards ul li svg {
   width: 24px;
@@ -347,24 +348,13 @@
 }
 .sportsCard_name {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 107.9%;
   color: #000000;
   display: inline-block;
   text-align: left;
-  padding-left: 5px;
-  width: 140px;
+  padding-left: 20px;
   text-transform: uppercase;
-}
-.sportsCard_value {
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 32px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #1A1A1A;
-  border-bottom: solid 4px #1a1a1a;
 }
 
 .packageAddOns {
@@ -418,21 +408,11 @@
   line-height: 28px;
   text-decoration: underline;
 }
-.sportsCard_value {
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 32px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #1A1A1A;
-  border-bottom: solid 4px #1a1a1a;
-}
 
 /* Cart Box */
 .cartBox {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: -50px;
   width: 430px;
   padding: 32px;
@@ -645,9 +625,6 @@
   .sportsCard_name {
     font-size: 22px;
   }
-  .sportsCard_value {
-    font-size: 30px;
-  }
   .cartBox {
     right: -10px;
     width: 420px;
@@ -668,9 +645,6 @@
   }
   .sportsCard_name {
     font-size: 22px;
-  }
-  .sportsCard_value {
-    font-size: 30px;
   }
   .cartBox {
     bottom: 0;
@@ -714,9 +688,6 @@
   .packageAddOns .sportsCard_name_row a {
     font-size: 18px;
     line-height: 22px;
-  }
-  .sportsCard_value {
-    font-size: 28px;
   }
   .totalPrice {
     margin: 0;
@@ -835,10 +806,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  .packageAddOns .sportsCard_value {
-    margin-left: 38px;
-    margin-top: 0.3em;
-  }
   .faqs ul li p {
     margin: 0 0 1.5em 24px;
     font-size: 14px;
@@ -880,4 +847,45 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.flexRow {
+  display: flex;
+  align-items: center;
+}
+.sportsCard_value {
+  text-align: center;
+  padding: 0.5em 1.5em;
+}
+.sportsCard_value_title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #000000;
+}
+.sportsCard_value_price {
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 122.4%;
+}
+.sportsCard_value_dayprice {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 900;
+}
+.sportsCard_value.origin .sportsCard_value_price,
+.sportsCard_value.origin .sportsCard_value_dayprice {
+  color: #767676;
+  text-decoration: line-through;
+}
+.sportsCard_value_content {
+  position: relative;
+}
+.sportsCard_value_content img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 135%;
 }

@@ -368,6 +368,34 @@ function ProductsAndCartBox({
   tempCart.forEach((item) => {
     totalPrice += item.plan.price;
   });
+  const getDayPrice = (plan: BillingPlan) => {
+    let dayPrice = plan.price;
+    switch (plan.duration) {
+      case 'DAILY':
+        dayPrice = plan.price;
+        break;
+      case 'EVERY_3_DAYS':
+        dayPrice = Math.round(plan.price / 3);
+        break;
+      case 'WEEKLY':
+        dayPrice = Math.round(plan.price / 7);
+        break;
+      case 'MONTHLY':
+        dayPrice = Math.round(plan.price / 30);
+        break;
+      case 'QUARTERLY':
+        dayPrice = Math.round(plan.price / 90);
+        break;
+      case 'ANNUAL':
+        dayPrice = Math.round(plan.price / 360);
+        break;
+      case 'SEMI_ANNUAL':
+        dayPrice = Math.round(plan.price / 180);
+        break;
+      default:
+    }
+    return dayPrice;
+  };
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
@@ -382,14 +410,32 @@ function ProductsAndCartBox({
               key={index}
               className={tempCart[0]?.plan.id === plan.id ? styles.active : ''}
               onClick={() => changeSportCard(plan)}>
-              {tempCart[0]?.plan.id === plan.id && (
-                <CheckedCircleIcon className={styles.checkedStatusIcon} />
-              )}
-              {tempCart[0]?.plan.id !== plan.id && (
-                <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-              )}
-              <span className={styles.sportsCard_name}>{plan.duration}</span>
-              <span className={styles.sportsCard_value}>${plan.price}.00</span>
+              <div className={styles.flexRow}>
+                {tempCart[0]?.plan.id === plan.id && (
+                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                )}
+                {tempCart[0]?.plan.id !== plan.id && (
+                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                )}
+                <span className={styles.sportsCard_name}>{plan.duration}</span>
+              </div>
+              <div className={styles.flexRow}>
+                <div className={`${styles.sportsCard_value} ${styles.origin}`}>
+                  <div className={styles.sportsCard_value_title}>Reg</div>
+                  <div className={styles.sportsCard_value_price}>$199</div>
+                  <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                </div>
+                <div className={`${styles.sportsCard_value}`}>
+                  <div className={styles.sportsCard_value_title}>Sale</div>
+                  <div className={styles.sportsCard_value_content}>
+                    <LazyLoad>
+                      <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                    </LazyLoad>
+                    <div className={styles.sportsCard_value_price}>${plan.price}</div>
+                    <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
+                  </div>
+                </div>
+              </div>
             </li>
           ))}
         </ul>

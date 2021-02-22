@@ -6,6 +6,7 @@ import LazyLoad from 'react-lazyload';
 import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { useStripe, useElements, CardNumberElement } from '@stripe/react-stripe-js';
+import NumberFormat from 'react-number-format';
 
 import {
   AppLayout,
@@ -71,7 +72,16 @@ function CartTotalWidget({
         <div className={styles.totalCount}>
           {cartItems.length > 0 ? `${cartItems.length} Items` : 'No Items'}
         </div>
-        <div className={styles.totalPrice}>{`$${totalPrice}.00`}</div>
+        <div className={styles.totalPrice}>
+          <NumberFormat
+            displayType="text"
+            thousandSeparator={true}
+            prefix={'$'}
+            fixedDecimalScale
+            decimalScale={2}
+            value={totalPrice}
+          />
+        </div>
         <div className={styles.discountRow}>
           <span>Discount:</span>
           <span>N/A</span>
@@ -95,7 +105,14 @@ function CartTotalWidget({
         <div className={styles.priceRow}>
           <div className={styles.totalCount}>{cartItems.length} Items</div>
           <div className={styles.totalPrice}>
-            <span>{`$${totalPrice}.00`}</span>
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={true}
+              prefix={'$'}
+              fixedDecimalScale
+              decimalScale={2}
+              value={totalPrice}
+            />
             {!showDetails && (
               <CaretUpOutlined className={styles.caret_up} onClick={() => setShowDetails(true)} />
             )}
@@ -483,7 +500,16 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                         ))}
                       </div>
                     </div>
-                    <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
+                    <div className={styles.cartItemPrice}>
+                      <NumberFormat
+                        displayType="text"
+                        thousandSeparator={true}
+                        prefix={'$'}
+                        fixedDecimalScale
+                        decimalScale={2}
+                        value={item.plan.price}
+                      />
+                    </div>
                     <Button
                       type={'link'}
                       className={styles.removeCartBtn}

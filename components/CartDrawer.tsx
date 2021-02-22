@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Menu, Dropdown } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import NumberFormat from 'react-number-format';
 
 import { BillingPlan, Package } from '@type/Packages';
 import { CartItem } from '@type/Cart';
@@ -130,7 +131,16 @@ export default function CartDrawer({
                     ))}
                   </div>
                 </div>
-                <div className={styles.cartItemPrice}>{`$${item.plan.price}.00`}</div>
+                <div className={styles.cartItemPrice}>
+                  <NumberFormat
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                    fixedDecimalScale
+                    decimalScale={2}
+                    value={item.plan.price}
+                  />
+                </div>
                 <Button
                   type={'link'}
                   className={styles.removeCartItemBtn}

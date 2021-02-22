@@ -18,7 +18,6 @@ export type CartType = {
 };
 
 export type CartItem = {
-  owner: number;
   plan: BillingPlan;
   sports: Sport | undefined;
   pack: Package;

@@ -517,7 +517,7 @@
   margin: 24px -8px;
   display: flex;
   flex-flow: row wrap;
-  max-width: 620px;
+  max-width: 600px;
   width: auto;
 }
 .dropdownBtnWrapper {

@@ -32,6 +32,36 @@ type ProductsAndCartBoxProps = {
   addToCart: (pack: Package, _: CartItem[]) => void;
   changeTempCart: (pack: Package, _: CartItem[]) => void;
 };
+const NON_UFC_F1 = 'NON_UFC_F1';
+
+const getDayPrice = (plan: BillingPlan) => {
+  let dayPrice = plan.price;
+  switch (plan.duration) {
+    case 'DAILY':
+      dayPrice = plan.price;
+      break;
+    case 'EVERY_3_DAYS':
+      dayPrice = Math.round(plan.price / 3);
+      break;
+    case 'WEEKLY':
+      dayPrice = Math.round(plan.price / 7);
+      break;
+    case 'MONTHLY':
+      dayPrice = Math.round(plan.price / 30);
+      break;
+    case 'QUARTERLY':
+      dayPrice = Math.round(plan.price / 90);
+      break;
+    case 'ANNUAL':
+      dayPrice = Math.round(plan.price / 360);
+      break;
+    case 'SEMI_ANNUAL':
+      dayPrice = Math.round(plan.price / 180);
+      break;
+    default:
+  }
+  return dayPrice;
+};
 
 export default function Shop({ token, subscriptions, packages, sports }: PageProps) {
   const { query } = useRouter();
@@ -343,8 +373,7 @@ function ProductsAndCartBox({
               sports: undefined,
               plan: pack.billing_plans[0],
               pack,
-              auto_renewal: false,
-              owner: 0
+              auto_renewal: false
             }
           ]
     );
@@ -368,34 +397,6 @@ function ProductsAndCartBox({
   tempCart.forEach((item) => {
     totalPrice += item.plan.price;
   });
-  const getDayPrice = (plan: BillingPlan) => {
-    let dayPrice = plan.price;
-    switch (plan.duration) {
-      case 'DAILY':
-        dayPrice = plan.price;
-        break;
-      case 'EVERY_3_DAYS':
-        dayPrice = Math.round(plan.price / 3);
-        break;
-      case 'WEEKLY':
-        dayPrice = Math.round(plan.price / 7);
-        break;
-      case 'MONTHLY':
-        dayPrice = Math.round(plan.price / 30);
-        break;
-      case 'QUARTERLY':
-        dayPrice = Math.round(plan.price / 90);
-        break;
-      case 'ANNUAL':
-        dayPrice = Math.round(plan.price / 360);
-        break;
-      case 'SEMI_ANNUAL':
-        dayPrice = Math.round(plan.price / 180);
-        break;
-      default:
-    }
-    return dayPrice;
-  };
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
@@ -517,8 +518,7 @@ function ProductsAndCartBoxForFantasy({
               sports: sports[0],
               plan: pack.billing_plans[0],
               pack,
-              auto_renewal: false,
-              owner: 0
+              auto_renewal: false
             }
           ]
     );
@@ -534,8 +534,7 @@ function ProductsAndCartBoxForFantasy({
           sports: activeSport,
           plan,
           pack,
-          auto_renewal: false,
-          owner: 10
+          auto_renewal: false
         });
       } else {
         newCart.splice(itemIdx, 1);
@@ -545,8 +544,7 @@ function ProductsAndCartBoxForFantasy({
         sports: activeSport,
         plan,
         pack,
-        auto_renewal: false,
-        owner: 10
+        auto_renewal: false
       });
     }
     setTempCart(newCart);
@@ -732,7 +730,27 @@ function ProductsAndCartBoxForSportsCard({
   });
   const [tempCart, setTempCart] = useState<CartItem[]>([]);
   // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
-  const [activeSport, setActiveSport] = useState<Sport>(sports[0]);
+  const [nonUFCAndF1Sports, setNonUFCandF1sports] = useState<Sport[]>([]);
+  const [ufcAndF1Sports, setUFCandF1sports] = useState<Sport[]>([]);
+  const [activeSports1, setActiveSports1] = useState<Sport[]>([]);
+  const [activeSports2, setActiveSports2] = useState<Sport[]>([]);
+  const [activePlan1, setActivePlan1] = useState<BillingPlan>(pack.billing_plans[0]);
+  const [activePlan2, setActivePlan2] = useState<BillingPlan>(pack.billing_plans[0]);
+
+  useEffect(() => {
+    const nonUFCandF1Sports1: Sport[] = [];
+    const ufcAndF1Sports1: Sport[] = [];
+    sports.forEach((sport) => {
+      if (sport.name === 'UFC' || sport.name === 'Formula 1') {
+        ufcAndF1Sports1.push(sport);
+      } else {
+        nonUFCandF1Sports1.push(sport);
+      }
+    });
+    setNonUFCandF1sports(nonUFCandF1Sports1);
+    setUFCandF1sports(ufcAndF1Sports1);
+    setActiveSports1([nonUFCandF1Sports1[0]]);
+  }, []);
 
   const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
@@ -744,8 +762,7 @@ function ProductsAndCartBoxForSportsCard({
               sports: sports[0],
               plan: pack.billing_plans[0],
               pack,
-              auto_renewal: false,
-              owner: 0
+              auto_renewal: false
             }
           ]
     );
@@ -755,30 +772,36 @@ function ProductsAndCartBoxForSportsCard({
     setCartFromProps(cartItems);
   }, [cartItems]);
 
-  const changeSportCard = (plan: BillingPlan) => {
-    const newCart = tempCart.slice();
-    const itemIdx = newCart.findIndex((item) => item.sports?.id === activeSport.id);
-    if (itemIdx > -1) {
-      if (newCart[itemIdx].plan.duration !== plan.duration) {
-        newCart.splice(itemIdx, 1);
-        newCart.push({
-          sports: activeSport,
-          plan,
-          pack,
-          auto_renewal: false,
-          owner: 10
+  const changeBillingPlan = (plan: BillingPlan, type: string) => {
+    const newCart: CartItem[] = tempCart.slice();
+    if (type === NON_UFC_F1) {
+      if (activeSports1.length > 0) {
+        activeSports1.forEach((activeSport) => {
+          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id);
+          newCart.splice(idx, 1);
+          newCart.push({
+            sports: activeSport,
+            plan,
+            pack,
+            auto_renewal: false
+          });
         });
-      } else {
-        newCart.splice(itemIdx, 1);
+        setActivePlan1(plan);
       }
     } else {
-      newCart.push({
-        sports: activeSport,
-        plan,
-        pack,
-        auto_renewal: false,
-        owner: 10
-      });
+      if (activeSports2.length > 0) {
+        activeSports2.forEach((activeSport) => {
+          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id);
+          newCart.splice(idx, 1);
+          newCart.push({
+            sports: activeSport,
+            plan,
+            pack,
+            auto_renewal: false
+          });
+        });
+        setActivePlan2(plan);
+      }
     }
     setTempCart(newCart);
     changeTempCart(pack, newCart);
@@ -852,8 +875,56 @@ function ProductsAndCartBoxForSportsCard({
     }
   ];
 
-  const onChangeItemAt = (sport: Sport) => {
-    setActiveSport(sport);
+  const onChangeItemAt = (sport: Sport, type: string) => {
+    let newCart: CartItem[] = tempCart.slice();
+    if (type === NON_UFC_F1) {
+      const active = activeSports1.slice();
+      const idx = active.findIndex((sp) => sp.id === sport.id);
+      if (idx < 0) {
+        active.push(sport);
+        setActiveSports1(active);
+        newCart.push({
+          sports: sport,
+          plan: activePlan1,
+          pack,
+          auto_renewal: false
+        });
+      } else {
+        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+        active.splice(idx, 1);
+        if (active.length === 0) {
+          active.push(nonUFCAndF1Sports[0]);
+          newCart.push({
+            sports: nonUFCAndF1Sports[0],
+            plan: activePlan1,
+            pack,
+            auto_renewal: false
+          });
+        }
+        setActiveSports1(active);
+      }
+    } else {
+      const active = activeSports2.slice();
+      const idx = active.findIndex((sp) => sp.id === sport.id);
+      if (idx < 0) {
+        active.push(sport);
+        setActiveSports2(active);
+        if (activePlan2) {
+          newCart.push({
+            sports: sport,
+            plan: activePlan2,
+            pack,
+            auto_renewal: false
+          });
+        }
+      } else {
+        active.splice(idx, 1);
+        setActiveSports2(active);
+        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+      }
+    }
+    setTempCart(newCart);
+    changeTempCart(pack, newCart);
   };
 
   let totalPrice = 0;
@@ -869,15 +940,23 @@ function ProductsAndCartBoxForSportsCard({
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
+  const ufcAndF1CartItems = tempCart.filter(
+    (cart) => cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1'
+  );
+  const nonUfcAndF1CartItems = tempCart.filter(
+    (cart) => cart.sports?.name !== 'UFC' && cart.sports?.name !== 'Formula 1'
+  );
 
   return (
     <>
       <div className={styles.sportsCards}>
-        <div className={styles.sectionTitle}>Select a sport</div>
+        <div className={styles.sectionTitle}>Select any number of sports</div>
         <div className={styles.sportsTypeContent}>
-          {sports.map((sport: Sport, index: number) => (
+          {nonUFCAndF1Sports.map((sport: Sport, index: number) => (
             <div key={index}>
-              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(sport)}>
+              <Button
+                className={styles.dropdownBtnWrapper}
+                onClick={() => onChangeItemAt(sport, NON_UFC_F1)}>
                 <div
                   className={`${styles.dropdownBtn} ${
                     styles[
@@ -889,7 +968,7 @@ function ProductsAndCartBoxForSportsCard({
                   }`}
                   style={{
                     background:
-                      activeSport.id === sport.id
+                      activeSports1.findIndex((sp) => sp.id === sport.id) > -1
                         ? SPORTS_INFO.filter(
                             (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                           )[0]?.background
@@ -913,23 +992,119 @@ function ProductsAndCartBoxForSportsCard({
               key={index}
               className={
                 tempCart.filter(
-                  (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
+                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
                 ).length > 0
                   ? styles.active
                   : ''
               }
-              onClick={() => changeSportCard(plan)}>
-              {tempCart.filter(
-                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
-              ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
-              {tempCart.filter(
-                (item) => item.sports?.id === activeSport.id && item.plan.id === plan.id
-              ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
-              <span className={styles.sportsCard_name}>{plan.duration}</span>
-              <span className={styles.sportsCard_value}>${plan.price}.00</span>
+              onClick={() => changeBillingPlan(plan, NON_UFC_F1)}>
+              <div className={styles.flexRow}>
+                {tempCart.filter(
+                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
+                ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
+                {tempCart.filter(
+                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
+                ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+                <span className={styles.sportsCard_name}>{plan.duration}</span>
+              </div>
+              <div className={styles.flexRow}>
+                <div className={`${styles.sportsCard_value} ${styles.origin}`}>
+                  <div className={styles.sportsCard_value_title}>Reg</div>
+                  <div className={styles.sportsCard_value_price}>$199</div>
+                  <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                </div>
+                <div className={`${styles.sportsCard_value}`}>
+                  <div className={styles.sportsCard_value_title}>Sale</div>
+                  <div className={styles.sportsCard_value_content}>
+                    <LazyLoad>
+                      <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                    </LazyLoad>
+                    <div className={styles.sportsCard_value_price}>${plan.price}</div>
+                    <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
+                  </div>
+                </div>
+              </div>
             </li>
           ))}
         </ul>
+        <div className={styles.sportsCards}>
+          <div className={styles.sectionTitle}>Event based daily cards</div>
+          <div className={styles.sportsTypeContent}>
+            {ufcAndF1Sports.map((sport: Sport, index: number) => (
+              <div key={index}>
+                <Button
+                  className={styles.dropdownBtnWrapper}
+                  onClick={() => onChangeItemAt(sport, '')}>
+                  <div
+                    className={`${styles.dropdownBtn} ${
+                      styles[
+                        'dropdown_' +
+                          SPORTS_INFO.filter(
+                            (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                          )[0]?.id
+                      ]
+                    }`}
+                    style={{
+                      background:
+                        activeSports2.findIndex((sp) => sp.id === sport.id) > -1
+                          ? SPORTS_INFO.filter(
+                              (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                            )[0]?.background
+                          : ''
+                    }}>
+                    {SPORTS_INFO.filter(
+                      (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
+                    )[0]?.logo()}
+                    <span>{sport.name}</span>
+                  </div>
+                </Button>
+              </div>
+            ))}
+          </div>
+          <ul>
+            {billingPlans.map((plan: BillingPlan, index: number) => (
+              <li
+                key={index}
+                className={
+                  tempCart.filter(
+                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
+                  ).length > 0
+                    ? styles.active
+                    : ''
+                }
+                onClick={() => changeBillingPlan(plan, '')}>
+                <div className={styles.flexRow}>
+                  {tempCart.filter(
+                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
+                  ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
+                  {tempCart.filter(
+                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
+                  ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+                  <span className={styles.sportsCard_name}>{plan.duration}</span>
+                </div>
+                <div className={styles.flexRow}>
+                  <div className={`${styles.sportsCard_value} ${styles.origin}`}>
+                    <div className={styles.sportsCard_value_title}>Reg</div>
+                    <div className={styles.sportsCard_value_price}>$199</div>
+                    <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                  </div>
+                  <div className={`${styles.sportsCard_value}`}>
+                    <div className={styles.sportsCard_value_title}>Sale</div>
+                    <div className={styles.sportsCard_value_content}>
+                      <LazyLoad>
+                        <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                      </LazyLoad>
+                      <div className={styles.sportsCard_value_price}>${plan.price}</div>
+                      <div className={styles.sportsCard_value_dayprice}>
+                        ${getDayPrice(plan)}/Day
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className={styles.cartBox}>
           <LazyLoad>
             <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
@@ -938,16 +1113,18 @@ function ProductsAndCartBoxForSportsCard({
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
               <div>
-                {tempCart.map((item, index) => (
-                  <p key={index}>
-                    {item.sports?.name} - {item.plan.duration}
-                    <Button
-                      type={'link'}
-                      className={styles.removeCartItemBtn}
-                      icon={<CloseIcon className={styles.closeIcon} />}
-                      onClick={() => removeCartAt(tempCart, index)}></Button>
+                {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
+                  <p>
+                    {nonUfcAndF1CartItems.length} Sport{nonUfcAndF1CartItems.length > 1 ? 's' : ''}{' '}
+                    - {activePlan1.duration}
                   </p>
-                ))}
+                )}
+                {activePlan2 && ufcAndF1CartItems.length > 0 && (
+                  <p>
+                    {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''} -{' '}
+                    {activePlan2.duration}
+                  </p>
+                )}
               </div>
               <div className={styles.totalPrice}>${totalPrice}.00</div>
             </div>

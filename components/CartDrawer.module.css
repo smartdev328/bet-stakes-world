@@ -8,7 +8,8 @@
   z-index: 1000;
 }
 .cartDrawer {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   position: fixed;
   z-index: 1001;
   top: 0;

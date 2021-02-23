@@ -13,7 +13,7 @@
 }
 @media (max-width: 1024px) {
   .container {
-    padding: 0 18px;
+    padding: 18px;
   }
 }
 
@@ -106,6 +106,9 @@
   justify-content: center;
   align-items: center;
 }
+.membershipOffers_plans.mobile {
+  display: none;
+}
 .plan {
   width: 425px;
   margin-right: 35px;
@@ -113,7 +116,7 @@
 }
 
 .plan_content {
-  border: 1px solid #1a1a1a;
+  border: 2px solid #1a1a1a;
 }
 .plan:last-child {
   margin-right: 0;
@@ -213,6 +216,16 @@
 @media (max-width: 1024px) {
   .membershipOffers_plans {
     flex-direction: column;
+    display: none;
+  }
+  .membershipOffers_plans.mobile {
+    display: block;
+  }
+  .membershipOffers_plans.mobile .plan {
+    display: none;
+  }
+  .membershipOffers_plans.mobile .plan.only {
+    display: block;
   }
   .plan {
     order: 1;
@@ -234,7 +247,7 @@
     top: 40%;
   }
   .plan_extra_content {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 1em;
   }
   .deal_circle {
@@ -243,12 +256,17 @@
 }
 
 @media (max-width: 600px) {
+  .membershipOffers_plans {
+    padding: 0 0;
+  }
   .plan {
     width: 100%;
     max-width: 360px;
   }
   .plan_extra_content {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: -0.5em;
+    margin-top: 8px;
   }
 }
 
@@ -626,12 +644,6 @@
   .offering_details {
     padding: 40px 0px;
   }
-  .sportsCards ul {
-    width: 692px;
-  }
-  .sportsCards ul li {
-    width: 340px;
-  }
   .sportsCard_name {
     font-size: 22px;
   }
@@ -646,12 +658,6 @@
     position: relative;
     max-width: 1024px;
     margin: auto;
-  }
-  .sportsCards {
-    position: static;
-  }
-  .sportsCards ul {
-    width: 700px;
   }
   .sportsCard_name {
     font-size: 22px;
@@ -681,9 +687,6 @@
     padding: 16px 95px;
     font-weight: 800;
   }
-  .sportsCards ul li {
-    height: 82px;
-  }
   .packageAddOns ul li {
     max-width: 49%;
     height: 82px;
@@ -709,9 +712,6 @@
   }
 }
 @media (max-width: 768px) {
-  .sportsCards ul {
-    width: 100%;
-  }
   .sectionTitle {
     font-size: 20px;
     line-height: 30px;
@@ -747,6 +747,9 @@
   }
 }
 @media (max-width: 692px) {
+  .sportsCards ul {
+    width: 100%;
+  }
   .sportsCards ul li {
     width: 100%;
   }
@@ -771,10 +774,24 @@
     width: 80px;
     height: 80px;
   }
+  .cartBox {
+    position: relative;
+    width: 100%;
+    right: 0;
+    left: 0;
+    padding: 24px;
+    margin-bottom: 3em;
+  }
+  .cartBoxContent p {
+    font-size: 14px;
+  }
 }
 @media (max-width: 600px) {
+  .sportsCards {
+    margin-bottom: 20px;
+  }
   .offering_details {
-    padding: 0 0px 150px 0;
+    padding: 0;
   }
   .sectionTitle {
     font-size: 18px;
@@ -827,7 +844,7 @@
     flex-flow: row wrap;
   }
   .cartBoxContentDesc p {
-    line-height: 154%;
+    line-height: 170%;
   }
   .totalPrice {
     font-size: 32px;
@@ -898,4 +915,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
   height: 135%;
+}
+.noItem {
+  font-size: 16px;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .sportsCards ul li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+  }
+  .sportsCard_name {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .sportsCard_value_title {
+    font-size: 14px;
+  }
+  .sportsCard_value_price {
+    font-size: 30px;
+  }
+  .sportsCard_value_dayprice {
+    font-size: 16px;
+  }
 }

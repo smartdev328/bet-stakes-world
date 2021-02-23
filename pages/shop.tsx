@@ -152,6 +152,12 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />
+          <MembershipOfferings
+            isMobile
+            onlyFor={'sports_card'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
               <IntroForSportsCard />
@@ -164,9 +170,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
                 />
               )}
-              <FAQs title={'Sports Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
+          <MembershipOfferings
+            isMobile
+            onlyFor={'all'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
@@ -179,9 +190,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
                 />
               )}
-              <FAQs title={'VIP All Access Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
+          <MembershipOfferings
+            isMobile
+            onlyFor={'fantasy'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
@@ -194,7 +210,21 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
                 />
               )}
+            </div>
+          )}
+          {currentPlan === 'sports_card' && (
+            <div className={styles.offering_details}>
+              <FAQs title={'Sports Card FAQ'} currentPlan={currentPlan} />
+            </div>
+          )}
+          {currentPlan === 'fantasy' && (
+            <div className={styles.offering_details}>
               <FAQs title={'FANTASY FAQ'} currentPlan={currentPlan} />
+            </div>
+          )}
+          {currentPlan === 'all' && (
+            <div className={styles.offering_details}>
+              <FAQs title={'VIP All Access Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
           {currentPlan === '' && (
@@ -222,13 +252,26 @@ function HeroBanner() {
 
 type MembershipOfferingsPropsType = {
   currentPlan: string;
+  isMobile?: boolean;
+  onlyFor?: string;
   changePlan: (_: string) => void;
 };
 
-function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPropsType) {
+function MembershipOfferings({
+  isMobile,
+  currentPlan,
+  changePlan,
+  onlyFor
+}: MembershipOfferingsPropsType) {
   return (
-    <div className={styles.membershipOffers_plans}>
-      <div className={`${styles.plan} ${currentPlan === 'sports_card' && styles.active}`}>
+    <div
+      className={`${styles.membershipOffers_plans} ${onlyFor && styles.single} ${
+        isMobile ? styles.mobile : ''
+      }`}>
+      <div
+        className={`${styles.plan} ${onlyFor === 'sports_card' && styles.only} ${
+          currentPlan === 'sports_card' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('sports_card')}>
             <div className={styles.plan_content_title}>Sports Card</div>
@@ -239,7 +282,9 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
         </div>
       </div>
       <div
-        className={`${styles.plan} ${styles.main_plan} ${currentPlan === 'all' && styles.active}`}>
+        className={`${styles.plan} ${styles.main_plan} ${onlyFor === 'all' && styles.only} ${
+          currentPlan === 'all' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('all')}>
             <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -253,7 +298,10 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
         </div>
         <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
       </div>
-      <div className={`${styles.plan} ${currentPlan === 'fantasy' && styles.active}`}>
+      <div
+        className={`${styles.plan} ${onlyFor === 'fantasy' && styles.only} ${
+          currentPlan === 'fantasy' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('fantasy')}>
             <div className={styles.plan_content_title}>Fantasy</div>
@@ -447,7 +495,12 @@ function ProductsAndCartBox({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>
+              {tempCart.length > 0 && <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"
@@ -682,13 +735,18 @@ function ProductsAndCartBoxForFantasy({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>
-                {tempCart.length > 0 && (
+              {tempCart.length > 0 && (
+                <div>
                   <p>
                     {tempCart.length} Sport{tempCart.length > 1 ? 's' : ''} - {activePlan?.duration}
                   </p>
-                )}
-              </div>
+                </div>
+              )}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"
@@ -767,7 +825,7 @@ function ProductsAndCartBoxForSportsCard({
   const [activePlan1, setActivePlan1] = useState<BillingPlan>();
   const [activePlan2, setActivePlan2] = useState<BillingPlan>();
 
-  const setCartFromProps = (cartItems: CartItem[]) => {
+  useEffect(() => {
     const nonUFCandF1Sports1: Sport[] = [];
     const ufcAndF1Sports1: Sport[] = [];
     sports.forEach((sport) => {
@@ -779,6 +837,12 @@ function ProductsAndCartBoxForSportsCard({
     });
     setNonUFCandF1sports(nonUFCandF1Sports1);
     setUFCandF1sports(ufcAndF1Sports1);
+    if (cartItems) {
+      setCartFromProps(cartItems);
+    }
+  }, []);
+
+  const setCartFromProps = (cartItems: CartItem[]) => {
     const sports1: Sport[] = [];
     const sports2: Sport[] = [];
 
@@ -801,12 +865,9 @@ function ProductsAndCartBoxForSportsCard({
     setActiveSports2(sports2);
   };
 
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
   const changeBillingPlan = (plan: BillingPlan, type: string) => {
     const newCart: CartItem[] = [...tempCart];
+    console.log('------ type:', type);
     if (type === NON_UFC_F1) {
       const carts: CartItem[] = [];
       newCart.forEach((cartItem) => {
@@ -839,7 +900,7 @@ function ProductsAndCartBoxForSportsCard({
         setActivePlan2(undefined);
       } else {
         activeSports2.forEach((activeSport) => {
-          newCart.push({
+          carts.push({
             sports: activeSport,
             plan,
             pack,
@@ -1119,20 +1180,27 @@ function ProductsAndCartBoxForSportsCard({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>
-                {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
-                  <p>
-                    {nonUfcAndF1CartItems.length} Sport{nonUfcAndF1CartItems.length > 1 ? 's' : ''}{' '}
-                    - {activePlan1.duration}
-                  </p>
-                )}
-                {activePlan2 && ufcAndF1CartItems.length > 0 && (
-                  <p>
-                    {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''} -{' '}
-                    {activePlan2.duration}
-                  </p>
-                )}
-              </div>
+              {tempCart.length > 0 && (
+                <div>
+                  {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
+                    <p>
+                      {nonUfcAndF1CartItems.length} Sport
+                      {nonUfcAndF1CartItems.length > 1 ? 's' : ''} - {activePlan1.duration}
+                    </p>
+                  )}
+                  {activePlan2 && ufcAndF1CartItems.length > 0 && (
+                    <p>
+                      {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''}{' '}
+                      - {activePlan2.duration}
+                    </p>
+                  )}
+                </div>
+              )}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"

@@ -101,9 +101,11 @@ function SportEntryActive({
                       </span>
                     </Row>
                   </div>
-                  <div className={styles.units}>{`${game.units} Unit${
-                    game.units > 1 ? 's' : ''
-                  }`}</div>
+                  <div className={styles.units}>
+                    {title.indexOf('Wilcard') > -1
+                      ? 'Units N/A'
+                      : `${game.units} Unit${game.units > 1 ? 's' : ''}`}
+                  </div>
                 </div>
                 <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
                   <div className={styles.hide_details_btn}>

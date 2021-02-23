@@ -767,7 +767,7 @@ function ProductsAndCartBoxForSportsCard({
   const [activePlan1, setActivePlan1] = useState<BillingPlan>();
   const [activePlan2, setActivePlan2] = useState<BillingPlan>();
 
-  useEffect(() => {
+  const setCartFromProps = (cartItems: CartItem[]) => {
     const nonUFCandF1Sports1: Sport[] = [];
     const ufcAndF1Sports1: Sport[] = [];
     sports.forEach((sport) => {
@@ -779,12 +779,26 @@ function ProductsAndCartBoxForSportsCard({
     });
     setNonUFCandF1sports(nonUFCandF1Sports1);
     setUFCandF1sports(ufcAndF1Sports1);
-    setActiveSports1([]);
-  }, []);
+    const sports1: Sport[] = [];
+    const sports2: Sport[] = [];
 
-  const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    setTempCart(itemsFromCart.length > 0 ? itemsFromCart : []);
+    if (itemsFromCart.length > 0) {
+      setTempCart(itemsFromCart);
+      itemsFromCart.forEach((cart) => {
+        if (cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1') {
+          sports2.push(cart.sports);
+          setActivePlan2(cart.plan);
+        } else {
+          if (cart.sports) {
+            sports1.push(cart.sports);
+            setActivePlan1(cart.plan);
+          }
+        }
+      });
+    }
+    setActiveSports1(sports1);
+    setActiveSports2(sports2);
   };
 
   useEffect(() => {

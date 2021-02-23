@@ -167,15 +167,18 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
+      <p className={styles.little_witty_intro}>Little Witty Intro</p>
       <div className={styles.block_content}>
-        <p className={styles.weekly_pro_tip_intro}>{data.slug}</p>
         <img
           alt="Weekly Pro Tip Image"
           src="/images/badminton_player.jpg"
           className={styles.weekly_pro_tip_img}
         />
-        <h4>{data.title}</h4>
-        <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
+        <div>
+          {/* <p className={styles.weekly_pro_tip_intro}>{data.slug}</p> */}
+          <h4 className={styles.weekly_description_title}>{data.title}</h4>
+          <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
+        </div>
       </div>
     </div>
   );
@@ -421,13 +424,18 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
               <div className={styles.earliest_games_col}>
                 <EarliestGames sports={sports} subscriptions={subscriptions} />
               </div>
+
+              <div className={styles.weekly_pro_tip_container}>
+                <WeeklyProTip data={weeklyTip} />
+              </div>
+
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />
               </div>
             </Col>
-            <Col span={6} className={styles.weekly_pro_tip_container}>
+            {/* <Col span={6} className={styles.weekly_pro_tip_container}>
               <WeeklyProTip data={weeklyTip} />
-            </Col>
+            </Col> */}
           </Row>
         </div>
       </AppLayout>

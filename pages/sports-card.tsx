@@ -24,6 +24,7 @@ import SportsAPIs from '@apis/sport.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
 import { UserSubscription } from '@type/Users';
+import { SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -73,21 +74,6 @@ const SPORTS_INFO = [
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />
-  }
-];
-
-const SportBetTypes = [
-  {
-    id: 'straight',
-    name: 'Straight Bets'
-  },
-  {
-    id: 'parlay',
-    name: 'Parlays'
-  },
-  {
-    id: 'wildcard',
-    name: 'Bonus Wilcard Plays'
   }
 ];
 

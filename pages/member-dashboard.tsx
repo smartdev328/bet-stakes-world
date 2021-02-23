@@ -4,6 +4,7 @@ import { Row, Button, Col, Dropdown, Menu, notification } from 'antd';
 import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 import {
   AppLayout,
@@ -22,7 +23,7 @@ import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
 import { Package } from '@type/Packages';
-import { useRouter } from 'next/router';
+import { SportBetTypes } from '@constants/';
 
 function HeroBanner() {
   return (
@@ -193,30 +194,17 @@ function EarliestGames({
   const [games, setGames] = useState<EarliestGameInfoType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const SportBetTypes = [
-    {
-      id: '',
-      name: 'All'
-    },
-    {
-      id: 'straight',
-      name: 'Straight Bets'
-    },
-    {
-      id: 'parlay',
-      name: 'Parlays'
-    },
-    {
-      id: 'wildcard',
-      name: 'Bonus Wilcard Plays'
-    }
-  ];
+  const DashboardSportBetTypes = SportBetTypes.slice();
+  DashboardSportBetTypes.unshift({
+    id: '',
+    name: 'All'
+  });
 
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
     SportsAPIs.getTodaySportEntries(
-      SportBetTypes[selectedBetType].id,
+      DashboardSportBetTypes[selectedBetType].id,
       subscriptions,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
@@ -235,7 +223,7 @@ function EarliestGames({
   };
   const menu = (
     <Menu className={styles.sportMenu}>
-      {SportBetTypes.map((type, index) => (
+      {DashboardSportBetTypes.map((type, index) => (
         <Menu.Item
           key={type.id}
           className={styles.sportMenuItem}
@@ -296,7 +284,7 @@ function EarliestGames({
             <div className={styles.dropdownBtn}>
               <span>
                 <strong>Betting Type:&nbsp;</strong>
-                {SportBetTypes[selectedBetType].name}
+                {DashboardSportBetTypes[selectedBetType].name}
               </span>
               {betMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
               {!betMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
@@ -321,7 +309,7 @@ function EarliestGames({
       </div>
       <br></br>
       <SportEntryActive
-        title={SportBetTypes[selectedBetType].name}
+        title={DashboardSportBetTypes[selectedBetType].name}
         loading={loading}
         hideSection={true}
         hideDetailsAt={hideDetailsAt}

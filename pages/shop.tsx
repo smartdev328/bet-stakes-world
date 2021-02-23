@@ -638,7 +638,7 @@ function ProductsAndCartBoxForFantasy({
           ))}
         </div>
       </div>
-      <div className={styles.sportsCards}>
+      <div className={`${styles.sportsCards}  ${styles.sportsCardsForFantasy}`}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans.map((plan: BillingPlan, index: number) => (
@@ -1001,7 +1001,7 @@ function ProductsAndCartBoxForSportsCard({
           ))}
         </div>
       </div>
-      <div className={styles.sportsCards}>
+      <div className={`${styles.sportsCards} ${styles.sportsCardsForSports}`}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans.map((plan: BillingPlan, index: number) => (

@@ -362,6 +362,24 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
     setShowDetailsAt(showDetailsAt.slice());
   };
 
+  const getPosition = (lineup: DailyLineupType) => {
+    let lineupPosition;
+    switch (lineup.position) {
+      case 'B1':
+        lineupPosition = '1B';
+        break;
+      case 'B2':
+        lineupPosition = '2B';
+        break;
+      case 'B3':
+        lineupPosition = '3B';
+        break;
+      default:
+        lineupPosition = lineup.position;
+    }
+    return lineupPosition;
+  };
+
   return (
     <div className={styles.daily_lineups}>
       {data.length === 0 && <div className={styles.noData}>No Data</div>}
@@ -373,7 +391,7 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
                 <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
               </LazyLoad>
               <div className={styles.daily_lineup_sidebar_content}>
-                <span>{lineup.position}</span>
+                <span>{getPosition(lineup)}</span>
                 <div className={styles.divider} />
                 <LazyLoad>
                   <img src={lineup.team.logo.url} alt="Daily Lineup Logo" />

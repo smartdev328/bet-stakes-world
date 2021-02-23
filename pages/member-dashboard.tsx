@@ -37,12 +37,15 @@ function HeroBanner() {
   );
 }
 
-function TopSection({ profileName }: { profileName: string }) {
+function TopSection({ profileName, initialName }: { profileName: string; initialName: string }) {
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
-        <Col className={styles.welcome_left}>Welcome back {profileName}!</Col>
+        <Row>
+          <Col className={styles.welcome_left}>Welcome back {profileName} </Col>
+          <div className={styles.avatar}>{initialName}</div>
+        </Row>
         <Col className={styles.welcome_right}>
           <strong>Overall Record:</strong>&nbsp;123-54
         </Col>
@@ -381,6 +384,8 @@ function YesterdayPlays() {
 export default function MemberDashboard({ token, subscriptions, sports, packages }: PageProps) {
   const [weeklyTip, setWeeklyTip] = useState<WeeklyTip | undefined>(undefined);
   const [profileName, setProfileName] = useState<string>('');
+  const [initialName, setInitialName] = useState<string>('');
+
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
@@ -393,6 +398,10 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         if (data && data.full_name) {
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
+          var initials = '';
+          const fullName = names.map((item) => (initials += item.substring(0, 1)));
+          console.log('full name', initials);
+          setInitialName(initials);
         }
       });
   }, []);
@@ -405,7 +414,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection profileName={profileName} />
+          <TopSection profileName={profileName} initialName={initialName} />
           <Row className={styles.nowrapRow}>
             <Col span={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}

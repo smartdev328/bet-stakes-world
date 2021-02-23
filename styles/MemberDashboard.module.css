@@ -271,6 +271,10 @@
 .weekly_pro_tip {
   margin-left: 16px;
 }
+.weekly_pro_tip_right_panel {
+  margin-left: 16px;
+  overflow: hidden;
+}
 .weekly_pro_tip .block_content {
   background: #f9f9f9;
   padding: 16px 24px;
@@ -295,10 +299,8 @@
   color: #000000;
 }
 .weekly_pro_tip_desc {
-  overflow-wrap: break-word;
   font-size: 16px;
-  /* line-height: 24px; */
-  /* line-width: 10px; */
+  overflow-wrap: break-word;
   color: #000000;
 }
 .weekly_pro_tip a {
@@ -309,7 +311,7 @@
   color: #1a1a1a;
 }
 .nowrapRow {
-  /* flex-wrap: nowrap; */
+  flex-wrap: nowrap;
 }
 
 @media (max-width: 1400px) {

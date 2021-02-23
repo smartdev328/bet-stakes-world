@@ -174,7 +174,7 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
           src="/images/badminton_player.jpg"
           className={styles.weekly_pro_tip_img}
         />
-        <div>
+        <div className={styles.weekly_pro_tip_right_panel}>
           {/* <p className={styles.weekly_pro_tip_intro}>{data.slug}</p> */}
           <h4 className={styles.weekly_description_title}>{data.title}</h4>
           <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
@@ -401,10 +401,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         if (data && data.full_name) {
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
-          var initials = '';
-          const fullName = names.map((item) => (initials += item.substring(0, 1)));
-          console.log('full name', initials);
-          setInitialName(initials);
+          setInitialName(
+            names
+              .map((item: string) => item.substring(0, 1))
+              .reduce((initials: string, currentValue: string) => initials + currentValue)
+          );
         }
       });
   }, []);

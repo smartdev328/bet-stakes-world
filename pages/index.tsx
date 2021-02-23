@@ -368,6 +368,58 @@ function BetOnSports() {
       }
     }
   ];
+
+  const sportsData = [
+    {
+      name: 'VIP',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS'
+    },
+    {
+      name: 'NBA',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA'
+    },
+    {
+      name: 'NFL',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL'
+    },
+    {
+      name: 'MLB',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB'
+    },
+    {
+      name: 'SOCCER',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER'
+    },
+    {
+      name: 'FORMULA 1',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1'
+    },
+    {
+      name: 'UFC',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC'
+    },
+    {
+      name: 'NCAAB',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB'
+    },
+    {
+      name: 'NCAAF',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF'
+    },
+
+    {
+      name: 'NBA DFS',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+    },
+    {
+      name: 'NFL DFS',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+    },
+    {
+      name: 'MLB DFS',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+    }
+  ];
   return (
     <div className={styles.bet_on_sports}>
       <div className={styles.bet_on_sports_title}>
@@ -378,6 +430,31 @@ function BetOnSports() {
         <Button className={styles.checkout_btn}>Continue to checkout</Button>
       </div>
       <div className={styles.sports_cards}>
+        <Carousel
+          slidesToShow={6}
+          infinite={false}
+          dots={true}
+          initialSlide={0}
+          responsive={responsive}
+          className="sports-cards-carousel">
+          <div>
+            <div className={styles.sports_card}>
+              {sportsData.map((item) => (
+                <div>
+                  <div className={styles.sports_card_box_content}>
+                    <h3>{item.name}</h3>
+                    <div className={styles.desc}>
+                      <div>{item.description}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Carousel>
+
+        {/* older code of sports is below */}
+
         <Carousel
           slidesToShow={6}
           infinite={false}

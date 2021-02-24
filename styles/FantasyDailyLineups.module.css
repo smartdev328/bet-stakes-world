@@ -309,25 +309,55 @@
 .optionsRow {
   margin: 40px 0;
 }
-.optionsRow .company_logo {
-  width: 110px;
+
+.sportsbook {
   margin-right: 30px;
-  border: solid 1px transparent;
-  padding: 0.8em 0.4em 0.8em;
-  cursor: pointer;
 }
-.optionsRow .company_logo.selected {
+.optionsRow .sportsbook_logo {
+  height: 60px;
   border: solid 1px #000;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.1em;
+  width: 120px;
+  background: #000;
 }
-.optionsRow .company_logo img {
-  width: 100%;
+.optionsRow .sportsbook_logo.selected {
+  background: #ffc700;
 }
-.optionsRow .company_logo.draft_kings {
-  padding-top: 0.4em;
+.optionsRow .sportsbook_logo svg {
+  height: 100%;
 }
-.optionsRow .company_logo.yahoo_fantasy {
-  padding: 0;
+.optionsRow .sportsbook_logo svg path {
+  fill: #fff;
+}
+.optionsRow .sportsbook_logo.draft_kings {
+  padding: 0.2em 0.3em 0.1em 0.1em;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy {
+  padding: 5px 8px;
   margin-right: 0;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy svg {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy svg path {
+  fill: #000;
+}
+.optionsRow .selected.yahoo_fantasy svg {
+  background: #000;
+}
+.optionsRow .sportsbook_logo.selected svg path {
+  fill: #000;
+}
+.optionsRow .selected.yahoo_fantasy svg path {
+  fill: #ffc700;
+}
+.sportsbook .sportsbook_name {
+  text-align: center;
+  font-size: 12px;
 }
 
 .optionsRow span {
@@ -364,7 +394,7 @@
   .optionsRow {
     margin: 30px 0;
   }
-  .optionsRow .company_logo {
+  .optionsRow .sportsbook_logo {
     width: 105px;
     margin-right: 12px;
     padding-right: 0.3em;
@@ -709,12 +739,18 @@
 /* Fantasy Tabs */
 .fantasy_tab {
   font-weight: 600;
-  font-size: 30px;
-  line-height: 47px;
-  width: 240px;
+  font-size: 24px;
+  line-height: 1em;
   cursor: pointer;
+  padding: 5px 10px;
+  background: #000;
+  color: #fff;
+  margin-right: 20px;
+  border: solid 1px #000;
 }
 .fantasy_tab.selected {
+  color: #000;
+  background: #ffc700;
   font-weight: 800;
 }
 .optionsRow .financialValues {
@@ -722,16 +758,21 @@
 }
 .fantasyLineupInfo {
   font-weight: 600;
-  font-size: 30px;
-  line-height: 47px;
+  font-size: 18px;
+  line-height: 1em;
   margin-bottom: 1.5em;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 0.5em;
 }
 .featureValue {
-  margin-right: 30px;
   background: #F9F9F9;
   padding: 16px;
   display: inline-block;
   min-width: 250px;
+  flex: 1;
+  margin-right: 30px;
 }
 .featureValue .featureValueTitle {
   font-weight: 600;
@@ -742,6 +783,9 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 28px;
+}
+.featureValue:last-child {
+  margin-right: 0;
 }
 
 @media (max-width: 600px) {
@@ -796,4 +840,9 @@
   padding: 2em 0;
   font-style: italic;
   text-align: center;
+}
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0.2em;
 }

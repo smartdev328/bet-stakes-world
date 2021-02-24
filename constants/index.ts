@@ -208,24 +208,6 @@ export const CREDIT_COUNTRIES = [
   }
 ];
 
-export const FANTASY_COMPANIES = [
-  {
-    id: 'draft_kings',
-    name: 'DraftKings',
-    logo: '/images/draft_kings_company.png'
-  },
-  {
-    id: 'fanduel_company',
-    name: 'Fanduel',
-    logo: '/images/fanduel_company.png'
-  },
-  {
-    id: 'yahoo_fantasy',
-    name: 'Yahoo',
-    logo: '/images/yahoo-fantasy.png'
-  }
-];
-
 export const FANTASY_TABS = [
   {
     id: 'Main_Slate',

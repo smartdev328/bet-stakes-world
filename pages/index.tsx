@@ -459,6 +459,13 @@ function BetOnSports() {
         <p>Select the sports you would like to bet on and continue to checkout</p>
         <Button className={styles.checkout_btn}>Continue to checkout</Button>
       </div>
+
+      <div className={styles.mobile_column_display}>
+        <Button className={styles.mobile_display_buttons}>VIP ALL ACCESS</Button>
+        <Button className={styles.mobile_display_buttons}>SPORTS CARD</Button>
+        <Button className={styles.mobile_display_buttons}>FANTASY SPORTS</Button>
+      </div>
+
       <div>
         <div>
           <div className={styles.sports_cards}>

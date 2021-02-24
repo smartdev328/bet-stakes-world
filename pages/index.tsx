@@ -98,6 +98,18 @@ function HeroBanner() {
                   <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
                 </div>
               </div>
+              <div>
+                <div className={styles.carousel_slide}>
+                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
+                  <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                </div>
+              </div>
+              <div>
+                <div className={styles.carousel_slide}>
+                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
+                  <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                </div>
+              </div>
             </Carousel>
           </div>
         </div>

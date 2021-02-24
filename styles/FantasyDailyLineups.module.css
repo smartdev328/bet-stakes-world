@@ -393,12 +393,18 @@
   }
   .optionsRow {
     margin: 30px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sportsbook {
+    margin-right: 0;
   }
   .optionsRow .sportsbook_logo {
     width: 105px;
     margin-right: 12px;
     padding-right: 0.3em;
     padding-left: 0.3em;
+    height: 54px;
   }
 }
 
@@ -790,13 +796,18 @@
 
 @media (max-width: 600px) {
   .fantasy_tab {
-    width: 220px;
-    margin-bottom: 1em;
-    font-size: 28px;
-    line-height: 40px;
+    width: auto;
+    margin-bottom: 32px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-right: 16px;
   }
-  .fantasy_tab:nth-child(2) {
-    width: 100px;
+  .fantasyStats {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .fantasy_tab:last-child {
+    margin-right: 0;
   }
   p.fantasyLineupInfo {
     display: none;
@@ -818,7 +829,7 @@
     margin-bottom: 1.5em;
   }
   .featureValue {
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
   }
   .featureValue .featureValueTitle {
     font-size: 24px;
@@ -841,8 +852,14 @@
   font-style: italic;
   text-align: center;
 }
+
 .sectionTitle {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 0.2em;
+}
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 16px;
+  }
 }

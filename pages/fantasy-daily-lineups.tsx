@@ -29,8 +29,6 @@ import {
   YahooFantasySVG
 } from '@components/SportIcons';
 import { FANTASY_TABS } from '@constants/';
-import FantasySportsBook from '@components/FantasySportsBook';
-import FantasyLineupIncludes from '@components/FantasyLineupIncludes';
 import { FantasyTabInfo, Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
 
@@ -170,7 +168,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
                 )}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <FantasySidebar selectedCompany={selectedCompany} selectedSport={selectedSport} />
+                <FantasySidebar />
               </Col>
             </Row>
           </div>
@@ -348,7 +346,7 @@ function TopSection({
             TheDailyStakes proposed Bankroll Allocation Based on Contest Types
           </p>
         </Col>
-        <Col span={18}>
+        <Col span={18} className={styles.fantasyStats}>
           <Row align="middle" justify="space-between">
             <div className={styles.featureValue}>
               <div className={styles.featureValueTitle}>Tournament</div>
@@ -504,28 +502,13 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
   );
 }
 
-type SidebarProps = {
-  selectedSport: string;
-  selectedCompany: string;
-};
-
-function FantasySidebar({ selectedSport, selectedCompany }: SidebarProps) {
+function FantasySidebar() {
   return (
     <>
-      {selectedSport === 'NBA' && selectedCompany === 'DraftKings' && (
-        <>
-          <DailyFantasyLineups />
-          <CommonSportsBook />
-          <WhereToWatchGame />
-          <WhereBuyGear />
-        </>
-      )}
-      {!(selectedSport === 'NBA' && selectedCompany === 'DraftKings') && (
-        <>
-          <FantasyLineupIncludes />
-          <FantasySportsBook />
-        </>
-      )}
+      <DailyFantasyLineups />
+      <CommonSportsBook />
+      <WhereToWatchGame />
+      <WhereBuyGear />
       <BettingFundamentals isFantasy />
     </>
   );

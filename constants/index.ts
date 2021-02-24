@@ -215,7 +215,7 @@ export const FANTASY_TABS = [
   },
   {
     id: 'Single_Slate',
-    name: 'SINGLE'
+    name: 'SINGLE SLATE'
   }
 ];
 

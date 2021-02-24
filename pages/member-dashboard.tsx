@@ -402,9 +402,10 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
           setInitialName(
-            names
-              .map((item: string) => item.substring(0, 1))
-              .reduce((initials: string, currentValue: string) => initials + currentValue)
+            names.reduce(
+              (initials: string, currentValue: string) => initials + currentValue.substring(0, 1),
+              ''
+            )
           );
         }
       });

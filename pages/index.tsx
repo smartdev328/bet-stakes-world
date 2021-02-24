@@ -336,38 +336,38 @@ function BetOnSports() {
     copySelectedCards[prop] = !copySelectedCards[prop];
     setSelectedCards(copySelectedCards);
   };
-  const responsive = [
-    {
-      breakpoint: 1400,
-      settings: {
-        slidesToShow: 4,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 1150,
-      settings: {
-        slidesToShow: 3,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 882,
-      settings: {
-        slidesToShow: 2,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        dots: true,
-        variableWidth: true,
-        swipeToSlide: true
-      }
-    }
-  ];
+  // const responsive = [
+  //   {
+  //     breakpoint: 1400,
+  //     settings: {
+  //       slidesToShow: 4,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 1150,
+  //     settings: {
+  //       slidesToShow: 3,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 882,
+  //     settings: {
+  //       slidesToShow: 2,
+  //       dots: true
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 600,
+  //     settings: {
+  //       slidesToShow: 1,
+  //       dots: true,
+  //       variableWidth: true,
+  //       swipeToSlide: true
+  //     }
+  //   }
+  // ];
 
   const sportsData = [
     {

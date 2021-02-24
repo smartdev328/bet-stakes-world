@@ -50,8 +50,6 @@ function SubMenu({
   subscriptions: UserSubscription[];
   token: JWT | null;
 }) {
-  const [sportPaneVisible, setSportPaneVisible] = useState<boolean>(false);
-  const [fantasyPaneVisible, setFantasyPaneVisible] = useState<boolean>(false);
   const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus>('visitor');
 
@@ -64,11 +62,6 @@ function SubMenu({
       setSubscriptionStatus('paid');
     }
   }, [token, subscriptions]);
-
-  const toggleSportPanel = () => {
-    setFantasyPaneVisible(false);
-    setSportPaneVisible(!sportPaneVisible);
-  };
 
   const hasPackage = (packageName: string) => {
     return subscriptions.filter((subscription: UserSubscription) => {

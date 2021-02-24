@@ -435,9 +435,6 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
                 <YesterdayPlays />
               </div>
             </Col>
-            {/* <Col span={6} className={styles.weekly_pro_tip_container}>
-              <WeeklyProTip data={weeklyTip} />
-            </Col> */}
           </Row>
         </div>
       </AppLayout>

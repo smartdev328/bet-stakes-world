@@ -22,7 +22,7 @@ import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
-import { Package } from '@type/Packages';
+import { BillingPlan, Package } from '@type/Packages';
 import { SportBetTypes } from '@constants/';
 
 function HeroBanner() {
@@ -59,6 +59,8 @@ function CurrentPackages({
   subscriptions: UserSubscription[];
   packages: Package[];
 }) {
+  const router = useRouter();
+
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
     if (pack.name.indexOf('VIP All Access') > -1) {
@@ -69,18 +71,13 @@ function CurrentPackages({
       sportsCardPack = pack.id;
     }
   });
-  const router = useRouter();
-  const goToPackage = (subscription: any) => {
-    switch (subscription.name) {
-      case 'VIP All Access - Daily':
-        router.push('/vip-all-access-card');
-        break;
-      case 'Fantasy':
-        router.push('/fantasy-daily-lineups');
-        break;
-      default:
-        router.push('/sports-card');
-        break;
+  const goToPackage = (plan: BillingPlan) => {
+    if (plan.name.toLowerCase().indexOf('vip all access') > -1) {
+      router.push('/vip-all-access-card');
+    } else if (plan.name.toLowerCase().indexOf('fantasy') > -1) {
+      router.push('/fantasy-daily-lineups');
+    } else {
+      router.push('/sports-card');
     }
   };
 
@@ -268,8 +265,6 @@ function EarliestGames({
     return null;
   };
 
-  console.log('earliest', games);
-
   return (
     <div className={styles.earliest_games}>
       <div className={styles.earliest_games_header}>
@@ -347,8 +342,6 @@ function YesterdayPlays() {
         setFetchMoreLoading(false);
       });
   };
-
-  console.log('yesterdays ', games);
 
   return (
     <div className={styles.yesterday_plays}>

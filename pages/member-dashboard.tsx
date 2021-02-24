@@ -39,6 +39,16 @@ function HeroBanner() {
 }
 
 function TopSection({ profileName, initialName }: { profileName: string; initialName: string }) {
+  const [overallInfo, setOverallInfo] = useState<string>('');
+  useEffect(() => {
+    UsersAPIs.getOverallRecord()
+      .then((res) => res.json())
+      .then((data) => {
+        const { wins, loss, draw } = data.data.summary;
+        setOverallInfo(`${wins}-${draw}-${loss}`);
+      });
+  });
+
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
@@ -48,7 +58,7 @@ function TopSection({ profileName, initialName }: { profileName: string; initial
           <div className={styles.avatar}>{initialName}</div>
         </Row>
         <Col className={styles.welcome_right}>
-          <strong>Overall Record:</strong>&nbsp;123-54
+          <strong>Overall Record:</strong>&nbsp;{overallInfo}
         </Col>
       </Row>
     </>

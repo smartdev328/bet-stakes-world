@@ -86,6 +86,7 @@
   display: flex;
   align-items: center;
   color: #000000;
+  min-width: 280px;
 }
 
 @media (max-width: 1024px) {

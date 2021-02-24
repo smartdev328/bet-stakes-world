@@ -1249,6 +1249,8 @@ li .square_icon {
     overflow: hidden;
     overflow-x: auto;
     flex-wrap: nowrap;
+    max-width: 100vw;
+    justify-content: end;
   }
   .sports_card {
     width: 240px;

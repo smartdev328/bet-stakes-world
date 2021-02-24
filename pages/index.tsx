@@ -376,27 +376,57 @@ function BetOnSports() {
     },
     {
       name: 'NBA',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA',
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
+      value: 'nba',
+      selectedStyle: selectedCards.nba && styles.nba_box_active,
+      selected: selectedCards.nba
     },
     {
       name: 'NFL',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL',
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
+      value: 'nfl',
+      selectedStyle: selectedCards.nfl && styles.nfl_box_active,
+      selected: selectedCards.nfl
     },
     {
       name: 'MLB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB',
+      image: <MLB_SVG className={styles.sports_card_image} />,
+      style: styles.mlb_box,
+      value: 'mlb',
+      selectedStyle: selectedCards.mlb && styles.mlb_box_active,
+      selected: selectedCards.mlb
     },
     {
       name: 'SOCCER',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER',
+      image: <SOCCER_SVG className={styles.sports_card_image} />,
+      style: styles.soccer_box,
+      value: 'soccer',
+      selectedStyle: selectedCards.soccer && styles.soccer_box_active,
+      selected: selectedCards.soccer
     },
     {
       name: 'FORMULA 1',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1',
+      image: <F1_SVG className={styles.sports_card_image} />,
+      style: styles.f1_box,
+      value: 'f1',
+      selectedStyle: selectedCards.f1 && styles.f1_box_active,
+      selected: selectedCards.f1
     },
     {
       name: 'UFC',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC',
+      image: <UFC_SVG className={styles.sports_card_image} />,
+      style: styles.ufc_box,
+      value: 'ufc',
+      selectedStyle: selectedCards.ufc && styles.ufc_box_active,
+      selected: selectedCards.ufc
     },
     {
       name: 'NCAAB',
@@ -429,33 +459,39 @@ function BetOnSports() {
         <p>Select the sports you would like to bet on and continue to checkout</p>
         <Button className={styles.checkout_btn}>Continue to checkout</Button>
       </div>
-      <div className={styles.sports_cards}>
-        <Carousel
-          slidesToShow={6}
-          infinite={false}
-          dots={true}
-          initialSlide={0}
-          responsive={responsive}
-          className="sports-cards-carousel">
-          <div>
-            <div className={styles.sports_card}>
-              {sportsData.map((item) => (
-                <div>
-                  <div className={styles.sports_card_box_content}>
-                    <h3>{item.name}</h3>
-                    <div className={styles.desc}>
-                      <div>{item.description}</div>
+      <div>
+        <div>
+          <div className={styles.sports_cards}>
+            {sportsData.map((item) => (
+              <div>
+                <div className={styles.sports_card}>
+                  <div
+                    className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                    onClick={() => toggleSelectCard(item.value)}>
+                    {item.selected && (
+                      <img
+                        src="/images/check_mark.svg"
+                        alt="Check mark Icon"
+                        className={styles.sports_card_checkmark}
+                      />
+                    )}
+                    {item.image}
+                    <div className={styles.sports_card_box_content}>
+                      <h3>{item.name}</h3>
+                      <div className={styles.desc}>
+                        <div>{item.description}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </Carousel>
+        </div>
 
         {/* older code of sports is below */}
 
-        <Carousel
+        {/* <Carousel
           slidesToShow={6}
           infinite={false}
           dots={true}
@@ -643,6 +679,7 @@ function BetOnSports() {
             </div>
           </div>
         </Carousel>
+     */}
       </div>
       <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
     </div>

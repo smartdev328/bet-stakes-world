@@ -493,6 +493,7 @@
     height: 16px;
   }
   .weekly_pro_tip .block_content {
+    flex-direction: column !important;
     padding: 16px 16px;
   }
   .weekly_pro_tip_img {

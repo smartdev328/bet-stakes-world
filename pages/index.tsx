@@ -329,6 +329,11 @@ function BetOnSports() {
     mlb: false,
     ufc: false,
     f1: false,
+    ncaaf: false,
+    nfl_dfs: false,
+    ncaab: false,
+    nba_dfs: false,
+    mlb_dfs: false,
     soccer: false
   });
   const toggleSelectCard = (prop: keyof SportCardsSelectionType) => {
@@ -372,7 +377,8 @@ function BetOnSports() {
   const sportsData = [
     {
       name: 'VIP',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
+      value: 'nfl'
     },
     {
       name: 'NBA',
@@ -430,24 +436,50 @@ function BetOnSports() {
     },
     {
       name: 'NCAAB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB',
+
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
+      value: 'ncaab',
+      selectedStyle: selectedCards.ncaab && styles.nba_box_active,
+      selected: selectedCards.ncaab
     },
     {
       name: 'NCAAF',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF',
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
+      value: 'ncaaf',
+      selectedStyle: selectedCards.ncaaf && styles.nfl_box_active,
+      selected: selectedCards.ncaaf
     },
 
     {
       name: 'NBA DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
+      value: 'nba_dfs',
+      selectedStyle: selectedCards.nba_dfs && styles.nba_box_active,
+      selected: selectedCards.nba_dfs
     },
     {
       name: 'NFL DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
+      value: 'nfl_dfs',
+      selectedStyle: selectedCards.nfl_dfs && styles.nfl_box_active,
+      selected: selectedCards.nfl_dfs
     },
     {
       name: 'MLB DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: <MLB_SVG className={styles.sports_card_image} />,
+      style: styles.mlb_box,
+      value: 'mlb_dfs',
+      selectedStyle: selectedCards.mlb_dfs && styles.mlb_box_active,
+      selected: selectedCards.mlb_dfs
     }
   ];
   return (

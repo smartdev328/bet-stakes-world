@@ -32,6 +32,11 @@ export type SportCardsSelectionType = {
   mlb: boolean;
   ufc: boolean;
   f1: boolean;
+  ncaaf: boolean;
+  nfl_dfs: boolean;
+  ncaab: boolean;
+  nba_dfs: boolean;
+  mlb_dfs: boolean;
   soccer: boolean;
 };
 

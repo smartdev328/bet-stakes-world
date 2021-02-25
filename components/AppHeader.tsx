@@ -268,7 +268,6 @@ export default function AppHeader({
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
 
   const { user } = useSelector((state: ReduxState) => {
-    console.log(state);
     return state;
   });
   const dispatch = useDispatch();

@@ -8,7 +8,8 @@
   z-index: 1000;
 }
 .cartDrawer {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   position: fixed;
   z-index: 1001;
   top: 0;
@@ -141,4 +142,26 @@
   padding: 1em;
   font-weight: bold;
   text-align: center;
+}
+.closeIconBtn {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .cartDrawer {
+    padding-top: 52px;
+  }
+  .closeIconBtn {
+    display: block;
+    position: absolute;
+    top: 1em;
+    right: 16px;
+    right: 1em;
+    padding: 0;
+    width: auto;
+    height: auto;
+  }
+  .closeIcon path {
+    fill: #1a1a1a;
+  }
 }

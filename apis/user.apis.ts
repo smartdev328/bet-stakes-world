@@ -109,6 +109,14 @@ function changePassword(payload: ChangePasswordForm) {
   });
 }
 
+function getOverallRecord() {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/users/overall-record`, {
+    method: 'get',
+    headers
+  });
+}
+
 export default {
   createUser,
   login,
@@ -119,5 +127,6 @@ export default {
   fetchProfile,
   updateProfile,
   uploadLogo,
-  changePassword
+  changePassword,
+  getOverallRecord
 };

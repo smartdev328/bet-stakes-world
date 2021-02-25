@@ -2,6 +2,21 @@ export const API_BASE_URL = 'https://api.tdsdevelopment.info';
 export const STRIPE_API_KEY =
   'pk_test_51H3m5pEPT82q25ZMP07C58HuGdSSWPLbZx2d7dBI0xbAXMLvXbidZK8AdTdDTC5G64jVoxXm9gv8K1PZrMGbqqBf00Mc6dlaF0';
 
+export const SportBetTypes = [
+  {
+    id: 'straight',
+    name: 'Straight Bets'
+  },
+  {
+    id: 'parlay',
+    name: 'Parlays'
+  },
+  {
+    id: 'wildcard',
+    name: 'Bonus Wilcard Plays'
+  }
+];
+
 export const MATCHES_MOCK = [
   {
     name: 'NBA | MON 07/31 3:00PM',
@@ -193,24 +208,6 @@ export const CREDIT_COUNTRIES = [
   }
 ];
 
-export const FANTASY_COMPANIES = [
-  {
-    id: 'draft_kings',
-    name: 'DraftKings',
-    logo: '/images/draft_kings_company.png'
-  },
-  {
-    id: 'fanduel_company',
-    name: 'Fanduel',
-    logo: '/images/fanduel_company.png'
-  },
-  {
-    id: 'yahoo_fantasy',
-    name: 'Yahoo',
-    logo: '/images/yahoo-fantasy.png'
-  }
-];
-
 export const FANTASY_TABS = [
   {
     id: 'Main_Slate',
@@ -218,7 +215,7 @@ export const FANTASY_TABS = [
   },
   {
     id: 'Single_Slate',
-    name: 'SINGLE'
+    name: 'SINGLE SLATE'
   }
 ];
 

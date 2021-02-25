@@ -152,6 +152,12 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />
+          <MembershipOfferings
+            isMobile
+            onlyFor={'sports_card'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
               <IntroForSportsCard />
@@ -164,9 +170,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
                 />
               )}
-              <FAQs title={'Sports Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
+          <MembershipOfferings
+            isMobile
+            onlyFor={'all'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
@@ -179,9 +190,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
                 />
               )}
-              <FAQs title={'VIP All Access Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
+          <MembershipOfferings
+            isMobile
+            onlyFor={'fantasy'}
+            currentPlan={currentPlan}
+            changePlan={setCurrentPlan}
+          />
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
@@ -194,7 +210,21 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
                 />
               )}
+            </div>
+          )}
+          {currentPlan === 'sports_card' && (
+            <div className={styles.offering_details}>
+              <FAQs title={'Sports Card FAQ'} currentPlan={currentPlan} />
+            </div>
+          )}
+          {currentPlan === 'fantasy' && (
+            <div className={styles.offering_details}>
               <FAQs title={'FANTASY FAQ'} currentPlan={currentPlan} />
+            </div>
+          )}
+          {currentPlan === 'all' && (
+            <div className={styles.offering_details}>
+              <FAQs title={'VIP All Access Card FAQ'} currentPlan={currentPlan} />
             </div>
           )}
           {currentPlan === '' && (
@@ -222,13 +252,26 @@ function HeroBanner() {
 
 type MembershipOfferingsPropsType = {
   currentPlan: string;
+  isMobile?: boolean;
+  onlyFor?: string;
   changePlan: (_: string) => void;
 };
 
-function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPropsType) {
+function MembershipOfferings({
+  isMobile,
+  currentPlan,
+  changePlan,
+  onlyFor
+}: MembershipOfferingsPropsType) {
   return (
-    <div className={styles.membershipOffers_plans}>
-      <div className={`${styles.plan} ${currentPlan === 'sports_card' && styles.active}`}>
+    <div
+      className={`${styles.membershipOffers_plans} ${onlyFor && styles.single} ${
+        isMobile ? styles.mobile : ''
+      }`}>
+      <div
+        className={`${styles.plan} ${onlyFor === 'sports_card' && styles.only} ${
+          currentPlan === 'sports_card' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('sports_card')}>
             <div className={styles.plan_content_title}>Sports Card</div>
@@ -239,7 +282,9 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
         </div>
       </div>
       <div
-        className={`${styles.plan} ${styles.main_plan} ${currentPlan === 'all' && styles.active}`}>
+        className={`${styles.plan} ${styles.main_plan} ${onlyFor === 'all' && styles.only} ${
+          currentPlan === 'all' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('all')}>
             <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -253,7 +298,10 @@ function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPro
         </div>
         <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
       </div>
-      <div className={`${styles.plan} ${currentPlan === 'fantasy' && styles.active}`}>
+      <div
+        className={`${styles.plan} ${onlyFor === 'fantasy' && styles.only} ${
+          currentPlan === 'fantasy' && styles.active
+        }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('fantasy')}>
             <div className={styles.plan_content_title}>Fantasy</div>
@@ -358,6 +406,7 @@ function ProductsAndCartBox({
     return a.price - b.price >= 0 ? 1 : -1;
   });
   const [tempCart, setTempCart] = useState<CartItem[]>([]);
+  const [activePlan, setActivePlan] = useState<BillingPlan>();
 
   useEffect(() => {
     setCartFromProps(cartItems);
@@ -365,32 +414,31 @@ function ProductsAndCartBox({
 
   const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    setTempCart(
-      itemsFromCart.length > 0
-        ? itemsFromCart
-        : [
-            {
-              sports: undefined,
-              plan: pack.billing_plans[0],
-              pack,
-              auto_renewal: false
-            }
-          ]
-    );
+    if (itemsFromCart.length > 0) {
+      setTempCart(itemsFromCart);
+      setActivePlan(itemsFromCart[0].plan);
+    }
   };
 
   const changeSportCard = (plan: BillingPlan) => {
-    const newCart = [
-      {
-        sports: undefined,
-        plan,
-        pack,
-        auto_renewal: false,
-        owner: 0
-      }
-    ];
-    setTempCart(newCart);
-    changeTempCart(pack, newCart);
+    if (activePlan?.id !== plan.id) {
+      const newCart = [
+        {
+          sports: undefined,
+          plan,
+          pack,
+          auto_renewal: false,
+          owner: 0
+        }
+      ];
+      setTempCart(newCart);
+      setActivePlan(plan);
+      changeTempCart(pack, newCart);
+    } else {
+      setTempCart([]);
+      setActivePlan(undefined);
+      changeTempCart(pack, []);
+    }
   };
 
   let totalPrice = 0;
@@ -409,13 +457,13 @@ function ProductsAndCartBox({
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={tempCart[0]?.plan.id === plan.id ? styles.active : ''}
+              className={activePlan?.id === plan.id ? styles.active : ''}
               onClick={() => changeSportCard(plan)}>
               <div className={styles.flexRow}>
-                {tempCart[0]?.plan.id === plan.id && (
+                {activePlan?.id === plan.id && (
                   <CheckedCircleIcon className={styles.checkedStatusIcon} />
                 )}
-                {tempCart[0]?.plan.id !== plan.id && (
+                {activePlan?.id !== plan.id && (
                   <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
                 )}
                 <span className={styles.sportsCard_name}>{plan.duration}</span>
@@ -447,7 +495,12 @@ function ProductsAndCartBox({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>
+              {tempCart.length > 0 && <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"
@@ -510,8 +563,8 @@ function ProductsAndCartBoxForFantasy({
     return a.price - b.price >= 0 ? 1 : -1;
   });
   const [tempCart, setTempCart] = useState<CartItem[]>([]);
-  const [activePlan, setActivePlan] = useState<BillingPlan>(pack.billing_plans[0]);
-  const [activeSports, setActiveSports] = useState<Sport[]>([sports[0]]);
+  const [activePlan, setActivePlan] = useState<BillingPlan>();
+  const [activeSports, setActiveSports] = useState<Sport[]>([]);
 
   useEffect(() => {
     setCartFromProps(cartItems);
@@ -519,31 +572,34 @@ function ProductsAndCartBoxForFantasy({
 
   const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    setTempCart(
-      itemsFromCart.length > 0
-        ? itemsFromCart
-        : [
-            {
-              sports: sports[0],
-              plan: pack.billing_plans[0],
-              pack,
-              auto_renewal: false
-            }
-          ]
-    );
+    if (itemsFromCart.length > 0) {
+      setTempCart(itemsFromCart);
+      setActivePlan(itemsFromCart[0].plan);
+      const sports: Sport[] = [];
+      itemsFromCart.forEach((cart) => {
+        if (cart.sports) {
+          sports.push(cart.sports);
+        }
+      });
+      setActiveSports(sports);
+    }
   };
 
   const changeBillingPlan = (plan: BillingPlan) => {
     const newCart: CartItem[] = [];
-    activeSports.forEach((activeSport) => {
-      newCart.push({
-        sports: activeSport,
-        plan,
-        pack,
-        auto_renewal: false
+    if (activePlan?.id === plan.id) {
+      setActivePlan(undefined);
+    } else {
+      activeSports.forEach((activeSport) => {
+        newCart.push({
+          sports: activeSport,
+          plan,
+          pack,
+          auto_renewal: false
+        });
       });
-    });
-    setActivePlan(plan);
+      setActivePlan(plan);
+    }
     setTempCart(newCart);
     changeTempCart(pack, newCart);
   };
@@ -576,20 +632,19 @@ function ProductsAndCartBoxForFantasy({
       active.push(sport);
     } else {
       active.splice(idx, 1);
-      if (active.length === 0) {
-        active.push(sports[0]);
-      }
     }
     setActiveSports(active);
     const newCart: CartItem[] = [];
-    active.forEach((activeSport) => {
-      newCart.push({
-        sports: activeSport,
-        plan: activePlan,
-        pack,
-        auto_renewal: false
+    if (activePlan) {
+      active.forEach((activeSport) => {
+        newCart.push({
+          sports: activeSport,
+          plan: activePlan,
+          pack,
+          auto_renewal: false
+        });
       });
-    });
+    }
     setTempCart(newCart);
     changeTempCart(pack, newCart);
   };
@@ -636,27 +691,21 @@ function ProductsAndCartBoxForFantasy({
           ))}
         </div>
       </div>
-      <div className={styles.sportsCards}>
+      <div className={`${styles.sportsCards}  ${styles.sportsCardsForFantasy}`}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={
-                tempCart.filter(
-                  (item) => item.sports?.id === activeSports[0]?.id && item.plan.id === plan.id
-                ).length > 0
-                  ? styles.active
-                  : ''
-              }
+              className={activePlan?.id === plan.id ? styles.active : ''}
               onClick={() => changeBillingPlan(plan)}>
               <div className={styles.flexRow}>
-                {tempCart.filter(
-                  (item) => item.sports?.id === activeSports[0]?.id && item.plan.id === plan.id
-                ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
-                {tempCart.filter(
-                  (item) => item.sports?.id === activeSports[0]?.id && item.plan.id === plan.id
-                ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+                {activePlan?.id === plan.id && (
+                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                )}
+                {activePlan?.id !== plan.id && (
+                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                )}
                 <span className={styles.sportsCard_name}>{plan.duration}</span>
               </div>
               <div className={styles.flexRow}>
@@ -686,11 +735,18 @@ function ProductsAndCartBoxForFantasy({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>
-                <p>
-                  {tempCart.length} Sport{tempCart.length > 1 ? 's' : ''} - {activePlan.duration}
-                </p>
-              </div>
+              {tempCart.length > 0 && (
+                <div>
+                  <p>
+                    {tempCart.length} Sport{tempCart.length > 1 ? 's' : ''} - {activePlan?.duration}
+                  </p>
+                </div>
+              )}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"
@@ -766,8 +822,8 @@ function ProductsAndCartBoxForSportsCard({
   const [ufcAndF1Sports, setUFCandF1sports] = useState<Sport[]>([]);
   const [activeSports1, setActiveSports1] = useState<Sport[]>([]);
   const [activeSports2, setActiveSports2] = useState<Sport[]>([]);
-  const [activePlan1, setActivePlan1] = useState<BillingPlan>(pack.billing_plans[0]);
-  const [activePlan2, setActivePlan2] = useState<BillingPlan>(pack.billing_plans[0]);
+  const [activePlan1, setActivePlan1] = useState<BillingPlan>();
+  const [activePlan2, setActivePlan2] = useState<BillingPlan>();
 
   useEffect(() => {
     const nonUFCandF1Sports1: Sport[] = [];
@@ -781,37 +837,49 @@ function ProductsAndCartBoxForSportsCard({
     });
     setNonUFCandF1sports(nonUFCandF1Sports1);
     setUFCandF1sports(ufcAndF1Sports1);
-    setActiveSports1([nonUFCandF1Sports1[0]]);
+    if (cartItems) {
+      setCartFromProps(cartItems);
+    }
   }, []);
 
   const setCartFromProps = (cartItems: CartItem[]) => {
+    const sports1: Sport[] = [];
+    const sports2: Sport[] = [];
+
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    setTempCart(
-      itemsFromCart.length > 0
-        ? itemsFromCart
-        : [
-            {
-              sports: sports[0],
-              plan: pack.billing_plans[0],
-              pack,
-              auto_renewal: false
-            }
-          ]
-    );
+    if (itemsFromCart.length > 0) {
+      setTempCart(itemsFromCart);
+      itemsFromCart.forEach((cart) => {
+        if (cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1') {
+          sports2.push(cart.sports);
+          setActivePlan2(cart.plan);
+        } else {
+          if (cart.sports) {
+            sports1.push(cart.sports);
+            setActivePlan1(cart.plan);
+          }
+        }
+      });
+    }
+    setActiveSports1(sports1);
+    setActiveSports2(sports2);
   };
 
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
   const changeBillingPlan = (plan: BillingPlan, type: string) => {
-    const newCart: CartItem[] = tempCart.slice();
+    const newCart: CartItem[] = [...tempCart];
+    console.log('------ type:', type);
     if (type === NON_UFC_F1) {
-      if (activeSports1.length > 0) {
+      const carts: CartItem[] = [];
+      newCart.forEach((cartItem) => {
+        if (cartItem.plan.id !== activePlan1?.id) {
+          carts.push(cartItem);
+        }
+      });
+      if (activePlan1?.id === plan.id) {
+        setActivePlan1(undefined);
+      } else {
         activeSports1.forEach((activeSport) => {
-          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id);
-          newCart.splice(idx, 1);
-          newCart.push({
+          carts.push({
             sports: activeSport,
             plan,
             pack,
@@ -820,12 +888,19 @@ function ProductsAndCartBoxForSportsCard({
         });
         setActivePlan1(plan);
       }
+      setTempCart(carts);
     } else {
-      if (activeSports2.length > 0) {
+      const carts: CartItem[] = [];
+      newCart.forEach((cartItem) => {
+        if (cartItem.plan.id !== activePlan2?.id) {
+          carts.push(cartItem);
+        }
+      });
+      if (activePlan2?.id === plan.id) {
+        setActivePlan2(undefined);
+      } else {
         activeSports2.forEach((activeSport) => {
-          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id);
-          newCart.splice(idx, 1);
-          newCart.push({
+          carts.push({
             sports: activeSport,
             plan,
             pack,
@@ -834,27 +909,10 @@ function ProductsAndCartBoxForSportsCard({
         });
         setActivePlan2(plan);
       }
+      setTempCart(carts);
     }
-    setTempCart(newCart);
     changeTempCart(pack, newCart);
   };
-
-  // const changeAddOn = (plan: BillingPlan) => {
-  //   const newCart = addOnTempCart.slice();
-  //   const itemIdx = newCart.findIndex((item) => item.sports?.id === activeSport.id);
-  //   if (itemIdx > -1) {
-  //     newCart.splice(itemIdx, 1);
-  //     if (newCart[itemIdx].plan.duration !== plan.duration) {
-  //       newCart.push({
-  //         sports: activeSport,
-  //         plan,
-  //         auto_renewal: false,
-  //         owner: 10
-  //       });
-  //     }
-  //   }
-  //   setAddOnTempCart(newCart);
-  // };
 
   const SPORTS_INFO = [
     {
@@ -915,27 +973,21 @@ function ProductsAndCartBoxForSportsCard({
       if (idx < 0) {
         active.push(sport);
         setActiveSports1(active);
-        newCart.push({
-          sports: sport,
-          plan: activePlan1,
-          pack,
-          auto_renewal: false
-        });
-      } else {
-        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
-        active.splice(idx, 1);
-        if (active.length === 0) {
-          active.push(nonUFCAndF1Sports[0]);
+        if (activePlan1) {
           newCart.push({
-            sports: nonUFCAndF1Sports[0],
+            sports: sport,
             plan: activePlan1,
             pack,
             auto_renewal: false
           });
         }
+      } else {
+        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+        active.splice(idx, 1);
         setActiveSports1(active);
       }
-    } else {
+    }
+    if (type === '') {
       const active = activeSports2.slice();
       const idx = active.findIndex((sp) => sp.id === sport.id);
       if (idx < 0) {
@@ -1010,27 +1062,21 @@ function ProductsAndCartBoxForSportsCard({
           ))}
         </div>
       </div>
-      <div className={styles.sportsCards}>
+      <div className={`${styles.sportsCards} ${styles.sportsCardsForSports}`}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={
-                tempCart.filter(
-                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
-                ).length > 0
-                  ? styles.active
-                  : ''
-              }
+              className={activePlan1?.id === plan.id ? styles.active : ''}
               onClick={() => changeBillingPlan(plan, NON_UFC_F1)}>
               <div className={styles.flexRow}>
-                {tempCart.filter(
-                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
-                ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
-                {tempCart.filter(
-                  (item) => item.sports?.id === activeSports1[0]?.id && item.plan.id === plan.id
-                ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
+                {activePlan1?.id === plan.id && (
+                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                )}
+                {activePlan1?.id !== plan.id && (
+                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                )}
                 <span className={styles.sportsCard_name}>{plan.duration}</span>
               </div>
               <div className={styles.flexRow}>
@@ -1088,47 +1134,43 @@ function ProductsAndCartBoxForSportsCard({
             ))}
           </div>
           <ul>
-            {billingPlans.map((plan: BillingPlan, index: number) => (
-              <li
-                key={index}
-                className={
-                  tempCart.filter(
-                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
-                  ).length > 0
-                    ? styles.active
-                    : ''
-                }
-                onClick={() => changeBillingPlan(plan, '')}>
-                <div className={styles.flexRow}>
-                  {tempCart.filter(
-                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
-                  ).length > 0 && <CheckedCircleIcon className={styles.checkedStatusIcon} />}
-                  {tempCart.filter(
-                    (item) => item.sports?.id === activeSports2[0]?.id && item.plan.id === plan.id
-                  ).length === 0 && <EmptyCircleIcon className={styles.uncheckedStatusIcon} />}
-                  <span className={styles.sportsCard_name}>{plan.duration}</span>
-                </div>
-                <div className={styles.flexRow}>
-                  <div className={`${styles.sportsCard_value} ${styles.origin}`}>
-                    <div className={styles.sportsCard_value_title}>Reg</div>
-                    <div className={styles.sportsCard_value_price}>$199</div>
-                    <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+            {billingPlans
+              .filter((plan) => plan.name.indexOf('UFC') > -1)
+              .map((plan: BillingPlan, index: number) => (
+                <li
+                  key={index}
+                  className={activePlan2?.id === plan.id ? styles.active : ''}
+                  onClick={() => changeBillingPlan(plan, '')}>
+                  <div className={styles.flexRow}>
+                    {activePlan2?.id === plan.id && (
+                      <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                    )}
+                    {activePlan2?.id !== plan.id && (
+                      <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                    )}
+                    <span className={styles.sportsCard_name}>{plan.duration}</span>
                   </div>
-                  <div className={`${styles.sportsCard_value}`}>
-                    <div className={styles.sportsCard_value_title}>Sale</div>
-                    <div className={styles.sportsCard_value_content}>
-                      <LazyLoad>
-                        <img src="/images/shop-plan-yellow-circle.svg" alt="" />
-                      </LazyLoad>
-                      <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                      <div className={styles.sportsCard_value_dayprice}>
-                        ${getDayPrice(plan)}/Day
+                  <div className={styles.flexRow}>
+                    <div className={`${styles.sportsCard_value} ${styles.origin}`}>
+                      <div className={styles.sportsCard_value_title}>Reg</div>
+                      <div className={styles.sportsCard_value_price}>$99</div>
+                      <div className={styles.sportsCard_value_dayprice}>$99/Day</div>
+                    </div>
+                    <div className={`${styles.sportsCard_value}`}>
+                      <div className={styles.sportsCard_value_title}>Sale</div>
+                      <div className={styles.sportsCard_value_content}>
+                        <LazyLoad>
+                          <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                        </LazyLoad>
+                        <div className={styles.sportsCard_value_price}>${plan.price}</div>
+                        <div className={styles.sportsCard_value_dayprice}>
+                          ${getDayPrice(plan)}/Day
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))}
           </ul>
         </div>
         <div className={styles.cartBox}>
@@ -1138,20 +1180,27 @@ function ProductsAndCartBoxForSportsCard({
           <div className={styles.cartBoxContent}>
             <h4>Package Total</h4>
             <div className={styles.cartBoxContentDesc}>
-              <div>
-                {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
-                  <p>
-                    {nonUfcAndF1CartItems.length} Sport{nonUfcAndF1CartItems.length > 1 ? 's' : ''}{' '}
-                    - {activePlan1.duration}
-                  </p>
-                )}
-                {activePlan2 && ufcAndF1CartItems.length > 0 && (
-                  <p>
-                    {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''} -{' '}
-                    {activePlan2.duration}
-                  </p>
-                )}
-              </div>
+              {tempCart.length > 0 && (
+                <div>
+                  {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
+                    <p>
+                      {nonUfcAndF1CartItems.length} Sport
+                      {nonUfcAndF1CartItems.length > 1 ? 's' : ''} - {activePlan1.duration}
+                    </p>
+                  )}
+                  {activePlan2 && ufcAndF1CartItems.length > 0 && (
+                    <p>
+                      {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''}{' '}
+                      - {activePlan2.duration}
+                    </p>
+                  )}
+                </div>
+              )}
+              {tempCart.length === 0 && (
+                <div className={styles.noItem}>
+                  <em>No Item</em>
+                </div>
+              )}
               <div className={styles.totalPrice}>
                 <NumberFormat
                   displayType="text"

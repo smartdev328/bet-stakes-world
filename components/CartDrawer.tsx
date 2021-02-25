@@ -93,6 +93,12 @@ export default function CartDrawer({
     <>
       {open && <div className={styles.cartDrawerWrapper} onClick={onClose}></div>}
       <div className={`${open && styles.open} ${styles.cartDrawer}`}>
+        <Button
+          ghost
+          className={styles.closeIconBtn}
+          icon={<CloseIcon className={styles.closeIcon} />}
+          onClick={onClose}
+        />
         <div className={styles.cartItems}>
           <div className={styles.cartItemsMain}>
             {cartItems.length === 0 && (

@@ -20,10 +20,15 @@ import {
 import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
 import { DailyLineupType, PageProps, SportInfoType } from '@type/Main';
-import { NBA_SVG, NFL_SVG, MLB_SVG } from '@components/SportIcons';
-import { FANTASY_COMPANIES, FANTASY_TABS } from '@constants/';
-import FantasySportsBook from '@components/FantasySportsBook';
-import FantasyLineupIncludes from '@components/FantasyLineupIncludes';
+import {
+  NBA_SVG,
+  NFL_SVG,
+  MLB_SVG,
+  FanduelLogoSvg,
+  DraftKingsLogoSvg,
+  YahooFantasySVG
+} from '@components/SportIcons';
+import { FANTASY_TABS } from '@constants/';
 import { FantasyTabInfo, Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
 
@@ -45,6 +50,24 @@ const SPORTS_INFO = [
     id: 'MLB',
     background: '#1878FB',
     logo: () => <MLB_SVG className={styles.sports_logo} />
+  }
+];
+
+export const FANTASY_COMPANIES = [
+  {
+    id: 'draft_kings',
+    name: 'DraftKings',
+    logo: () => <DraftKingsLogoSvg className={styles.fantasyCompanyLogo} />
+  },
+  {
+    id: 'fanduel_company',
+    name: 'Fanduel',
+    logo: () => <FanduelLogoSvg className={styles.fantasyCompanyLogo} />
+  },
+  {
+    id: 'yahoo_fantasy',
+    name: 'Yahoo',
+    logo: () => <YahooFantasySVG className={styles.fantasyCompanyLogo} />
   }
 ];
 
@@ -145,7 +168,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
                 )}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <FantasySidebar selectedCompany={selectedCompany} selectedSport={selectedSport} />
+                <FantasySidebar />
               </Col>
             </Row>
           </div>
@@ -263,23 +286,28 @@ function TopSection({
           ))}
         </div>
       </Row>
-      <Row className={styles.optionsRow} align={'middle'} justify={'space-between'}>
-        <Row align={'middle'}>
+      <Row className={styles.optionsRow} align={'middle'} wrap={false} justify={'space-between'}>
+        <Row align={'middle'} style={{ flex: 1 }}>
+          <Col span={24} className={styles.sectionTitle}>
+            Select Sportsbook
+          </Col>
           {FANTASY_COMPANIES.map((company) => (
             <LazyLoad key={company.id}>
-              <div
-                className={`${styles.company_logo} ${styles[`${company.id}`]} ${
-                  selectedCompany === company.name && styles.selected
-                }`}
-                onClick={() => onSelectCompany(company.name)}>
-                <img src={company.logo} alt="Draft kings Company" />
+              <div className={styles.sportsbook}>
+                <div className={styles.sportsbook_name}>{company.name}</div>
+                <div
+                  className={`${styles.sportsbook_logo} ${styles[`${company.id}`]} ${
+                    selectedCompany === company.name && styles.selected
+                  }`}
+                  onClick={() => onSelectCompany(company.name)}>
+                  {company.logo()}
+                </div>
               </div>
             </LazyLoad>
           ))}
-        </Row>
-      </Row>
-      <Row className={styles.optionsRow} align={'middle'} justify={'space-between'}>
-        <Row align={'middle'}>
+          <Col span={24} className={styles.sectionTitle} style={{ marginTop: '1em' }}>
+            Select Game Style
+          </Col>
           {FANTASY_TABS.map((tab) => (
             <div
               key={tab.id}
@@ -313,42 +341,44 @@ function TopSection({
         </Row>
       </Row>
       <Row>
-        <Col span={24}>
+        <Col span={18}>
           <p className={styles.fantasyLineupInfo}>
-            TheDailyStakes suggests entering this lineup in the following contest types
+            TheDailyStakes proposed Bankroll Allocation Based on Contest Types
           </p>
         </Col>
-        <Col span={24} className={styles.fantasyLineupInfo}>
-          <div className={styles.featureValue}>
-            <div className={styles.featureValueTitle}>Tournament</div>
-            <div className={styles.featureValueContent}>
-              {infoForCurrentTab?.stat.tournament ? (
-                infoForCurrentTab?.stat.tournament
-              ) : (
-                <span>&nbsp;</span>
-              )}
+        <Col span={18} className={styles.fantasyStats}>
+          <Row align="middle" justify="space-between">
+            <div className={styles.featureValue}>
+              <div className={styles.featureValueTitle}>Tournament</div>
+              <div className={styles.featureValueContent}>
+                {infoForCurrentTab?.stat.tournament ? (
+                  infoForCurrentTab?.stat.tournament
+                ) : (
+                  <span>&nbsp;</span>
+                )}
+              </div>
             </div>
-          </div>
-          <div className={styles.featureValue}>
-            <div className={styles.featureValueTitle}>Beat the Score</div>
-            <div className={styles.featureValueContent}>
-              {infoForCurrentTab?.stat.beat_the_score ? (
-                infoForCurrentTab?.stat.beat_the_score
-              ) : (
-                <span>&nbsp;</span>
-              )}
+            <div className={styles.featureValue}>
+              <div className={styles.featureValueTitle}>Beat the Score</div>
+              <div className={styles.featureValueContent}>
+                {infoForCurrentTab?.stat.beat_the_score ? (
+                  infoForCurrentTab?.stat.beat_the_score
+                ) : (
+                  <span>&nbsp;</span>
+                )}
+              </div>
             </div>
-          </div>
-          <div className={styles.featureValue}>
-            <div className={styles.featureValueTitle}>50/50s</div>
-            <div className={styles.featureValueContent}>
-              {infoForCurrentTab?.stat.fifty_to_fifty ? (
-                infoForCurrentTab?.stat.fifty_to_fifty
-              ) : (
-                <span>&nbsp;</span>
-              )}
+            <div className={styles.featureValue}>
+              <div className={styles.featureValueTitle}>50/50s</div>
+              <div className={styles.featureValueContent}>
+                {infoForCurrentTab?.stat.fifty_to_fifty ? (
+                  infoForCurrentTab?.stat.fifty_to_fifty
+                ) : (
+                  <span>&nbsp;</span>
+                )}
+              </div>
             </div>
-          </div>
+          </Row>
         </Col>
       </Row>
     </>
@@ -360,6 +390,24 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
     setShowDetailsAt(showDetailsAt.slice());
+  };
+
+  const getPosition = (lineup: DailyLineupType) => {
+    let lineupPosition;
+    switch (lineup.position) {
+      case 'B1':
+        lineupPosition = '1B';
+        break;
+      case 'B2':
+        lineupPosition = '2B';
+        break;
+      case 'B3':
+        lineupPosition = '3B';
+        break;
+      default:
+        lineupPosition = lineup.position;
+    }
+    return lineupPosition;
   };
 
   return (
@@ -379,7 +427,7 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
                 )}
               </LazyLoad>
               <div className={styles.daily_lineup_sidebar_content}>
-                <span>{lineup.position}</span>
+                <span>{getPosition(lineup)}</span>
                 <div className={styles.divider} />
                 <LazyLoad>
                   <img src={lineup.team.logo.url} alt="Daily Lineup Logo" />
@@ -460,29 +508,13 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
   );
 }
 
-type SidebarProps = {
-  selectedSport: string;
-  selectedCompany: string;
-};
-
-function FantasySidebar({ selectedSport, selectedCompany }: SidebarProps) {
+function FantasySidebar() {
   return (
     <>
-      {selectedSport === 'NBA' && selectedCompany === 'DraftKings' && (
-        <>
-          <DailyFantasyLineups />
-          <CommonSportsBook />
-          <WhereToWatchGame />
-          <WhereBuyGear />
-          {/* <BankRollManagement /> */}
-        </>
-      )}
-      {!(selectedSport === 'NBA' && selectedCompany === 'DraftKings') && (
-        <>
-          <FantasyLineupIncludes />
-          <FantasySportsBook />
-        </>
-      )}
+      <DailyFantasyLineups />
+      <CommonSportsBook />
+      <WhereToWatchGame />
+      <WhereBuyGear />
       <BettingFundamentals isFantasy />
     </>
   );

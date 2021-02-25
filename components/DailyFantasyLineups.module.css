@@ -77,5 +77,6 @@
 @media (max-width: 600px) {
   .sidebarBlock {
     margin-left: 0;
+    width: 100%;
   }
 }

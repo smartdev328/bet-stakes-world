@@ -50,8 +50,6 @@ function SubMenu({
   subscriptions: UserSubscription[];
   token: JWT | null;
 }) {
-  const [sportPaneVisible, setSportPaneVisible] = useState<boolean>(false);
-  const [fantasyPaneVisible, setFantasyPaneVisible] = useState<boolean>(false);
   const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus>('visitor');
 
@@ -64,11 +62,6 @@ function SubMenu({
       setSubscriptionStatus('paid');
     }
   }, [token, subscriptions]);
-
-  const toggleSportPanel = () => {
-    setFantasyPaneVisible(false);
-    setSportPaneVisible(!sportPaneVisible);
-  };
 
   const hasPackage = (packageName: string) => {
     return subscriptions.filter((subscription: UserSubscription) => {
@@ -100,7 +93,7 @@ function SubMenu({
             <div className={styles.submenu_item_for_pane}>
               {(hasPackage('Sport') || subscriptionStatus === 'visitor') && (
                 <Link href="/sports-card">
-                  <a className={styles.locked}>
+                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
                     <span>Sports Card</span>
                   </a>
@@ -162,18 +155,12 @@ function SubMenu({
               </div>
               <div className={styles.submenu_item_for_pane}>
                 {(hasPackage('Sports') || subscriptionStatus === 'visitor') && (
-                  <a
-                    className={
-                      sportPaneVisible
-                        ? styles.paneActive
-                        : subscriptionStatus !== 'paid'
-                        ? styles.locked
-                        : ''
-                    }
-                    onClick={toggleSportPanel}>
-                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                    <span>Sports Card</span>
-                  </a>
+                  <Link href="/sports-card">
+                    <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                      {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                      <span>Sports Card</span>
+                    </a>
+                  </Link>
                 )}
               </div>
               <div className={styles.submenu_item}>
@@ -189,17 +176,12 @@ function SubMenu({
 
               <div className={styles.submenu_item_for_pane}>
                 {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
-                  <a
-                    className={
-                      fantasyPaneVisible
-                        ? styles.paneActive
-                        : subscriptionStatus !== 'paid'
-                        ? styles.locked
-                        : ''
-                    }>
-                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                    <span>FANTASY PICKS</span>
-                  </a>
+                  <Link href="/fantasy-daily-lineups">
+                    <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                      {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                      <span>FANTASY PICKS</span>
+                    </a>
+                  </Link>
                 )}
               </div>
               <div className={styles.submenu_item}>

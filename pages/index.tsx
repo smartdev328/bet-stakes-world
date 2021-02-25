@@ -364,116 +364,116 @@ function BetOnSports() {
     {
       name: 'VIP',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
-      image: () => <NBA_SVG className={styles.sports_card_image} />,
-      style: () => styles.nba_box,
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
       value: SpoortCardName.nba,
-      selectedStyle: () => selectedCards.nba && styles.nba_box_active,
+      selectedStyle: styles.nba_box_active,
       selected: selectedCards.nba
     },
     {
       name: 'NBA',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA',
-      image: () => <NBA_SVG className={styles.sports_card_image} />,
-      style: () => styles.nba_box,
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
       value: SpoortCardName.nba,
-      selectedStyle: () => selectedCards.nba && styles.nba_box_active,
+      selectedStyle: styles.nba_box_active,
       selected: selectedCards.nba
     },
     {
       name: 'NFL',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL',
-      image: () => <NFL_SVG className={styles.sports_card_image} />,
-      style: () => styles.nfl_box,
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
       value: SpoortCardName.nfl,
-      selectedStyle: () => selectedCards.nfl && styles.nfl_box_active,
+      selectedStyle: styles.nfl_box_active,
       selected: selectedCards.nfl
     },
     {
       name: 'MLB',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB',
-      image: () => <MLB_SVG className={styles.sports_card_image} />,
-      style: () => styles.mlb_box,
+      image: <MLB_SVG className={styles.sports_card_image} />,
+      style: styles.mlb_box,
       value: SpoortCardName.mlb,
-      selectedStyle: () => selectedCards.mlb && styles.mlb_box_active,
+      selectedStyle: styles.mlb_box_active,
       selected: selectedCards.mlb
     },
     {
       name: 'SOCCER',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER',
-      image: () => <SOCCER_SVG className={styles.sports_card_image} />,
-      style: () => styles.soccer_box,
+      image: <SOCCER_SVG className={styles.sports_card_image} />,
+      style: styles.soccer_box,
       value: SpoortCardName.soccer,
-      selectedStyle: () => selectedCards.soccer && styles.soccer_box_active,
+      selectedStyle: styles.soccer_box_active,
       selected: selectedCards.soccer
     },
     {
       name: 'FORMULA 1',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1',
-      image: () => <F1_SVG className={styles.sports_card_image} />,
-      style: () => styles.f1_box,
+      image: <F1_SVG className={styles.sports_card_image} />,
+      style: styles.f1_box,
       value: SpoortCardName.f1,
-      selectedStyle: () => selectedCards.f1 && styles.f1_box_active,
+      selectedStyle: styles.f1_box_active,
       selected: selectedCards.f1
     },
     {
       name: 'UFC',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC',
-      image: () => <UFC_SVG className={styles.sports_card_image} />,
-      style: () => styles.ufc_box,
+      image: <UFC_SVG className={styles.sports_card_image} />,
+      style: styles.ufc_box,
       value: SpoortCardName.ufc,
-      selectedStyle: () => selectedCards.ufc && styles.ufc_box_active,
+      selectedStyle: styles.ufc_box_active,
       selected: selectedCards.ufc
     },
     {
       name: 'NCAAB',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB',
-      image: () => <NBA_SVG className={styles.sports_card_image} />,
-      style: () => styles.nba_box,
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
       value: SpoortCardName.ncaab,
-      selectedStyle: () => selectedCards.ncaab && styles.nba_box_active,
+      selectedStyle: styles.nba_box_active,
       selected: selectedCards.ncaab
     },
     {
       name: 'NCAAF',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF',
-      image: () => <NFL_SVG className={styles.sports_card_image} />,
-      style: () => styles.nfl_box,
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
       value: SpoortCardName.ncaaf,
-      selectedStyle: () => selectedCards.ncaaf && styles.nfl_box_active,
+      selectedStyle: styles.nfl_box_active,
       selected: selectedCards.ncaaf
     },
 
     {
       name: 'NBA DFS',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
-      image: () => <NBA_SVG className={styles.sports_card_image} />,
-      style: () => styles.nba_box,
+      image: <NBA_SVG className={styles.sports_card_image} />,
+      style: styles.nba_box,
       value: SpoortCardName.nba_dfs,
-      selectedStyle: () => selectedCards.nba_dfs && styles.nba_box_active,
+      selectedStyle: styles.nba_box_active,
       selected: selectedCards.nba_dfs
     },
     {
       name: 'NFL DFS',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
-      image: () => <NFL_SVG className={styles.sports_card_image} />,
-      style: () => styles.nfl_box,
+      image: <NFL_SVG className={styles.sports_card_image} />,
+      style: styles.nfl_box,
       value: SpoortCardName.nfl_dfs,
-      selectedStyle: () => selectedCards.nfl_dfs && styles.nfl_box_active,
+      selectedStyle: styles.nfl_box_active,
       selected: selectedCards.nfl_dfs
     },
     {
       name: 'MLB DFS',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
-      image: () => <MLB_SVG className={styles.sports_card_image} />,
-      style: () => styles.mlb_box,
+      image: <MLB_SVG className={styles.sports_card_image} />,
+      style: styles.mlb_box,
       value: SpoortCardName.mlb_dfs,
-      selectedStyle: () => selectedCards.mlb_dfs && styles.mlb_box_active,
+      selectedStyle: styles.mlb_box_active,
       selected: selectedCards.mlb_dfs
     }
   ];
 
   const [sportsDataForMobile, setSportsDataForMobile] = useState<SportCardsSelection[]>([
-    ...sportsData
+    sportsData[0]
   ]);
 
   useEffect(() => {
@@ -509,10 +509,12 @@ function BetOnSports() {
           <div>
             <div className={styles.sports_cards}>
               {sportsDataForMobile.map((item: SportCardsSelection) => (
-                <div>
+                <div key={item.name}>
                   <div className={styles.sports_card}>
                     <div
-                      className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                      className={`${styles.sports_card_box} ${item.style} ${
+                        item.selected ? item.selectedStyle : ''
+                      }`}
                       onClick={() => toggleSelectCard(item.value)}>
                       {item.selected && (
                         <img
@@ -541,10 +543,12 @@ function BetOnSports() {
         <div>
           <div className={styles.sports_cards}>
             {sportsData.map((item: SportCardsSelection) => (
-              <div>
+              <div key={item.name}>
                 <div className={styles.sports_card}>
                   <div
-                    className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                    className={`${styles.sports_card_box} ${item.style} ${
+                      item.selected ? item.selectedStyle : ''
+                    }`}
                     onClick={() => toggleSelectCard(item.value)}>
                     {item.selected && (
                       <img

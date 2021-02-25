@@ -56,10 +56,10 @@ export enum SpoortCardName {
 export type SportCardsSelection = {
   name: string;
   description: string;
-  image: Function;
-  style: Function;
+  image: JSX.Element;
+  style: string;
   value: SpoortCardName;
-  selectedStyle: Function;
+  selectedStyle: string;
   selected: boolean;
 };
 

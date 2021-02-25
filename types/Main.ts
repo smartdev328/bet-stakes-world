@@ -40,6 +40,29 @@ export type SportCardsSelectionType = {
   soccer: boolean;
 };
 
+export enum SpoortCardName {
+  nba = 'nba',
+  nfl = 'nfl',
+  mlb = 'mlb',
+  ufc = 'ufc',
+  f1 = 'f1',
+  ncaaf = 'ncaaf',
+  nfl_dfs = 'nfl_dfs',
+  ncaab = 'ncaab',
+  nba_dfs = 'nba_dfs',
+  mlb_dfs = 'mlb_dfs',
+  soccer = 'soccer'
+}
+export type SportCardsSelection = {
+  name: string;
+  description: string;
+  image: Function;
+  style: Function;
+  value: SpoortCardName;
+  selectedStyle: Function;
+  selected: boolean;
+};
+
 export type MatchSimpleType = {
   name: string;
   team1: string;

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';

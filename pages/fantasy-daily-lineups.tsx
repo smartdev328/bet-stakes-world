@@ -160,7 +160,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           <div className={styles.container}>
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
-                {!loading && <LineupsList data={lineupList} />}
+                {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}
                 {loading && (
                   <div className={styles.loadingSpin}>
                     <Spin size="large" />
@@ -385,7 +385,7 @@ function TopSection({
   );
 }
 
-function LineupsList({ data }: { data: DailyLineupType[] }) {
+function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selectedSport: string }) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
@@ -418,7 +418,13 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
           <Row>
             <div className={styles.daily_lineup_sidebar}>
               <LazyLoad>
-                <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
+                {selectedSport === 'NBA' ? (
+                  <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
+                ) : selectedSport === 'NFL' ? (
+                  <NFL_SVG className={styles.image_NFL} />
+                ) : (
+                  <MLB_SVG className={styles.image_MLB} />
+                )}
               </LazyLoad>
               <div className={styles.daily_lineup_sidebar_content}>
                 <span>{getPosition(lineup)}</span>

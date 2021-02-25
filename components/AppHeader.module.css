@@ -33,7 +33,7 @@
 
 .info span {
   display: block;
-  color: #FFC700;
+  color: #ffc700;
 }
 
 .info strong {
@@ -52,7 +52,7 @@
   left: -14px;
   width: 6px;
   height: 100%;
-  background-color: var(--actionYellowColor); 
+  background-color: var(--actionYellowColor);
 }
 
 .countdownBox_desc {
@@ -104,7 +104,7 @@
 }
 
 .dateBar .dateBarDivider {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   width: 2px;
   height: 25px;
   margin: 0 13px;
@@ -122,7 +122,7 @@
   color: #101010;
   background-color: var(--lightGreyColor);
   margin-right: 14px;
-  padding:  7.5px 24px;
+  padding: 7.5px 24px;
   height: auto;
   outline: none;
   border: none;
@@ -136,7 +136,7 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  padding:  6.5px 24px;
+  padding: 6.5px 24px;
   color: var(--lightGreyColor);
   border: 1px solid var(--lightGreyColor);
   height: auto;
@@ -146,12 +146,12 @@
   transition: all ease-in 0.3s;
 }
 .ctaBtns .myDashboardBtn {
-  background: #FFC700;
+  background: #ffc700;
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
   padding: 6.5px 24px;
-  border: 1px solid #FFC700;
+  border: 1px solid #ffc700;
   box-sizing: border-box;
   color: #101010;
   margin-right: 14px;
@@ -162,10 +162,10 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  padding:  6.5px 24px;
+  padding: 6.5px 24px;
   background: #959799;
   color: #ffffff;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   height: auto;
   outline: none;
   display: inline-flex;
@@ -186,7 +186,8 @@
   margin-right: 10px;
 }
 @media (max-width: 1272px) {
-  .ctaBtns .profileBtn, .ctaBtns .myDashboardBtn {
+  .ctaBtns .profileBtn,
+  .ctaBtns .myDashboardBtn {
     font-size: 13px;
   }
 }
@@ -205,14 +206,21 @@
   .header {
     padding: 25px 30px;
   }
-  .countdownBox_desc, .ctaBtns .subscribeBtn, .ctaBtns .loginBtn, .yellowBoldLink, .dateBar a, .info {
+  .countdownBox_desc,
+  .ctaBtns .subscribeBtn,
+  .ctaBtns .loginBtn,
+  .yellowBoldLink,
+  .dateBar a,
+  .info {
     font-size: 13px;
   }
   .dateBar .dateBarDivider {
     height: 20px;
   }
-  .ctaBtns .subscribeBtn, .ctaBtns .loginBtn,
-  .ctaBtns .profileBtn, .ctaBtns .myDashboardBtn {
+  .ctaBtns .subscribeBtn,
+  .ctaBtns .loginBtn,
+  .ctaBtns .profileBtn,
+  .ctaBtns .myDashboardBtn {
     padding-right: 20px;
     padding-left: 20px;
   }
@@ -256,7 +264,7 @@
   }
   .info span {
     display: block;
-    color: #FFC700;
+    color: #ffc700;
   }
   .logo {
     max-width: 52%;
@@ -266,7 +274,7 @@
 /* Navbar Section */
 .navbarContainer {
   background-color: var(--primaryColor);
-  border-top: 1px solid #EBEBEB;
+  border-top: 1px solid #ebebeb;
   padding: 0 50px;
   position: relative;
 }
@@ -302,14 +310,15 @@
   font-size: 16px;
   line-height: 25px;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 18px 0 !important;
   margin: 0 16px !important;
 }
 .navbar .navbarItem a {
   color: #fff;
 }
-.navbar .navbarItem:active, .navbar .navbarItem:hover {
+.navbar .navbarItem:active,
+.navbar .navbarItem:hover {
   color: #ffffff !important;
   border-bottom-color: transparent !important;
 }
@@ -327,11 +336,12 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .cart_icon {
-  width: 24px;
+  width: 36px;
+  border-radius: 50px;
 }
 
 .submenu {
@@ -346,15 +356,17 @@
   text-transform: uppercase;
   color: #656565;
 }
-.submenu_item, .submenu_item_for_pane {
+.submenu_item,
+.submenu_item_for_pane {
   font-weight: 600;
   font-size: 16px;
   line-height: 184.4%;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 1em;
 }
-.submenu_item a, .submenu_item_for_pane a {
+.submenu_item a,
+.submenu_item_for_pane a {
   display: flex;
   align-items: center;
 }
@@ -364,7 +376,8 @@
 a.locked:active {
   pointer-events: none;
 }
-.submenu_item a:hover svg path, .submenu_item_for_pane a:hover svg path {
+.submenu_item a:hover svg path,
+.submenu_item_for_pane a:hover svg path {
   fill: #40a9ff;
 }
 .submenu_main_item {
@@ -374,17 +387,19 @@ a.locked:active {
   line-height: 25px;
   padding: 19px 0 !important;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 16px !important;
   display: flex;
   align-items: center;
 }
-.caret_up, .caret_down {
+.caret_up,
+.caret_down {
   font-size: 12px;
   line-height: 12px;
   margin-left: 3px;
 }
-.submenu_main_item:active, .submenu_main_item:hover {
+.submenu_main_item:active,
+.submenu_main_item:hover {
   color: #ffffff;
 }
 .submenu:hover .submenu_main_item span + .caret_down {
@@ -403,14 +418,15 @@ a.locked:active {
   background-color: var(--primaryColor);
   padding: 16px 16px 20px;
   width: 700px;
-  border-top: 1px solid #E5E5E5;
+  border-top: 1px solid #e5e5e5;
   display: none;
   z-index: 100;
 }
 .submenu:hover .submenu_content {
   display: flex;
 }
-.pane, .submenu_content_left {
+.pane,
+.submenu_content_left {
   width: 50%;
 }
 .pane .submenu_item {
@@ -424,7 +440,7 @@ a.locked:active {
   fill: #40a9ff;
 }
 .lock_icon {
-  width: 9px; 
+  width: 9px;
   margin-right: 5px;
 }
 .navbarContainer .mobilecontainer {
@@ -470,11 +486,12 @@ a.locked:active {
   .navbarContainer .navbarLeftSide {
     justify-content: flex-start;
   }
-  .navbar .navbarItem, .navbar .submenu_main_item {
+  .navbar .navbarItem,
+  .navbar .submenu_main_item {
     font-weight: bold;
-  font-size: 32px;
+    font-size: 32px;
     line-height: 32px;
-    color: #FFFFFF;
+    color: #ffffff;
     padding: 0 0 !important;
     height: auto;
     margin: 0.4em 0 !important;
@@ -484,19 +501,21 @@ a.locked:active {
   .navbar .submenu_main_item.active {
     border-bottom-color: #fff;
   }
-  .submenu_item, .submenu_item .navbarItem, .submenu_item_for_pane {
+  .submenu_item,
+  .submenu_item .navbarItem,
+  .submenu_item_for_pane {
     font-weight: 500;
     font-size: 24px;
     line-height: 184.4%;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
   }
   .pane .submenu_item {
     font-weight: 600;
     font-size: 16px;
     line-height: 25px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
   }
   .navbarContainer .mobilecontainer {
     display: flex;
@@ -518,10 +537,12 @@ a.locked:active {
     display: flex;
     padding: 10px 4px 20px;
   }
-  .pane, .submenu_content_left {
+  .pane,
+  .submenu_content_left {
     width: 100%;
   }
-  .submenu_item, .submenu_item_for_pane {
+  .submenu_item,
+  .submenu_item_for_pane {
     margin-left: 16px;
     margin-bottom: 0;
   }
@@ -547,7 +568,7 @@ a.locked:active {
   .subscribeBtn {
     width: 335px;
     height: 40px;
-    background: #FFC700;
+    background: #ffc700;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -591,7 +612,7 @@ a.locked:active {
 
 .mobileSubscribeBtn {
   width: 100%;
-  background: #FFC700;
+  background: #ffc700;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;

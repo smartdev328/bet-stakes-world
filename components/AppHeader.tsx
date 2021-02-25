@@ -267,6 +267,10 @@ export default function AppHeader({
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
 
+  const { user } = useSelector((state: ReduxState) => {
+    console.log(state);
+    return state;
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     const remainingTime = getRemainingTime();
@@ -500,7 +504,7 @@ export default function AppHeader({
                   trigger={['click']}>
                   <Button
                     type="link"
-                    icon={<IdentityIcon className={styles.cart_icon} />}
+                    icon={<img src={user.profile?.avatar?.url} className={styles.cart_icon} />}
                     aria-label="User Profile Button"
                     className={styles.cart_btn}></Button>
                 </Dropdown>

@@ -32,10 +32,12 @@ export type LoginUserValidateType = {
   email: boolean;
   password: boolean;
 };
-
+export type UserAvatar = {
+  url: string;
+};
 export type UserProfile = {
   id?: string;
-  avatar?: string | undefined;
+  avatar?: UserAvatar | undefined;
   username: string | undefined;
   first_name: string | undefined;
   last_name: string | undefined;

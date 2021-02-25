@@ -30,7 +30,6 @@
   }
 }
 
-
 /* Hero Banner */
 .heroBanner {
   position: relative;
@@ -60,7 +59,7 @@
 
 .topSection {
   padding: 24px 0;
-  border-bottom: 1px solid #C4C4C4;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 .topSection .right,
@@ -82,7 +81,8 @@
   font-size: 18px;
   line-height: 28px;
 }
-.thick_star_btn, .caret_down_btn {
+.thick_star_btn,
+.caret_down_btn {
   height: auto;
   border: none;
   display: flex;
@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   background: #000;
   padding: 13px 16px;
   height: auto;
@@ -143,7 +143,7 @@
 @media (max-width: 992px) {
   .topSection {
     padding: 20px 0;
-  }  
+  }
   .topSection .left {
     font-size: 28px;
     line-height: 42px;
@@ -249,6 +249,15 @@
   left: -40%;
   top: -120%;
 }
+
+.mlb_sports_logo {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
 .dropdown_UFC > svg.sports_logo {
   width: 80%;
   position: absolute;
@@ -346,7 +355,6 @@
   .dropdownBtnAll {
     margin: 1.5em 8px;
   }
-
 }
 @media (max-width: 600px) {
   .sportsCardListCarousel {
@@ -379,7 +387,7 @@
 }
 
 .daily_lineup_sidebar {
-  background: #1A1A1A;
+  background: #1a1a1a;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -420,7 +428,7 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  color: #F9F9F9;
+  color: #f9f9f9;
 }
 
 .daily_lineup_sidebar img {
@@ -438,7 +446,6 @@
   align-items: center;
 }
 
-
 .daily_lineup_main_content h4 {
   font-weight: 800;
   font-size: 72px;
@@ -452,7 +459,7 @@
   font-size: 32px;
   line-height: 94.4%;
   text-transform: uppercase;
-  color: #373D40;
+  color: #373d40;
   display: flex;
   flex-flow: row wrap;
   margin-bottom: 18px;
@@ -487,7 +494,7 @@
   display: block;
   content: '';
   height: 1px;
-  background: #C4C4C4;
+  background: #c4c4c4;
   flex: 1;
 }
 .hide_details_btn {
@@ -728,7 +735,7 @@
 }
 .featureValue {
   margin-right: 30px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   padding: 16px;
   display: inline-block;
   min-width: 250px;
@@ -796,4 +803,31 @@
   padding: 2em 0;
   font-style: italic;
   text-align: center;
+}
+
+.image_NFL {
+  transform: rotate(90deg);
+  height: 200%;
+  top: 30%;
+  left: -120%;
+}
+
+.image_MLB {
+  position: absolute;
+  top: 50%;
+  left: -75%;
+  height: auto;
+  width: 400px;
+  position: absolute;
+  height: auto;
+  width: 400px;
+  left: -120%;
+  top: -3%;
+  transform: scale(0.3);
+}
+
+.image_NBA {
+  top: -133%;
+  left: -230%;
+  height: 160%;
 }

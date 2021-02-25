@@ -137,7 +137,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           <div className={styles.container}>
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
-                {!loading && <LineupsList data={lineupList} />}
+                {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}
                 {loading && (
                   <div className={styles.loadingSpin}>
                     <Spin size="large" />
@@ -355,7 +355,7 @@ function TopSection({
   );
 }
 
-function LineupsList({ data }: { data: DailyLineupType[] }) {
+function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selectedSport: string }) {
   const [showDetailsAt, setShowDetailsAt] = useState<boolean[]>([]);
   const changeDetailsVisibleAt = (index: number) => {
     showDetailsAt[index] = !showDetailsAt[index];
@@ -369,9 +369,19 @@ function LineupsList({ data }: { data: DailyLineupType[] }) {
         <div className={styles.daily_lineup} key={lineup.id}>
           <Row>
             <div className={styles.daily_lineup_sidebar}>
-              <LazyLoad>
-                <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
-              </LazyLoad>
+              {selectedSport === 'NBA' ? (
+                <LazyLoad>
+                  <NBA_SVG className={styles.image_NBA} />
+                </LazyLoad>
+              ) : selectedSport === 'NFL' ? (
+                <LazyLoad>
+                  <NFL_SVG className={styles.image_NFL} />
+                </LazyLoad>
+              ) : (
+                <LazyLoad>
+                  <MLB_SVG className={styles.image_MLB} />
+                </LazyLoad>
+              )}
               <div className={styles.daily_lineup_sidebar_content}>
                 <span>{lineup.position}</span>
                 <div className={styles.divider} />

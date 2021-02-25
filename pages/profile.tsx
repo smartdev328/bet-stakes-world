@@ -124,7 +124,6 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
   };
   const changeProfileForm = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    console.log('Name', name, typeof name);
     const newProfileForm = Object.assign({}, profileForm);
     if (name === 'avatar') newProfileForm.tempAvatar = name;
     else newProfileForm[name] = value;

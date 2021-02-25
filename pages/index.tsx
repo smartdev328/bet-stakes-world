@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
@@ -466,6 +466,12 @@ function BetOnSports() {
       selected: selectedCards.mlb_dfs
     }
   ];
+
+  const [sportsDataForMobile, setSportsDataForMobile] = useState<string[]>([...sportsData]);
+
+  useEffect(() => {
+    console.log('sportsDataForMobile', sportsDataForMobile);
+  }, [sportsDataForMobile]);
   return (
     <div className={styles.bet_on_sports}>
       <div className={styles.bet_on_sports_title}>
@@ -477,12 +483,54 @@ function BetOnSports() {
       </div>
 
       <div className={styles.mobile_column_display}>
-        <Button className={styles.mobile_display_buttons}>VIP ALL ACCESS</Button>
-        <Button className={styles.mobile_display_buttons}>SPORTS CARD</Button>
-        <Button className={styles.mobile_display_buttons}>FANTASY SPORTS</Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(0, 1))}>
+          VIP ALL ACCESS
+        </Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(1, 9))}>
+          SPORTS CARD
+        </Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(9, 13))}>
+          FANTASY SPORTS
+        </Button>
+        <div>
+          <div>
+            <div className={styles.sports_cards}>
+              {sportsDataForMobile.map((item) => (
+                <div>
+                  <div className={styles.sports_card}>
+                    <div
+                      className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                      onClick={() => toggleSelectCard(item.value)}>
+                      {item.selected && (
+                        <img
+                          src="/images/check_mark.svg"
+                          alt="Check mark Icon"
+                          className={styles.sports_card_checkmark}
+                        />
+                      )}
+                      {item.image}
+                      <div className={styles.sports_card_box_content}>
+                        <h3>{item.name}</h3>
+                        <div className={styles.desc}>
+                          <div>{item.description}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
+      <div className={styles.laptop_display}>
         <div>
           <div className={styles.sports_cards}>
             {sportsData.map((item) => (
@@ -511,9 +559,10 @@ function BetOnSports() {
             ))}
           </div>
         </div>
-
-        {/* older code of sports is below */}
       </div>
+
+      {/* older code of sports is below */}
+
       <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
     </div>
   );

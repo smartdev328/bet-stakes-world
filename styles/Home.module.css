@@ -1084,6 +1084,7 @@ li .square_icon {
   text-align: center;
   height: auto;
   padding: 15.5px 24px 15.5px 24px;
+  width: 250px;
 }
 .mobile_column_display {
   display: flex;
@@ -1096,6 +1097,12 @@ li .square_icon {
 @media (max-width: 600px) {
   .mobile_column_display {
     display: flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .laptop_display {
+    display: none;
   }
 }
 
@@ -1246,6 +1253,8 @@ li .square_icon {
 }
 @media (max-width: 600px) {
   .sports_cards {
+    justify-content: end;
+    max-width: 100vw;
     overflow: hidden;
     overflow-x: auto;
     flex-wrap: nowrap;

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
@@ -8,7 +8,13 @@ import { useRouter } from 'next/router';
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { PageProps, SlickArrowType, SportCardsSelectionType } from '@type/Main';
+import {
+  PageProps,
+  SlickArrowType,
+  SportCardsSelectionType,
+  SportCardsSelection,
+  SpoortCardName
+} from '@type/Main';
 import styles from '@styles/Home.module.css';
 
 const Carousel = dynamic(() => import('antd/lib/carousel'));
@@ -341,127 +347,138 @@ function BetOnSports() {
     mlb: false,
     ufc: false,
     f1: false,
+    ncaaf: false,
+    nfl_dfs: false,
+    ncaab: false,
+    nba_dfs: false,
+    mlb_dfs: false,
     soccer: false
   });
-  const toggleSelectCard = (prop: keyof SportCardsSelectionType) => {
+  const toggleSelectCard = (prop: SpoortCardName) => {
     const copySelectedCards = Object.assign({}, selectedCards);
     copySelectedCards[prop] = !copySelectedCards[prop];
     setSelectedCards(copySelectedCards);
   };
-  // const responsive = [
-  //   {
-  //     breakpoint: 1400,
-  //     settings: {
-  //       slidesToShow: 4,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 1150,
-  //     settings: {
-  //       slidesToShow: 3,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 882,
-  //     settings: {
-  //       slidesToShow: 2,
-  //       dots: true
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 600,
-  //     settings: {
-  //       slidesToShow: 1,
-  //       dots: true,
-  //       variableWidth: true,
-  //       swipeToSlide: true
-  //     }
-  //   }
-  // ];
 
-  const sportsData = [
+  const sportsData: SportCardsSelection[] = [
     {
       name: 'VIP',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
+      image: () => <NBA_SVG className={styles.sports_card_image} />,
+      style: () => styles.nba_box,
+      value: SpoortCardName.nba,
+      selectedStyle: () => selectedCards.nba && styles.nba_box_active,
+      selected: selectedCards.nba
     },
     {
       name: 'NBA',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA',
-      image: <NBA_SVG className={styles.sports_card_image} />,
-      style: styles.nba_box,
-      value: 'nba',
-      selectedStyle: selectedCards.nba && styles.nba_box_active,
+      image: () => <NBA_SVG className={styles.sports_card_image} />,
+      style: () => styles.nba_box,
+      value: SpoortCardName.nba,
+      selectedStyle: () => selectedCards.nba && styles.nba_box_active,
       selected: selectedCards.nba
     },
     {
       name: 'NFL',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL',
-      image: <NFL_SVG className={styles.sports_card_image} />,
-      style: styles.nfl_box,
-      value: 'nfl',
-      selectedStyle: selectedCards.nfl && styles.nfl_box_active,
+      image: () => <NFL_SVG className={styles.sports_card_image} />,
+      style: () => styles.nfl_box,
+      value: SpoortCardName.nfl,
+      selectedStyle: () => selectedCards.nfl && styles.nfl_box_active,
       selected: selectedCards.nfl
     },
     {
       name: 'MLB',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB',
-      image: <MLB_SVG className={styles.sports_card_image} />,
-      style: styles.mlb_box,
-      value: 'mlb',
-      selectedStyle: selectedCards.mlb && styles.mlb_box_active,
+      image: () => <MLB_SVG className={styles.sports_card_image} />,
+      style: () => styles.mlb_box,
+      value: SpoortCardName.mlb,
+      selectedStyle: () => selectedCards.mlb && styles.mlb_box_active,
       selected: selectedCards.mlb
     },
     {
       name: 'SOCCER',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER',
-      image: <SOCCER_SVG className={styles.sports_card_image} />,
-      style: styles.soccer_box,
-      value: 'soccer',
-      selectedStyle: selectedCards.soccer && styles.soccer_box_active,
+      image: () => <SOCCER_SVG className={styles.sports_card_image} />,
+      style: () => styles.soccer_box,
+      value: SpoortCardName.soccer,
+      selectedStyle: () => selectedCards.soccer && styles.soccer_box_active,
       selected: selectedCards.soccer
     },
     {
       name: 'FORMULA 1',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1',
-      image: <F1_SVG className={styles.sports_card_image} />,
-      style: styles.f1_box,
-      value: 'f1',
-      selectedStyle: selectedCards.f1 && styles.f1_box_active,
+      image: () => <F1_SVG className={styles.sports_card_image} />,
+      style: () => styles.f1_box,
+      value: SpoortCardName.f1,
+      selectedStyle: () => selectedCards.f1 && styles.f1_box_active,
       selected: selectedCards.f1
     },
     {
       name: 'UFC',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC',
-      image: <UFC_SVG className={styles.sports_card_image} />,
-      style: styles.ufc_box,
-      value: 'ufc',
-      selectedStyle: selectedCards.ufc && styles.ufc_box_active,
+      image: () => <UFC_SVG className={styles.sports_card_image} />,
+      style: () => styles.ufc_box,
+      value: SpoortCardName.ufc,
+      selectedStyle: () => selectedCards.ufc && styles.ufc_box_active,
       selected: selectedCards.ufc
     },
     {
       name: 'NCAAB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB',
+      image: () => <NBA_SVG className={styles.sports_card_image} />,
+      style: () => styles.nba_box,
+      value: SpoortCardName.ncaab,
+      selectedStyle: () => selectedCards.ncaab && styles.nba_box_active,
+      selected: selectedCards.ncaab
     },
     {
       name: 'NCAAF',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF',
+      image: () => <NFL_SVG className={styles.sports_card_image} />,
+      style: () => styles.nfl_box,
+      value: SpoortCardName.ncaaf,
+      selectedStyle: () => selectedCards.ncaaf && styles.nfl_box_active,
+      selected: selectedCards.ncaaf
     },
 
     {
       name: 'NBA DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: () => <NBA_SVG className={styles.sports_card_image} />,
+      style: () => styles.nba_box,
+      value: SpoortCardName.nba_dfs,
+      selectedStyle: () => selectedCards.nba_dfs && styles.nba_box_active,
+      selected: selectedCards.nba_dfs
     },
     {
       name: 'NFL DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: () => <NFL_SVG className={styles.sports_card_image} />,
+      style: () => styles.nfl_box,
+      value: SpoortCardName.nfl_dfs,
+      selectedStyle: () => selectedCards.nfl_dfs && styles.nfl_box_active,
+      selected: selectedCards.nfl_dfs
     },
     {
       name: 'MLB DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]'
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      image: () => <MLB_SVG className={styles.sports_card_image} />,
+      style: () => styles.mlb_box,
+      value: SpoortCardName.mlb_dfs,
+      selectedStyle: () => selectedCards.mlb_dfs && styles.mlb_box_active,
+      selected: selectedCards.mlb_dfs
     }
   ];
+
+  const [sportsDataForMobile, setSportsDataForMobile] = useState<SportCardsSelection[]>([
+    ...sportsData
+  ]);
+
+  useEffect(() => {
+    console.log('sportsDataForMobile', sportsDataForMobile);
+  }, [sportsDataForMobile]);
   return (
     <div className={styles.bet_on_sports}>
       <div className={styles.bet_on_sports_title}>
@@ -473,15 +490,57 @@ function BetOnSports() {
       </div>
 
       <div className={styles.mobile_column_display}>
-        <Button className={styles.mobile_display_buttons}>VIP ALL ACCESS</Button>
-        <Button className={styles.mobile_display_buttons}>SPORTS CARD</Button>
-        <Button className={styles.mobile_display_buttons}>FANTASY SPORTS</Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(0, 1))}>
+          VIP ALL ACCESS
+        </Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(1, 9))}>
+          SPORTS CARD
+        </Button>
+        <Button
+          className={styles.mobile_display_buttons}
+          onClick={() => setSportsDataForMobile(sportsData.slice(9, 13))}>
+          FANTASY SPORTS
+        </Button>
+        <div>
+          <div>
+            <div className={styles.sports_cards}>
+              {sportsDataForMobile.map((item: SportCardsSelection) => (
+                <div>
+                  <div className={styles.sports_card}>
+                    <div
+                      className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                      onClick={() => toggleSelectCard(item.value)}>
+                      {item.selected && (
+                        <img
+                          src="/images/check_mark.svg"
+                          alt="Check mark Icon"
+                          className={styles.sports_card_checkmark}
+                        />
+                      )}
+                      {item.image}
+                      <div className={styles.sports_card_box_content}>
+                        <h3>{item.name}</h3>
+                        <div className={styles.desc}>
+                          <div>{item.description}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div>
+      <div className={styles.laptop_display}>
         <div>
           <div className={styles.sports_cards}>
-            {sportsData.map((item) => (
+            {sportsData.map((item: SportCardsSelection) => (
               <div>
                 <div className={styles.sports_card}>
                   <div
@@ -507,199 +566,10 @@ function BetOnSports() {
             ))}
           </div>
         </div>
-
-        {/* older code of sports is below */}
-
-        {/* <Carousel
-          slidesToShow={6}
-          infinite={false}
-          dots={true}
-          initialSlide={0}
-          responsive={responsive}
-          className="sports-cards-carousel">
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.nba_box} ${
-                  selectedCards.nba && styles.nba_box_active
-                }`}
-                onClick={() => toggleSelectCard('nba')}>
-                {selectedCards.nba && (
-                  <img
-                    src="/images/check_mark.svg"
-                    alt="Check mark Icon"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <NBA_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>NBA</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.nfl_box} ${
-                  selectedCards.nfl && styles.nfl_box_active
-                }`}
-                onClick={() => toggleSelectCard('nfl')}>
-                {selectedCards.nfl && (
-                  <img
-                    src="/images/check_mark.svg"
-                    alt="Check mark Icon"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <NFL_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>NFL</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.mlb_box} ${
-                  selectedCards.mlb && styles.mlb_box_active
-                }`}
-                onClick={() => toggleSelectCard('mlb')}>
-                {selectedCards.mlb && (
-                  <img
-                    alt="Check Mark Icon"
-                    src="/images/check_mark.svg"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <MLB_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>MLB</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.ufc_box} ${
-                  selectedCards.ufc && styles.ufc_box_active
-                }`}
-                onClick={() => toggleSelectCard('ufc')}>
-                {selectedCards.ufc && (
-                  <img
-                    alt="Check Mark Icon"
-                    src="/images/check_mark.svg"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <UFC_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>UFC</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.f1_box} ${
-                  selectedCards.f1 && styles.f1_box_active
-                }`}
-                onClick={() => toggleSelectCard('f1')}>
-                {selectedCards.f1 && (
-                  <img
-                    alt="Check Mark Icon"
-                    src="/images/check_mark.svg"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <F1_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>Formula 1</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className={styles.sports_card}>
-              <div
-                className={`${styles.sports_card_box} ${styles.soccer_box} ${
-                  selectedCards.soccer && styles.soccer_box_active
-                }`}
-                onClick={() => toggleSelectCard('soccer')}>
-                {selectedCards.soccer && (
-                  <img
-                    alt="Check Mark Icon"
-                    src="/images/check_mark.svg"
-                    className={styles.sports_card_checkmark}
-                  />
-                )}
-                <SOCCER_SVG className={styles.sports_card_image} />
-                <div className={styles.sports_card_box_content}>
-                  <h3>Soccer</h3>
-                  <div className={styles.desc}>
-                    <div>Current record: 90-0</div>
-                    <div>R.O.I: $1.4k</div>
-                  </div>
-                  <ul>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Adipiscing elit</li>
-                    <li>Volutpat arcu Elit eget</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Carousel>
-     */}
       </div>
+
+      {/* older code of sports is below */}
+
       <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
     </div>
   );

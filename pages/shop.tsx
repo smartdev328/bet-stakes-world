@@ -14,7 +14,8 @@ import {
   EmptyCircleIcon,
   CheckedCircleIcon,
   NormalCheckIcon,
-  MinusIcon
+  MinusIcon,
+  CloseIcon
 } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import styles from '@styles/Shop.module.css';
@@ -31,6 +32,7 @@ type ProductsAndCartBoxProps = {
   cartItems: CartItem[];
   addToCart: (pack: Package, _: CartItem[]) => void;
   changeTempCart: (pack: Package, _: CartItem[]) => void;
+  updateCart: (_: CartItem[]) => void;
 };
 const NON_UFC_F1 = 'NON_UFC_F1';
 
@@ -167,6 +169,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   cartItems={tempCartItems}
                   addToCart={addToCart}
                   changeTempCart={changeTempCart}
+                  updateCart={updateCart}
                   pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
                 />
               )}
@@ -187,6 +190,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   cartItems={tempCartItems}
                   addToCart={addToCart}
                   changeTempCart={changeTempCart}
+                  updateCart={updateCart}
                   pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
                 />
               )}
@@ -207,6 +211,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
                   cartItems={tempCartItems}
                   changeTempCart={changeTempCart}
                   addToCart={addToCart}
+                  updateCart={updateCart}
                   pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
                 />
               )}
@@ -219,7 +224,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
           )}
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
-              <FAQs title={'FANTASY FAQ'} currentPlan={currentPlan} />
+              <FAQs title={'DAILY FANTASY CARD FAQ'} currentPlan={currentPlan} />
             </div>
           )}
           {currentPlan === 'all' && (
@@ -304,7 +309,7 @@ function MembershipOfferings({
         }`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('fantasy')}>
-            <div className={styles.plan_content_title}>Fantasy</div>
+            <div className={styles.plan_content_title}>DAILY FANTASY CARD</div>
             <div className={styles.plan_content_desc}>
               <span>OPTIMAL DFS LINEUPS</span>
             </div>
@@ -400,12 +405,12 @@ function ProductsAndCartBox({
   pack,
   addToCart,
   cartItems,
-  changeTempCart
+  changeTempCart,
+  updateCart
 }: ProductsAndCartBoxProps) {
   pack.billing_plans.sort(function (a, b) {
     return a.price - b.price >= 0 ? 1 : -1;
   });
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
   const [activePlan, setActivePlan] = useState<BillingPlan>();
 
   useEffect(() => {
@@ -415,8 +420,9 @@ function ProductsAndCartBox({
   const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
     if (itemsFromCart.length > 0) {
-      setTempCart(itemsFromCart);
       setActivePlan(itemsFromCart[0].plan);
+    } else if (activePlan) {
+      setActivePlan(undefined);
     }
   };
 
@@ -431,16 +437,10 @@ function ProductsAndCartBox({
           owner: 0
         }
       ];
-      setTempCart(newCart);
       setActivePlan(plan);
       changeTempCart(pack, newCart);
     }
   };
-
-  let totalPrice = 0;
-  tempCart.forEach((item) => {
-    totalPrice += item.plan.price;
-  });
 
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
@@ -484,35 +484,7 @@ function ProductsAndCartBox({
             </li>
           ))}
         </ul>
-        <div className={styles.cartBox}>
-          <LazyLoad>
-            <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
-          </LazyLoad>
-          <div className={styles.cartBoxContent}>
-            <h4>Package Total</h4>
-            <div className={styles.cartBoxContentDesc}>
-              {tempCart.length > 0 && <div>{tempCart[0] && <p>{tempCart[0]?.plan.name}</p>}</div>}
-              {tempCart.length === 0 && (
-                <div className={styles.noItem}>
-                  <em>No Item</em>
-                </div>
-              )}
-              <div className={styles.totalPrice}>
-                <NumberFormat
-                  displayType="text"
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  decimalScale={2}
-                  fixedDecimalScale
-                  value={totalPrice}
-                />
-              </div>
-            </div>
-            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
-              Add to Cart
-            </Button>
-          </div>
-        </div>
+        <CartBox pack={pack} cartItems={cartItems} addToCart={addToCart} changeCart={updateCart} />
       </div>
     </>
   );
@@ -523,7 +495,7 @@ function IntroForFantasy() {
     <div className={styles.introSection}>
       <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
-          <div className={styles.sectionTitle}>Fantasy Picks</div>
+          <div className={styles.sectionTitle}>DAILY FANTASY CARD</div>
           <div className={styles.introDesc}>
             Includes Access to Main Slate & Single Slate Tournaments for DraftKings, Fanduel & Yahoo
             Sports Formats.
@@ -553,12 +525,12 @@ function ProductsAndCartBoxForFantasy({
   pack,
   addToCart,
   cartItems,
-  changeTempCart
+  changeTempCart,
+  updateCart
 }: ProductsAndCartBoxProps) {
   pack.billing_plans.sort(function (a, b) {
     return a.price - b.price >= 0 ? 1 : -1;
   });
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
   const [activePlan, setActivePlan] = useState<BillingPlan>();
   const [activeSports, setActiveSports] = useState<Sport[]>([]);
 
@@ -569,7 +541,6 @@ function ProductsAndCartBoxForFantasy({
   const setCartFromProps = (cartItems: CartItem[]) => {
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
     if (itemsFromCart.length > 0) {
-      setTempCart(itemsFromCart);
       setActivePlan(itemsFromCart[0].plan);
       const sports: Sport[] = [];
       itemsFromCart.forEach((cart) => {
@@ -578,6 +549,9 @@ function ProductsAndCartBoxForFantasy({
         }
       });
       setActiveSports(sports);
+    } else if (activeSports.length > 0 && activePlan) {
+      setActivePlan(undefined);
+      setActiveSports([]);
     }
   };
 
@@ -585,10 +559,10 @@ function ProductsAndCartBoxForFantasy({
     if (activeSports.length > 0 && activePlan) {
       return;
     }
-    const newCart: CartItem[] = [];
     if (activePlan?.id === plan.id) {
       setActivePlan(undefined);
     } else {
+      const newCart: CartItem[] = [];
       activeSports.forEach((activeSport) => {
         newCart.push({
           sports: activeSport,
@@ -598,9 +572,8 @@ function ProductsAndCartBoxForFantasy({
         });
       });
       setActivePlan(plan);
+      changeTempCart(pack, newCart);
     }
-    setTempCart(newCart);
-    changeTempCart(pack, newCart);
   };
 
   const SPORTS_INFO = [
@@ -647,14 +620,9 @@ function ProductsAndCartBoxForFantasy({
         });
       });
     }
-    setTempCart(newCart);
     changeTempCart(pack, newCart);
   };
 
-  let totalPrice = 0;
-  tempCart.forEach((item) => {
-    totalPrice += item.plan.price;
-  });
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
@@ -730,41 +698,7 @@ function ProductsAndCartBoxForFantasy({
             </li>
           ))}
         </ul>
-        <div className={styles.cartBox}>
-          <LazyLoad>
-            <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
-          </LazyLoad>
-          <div className={styles.cartBoxContent}>
-            <h4>Package Total</h4>
-            <div className={styles.cartBoxContentDesc}>
-              {tempCart.length > 0 && (
-                <div>
-                  <p>
-                    {tempCart.length} Sport{tempCart.length > 1 ? 's' : ''} - {activePlan?.duration}
-                  </p>
-                </div>
-              )}
-              {tempCart.length === 0 && (
-                <div className={styles.noItem}>
-                  <em>No Item</em>
-                </div>
-              )}
-              <div className={styles.totalPrice}>
-                <NumberFormat
-                  displayType="text"
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  decimalScale={2}
-                  fixedDecimalScale
-                  value={totalPrice}
-                />
-              </div>
-            </div>
-            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
-              Add to Cart
-            </Button>
-          </div>
-        </div>
+        <CartBox pack={pack} cartItems={cartItems} addToCart={addToCart} changeCart={updateCart} />
       </div>
     </>
   );
@@ -813,13 +747,12 @@ function ProductsAndCartBoxForSportsCard({
   pack,
   addToCart,
   cartItems,
-  changeTempCart
+  changeTempCart,
+  updateCart
 }: ProductsAndCartBoxProps) {
   pack.billing_plans.sort(function (a, b) {
     return a.price - b.price >= 0 ? 1 : -1;
   });
-  const [tempCart, setTempCart] = useState<CartItem[]>([]);
-  // const [addOnTempCart, setAddOnTempCart] = useState<CartItem[]>([]);
   const [nonUFCAndF1Sports, setNonUFCandF1sports] = useState<Sport[]>([]);
   const [ufcAndF1Sports, setUFCandF1sports] = useState<Sport[]>([]);
   const [activeSports1, setActiveSports1] = useState<Sport[]>([]);
@@ -839,38 +772,60 @@ function ProductsAndCartBoxForSportsCard({
     });
     setNonUFCandF1sports(nonUFCandF1Sports1);
     setUFCandF1sports(ufcAndF1Sports1);
-    if (cartItems) {
-      setCartFromProps(cartItems);
-    }
-  }, []);
+  }, [sports]);
+
+  useEffect(() => {
+    setCartFromProps(cartItems);
+  }, [cartItems]);
 
   const setCartFromProps = (cartItems: CartItem[]) => {
     const sports1: Sport[] = [];
     const sports2: Sport[] = [];
-    console.log('-------- cartItems', cartItems);
 
     const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
     if (itemsFromCart.length > 0) {
-      setTempCart(itemsFromCart);
+      let plan1, plan2;
       itemsFromCart.forEach((cart) => {
-        console.log('-------- cart', cart);
         if (cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1') {
           sports2.push(cart.sports);
-          setActivePlan2(cart.plan);
+          plan2 = cart.plan;
         } else {
           if (cart.sports) {
             sports1.push(cart.sports);
-            setActivePlan1(cart.plan);
+            plan1 = cart.plan;
           }
         }
       });
+      if (sports1.length > 0 && plan1) {
+        setActiveSports1(sports1);
+        setActivePlan1(plan1);
+      }
+      if (sports2.length > 0 && plan2) {
+        setActiveSports2(sports2);
+        setActivePlan2(plan2);
+      }
+      if (sports1.length === 0 && activePlan1) {
+        setActiveSports1([]);
+        setActivePlan1(undefined);
+      }
+      if (sports2.length === 0 && activePlan2) {
+        setActiveSports2([]);
+        setActivePlan2(undefined);
+      }
+    } else {
+      if (activePlan1 && activeSports1.length > 0) {
+        setActivePlan1(undefined);
+        setActiveSports1([]);
+      }
+      if (activePlan2 && activeSports2.length > 0) {
+        setActivePlan2(undefined);
+        setActiveSports2([]);
+      }
     }
-    setActiveSports1(sports1);
-    setActiveSports2(sports2);
   };
 
   const selectBillingPlan = (plan: BillingPlan, type: string) => {
-    const newCart: CartItem[] = [...tempCart];
+    const newCart: CartItem[] = [...cartItems];
     if (type === NON_UFC_F1) {
       if (activeSports1.length > 0 && activePlan1) {
         return;
@@ -894,7 +849,6 @@ function ProductsAndCartBoxForSportsCard({
         });
         setActivePlan1(plan);
       }
-      setTempCart(carts);
       changeTempCart(pack, carts);
     } else {
       if (activeSports2.length > 0 && activePlan2) {
@@ -919,7 +873,6 @@ function ProductsAndCartBoxForSportsCard({
         });
         setActivePlan2(plan);
       }
-      setTempCart(carts);
       changeTempCart(pack, carts);
     }
   };
@@ -976,7 +929,7 @@ function ProductsAndCartBoxForSportsCard({
   ];
 
   const onChangeItemAt = (sport: Sport, type: string) => {
-    let newCart: CartItem[] = tempCart.slice();
+    let newCart: CartItem[] = cartItems.slice();
     if (type === NON_UFC_F1) {
       if (activeSports1.length > 0 && activePlan1) {
         return;
@@ -1023,23 +976,11 @@ function ProductsAndCartBoxForSportsCard({
         newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
       }
     }
-    setTempCart(newCart);
     changeTempCart(pack, newCart);
   };
 
-  let totalPrice = 0;
-  tempCart.forEach((item) => {
-    totalPrice += item.plan.price;
-  });
-
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
-  const ufcAndF1CartItems = tempCart.filter(
-    (cart) => cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1'
-  );
-  const nonUfcAndF1CartItems = tempCart.filter(
-    (cart) => cart.sports?.name !== 'UFC' && cart.sports?.name !== 'Formula 1'
-  );
 
   return (
     <>
@@ -1081,45 +1022,49 @@ function ProductsAndCartBoxForSportsCard({
       <div className={`${styles.sportsCards} ${styles.sportsCardsForSports}`}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
-          {billingPlans.map((plan: BillingPlan, index: number) => (
-            <li
-              key={index}
-              className={activePlan1?.id === plan.id ? styles.active : ''}
-              onClick={() => selectBillingPlan(plan, NON_UFC_F1)}>
-              <div className={styles.flexRow}>
-                {activePlan1?.id === plan.id && (
-                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
-                )}
-                {activePlan1?.id !== plan.id && (
-                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-                )}
-                <span className={styles.sportsCard_name}>{plan.duration}</span>
-              </div>
-              <div className={styles.flexRow}>
-                <div className={`${styles.sportsCard_value} ${styles.origin}`}>
-                  <div className={styles.sportsCard_value_title}>Reg</div>
-                  <div className={styles.sportsCard_value_price}>$199</div>
-                  <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+          {billingPlans
+            .filter((plan) => plan.name.indexOf('UFC') < 0)
+            .map((plan: BillingPlan, index: number) => (
+              <li
+                key={index}
+                className={activePlan1?.id === plan.id ? styles.active : ''}
+                onClick={() => selectBillingPlan(plan, NON_UFC_F1)}>
+                <div className={styles.flexRow}>
+                  {activePlan1?.id === plan.id && (
+                    <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                  )}
+                  {activePlan1?.id !== plan.id && (
+                    <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                  )}
+                  <span className={styles.sportsCard_name}>{plan.duration}</span>
                 </div>
-                <div className={`${styles.sportsCard_value}`}>
-                  <div className={styles.sportsCard_value_title}>Sale</div>
-                  <div className={styles.sportsCard_value_content}>
-                    <LazyLoad>
-                      <img src="/images/shop-plan-yellow-circle.svg" alt="" />
-                    </LazyLoad>
-                    <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                    <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
+                <div className={styles.flexRow}>
+                  <div className={`${styles.sportsCard_value} ${styles.origin}`}>
+                    <div className={styles.sportsCard_value_title}>Reg</div>
+                    <div className={styles.sportsCard_value_price}>$199</div>
+                    <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                  </div>
+                  <div className={`${styles.sportsCard_value}`}>
+                    <div className={styles.sportsCard_value_title}>Sale</div>
+                    <div className={styles.sportsCard_value_content}>
+                      <LazyLoad>
+                        <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                      </LazyLoad>
+                      <div className={styles.sportsCard_value_price}>${plan.price}</div>
+                      <div className={styles.sportsCard_value_dayprice}>
+                        ${getDayPrice(plan)}/Day
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
         <div className={styles.sportsCards}>
           <div className={styles.sectionTitle}>Event based daily cards</div>
           <div className={styles.sportsTypeContent}>
             {ufcAndF1Sports.map((sport: Sport, index: number) => (
-              <div key={index}>
+              <div key={`plan-${index}`}>
                 <Button
                   className={styles.dropdownBtnWrapper}
                   onClick={() => onChangeItemAt(sport, '')}>
@@ -1154,7 +1099,7 @@ function ProductsAndCartBoxForSportsCard({
               .filter((plan) => plan.name.indexOf('UFC') > -1)
               .map((plan: BillingPlan, index: number) => (
                 <li
-                  key={index}
+                  key={`ufc-plan-${index}`}
                   className={activePlan2?.id === plan.id ? styles.active : ''}
                   onClick={() => selectBillingPlan(plan, '')}>
                   <div className={styles.flexRow}>
@@ -1189,52 +1134,139 @@ function ProductsAndCartBoxForSportsCard({
               ))}
           </ul>
         </div>
-        <div className={styles.cartBox}>
-          <LazyLoad>
-            <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
-          </LazyLoad>
-          <div className={styles.cartBoxContent}>
-            <h4>Package Total</h4>
-            <div className={styles.cartBoxContentDesc}>
-              {tempCart.length > 0 && (
-                <div>
-                  {activePlan1 && nonUfcAndF1CartItems.length > 0 && (
-                    <p>
-                      {nonUfcAndF1CartItems.length} Sport
-                      {nonUfcAndF1CartItems.length > 1 ? 's' : ''} - {activePlan1.duration}
-                    </p>
-                  )}
-                  {activePlan2 && ufcAndF1CartItems.length > 0 && (
-                    <p>
-                      {ufcAndF1CartItems.length} Daily Card{ufcAndF1CartItems.length > 1 ? 's' : ''}{' '}
-                      - {activePlan2.duration}
-                    </p>
-                  )}
-                </div>
-              )}
-              {tempCart.length === 0 && (
-                <div className={styles.noItem}>
-                  <em>No Item</em>
-                </div>
-              )}
-              <div className={styles.totalPrice}>
-                <NumberFormat
-                  displayType="text"
-                  thousandSeparator={true}
-                  prefix={'$'}
-                  fixedDecimalScale
-                  decimalScale={2}
-                  value={totalPrice}
-                />
-              </div>
-            </div>
-            <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, tempCart)}>
-              Add to Cart
-            </Button>
-          </div>
-        </div>
+        <CartBox pack={pack} cartItems={cartItems} addToCart={addToCart} changeCart={updateCart} />
       </div>
     </>
+  );
+}
+
+type CartBoxProps = {
+  cartItems: CartItem[];
+  pack: Package;
+  addToCart: (pack: Package, _: CartItem[]) => void;
+  changeCart: (_: CartItem[]) => void;
+};
+
+function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
+  const removeItemAt = (index: number) => {
+    const newCart = cartItems.slice();
+    newCart.splice(index, 1);
+    changeCart(newCart);
+  };
+
+  let totalPrice = 0;
+  const vipCartItems: CartItem[] = [],
+    sportsCartItems: CartItem[] = [],
+    fantasyCartItems: CartItem[] = [];
+  cartItems.forEach((item: CartItem) => {
+    totalPrice += item.plan.price;
+    if (item.plan.name.indexOf('VIP') > -1) {
+      vipCartItems.push(item);
+    } else if (item.plan.name.indexOf('Sports Card') > -1) {
+      sportsCartItems.push(item);
+    } else {
+      fantasyCartItems.push(item);
+    }
+  });
+
+  return (
+    <div className={styles.cartBox}>
+      <LazyLoad>
+        <img src="/images/All-sports-bg.svg" alt="All Sports Background" />
+      </LazyLoad>
+      <div className={styles.cartBoxContent}>
+        <h4>CART TOTAL</h4>
+        <div className={styles.cartBoxContentDesc}>
+          {cartItems.length > 0 &&
+            vipCartItems.map((item, index) => (
+              <div key={index} className={styles.cartBoxItem}>
+                <div
+                  className={
+                    styles.cartBoxItemName
+                  }>{`VIP All Access Card - ${item.plan.duration}`}</div>
+                <div>
+                  <NumberFormat
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                    value={item.plan.price}
+                  />
+                  <Button
+                    ghost
+                    onClick={() => removeItemAt(index)}
+                    className={styles.closeIconBtn}
+                    icon={<CloseIcon className={styles.closeIcon} />}
+                  />
+                </div>
+              </div>
+            ))}
+          {cartItems.length > 0 &&
+            sportsCartItems.map((item, index) => (
+              <div key={index} className={styles.cartBoxItem}>
+                <div
+                  className={
+                    styles.cartBoxItemName
+                  }>{`Sport Card - ${item.sports?.name} - ${item.plan.duration}`}</div>
+                <div>
+                  <NumberFormat
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                    value={item.plan.price}
+                  />
+                  <Button
+                    ghost
+                    onClick={() => removeItemAt(index)}
+                    className={styles.closeIconBtn}
+                    icon={<CloseIcon className={styles.closeIcon} />}
+                  />
+                </div>
+              </div>
+            ))}
+          {cartItems.length > 0 &&
+            fantasyCartItems.map((item, index) => (
+              <div key={index} className={styles.cartBoxItem}>
+                <div
+                  className={
+                    styles.cartBoxItemName
+                  }>{`Daily Fantasy Card - ${item.sports?.name} - ${item.plan.duration}`}</div>
+                <div>
+                  <NumberFormat
+                    displayType="text"
+                    thousandSeparator={true}
+                    prefix={'$'}
+                    value={item.plan.price}
+                  />
+                  <Button
+                    ghost
+                    onClick={() => removeItemAt(index)}
+                    className={styles.closeIconBtn}
+                    icon={<CloseIcon className={styles.closeIcon} />}
+                  />
+                </div>
+              </div>
+            ))}
+          {cartItems.length === 0 && (
+            <div className={styles.noItem}>
+              <em>No Item</em>
+            </div>
+          )}
+          <div className={styles.totalPrice}>
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={true}
+              prefix={'$'}
+              fixedDecimalScale
+              decimalScale={2}
+              value={totalPrice}
+            />
+          </div>
+        </div>
+        <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, cartItems)}>
+          Add to Cart
+        </Button>
+      </div>
+    </div>
   );
 }
 

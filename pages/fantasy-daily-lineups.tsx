@@ -369,19 +369,15 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
         <div className={styles.daily_lineup} key={lineup.id}>
           <Row>
             <div className={styles.daily_lineup_sidebar}>
-              {selectedSport === 'NBA' ? (
-                <LazyLoad>
-                  <NBA_SVG className={styles.image_NBA} />
-                </LazyLoad>
-              ) : selectedSport === 'NFL' ? (
-                <LazyLoad>
+              <LazyLoad>
+                {selectedSport === 'NBA' ? (
+                  <NBA_SVG className={styles.daily_lineup_sidebar_bg} />
+                ) : selectedSport === 'NFL' ? (
                   <NFL_SVG className={styles.image_NFL} />
-                </LazyLoad>
-              ) : (
-                <LazyLoad>
+                ) : (
                   <MLB_SVG className={styles.image_MLB} />
-                </LazyLoad>
-              )}
+                )}
+              </LazyLoad>
               <div className={styles.daily_lineup_sidebar_content}>
                 <span>{lineup.position}</span>
                 <div className={styles.divider} />

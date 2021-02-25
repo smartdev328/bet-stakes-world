@@ -806,28 +806,34 @@
 }
 
 .image_NFL {
-  transform: rotate(90deg);
-  height: 200%;
-  top: 30%;
-  left: -120%;
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: 51px;
+  top: 194px;
+  transform: scale(2.7) rotate(90deg);
 }
 
 .image_MLB {
   position: absolute;
-  top: 50%;
-  left: -75%;
   height: auto;
-  width: 400px;
-  position: absolute;
-  height: auto;
-  width: 400px;
-  left: -120%;
-  top: -3%;
-  transform: scale(0.3);
+  width: 200px;
+  left: -75px;
+  bottom: 25px;
 }
 
 .image_NBA {
-  top: -133%;
-  left: -230%;
-  height: 160%;
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: -75px;
+  bottom: 25px;
+}
+
+.image_MLB path {
+  fill: rgba(255, 255, 255, 0.1);
+}
+
+.image_NFL path {
+  fill: rgba(255, 255, 255, 0.1);
 }

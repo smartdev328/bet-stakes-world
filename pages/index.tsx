@@ -476,9 +476,6 @@ function BetOnSports() {
     sportsData[0]
   ]);
 
-  useEffect(() => {
-    console.log('sportsDataForMobile', sportsDataForMobile);
-  }, [sportsDataForMobile]);
   return (
     <div className={styles.bet_on_sports}>
       <div className={styles.bet_on_sports_title}>

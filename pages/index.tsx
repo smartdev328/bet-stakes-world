@@ -473,7 +473,7 @@ function BetOnSports() {
   ];
 
   const [sportsDataForMobile, setSportsDataForMobile] = useState<SportCardsSelection[]>([
-    ...sportsData
+    sportsData[0]
   ]);
 
   useEffect(() => {
@@ -512,7 +512,9 @@ function BetOnSports() {
                 <div>
                   <div className={styles.sports_card}>
                     <div
-                      className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                      className={`${
+                        styles.sports_card_box
+                      } ${item.style()} ${item.selectedStyle()}`}
                       onClick={() => toggleSelectCard(item.value)}>
                       {item.selected && (
                         <img
@@ -521,7 +523,7 @@ function BetOnSports() {
                           className={styles.sports_card_checkmark}
                         />
                       )}
-                      {item.image}
+                      {item.image()}
                       <div className={styles.sports_card_box_content}>
                         <h3>{item.name}</h3>
                         <div className={styles.desc}>
@@ -544,7 +546,7 @@ function BetOnSports() {
               <div>
                 <div className={styles.sports_card}>
                   <div
-                    className={`${styles.sports_card_box} ${item.style} ${item.selectedStyle}`}
+                    className={`${styles.sports_card_box} ${item.style()} ${item.selectedStyle()}`}
                     onClick={() => toggleSelectCard(item.value)}>
                     {item.selected && (
                       <img
@@ -553,7 +555,7 @@ function BetOnSports() {
                         className={styles.sports_card_checkmark}
                       />
                     )}
-                    {item.image}
+                    {item.image()}
                     <div className={styles.sports_card_box_content}>
                       <h3>{item.name}</h3>
                       <div className={styles.desc}>

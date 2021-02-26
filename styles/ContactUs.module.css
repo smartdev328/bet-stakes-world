@@ -55,14 +55,16 @@
   display: block;
   margin-bottom: 8px;
 }
-.formGroup input, .formGroup textarea {
-  border: 1px solid #C4C4C4;
+.formGroup input,
+.formGroup textarea {
+  border: 1px solid #c4c4c4;
   width: 100%;
   font-size: 12px;
   line-height: 19px;
   padding: 10px 12px;
 }
-.formGroup input.error, .formGroup textarea.error {
+.formGroup input.error,
+.formGroup textarea.error {
   border-color: rgb(236, 76, 21);
 }
 .formGroup textarea {
@@ -80,7 +82,7 @@
   height: 48px;
   width: 200px;
   background: transparent;
-  background-color: #FFC700;
+  background-color: #ffc700;
   margin: 1em 0 2em;
   cursor: pointer;
 }
@@ -98,4 +100,8 @@
   padding: 2em 0;
   text-align: center;
   height: 200px;
+}
+
+.faq_link {
+  color: #0000ff;
 }

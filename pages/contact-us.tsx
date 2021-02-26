@@ -11,6 +11,7 @@ import { ContactUsForm, ContactUsFormValidation } from '@type/ContactUs';
 import { validateEmail } from '@utils/common';
 import ContactUsAPIs from '@apis/contactus.apis';
 import UsersAPIs from '@apis/user.apis';
+import Link from 'next/link';
 
 const { Dragger } = Upload;
 
@@ -173,7 +174,12 @@ export default function Contact({ token, subscriptions }: PageProps) {
             )}
             {showSuccess && (
               <div className={styles.successMessage}>
-                Contact Request was successfully sent. Please wait.
+                Your message has been successfully submitted. A member of our support staff will
+                respond as soon as possible. Feel free to review our &nbsp;
+                <Link className={styles.faq_link} href="/faqs">
+                  FAQ Page
+                </Link>
+                &nbsp; in the interim.
               </div>
             )}
           </div>

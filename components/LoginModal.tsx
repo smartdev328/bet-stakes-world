@@ -48,7 +48,7 @@ function LoginModal() {
     if (loginError === null && !loading && formSubmitted) {
       closeModal();
       notification['info']({
-        message: 'Successfully Login!'
+        message: 'You’ve Successfully Logged In!'
       });
     }
   }, [loginError, loading]);

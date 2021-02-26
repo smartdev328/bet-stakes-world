@@ -12,7 +12,7 @@ import { tokenAuthHeaders } from '@utils/common';
 
 function createUser(payload: CreateUserType) {
   return fetch(`${API_BASE_URL}/auth/local/register`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
       Accept: 'application/json',
@@ -23,7 +23,7 @@ function createUser(payload: CreateUserType) {
 
 function login(payload: LoginUserType) {
   return fetch(`${API_BASE_URL}/auth/local`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
       Accept: 'application/json',
@@ -34,7 +34,7 @@ function login(payload: LoginUserType) {
 
 function forgotPass(payload: ForgotPasswordForm) {
   return fetch(`${API_BASE_URL}/auth/forgot-password`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
       Accept: 'application/json',
@@ -45,7 +45,7 @@ function forgotPass(payload: ForgotPasswordForm) {
 
 function resetPass(payload: ResetPasswordForm) {
   return fetch(`${API_BASE_URL}/auth/reset-password`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
       Accept: 'application/json',
@@ -57,7 +57,7 @@ function resetPass(payload: ResetPasswordForm) {
 function sendConfirmEmail(payload: ForgotPasswordForm) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/auth/send-email-confirmation`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers
   });
@@ -66,7 +66,7 @@ function sendConfirmEmail(payload: ForgotPasswordForm) {
 function addPaymentMethod(payload: AddUserPayment) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/app/users/post-billing`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers
   });
@@ -75,7 +75,7 @@ function addPaymentMethod(payload: AddUserPayment) {
 function fetchProfile() {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/users/me`, {
-    method: 'get',
+    method: 'GET',
     headers
   });
 }
@@ -92,7 +92,7 @@ function updateProfile(payload: UserProfile) {
 function uploadLogo(payload: FormData) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/upload`, {
-    method: 'post',
+    method: 'POST',
     body: payload,
     headers: {
       Authorization: headers.Authorization
@@ -112,7 +112,7 @@ function changePassword(payload: ChangePasswordForm) {
 function getOverallRecord() {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/app/users/overall-record`, {
-    method: 'get',
+    method: 'GET',
     headers
   });
 }

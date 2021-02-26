@@ -24,6 +24,8 @@ import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
+import checkoutApis from '@apis/checkout.apis';
+import { CheckoutSessionType } from '@type/Cart';
 
 function HeroBanner() {
   return (
@@ -369,7 +371,7 @@ function YesterdayPlays() {
       })
       .catch((error) => {
         notification['error']({
-          message: 'Registration Error!',
+          message: 'Loading Error!',
           description: error.message
         });
         setFetchMoreLoading(false);
@@ -396,6 +398,9 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [weeklyTip, setWeeklyTip] = useState<WeeklyTip | undefined>(undefined);
   const [profileName, setProfileName] = useState<string>('');
   const [initialName, setInitialName] = useState<string>('');
+  const [session, setSession] = useState<CheckoutSessionType | undefined>(undefined);
+  const router = useRouter();
+  const { session_id: sessionId } = router.query;
 
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
@@ -418,6 +423,44 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         }
       });
   }, []);
+
+  useEffect(() => {
+    async function fetchSession() {
+      if (sessionId) {
+        setSession(await checkoutApis.loadSession(sessionId.toString()).then((res) => res.json()));
+      } else {
+        setSession(undefined);
+      }
+    }
+    fetchSession();
+  }, [sessionId]);
+
+  useEffect(() => {
+    if (session && sessionId) {
+      checkoutApis
+        .completeCheckout(sessionId.toString())
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.statusCode > 200) {
+            notification['error']({
+              message: 'Checkout Session Error!',
+              description: data.message
+            });
+          } else {
+            notification['info']({
+              message: 'Checkout was completed!'
+            });
+            router.replace('/member-dashboard');
+          }
+        })
+        .catch((error) => {
+          notification['error']({
+            message: 'Checkout Session Error!',
+            description: error.message
+          });
+        });
+    }
+  }, [session]);
 
   return (
     <>

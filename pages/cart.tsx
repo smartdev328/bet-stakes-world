@@ -231,7 +231,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   }, [cartItems]);
 
   useEffect(() => {
-    if (error === null && !loading && formSubmitted && formView === 'LOGIN') {
+    if (error === null && !loading && formSubmitted) {
       proceedCheckout();
     }
     if (error && !loading && formView === 'LOGIN') {

@@ -3,7 +3,7 @@ import { ContactUsForm } from '@type/ContactUs';
 
 function createMessage(payload: ContactUsForm) {
   return fetch(`${API_BASE_URL}/messages`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers: {
       Accept: 'application/json',

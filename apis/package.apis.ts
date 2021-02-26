@@ -3,7 +3,7 @@ import { tokenAuthHeaders } from '@utils/common';
 
 export function getPackages() {
   return fetch(`${API_BASE_URL}/packages`, {
-    method: 'get',
+    method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'

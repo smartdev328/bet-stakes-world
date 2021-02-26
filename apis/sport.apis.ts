@@ -4,7 +4,7 @@ import { tokenAuthHeaders } from '@utils/common';
 
 export function getSports() {
   return fetch(`${API_BASE_URL}/sports`, {
-    method: 'get',
+    method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export function getTodaySportEntries(
   return fetch(
     `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}${typeFilter}${sportFilter}${subscriptionsQuery}`,
     {
-      method: 'get',
+      method: 'GET',
       headers
     }
   );
@@ -54,7 +54,7 @@ export function getSportEntries(
   return fetch(
     `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC${typeFilter}${sportFilter}${subscriptionsQuery}`,
     {
-      method: 'get',
+      method: 'GET',
       headers
     }
   );
@@ -69,7 +69,7 @@ export function getYesterdaySportEntries(
     return fetch(
       `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&yesterday=true&sport=${sportFilter}`,
       {
-        method: 'get',
+        method: 'GET',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ export function getYesterdaySportEntries(
   return fetch(
     `${API_BASE_URL}/sports-entries?_limit=${limit}&_start=${offset}&_sort=publish_date:ASC&yesterday=true`,
     {
-      method: 'get',
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ export function getFantasyParentEntries(sportId: number, subscriptions: UserSubs
     subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
   return fetch(`${API_BASE_URL}/fantasy-parent-entries?sport=${sportId}${subscriptionsQuery}`, {
-    method: 'get',
+    method: 'GET',
     headers
   });
 }
@@ -104,7 +104,7 @@ export function getFantasyParentEntries(sportId: number, subscriptions: UserSubs
 export function getFantasyPlayerEntries(parentId: string) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/fantasy-player-entries?parent=${parentId}&_sort=weight:ASC`, {
-    method: 'get',
+    method: 'GET',
     headers
   });
 }

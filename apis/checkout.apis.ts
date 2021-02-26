@@ -5,12 +5,30 @@ import { tokenAuthHeaders } from '@utils/common';
 function createSession(payload: CreateCheckoutSessionParams) {
   const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/app/checkout/sessions/plan/create`, {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(payload),
     headers
   });
 }
 
+function loadSession(sessionId: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/checkout/sessions/${sessionId}`, {
+    method: 'GET',
+    headers
+  });
+}
+
+function completeCheckout(sessionId: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/checkout/sessions/${sessionId}/complete`, {
+    method: 'PATCH',
+    headers
+  });
+}
+
 export default {
-  createSession
+  createSession,
+  completeCheckout,
+  loadSession
 };

@@ -32,3 +32,9 @@ export type CheckoutItem = {
 export type CreateCheckoutSessionParams = {
   items: CheckoutItem[];
 };
+
+export type CheckoutSessionType = {
+  id: string;
+  amount_total?: number;
+  currency?: number;
+};

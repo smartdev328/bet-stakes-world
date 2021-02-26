@@ -72,7 +72,6 @@ const SPORTS_INFO = [
 ];
 
 export default function YesterdaysPlays({ token, subscriptions, sports }: PageProps) {
-  const [unlockedItems, setUnlockedItems] = useState<number[]>();
   const [activeSport, setActiveSport] = useState<number>(-1);
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [offset, setOffset] = useState<number>(0);
@@ -82,12 +81,6 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
   useEffect(() => {
     onLoadMore();
   }, []);
-
-  useEffect(() => {
-    if (sports.length > 0) {
-      setUnlockedItems([sports[0].id, sports[1].id]);
-    }
-  }, [sports]);
 
   // Update Filters
   const updateFilters = (sportId: number, status: boolean) => {
@@ -137,13 +130,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          {unlockedItems && sports.length > 0 && (
-            <TopSection
-              unlockedItems={unlockedItems}
-              sports={sports}
-              onSelectChange={updateFilters}
-            />
-          )}
+          {sports.length > 0 && <TopSection sports={sports} onSelectChange={updateFilters} />}
         </div>
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
@@ -225,28 +212,19 @@ function HeroBanner() {
 }
 
 type TopSectionPropsType = {
-  unlockedItems: number[];
   sports: Sport[];
   onSelectChange: (_: number, _status: boolean) => void;
 };
 
-function TopSection({ unlockedItems, sports, onSelectChange }: TopSectionPropsType) {
+function TopSection({ sports, onSelectChange }: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
-    const selectedStatus = sports.map((sport: Sport) => {
-      const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
-      if (unlockedItemIndex > -1) {
-        return 1;
-      }
-      return 0;
-    });
-    setSportsStatus(selectedStatus);
-  }, [unlockedItems]);
+    setSportsStatus(new Array(sports.length).fill(1));
+  }, []);
 
   const onUnlockAll = () => {
     const newStatuses = sportsStatus.fill(1);
-    console.log('---newStatuses:', newStatuses);
     setSportsStatus(newStatuses);
     onSelectChange(-1, false);
   };

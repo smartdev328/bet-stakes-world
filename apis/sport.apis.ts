@@ -103,7 +103,7 @@ export function getFantasyParentEntries(sportId: number, subscriptions: UserSubs
 
 export function getFantasyPlayerEntries(parentId: string) {
   const headers = tokenAuthHeaders();
-  return fetch(`${API_BASE_URL}/fantasy-player-entries?parent=${parentId}`, {
+  return fetch(`${API_BASE_URL}/fantasy-player-entries?parent=${parentId}&_sort=weight:ASC`, {
     method: 'get',
     headers
   });

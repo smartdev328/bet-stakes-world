@@ -7,6 +7,7 @@ import styles from './SportEntryActive.module.css';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { LongArrowIcon } from './SvgIcons';
 import Markdown from 'react-markdown';
+import { SportBetTypes } from '@constants/';
 
 type PropsType = {
   title: string;
@@ -101,9 +102,11 @@ function SportEntryActive({
                       </span>
                     </Row>
                   </div>
-                  <div className={styles.units}>{`${game.units} Unit${
-                    game.units > 1 ? 's' : ''
-                  }`}</div>
+                  <div className={styles.units}>
+                    {game.type === SportBetTypes[2].id
+                      ? 'Units N/A'
+                      : `${game.units} Unit${game.units > 1 ? 's' : ''}`}
+                  </div>
                 </div>
                 <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
                   <div className={styles.hide_details_btn}>

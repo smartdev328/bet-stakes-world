@@ -27,12 +27,42 @@ export type SportInfoType = {
 };
 
 export type SportCardsSelectionType = {
+  vip: boolean;
   nba: boolean;
   nfl: boolean;
   mlb: boolean;
   ufc: boolean;
   f1: boolean;
+  ncaaf: boolean;
+  nfl_dfs: boolean;
+  ncaab: boolean;
+  nba_dfs: boolean;
+  mlb_dfs: boolean;
   soccer: boolean;
+};
+
+export enum SpoortCardName {
+  vip = 'vip',
+  nba = 'nba',
+  nfl = 'nfl',
+  mlb = 'mlb',
+  ufc = 'ufc',
+  f1 = 'f1',
+  ncaaf = 'ncaaf',
+  nfl_dfs = 'nfl_dfs',
+  ncaab = 'ncaab',
+  nba_dfs = 'nba_dfs',
+  mlb_dfs = 'mlb_dfs',
+  soccer = 'soccer'
+}
+export type SportCardsSelection = {
+  name: string;
+  description: string;
+  image: JSX.Element;
+  style: string;
+  value: SpoortCardName;
+  selectedStyle: string;
+  selected: boolean;
 };
 
 export type MatchSimpleType = {

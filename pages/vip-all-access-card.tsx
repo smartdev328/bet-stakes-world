@@ -18,6 +18,7 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
+import { SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -67,21 +68,6 @@ const SPORTS_INFO = [
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />
-  }
-];
-
-const SportBetTypes = [
-  {
-    id: 'straight',
-    name: 'Straight Bets'
-  },
-  {
-    id: 'parlay',
-    name: 'Parlays'
-  },
-  {
-    id: 'wildcard',
-    name: 'Bonus Wilcard Plays'
   }
 ];
 

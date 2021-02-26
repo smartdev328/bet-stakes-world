@@ -34,6 +34,7 @@ type ProfileFormType = UserProfile & {
   password: string | undefined;
   new_password: string | undefined;
   verify_password: string | undefined;
+  tempAvatar: string | undefined;
 };
 
 export default function MemberProfile({ token, subscriptions, packages }: PageProps) {
@@ -51,7 +52,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
     mobile_number: undefined,
     password: undefined,
     new_password: undefined,
-    verify_password: undefined
+    verify_password: undefined,
+    tempAvatar: undefined
   });
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [logoFile, setLogoFile] = useState<File | undefined>(undefined);
@@ -106,7 +108,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
           provider: data.provider,
           password: undefined,
           new_password: undefined,
-          verify_password: undefined
+          verify_password: undefined,
+          tempAvatar: data.avatar ? data.avatar.url : ''
         });
         setFormValidation({
           username: true,
@@ -122,7 +125,8 @@ export default function MemberProfile({ token, subscriptions, packages }: PagePr
   const changeProfileForm = (name: keyof ProfileFormType, e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const newProfileForm = Object.assign({}, profileForm);
-    newProfileForm[name] = value;
+    if (name === 'avatar') newProfileForm.tempAvatar = name;
+    else newProfileForm[name] = value;
     setProfileForm(newProfileForm);
     validateForm(newProfileForm);
     setFormChanged(true);
@@ -602,14 +606,14 @@ function ProfileInfo({
           <Col span={12}>
             <div className={styles.profileLogoWrapper}>
               {profileForm.avatar && (
-                <img src={profileForm.avatar} alt="" className={styles.avatarLogo} />
+                <img src={profileForm.tempAvatar} alt="" className={styles.avatarLogo} />
               )}
               {!profileForm.avatar && (
                 <>
                   <LogoFromName first_name="Nicolas" last_name="Patrick" />
                 </>
               )}
-              <Upload key={profileForm.avatar} onChange={onLogoChange} multiple={false}>
+              <Upload key={profileForm.tempAvatar} onChange={onLogoChange} multiple={false}>
                 <div className={styles.uploadCoverBtn}>Update Cover Photo</div>
               </Upload>
             </div>

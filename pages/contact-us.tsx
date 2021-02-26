@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { Row, Col, Button, Upload } from 'antd';
+import { Row, Col, Button, Upload, notification } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -44,6 +44,9 @@ export default function Contact({ token, subscriptions }: PageProps) {
     if (data.description === '') {
       newValidation.description = false;
       isValid = false;
+    } else if (data.description && data.description.length < 20) {
+      newValidation.description = false;
+      isValid = false;
     } else if (data.description == undefined) {
       isValid = false;
     } else {
@@ -75,18 +78,37 @@ export default function Contact({ token, subscriptions }: PageProps) {
     ContactUsAPIs.createMessage(contactUsForm)
       .then((res) => res.json())
       .then((message) => {
-        if (attachments.length > 0) {
-          const formdata = new FormData();
-          attachments.forEach((file) => {
-            formdata.append('files', file.originFileObj as File);
+        if (message.statusCode > 201) {
+          notification['error']({
+            message: 'Contact Us Message Error!',
+            description: message.data.errors.description[0]
           });
-          formdata.append('ref', 'message');
-          formdata.append('refId', `${message.id}`);
-          formdata.append('field', 'attachments');
-          UsersAPIs.uploadLogo(formdata);
+        } else {
+          if (attachments.length > 0) {
+            const formdata = new FormData();
+            attachments.forEach((file) => {
+              formdata.append('files', file.originFileObj as File);
+            });
+            formdata.append('ref', 'message');
+            formdata.append('refId', `${message.id}`);
+            formdata.append('field', 'attachments');
+            UsersAPIs.uploadLogo(formdata)
+              .then((res2) => res2.json())
+              .then((data) => {
+                if (data.statusCode > 201) {
+                  setShowSuccess(true);
+                } else {
+                  notification['error']({
+                    message: 'Contact Us Message Error!',
+                    description: 'Uploading Attachments was Failed'
+                  });
+                }
+              });
+          } else {
+            setShowSuccess(true);
+          }
         }
       });
-    setShowSuccess(true);
   };
   const onAttachmentsChange = (info: UploadChangeParam<UploadFile<File>>) => {
     const { status } = info.file;
@@ -99,7 +121,6 @@ export default function Contact({ token, subscriptions }: PageProps) {
   };
   const onRecaptchaChange = () => {
     const recaptchaValue = recaptchaRef.current?.getValue();
-    console.log('----', recaptchaValue);
     if (recaptchaValue) {
       setRecaptchaValid(true);
     } else {

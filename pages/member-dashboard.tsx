@@ -4,6 +4,7 @@ import { Row, Button, Col, Dropdown, Menu, notification } from 'antd';
 import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 import {
   AppLayout,
@@ -21,8 +22,8 @@ import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
-import { Package } from '@type/Packages';
-import { useRouter } from 'next/router';
+import { BillingPlan, Package } from '@type/Packages';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 function HeroBanner() {
   return (
@@ -37,14 +38,27 @@ function HeroBanner() {
   );
 }
 
-function TopSection({ profileName }: { profileName: string }) {
+function TopSection({ profileName, initialName }: { profileName: string; initialName: string }) {
+  const [overallInfo, setOverallInfo] = useState<string>('');
+  useEffect(() => {
+    UsersAPIs.getOverallRecord()
+      .then((res) => res.json())
+      .then((data) => {
+        const { wins, loss, draw } = data.data.summary;
+        setOverallInfo(`${wins}-${draw}-${loss}`);
+      });
+  });
+
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
-        <Col className={styles.welcome_left}>Welcome back {profileName}!</Col>
+        <Row>
+          <Col className={styles.welcome_left}>Welcome back {profileName} </Col>
+          <div className={styles.avatar}>{initialName}</div>
+        </Row>
         <Col className={styles.welcome_right}>
-          <strong>Overall Record:</strong>&nbsp;123-54
+          <strong>Overall Record:</strong>&nbsp;{overallInfo}
         </Col>
       </Row>
     </>
@@ -58,36 +72,49 @@ function CurrentPackages({
   subscriptions: UserSubscription[];
   packages: Package[];
 }) {
+  const router = useRouter();
+
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
-    if (pack.name.indexOf('VIP All Access') > -1) {
+    if (pack.name.indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipAllAccessPack = pack.id;
-    } else if (pack.name.indexOf('Fantasy') > -1) {
+    } else if (pack.name.indexOf(PACKAGE_NAMES.FANTASY) > -1) {
       fantasyPack = pack.id;
-    } else {
+    } else if (pack.name.indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCardPack = pack.id;
     }
   });
-  const router = useRouter();
-  const goToPackage = (subscription: any) => {
-    switch (subscription.name) {
-      case 'VIP All Access - Daily':
-        router.push('/vip-all-access-card');
-        break;
-      case 'Fantasy':
-        router.push('/fantasy-daily-lineups');
-        break;
-      default:
-        router.push('/sports-card');
-        break;
+  const goToPackage = (plan: BillingPlan) => {
+    if (plan.package === vipAllAccessPack) {
+      router.push('/vip-all-access-card');
+    } else if (plan.package === fantasyPack) {
+      router.push('/fantasy-daily-lineups');
+    } else if (plan.package === sportsCardPack) {
+      router.push('/sports-card');
     }
+  };
+  // Sort Subscriptions
+  const sortSubscriptions = () => {
+    const vipSubscription: UserSubscription[] = [],
+      sportSubscription: UserSubscription[] = [],
+      fantasySubscription: UserSubscription[] = [];
+    subscriptions.forEach((subscription: UserSubscription) => {
+      if (subscription.plan.name.indexOf('VIP') > -1) {
+        vipSubscription.push(subscription);
+      } else if (subscription.plan.name.indexOf('Sports Card') > -1) {
+        sportSubscription.push(subscription);
+      } else {
+        fantasySubscription.push(subscription);
+      }
+    });
+    return vipSubscription.concat(sportSubscription, fantasySubscription);
   };
 
   return (
     <div className={styles.current_packages}>
       <div className={styles.block_title}>Current Packages</div>
       <div className={styles.block_content}>
-        {subscriptions.map((subscription) => (
+        {sortSubscriptions().map((subscription) => (
           <div className={styles.package_card} key={subscription.id}>
             {!subscription.is_active && (
               <div className={styles.package_status}>{`Expired ${Math.floor(
@@ -125,7 +152,8 @@ function CurrentPackages({
                 )}
               </div>
               <p className={styles.package_desc}>
-                {subscription.sports[0] ? subscription.sports[0].name : ''}
+                {subscription.sports[0] && subscription.sports[0].name}
+                {!subscription.sports[0] && <span>&nbsp;</span>}
               </p>
               {subscription.is_active && (
                 <Button
@@ -164,15 +192,18 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
+      <p className={styles.little_witty_intro}>Little Witty Intro</p>
       <div className={styles.block_content}>
-        <p className={styles.weekly_pro_tip_intro}>{data.slug}</p>
         <img
           alt="Weekly Pro Tip Image"
           src="/images/badminton_player.jpg"
           className={styles.weekly_pro_tip_img}
         />
-        <h4>{data.title}</h4>
-        <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
+        <div className={styles.weekly_pro_tip_right_panel}>
+          {/* <p className={styles.weekly_pro_tip_intro}>{data.slug}</p> */}
+          <h4 className={styles.weekly_description_title}>{data.title}</h4>
+          <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
+        </div>
       </div>
     </div>
   );
@@ -193,30 +224,17 @@ function EarliestGames({
   const [games, setGames] = useState<EarliestGameInfoType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const SportBetTypes = [
-    {
-      id: '',
-      name: 'All'
-    },
-    {
-      id: 'straight',
-      name: 'Straight Bets'
-    },
-    {
-      id: 'parlay',
-      name: 'Parlays'
-    },
-    {
-      id: 'wildcard',
-      name: 'Bonus Wilcard Plays'
-    }
-  ];
+  const DashboardSportBetTypes = SportBetTypes.slice();
+  DashboardSportBetTypes.unshift({
+    id: '',
+    name: 'All'
+  });
 
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
     SportsAPIs.getTodaySportEntries(
-      SportBetTypes[selectedBetType].id,
+      DashboardSportBetTypes[selectedBetType].id,
       subscriptions,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
@@ -235,7 +253,7 @@ function EarliestGames({
   };
   const menu = (
     <Menu className={styles.sportMenu}>
-      {SportBetTypes.map((type, index) => (
+      {DashboardSportBetTypes.map((type, index) => (
         <Menu.Item
           key={type.id}
           className={styles.sportMenuItem}
@@ -280,8 +298,6 @@ function EarliestGames({
     return null;
   };
 
-  console.log('earliest', games);
-
   return (
     <div className={styles.earliest_games}>
       <div className={styles.earliest_games_header}>
@@ -296,7 +312,7 @@ function EarliestGames({
             <div className={styles.dropdownBtn}>
               <span>
                 <strong>Betting Type:&nbsp;</strong>
-                {SportBetTypes[selectedBetType].name}
+                {DashboardSportBetTypes[selectedBetType].name}
               </span>
               {betMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
               {!betMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
@@ -321,7 +337,7 @@ function EarliestGames({
       </div>
       <br></br>
       <SportEntryActive
-        title={SportBetTypes[selectedBetType].name}
+        title={DashboardSportBetTypes[selectedBetType].name}
         loading={loading}
         hideSection={true}
         hideDetailsAt={hideDetailsAt}
@@ -360,8 +376,6 @@ function YesterdayPlays() {
       });
   };
 
-  console.log('yesterdays ', games);
-
   return (
     <div className={styles.yesterday_plays}>
       <div className={styles.earliest_games_header}>
@@ -381,6 +395,8 @@ function YesterdayPlays() {
 export default function MemberDashboard({ token, subscriptions, sports, packages }: PageProps) {
   const [weeklyTip, setWeeklyTip] = useState<WeeklyTip | undefined>(undefined);
   const [profileName, setProfileName] = useState<string>('');
+  const [initialName, setInitialName] = useState<string>('');
+
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
@@ -393,6 +409,12 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         if (data && data.full_name) {
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
+          setInitialName(
+            names.reduce(
+              (initials: string, currentValue: string) => initials + currentValue.substring(0, 1),
+              ''
+            )
+          );
         }
       });
   }, []);
@@ -405,19 +427,21 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection profileName={profileName} />
+          <TopSection profileName={profileName} initialName={initialName} />
           <Row className={styles.nowrapRow}>
             <Col span={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
               <div className={styles.earliest_games_col}>
                 <EarliestGames sports={sports} subscriptions={subscriptions} />
               </div>
+
+              <div className={styles.weekly_pro_tip_container}>
+                <WeeklyProTip data={weeklyTip} />
+              </div>
+
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />
               </div>
-            </Col>
-            <Col span={6} className={styles.weekly_pro_tip_container}>
-              <WeeklyProTip data={weeklyTip} />
             </Col>
           </Row>
         </div>

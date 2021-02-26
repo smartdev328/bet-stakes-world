@@ -186,6 +186,49 @@
   width: 500px;
 }
 
+.dsCoverage_subheadings {
+  color: #595651;
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 140%;
+}
+
+.dsCoverage_subheadings_sportsbook {
+  color: #595651;
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 140%;
+}
+.coverage_images {
+  padding: 2px;
+  width: 120px;
+}
+
+.checkout_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #1a1a1a;
+  background: #ffc700;
+  margin-left: 40px;
+  margin-right: 20px;
+  margin-top: 30px;
+  padding: 15.5px 24px;
+  border: none;
+  height: 60px;
+}
+
+.button_div {
+  display: flex;
+}
 @media (max-width: 600px) {
   .dailystake_image {
     padding-left: 50px;
@@ -262,5 +305,41 @@
     line-height: 80%;
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  .dsCoverage_subheadings {
+    color: #595651;
+    text-align: center;
+    font-family: Saira;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 80%;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+  }
+
+  .dsCoverage_subheadings_sportsbook {
+    color: #595651;
+    text-align: center;
+    font-family: Saira;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 80%;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+  }
+  .button_div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .coverage_images {
+    padding: 5px;
+    width: 150px;
+    margin-left: 25px;
   }
 }

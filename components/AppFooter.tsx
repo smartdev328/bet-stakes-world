@@ -30,7 +30,8 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
   useEffect(() => {
     if (status === 'success') {
       notification['info']({
-        message: 'You are subscribed successfully!',
+        message:
+          'You’ve successfully subscribed to TheDailyStakes Newsletter. Welcome to the team!',
         description: null
       });
     }

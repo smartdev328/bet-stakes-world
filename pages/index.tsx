@@ -352,11 +352,21 @@ function BetOnSports() {
     ncaab: false,
     nba_dfs: false,
     mlb_dfs: false,
-    soccer: false
+    soccer: false,
+    vip: false
   });
   const toggleSelectCard = (prop: SpoortCardName) => {
     const copySelectedCards = Object.assign({}, selectedCards);
     copySelectedCards[prop] = !copySelectedCards[prop];
+    setSportsDataForMobile(
+      sportsDataForMobile.map((item) => {
+        if (item.value === prop) {
+          item.selected = copySelectedCards[prop];
+          return item;
+        }
+        return item;
+      })
+    );
     setSelectedCards(copySelectedCards);
   };
 
@@ -364,11 +374,11 @@ function BetOnSports() {
     {
       name: 'VIP',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
-      image: <NBA_SVG className={styles.sports_card_image} />,
+      image: <img src={'/images/vip.svg'} className={styles.vip_sport_card} />,
       style: styles.nba_box,
-      value: SpoortCardName.nba,
-      selectedStyle: styles.nba_box_active,
-      selected: selectedCards.nba
+      value: SpoortCardName.vip,
+      selectedStyle: styles.vip_box_active,
+      selected: selectedCards.vip
     },
     {
       name: 'NBA',
@@ -445,7 +455,7 @@ function BetOnSports() {
 
     {
       name: 'NBA DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      description: 'DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports',
       image: <NBA_SVG className={styles.sports_card_image} />,
       style: styles.nba_box,
       value: SpoortCardName.nba_dfs,
@@ -454,7 +464,7 @@ function BetOnSports() {
     },
     {
       name: 'NFL DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      description: 'DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports',
       image: <NFL_SVG className={styles.sports_card_image} />,
       style: styles.nfl_box,
       value: SpoortCardName.nfl_dfs,
@@ -463,7 +473,7 @@ function BetOnSports() {
     },
     {
       name: 'MLB DFS',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR [ENTER SPORT]',
+      description: 'DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports',
       image: <MLB_SVG className={styles.sports_card_image} />,
       style: styles.mlb_box,
       value: SpoortCardName.mlb_dfs,
@@ -507,19 +517,28 @@ function BetOnSports() {
             <div className={styles.sports_cards}>
               {sportsDataForMobile.map((item: SportCardsSelection) => (
                 <div key={item.name}>
+                  {item.name === 'VIP' ? <p className={styles.best_deal_text}>best Deal!</p> : null}
                   <div className={styles.sports_card}>
                     <div
                       className={`${styles.sports_card_box} ${item.style} ${
                         item.selected ? item.selectedStyle : ''
                       }`}
                       onClick={() => toggleSelectCard(item.value)}>
-                      {item.selected && (
-                        <img
-                          src="/images/check_mark.svg"
-                          alt="Check mark Icon"
-                          className={styles.sports_card_checkmark}
-                        />
-                      )}
+                      {item.selected ? (
+                        item.name === 'VIP' ? (
+                          <img
+                            src="/images/golden_check_mark.svg"
+                            alt="Check mark Icon"
+                            className={styles.sports_card_checkmark}
+                          />
+                        ) : (
+                          <img
+                            src="/images/check_mark.svg"
+                            alt="Check mark Icon"
+                            className={styles.sports_card_checkmark}
+                          />
+                        )
+                      ) : null}
                       {item.image}
                       <div className={styles.sports_card_box_content}>
                         <h3>{item.name}</h3>
@@ -547,13 +566,21 @@ function BetOnSports() {
                       item.selected ? item.selectedStyle : ''
                     }`}
                     onClick={() => toggleSelectCard(item.value)}>
-                    {item.selected && (
-                      <img
-                        src="/images/check_mark.svg"
-                        alt="Check mark Icon"
-                        className={styles.sports_card_checkmark}
-                      />
-                    )}
+                    {item.selected ? (
+                      item.name === 'VIP' ? (
+                        <img
+                          src="/images/golden_check_mark.svg"
+                          alt="Check mark Icon"
+                          className={styles.sports_card_checkmark}
+                        />
+                      ) : (
+                        <img
+                          src="/images/check_mark.svg"
+                          alt="Check mark Icon"
+                          className={styles.sports_card_checkmark}
+                        />
+                      )
+                    ) : null}
                     {item.image}
                     <div className={styles.sports_card_box_content}>
                       <h3>{item.name}</h3>

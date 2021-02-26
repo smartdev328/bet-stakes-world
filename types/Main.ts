@@ -27,6 +27,7 @@ export type SportInfoType = {
 };
 
 export type SportCardsSelectionType = {
+  vip: boolean;
   nba: boolean;
   nfl: boolean;
   mlb: boolean;
@@ -41,6 +42,7 @@ export type SportCardsSelectionType = {
 };
 
 export enum SpoortCardName {
+  vip = 'vip',
   nba = 'nba',
   nfl = 'nfl',
   mlb = 'mlb',

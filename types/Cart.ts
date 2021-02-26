@@ -23,3 +23,12 @@ export type CartItem = {
   pack: Package;
   auto_renewal: boolean;
 };
+
+export type CheckoutItem = {
+  plan_id: string;
+  sports: number[];
+};
+
+export type CreateCheckoutSessionParams = {
+  items: CheckoutItem[];
+};

@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Button, Dropdown, Menu, notification, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { useStripe, useElements, CardNumberElement } from '@stripe/react-stripe-js';
+import { useStripe } from '@stripe/react-stripe-js';
 import NumberFormat from 'react-number-format';
 
 import {
   AppLayout,
   BannerSportsAndMatches,
-  CartBillingInfo,
   CartLoginForm,
   CartSignupForm
 } from '@components/index';
 import styles from '@styles/Cart.module.css';
-import { CartItem } from '@type/Cart';
+import { CartItem, CheckoutItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
-import { PageProps, PromiseResponse } from '@type/Main';
+import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
-import SubscriptionsApis from '@apis/subscriptions.apis';
 import { MinusIcon } from '@components/SvgIcons';
-import UsersAPIs from '@apis/user.apis';
-import { CreateUserType, LoginUserType, UserBillingInfo } from '@type/Users';
+import CheckoutAPIs from '@apis/checkout.apis';
+import { CreateUserType, LoginUserType } from '@type/Users';
 
 function HeroBanner() {
   return (
@@ -207,15 +204,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
   const [proceeding, setProceeding] = useState<boolean>(false);
   const [formView, setFormView] = useState<string>('');
-  const [billingInfo, setBillingInfo] = useState<UserBillingInfo>({
-    city: undefined,
-    address: undefined,
-    zipcode: undefined,
-    full_name: undefined,
-    country: undefined
-  });
   const [isSignupFormValid, setSignUpFormValid] = useState<boolean>(false);
-  const [isBillingFormValid, setBillingFormValid] = useState<boolean>(false);
   const [loginFormData, setLoginFormData] = useState<LoginUserType>({
     email: undefined,
     password: undefined
@@ -234,10 +223,8 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [cartForVisitor] = useState<boolean>(!token);
 
-  const router = useRouter();
   const dispatch = useDispatch();
   const stripe = useStripe();
-  const elements = useElements();
 
   useEffect(() => {
     setTempCartItems(cartItems);
@@ -253,9 +240,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
         description: error
       });
       setProceeding(false);
-    }
-    if (error === null && !loading && formSubmitted && formView === '') {
-      updateCardForm();
     }
     if (formSubmitted && !loading && error && formView === '') {
       notification['error']({
@@ -279,39 +263,48 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
 
   const proceedCheckout = () => {
     setProceeding(true);
-    const promiseArr: Promise<PromiseResponse>[] = [];
+    const checkoutItems: CheckoutItem[] = [];
     tempCartItems.forEach((item) => {
       // Add To Subscriptions
-      const promise = SubscriptionsApis.addSubscription({
+      const subscriptionParams: CheckoutItem = {
         plan_id: item.plan.id,
         sports: item.sports !== undefined ? [item.sports.id] : []
-      }).then((res) => res.json());
-      promiseArr.push(promise);
+      };
+      checkoutItems.push(subscriptionParams);
     });
-    Promise.all(promiseArr)
-      .then((values) => {
+
+    CheckoutAPIs.createSession({
+      items: checkoutItems
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
         let hasError = false;
-        values.forEach((data: PromiseResponse) => {
-          if (data.status === 400) {
+        if (data.status === 400) {
+          notification['error']({
+            message: 'Checkout Error!',
+            description: data.message
+          });
+          hasError = true;
+        } else if (data.statusCode === 400) {
+          notification['error']({
+            message: 'Checkout Error!',
+            description: data.raw?.message
+          });
+          hasError = true;
+        }
+        if (!hasError && stripe) {
+          const { checkoutSessionId } = data.data;
+          const { error } = await stripe.redirectToCheckout({
+            sessionId: checkoutSessionId
+          });
+          setProceeding(false);
+          if (error) {
             notification['error']({
-              message: 'Add Subscription Error!',
-              description: data.message
+              message: 'Checkout Error!',
+              description: error.message
             });
-            hasError = true;
-          } else if (data.statusCode === 400) {
-            notification['error']({
-              message: 'Add Subscription Error!',
-              description: data.raw?.message
-            });
-            hasError = true;
           }
-        });
-        setProceeding(false);
-        if (!hasError) {
           dispatch({ type: 'UPDATE_CART', payload: [] });
-          router.push('/member-dashboard');
-        } else {
-          router.push('/profile');
         }
       })
       .catch((error) => {
@@ -347,11 +340,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     }
   };
 
-  const updateBillingForm = (data: UserBillingInfo, isValid: boolean) => {
-    setBillingInfo(data);
-    setBillingFormValid(isValid);
-  };
-
   const cartLoginFormChanged = (formData: LoginUserType, isValid: boolean) => {
     setLoginFormData(formData);
     setSignUpFormValid(isValid);
@@ -360,69 +348,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const cartSignupFormChanged = (formData: CreateUserType, isValid: boolean) => {
     setSignupFormData(formData);
     setSignUpFormValid(isValid);
-  };
-
-  const updateCardForm = async () => {
-    if (!stripe || !elements) {
-      console.error('Stripe is not loaded');
-      setProceeding(false);
-      return;
-    }
-
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-    const cardNumberElement = elements.getElement(CardNumberElement);
-
-    // Use your card Element with other Stripe.js APIs
-    if (cardNumberElement) {
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardNumberElement,
-        billing_details: {
-          name: billingInfo.full_name,
-          address: {
-            city: billingInfo.city,
-            country: billingInfo.country,
-            line1: billingInfo.address,
-            postal_code: billingInfo.zipcode
-          }
-        }
-      });
-      if (!paymentMethod) {
-        console.log('[error]', error);
-        setProceeding(false);
-      } else {
-        await UsersAPIs.addPaymentMethod({ payment_method_id: paymentMethod.id })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.status === 'success') {
-              notification['info']({
-                message: 'New Payment Method has been Added!'
-              });
-              setTimeout(() => {
-                proceedCheckout();
-              }, 5000);
-            } else {
-              notification['error']({
-                message: 'Add New Payment Method Error',
-                description: data.message
-              });
-              setProceeding(false);
-            }
-          })
-          .catch((error) => {
-            notification['error']({
-              message: 'Add New Payment Method Error',
-              description: error.message
-            });
-            setProceeding(false);
-          });
-      }
-    } else {
-      console.log('[error] Card Element is not rendered');
-      setProceeding(false);
-    }
   };
 
   return (
@@ -448,7 +373,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                         signupFormChanged={cartSignupFormChanged}
                         onCartLogin={() => setFormView('LOGIN')}
                       />
-                      <CartBillingInfo updateBillingFormData={updateBillingForm} />
                     </>
                   )}
                   {formView === 'LOGIN' && (
@@ -526,7 +450,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               disabled={
                 !cartForVisitor
                   ? tempCartItems.length === 0
-                  : tempCartItems.length === 0 || !(isSignupFormValid && isBillingFormValid)
+                  : tempCartItems.length === 0 || !isSignupFormValid
               }
               onCheckout={!cartForVisitor ? proceedCheckout : proceedCheckoutForVisitor}
             />
@@ -558,7 +482,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             disabled={
               !cartForVisitor
                 ? tempCartItems.length === 0
-                : tempCartItems.length === 0 || !(isSignupFormValid && isBillingFormValid)
+                : tempCartItems.length === 0 || !isSignupFormValid
             }
             cartItems={tempCartItems}
             onCheckout={!cartForVisitor ? proceedCheckout : proceedCheckoutForVisitor}

@@ -21,15 +21,15 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 className={styles.ourPurpose_image}
               />
             </div>
-            <Row className={styles.row} gutter={{ xs: 24, sm: 24, md: 24, lg: 24 }}>
-              <Col className="gutter-row" span={10}>
+            <Row className={styles.row}>
+              <Col md={10} sm={24}>
                 <img
                   src="/images/dailyStakes.svg"
                   alt="The Daily Stakes"
                   className={styles.dailystake_image}
                 />
               </Col>
-              <Col span={14}>
+              <Col md={14} sm={24}>
                 <p className={styles.dailyStake_details}>
                   The Daily Stakes, Inc. is a North American digital sports consulting & media
                   company focused on the rapidly evolving sports betting and daily fantasy sports
@@ -40,10 +40,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
               </Col>
             </Row>
             <Row className={styles.row}>
-              <Col span={10}>
+              <Col md={10} sm={24}>
                 <p className={styles.aboutUs_headings}>The DS mission</p>
               </Col>
-              <Col span={14}>
+              <Col md={14} sm={24}>
                 <p className={styles.dsMission_details}>
                   To be the sports consulting industry leader by providing our users with the
                   industry’s most versatile content and insightful recommendations.
@@ -52,10 +52,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
             </Row>
 
             <Row className={styles.row}>
-              <Col span={10}>
+              <Col md={10} sm={24}>
                 <p className={styles.aboutUs_headings}>The DS Story</p>
               </Col>
-              <Col span={14}>
+              <Col md={14} sm={24}>
                 <p className={styles.dsStory_details}>
                   Formally established in 2021 upon forming a partnership amongst professionals
                   working in the finance & consulting space, TheDailyStakes is rapidly becoming one
@@ -76,10 +76,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
             </Row>
 
             <Row className={styles.row}>
-              <Col span={10}>
+              <Col md={10} sm={24}>
                 <p className={styles.aboutUs_headings}>The DS Purpose</p>
               </Col>
-              <Col span={14}>
+              <Col md={14} sm={24}>
                 <p>
                   <h5 className={styles.ourPurpose_subheadings}>EDUCATING THE BETTOR</h5>
 

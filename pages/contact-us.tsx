@@ -176,8 +176,8 @@ export default function Contact({ token, subscriptions }: PageProps) {
               <div className={styles.successMessage}>
                 Your message has been successfully submitted. A member of our support staff will
                 respond as soon as possible. Feel free to review our &nbsp;
-                <Link className={styles.faq_link} href="/faqs">
-                  FAQ Page
+                <Link href="/faqs">
+                  <a className={styles.faq_link}> FAQ Page </a>
                 </Link>
                 &nbsp; in the interim.
               </div>

@@ -98,21 +98,90 @@
 }
 
 .aboutUs_headings {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  padding: 10px;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 100px;
+  line-height: 117.9%;
+
+  text-align: center;
 }
 
 .ourPurpose_subheadings {
+  color: #595651;
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 140%;
+}
+
+.dailyStake_details {
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.dsMission_details {
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.dsStory_details {
+  text-align: left;
+
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.dsPurpose_details {
+  text-align: left;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 140%;
+  color: #000000;
+}
+
+.ourPurpose_background {
+  background-image: url('/images/aboutusBackground.png');
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  color: #696969;
 }
 
-.ourPurpose_details {
-  text-align: center;
+.ourPurpose_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  width: 300px;
+}
+
+.row {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.dailystake_image {
+  /* padding-bottom: 90px; */
+  padding-left: 200px;
+  height: 500px;
+  width: 500px;
 }

@@ -427,7 +427,10 @@ function ProductsAndCartBox({
   };
 
   const selectBillingPlan = (plan: BillingPlan) => {
-    if (!activePlan) {
+    if (activePlan?.id === plan.id) {
+      setActivePlan(undefined);
+      changeTempCart(pack, []);
+    } else {
       const newCart = [
         {
           sports: undefined,

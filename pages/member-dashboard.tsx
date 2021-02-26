@@ -23,7 +23,7 @@ import { Sport } from '@type/Sports';
 import PackageAPIs from '@apis/package.apis';
 import UsersAPIs from '@apis/user.apis';
 import { BillingPlan, Package } from '@type/Packages';
-import { SportBetTypes } from '@constants/';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 function HeroBanner() {
   return (
@@ -76,29 +76,45 @@ function CurrentPackages({
 
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
-    if (pack.name.indexOf('VIP All Access') > -1) {
+    if (pack.name.indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipAllAccessPack = pack.id;
-    } else if (pack.name.indexOf('Fantasy') > -1) {
+    } else if (pack.name.indexOf(PACKAGE_NAMES.FANTASY) > -1) {
       fantasyPack = pack.id;
-    } else {
+    } else if (pack.name.indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCardPack = pack.id;
     }
   });
   const goToPackage = (plan: BillingPlan) => {
-    if (plan.name.toLowerCase().indexOf('vip all access') > -1) {
+    if (plan.package === vipAllAccessPack) {
       router.push('/vip-all-access-card');
-    } else if (plan.name.toLowerCase().indexOf('fantasy') > -1) {
+    } else if (plan.package === fantasyPack) {
       router.push('/fantasy-daily-lineups');
-    } else {
+    } else if (plan.package === sportsCardPack) {
       router.push('/sports-card');
     }
+  };
+  // Sort Subscriptions
+  const sortSubscriptions = () => {
+    const vipSubscription: UserSubscription[] = [],
+      sportSubscription: UserSubscription[] = [],
+      fantasySubscription: UserSubscription[] = [];
+    subscriptions.forEach((subscription: UserSubscription) => {
+      if (subscription.plan.name.indexOf('VIP') > -1) {
+        vipSubscription.push(subscription);
+      } else if (subscription.plan.name.indexOf('Sports Card') > -1) {
+        sportSubscription.push(subscription);
+      } else {
+        fantasySubscription.push(subscription);
+      }
+    });
+    return vipSubscription.concat(sportSubscription, fantasySubscription);
   };
 
   return (
     <div className={styles.current_packages}>
       <div className={styles.block_title}>Current Packages</div>
       <div className={styles.block_content}>
-        {subscriptions.map((subscription) => (
+        {sortSubscriptions().map((subscription) => (
           <div className={styles.package_card} key={subscription.id}>
             {!subscription.is_active && (
               <div className={styles.package_status}>{`Expired ${Math.floor(
@@ -136,7 +152,8 @@ function CurrentPackages({
                 )}
               </div>
               <p className={styles.package_desc}>
-                {subscription.sports[0] ? subscription.sports[0].name : ''}
+                {subscription.sports[0] && subscription.sports[0].name}
+                {!subscription.sports[0] && <span>&nbsp;</span>}
               </p>
               {subscription.is_active && (
                 <Button

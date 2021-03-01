@@ -134,16 +134,22 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
         <div className={styles.container}>
           {sports.length > 0 && <TopSection sports={sports} onSelectChange={updateFilters} />}
         </div>
+
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
+
               <Col span={18} className={styles.contentMainCol}>
                 {!token && <SubscribeNow />}
                 {token && (
                   <>
                     <SportEntry loading={entireLoading} plays={games} />
                     <Row>
-                      <Col span={24} className="text-center">
+                      <Col sm={24} md={18} className="text-center">
                         <Button
                           loading={fetchMoreLoading}
                           onClick={onLoadMore}
@@ -154,13 +160,22 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
                     </Row>
                   </>
                 )}
+                <div className={styles.laptop_view}>
+                  <VipAllAccessCard />
+                  <DailyFantasyLineups />
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                </div>
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <VipAllAccessCard />
-                <DailyFantasyLineups />
-                <CommonSportsBook />
-                <WhereToWatchGame />
-                <WhereBuyGear />
+                <div className={styles.mobile_view}>
+                  <VipAllAccessCard />
+                  <DailyFantasyLineups />
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                </div>
               </Col>
             </Row>
           </div>

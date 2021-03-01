@@ -52,7 +52,7 @@
 
 .topSection {
   padding: 24px 0;
-  border-bottom: 1px solid #C4C4C4;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 .topSection .right,
@@ -74,7 +74,8 @@
   font-size: 18px;
   line-height: 28px;
 }
-.thick_star_btn, .caret_down_btn {
+.thick_star_btn,
+.caret_down_btn {
   height: auto;
   border: none;
   display: flex;
@@ -99,7 +100,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   background: #000;
   padding: 13px 16px;
   height: auto;
@@ -135,7 +136,7 @@
 @media (max-width: 992px) {
   .topSection {
     padding: 20px 0;
-  }  
+  }
   .topSection .left {
     font-size: 28px;
     line-height: 42px;
@@ -384,17 +385,13 @@
   line-height: 25px;
   display: flex;
   align-items: center;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .earliest_games_titlebar span {
   font-size: 14px;
   line-height: 22px;
   color: #fff;
 }
-
-
- 
-
 
 /* Unlock Item Modal */
 .unlockItemModal {
@@ -442,14 +439,13 @@
 }
 .unlockItemModal .modalContent {
   position: relative;
-
 }
 .contentTitle {
   font-weight: bold;
   font-size: 48px;
   line-height: 57px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 35px;
 }
 .contentDesc {
@@ -457,7 +453,7 @@
   font-size: 16px;
   line-height: 25px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   max-width: 520px;
   margin: auto;
   margin-bottom: 50px;
@@ -466,21 +462,21 @@
 .plan {
   width: 220px;
   padding: 18px;
-  background: #FFFFFF;
+  background: #ffffff;
 }
 .plan h4 {
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
   text-transform: uppercase;
-  color: #1A1A1A;
+  color: #1a1a1a;
   margin: 0;
 }
 .plan p {
   font-weight: normal;
   font-size: 12px;
   line-height: 19px;
-  color: #1A1A1A;
+  color: #1a1a1a;
   margin-bottom: 1em;
   margin-top: 0;
 }
@@ -490,13 +486,13 @@
   line-height: 19px;
   display: flex;
   align-items: center;
-  color: #1A1A1A;
+  color: #1a1a1a;
   display: block;
   margin-bottom: 0.5em;
 }
 
 .plan .optionBtn {
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   padding: 8px 12px;
   display: flex;
   justify-content: space-between;
@@ -509,7 +505,7 @@
   line-height: 19px;
   display: flex;
   align-items: center;
-  color: #1A1A1A;
+  color: #1a1a1a;
 }
 
 .planSubmitBtn {
@@ -517,7 +513,7 @@
   font-size: 16px;
   line-height: 25px;
   color: #101010;
-  background: #FFC700;
+  background: #ffc700;
   width: 100%;
   padding: 8px;
   height: auto;
@@ -530,7 +526,7 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 38px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 1em;
 }
 
@@ -612,7 +608,7 @@
   line-height: 25px;
   color: #000000;
   padding: 7.5px 24px;
-  border: 1px solid #1A1A1A;
+  border: 1px solid #1a1a1a;
   height: auto;
   margin: 48px 0 100px;
 }
@@ -625,15 +621,12 @@
   }
 }
 
-
 .company_logo {
   margin-bottom: 28px;
 }
 .company_logo:last-child {
   margin-bottom: 0;
 }
-
-
 
 @media (max-width: 1024px) {
   .contentMainCol {
@@ -666,7 +659,8 @@
   .sidebarBlockTitleIcon {
     width: 18px;
   }
-  .agressiveBtn, .conservativeBtn {
+  .agressiveBtn,
+  .conservativeBtn {
     font-size: 13px;
   }
   .sidebarBlockContent p {
@@ -679,21 +673,22 @@
     padding-right: 0;
     padding-left: 5px;
   }
-  .company_logo:nth-child(2n+1) {
+  .company_logo:nth-child(2n + 1) {
     padding-right: 5px;
     padding-left: 0;
   }
   .company_logo {
     margin-bottom: 18px;
   }
-  .company_logo img  {
+  .company_logo img {
     max-width: 100%;
     height: auto;
   }
   .accordionTitle {
     margin-bottom: 8px;
   }
-  .accordionTitle span, .accordionTitle strong {
+  .accordionTitle span,
+  .accordionTitle strong {
     font-size: 14px;
     line-height: 21px;
   }
@@ -730,7 +725,7 @@
 /* Subscribe Now Btn */
 
 .subscribenow {
-  background: #1A1A1A;
+  background: #1a1a1a;
   padding: 50px;
 }
 .subscribenow_container {
@@ -754,7 +749,7 @@
   font-size: 64px;
   line-height: 100px;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 .subscribenow_title2 {
   font-style: normal;
@@ -762,7 +757,7 @@
   font-size: 96px;
   line-height: 100px;
   text-transform: uppercase;
-  color: #FFC700;
+  color: #ffc700;
 }
 .subscribenow_desc {
   margin-top: 22px;
@@ -770,7 +765,7 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 48px;
-  color: #F1F1F1;
+  color: #f1f1f1;
 }
 
 .subscribenow_right {
@@ -958,4 +953,19 @@
   font-size: 1.2em;
   text-align: center;
   font-style: italic;
+}
+
+@media (max-width: 992px) {
+  .mobile_view {
+    display: none;
+  }
+  .laptop_view {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .laptop_view {
+    display: none;
+  }
 }

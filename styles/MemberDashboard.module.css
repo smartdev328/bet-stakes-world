@@ -784,3 +784,18 @@
   text-align: center;
   font-style: italic;
 }
+
+@media (max-width: 992px) {
+  .mobile_view {
+    display: none;
+  }
+  .laptop_view {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .laptop_view {
+    display: none;
+  }
+}

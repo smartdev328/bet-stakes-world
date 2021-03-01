@@ -97,7 +97,11 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             }}
           />
           <Row className={styles.content}>
-            <Col span={18} className={styles.contentMainCol}>
+            <div className={styles.laptop_view}>
+              <VipAllAccessCard />
+              <DailyFantasyLineups />
+            </div>
+            <Col sm={24} md={18} className={styles.contentMainCol}>
               {SportBetTypes.map((type) => (
                 <ListGames
                   id={type.id}
@@ -108,16 +112,26 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
                   selectedFilterType={filterType}
                 />
               ))}
+              <div className={styles.laptop_view}>
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
             </Col>
             <Col span={6} className={styles.contentSideCol}>
-              <VipAllAccessCard />
-              <DailyFantasyLineups />
-              <CommonSportsBook />
-              <WhereToWatchGame />
-              <WhereBuyGear />
-              <BankRollManagement />
-              <BettingFundamentals />
-              <BettingFundamentals isFantasy />
+              <div className={styles.mobile_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
             </Col>
           </Row>
         </div>

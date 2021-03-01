@@ -158,19 +158,34 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
             onChangeOptions={onChangeOptions}
           />
         </div>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
+
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>
-              <Col span={18} className={styles.contentMainCol}>
+              <Col sm={24} md={18} className={styles.contentMainCol}>
                 {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}
                 {loading && (
                   <div className={styles.loadingSpin}>
                     <Spin size="large" />
                   </div>
                 )}
+                <div className={styles.laptop_view}>
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <FantasySidebar />
+                <div className={styles.mobile_view}>
+                  <FantasySidebar />
+                </div>
               </Col>
             </Row>
           </div>

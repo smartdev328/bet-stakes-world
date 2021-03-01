@@ -5,8 +5,6 @@ import { Row, Button, Col, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import {
   AppLayout,
-  BankRollManagement,
-  BettingFundamentals,
   BannerSportsAndMatches,
   CommonSportsBook,
   DashboardHeader,

@@ -536,27 +536,6 @@ function ProductsAndCartBoxForFantasy({
   });
   const [activePlan, setActivePlan] = useState<BillingPlan>();
   const [activeSport, setActiveSport] = useState<Sport>();
-  const [purchasedSports, setPurchasedSports] = useState<number[]>([]);
-
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
-  const setCartFromProps = (cartItems: CartItem[]) => {
-    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    if (itemsFromCart.length > 0) {
-      const purchased: number[] = [];
-      itemsFromCart.forEach((cart: CartItem) => {
-        const sportId = cart.sports?.id;
-        if (sportId) {
-          purchased.push(sportId);
-        }
-      });
-      setPurchasedSports(purchased);
-    } else {
-      setPurchasedSports([]);
-    }
-  };
 
   const selectBillingPlan = (plan: BillingPlan) => {
     const newCart: CartItem[] = [...cartItems];
@@ -639,6 +618,10 @@ function ProductsAndCartBoxForFantasy({
         setActiveSport(sport);
       }
     }
+    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan(itemsFromCart[0].plan);
+      }
     changeTempCart(pack, newCart);
   };
 
@@ -654,7 +637,6 @@ function ProductsAndCartBoxForFantasy({
             <div key={index}>
               <Button
                 className={styles.dropdownBtnWrapper}
-                disabled={purchasedSports.findIndex((sp) => sp === sport.id) > -1}
                 onClick={() => onChangeItemAt(sport)}>
                 <div
                   className={`${styles.dropdownBtn} ${
@@ -781,27 +763,6 @@ function ProductsAndCartBoxForSportsCard({
   const [activeSport2, setActiveSport2] = useState<Sport>();
   const [activePlan1, setActivePlan1] = useState<BillingPlan>();
   const [activePlan2, setActivePlan2] = useState<BillingPlan>();
-  const [purchasedSports, setPurchasedSports] = useState<number[]>([]);
-
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
-  const setCartFromProps = (cartItems: CartItem[]) => {
-    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    if (itemsFromCart.length > 0) {
-      const purchased: number[] = [];
-      itemsFromCart.forEach((cart: CartItem) => {
-        const sportId = cart.sports?.id;
-        if (sportId) {
-          purchased.push(sportId);
-        }
-      });
-      setPurchasedSports(purchased);
-    } else {
-      setPurchasedSports([]);
-    }
-  };
 
   useEffect(() => {
     const nonUFCandF1Sports1: Sport[] = [];
@@ -963,6 +924,10 @@ function ProductsAndCartBoxForSportsCard({
           setActiveSport1(sport);
         }
       }
+      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan1(itemsFromCart[0].plan);
+      }
     }
     if (type === '') {
       if (activeSport2 && activePlan2) {
@@ -983,6 +948,10 @@ function ProductsAndCartBoxForSportsCard({
         newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
         setActiveSport2(undefined);
       }
+      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan1(itemsFromCart[0].plan);
+      }
     }
     changeTempCart(pack, newCart);
   };
@@ -999,7 +968,6 @@ function ProductsAndCartBoxForSportsCard({
             <div key={index}>
               <Button
                 className={styles.dropdownBtnWrapper}
-                disabled={purchasedSports.findIndex((sp) => sp === sport.id) > -1}
                 onClick={() => onChangeItemAt(sport, NON_UFC_F1)}>
                 <div
                   className={`${styles.dropdownBtn} ${
@@ -1076,7 +1044,6 @@ function ProductsAndCartBoxForSportsCard({
               <div key={`plan-${index}`}>
                 <Button
                   className={styles.dropdownBtnWrapper}
-                  disabled={purchasedSports.findIndex((sp) => sp === sport.id) > -1}
                   onClick={() => onChangeItemAt(sport, '')}>
                   <div
                     className={`${styles.dropdownBtn} ${

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import styles from './BettingFundamentals.module.css';
 import { ListIcon, MinusEncloseIcon, PlusEncloseIcon } from './SvgIcons';
-import { MOCK_BetFundaments, MOCK_BankRoll } from '@constants/index';
+import { MOCK_BankRoll } from '@constants/index';
 
 type PropsType = {
   showContentAt: boolean[];

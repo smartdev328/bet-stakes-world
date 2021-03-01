@@ -32,7 +32,8 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
       notification['info']({
         message:
           'You’ve successfully subscribed to TheDailyStakes Newsletter. Welcome to the team!',
-        description: null
+        description: null,
+        style: { background: '#ffc700' }
       });
     }
     if (status === 'error') {

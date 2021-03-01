@@ -15,7 +15,9 @@ import {
   CommonSportsBook,
   DashboardHeader,
   WhereToWatchGame,
-  WhereBuyGear
+  WhereBuyGear,
+  VipAllAccessCard,
+  BankRollManagement
 } from '@components/index';
 import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
@@ -511,10 +513,13 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
 function FantasySidebar() {
   return (
     <>
+      <VipAllAccessCard />
       <DailyFantasyLineups />
       <CommonSportsBook />
       <WhereToWatchGame />
       <WhereBuyGear />
+      <BankRollManagement />
+      <BettingFundamentals />
       <BettingFundamentals isFantasy />
     </>
   );

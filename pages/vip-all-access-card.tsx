@@ -9,7 +9,11 @@ import {
   BettingFundamentals,
   CommonSportsBook,
   DashboardHeader,
-  SportEntryActive
+  SportEntryActive,
+  VipAllAccessCard,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear
 } from '@components/index';
 import { WinnerCupIcon } from '@components/SvgIcons';
 import SportsAPIs from '@apis/sport.apis';
@@ -106,9 +110,14 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
               ))}
             </Col>
             <Col span={6} className={styles.contentSideCol}>
-              <BankRollManagement />
+              <VipAllAccessCard />
+              <DailyFantasyLineups />
               <CommonSportsBook />
+              <WhereToWatchGame />
+              <WhereBuyGear />
+              <BankRollManagement />
               <BettingFundamentals />
+              <BettingFundamentals isFantasy />
             </Col>
           </Row>
         </div>

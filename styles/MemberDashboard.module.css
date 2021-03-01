@@ -444,6 +444,14 @@
     flex-wrap: wrap;
     flex-direction: column;
   }
+  .contentSideCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
 }
 @media (max-width: 768px) {
   .block_content {

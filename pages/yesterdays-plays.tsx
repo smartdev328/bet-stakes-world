@@ -10,7 +10,11 @@ import {
   BannerSportsAndMatches,
   CommonSportsBook,
   DashboardHeader,
-  SportEntry
+  SportEntry,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear,
+  VipAllAccessCard
 } from '@components/index';
 
 import styles from '@styles/YesterdaysPlays.module.css';
@@ -154,9 +158,11 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
                 )}
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <BankRollManagement />
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
                 <CommonSportsBook />
-                <BettingFundamentals />
+                <WhereToWatchGame />
+                <WhereBuyGear />
               </Col>
             </Row>
           </div>

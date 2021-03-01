@@ -17,14 +17,15 @@ function WhereToWatchGame() {
               <img src="/images/dazn-company.png" alt="DAZN Logo" width={80} height={80} />
             </a>
           </Col>
-          <Col span={12} className={styles.company_logo}>
-            <a href="https://www.fubo.tv/">
-              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={132} height={43} />
-            </a>
-          </Col>
+
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.stubhub.com/">
               <img src="/images/stubhub-company.png" alt="StubHub Logo" width={80} height={80} />
+            </a>
+          </Col>
+          <Col span={12} className={styles.company_logo}>
+            <a href="https://www.fubo.tv/">
+              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={132} height={43} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -32,12 +33,17 @@ function WhereToWatchGame() {
               <img
                 src="/images/ticketmaster-company.png"
                 alt="TicketMaster Logo"
-                width={176}
+                width={160}
                 height={57}
-                style={{ marginLeft: -20 }}
+                style={{ marginLeft: -5 }}
               />
             </a>
           </Col>
+
+          <Col span={12} className={styles.company_logo}>
+            <img src="/images/sling-company.png" alt="VividSeats Logo" width={135} height={80} />
+          </Col>
+
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.vividseats.com/">
               <img

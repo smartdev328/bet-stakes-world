@@ -11,7 +11,14 @@ import {
   BannerSportsAndMatches,
   DashboardHeader,
   SportEntryActive,
-  SportEntry
+  SportEntry,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear,
+  VipAllAccessCard,
+  CommonSportsBook,
+  BankRollManagement,
+  BettingFundamentals
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
@@ -485,6 +492,16 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />
               </div>
+            </Col>
+            <Col span={6} className={styles.contentSideCol}>
+              <VipAllAccessCard />
+              <DailyFantasyLineups />
+              <CommonSportsBook />
+              <WhereToWatchGame />
+              <WhereBuyGear />
+              <BankRollManagement />
+              <BettingFundamentals />
+              <BettingFundamentals isFantasy />
             </Col>
           </Row>
         </div>

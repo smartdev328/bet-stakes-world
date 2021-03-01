@@ -95,7 +95,7 @@ export default function Contact({ token, subscriptions }: PageProps) {
             UsersAPIs.uploadLogo(formdata)
               .then((res2) => res2.json())
               .then((data) => {
-                if (data.statusCode > 201) {
+                if (data.length > 0) {
                   setShowSuccess(true);
                 } else {
                   notification['error']({
@@ -165,6 +165,7 @@ export default function Contact({ token, subscriptions }: PageProps) {
                     <label>Description*</label>
                     <textarea
                       value={contactUsForm.description}
+                      placeholder="Please include a minimum of 20 characters in your message"
                       className={formValidation.description ? '' : styles.error}
                       onChange={(e) => changecontactUsForm('description', e.currentTarget.value)}
                     />

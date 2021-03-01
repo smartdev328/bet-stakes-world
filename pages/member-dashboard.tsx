@@ -194,7 +194,6 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
-      <p className={styles.little_witty_intro}>Little Witty Intro</p>
       <div className={styles.block_content}>
         <img
           alt="Weekly Pro Tip Image"
@@ -202,7 +201,6 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
           className={styles.weekly_pro_tip_img}
         />
         <div className={styles.weekly_pro_tip_right_panel}>
-          {/* <p className={styles.weekly_pro_tip_intro}>{data.slug}</p> */}
           <h4 className={styles.weekly_description_title}>{data.title}</h4>
           <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
         </div>

@@ -47,8 +47,10 @@ function LoginModal() {
     }
     if (loginError === null && !loading && formSubmitted) {
       closeModal();
-      notification['info']({
-        message: 'You’ve Successfully Logged In!'
+
+      notification.open({
+        message: 'You’ve Successfully Logged In!',
+        style: { background: '#ffc700' }
       });
     }
   }, [loginError, loading]);

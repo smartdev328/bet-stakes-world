@@ -404,7 +404,6 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data);
         setWeeklyTip(data);
       });
     UsersAPIs.fetchProfile()

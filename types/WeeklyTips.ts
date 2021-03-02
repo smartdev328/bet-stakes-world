@@ -4,5 +4,5 @@ export type WeeklyTip = {
   detail: string;
   photo: {
     url: string;
-  }
+  };
 };

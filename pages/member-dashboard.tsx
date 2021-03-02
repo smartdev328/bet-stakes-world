@@ -195,6 +195,7 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
+      <div className={styles.little_witty_intro}></div>
       <div className={styles.block_content}>
         <img
           alt="Weekly Pro Tip Image"

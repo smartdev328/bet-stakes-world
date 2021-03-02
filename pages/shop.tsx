@@ -541,7 +541,9 @@ function ProductsAndCartBoxForFantasy({
     const newCart: CartItem[] = [...cartItems];
     if (activeSport) {
       if (activePlan) {
-        const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id && cart.plan.id === activePlan.id);
+        const idx = newCart.findIndex(
+          (cart) => cart.sports?.id === activeSport.id && cart.plan.id === activePlan.id
+        );
         newCart.splice(idx, 1);
         if (activePlan?.id === plan.id) {
           setActivePlan(undefined);
@@ -618,10 +620,12 @@ function ProductsAndCartBoxForFantasy({
         setActiveSport(sport);
       }
     }
-    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
-      if (itemsFromCart.length > 0) {
-        setActivePlan(itemsFromCart[0].plan);
-      }
+    const itemsFromCart = cartItems.filter(
+      (cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id
+    );
+    if (itemsFromCart.length > 0) {
+      setActivePlan(itemsFromCart[0].plan);
+    }
     changeTempCart(pack, newCart);
   };
 
@@ -635,9 +639,7 @@ function ProductsAndCartBoxForFantasy({
         <div className={styles.sportsTypeContent}>
           {sports.slice(0, 3).map((sport: Sport, index: number) => (
             <div key={index}>
-              <Button
-                className={styles.dropdownBtnWrapper}
-                onClick={() => onChangeItemAt(sport)}>
+              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(sport)}>
                 <div
                   className={`${styles.dropdownBtn} ${
                     styles[
@@ -783,7 +785,9 @@ function ProductsAndCartBoxForSportsCard({
     if (type === NON_UFC_F1) {
       if (activeSport1) {
         if (activePlan1) {
-          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport1.id && cart.plan.id === activePlan1.id);
+          const idx = newCart.findIndex(
+            (cart) => cart.sports?.id === activeSport1.id && cart.plan.id === activePlan1.id
+          );
           newCart.splice(idx, 1);
           if (activePlan1?.id === plan.id) {
             setActivePlan1(undefined);
@@ -815,7 +819,9 @@ function ProductsAndCartBoxForSportsCard({
     } else {
       if (activeSport2) {
         if (activePlan2) {
-          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport2.id && cart.plan.id === activePlan2.id);
+          const idx = newCart.findIndex(
+            (cart) => cart.sports?.id === activeSport2.id && cart.plan.id === activePlan2.id
+          );
           newCart.splice(idx, 1);
           if (activePlan2?.id === plan.id) {
             setActivePlan2(undefined);
@@ -924,7 +930,9 @@ function ProductsAndCartBoxForSportsCard({
           setActiveSport1(sport);
         }
       }
-      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      const itemsFromCart = cartItems.filter(
+        (cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id
+      );
       if (itemsFromCart.length > 0) {
         setActivePlan1(itemsFromCart[0].plan);
       }
@@ -948,7 +956,9 @@ function ProductsAndCartBoxForSportsCard({
         newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
         setActiveSport2(undefined);
       }
-      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      const itemsFromCart = cartItems.filter(
+        (cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id
+      );
       if (itemsFromCart.length > 0) {
         setActivePlan1(itemsFromCart[0].plan);
       }

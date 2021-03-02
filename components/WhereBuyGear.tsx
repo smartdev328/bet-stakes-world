@@ -14,20 +14,40 @@ function WhereBuyGear() {
         <Row>
           <Col span={12} className={styles.company_logo}>
             <a href="http://www.tdsdevelopment.info/">
-              <img src="/images/dailystakes-company.png" alt="DailyStakes Company" width={94} />
+              <img
+                src="/images/dailystakes-company.png"
+                alt="DailyStakes Company"
+                width={84}
+                height={79}
+              />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/fanatics-company.png" alt="DailyStakes Company" width={94} />
+            <img
+              src="/images/fanatics-company.png"
+              alt="DailyStakes Company"
+              width={106}
+              height={37}
+            />
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/fansedge-company.png" alt="DailyStakes Company" width={94} />
+            <img
+              src="/images/fansedge-company.png"
+              alt="DailyStakes Company"
+              width={106}
+              height={52}
+            />
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/sports-company.png" alt="DailyStakes Company" width={94} />
+            <img
+              src="/images/sports-company.png"
+              alt="DailyStakes Company"
+              width={106}
+              height={36}
+            />
           </Col>
         </Row>
       </div>

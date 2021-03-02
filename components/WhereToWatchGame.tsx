@@ -25,7 +25,7 @@ function WhereToWatchGame() {
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.fubo.tv/">
-              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={132} height={43} />
+              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={80} height={26} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -33,15 +33,14 @@ function WhereToWatchGame() {
               <img
                 src="/images/ticketmaster-company.png"
                 alt="TicketMaster Logo"
-                width={160}
-                height={57}
-                style={{ marginLeft: -5 }}
+                width={105}
+                height={25}
               />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/sling-company.png" alt="VividSeats Logo" width={135} height={80} />
+            <img src="/images/sling-company.png" alt="VividSeats Logo" width={80} height={43} />
           </Col>
 
           <Col span={12} className={styles.company_logo}>
@@ -49,8 +48,8 @@ function WhereToWatchGame() {
               <img
                 src="/images/vividseats-company.png"
                 alt="VividSeats Logo"
-                width={125}
-                height={25}
+                width={80}
+                height={16}
               />
             </a>
           </Col>

@@ -535,48 +535,42 @@ function ProductsAndCartBoxForFantasy({
     return a.price - b.price >= 0 ? 1 : -1;
   });
   const [activePlan, setActivePlan] = useState<BillingPlan>();
-  const [activeSports, setActiveSports] = useState<Sport[]>([]);
-
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
-  const setCartFromProps = (cartItems: CartItem[]) => {
-    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    if (itemsFromCart.length > 0) {
-      setActivePlan(itemsFromCart[0].plan);
-      const sports: Sport[] = [];
-      itemsFromCart.forEach((cart) => {
-        if (cart.sports) {
-          sports.push(cart.sports);
-        }
-      });
-      setActiveSports(sports);
-    } else if (activeSports.length > 0 && activePlan) {
-      setActivePlan(undefined);
-      setActiveSports([]);
-    }
-  };
+  const [activeSport, setActiveSport] = useState<Sport>();
 
   const selectBillingPlan = (plan: BillingPlan) => {
-    if (activeSports.length > 0 && activePlan) {
-      return;
-    }
-    if (activePlan?.id === plan.id) {
-      setActivePlan(undefined);
-    } else {
-      const newCart: CartItem[] = [];
-      activeSports.forEach((activeSport) => {
+    const newCart: CartItem[] = [...cartItems];
+    if (activeSport) {
+      if (activePlan) {
+        const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport.id && cart.plan.id === activePlan.id);
+        newCart.splice(idx, 1);
+        if (activePlan?.id === plan.id) {
+          setActivePlan(undefined);
+        } else {
+          newCart.push({
+            sports: activeSport,
+            plan,
+            pack,
+            auto_renewal: false
+          });
+          setActivePlan(plan);
+        }
+      } else {
         newCart.push({
           sports: activeSport,
           plan,
           pack,
           auto_renewal: false
         });
-      });
-      setActivePlan(plan);
-      changeTempCart(pack, newCart);
+        setActivePlan(plan);
+      }
+    } else {
+      if (activePlan?.id === plan.id) {
+        setActivePlan(undefined);
+      } else {
+        setActivePlan(plan);
+      }
     }
+    changeTempCart(pack, newCart);
   };
 
   const SPORTS_INFO = [
@@ -601,28 +595,33 @@ function ProductsAndCartBoxForFantasy({
   ];
 
   const onChangeItemAt = (sport: Sport) => {
-    if (activeSports.length > 0 && activePlan) {
-      return;
+    let newCart: CartItem[] = cartItems.slice();
+    if (activeSport && activePlan) {
+      setActiveSport(sport);
+      setActivePlan(undefined);
     }
-    const active = activeSports.slice();
-    const idx = active.findIndex((sp) => sp.id === sport.id);
-    if (idx < 0) {
-      active.push(sport);
-    } else {
-      active.splice(idx, 1);
-    }
-    setActiveSports(active);
-    const newCart: CartItem[] = [];
-    if (activePlan) {
-      active.forEach((activeSport) => {
+    if (!activeSport) {
+      setActiveSport(sport);
+      if (activePlan) {
         newCart.push({
-          sports: activeSport,
+          sports: sport,
           plan: activePlan,
           pack,
           auto_renewal: false
         });
-      });
+      }
+    } else {
+      if (sport.id === activeSport.id) {
+        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+        setActiveSport(undefined);
+      } else {
+        setActiveSport(sport);
+      }
     }
+    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan(itemsFromCart[0].plan);
+      }
     changeTempCart(pack, newCart);
   };
 
@@ -636,7 +635,9 @@ function ProductsAndCartBoxForFantasy({
         <div className={styles.sportsTypeContent}>
           {sports.slice(0, 3).map((sport: Sport, index: number) => (
             <div key={index}>
-              <Button className={styles.dropdownBtnWrapper} onClick={() => onChangeItemAt(sport)}>
+              <Button
+                className={styles.dropdownBtnWrapper}
+                onClick={() => onChangeItemAt(sport)}>
                 <div
                   className={`${styles.dropdownBtn} ${
                     styles[
@@ -648,7 +649,7 @@ function ProductsAndCartBoxForFantasy({
                   }`}
                   style={{
                     background:
-                      activeSports.findIndex((sp) => sp.id === sport.id) > -1
+                      activeSport?.id === sport.id
                         ? SPORTS_INFO.filter(
                             (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                           )[0]?.background
@@ -758,8 +759,8 @@ function ProductsAndCartBoxForSportsCard({
   });
   const [nonUFCAndF1Sports, setNonUFCandF1sports] = useState<Sport[]>([]);
   const [ufcAndF1Sports, setUFCandF1sports] = useState<Sport[]>([]);
-  const [activeSports1, setActiveSports1] = useState<Sport[]>([]);
-  const [activeSports2, setActiveSports2] = useState<Sport[]>([]);
+  const [activeSport1, setActiveSport1] = useState<Sport>();
+  const [activeSport2, setActiveSport2] = useState<Sport>();
   const [activePlan1, setActivePlan1] = useState<BillingPlan>();
   const [activePlan2, setActivePlan2] = useState<BillingPlan>();
 
@@ -777,107 +778,74 @@ function ProductsAndCartBoxForSportsCard({
     setUFCandF1sports(ufcAndF1Sports1);
   }, [sports]);
 
-  useEffect(() => {
-    setCartFromProps(cartItems);
-  }, [cartItems]);
-
-  const setCartFromProps = (cartItems: CartItem[]) => {
-    const sports1: Sport[] = [];
-    const sports2: Sport[] = [];
-
-    const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id);
-    if (itemsFromCart.length > 0) {
-      let plan1, plan2;
-      itemsFromCart.forEach((cart) => {
-        if (cart.sports?.name === 'UFC' || cart.sports?.name === 'Formula 1') {
-          sports2.push(cart.sports);
-          plan2 = cart.plan;
-        } else {
-          if (cart.sports) {
-            sports1.push(cart.sports);
-            plan1 = cart.plan;
-          }
-        }
-      });
-      if (sports1.length > 0 && plan1) {
-        setActiveSports1(sports1);
-        setActivePlan1(plan1);
-      }
-      if (sports2.length > 0 && plan2) {
-        setActiveSports2(sports2);
-        setActivePlan2(plan2);
-      }
-      if (sports1.length === 0 && activePlan1) {
-        setActiveSports1([]);
-        setActivePlan1(undefined);
-      }
-      if (sports2.length === 0 && activePlan2) {
-        setActiveSports2([]);
-        setActivePlan2(undefined);
-      }
-    } else {
-      if (activePlan1 && activeSports1.length > 0) {
-        setActivePlan1(undefined);
-        setActiveSports1([]);
-      }
-      if (activePlan2 && activeSports2.length > 0) {
-        setActivePlan2(undefined);
-        setActiveSports2([]);
-      }
-    }
-  };
-
   const selectBillingPlan = (plan: BillingPlan, type: string) => {
     const newCart: CartItem[] = [...cartItems];
     if (type === NON_UFC_F1) {
-      if (activeSports1.length > 0 && activePlan1) {
-        return;
-      }
-      const carts: CartItem[] = [];
-      newCart.forEach((cartItem) => {
-        if (cartItem.plan.id !== activePlan1?.id) {
-          carts.push(cartItem);
-        }
-      });
-      if (activePlan1?.id === plan.id) {
-        setActivePlan1(undefined);
-      } else {
-        activeSports1.forEach((activeSport) => {
-          carts.push({
-            sports: activeSport,
+      if (activeSport1) {
+        if (activePlan1) {
+          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport1.id && cart.plan.id === activePlan1.id);
+          newCart.splice(idx, 1);
+          if (activePlan1?.id === plan.id) {
+            setActivePlan1(undefined);
+          } else {
+            newCart.push({
+              sports: activeSport1,
+              plan,
+              pack,
+              auto_renewal: false
+            });
+            setActivePlan1(plan);
+          }
+        } else {
+          newCart.push({
+            sports: activeSport1,
             plan,
             pack,
             auto_renewal: false
           });
-        });
-        setActivePlan1(plan);
+          setActivePlan1(plan);
+        }
+      } else {
+        if (activePlan1?.id === plan.id) {
+          setActivePlan1(undefined);
+        } else {
+          setActivePlan1(plan);
+        }
       }
-      changeTempCart(pack, carts);
     } else {
-      if (activeSports2.length > 0 && activePlan2) {
-        return;
-      }
-      const carts: CartItem[] = [];
-      newCart.forEach((cartItem) => {
-        if (cartItem.plan.id !== activePlan2?.id) {
-          carts.push(cartItem);
-        }
-      });
-      if (activePlan2?.id === plan.id) {
-        setActivePlan2(undefined);
-      } else {
-        activeSports2.forEach((activeSport) => {
-          carts.push({
-            sports: activeSport,
+      if (activeSport2) {
+        if (activePlan2) {
+          const idx = newCart.findIndex((cart) => cart.sports?.id === activeSport2.id && cart.plan.id === activePlan2.id);
+          newCart.splice(idx, 1);
+          if (activePlan2?.id === plan.id) {
+            setActivePlan2(undefined);
+          } else {
+            newCart.push({
+              sports: activeSport2,
+              plan,
+              pack,
+              auto_renewal: false
+            });
+            setActivePlan2(plan);
+          }
+        } else {
+          newCart.push({
+            sports: activeSport2,
             plan,
             pack,
             auto_renewal: false
           });
-        });
-        setActivePlan2(plan);
+          setActivePlan2(plan);
+        }
+      } else {
+        if (activePlan2?.id === plan.id) {
+          setActivePlan2(undefined);
+        } else {
+          setActivePlan2(plan);
+        }
       }
-      changeTempCart(pack, carts);
     }
+    changeTempCart(pack, newCart);
   };
 
   const SPORTS_INFO = [
@@ -934,14 +902,12 @@ function ProductsAndCartBoxForSportsCard({
   const onChangeItemAt = (sport: Sport, type: string) => {
     let newCart: CartItem[] = cartItems.slice();
     if (type === NON_UFC_F1) {
-      if (activeSports1.length > 0 && activePlan1) {
-        return;
+      if (activeSport1 && activePlan1) {
+        setActiveSport1(sport);
+        setActivePlan1(undefined);
       }
-      const active = activeSports1.slice();
-      const idx = active.findIndex((sp) => sp.id === sport.id);
-      if (idx < 0) {
-        active.push(sport);
-        setActiveSports1(active);
+      if (!activeSport1) {
+        setActiveSport1(sport);
         if (activePlan1) {
           newCart.push({
             sports: sport,
@@ -951,20 +917,25 @@ function ProductsAndCartBoxForSportsCard({
           });
         }
       } else {
-        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
-        active.splice(idx, 1);
-        setActiveSports1(active);
+        if (sport.id === activeSport1.id) {
+          newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+          setActiveSport1(undefined);
+        } else {
+          setActiveSport1(sport);
+        }
+      }
+      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan1(itemsFromCart[0].plan);
       }
     }
     if (type === '') {
-      if (activeSports2.length > 0 && activePlan2) {
-        return;
+      if (activeSport2 && activePlan2) {
+        setActiveSport2(sport);
+        setActivePlan2(undefined);
       }
-      const active = activeSports2.slice();
-      const idx = active.findIndex((sp) => sp.id === sport.id);
-      if (idx < 0) {
-        active.push(sport);
-        setActiveSports2(active);
+      if (!activeSport2) {
+        setActiveSport2(sport);
         if (activePlan2) {
           newCart.push({
             sports: sport,
@@ -974,9 +945,12 @@ function ProductsAndCartBoxForSportsCard({
           });
         }
       } else {
-        active.splice(idx, 1);
-        setActiveSports2(active);
         newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+        setActiveSport2(undefined);
+      }
+      const itemsFromCart = cartItems.filter((cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id);
+      if (itemsFromCart.length > 0) {
+        setActivePlan1(itemsFromCart[0].plan);
       }
     }
     changeTempCart(pack, newCart);
@@ -1006,7 +980,7 @@ function ProductsAndCartBoxForSportsCard({
                   }`}
                   style={{
                     background:
-                      activeSports1.findIndex((sp) => sp.id === sport.id) > -1
+                      activeSport1?.id === sport.id
                         ? SPORTS_INFO.filter(
                             (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                           )[0]?.background
@@ -1082,7 +1056,7 @@ function ProductsAndCartBoxForSportsCard({
                     }`}
                     style={{
                       background:
-                        activeSports2.findIndex((sp) => sp.id === sport.id) > -1
+                        activeSport2?.id === sport.id
                           ? SPORTS_INFO.filter(
                               (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                             )[0]?.background

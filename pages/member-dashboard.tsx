@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { useRouter } from 'next/router';
+import ReactMarkdown from 'react-markdown';
 
 import {
   AppLayout,
@@ -201,17 +202,15 @@ function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
-      <p className={styles.little_witty_intro}>Little Witty Intro</p>
       <div className={styles.block_content}>
         <img
           alt="Weekly Pro Tip Image"
-          src="/images/badminton_player.jpg"
+          src={data.photo.url}
           className={styles.weekly_pro_tip_img}
         />
         <div className={styles.weekly_pro_tip_right_panel}>
-          {/* <p className={styles.weekly_pro_tip_intro}>{data.slug}</p> */}
           <h4 className={styles.weekly_description_title}>{data.title}</h4>
-          <p className={styles.weekly_pro_tip_desc}>{data.detail}</p>
+          <ReactMarkdown className={styles.weekly_pro_tip_desc}>{data.detail}</ReactMarkdown>
         </div>
       </div>
     </div>

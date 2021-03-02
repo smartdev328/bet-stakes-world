@@ -554,6 +554,9 @@
   padding: 0;
   margin: 8px 8px;
 }
+.dropdownBtnWrapper:disabled {
+  opacity: 0.8;
+}
 .dropdownBtn {
   width: 138px;
   height: 64px;
@@ -964,14 +967,15 @@
 .closeIconBtn .closeIcon path {
   fill: #ffc700;
 }
-
+.cartBoxItem .cartBoxItemName {
+  flex: 1;
+  text-align: left;
+}
 @media (max-width: 600px) {
   .cartBox {
     padding: 24px 16px;
   }
   .cartBoxItem .cartBoxItemName {
-    flex: 1;
-    text-align: left;
     font-size: 14px;
   }
   .closeIconBtn .closeIcon {

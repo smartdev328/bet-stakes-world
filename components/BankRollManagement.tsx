@@ -1,29 +1,63 @@
-import React from 'react';
-import styles from './BankRollManagement.module.css';
-import { MoneyPocketIcon } from './SvgIcons';
+import { Button } from 'antd';
+import React, { useState } from 'react';
 
-function BankRollManagement() {
+import styles from './BettingFundamentals.module.css';
+import { ListIcon, MinusEncloseIcon, PlusEncloseIcon } from './SvgIcons';
+import { MOCK_BankRoll } from '@constants/index';
+
+type PropsType = {
+  showContentAt: boolean[];
+  toggleDetailsAt: (index: number) => void;
+};
+
+function BankrollManagment({ showContentAt, toggleDetailsAt }: PropsType) {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Bankroll Management System</span>
+        <ListIcon className={styles.sidebarBlockTitleIcon} />
+        <span>Bankroll Management Systems</span>
       </div>
       <div className={styles.sidebarBlockContent}>
-        <p>
-          A unit represents a percentage of your bankroll and should generally represent between 1
-          to 5 percent of your bankroll. Setting a unit percentage for your bankroll is completely
-          at the users discretion. The higher the unit percentage, the more aggressive your
-          bankroll. For example, for a $5,000 starting bankroll, a 1 unit wager would represent
-          $100, i.e. 2% of your bankroll.
-        </p>
-
-        <div className={styles.footer_desc}>
-          TheDailyStakes recommends setting 1 unit as 2% of your bankroll.
-        </div>
+        {MOCK_BankRoll.map((data, index) => (
+          <React.Fragment key={index}>
+            <div className={styles.accordionTitle}>
+              {showContentAt[index] && (
+                <>
+                  <strong>{data.title}</strong>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <MinusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+              {!showContentAt[index] && (
+                <>
+                  <span>{data.title}</span>
+                  <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
+                    <PlusEncloseIcon className={styles.accordionTitleIcon} />
+                  </Button>
+                </>
+              )}
+            </div>
+            {showContentAt[index] && <div className={styles.accordionContent}>{data.content}</div>}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
 }
 
-export default BankRollManagement;
+function BankrollManagmentRender() {
+  const [showContent, setShowContent] = useState<boolean[]>([]);
+  const toggleDetailsAt = (id: number) => {
+    showContent[id] = !showContent[id];
+    setShowContent(showContent.slice());
+  };
+
+  return (
+    <BankrollManagment
+      showContentAt={showContent}
+      toggleDetailsAt={toggleDetailsAt}></BankrollManagment>
+  );
+}
+
+export default BankrollManagmentRender;

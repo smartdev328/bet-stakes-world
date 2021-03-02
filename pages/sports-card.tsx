@@ -12,7 +12,11 @@ import {
   BettingFundamentals,
   CommonSportsBook,
   DashboardHeader,
-  SportEntryActive
+  SportEntryActive,
+  VipAllAccessCard,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear
 } from '@components/index';
 import { AllSportsBtnBgIcon, LockIcon } from '@components/SvgIcons';
 
@@ -126,7 +130,12 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
-              <Col span={18} className={styles.contentMainCol}>
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
+
+              <Col sm={24} md={18} className={styles.contentMainCol}>
                 {SportBetTypes.map((type) => (
                   <ListGames
                     id={type.id}
@@ -137,11 +146,26 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
                     selectedFilterType={filterType}
                   />
                 ))}
+                <div className={styles.laptop_view}>
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <BankRollManagement />
-                <CommonSportsBook />
-                <BettingFundamentals />
+                <div className={styles.mobile_view}>
+                  <VipAllAccessCard />
+                  <DailyFantasyLineups />
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
             </Row>
           </div>

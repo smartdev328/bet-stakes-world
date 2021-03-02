@@ -1,12 +1,12 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 
-import styles from './DailyFantasyLineups.module.css';
+import styles from './VipAllAccessCard.module.css';
 import { MinusEncloseIcon, PlusEncloseIcon, WinnerCupIcon } from './SvgIcons';
-import { MOCK_DailyFantasyLineups } from '@constants/index';
+import { MOCK_VipAllAccessCard } from '@constants/index';
 import SportTile from './SportTile';
 
-function DailyFantasyLineups() {
+function VipAllAccessCard() {
   const [showContent, setShowContent] = useState<boolean[]>([]);
   const toggleDetailsAt = (id: number) => {
     showContent[id] = !showContent[id];
@@ -17,11 +17,11 @@ function DailyFantasyLineups() {
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Daily Fantasy Lineups</span>
+        <span>VIP ALL ACCESS CARD</span>
       </div>
       <p className={styles.date}>Thursday, February 25 2021</p>
       <div className={styles.sidebarBlockContent}>
-        {MOCK_DailyFantasyLineups.map((data, index) => (
+        {MOCK_VipAllAccessCard.map((data, index) => (
           <React.Fragment key={index}>
             <div className={styles.accordionTitle}>
               <div>
@@ -45,12 +45,7 @@ function DailyFantasyLineups() {
                   {data.content.map((content) => (
                     <li className={styles.fantasyLineupContent} key={content.label}>
                       <div>
-                        <span className={styles.fantasyLineupContentlabel}>{content.label}</span>
-                        <ul className={styles.fantasyLineupContentFeatures}>
-                          {content.features.map((feature) => (
-                            <li key={feature}>{feature}</li>
-                          ))}
-                        </ul>
+                        <span className={styles.label}>{content.label}</span>
                       </div>
                     </li>
                   ))}
@@ -64,4 +59,4 @@ function DailyFantasyLineups() {
   );
 }
 
-export default DailyFantasyLineups;
+export default VipAllAccessCard;

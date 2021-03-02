@@ -12,7 +12,14 @@ import {
   BannerSportsAndMatches,
   DashboardHeader,
   SportEntryActive,
-  SportEntry
+  SportEntry,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear,
+  VipAllAccessCard,
+  CommonSportsBook,
+  BankRollManagement,
+  BettingFundamentals
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
@@ -472,8 +479,12 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         <div className={styles.container}>
           <TopSection profileName={profileName} initialName={initialName} />
           <Row className={styles.nowrapRow}>
-            <Col span={18} className={styles.current_packages_container}>
+            <Col sm={24} md={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
               <div className={styles.earliest_games_col}>
                 <EarliestGames sports={sports} subscriptions={subscriptions} />
               </div>
@@ -484,6 +495,26 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
 
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />
+              </div>
+              <div className={styles.laptop_view}>
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
+            </Col>
+            <Col md={6} className={styles.contentSideCol}>
+              <div className={styles.mobile_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
               </div>
             </Col>
           </Row>

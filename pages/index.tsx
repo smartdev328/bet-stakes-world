@@ -382,7 +382,7 @@ function BetOnSports() {
     },
     {
       name: 'NBA',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NBA',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NBA',
       image: <NBA_SVG className={styles.sports_card_image} />,
       style: styles.nba_box,
       value: SpoortCardName.nba,
@@ -391,7 +391,7 @@ function BetOnSports() {
     },
     {
       name: 'NFL',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NFL',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NFL',
       image: <NFL_SVG className={styles.sports_card_image} />,
       style: styles.nfl_box,
       value: SpoortCardName.nfl,
@@ -400,7 +400,7 @@ function BetOnSports() {
     },
     {
       name: 'MLB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS MLB',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR MLB',
       image: <MLB_SVG className={styles.sports_card_image} />,
       style: styles.mlb_box,
       value: SpoortCardName.mlb,
@@ -409,7 +409,7 @@ function BetOnSports() {
     },
     {
       name: 'SOCCER',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS SOCCER',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  SOCCER',
       image: <SOCCER_SVG className={styles.sports_card_image} />,
       style: styles.soccer_box,
       value: SpoortCardName.soccer,
@@ -418,7 +418,7 @@ function BetOnSports() {
     },
     {
       name: 'FORMULA 1',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS FORMULA 1',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR FORMULA 1',
       image: <F1_SVG className={styles.sports_card_image} />,
       style: styles.f1_box,
       value: SpoortCardName.f1,
@@ -427,7 +427,7 @@ function BetOnSports() {
     },
     {
       name: 'UFC',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS UFC',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  UFC',
       image: <UFC_SVG className={styles.sports_card_image} />,
       style: styles.ufc_box,
       value: SpoortCardName.ufc,
@@ -436,7 +436,7 @@ function BetOnSports() {
     },
     {
       name: 'NCAAB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAB',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NCAAB',
       image: <NBA_SVG className={styles.sports_card_image} />,
       style: styles.nba_box,
       value: SpoortCardName.ncaab,
@@ -445,7 +445,7 @@ function BetOnSports() {
     },
     {
       name: 'NCAAF',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS NCAAF',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NCAAF',
       image: <NFL_SVG className={styles.sports_card_image} />,
       style: styles.nfl_box,
       value: SpoortCardName.ncaaf,
@@ -492,8 +492,8 @@ function BetOnSports() {
         Bet on any or all of these <strong>sports</strong>
       </div>
       <div className={styles.bet_on_sports_desc}>
-        <p>Select the sports you would like to bet on and continue to checkout</p>
-        <Button className={styles.checkout_btn}>Continue to checkout</Button>
+        <p>Select the sport(s) you would like to bet and continue to the shop page</p>
+        <Button className={styles.checkout_btn}>Continue to SHOP </Button>
       </div>
 
       <div className={styles.mobile_column_display}>

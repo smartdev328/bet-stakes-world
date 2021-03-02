@@ -382,7 +382,7 @@ function BetOnSports() {
     },
     {
       name: 'NBA',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NBA',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR NBA',
       image: <NBA_SVG className={styles.sports_card_image} />,
       style: styles.nba_box,
       value: SpoortCardName.nba,
@@ -391,7 +391,7 @@ function BetOnSports() {
     },
     {
       name: 'NFL',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NFL',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR NFL',
       image: <NFL_SVG className={styles.sports_card_image} />,
       style: styles.nfl_box,
       value: SpoortCardName.nfl,
@@ -409,7 +409,7 @@ function BetOnSports() {
     },
     {
       name: 'SOCCER',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  SOCCER',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR SOCCER',
       image: <SOCCER_SVG className={styles.sports_card_image} />,
       style: styles.soccer_box,
       value: SpoortCardName.soccer,
@@ -427,7 +427,7 @@ function BetOnSports() {
     },
     {
       name: 'UFC',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  UFC',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR UFC',
       image: <UFC_SVG className={styles.sports_card_image} />,
       style: styles.ufc_box,
       value: SpoortCardName.ufc,
@@ -436,7 +436,7 @@ function BetOnSports() {
     },
     {
       name: 'NCAAB',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NCAAB',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR NCAAB',
       image: <NBA_SVG className={styles.sports_card_image} />,
       style: styles.nba_box,
       value: SpoortCardName.ncaab,
@@ -445,7 +445,7 @@ function BetOnSports() {
     },
     {
       name: 'NCAAF',
-      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR  NCAAF',
+      description: 'ACCESS TO ALL PLAYS & PARLAYS FOR NCAAF',
       image: <NFL_SVG className={styles.sports_card_image} />,
       style: styles.nfl_box,
       value: SpoortCardName.ncaaf,
@@ -493,7 +493,7 @@ function BetOnSports() {
       </div>
       <div className={styles.bet_on_sports_desc}>
         <p>Select the sport(s) you would like to bet and continue to the shop page</p>
-        <Button className={styles.checkout_btn}>Continue to SHOP </Button>
+        <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
       </div>
 
       <div className={styles.mobile_column_display}>

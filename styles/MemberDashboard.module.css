@@ -40,11 +40,9 @@
 }
 
 .little_witty_intro {
-  color: white !important;
   background-color: #000000;
-  padding: 10px 0px 10px 10px;
+  height: 40px;
   margin: 10px 0px 5px 0px;
-  font-weight: 800;
 }
 
 .weekly_description_title {

@@ -43,7 +43,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 </Col>
               </Row>
               <Row className={styles.row}>
-                <Col lg={10} md={24}>
+                <Col lg={10} md={24} className={styles.aboutUs_headings_col}>
                   <p className={styles.aboutUs_headings}>The DS mission</p>
                 </Col>
                 <Col lg={14} md={24}>
@@ -155,13 +155,13 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                     Sportbooks formats included
                   </h5>
                   <div className={styles.sport_car_container}>
-                    <img src="/images/about_draftkings.png" className={styles.coverage_images} />
-                    <img src="/images/about_fanduel.png" className={styles.coverage_images} />
-                    <img src="/images/about_daily.png" className={styles.coverage_images} />
+                    <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
+                    <img src="/images/about_fanduel.png" className={styles.sportsbook_images} />
+                    <img src="/images/about_daily.png" className={styles.sportsbook_images} />
                   </div>
 
                   <div className={styles.button_div}>
-                    <h5 className={styles.dsCoverage_subheadings}>
+                    <h5 className={styles.dsCoverage_subheadings_interesting}>
                       Interested in winning with us?
                     </h5>
                     <Button className={styles.checkout_btn}>Continue to Shop</Button>

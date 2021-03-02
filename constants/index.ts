@@ -390,37 +390,25 @@ export const MOCK_FantasyFundaments = [
 export const MOCK_BankRoll = [
   {
     id: 1,
-    title: 'Tournament',
+    title: 'What is a unit? ',
     content:
       'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
   },
   {
     id: 2,
-    title: 'Beat the Score',
+    title: 'What should my unit % be?',
     content:
       'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
   },
   {
     id: 3,
-    title: 'Multipliers',
+    title: 'TheDailyStakes Recommendation',
     content:
       'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
   },
   {
     id: 4,
-    title: 'Head to Head',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
-  },
-  {
-    id: 5,
-    title: '3-100 Players',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
-  },
-  {
-    id: 6,
-    title: '50/50s',
+    title: 'Other Bankroll Systems',
     content:
       'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
   }

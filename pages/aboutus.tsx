@@ -152,7 +152,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                   </div>
 
                   <h5 className={styles.dsCoverage_subheadings_sportsbook}>
-                    Sportbooks formats included
+                    SPORTSBOOK FORMATS INCLUDED
                   </h5>
                   <div className={styles.sport_car_container}>
                     <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
@@ -162,7 +162,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
                   <div className={styles.button_div}>
                     <h5 className={styles.dsCoverage_subheadings_interesting}>
-                      Interested in winning with us?
+                      INTERESTED IN WINNING WITH US?
                     </h5>
                     <Button className={styles.checkout_btn}>Continue to Shop</Button>
                   </div>

@@ -206,6 +206,7 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 140%;
+  margin-top: 0.5em;
 }
 
 .dsCoverage_subheadings_interesting {
@@ -218,6 +219,7 @@
   line-height: 140%;
   white-space: pre-wrap;
   width: 300px;
+  margin-top: 0.5em;
 }
 
 .dsCoverage_subheadings_sportsbook {
@@ -228,6 +230,7 @@
   font-weight: 600;
   font-size: 28px;
   line-height: 140%;
+  margin-top: 0.5em;
 }
 .coverage_images {
   padding: 2px;
@@ -244,16 +247,16 @@
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 25px;
+  /* line-height: 25px; */
   text-align: center;
   color: #1a1a1a;
   background: #ffc700;
   margin-left: 8px;
   margin-right: 50px;
-
+  margin-top: 20px;
   padding: 15.5px 24px;
   border: none;
-  height: 70px;
+  height: 80px;
   white-space: pre-wrap;
   width: 160px;
 }

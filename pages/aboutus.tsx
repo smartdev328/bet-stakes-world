@@ -25,9 +25,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
             </div>
             <div className={styles.aboutus_container}>
               <Row className={styles.row}>
-                <Col lg={10} md={24}>
+                <Col lg={10} md={24} className={styles.dsimage_container}>
                   <img
-                    src="/images/dailyStakes.svg"
+                    src="/images/about-us-dailystake.svg"
                     alt="The Daily Stakes"
                     className={styles.dailystake_image}
                   />

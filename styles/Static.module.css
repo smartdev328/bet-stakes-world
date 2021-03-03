@@ -103,7 +103,7 @@
   font-weight: 800;
   font-size: 48px;
   line-height: 117.9%;
-  text-align: center;
+  text-align: left;
 }
 
 .ourPurpose_subheadings {
@@ -132,8 +132,8 @@
 }
 
 .aboutus_container {
-  padding-left: 40px;
-  padding-right: 110px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 .dsMission_details {
   text-align: left;
@@ -186,9 +186,16 @@
   padding-bottom: 20px;
 }
 
+.dsimage_container {
+  align-items: center;
+  display: flex;
+}
+
 .dailystake_image {
   height: 300px;
-  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
 }
 
 .dsCoverage_subheadings {
@@ -261,7 +268,6 @@
   }
 
   .dailystake_image {
-    padding-left: 50px;
     height: 200px;
     width: 100%;
   }

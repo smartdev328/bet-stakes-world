@@ -22,7 +22,7 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
-import { SportBetTypes } from '@constants/';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -249,7 +249,8 @@ function ListGames({
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
+    const vipSubscriptions = subscriptions.filter(subscription => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1);
+    SportsAPIs.getSportEntries(id, vipSubscriptions, selectedSport !== -1 ? selectedSport : undefined)
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {

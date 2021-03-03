@@ -18,6 +18,7 @@ import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
 import moment from 'moment-timezone';
+import { PACKAGE_NAMES } from '@constants/';
 
 const Button = dynamic(() => import('antd/lib/button'));
 
@@ -65,7 +66,7 @@ function SubMenu({
 
   const hasPackage = (packageName: string) => {
     return subscriptions.filter((subscription: UserSubscription) => {
-      return subscription.plan.name.includes(packageName);
+      return subscription.plan.name.toUpperCase().includes(packageName);
     }).length;
   };
 
@@ -91,7 +92,7 @@ function SubMenu({
               </Link>
             </div>
             <div className={styles.submenu_item_for_pane}>
-              {(hasPackage('Sport') || subscriptionStatus === 'visitor') && (
+              {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
                 <Link href="/sports-card">
                   <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
@@ -101,7 +102,7 @@ function SubMenu({
               )}
             </div>
             <div className={styles.submenu_item}>
-              {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
+              {(hasPackage(PACKAGE_NAMES.VIP_ALL_ACCESS) || subscriptionStatus === 'visitor') && (
                 <Link href="/vip-all-access-card">
                   <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
@@ -111,7 +112,7 @@ function SubMenu({
               )}
             </div>
             <div className={styles.submenu_item_for_pane}>
-              {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
+              {(hasPackage(PACKAGE_NAMES.FANTASY) || subscriptionStatus === 'visitor') && (
                 <Link href="/fantasy-daily-lineups">
                   <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
@@ -154,7 +155,7 @@ function SubMenu({
                 </Link>
               </div>
               <div className={styles.submenu_item_for_pane}>
-                {(hasPackage('Sports') || subscriptionStatus === 'visitor') && (
+                {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
                   <Link href="/sports-card">
                     <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                       {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
@@ -164,7 +165,7 @@ function SubMenu({
                 )}
               </div>
               <div className={styles.submenu_item}>
-                {(hasPackage('VIP') || subscriptionStatus === 'visitor') && (
+                {(hasPackage(PACKAGE_NAMES.VIP_ALL_ACCESS) || subscriptionStatus === 'visitor') && (
                   <Link href="/vip-all-access-card">
                     <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                       {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
@@ -175,7 +176,7 @@ function SubMenu({
               </div>
 
               <div className={styles.submenu_item_for_pane}>
-                {(hasPackage('Fantasy') || subscriptionStatus === 'visitor') && (
+                {(hasPackage(PACKAGE_NAMES.FANTASY) || subscriptionStatus === 'visitor') && (
                   <Link href="/fantasy-daily-lineups">
                     <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                       {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}

@@ -201,7 +201,6 @@ function TopSection({
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
-    console.log('-- unlockedItems:', unlockedItems);
     const selectedStatus = sports.map((sport: Sport) => {
       const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
       if (unlockedItemIndex > -1) {
@@ -300,7 +299,8 @@ function ListGames({
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
+    const sportSubscriptions = subscriptions.filter(subscription => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1);
+    SportsAPIs.getSportEntries(id, sportSubscriptions, selectedSport !== -1 ? selectedSport : undefined)
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {

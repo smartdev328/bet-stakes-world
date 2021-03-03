@@ -20,25 +20,27 @@ export function cartReducer(state = initialState, action: CartStateAction) {
     case HYDRATE: {
       return { ...state, ...action.payload };
     }
-    case LOAD_CART:
+    case LOAD_CART: {
       const cartItems = localStorage.getItem('cart_items') || '[]';
       return {
         ...state,
         ...{ items: JSON.parse(cartItems) }
-      }
-    case UPDATE_CART:
+      };
+    }
+    case UPDATE_CART: {
       localStorage.setItem('cart_items', JSON.stringify(action.payload));
       return {
         ...state,
         ...{ items: action.payload }
       };
-    case RESET_CART:
+    }
+    case RESET_CART: {
       localStorage.setItem('cart_items', JSON.stringify([]));
       return {
         ...state,
         ...{ items: [] }
       };
-
+    }
     default:
       return state;
   }

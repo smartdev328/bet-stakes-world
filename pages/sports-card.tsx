@@ -345,8 +345,12 @@ type UnlockItemModalPropsType = {
 };
 
 function UnLockItemModal({ sport, closeModal, packages }: UnlockItemModalPropsType) {
-  const sportCardPack = packages.filter((pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1)[0];
-  const vipAllAccessPack = packages.filter((pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1)[0];
+  const sportCardPack = packages.filter(
+    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1
+  )[0];
+  const vipAllAccessPack = packages.filter(
+    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
+  )[0];
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [selectedPackType, setSelectedPackType] = useState<BillingPlan>(
     sportCardPack.billing_plans[0]

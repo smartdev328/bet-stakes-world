@@ -243,7 +243,9 @@ function EarliestGames({
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
-    const nonFantasySubscriptions = subscriptions.filter(subscription => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) < 0);
+    const nonFantasySubscriptions = subscriptions.filter(
+      (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) < 0
+    );
     SportsAPIs.getTodaySportEntries(
       DashboardSportBetTypes[selectedBetType].id,
       nonFantasySubscriptions,

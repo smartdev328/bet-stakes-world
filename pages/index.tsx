@@ -89,31 +89,41 @@ function HeroBanner() {
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup"><Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button></Link>
+                  <Link href="/signup">
+                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                  </Link>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup"><Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button></Link>
+                  <Link href="/signup">
+                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                  </Link>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup"><Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button></Link>
+                  <Link href="/signup">
+                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                  </Link>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup"><Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button></Link>
+                  <Link href="/signup">
+                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                  </Link>
                 </div>
               </div>
               <div>
                 <div className={styles.carousel_slide}>
                   <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup"><Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button></Link>
+                  <Link href="/signup">
+                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                  </Link>
                 </div>
               </div>
             </Carousel>

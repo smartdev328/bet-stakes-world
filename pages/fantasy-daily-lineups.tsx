@@ -94,7 +94,9 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
         items.push(subscription.sports[0]);
       }
     });
-    items.sort((a, b) => { return a.id > b.id ? 1 : -1; });
+    items.sort((a, b) => {
+      return a.id > b.id ? 1 : -1;
+    });
 
     if (querySport) {
       setSelectedSport(querySport as string);

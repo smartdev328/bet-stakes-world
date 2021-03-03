@@ -299,8 +299,14 @@ function ListGames({
 
   useEffect(() => {
     setLoading(true);
-    const sportSubscriptions = subscriptions.filter(subscription => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1);
-    SportsAPIs.getSportEntries(id, sportSubscriptions, selectedSport !== -1 ? selectedSport : undefined)
+    const sportSubscriptions = subscriptions.filter(
+      (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1
+    );
+    SportsAPIs.getSportEntries(
+      id,
+      sportSubscriptions,
+      selectedSport !== -1 ? selectedSport : undefined
+    )
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {

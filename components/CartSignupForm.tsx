@@ -13,7 +13,12 @@ type CartRegistration = {
   signupFormChanged: (_: CreateUserType, _valid: boolean) => void;
 };
 
-export default function CartRegistration({ showLoginForm, userProfile, onCartLogin, signupFormChanged }: CartRegistration) {
+export default function CartRegistration({
+  showLoginForm,
+  userProfile,
+  onCartLogin,
+  signupFormChanged
+}: CartRegistration) {
   const [formData, setFormData] = useState<CreateUserType>({
     username: undefined,
     first_name: undefined,
@@ -128,16 +133,16 @@ export default function CartRegistration({ showLoginForm, userProfile, onCartLog
       {!showLoginForm && (
         <>
           <h2 className={styles.cartSignupTitle}>Create an Account</h2>
-          <p className={styles.cartSignupDesc}>In order to access your Member Dashboard where you can access your membership picks</p>
+          <p className={styles.cartSignupDesc}>
+            In order to access your Member Dashboard where you can access your membership picks
+          </p>
           <Row align={'middle'} className={styles.register_row}>
             <span>Returning Customer?&nbsp;&nbsp;</span>
             <a onClick={onCartLogin}>Click here to login</a>
           </Row>
         </>
       )}
-      {showLoginForm && (
-        <h2 className={styles.cartSignupTitle}>Billing Info</h2>
-      )}
+      {showLoginForm && <h2 className={styles.cartSignupTitle}>Billing Info</h2>}
       <Row>
         <Col span={24} className={styles.formGroup}>
           <label>User Name*</label>

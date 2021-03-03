@@ -10,7 +10,6 @@ import NumberFormat from 'react-number-format';
 import {
   AppLayout,
   BannerSportsAndMatches,
-  CartLoginForm,
   CartSignupForm
 } from '@components/index';
 import styles from '@styles/Cart.module.css';
@@ -21,7 +20,7 @@ import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
 import { MinusIcon } from '@components/SvgIcons';
 import CheckoutAPIs from '@apis/checkout.apis';
-import { CreateUserType, LoginUserType, UserProfile } from '@type/Users';
+import { CreateUserType, UserProfile } from '@type/Users';
 import { PACKAGE_NAMES } from '@constants/';
 
 function HeroBanner() {
@@ -346,7 +345,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       setIsTryingLogin(true);
       dispatch({ type: 'OPEN_LOGIN_MODAL' });
     }
-  }
+  };
 
   return (
     <>

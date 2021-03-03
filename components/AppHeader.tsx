@@ -356,9 +356,11 @@ export default function AppHeader({
         <Col span={7} className={styles.headerRightCol}>
           {!token && (
             <div className={styles.ctaBtns}>
-              <Button type="primary" className={styles.subscribeBtn}>
-                Subscribe Now
-              </Button>
+              <Link href="/signup">
+                <Button type="primary" className={styles.subscribeBtn}>
+                  Subscribe Now
+                </Button>
+              </Link>
               <Button
                 type="ghost"
                 icon={<IdentityIcon className={styles.user_icon} />}

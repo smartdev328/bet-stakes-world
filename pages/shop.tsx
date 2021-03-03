@@ -773,7 +773,7 @@ function ProductsAndCartBoxForSportsCard({
     const nonUFCandF1Sports1: Sport[] = [];
     const ufcAndF1Sports1: Sport[] = [];
     sports.forEach((sport) => {
-      if (sport.name === 'UFC' || sport.name === 'Formula 1') {
+      if (sport.name === 'UFC' || sport.name === 'FORMULA 1') {
         ufcAndF1Sports1.push(sport);
       } else {
         nonUFCandF1Sports1.push(sport);

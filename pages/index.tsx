@@ -500,7 +500,7 @@ function BetOnSports() {
         <Button
           className={styles.mobile_display_buttons}
           onClick={() => setSportsDataForMobile(sportsData.slice(0, 1))}>
-          VIP ALL ACCESS
+          VIP ALL ACCESS CARD
         </Button>
         <Button
           className={styles.mobile_display_buttons}
@@ -510,7 +510,7 @@ function BetOnSports() {
         <Button
           className={styles.mobile_display_buttons}
           onClick={() => setSportsDataForMobile(sportsData.slice(9, 13))}>
-          FANTASY SPORTS
+          DAILY FANTASY CARD
         </Button>
         <div>
           <div>
@@ -598,7 +598,7 @@ function BetOnSports() {
 
       {/* older code of sports is below */}
 
-      <Button className={styles.mobile_checkout_btn}>Continue to checkout</Button>
+      <Button className={styles.mobile_checkout_btn}>Continue to SHOP page</Button>
     </div>
   );
 }

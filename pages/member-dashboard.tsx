@@ -95,11 +95,11 @@ function CurrentPackages({
       sportsCardPack = pack.id;
     }
   });
-  const goToPackage = (plan: BillingPlan) => {
+  const goToPackage = (plan: BillingPlan, sport: Sport) => {
     if (plan.package === vipAllAccessPack) {
       router.push('/vip-all-access-card');
     } else if (plan.package === fantasyPack) {
-      router.push('/fantasy-daily-lineups');
+      router.push(`/fantasy-daily-lineups?sport=${sport.name}`);
     } else if (plan.package === sportsCardPack) {
       router.push('/sports-card');
     }
@@ -169,7 +169,7 @@ function CurrentPackages({
               {subscription.is_active && (
                 <Button
                   onClick={() => {
-                    goToPackage(subscription.plan);
+                    goToPackage(subscription.plan, subscription.sports[0]);
                   }}
                   className={styles.cta_btn}>
                   View Picks
@@ -243,9 +243,10 @@ function EarliestGames({
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
+    const nonFantasySubscriptions = subscriptions.filter(subscription => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) < 0);
     SportsAPIs.getTodaySportEntries(
       DashboardSportBetTypes[selectedBetType].id,
-      subscriptions,
+      nonFantasySubscriptions,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
       .then((res) => res.json())

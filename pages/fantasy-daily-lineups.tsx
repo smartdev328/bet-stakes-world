@@ -6,6 +6,7 @@ import { Row, Button, Col, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import NumberFormat from 'react-number-format';
+import { useRouter } from 'next/router';
 
 import {
   AppLayout,
@@ -83,6 +84,9 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   const [unlockedSports, setUnlockedSports] = useState<Sport[]>([]);
   const [lineupSalary, setLineupSalary] = useState<number>(0);
 
+  const router = useRouter();
+  const { sport: querySport } = router.query;
+
   useEffect(() => {
     const items: Sport[] = [];
     subscriptions.forEach((subscription) => {
@@ -90,6 +94,13 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
         items.push(subscription.sports[0]);
       }
     });
+    items.sort((a, b) => { return a.id > b.id ? 1 : -1; });
+
+    if (querySport) {
+      setSelectedSport(querySport as string);
+    } else if (items.length > 0) {
+      setSelectedSport(items[0].name);
+    }
     setUnlockedSports(items);
   }, [subscriptions]);
 

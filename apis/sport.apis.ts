@@ -3,7 +3,7 @@ import { UserSubscription } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
 export function getSports() {
-  return fetch(`${API_BASE_URL}/sports`, {
+  return fetch(`${API_BASE_URL}/sports?_sort=id:ASC`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

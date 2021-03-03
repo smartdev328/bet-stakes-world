@@ -501,12 +501,13 @@ li .square_icon {
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
-  font-size: 43.9518px;
+  font-size: 35px;
   line-height: 184.4%;
   text-align: center;
   text-transform: uppercase;
   color: #000000;
   margin-top: 1em;
+  padding-bottom: 8px;
 }
 .deal_circle {
   position: absolute;
@@ -514,6 +515,45 @@ li .square_icon {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 135%;
+}
+
+.protection_div {
+  display: flex;
+}
+
+.protection_heading {
+  text-transform: uppercase;
+
+  font-family: Saira;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 184.4%;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.protection_details {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 184.4%;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.protection_image_div {
+  position: absolute;
+  top: -250;
+  /* left: 0; */
 }
 
 @media (max-width: 1400px) and (min-width: 1241px) {

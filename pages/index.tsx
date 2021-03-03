@@ -168,6 +168,7 @@ function MembershipOfferings() {
           </div>
         </div>
         <div className={`${styles.plan} ${styles.main_plan}`}>
+          <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -201,7 +202,19 @@ function MembershipOfferings() {
               </Button>
             </div>
           </div>
-          <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
+          <div className={styles.protection_div}>
+            <div className={styles.protection_image_div}>
+              <img src="/images/ds-protection.png" width={250} height={255} />
+            </div>
+
+            <div>
+              <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
+              <p className={styles.protection_details}>
+                IF over 50% of the plays on theCard are losses for a given day, the next day’s picks
+                is automatically FREE.
+              </p>
+            </div>
+          </div>
         </div>
         <div className={styles.plan}>
           <div className={styles.plan_content}>

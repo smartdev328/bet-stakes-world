@@ -86,11 +86,11 @@ function CurrentPackages({
 
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
-    if (pack.name.indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipAllAccessPack = pack.id;
-    } else if (pack.name.indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
       fantasyPack = pack.id;
-    } else if (pack.name.indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCardPack = pack.id;
     }
   });
@@ -109,11 +109,11 @@ function CurrentPackages({
       sportSubscription: UserSubscription[] = [],
       fantasySubscription: UserSubscription[] = [];
     subscriptions.forEach((subscription: UserSubscription) => {
-      if (subscription.plan.name.indexOf('VIP') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
         vipSubscription.push(subscription);
-      } else if (subscription.plan.name.indexOf('Sports Card') > -1) {
+      } else if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
         sportSubscription.push(subscription);
-      } else {
+      } else if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
         fantasySubscription.push(subscription);
       }
     });

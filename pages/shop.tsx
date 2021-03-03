@@ -24,7 +24,7 @@ import PackageAPIs from '@apis/package.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { Sport } from '@type/Sports';
 import { ReduxState } from '@redux/reducers';
-import { FAQsARR, FAQsDesc } from '@constants/index';
+import { FAQsARR, FAQsDesc, PACKAGE_NAMES } from '@constants/';
 
 type ProductsAndCartBoxProps = {
   sports: Sport[];
@@ -89,7 +89,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
 
   const changeTempCart = (pack: Package, items: CartItem[]) => {
     const newItems = tempCartItems.filter((item) => item.plan.package !== pack.id);
-    if (pack.name.indexOf('VIP All Access') > -1) {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       items.forEach((item) => {
         newItems.push(item);
       });
@@ -111,7 +111,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
       return;
     }
     const newItems = cartItems.filter((item) => item.plan.package !== pack.id);
-    if (pack.name.indexOf('VIP All Access') > -1) {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       items.forEach((item) => {
         newItems.push(item);
       });
@@ -135,6 +135,18 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
     dispatch({ type: 'UPDATE_CART', payload: items });
     setTempCartItems(items);
   };
+  let vipAllAccessPack: Package | undefined = undefined,
+    fantasyPack: Package | undefined = undefined,
+    sportsCardPack: Package | undefined = undefined;
+  packages?.forEach((pack) => {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+      vipAllAccessPack = pack;
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+      fantasyPack = pack;
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+      sportsCardPack = pack;
+    }
+  });
 
   return (
     <>
@@ -163,14 +175,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
               <IntroForSportsCard />
-              {packages && (
+              {sportsCardPack && (
                 <ProductsAndCartBoxForSportsCard
                   sports={sports}
                   cartItems={tempCartItems}
                   addToCart={addToCart}
                   changeTempCart={changeTempCart}
                   updateCart={updateCart}
-                  pack={packages.filter((pack) => pack.name === 'Sports Card')[0]}
+                  pack={sportsCardPack}
                 />
               )}
             </div>
@@ -184,14 +196,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
-              {packages && (
+              {vipAllAccessPack && (
                 <ProductsAndCartBox
                   sports={sports}
                   cartItems={tempCartItems}
                   addToCart={addToCart}
                   changeTempCart={changeTempCart}
                   updateCart={updateCart}
-                  pack={packages.filter((pack) => pack.name === 'VIP All Access')[0]}
+                  pack={vipAllAccessPack}
                 />
               )}
             </div>
@@ -205,14 +217,14 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
-              {packages && (
+              {fantasyPack && (
                 <ProductsAndCartBoxForFantasy
                   sports={sports}
                   cartItems={tempCartItems}
                   changeTempCart={changeTempCart}
                   addToCart={addToCart}
                   updateCart={updateCart}
-                  pack={packages.filter((pack) => pack.name === 'Fantasy')[0]}
+                  pack={fantasyPack}
                 />
               )}
             </div>
@@ -408,9 +420,6 @@ function ProductsAndCartBox({
   changeTempCart,
   updateCart
 }: ProductsAndCartBoxProps) {
-  pack.billing_plans.sort(function (a, b) {
-    return a.price - b.price >= 0 ? 1 : -1;
-  });
   const [activePlan, setActivePlan] = useState<BillingPlan>();
 
   useEffect(() => {
@@ -531,9 +540,6 @@ function ProductsAndCartBoxForFantasy({
   changeTempCart,
   updateCart
 }: ProductsAndCartBoxProps) {
-  pack.billing_plans.sort(function (a, b) {
-    return a.price - b.price >= 0 ? 1 : -1;
-  });
   const [activePlan, setActivePlan] = useState<BillingPlan>();
   const [activeSport, setActiveSport] = useState<Sport>();
 
@@ -756,9 +762,6 @@ function ProductsAndCartBoxForSportsCard({
   changeTempCart,
   updateCart
 }: ProductsAndCartBoxProps) {
-  pack.billing_plans.sort(function (a, b) {
-    return a.price - b.price >= 0 ? 1 : -1;
-  });
   const [nonUFCAndF1Sports, setNonUFCandF1sports] = useState<Sport[]>([]);
   const [ufcAndF1Sports, setUFCandF1sports] = useState<Sport[]>([]);
   const [activeSport1, setActiveSport1] = useState<Sport>();
@@ -1147,9 +1150,9 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
     fantasyCartItems: CartItem[] = [];
   cartItems.forEach((item: CartItem) => {
     totalPrice += item.plan.price;
-    if (item.plan.name.indexOf('VIP') > -1) {
+    if (item.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipCartItems.push(item);
-    } else if (item.plan.name.indexOf('Sports Card') > -1) {
+    } else if (item.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCartItems.push(item);
     } else {
       fantasyCartItems.push(item);

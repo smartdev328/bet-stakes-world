@@ -9,6 +9,7 @@ import { CartItem } from '@type/Cart';
 
 import styles from './CartDrawer.module.css';
 import { CloseIcon } from './SvgIcons';
+import { PACKAGE_NAMES } from '@constants/';
 
 function PlanDropdown({
   pack,
@@ -116,7 +117,7 @@ export default function CartDrawer({
                   <div className={styles.cartItemInfo}>
                     <span className={styles.cartItemName}>{item.pack.name}</span>
                     <span className={styles.cartItemDesc}>
-                      {item.pack.name.indexOf('VIP All Access') > -1
+                      {item.pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
                         ? 'All Sports'
                         : item.sports?.name}
                     </span>

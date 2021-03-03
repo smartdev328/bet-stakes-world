@@ -415,7 +415,7 @@ export const MOCK_BankRoll = [
 ];
 
 export const PACKAGE_NAMES = {
-  VIP_ALL_ACCESS: 'VIP All Access',
-  SPORTS_CARD: 'Sports Card',
-  FANTASY: 'Fantasy'
+  VIP_ALL_ACCESS: 'VIP',
+  SPORTS_CARD: 'SPORTS CARD',
+  FANTASY: 'FANTASY'
 };

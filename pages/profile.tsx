@@ -26,7 +26,7 @@ import { PageProps, PromiseResponse } from '@type/Main';
 import UsersAPIs from '@apis/user.apis';
 import PackageApis from '@apis/package.apis';
 import subscriptionsApis from '@apis/subscriptions.apis';
-import { CREDIT_COUNTRIES } from '@constants/';
+import { CREDIT_COUNTRIES, PACKAGE_NAMES } from '@constants/';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 
@@ -674,11 +674,11 @@ function CurrentPackages({
 }) {
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
-    if (pack.name.indexOf('VIP All Access') > -1) {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipAllAccessPack = pack.id;
-    } else if (pack.name.indexOf('Fantasy') > -1) {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
       fantasyPack = pack.id;
-    } else {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCardPack = pack.id;
     }
   });

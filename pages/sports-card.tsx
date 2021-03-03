@@ -28,7 +28,7 @@ import SportsAPIs from '@apis/sport.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
 import { UserSubscription } from '@type/Users';
-import { SportBetTypes } from '@constants/';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -90,7 +90,7 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
   useEffect(() => {
     const items: number[] = [];
     subscriptions.forEach((subscription) => {
-      if (subscription.plan.name.toLowerCase().indexOf('sports card') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
         items.push(subscription.sports[0].id);
       }
     });
@@ -345,8 +345,8 @@ type UnlockItemModalPropsType = {
 };
 
 function UnLockItemModal({ sport, closeModal, packages }: UnlockItemModalPropsType) {
-  const sportCardPack = packages.filter((pack) => pack.name.indexOf('Sports Card') > -1)[0];
-  const vipAllAccessPack = packages.filter((pack) => pack.name.indexOf('VIP All Access') > -1)[0];
+  const sportCardPack = packages.filter((pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1)[0];
+  const vipAllAccessPack = packages.filter((pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1)[0];
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [selectedPackType, setSelectedPackType] = useState<BillingPlan>(
     sportCardPack.billing_plans[0]

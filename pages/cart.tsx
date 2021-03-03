@@ -22,6 +22,7 @@ import { ReduxState } from '@redux/reducers';
 import { MinusIcon } from '@components/SvgIcons';
 import CheckoutAPIs from '@apis/checkout.apis';
 import { CreateUserType, LoginUserType } from '@type/Users';
+import { PACKAGE_NAMES } from '@constants/';
 
 function HeroBanner() {
   return (
@@ -403,7 +404,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                       <div className={styles.cartItemInfo}>
                         <span className={styles.cartItemName}>{item.pack.name}</span>
                         <span className={styles.cartItemDesc}>
-                          {item.pack.name.indexOf('VIP All Access') > -1
+                          {item.pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
                             ? 'All Sports'
                             : item.sports?.name}
                         </span>

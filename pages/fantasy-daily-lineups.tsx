@@ -30,7 +30,7 @@ import {
   DraftKingsLogoSvg,
   YahooFantasySVG
 } from '@components/SportIcons';
-import { FANTASY_TABS } from '@constants/';
+import { FANTASY_TABS, PACKAGE_NAMES } from '@constants/';
 import { FantasyTabInfo, Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
 
@@ -86,7 +86,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   useEffect(() => {
     const items: Sport[] = [];
     subscriptions.forEach((subscription) => {
-      if (subscription.plan.name.toLowerCase().indexOf('fantasy') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
         items.push(subscription.sports[0]);
       }
     });
@@ -97,7 +97,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
     setLoading(true);
     if (sports.length > 0 && subscriptions.length > 0) {
       const fantasySubscriptions = subscriptions.filter(
-        (subscription) => subscription.plan.name.toLowerCase().indexOf('fantasy') > -1
+        (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1
       );
       const sportIdx = sports.findIndex((sport) => sport.name === selectedSport);
 

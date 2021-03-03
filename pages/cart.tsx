@@ -21,7 +21,7 @@ import { BillingPlan, Package } from '@type/Packages';
 import { ReduxState } from '@redux/reducers';
 import { MinusIcon } from '@components/SvgIcons';
 import CheckoutAPIs from '@apis/checkout.apis';
-import { CreateUserType, LoginUserType } from '@type/Users';
+import { CreateUserType, LoginUserType, UserProfile } from '@type/Users';
 import { PACKAGE_NAMES } from '@constants/';
 
 function HeroBanner() {
@@ -201,15 +201,11 @@ function PlanDropdown({
 
 export default function Cart({ packages, token, subscriptions }: PageProps) {
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
-  const { error, loading } = useSelector((state: ReduxState) => state.user);
+  const { error, loading, profile } = useSelector((state: ReduxState) => state.user);
   const [tempCartItems, setTempCartItems] = useState<CartItem[]>([]);
   const [proceeding, setProceeding] = useState<boolean>(false);
   const [formView, setFormView] = useState<string>('');
   const [isSignupFormValid, setSignUpFormValid] = useState<boolean>(false);
-  const [loginFormData, setLoginFormData] = useState<LoginUserType>({
-    email: undefined,
-    password: undefined
-  });
   const [signupFormData, setSignupFormData] = useState<CreateUserType>({
     username: undefined,
     first_name: undefined,
@@ -222,7 +218,9 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     verify_password: undefined
   });
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [isTryingLogin, setIsTryingLogin] = useState<boolean>(false);
   const [cartForVisitor] = useState<boolean>(!token);
+  const [userProfile, setUserProfile] = useState<UserProfile | undefined>();
 
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -234,6 +232,9 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   useEffect(() => {
     if (error === null && !loading && formSubmitted) {
       proceedCheckout();
+    }
+    if (error === null && !loading && isTryingLogin && profile) {
+      setUserProfile(profile);
     }
     if (error && !loading && formView === 'LOGIN') {
       notification['error']({
@@ -320,14 +321,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     //
     setProceeding(true);
     if (formView === 'LOGIN') {
-      dispatch({
-        type: 'LOGIN_USER',
-        payload: {
-          identifier: loginFormData.email,
-          password: loginFormData.password
-        }
-      });
-      setFormSubmitted(true);
+      proceedCheckout();
     } else {
       dispatch({
         type: 'SIGNUP_USER',
@@ -340,15 +334,19 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     }
   };
 
-  const cartLoginFormChanged = (formData: LoginUserType, isValid: boolean) => {
-    setLoginFormData(formData);
-    setSignUpFormValid(isValid);
-  };
-
   const cartSignupFormChanged = (formData: CreateUserType, isValid: boolean) => {
     setSignupFormData(formData);
     setSignUpFormValid(isValid);
   };
+  const onCartLogin = () => {
+    if (formView === 'LOGIN') {
+      setFormView('');
+    } else {
+      setFormView('LOGIN');
+      setIsTryingLogin(true);
+      dispatch({ type: 'OPEN_LOGIN_MODAL' });
+    }
+  }
 
   return (
     <>
@@ -367,22 +365,12 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             <div className={styles.cartItems}>
               {cartForVisitor && (
                 <>
-                  {formView === '' && (
-                    <>
-                      <CartSignupForm
-                        signupFormChanged={cartSignupFormChanged}
-                        onCartLogin={() => setFormView('LOGIN')}
-                      />
-                    </>
-                  )}
-                  {formView === 'LOGIN' && (
-                    <>
-                      <CartLoginForm
-                        loginFormChanged={cartLoginFormChanged}
-                        onCartSignup={() => setFormView('')}
-                      />
-                    </>
-                  )}
+                  <CartSignupForm
+                    showLoginForm={formView === 'LOGIN'}
+                    userProfile={userProfile}
+                    signupFormChanged={cartSignupFormChanged}
+                    onCartLogin={onCartLogin}
+                  />
                   <br />
                   <br />
                 </>

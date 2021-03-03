@@ -48,7 +48,7 @@
   margin: auto;
 }
 .register_row {
-  margin-bottom: 18px;
+  margin-bottom: 0;
 }
 .content h2 {
   text-align: center;
@@ -224,4 +224,17 @@
   padding: 7.5px 24px;
   height: auto;
   width: 100%;
+}
+.cartSignupTitle {
+  margin-bottom: 0.2em;
+  font-size: 56px;
+}
+.cartSignupDesc {
+  margin-bottom: 2.5em;
+  font-size: 18px;
+  font-weight: 500;
+}
+.register_row a {
+  color: #40a9ff;
+  font-weight: 600;
 }

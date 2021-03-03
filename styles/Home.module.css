@@ -1159,6 +1159,13 @@ li .square_icon {
   }
 }
 @media (max-width: 1400px) {
+  .sports_card_box:hover {
+    transform: scale(1, 1);
+    border: 0px solid #1a1a1a;
+    z-index: 1;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+  }
+
   .bet_on_sports {
     padding: 100px 30px 50px;
   }
@@ -1244,6 +1251,10 @@ li .square_icon {
 }
 @media (max-width: 882px) {
   .sports_cards {
+    max-width: 550px;
+    padding: 50px 12px 70px 70px;
+  }
+  .sports_cards_for_vip {
     max-width: 550px;
     padding: 50px 12px 70px;
   }

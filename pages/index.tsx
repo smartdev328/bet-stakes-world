@@ -514,7 +514,10 @@ function BetOnSports() {
         </Button>
         <div>
           <div>
-            <div className={styles.sports_cards}>
+            <div
+              className={
+                sportsDataForMobile.length > 1 ? styles.sports_cards : styles.sports_cards_for_vip
+              }>
               {sportsDataForMobile.map((item: SportCardsSelection) => (
                 <div key={item.name}>
                   {item.name === 'VIP' ? <p className={styles.best_deal_text}>best Deal!</p> : null}

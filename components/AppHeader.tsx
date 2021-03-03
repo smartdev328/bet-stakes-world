@@ -254,6 +254,7 @@ export default function AppHeader({
   });
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch({ type: 'LOAD_CART' });
     const remainingTime = getRemainingTime();
     setRemainingTime(remainingTime);
     const remainingTimeInterval = setInterval(() => {

@@ -305,7 +305,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               description: error.message
             });
           }
-          dispatch({ type: 'UPDATE_CART', payload: [] });
         }
       })
       .catch((error) => {

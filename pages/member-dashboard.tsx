@@ -6,6 +6,7 @@ import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/ic
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
+import { useDispatch } from 'react-redux';
 
 import {
   AppLayout,
@@ -409,6 +410,8 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const router = useRouter();
   const { session_id: sessionId } = router.query;
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
@@ -457,6 +460,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             notification['info']({
               message: 'Checkout was completed!'
             });
+            dispatch({ type: 'UPDATE_CART', payload: [] });
             router.replace('/member-dashboard');
           }
         })

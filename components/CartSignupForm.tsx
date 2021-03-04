@@ -142,7 +142,7 @@ export default function CartRegistration({
           </Row>
         </>
       )}
-      {showLoginForm && <h2 className={styles.cartSignupTitle}>Billing Info</h2>}
+      {showLoginForm && <h2 className={styles.cartSignupTitle}>ACCOUNT INFO</h2>}
       <Row>
         <Col span={24} className={styles.formGroup}>
           <label>User Name*</label>

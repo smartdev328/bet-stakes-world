@@ -228,6 +228,7 @@
 .cartSignupTitle {
   margin-bottom: 0.2em;
   font-size: 56px;
+  text-transform: uppercase;
 }
 .cartSignupDesc {
   margin-bottom: 2.5em;

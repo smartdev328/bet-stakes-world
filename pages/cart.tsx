@@ -233,6 +233,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       proceedCheckout();
     }
     if (error === null && !loading && isTryingLogin && profile) {
+      setFormView('LOGIN');
       setUserProfile(profile);
     }
     if (error && !loading && formView === 'LOGIN') {
@@ -341,7 +342,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     if (formView === 'LOGIN') {
       setFormView('');
     } else {
-      setFormView('LOGIN');
       setIsTryingLogin(true);
       dispatch({ type: 'OPEN_LOGIN_MODAL' });
     }

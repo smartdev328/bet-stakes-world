@@ -337,7 +337,7 @@
   margin: 0;
   margin-bottom: 24px;
   height: auto;
-  width: 620px;
+  width: 700px;
   cursor: pointer;
   border: solid 1px #1a1a1a;
   transition: all linear 0.3s;
@@ -873,7 +873,7 @@
 }
 .sportsCard_value {
   text-align: center;
-  padding: 0.5em 1.5em;
+  padding: 0.5em 2em 0.5em 2.5em;
 }
 .sportsCard_value_title {
   font-weight: 600;
@@ -881,6 +881,7 @@
   line-height: 117.9%;
   text-transform: uppercase;
   color: #000000;
+  padding-bottom: 0.3em;
 }
 .sportsCard_value_price {
   font-weight: 900;
@@ -905,7 +906,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 135%;
+  height: 150%;
+  width: 180%;
 }
 .noItem {
   font-size: 16px;
@@ -924,6 +926,7 @@
   }
   .sportsCard_value_title {
     font-size: 14px;
+    padding-bottom: 0.5em;
   }
   .sportsCard_value_price {
     font-size: 30px;

@@ -24,7 +24,7 @@ export default function AppLayout({ bgColor, children, token, subscriptions }: A
           today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
         } ${today.getFullYear()}`}
       />
-      <main style={{ background: bgColor }}>{children}</main>
+      <main style={{ background: bgColor, overflow: 'hidden' }}>{children}</main>
       <AppFooter token={token} />
     </>
   );

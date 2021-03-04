@@ -1252,7 +1252,7 @@ li .square_icon {
 @media (max-width: 882px) {
   .sports_cards {
     max-width: 550px;
-    padding: 50px 12px 70px 70px;
+    padding: 50px 12px 70px 75px;
   }
   .sports_cards_for_vip {
     max-width: 550px;

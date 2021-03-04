@@ -6,7 +6,12 @@ function WhereToWatchGame() {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <img src={'/images/where-to-watch.svg'} height="32px" width="32px" />
+        <img
+          src={'/images/where-to-watch.svg'}
+          height="36px"
+          width="36px"
+          style={{ paddingRight: '6px' }}
+        />
         <span>Where to watch the game?</span>
       </div>
       <div className={styles.sidebarBlockContent}>

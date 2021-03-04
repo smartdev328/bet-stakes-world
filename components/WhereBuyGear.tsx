@@ -6,7 +6,12 @@ function WhereBuyGear() {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <img src={'/images/where-to-buy.svg'} height="32px" width="32px" />
+        <img
+          src={'/images/where-to-buy.svg'}
+          height="32px"
+          width="32px"
+          style={{ paddingRight: '6px' }}
+        />
         <span>Where to buy your merch</span>
       </div>
       <div className={styles.sidebarBlockContent}>

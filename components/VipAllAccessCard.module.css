@@ -80,6 +80,11 @@
   font-size: 11px;
 }
 
+.label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
 @media (max-width: 600px) {
   .sidebarBlock {
     margin-left: 0;

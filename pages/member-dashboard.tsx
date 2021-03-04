@@ -6,13 +6,21 @@ import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/ic
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
+import { useDispatch } from 'react-redux';
 
 import {
   AppLayout,
   BannerSportsAndMatches,
   DashboardHeader,
   SportEntryActive,
-  SportEntry
+  SportEntry,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear,
+  VipAllAccessCard,
+  CommonSportsBook,
+  BankRollManagement,
+  BettingFundamentals
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
@@ -79,19 +87,19 @@ function CurrentPackages({
 
   let vipAllAccessPack: number, fantasyPack: number, sportsCardPack: number;
   packages.forEach((pack) => {
-    if (pack.name.indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       vipAllAccessPack = pack.id;
-    } else if (pack.name.indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
       fantasyPack = pack.id;
-    } else if (pack.name.indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
       sportsCardPack = pack.id;
     }
   });
-  const goToPackage = (plan: BillingPlan) => {
+  const goToPackage = (plan: BillingPlan, sport: Sport) => {
     if (plan.package === vipAllAccessPack) {
       router.push('/vip-all-access-card');
     } else if (plan.package === fantasyPack) {
-      router.push('/fantasy-daily-lineups');
+      router.push(`/fantasy-daily-lineups?sport=${sport.name}`);
     } else if (plan.package === sportsCardPack) {
       router.push('/sports-card');
     }
@@ -102,11 +110,11 @@ function CurrentPackages({
       sportSubscription: UserSubscription[] = [],
       fantasySubscription: UserSubscription[] = [];
     subscriptions.forEach((subscription: UserSubscription) => {
-      if (subscription.plan.name.indexOf('VIP') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
         vipSubscription.push(subscription);
-      } else if (subscription.plan.name.indexOf('Sports Card') > -1) {
+      } else if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
         sportSubscription.push(subscription);
-      } else {
+      } else if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
         fantasySubscription.push(subscription);
       }
     });
@@ -161,7 +169,7 @@ function CurrentPackages({
               {subscription.is_active && (
                 <Button
                   onClick={() => {
-                    goToPackage(subscription.plan);
+                    goToPackage(subscription.plan, subscription.sports[0]);
                   }}
                   className={styles.cta_btn}>
                   View Picks
@@ -235,9 +243,12 @@ function EarliestGames({
   useEffect(() => {
     // Fetch Earliest games
     setLoading(true);
+    const nonFantasySubscriptions = subscriptions.filter(
+      (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) < 0
+    );
     SportsAPIs.getTodaySportEntries(
       DashboardSportBetTypes[selectedBetType].id,
-      subscriptions,
+      nonFantasySubscriptions,
       selectedSportType === -1 ? undefined : sports[selectedSportType].id
     )
       .then((res) => res.json())
@@ -402,6 +413,8 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const router = useRouter();
   const { session_id: sessionId } = router.query;
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     WeeklyTipsAPIs.getLastTip()
       .then((res) => res.json())
@@ -450,6 +463,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             notification['info']({
               message: 'Checkout was completed!'
             });
+            dispatch({ type: 'UPDATE_CART', payload: [] });
             router.replace('/member-dashboard');
           }
         })
@@ -472,8 +486,12 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         <div className={styles.container}>
           <TopSection profileName={profileName} initialName={initialName} />
           <Row className={styles.nowrapRow}>
-            <Col span={18} className={styles.current_packages_container}>
+            <Col sm={24} md={18} className={styles.current_packages_container}>
               {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
               <div className={styles.earliest_games_col}>
                 <EarliestGames sports={sports} subscriptions={subscriptions} />
               </div>
@@ -484,6 +502,26 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
 
               <div className={styles.yesterday_plays_col}>
                 <YesterdayPlays />
+              </div>
+              <div className={styles.laptop_view}>
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
+            </Col>
+            <Col md={6} className={styles.contentSideCol}>
+              <div className={styles.mobile_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
               </div>
             </Col>
           </Row>

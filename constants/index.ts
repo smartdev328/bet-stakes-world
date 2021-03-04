@@ -264,6 +264,90 @@ export const MOCK_DailyFantasyLineups = [
   }
 ];
 
+export const MOCK_VipAllAccessCard = [
+  {
+    sport: 'NBA',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'NFL',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'MLB',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  }
+];
+
 export const MOCK_FantasyFundaments = [
   {
     id: 1,
@@ -303,8 +387,35 @@ export const MOCK_FantasyFundaments = [
   }
 ];
 
+export const MOCK_BankRoll = [
+  {
+    id: 1,
+    title: 'What is a unit? ',
+    content:
+      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+  },
+  {
+    id: 2,
+    title: 'What should my unit % be?',
+    content:
+      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+  },
+  {
+    id: 3,
+    title: 'TheDailyStakes Recommendation',
+    content:
+      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+  },
+  {
+    id: 4,
+    title: 'Other Bankroll Systems',
+    content:
+      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+  }
+];
+
 export const PACKAGE_NAMES = {
-  VIP_ALL_ACCESS: 'VIP All Access',
-  SPORTS_CARD: 'Sports Card',
-  FANTASY: 'Fantasy'
+  VIP_ALL_ACCESS: 'VIP',
+  SPORTS_CARD: 'SPORTS CARD',
+  FANTASY: 'FANTASY'
 };

@@ -35,3 +35,4 @@ export const CLOSE_RESET_PASS_MODAL = 'CLOSE_RESET_PASS_MODAL';
 
 export const UPDATE_CART = 'UPDATE_CART';
 export const RESET_CART = 'RESET_CART';
+export const LOAD_CART = 'LOAD_CART';

@@ -12,7 +12,11 @@ import {
   BettingFundamentals,
   CommonSportsBook,
   DashboardHeader,
-  SportEntryActive
+  SportEntryActive,
+  VipAllAccessCard,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear
 } from '@components/index';
 import { AllSportsBtnBgIcon, LockIcon } from '@components/SvgIcons';
 
@@ -24,7 +28,7 @@ import SportsAPIs from '@apis/sport.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
 import { UserSubscription } from '@type/Users';
-import { SportBetTypes } from '@constants/';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -86,7 +90,7 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
   useEffect(() => {
     const items: number[] = [];
     subscriptions.forEach((subscription) => {
-      if (subscription.plan.name.toLowerCase().indexOf('sports card') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
         items.push(subscription.sports[0].id);
       }
     });
@@ -126,7 +130,12 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
-              <Col span={18} className={styles.contentMainCol}>
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
+
+              <Col sm={24} md={18} className={styles.contentMainCol}>
                 {SportBetTypes.map((type) => (
                   <ListGames
                     id={type.id}
@@ -137,11 +146,26 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
                     selectedFilterType={filterType}
                   />
                 ))}
+                <div className={styles.laptop_view}>
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <BankRollManagement />
-                <CommonSportsBook />
-                <BettingFundamentals />
+                <div className={styles.mobile_view}>
+                  <VipAllAccessCard />
+                  <DailyFantasyLineups />
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
             </Row>
           </div>
@@ -177,7 +201,6 @@ function TopSection({
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
-    console.log('-- unlockedItems:', unlockedItems);
     const selectedStatus = sports.map((sport: Sport) => {
       const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
       if (unlockedItemIndex > -1) {
@@ -276,7 +299,14 @@ function ListGames({
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
+    const sportSubscriptions = subscriptions.filter(
+      (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1
+    );
+    SportsAPIs.getSportEntries(
+      id,
+      sportSubscriptions,
+      selectedSport !== -1 ? selectedSport : undefined
+    )
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {
@@ -321,8 +351,12 @@ type UnlockItemModalPropsType = {
 };
 
 function UnLockItemModal({ sport, closeModal, packages }: UnlockItemModalPropsType) {
-  const sportCardPack = packages.filter((pack) => pack.name.indexOf('Sports Card') > -1)[0];
-  const vipAllAccessPack = packages.filter((pack) => pack.name.indexOf('VIP All Access') > -1)[0];
+  const sportCardPack = packages.filter(
+    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1
+  )[0];
+  const vipAllAccessPack = packages.filter(
+    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
+  )[0];
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [selectedPackType, setSelectedPackType] = useState<BillingPlan>(
     sportCardPack.billing_plans[0]

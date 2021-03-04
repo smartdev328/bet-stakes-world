@@ -3,7 +3,7 @@ import { UserSubscription } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
 
 export function getSports() {
-  return fetch(`${API_BASE_URL}/sports`, {
+  return fetch(`${API_BASE_URL}/sports?_sort=id:ASC`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -18,7 +18,7 @@ export function getTodaySportEntries(
   sport: number | undefined
 ) {
   const headers = tokenAuthHeaders();
-  const sportFilter = sport ? `&sport=${sport}` : '';
+  const sportFilter = sport ? `&sport[0]=${sport}` : '';
   const today = new Date();
   const startTimestampOfToday = new Date(
     today.getFullYear(),
@@ -49,7 +49,7 @@ export function getSportEntries(
   subscriptions.map((subscription, index) => {
     subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
-  const sportFilter = sport ? `&sport=${sport}` : '';
+  const sportFilter = sport ? `&sport[0]=${sport}` : '';
   const typeFilter = type ? `&type=${type}` : '';
   return fetch(
     `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC${typeFilter}${sportFilter}${subscriptionsQuery}`,

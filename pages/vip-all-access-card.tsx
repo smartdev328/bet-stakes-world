@@ -9,7 +9,11 @@ import {
   BettingFundamentals,
   CommonSportsBook,
   DashboardHeader,
-  SportEntryActive
+  SportEntryActive,
+  VipAllAccessCard,
+  DailyFantasyLineups,
+  WhereToWatchGame,
+  WhereBuyGear
 } from '@components/index';
 import { WinnerCupIcon } from '@components/SvgIcons';
 import SportsAPIs from '@apis/sport.apis';
@@ -18,7 +22,7 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import { UserSubscription } from '@type/Users';
-import { SportBetTypes } from '@constants/';
+import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 
 const SPORTS_INFO = [
   {
@@ -93,7 +97,11 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             }}
           />
           <Row className={styles.content}>
-            <Col span={18} className={styles.contentMainCol}>
+            <div className={styles.laptop_view}>
+              <VipAllAccessCard />
+              <DailyFantasyLineups />
+            </div>
+            <Col sm={24} md={18} className={styles.contentMainCol}>
               {SportBetTypes.map((type) => (
                 <ListGames
                   id={type.id}
@@ -104,11 +112,26 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
                   selectedFilterType={filterType}
                 />
               ))}
+              <div className={styles.laptop_view}>
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
             </Col>
             <Col span={6} className={styles.contentSideCol}>
-              <BankRollManagement />
-              <CommonSportsBook />
-              <BettingFundamentals />
+              <div className={styles.mobile_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+                <CommonSportsBook />
+                <WhereToWatchGame />
+                <WhereBuyGear />
+                <BankRollManagement />
+                <BettingFundamentals />
+                <BettingFundamentals isFantasy />
+              </div>
             </Col>
           </Row>
         </div>
@@ -226,7 +249,15 @@ function ListGames({
 
   useEffect(() => {
     setLoading(true);
-    SportsAPIs.getSportEntries(id, subscriptions, selectedSport !== -1 ? selectedSport : undefined)
+    const vipSubscriptions = subscriptions.filter(
+      (subscription) =>
+        subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
+    );
+    SportsAPIs.getSportEntries(
+      id,
+      vipSubscriptions,
+      selectedSport !== -1 ? selectedSport : undefined
+    )
       .then((res) => res.json())
       .then((data: EarliestGameInfoType[]) => {
         switch (selectedFilterType) {

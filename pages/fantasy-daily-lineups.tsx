@@ -6,6 +6,7 @@ import { Row, Button, Col, Spin } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import NumberFormat from 'react-number-format';
+import { useRouter } from 'next/router';
 
 import {
   AppLayout,
@@ -15,7 +16,9 @@ import {
   CommonSportsBook,
   DashboardHeader,
   WhereToWatchGame,
-  WhereBuyGear
+  WhereBuyGear,
+  VipAllAccessCard,
+  BankRollManagement
 } from '@components/index';
 import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
@@ -28,7 +31,7 @@ import {
   DraftKingsLogoSvg,
   YahooFantasySVG
 } from '@components/SportIcons';
-import { FANTASY_TABS } from '@constants/';
+import { FANTASY_TABS, PACKAGE_NAMES } from '@constants/';
 import { FantasyTabInfo, Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
 
@@ -81,13 +84,25 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   const [unlockedSports, setUnlockedSports] = useState<Sport[]>([]);
   const [lineupSalary, setLineupSalary] = useState<number>(0);
 
+  const router = useRouter();
+  const { sport: querySport } = router.query;
+
   useEffect(() => {
     const items: Sport[] = [];
     subscriptions.forEach((subscription) => {
-      if (subscription.plan.name.toLowerCase().indexOf('fantasy') > -1) {
+      if (subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
         items.push(subscription.sports[0]);
       }
     });
+    items.sort((a, b) => {
+      return a.id > b.id ? 1 : -1;
+    });
+
+    if (querySport) {
+      setSelectedSport(querySport as string);
+    } else if (items.length > 0) {
+      setSelectedSport(items[0].name);
+    }
     setUnlockedSports(items);
   }, [subscriptions]);
 
@@ -95,7 +110,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
     setLoading(true);
     if (sports.length > 0 && subscriptions.length > 0) {
       const fantasySubscriptions = subscriptions.filter(
-        (subscription) => subscription.plan.name.toLowerCase().indexOf('fantasy') > -1
+        (subscription) => subscription.plan.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1
       );
       const sportIdx = sports.findIndex((sport) => sport.name === selectedSport);
 
@@ -156,19 +171,34 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
             onChangeOptions={onChangeOptions}
           />
         </div>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
+
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>
-              <Col span={18} className={styles.contentMainCol}>
+              <Col sm={24} md={18} className={styles.contentMainCol}>
                 {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}
                 {loading && (
                   <div className={styles.loadingSpin}>
                     <Spin size="large" />
                   </div>
                 )}
+                <div className={styles.laptop_view}>
+                  <CommonSportsBook />
+                  <WhereToWatchGame />
+                  <WhereBuyGear />
+                  <BankRollManagement />
+                  <BettingFundamentals />
+                  <BettingFundamentals isFantasy />
+                </div>
               </Col>
               <Col span={6} className={styles.contentSideCol}>
-                <FantasySidebar />
+                <div className={styles.mobile_view}>
+                  <FantasySidebar />
+                </div>
               </Col>
             </Row>
           </div>
@@ -511,10 +541,13 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
 function FantasySidebar() {
   return (
     <>
+      <VipAllAccessCard />
       <DailyFantasyLineups />
       <CommonSportsBook />
       <WhereToWatchGame />
       <WhereBuyGear />
+      <BankRollManagement />
+      <BettingFundamentals />
       <BettingFundamentals isFantasy />
     </>
   );

@@ -1,9 +1,15 @@
 .sidebarBlock {
-  background: #F1F1F1;
+  background: #f1f1f1;
   padding: 16px;
   margin-left: 16px;
   margin-bottom: 24px;
   min-height: 300px;
+}
+.company_logo {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .sidebarBlockTitle {
   display: flex;
@@ -37,8 +43,8 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  color: #FFFFFF;
-  background: #1A1A1A;
+  color: #ffffff;
+  background: #1a1a1a;
   border: 1px solid #434343;
   flex: 1;
 }

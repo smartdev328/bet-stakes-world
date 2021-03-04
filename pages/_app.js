@@ -77,6 +77,17 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     getDefaultProps();
+
+    const handleRouteChangeComplete = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    };
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    // If the component is unmounted, unsubscribe from the event
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+
   }, []);
 
   // useEffect(() => {

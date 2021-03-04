@@ -1,13 +1,12 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import styles from './WhereToWatchGame.module.css';
-import { MoneyPocketIcon } from './SvgIcons';
 
 function WhereToWatchGame() {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
+        <img src={'/images/where-to-watch.svg'} height="32px" width="32px" />
         <span>Where to watch the game?</span>
       </div>
       <div className={styles.sidebarBlockContent}>
@@ -25,7 +24,7 @@ function WhereToWatchGame() {
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.fubo.tv/">
-              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={80} height={26} />
+              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={80} height={70} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -34,13 +33,13 @@ function WhereToWatchGame() {
                 src="/images/ticketmaster-company.png"
                 alt="TicketMaster Logo"
                 width={105}
-                height={25}
+                height={90}
               />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/sling-company.png" alt="VividSeats Logo" width={80} height={43} />
+            <img src="/images/sling-company.png" alt="VividSeats Logo" width={80} height={70} />
           </Col>
 
           <Col span={12} className={styles.company_logo}>
@@ -49,7 +48,7 @@ function WhereToWatchGame() {
                 src="/images/vividseats-company.png"
                 alt="VividSeats Logo"
                 width={80}
-                height={16}
+                height={80}
               />
             </a>
           </Col>

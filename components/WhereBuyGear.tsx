@@ -1,13 +1,12 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import styles from './WhereBuyGear.module.css';
-import { MoneyPocketIcon } from './SvgIcons';
 
 function WhereBuyGear() {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <MoneyPocketIcon className={styles.sidebarBlockTitleIcon} />
+        <img src={'/images/where-to-buy.svg'} height="32px" width="32px" />
         <span>Where to buy your merch</span>
       </div>
       <div className={styles.sidebarBlockContent}>
@@ -28,7 +27,7 @@ function WhereBuyGear() {
               src="/images/fanatics-company.png"
               alt="DailyStakes Company"
               width={106}
-              height={37}
+              height={110}
             />
           </Col>
 
@@ -37,7 +36,7 @@ function WhereBuyGear() {
               src="/images/fansedge-company.png"
               alt="DailyStakes Company"
               width={106}
-              height={52}
+              height={110}
             />
           </Col>
 
@@ -46,7 +45,7 @@ function WhereBuyGear() {
               src="/images/sports-company.png"
               alt="DailyStakes Company"
               width={106}
-              height={36}
+              height={100}
             />
           </Col>
         </Row>

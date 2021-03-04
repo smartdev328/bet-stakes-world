@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 
 import styles from './BettingFundamentals.module.css';
-import { ListIcon, MinusEncloseIcon, PlusEncloseIcon } from './SvgIcons';
+import { MinusEncloseIcon, PlusEncloseIcon } from './SvgIcons';
 import { MOCK_BankRoll } from '@constants/index';
 
 type PropsType = {
@@ -14,8 +14,14 @@ function BankrollManagment({ showContentAt, toggleDetailsAt }: PropsType) {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <ListIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Bankroll Management Systems</span>
+        <img
+          src={'/images/bank-roll.svg'}
+          height="32px"
+          width="32px"
+          style={{ paddingRight: '7px' }}
+        />
+
+        <span>Bankroll Management </span>
       </div>
       <div className={styles.sidebarBlockContent}>
         {MOCK_BankRoll.map((data, index) => (
@@ -23,7 +29,9 @@ function BankrollManagment({ showContentAt, toggleDetailsAt }: PropsType) {
             <div className={styles.accordionTitle}>
               {showContentAt[index] && (
                 <>
-                  <strong>{data.title}</strong>
+                  <strong className={styles.handIcon} onClick={() => toggleDetailsAt(index)}>
+                    {data.title}
+                  </strong>
                   <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
                     <MinusEncloseIcon className={styles.accordionTitleIcon} />
                   </Button>
@@ -31,7 +39,9 @@ function BankrollManagment({ showContentAt, toggleDetailsAt }: PropsType) {
               )}
               {!showContentAt[index] && (
                 <>
-                  <span>{data.title}</span>
+                  <span className={styles.handIcon} onClick={() => toggleDetailsAt(index)}>
+                    {data.title}
+                  </span>
                   <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
                     <PlusEncloseIcon className={styles.accordionTitleIcon} />
                   </Button>

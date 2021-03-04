@@ -7,11 +7,7 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import { useStripe } from '@stripe/react-stripe-js';
 import NumberFormat from 'react-number-format';
 
-import {
-  AppLayout,
-  BannerSportsAndMatches,
-  CartSignupForm
-} from '@components/index';
+import { AppLayout, BannerSportsAndMatches, CartSignupForm } from '@components/index';
 import styles from '@styles/Cart.module.css';
 import { CartItem, CheckoutItem } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';

@@ -6,6 +6,7 @@ import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import NumberFormat from 'react-number-format';
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import { AppLayout, BannerSportsAndMatches, CartDrawer } from '@components/index';
 import { CartItem } from '@type/Cart';
@@ -187,12 +188,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
               )}
             </div>
           )}
-          <MembershipOfferings
-            isMobile
-            onlyFor={'all'}
-            currentPlan={currentPlan}
-            changePlan={setCurrentPlan}
-          />
+
           {currentPlan === 'all' && (
             <div className={styles.offering_details}>
               <Intro />
@@ -1152,6 +1148,8 @@ type CartBoxProps = {
 };
 
 function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+
   const removeItemAt = (index: number) => {
     const newCart = cartItems.slice();
     newCart.splice(index, 1);
@@ -1180,7 +1178,7 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
       </LazyLoad>
       <div className={styles.cartBoxContent}>
         <h4>CART TOTAL</h4>
-        <div className={styles.cartBoxContentDesc}>
+        <div className={`${styles.cartBoxContentDesc} ${showDetails && styles.showDetails}`}>
           {cartItems.length > 0 &&
             vipCartItems.map((item, index) => (
               <div key={index} className={styles.cartBoxItem}>
@@ -1255,20 +1253,26 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
               <em>No Item</em>
             </div>
           )}
-          <div className={styles.totalPrice}>
+        </div>
+        <div className={styles.ctaRow}>
+          <div className={styles.totalPriceRow}>
             <NumberFormat
               displayType="text"
               thousandSeparator={true}
               prefix={'$'}
+              className={styles.totalPrice}
               fixedDecimalScale
               decimalScale={2}
               value={totalPrice}
             />
+            {showDetails && <CaretUpOutlined className={styles.caret_icon} onClick={() => setShowDetails(false)} />}
+            {!showDetails && <CaretDownOutlined className={styles.caret_icon} onClick={() => setShowDetails(true)} />}
           </div>
+          <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, cartItems)}>
+            Add to Cart
+          </Button>
         </div>
-        <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, cartItems)}>
-          Add to Cart
-        </Button>
+        
       </div>
     </div>
   );

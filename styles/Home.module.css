@@ -924,6 +924,7 @@ li .square_icon {
   overflow: hidden;
   cursor: pointer;
   background: #000;
+  height: 390px;
 }
 .sports_card_box:hover {
   transform: scale(1.1, 1.1);
@@ -968,6 +969,7 @@ li .square_icon {
   padding: 14px 16px;
   margin-top: 280px;
   position: relative;
+  height: 100%;
   z-index: 3;
   background-color: #fff;
 }
@@ -1000,6 +1002,9 @@ li .square_icon {
 .nba_box_active {
   background: #ec4c15;
   border: 2px solid #1a1a1a;
+}
+.vip_box_active {
+  border: 2px solid #ffc700;
 }
 .nfl_box_active {
   background: #91442a;

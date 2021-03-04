@@ -146,16 +146,28 @@ function CartTotalWidget({
 function PlanDropdown({
   pack,
   selectedPlan,
+  sport,
   changePlan
 }: {
   pack: Package;
   selectedPlan: BillingPlan;
+  sport: string | undefined;
   changePlan: (plan: BillingPlan) => void;
 }) {
   const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
   const [tempPlan, setTempPlan] = useState<BillingPlan>(selectedPlan);
 
-  const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
+
+  let billingPlans: BillingPlan[] = [];
+  if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1 && sport) {
+    if (sport === 'UFC' || sport === 'FORMULA 1') {
+      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') > -1)
+    } else {
+      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') < 0)
+    }
+  } else {
+    billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
+  }
 
   const PackTypeMenu = () => (
     <Menu className={styles.sportMenu}>
@@ -270,7 +282,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       };
       checkoutItems.push(subscriptionParams);
     });
-
     CheckoutAPIs.createSession({
       items: checkoutItems
     })
@@ -342,6 +353,22 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       dispatch({ type: 'OPEN_LOGIN_MODAL' });
     }
   };
+  const getCartItemName = (packName: string) => {
+    if (packName.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+      return 'VIP ALL ACCESS CARD';
+    } else if (packName.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+      return 'DAILY FANTASY CARD';
+    } else if (packName.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+      return 'SPORTS CARD';
+    }
+    return '';
+  }
+  const getCartItemLogo = (packName: string, sportName: string) => {
+    if (packName.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+      return '/images/sports/vip.svg';
+    }
+    return `/images/sports/${sportName.toLowerCase()}.svg`;
+  }
 
   return (
     <>
@@ -380,14 +407,14 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                   <div className={styles.cartItem}>
                     <div className={styles.cartItemMain}>
                       <img
-                        src={item.sports?.logo || 'https://via.placeholder.com/100'}
-                        alt={item.sports?.name}
+                        src={getCartItemLogo(item.pack.name, item.sports?.name || '')}
+                        alt=''
                       />
                       <div className={styles.cartItemInfo}>
-                        <span className={styles.cartItemName}>{item.pack.name}</span>
+                      <span className={styles.cartItemName}>{getCartItemName(item.pack.name)}</span>
                         <span className={styles.cartItemDesc}>
                           {item.pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
-                            ? 'All Sports'
+                            ? 'VIP'
                             : item.sports?.name}
                         </span>
                       </div>
@@ -399,6 +426,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                             {pack.id === item.plan.package && pack.description !== 'add-on' && (
                               <PlanDropdown
                                 pack={pack}
+                                sport={item.sports?.name}
                                 selectedPlan={item.plan}
                                 changePlan={(plan) => changedPlan(index, plan)}
                               />

@@ -1013,7 +1013,7 @@ function ProductsAndCartBoxForSportsCard({
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans
-            .filter((plan) => plan.name.indexOf('UFC') < 0)
+            .filter((plan) => plan.name.indexOf('EVENT BASED') < 0)
             .map((plan: BillingPlan, index: number) => (
               <li
                 key={index}
@@ -1086,10 +1086,10 @@ function ProductsAndCartBoxForSportsCard({
           </div>
           <ul>
             {billingPlans
-              .filter((plan) => plan.name.indexOf('UFC') > -1)
+              .filter((plan) => plan.name.indexOf('EVENT BASED') > -1)
               .map((plan: BillingPlan, index: number) => (
                 <li
-                  key={`ufc-plan-${index}`}
+                  key={`event-based-plan-${index}`}
                   className={activePlan2?.id === plan.id ? styles.active : ''}
                   onClick={() => selectBillingPlan(plan, '')}>
                   <div className={styles.flexRow}>

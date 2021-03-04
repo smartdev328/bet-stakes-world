@@ -845,6 +845,7 @@
   }
   .cartBoxContentDesc {
     flex-flow: row wrap;
+    flex-direction: column;
   }
   .cartBoxContentDesc p {
     line-height: 170%;
@@ -970,6 +971,7 @@
 .cartBoxItem .cartBoxItemName {
   flex: 1;
   text-align: left;
+  margin-right: 1em;
 }
 @media (max-width: 600px) {
   .cartBox {

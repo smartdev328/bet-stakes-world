@@ -140,6 +140,7 @@
   justify-content: space-between;
   border: 1px solid #959799;
   margin: 0 0 24px 0;
+  position: relative;
 }
 .cartItemMain {
   display: flex;
@@ -173,6 +174,7 @@
   line-height: 184.4%;
   color: #000000;
   width: 120px;
+  font-weight: 600;
 }
 .cartItemPlans {
   flex: 1;
@@ -277,6 +279,17 @@
   .cartItemPrice {
     font-size: 18px;
     width: auto;
+    margin-top: 14px;
+    height: 36px;
+    font-weight: 600;
+  }
+  .cartItems {
+    margin-right: 0;
+  }
+  .removeCartBtn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
   }
 }
 
@@ -536,7 +549,6 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
-  margin-bottom: 12px;
 }
 .optionBtn span {
   font-size: 14px;

@@ -16,23 +16,17 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div>
           <div>
-            <div className={styles.ourPurpose_background}>
-              <img
-                src="/images/aboutUs.png"
-                alt="The Daily Stakes"
-                className={styles.ourPurpose_image}
-              />
-            </div>
+            <div className={styles.ourPurpose_background}></div>
             <div className={styles.aboutus_container}>
               <Row className={styles.row}>
-                <Col lg={10} md={24}>
+                <Col lg={8} md={24} className={styles.dsimage_container}>
                   <img
-                    src="/images/dailyStakes.svg"
+                    src="/images/about-us-dailystake.svg"
                     alt="The Daily Stakes"
                     className={styles.dailystake_image}
                   />
                 </Col>
-                <Col lg={14} md={24} className={styles.ds_detail_col}>
+                <Col lg={16} md={24} className={styles.ds_detail_col}>
                   <p className={styles.dailyStake_details}>
                     The Daily Stakes, Inc. is a North American digital sports consulting & media
                     company focused on the rapidly evolving sports betting and daily fantasy sports
@@ -43,10 +37,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 </Col>
               </Row>
               <Row className={styles.row}>
-                <Col lg={10} md={24} className={styles.aboutUs_headings_col}>
+                <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
                   <p className={styles.aboutUs_headings}>The DS mission</p>
                 </Col>
-                <Col lg={14} md={24}>
+                <Col lg={16} md={24}>
                   <p className={styles.dsMission_details}>
                     To be the sports consulting industry leader by providing our users with the
                     industry’s most versatile content and insightful recommendations.
@@ -55,10 +49,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
               </Row>
 
               <Row className={styles.row}>
-                <Col lg={10} md={24} className={styles.aboutUs_headings_col}>
+                <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
                   <p className={styles.aboutUs_headings}>The DS Story</p>
                 </Col>
-                <Col lg={14} md={24}>
+                <Col lg={16} md={24}>
                   <p className={styles.dsStory_details}>
                     Formally established in 2021 upon forming a partnership amongst professionals
                     working in the finance & consulting space, TheDailyStakes is rapidly becoming
@@ -79,10 +73,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
               </Row>
 
               <Row className={styles.row}>
-                <Col lg={10} md={24} className={styles.aboutUs_headings_col}>
+                <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
                   <p className={styles.aboutUs_headings}>The DS Purpose</p>
                 </Col>
-                <Col lg={14} md={24}>
+                <Col lg={16} md={24}>
                   <p>
                     <h5 className={styles.ourPurpose_subheadings}>EDUCATING THE BETTOR</h5>
 
@@ -125,11 +119,11 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 </Col>
               </Row>
               <Row className={styles.row}>
-                <Col lg={10} md={24} className={styles.aboutUs_headings_col}>
+                <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
                   <p className={styles.aboutUs_headings}>The DS coverage</p>
                 </Col>
 
-                <Col lg={14} md={24} className={styles.coverage_main}>
+                <Col lg={16} md={24} className={styles.coverage_main}>
                   <h5 className={styles.dsCoverage_subheadings}>SPORTS</h5>
                   <div className={styles.sport_car_container}>
                     <img src="/images/about_nba.svg" className={styles.coverage_images} />
@@ -152,7 +146,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                   </div>
 
                   <h5 className={styles.dsCoverage_subheadings_sportsbook}>
-                    Sportbooks formats included
+                    SPORTSBOOK FORMATS INCLUDED
                   </h5>
                   <div className={styles.sport_car_container}>
                     <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
@@ -162,7 +156,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
                   <div className={styles.button_div}>
                     <h5 className={styles.dsCoverage_subheadings_interesting}>
-                      Interested in winning with us?
+                      INTERESTED IN WINNING WITH US?
                     </h5>
                     <Button className={styles.checkout_btn}>Continue to Shop</Button>
                   </div>

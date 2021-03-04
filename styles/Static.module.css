@@ -103,7 +103,7 @@
   font-weight: 800;
   font-size: 48px;
   line-height: 117.9%;
-  text-align: center;
+  text-align: left;
 }
 
 .ourPurpose_subheadings {
@@ -132,8 +132,8 @@
 }
 
 .aboutus_container {
-  padding-left: 40px;
-  padding-right: 110px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 .dsMission_details {
   text-align: left;
@@ -186,9 +186,16 @@
   padding-bottom: 20px;
 }
 
+.dsimage_container {
+  align-items: center;
+  display: flex;
+}
+
 .dailystake_image {
   height: 300px;
-  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
 }
 
 .dsCoverage_subheadings {
@@ -199,6 +206,7 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 140%;
+  margin-bottom: 0px;
 }
 
 .dsCoverage_subheadings_interesting {
@@ -211,6 +219,7 @@
   line-height: 140%;
   white-space: pre-wrap;
   width: 300px;
+  margin-bottom: 0px;
 }
 
 .dsCoverage_subheadings_sportsbook {
@@ -221,6 +230,7 @@
   font-weight: 600;
   font-size: 28px;
   line-height: 140%;
+  margin-bottom: 0px;
 }
 .coverage_images {
   padding: 2px;
@@ -237,16 +247,15 @@
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 25px;
   text-align: center;
   color: #1a1a1a;
   background: #ffc700;
   margin-left: 8px;
   margin-right: 50px;
-
+  margin-top: 20px;
   padding: 15.5px 24px;
   border: none;
-  height: 70px;
+  height: 80px;
   white-space: pre-wrap;
   width: 160px;
 }
@@ -261,7 +270,6 @@
   }
 
   .dailystake_image {
-    padding-left: 50px;
     height: 200px;
     width: 100%;
   }

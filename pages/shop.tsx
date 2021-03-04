@@ -167,12 +167,6 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
         <HeroBanner />
         <div className={styles.container}>
           <MembershipOfferings currentPlan={currentPlan} changePlan={setCurrentPlan} />
-          <MembershipOfferings
-            isMobile
-            onlyFor={'sports_card'}
-            currentPlan={currentPlan}
-            changePlan={setCurrentPlan}
-          />
           {currentPlan === 'sports_card' && (
             <div className={styles.offering_details}>
               <IntroForSportsCard />
@@ -204,12 +198,6 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
               )}
             </div>
           )}
-          <MembershipOfferings
-            isMobile
-            onlyFor={'fantasy'}
-            currentPlan={currentPlan}
-            changePlan={setCurrentPlan}
-          />
           {currentPlan === 'fantasy' && (
             <div className={styles.offering_details}>
               <IntroForFantasy />
@@ -266,23 +254,18 @@ function HeroBanner() {
 type MembershipOfferingsPropsType = {
   currentPlan: string;
   isMobile?: boolean;
-  onlyFor?: string;
   changePlan: (_: string) => void;
 };
 
 function MembershipOfferings({
-  isMobile,
   currentPlan,
   changePlan,
-  onlyFor
 }: MembershipOfferingsPropsType) {
   return (
     <div
-      className={`${styles.membershipOffers_plans} ${onlyFor && styles.single} ${
-        isMobile ? styles.mobile : ''
-      }`}>
+      className={styles.membershipOffers_plans}>
       <div
-        className={`${styles.plan} ${onlyFor === 'sports_card' && styles.only} ${
+        className={`${styles.plan} ${
           currentPlan === 'sports_card' && styles.active
         }`}>
         <div className={styles.plan_content}>
@@ -295,7 +278,7 @@ function MembershipOfferings({
         </div>
       </div>
       <div
-        className={`${styles.plan} ${styles.main_plan} ${onlyFor === 'all' && styles.only} ${
+        className={`${styles.plan} ${styles.main_plan} ${
           currentPlan === 'all' && styles.active
         }`}>
         <div className={styles.plan_content}>
@@ -312,7 +295,7 @@ function MembershipOfferings({
         <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
       </div>
       <div
-        className={`${styles.plan} ${onlyFor === 'fantasy' && styles.only} ${
+        className={`${styles.plan} ${
           currentPlan === 'fantasy' && styles.active
         }`}>
         <div className={styles.plan_content}>

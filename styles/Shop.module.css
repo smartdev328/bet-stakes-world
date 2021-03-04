@@ -106,9 +106,6 @@
   justify-content: center;
   align-items: center;
 }
-.membershipOffers_plans.mobile {
-  display: none;
-}
 .plan {
   width: 425px;
   margin-right: 35px;
@@ -216,16 +213,6 @@
 @media (max-width: 1024px) {
   .membershipOffers_plans {
     flex-direction: column;
-    display: none;
-  }
-  .membershipOffers_plans.mobile {
-    display: block;
-  }
-  .membershipOffers_plans.mobile .plan {
-    display: none;
-  }
-  .membershipOffers_plans.mobile .plan.only {
-    display: block;
   }
   .plan {
     order: 1;

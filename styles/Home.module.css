@@ -517,45 +517,6 @@ li .square_icon {
   width: 135%;
 }
 
-.protection_div {
-  display: flex;
-}
-
-.protection_heading {
-  text-transform: uppercase;
-
-  font-family: Saira;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 184.4%;
-
-  text-align: center;
-  text-transform: uppercase;
-
-  color: #000000;
-}
-
-.protection_details {
-  text-transform: uppercase;
-  font-family: Saira;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 184.4%;
-
-  text-align: center;
-  text-transform: uppercase;
-
-  color: #000000;
-}
-
-.protection_image_div {
-  position: absolute;
-  top: -250;
-  /* left: 0; */
-}
-
 @media (max-width: 1400px) and (min-width: 1241px) {
   .membershipOffers {
     padding: 118px 50px 130px;
@@ -2016,4 +1977,93 @@ li .square_icon {
   text-transform: uppercase;
 
   color: #000000;
+}
+
+@media (max-width: 600px) {
+  .plan_extra_content {
+    display: none;
+  }
+  .protection_div {
+    display: none;
+  }
+  .plan_extra_content_mobile {
+    font-family: 'Rock Salt';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 184.4%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin-top: 1em;
+    padding-bottom: 8px;
+  }
+}
+
+.plan_extra_content_mobile {
+  display: none;
+}
+
+.protection_div_mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .plan_extra_content_mobile {
+    font-family: 'Rock Salt';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin-top: 1em;
+    display: block;
+    padding-bottom: 8px;
+  }
+
+  .plan_extra_content {
+    display: none;
+  }
+
+  .protection_div {
+    display: none;
+  }
+
+  .protection_div_mobile {
+    display: flex;
+  }
+}
+
+.protection_div {
+  display: flex;
+}
+
+.protection_heading {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 15px;
+}
+
+.protection_details {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: -7px;
+}
+
+.protection_image_div {
+  margin-top: 2px;
 }

@@ -139,6 +139,7 @@ function MembershipOfferings() {
         dashboard which will include your specified picks, key stats & trends, our weekly pro tip,
         hands on support & an expert bankroll management system.
       </div>
+      <div className={styles.plan_extra_content_mobile}>Best&nbsp;&nbsp;Deal!</div>
       <div className={styles.membershipOffers_plans}>
         <div className={styles.plan}>
           <div className={styles.plan_content}>
@@ -167,6 +168,7 @@ function MembershipOfferings() {
             </div>
           </div>
         </div>
+
         <div className={`${styles.plan} ${styles.main_plan}`}>
           <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
           <div className={styles.plan_content}>
@@ -204,7 +206,7 @@ function MembershipOfferings() {
           </div>
           <div className={styles.protection_div}>
             <div className={styles.protection_image_div}>
-              <img src="/images/ds-protection.png" width={250} height={255} />
+              <img src="/images/ds-protectionn.png" width={150} height={160} />
             </div>
 
             <div>
@@ -216,6 +218,21 @@ function MembershipOfferings() {
             </div>
           </div>
         </div>
+
+        <div className={styles.protection_div_mobile}>
+          <div className={styles.protection_image_div}>
+            <img src="/images/ds-protectionn.png" width={150} height={160} />
+          </div>
+
+          <div>
+            <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
+            <p className={styles.protection_details}>
+              IF over 50% of the plays on theCard are losses for a given day, the next day’s picks
+              is automatically FREE.
+            </p>
+          </div>
+        </div>
+
         <div className={styles.plan}>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>

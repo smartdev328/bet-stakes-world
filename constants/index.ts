@@ -261,6 +261,76 @@ export const MOCK_DailyFantasyLineups = [
         features: ['MLB Single Slate for NOP vs LAL', 'MLB MAIN slate at 7:00 pm EST']
       }
     ]
+  },
+  {
+    sport: 'SOCCER',
+    title: 'Lineups for DK, FD and Yahoo!',
+    content: [
+      {
+        label: 'Draftkings Lineups Include',
+        features: ['SOCCER Single Slate for NOP vs LAL', 'SOCCER MAIN slate at 7:00 pm EST']
+      },
+      {
+        label: 'Fanduel lineups include',
+        features: ['SOCCER Single Slate for NOP vs LAL', 'SOCCER MAIN slate at 7:00 pm EST']
+      }
+    ]
+  },
+  {
+    sport: 'NCAAB',
+    title: 'Lineups for DK, FD and Yahoo!',
+    content: [
+      {
+        label: 'Draftkings Lineups Include',
+        features: ['NCAAB Single Slate for NOP vs LAL', 'NCAAB MAIN slate at 7:00 pm EST']
+      },
+      {
+        label: 'Fanduel lineups include',
+        features: ['NCAAB Single Slate for NOP vs LAL', 'NCAAB MAIN slate at 7:00 pm EST']
+      }
+    ]
+  },
+  {
+    sport: 'NCAAF',
+    title: 'Lineups for DK, FD and Yahoo!',
+    content: [
+      {
+        label: 'Draftkings Lineups Include',
+        features: ['NCAAF Single Slate for NOP vs LAL', 'NCAAF MAIN slate at 7:00 pm EST']
+      },
+      {
+        label: 'Fanduel lineups include',
+        features: ['NCAAF Single Slate for NOP vs LAL', 'NCAAF MAIN slate at 7:00 pm EST']
+      }
+    ]
+  },
+  {
+    sport: 'Formula 1',
+    title: 'Lineups for DK, FD and Yahoo!',
+    content: [
+      {
+        label: 'Draftkings Lineups Include',
+        features: ['F1 Single Slate for NOP vs LAL', 'F1 MAIN slate at 7:00 pm EST']
+      },
+      {
+        label: 'Fanduel lineups include',
+        features: ['F1 Single Slate for NOP vs LAL', 'F1 MAIN slate at 7:00 pm EST']
+      }
+    ]
+  },
+  {
+    sport: 'UFC',
+    title: 'Lineups for DK, FD and Yahoo!',
+    content: [
+      {
+        label: 'Draftkings Lineups Include',
+        features: ['UFC Single Slate for NOP vs LAL', 'UFC MAIN slate at 7:00 pm EST']
+      },
+      {
+        label: 'Fanduel lineups include',
+        features: ['UFC Single Slate for NOP vs LAL', 'UFC MAIN slate at 7:00 pm EST']
+      }
+    ]
   }
 ];
 
@@ -321,6 +391,141 @@ export const MOCK_VipAllAccessCard = [
   },
   {
     sport: 'MLB',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'SOCCER',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'NCAAB',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'NCAAF',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'Formula 1',
+    title: 'Includes 6 plays',
+    content: [
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: 'Straight Bet (-110, 1 unit)'
+      },
+      {
+        label: '1 player prop (-110, 1 unit)'
+      },
+      {
+        label: '2 game Parlay  (+350, 1 unit)'
+      },
+      {
+        label: '2 player prop Parlay  (+650, 1 unit)'
+      },
+      {
+        label: '1 bonus wildcard parlay (+1050, 1 unit)'
+      }
+    ]
+  },
+  {
+    sport: 'UFC',
     title: 'Includes 6 plays',
     content: [
       {

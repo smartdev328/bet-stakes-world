@@ -129,8 +129,10 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
       <Head>
         <title>The Daily Stakes - Yesterdays plays</title>
       </Head>
+
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
+
         <div className={styles.container}>
           {sports.length > 0 && <TopSection sports={sports} onSelectChange={updateFilters} />}
         </div>
@@ -138,11 +140,6 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>
-              <div className={styles.laptop_view}>
-                <VipAllAccessCard />
-                <DailyFantasyLineups />
-              </div>
-
               <Col span={18} className={styles.contentMainCol}>
                 {!token && <SubscribeNow />}
                 {token && (
@@ -161,8 +158,6 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
                   </>
                 )}
                 <div className={styles.laptop_view}>
-                  <VipAllAccessCard />
-                  <DailyFantasyLineups />
                   <CommonSportsBook />
                   <WhereToWatchGame />
                   <WhereBuyGear />
@@ -267,6 +262,10 @@ function TopSection({ sports, onSelectChange }: TopSectionPropsType) {
     <>
       <DashboardHeader title={'Yesterdays plays'} />
       <Row className={styles.sportsCardList} justify={'center'}>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
         <Button
           className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
           onClick={onUnlockAll}>

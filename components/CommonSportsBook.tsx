@@ -1,13 +1,17 @@
 import { Col, Row } from 'antd';
 import React from 'react';
 import styles from './CommonSportsBook.module.css';
-import { OpenBookIcon } from './SvgIcons';
 
 function CommonSportsBook() {
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <OpenBookIcon className={styles.sidebarBlockTitleIcon} />
+        <img
+          src={'/images/comom-sport.svg'}
+          height="32px"
+          width="32px"
+          style={{ paddingRight: '6px' }}
+        />
         <span>Common Sportsbooks</span>
       </div>
       <div className={styles.sidebarBlockContent}>

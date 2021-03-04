@@ -97,10 +97,6 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             }}
           />
           <Row className={styles.content}>
-            <div className={styles.laptop_view}>
-              <VipAllAccessCard />
-              <DailyFantasyLineups />
-            </div>
             <Col sm={24} md={18} className={styles.contentMainCol}>
               {SportBetTypes.map((type) => (
                 <ListGames
@@ -182,6 +178,10 @@ function TopSection({ sports, changeActiveSport }: TopSectionPropsType) {
     <>
       <DashboardHeader title={'VIP ALL ACCESS CARD'} />
       <Row className={styles.sportsCardList} justify={'center'}>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
         <Button
           className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
           onClick={onUnlockAll}>

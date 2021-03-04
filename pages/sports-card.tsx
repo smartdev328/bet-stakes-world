@@ -130,11 +130,6 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
-              <div className={styles.laptop_view}>
-                <VipAllAccessCard />
-                <DailyFantasyLineups />
-              </div>
-
               <Col sm={24} md={18} className={styles.contentMainCol}>
                 {SportBetTypes.map((type) => (
                   <ListGames
@@ -232,6 +227,10 @@ function TopSection({
     <>
       <DashboardHeader title={'Sports Card'} />
       <Row className={styles.sportsCardList}>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
         <Button className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <LockIcon className={styles.lock_icon} />

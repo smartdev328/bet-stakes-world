@@ -171,10 +171,6 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
             onChangeOptions={onChangeOptions}
           />
         </div>
-        <div className={styles.laptop_view}>
-          <VipAllAccessCard />
-          <DailyFantasyLineups />
-        </div>
 
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
@@ -285,6 +281,10 @@ function TopSection({
     <>
       <DashboardHeader title={'Daily Fantasy'} />
       <Row className={styles.sportsCardList} justify={'center'}>
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
         <div className={styles.sportsCardListCarousel}>
           {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
             <Button

@@ -1,5 +1,5 @@
 .sidebarBlock {
-  background: #F1F1F1;
+  background: #f1f1f1;
   padding: 16px;
   margin-left: 16px;
   margin-bottom: 24px;
@@ -36,8 +36,8 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  color: #FFFFFF;
-  background: #1A1A1A;
+  color: #ffffff;
+  background: #1a1a1a;
   border: 1px solid #434343;
   flex: 1;
 }
@@ -74,10 +74,11 @@
   margin-bottom: 16px;
 }
 
-.accordionTitle span, .accordionTitle strong {
+.accordionTitle span,
+.accordionTitle strong {
   font-size: 16px;
   line-height: 25px;
-  color: #1A1A1A;
+  color: #1a1a1a;
 }
 .accordionTitleIcon {
   width: 16px;
@@ -124,7 +125,8 @@
   .sidebarBlockTitleIcon {
     width: 18px;
   }
-  .agressiveBtn, .conservativeBtn {
+  .agressiveBtn,
+  .conservativeBtn {
     font-size: 13px;
   }
   .sidebarBlockContent p {
@@ -137,21 +139,22 @@
     padding-right: 0;
     padding-left: 5px;
   }
-  .company_logo:nth-child(2n+1) {
+  .company_logo:nth-child(2n + 1) {
     padding-right: 5px;
     padding-left: 0;
   }
   .company_logo {
     margin-bottom: 18px;
   }
-  .company_logo img  {
+  .company_logo img {
     max-width: 100%;
     height: auto;
   }
   .accordionTitle {
     margin-bottom: 8px;
   }
-  .accordionTitle span, .accordionTitle strong {
+  .accordionTitle span,
+  .accordionTitle strong {
     font-size: 14px;
     line-height: 21px;
   }
@@ -164,8 +167,6 @@
     line-height: 18px;
   }
 }
-
-
 
 @media (max-width: 1024px) {
   .contentMainCol {
@@ -198,7 +199,8 @@
   .sidebarBlockTitleIcon {
     width: 18px;
   }
-  .agressiveBtn, .conservativeBtn {
+  .agressiveBtn,
+  .conservativeBtn {
     font-size: 13px;
   }
   .sidebarBlockContent p {
@@ -211,21 +213,22 @@
     padding-right: 0;
     padding-left: 5px;
   }
-  .company_logo:nth-child(2n+1) {
+  .company_logo:nth-child(2n + 1) {
     padding-right: 5px;
     padding-left: 0;
   }
   .company_logo {
     margin-bottom: 18px;
   }
-  .company_logo img  {
+  .company_logo img {
     max-width: 100%;
     height: auto;
   }
   .accordionTitle {
     margin-bottom: 8px;
   }
-  .accordionTitle span, .accordionTitle strong {
+  .accordionTitle span,
+  .accordionTitle strong {
     font-size: 14px;
     line-height: 21px;
   }
@@ -257,4 +260,8 @@
   .sidebarBlockContent {
     padding-bottom: 5px;
   }
+}
+
+.handIcon {
+  cursor: pointer;
 }

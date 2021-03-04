@@ -62,12 +62,13 @@ const SportTile = ({ sport }: SportTilePropsType) => {
   const selectedSport = SPORTS_INFO.filter(
     (sp) => sp.name.toLowerCase() === sport.toLowerCase()
   )[0];
+  console.log(selectedSport);
   return (
     <div
       className={`${styles.sportTileBtn} ${styles['sportTile_' + selectedSport.id]}`}
       style={{ background: selectedSport.background }}>
       {selectedSport.logo()}
-      <span>{selectedSport.name}</span>
+      <span>{selectedSport.name.toLowerCase() === 'formula 1' ? 'F1' : selectedSport.name}</span>
     </div>
   );
 };

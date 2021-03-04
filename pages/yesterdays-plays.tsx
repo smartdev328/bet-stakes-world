@@ -198,7 +198,7 @@ function SubscribeNow() {
             />
           </LazyLoad>
           <div className={styles.subscribenow_desc}>
-            Subscribe Now for Free & Join the Winning Team.
+            Subscribe now for free with TheDailyStakes and gain access to yesterday’s plays!
           </div>
         </div>
         <div className={styles.subscribenow_right}>

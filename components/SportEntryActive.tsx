@@ -108,17 +108,28 @@ function SportEntryActive({
                       : `${game.units} Unit${game.units > 1 ? 's' : ''}`}
                   </div>
                 </div>
-                <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-                  <div className={styles.hide_details_btn}>
-                    <span>View Details</span>
-                    {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                    {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
-                </div>
-                {showDetailsAt[index] && (
-                  <div className={styles.details_section}>
-                    <Markdown source={game.detail} />
-                  </div>
+
+                {game.detail.length > 0 ? (
+                  <>
+                    <div
+                      onClick={() => changeDetailsVisibleAt(index)}
+                      className={styles.hide_details}>
+                      <div className={styles.hide_details_btn}>
+                        <span>View Details</span>
+                        {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                        {!showDetailsAt[index] && (
+                          <CaretDownOutlined className={styles.caret_down} />
+                        )}
+                      </div>
+                    </div>
+                    {showDetailsAt[index] && (
+                      <div className={styles.details_section}>
+                        <Markdown source={game.detail} />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className={styles.border_line} />
                 )}
               </div>
             ))}

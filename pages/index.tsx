@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import {
@@ -205,32 +205,12 @@ function MembershipOfferings() {
             </div>
           </div>
           <div className={styles.protection_div}>
-            <div className={styles.protection_image_div}>
-              <img src="/images/ds-protectionn.png" width={150} height={160} />
-            </div>
-
-            <div>
-              <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
-              <p className={styles.protection_details}>
-                IF over 50% of the plays on theCard are losses for a given day, the next day’s picks
-                is automatically FREE.
-              </p>
-            </div>
+            <DSProtection />
           </div>
         </div>
 
         <div className={styles.protection_div_mobile}>
-          <div className={styles.protection_image_div}>
-            <img src="/images/ds-protectionn.png" width={150} height={160} />
-          </div>
-
-          <div>
-            <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
-            <p className={styles.protection_details}>
-              IF over 50% of the plays on theCard are losses for a given day, the next day’s picks
-              is automatically FREE.
-            </p>
-          </div>
+          <DSProtection />
         </div>
 
         <div className={styles.plan}>

@@ -21,3 +21,4 @@ export { default as WhereBuyGear } from './WhereBuyGear';
 export { default as WhereToWatchGame } from './WhereToWatchGame';
 export { default as VipAllAccessCard } from './VipAllAccessCard';
 export { default as BankRollManagement } from './BankRollManagement';
+export { default as DSProtection } from './DSProtection';

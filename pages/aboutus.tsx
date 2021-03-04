@@ -16,13 +16,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div>
           <div>
-            <div className={styles.ourPurpose_background}>
-              <img
-                src="/images/aboutUs.png"
-                alt="The Daily Stakes"
-                className={styles.ourPurpose_image}
-              />
-            </div>
+            <div className={styles.ourPurpose_background}></div>
             <div className={styles.aboutus_container}>
               <Row className={styles.row}>
                 <Col lg={8} md={24} className={styles.dsimage_container}>

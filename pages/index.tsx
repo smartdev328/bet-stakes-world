@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
 
-import { AppLayout, BannerSportsAndMatches } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import {
@@ -149,6 +149,7 @@ function MembershipOfferings() {
         dashboard which will include your specified picks, key stats & trends, our weekly pro tip,
         hands on support & an expert bankroll management system.
       </div>
+      <div className={styles.plan_extra_content_mobile}>Best&nbsp;&nbsp;Deal!</div>
       <div className={styles.membershipOffers_plans}>
         <div className={styles.plan}>
           <div className={styles.plan_content}>
@@ -177,7 +178,9 @@ function MembershipOfferings() {
             </div>
           </div>
         </div>
+
         <div className={`${styles.plan} ${styles.main_plan}`}>
+          <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
               <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -211,8 +214,15 @@ function MembershipOfferings() {
               </Button>
             </div>
           </div>
-          <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
+          <div className={styles.protection_div}>
+            <DSProtection />
+          </div>
         </div>
+
+        <div className={styles.protection_div_mobile}>
+          <DSProtection />
+        </div>
+
         <div className={styles.plan}>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>

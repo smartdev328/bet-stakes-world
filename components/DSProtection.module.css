@@ -1,0 +1,41 @@
+.protection_image {
+  height: 160px;
+  width: 150px;
+}
+
+.protection_heading {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 15px;
+}
+
+.protection_details {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: -7px;
+}
+
+.protection_image_div {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .protection_image {
+    height: 110px;
+    width: 100px;
+  }
+}

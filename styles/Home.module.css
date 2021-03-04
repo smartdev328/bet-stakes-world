@@ -501,12 +501,13 @@ li .square_icon {
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
-  font-size: 43.9518px;
+  font-size: 35px;
   line-height: 184.4%;
   text-align: center;
   text-transform: uppercase;
   color: #000000;
   margin-top: 1em;
+  padding-bottom: 8px;
 }
 .deal_circle {
   position: absolute;
@@ -1992,4 +1993,42 @@ li .square_icon {
   text-transform: uppercase;
 
   color: #000000;
+}
+
+.plan_extra_content_mobile {
+  display: none;
+}
+
+.protection_div_mobile {
+  display: none;
+}
+
+.protection_div {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .protection_div {
+    display: none;
+  }
+
+  .protection_div_mobile {
+    display: flex;
+  }
+  .plan_extra_content_mobile {
+    font-family: 'Rock Salt';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin-top: 1em;
+    display: block;
+    padding-bottom: 8px;
+  }
+  .plan_extra_content {
+    display: none;
+  }
 }

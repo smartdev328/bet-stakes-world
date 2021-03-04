@@ -45,7 +45,7 @@ const SPORTS_INFO = [
     logo: () => <UFC_SVG className={styles.sports_logo} />
   },
   {
-    name: 'F1',
+    name: 'FORMULA 1',
     id: 'F1',
     background: '#505054',
     logo: () => <F1_SVG className={styles.sports_logo} />
@@ -68,7 +68,7 @@ const SportTile = ({ sport }: SportTilePropsType) => {
       className={`${styles.sportTileBtn} ${styles['sportTile_' + selectedSport.id]}`}
       style={{ background: selectedSport.background }}>
       {selectedSport.logo()}
-      <span>{selectedSport.name}</span>
+      <span>{selectedSport.name.toLowerCase() === 'formula 1' ? 'F1' : selectedSport.name}</span>
     </div>
   );
 };

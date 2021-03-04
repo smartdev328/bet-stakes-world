@@ -305,7 +305,7 @@ export const MOCK_DailyFantasyLineups = [
     ]
   },
   {
-    sport: 'F1',
+    sport: 'Formula 1',
     title: 'Lineups for DK, FD and Yahoo!',
     content: [
       {
@@ -498,7 +498,7 @@ export const MOCK_VipAllAccessCard = [
     ]
   },
   {
-    sport: 'F1',
+    sport: 'Formula 1',
     title: 'Includes 6 plays',
     content: [
       {

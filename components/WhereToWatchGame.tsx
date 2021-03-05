@@ -18,18 +18,36 @@ function WhereToWatchGame() {
         <Row>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.dazn.com/">
-              <img src="/images/dazn-company.png" alt="DAZN Logo" width={80} height={80} />
+              <img
+                src="/images/dazn-company.png"
+                alt="DAZN Logo"
+                width={80}
+                height={80}
+                className={styles.image_style}
+              />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.stubhub.com/">
-              <img src="/images/stubhub-company.png" alt="StubHub Logo" width={80} height={80} />
+              <img
+                src="/images/stubhub-company.png"
+                alt="StubHub Logo"
+                width={80}
+                height={80}
+                className={styles.image_style}
+              />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.fubo.tv/">
-              <img src="/images/fubo-tv-company.png" alt="FuboTV Logo" width={100} height={110} />
+              <img
+                src="/images/fubo-tv-company.png"
+                alt="FuboTV Logo"
+                width={100}
+                height={50}
+                className={styles.image_style}
+              />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -37,14 +55,21 @@ function WhereToWatchGame() {
               <img
                 src="/images/ticketmaster-company.png"
                 alt="TicketMaster Logo"
-                width={120}
-                height={160}
+                width={150}
+                height={50}
+                className={styles.image_style}
               />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img src="/images/sling-company.png" alt="VividSeats Logo" width={100} height={90} />
+            <img
+              src="/images/sling-company.png"
+              alt="VividSeats Logo"
+              width={150}
+              height={60}
+              className={styles.image_style}
+            />
           </Col>
 
           <Col span={12} className={styles.company_logo}>
@@ -52,8 +77,9 @@ function WhereToWatchGame() {
               <img
                 src="/images/vividseats-company.png"
                 alt="VividSeats Logo"
-                width={100}
-                height={110}
+                width={150}
+                height={40}
+                className={styles.image_style}
               />
             </a>
           </Col>

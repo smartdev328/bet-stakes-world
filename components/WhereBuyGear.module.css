@@ -5,6 +5,9 @@
   margin-bottom: 24px;
   min-height: 300px;
 }
+.image_style {
+  object-fit: contain;
+}
 .company_logo {
   margin-top: 2em;
   display: flex;

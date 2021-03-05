@@ -83,10 +83,10 @@ const SPORTS_INFO = [
 ];
 
 export default function SportsCard({ token, subscriptions, sports, packages }: PageProps) {
-  const [openUnlockModal, setOpenUnlockModal] = useState<Sport | undefined>(undefined);
   const [activeSport, setActiveSport] = useState<number>(-1);
   const [filterType, setFilterType] = useState<string>('');
   const [unlockedItems, setUnlockedItems] = useState<number[]>([]);
+  const [showLockView, setShowLockView] = useState<boolean>(false);
 
   useEffect(() => {
     const items: number[] = [];
@@ -109,12 +109,12 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
           <TopSection
             sports={sports}
             unlockedItems={unlockedItems}
-            changeActiveSport={(sport) => {
+            changeActiveSport={(sport: number) => {
+              setShowLockView(!unlockedItems.some((item: number) => item === sport));
               setActiveSport(sport);
-              setOpenUnlockModal(undefined);
             }}
             openUnlockModal={(sport: Sport) => {
-              setOpenUnlockModal(sport);
+              setShowLockView(!unlockedItems.some((item: number) => item === sport.id));
             }}
             filterChanged={(filter) => {
               setFilterType(filter);
@@ -123,19 +123,7 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
         </div>
 
         <div className={styles.containerWrapper}>
-          {openUnlockModal && packages && (
-            <UnLockItemModal
-              sport={openUnlockModal}
-              packages={packages}
-              closeModal={() => setOpenUnlockModal(undefined)}
-            />
-          )}
           <div className={styles.container}>
-            <Row className={styles.content}>
-              <Col sm={24} md={18} className={styles.contentMainCol}>
-                <LockSportsCard />
-              </Col>
-            </Row>
             <Row className={styles.content}>
               <div className={styles.laptop_view}>
                 <VipAllAccessCard />
@@ -143,16 +131,20 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
               </div>
 
               <Col sm={24} md={18} className={styles.contentMainCol}>
-                {SportBetTypes.map((type) => (
-                  <ListGames
-                    id={type.id}
-                    title={type.name}
-                    key={type.id}
-                    subscriptions={subscriptions}
-                    selectedSport={activeSport}
-                    selectedFilterType={filterType}
-                  />
-                ))}
+                {showLockView ? (
+                  <LockSportsCard />
+                ) : (
+                  SportBetTypes.map((type) => (
+                    <ListGames
+                      id={type.id}
+                      title={type.name}
+                      key={type.id}
+                      subscriptions={subscriptions}
+                      selectedSport={activeSport}
+                      selectedFilterType={filterType}
+                    />
+                  ))
+                )}
                 <div className={styles.laptop_view}>
                   <CommonSportsBook />
                   <WhereToWatchGame />

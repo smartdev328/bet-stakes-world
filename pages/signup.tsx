@@ -255,7 +255,7 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
             </li>
           </ul>
           <div className={styles.vipBestValue}>
-            <img src="/images/mark-vip.png" alt="" />
+            <img src="/images/mark-vip2.svg" alt="" />
             <span>Best Value!</span>
           </div>
           <div className={styles.extra_info}>

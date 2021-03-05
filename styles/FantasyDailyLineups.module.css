@@ -580,6 +580,15 @@
   margin-left: 8px;
 }
 
+.details_property p, .details_property div {
+  margin-bottom: 0;
+  margin-left: 1em;
+  white-space: pre-line;
+}
+.details_property_title p,
+.details_property_title div {
+  margin-left: 0;
+}
 .details_property_title .user_double_icon {
   height: 16px;
 }

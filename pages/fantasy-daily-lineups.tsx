@@ -7,6 +7,7 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import LazyLoad from 'react-lazyload';
 import NumberFormat from 'react-number-format';
 import { useRouter } from 'next/router';
+import Markdown from 'react-markdown';
 
 import {
   AppLayout,
@@ -502,33 +503,39 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
             </div>
             {showDetailsAt[index] && (
               <Row className={styles.details_properties} justify={'space-between'}>
-                <div className={styles.details_property}>
-                  <div className={styles.details_property_title}>
-                    <AntiClockIcon className={styles.anti_clock_icon} />
-                    <span>THIS SEASON</span>
-                  </div>
-                  <div>{lineup.stat.this_season}</div>
-                </div>
-                <div className={styles.details_property}>
-                  <div className={styles.details_property_title}>
-                    <div>
-                      <img
-                        alt=""
-                        src="/images/user-double.png"
-                        className={styles.user_double_icon}
-                      />
+                {lineup?.stat?.this_season && (
+                  <div className={styles.details_property}>
+                    <div className={styles.details_property_title}>
+                      <AntiClockIcon className={styles.anti_clock_icon} />
+                      <span>THIS SEASON</span>
                     </div>
-                    <span>PROJECTED POINTS BY THE DAILY STAKES </span>
+                    <Markdown source={lineup?.stat?.this_season} />
                   </div>
-                  <div>{lineup.stat.projected_points}</div>
-                </div>
-                <div className={styles.details_property}>
-                  <div className={styles.details_property_title}>
-                    <DateRangeIcon className={styles.date_range_icon} />
-                    <span>PLAYER PROPS BY THE Sportbooks</span>
+                )}
+                {lineup?.stat?.projected_points && (
+                  <div className={styles.details_property}>
+                    <div className={styles.details_property_title}>
+                      <div>
+                        <img
+                          alt=""
+                          src="/images/user-double.png"
+                          className={styles.user_double_icon}
+                        />
+                      </div>
+                      <span>PROJECTED POINTS BY THE DAILY STAKES </span>
+                    </div>
+                    <Markdown source={lineup?.stat?.projected_points} />
                   </div>
-                  <div>{lineup.stat.player_props}</div>
-                </div>
+                )}
+                {lineup?.stat?.player_props && (
+                  <div className={styles.details_property}>
+                    <div className={styles.details_property_title}>
+                      <DateRangeIcon className={styles.date_range_icon} />
+                      <span>PLAYER PROPS BY THE Sportbooks</span>
+                    </div>
+                    <Markdown source={lineup?.stat?.player_props} />
+                  </div>
+                )}
               </Row>
             )}
           </div>

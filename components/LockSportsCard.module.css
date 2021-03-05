@@ -6,11 +6,10 @@
 
 .subscribenow_desc {
   margin-top: 10px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 40px;
-  color: #f1f1f1;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 57px;
+  color: #FFFFFF;
   text-align: center;
 }
 
@@ -24,43 +23,46 @@
   text-align: center;
 }
 
-.leftCard {
+.leftCard, .rightCard {
   background: #ffffff;
-}
-
-.rightCard {
-  background: #ffffff;
+  width: 240px;
+  padding: 20px;
+  flex: none;
 }
 
 .vipText {
-  font-family: Saira;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  text-align: center;
+  text-align: left;
   color: #1a1a1a;
-  padding-top: 8px;
+  margin-bottom: 0;
+  padding: 0;
+  text-transform: uppercase;
 }
 
 .allPlayText {
-  font-family: Saira;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 19px;
-  text-align: center;
+  text-align: left;
   color: #1a1a1a;
+  margin: 0;
+  height: 40px;
 }
 
 .leftOuterDiv {
-  height: 270px;
   width: 100%;
 }
 
 .rightOuterDiv {
-  height: 270px;
   width: 100%;
+}
+.rightOuterDiv .allPlayText {
+  font-size: 10px;
+  line-height: 16px;
+  height: 38px;
 }
 
 .imageAndDetailDivForRight {
@@ -68,52 +70,51 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 10px;
+  padding-bottom: 4px;
 }
 
 .imageAndDetailDiv {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
-  padding-top: 30px;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
-
+.imageAndDetailDiv img {
+  margin-right: 8px;
+  height: auto;
+}
 .bestValueText {
   font-family: Rock Salt;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 184.4%;
-
-  text-align: center;
   text-transform: uppercase;
-
   color: #000000;
 }
 
 .dailyCardText {
-  font-family: Saira;
   font-style: normal;
   font-weight: normal;
   font-size: 8px;
   line-height: 140%;
-  text-align: center;
   color: #000000;
+  margin-bottom: 0;
 }
 .subscribe_btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 7.5px 24px;
-
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
   background: #ffc700;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 40px;
+  margin-top: 0.2em;
+  width: 100%;
 }
 
 .buttonContainer {
@@ -127,6 +128,7 @@
   padding-right: 100px;
   padding-left: 100px;
   padding-top: 40px;
+  justify-content: center;
 }
 
 .orColumn {
@@ -139,11 +141,14 @@
 .imagesContainer {
   display: flex;
   justify-content: center;
+  padding-bottom: 4px;
 }
 
 .images {
-  padding-right: 3px;
-  padding-left: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  width: 52px;
+  height: 42px;
 }
 
 @media (max-width: 600px) {

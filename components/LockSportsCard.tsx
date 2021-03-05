@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './LockSportsCard.module.css';
 import { Row, Button, Col } from 'antd';
+import Link from 'next/link';
+
+import styles from './LockSportsCard.module.css';
 
 const LockSportsCard = () => {
   return (
@@ -15,17 +17,17 @@ const LockSportsCard = () => {
             <p className={styles.allPlayText}>ALL PLAYS. ALL SPORTS</p>
 
             <div className={styles.imageAndDetailDiv}>
-              <img src="/images/lock_vip_sport.png" alt="Fanduel Logo" width={70} height={80} />
+              <img src="/images/mark-vip2.svg" alt="Fanduel Logo" width={70} height={80} />
               <div>
-                <p className={styles.bestValueText}> best Value!</p>
+                <p className={styles.bestValueText}>best Value!</p>
                 <p className={styles.dailyCardText}>
-                  *The Daily Card inclues TheDailyStakes Guaranteed Protection.{' '}
+                  *The <b>Daily Card</b> inclues TheDailyStakes Guaranteed Protection.{' '}
                 </p>
               </div>
             </div>
 
             <div className={styles.buttonContainer}>
-              <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+              <Link href="/shop?plan=all"><Button className={styles.subscribe_btn}>Go to Shop Page</Button></Link>
             </div>
           </div>
         </Col>
@@ -92,7 +94,7 @@ const LockSportsCard = () => {
               </div>
             </div>
             <div className={styles.buttonContainer}>
-              <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+              <Link href="/shop?plan=sports_card"><Button className={styles.subscribe_btn}>Go to Shop Page</Button></Link>
             </div>
           </div>
         </Col>

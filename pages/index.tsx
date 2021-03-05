@@ -226,7 +226,7 @@ function MembershipOfferings() {
         <div className={styles.plan}>
           <div className={styles.plan_content}>
             <div className={styles.plan_content_info}>
-              <div className={styles.plan_content_title}>Fantasy</div>
+              <div className={styles.plan_content_title}>DAILY FANTASY CARD</div>
               <div className={styles.plan_content_desc}>OPTIMAL DFS LINEUPS.</div>
             </div>
             <div className={styles.plan_content_details}>

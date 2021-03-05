@@ -182,7 +182,6 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           <VipAllAccessCard />
           <DailyFantasyLineups />
         </div>
-
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>

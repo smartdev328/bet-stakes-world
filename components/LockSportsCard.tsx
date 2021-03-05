@@ -15,7 +15,7 @@ const LockSportsCard = () => {
             <p className={styles.allPlayText}>ALL PLAYS. ALL SPORTS</p>
 
             <div className={styles.imageAndDetailDiv}>
-              <img src="/images/fanduel.png" alt="Fanduel Logo" width={107} height={26} />
+              <img src="/images/lock_vip_sport.png" alt="Fanduel Logo" width={70} height={80} />
               <div>
                 <p className={styles.bestValueText}> best Value!</p>
                 <p className={styles.dailyCardText}>
@@ -24,13 +24,78 @@ const LockSportsCard = () => {
               </div>
             </div>
 
-            <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+            <div className={styles.buttonContainer}>
+              <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+            </div>
           </div>
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className={styles.orColumn}>
           <p className={styles.orText}>Or</p>
         </Col>
-        <Col lg={10} className={styles.rightCard}></Col>
+        <Col lg={10} className={styles.rightCard}>
+          <div className={styles.rightOuterDiv}>
+            <p className={styles.vipText}>SPORTS CARD</p>
+            <p className={styles.allPlayText}>ALL PLAYS FOR THE SPORT(S) OF YOUR CHOICE</p>
+            <div className={styles.imageAndDetailDivForRight}>
+              <div className={styles.imagesContainer}>
+                <img
+                  src="/images/lock_nba_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_nfl_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_mlb_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_soccer_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+              </div>
+
+              <div className={styles.imagesContainer}>
+                <img
+                  src="/images/lock_ufc_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_f1_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_ncaab_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+                <img
+                  src="/images/lock_ncaaf_sport.svg"
+                  width={50}
+                  height={50}
+                  className={styles.images}
+                />
+              </div>
+            </div>
+            <div className={styles.buttonContainer}>
+              <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+            </div>
+          </div>
+        </Col>
       </Row>
     </div>
   );

@@ -7,12 +7,12 @@
 .subscribenow_desc {
   margin-top: 10px;
   margin-bottom: 10px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 40px;
   color: #f1f1f1;
   text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 57px;
 }
 
 .orText {
@@ -25,45 +25,36 @@
   text-align: center;
 }
 
-.leftCard {
-  background: #ffffff;
-}
-
 .rightCard {
   background: #ffffff;
+  width: 220px;
+  flex: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .vipText {
-  font-family: Saira;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  text-align: center;
+  text-align: left;
   color: #1a1a1a;
-  padding-top: 8px;
+  text-transform: uppercase;
+  margin-bottom: 0.2em;
 }
 
 .allPlayText {
-  font-family: Saira;
-  font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 19px;
-  text-align: center;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: left;
   color: #1a1a1a;
-}
-
-.leftOuterDiv {
-  height: 270px;
-  width: 100%;
+  margin-bottom: 0em;
 }
 
 .rightOuterDiv {
-  height: 220px;
   width: 100%;
 }
 
@@ -100,7 +91,6 @@
 }
 
 .dailyCardText {
-  font-family: Saira;
   font-style: normal;
   font-weight: normal;
   font-size: 8px;
@@ -113,11 +103,17 @@
   flex-direction: column;
   align-items: center;
   padding: 7.5px 24px;
-
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
   background: #ffc700;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 40px;
+  margin-top: 0.2em;
+  width: 100%;
 }
 
 .buttonContainer {
@@ -148,8 +144,8 @@
 }
 
 .images {
-  padding-right: 3px;
-  padding-left: 3px;
+  padding-right: 4px;
+  padding-left: 4px;
 }
 
 @media (max-width: 600px) {

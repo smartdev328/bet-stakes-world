@@ -6,7 +6,7 @@
 }
 
 .image_style {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .sidebarBlockTitle {

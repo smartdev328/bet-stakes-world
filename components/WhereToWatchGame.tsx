@@ -66,7 +66,7 @@ function WhereToWatchGame() {
             <img
               src="/images/sling-company.png"
               alt="VividSeats Logo"
-              width={150}
+              width={100}
               height={60}
               className={styles.image_style}
             />
@@ -77,7 +77,7 @@ function WhereToWatchGame() {
               <img
                 src="/images/vividseats-company.png"
                 alt="VividSeats Logo"
-                width={150}
+                width={120}
                 height={40}
                 className={styles.image_style}
               />

@@ -1,9 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Col, Dropdown, Menu } from 'antd';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import LazyLoad from 'react-lazyload';
+import { Row, Button, Col } from 'antd';
 
 import {
   AppLayout,
@@ -26,7 +24,6 @@ import { EarliestGameInfoType, PageProps } from '@type/Main';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import { Sport } from '@type/Sports';
 import SportsAPIs from '@apis/sport.apis';
-import { BillingPlan, Package } from '@type/Packages';
 import PackageAPIs from '@apis/package.apis';
 import { UserSubscription } from '@type/Users';
 import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
@@ -82,7 +79,7 @@ const SPORTS_INFO = [
   }
 ];
 
-export default function SportsCard({ token, subscriptions, sports, packages }: PageProps) {
+export default function SportsCard({ token, subscriptions, sports }: PageProps) {
   const [activeSport, setActiveSport] = useState<number>(-1);
   const [filterType, setFilterType] = useState<string>('');
   const [unlockedItems, setUnlockedItems] = useState<number[]>([]);
@@ -345,134 +342,6 @@ function ListGames({
       games={games}
       showDetailsAt={showDetailsAt}
       changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
-  );
-}
-
-type UnlockItemModalPropsType = {
-  closeModal: () => void;
-  sport: Sport;
-  packages: Package[];
-};
-
-function UnLockItemModal({ sport, closeModal, packages }: UnlockItemModalPropsType) {
-  const sportCardPack = packages.filter(
-    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1
-  )[0];
-  const vipAllAccessPack = packages.filter(
-    (pack) => pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1
-  )[0];
-  const [packTypeMenuOpen, setPackTypeMenuOpen] = useState<boolean>(false);
-  const [selectedPackType, setSelectedPackType] = useState<BillingPlan>(
-    sportCardPack.billing_plans[0]
-  );
-  const [memberTypeMenuOpen, setMemberTypeMenuOpen] = useState<boolean>(false);
-  const [selectedMemberType, setSelectedMemberType] = useState<BillingPlan>(
-    vipAllAccessPack.billing_plans[0]
-  );
-  const PackTypeMenu = () => (
-    <Menu className={styles.sportMenu}>
-      {sportCardPack.billing_plans?.map((plan) => (
-        <Menu.Item
-          key={plan.id}
-          className={styles.sportMenuItem}
-          onClick={() => {
-            setSelectedPackType(plan);
-            setPackTypeMenuOpen(false);
-          }}>
-          {`${plan.name}`}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-  const MemberTypeMenu = () => (
-    <Menu className={styles.sportMenu}>
-      {sportCardPack.billing_plans?.map((plan) => (
-        <Menu.Item
-          key={plan.id}
-          className={styles.sportMenuItem}
-          onClick={() => {
-            setSelectedMemberType(plan);
-            setMemberTypeMenuOpen(false);
-          }}>
-          {`${plan.name}`}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-
-  const changeMemberMenuVisible = (status: boolean) => {
-    setMemberTypeMenuOpen(status);
-  };
-  const changePackMenuVisible = (status: boolean) => {
-    setPackTypeMenuOpen(status);
-  };
-
-  return (
-    <div className={styles.unlockItemModal}>
-      <div className={styles.modalWrapper} onClick={closeModal} />
-      <Row align={'middle'} justify={'center'} className={styles.modalContainer}>
-        <LazyLoad>
-          <img
-            src="/images/new_pack_bg.jpg"
-            alt="Package Add Modal Background"
-            className={styles.modalBg}
-          />
-        </LazyLoad>
-        <div className={styles.modalOverlay} />
-        <div className={styles.modalContent}>
-          <div className={styles.contentTitle}>
-            You need to purchase this pack in order to view the picks
-          </div>
-          <div className={styles.contentDesc}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel amet lorem odio
-            tincidunt sed dolor commodo risus.
-          </div>
-          <Row className={styles.plans} align={'middle'} justify="center">
-            <div className={styles.plan}>
-              <h4>{sport.name} Access</h4>
-              <p>Ut aliquam eleifend et fames.</p>
-              <div>
-                <label>Select Pack Type</label>
-                <Dropdown
-                  overlay={PackTypeMenu}
-                  onVisibleChange={changePackMenuVisible}
-                  placement="bottomLeft"
-                  transitionName=""
-                  trigger={['click']}>
-                  <div className={styles.optionBtn}>
-                    <span>{selectedPackType.name}</span>
-                    {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-                    {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
-                </Dropdown>
-              </div>
-              <Button className={styles.planSubmitBtn}>Add to Sports Card</Button>
-            </div>
-            <div className={styles.orText}>OR</div>
-            <div className={styles.plan}>
-              <h4>VIP ALL ACCESS CARD</h4>
-              <p>Ut aliquam eleifend et fames.</p>
-              <div>
-                <label>Select Pack Type</label>
-                <Dropdown
-                  overlay={MemberTypeMenu}
-                  onVisibleChange={changeMemberMenuVisible}
-                  placement="bottomLeft"
-                  transitionName=""
-                  trigger={['click']}>
-                  <div className={styles.optionBtn}>
-                    <span>{selectedMemberType.name}</span>
-                    {memberTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
-                    {!memberTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
-                  </div>
-                </Dropdown>
-              </div>
-              <Button className={styles.planSubmitBtn}>Add Membership</Button>
-            </div>
-          </Row>
-        </div>
-      </Row>
-    </div>
   );
 }
 

@@ -345,6 +345,7 @@
   color: #000000;
   display: block;
   margin-bottom: 8px;
+  text-transform: uppercase;
 }
 .formGroup input {
   border: 1px solid #C4C4C4;
@@ -365,18 +366,17 @@
   align-items: center;
 }
 .termsContent {
-  font-size: 12px;
-  line-height: 19px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
   color: #000000;
-  margin-left: 12px;
-}
-.termsContent .title {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 22px;
+  text-align: center;
+  width: 560px;
+  margin: 3em auto 0;
 }
 .termsContent a {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #4778F9;
 }
 .registerBtn {
   font-weight: bold;

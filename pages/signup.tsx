@@ -5,6 +5,7 @@ import { Row, Col, Button, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { NormalCheckIcon } from '@components/SvgIcons';
@@ -16,6 +17,7 @@ import PackageAPIs from '@apis/package.apis';
 import { PageProps } from '@type/Main';
 
 import styles from '@styles/Signup.module.css';
+import { PACKAGE_NAMES } from '@constants/';
 
 function HeroBanner() {
   return (
@@ -43,71 +45,83 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
       <div className={styles.packageTitle}>
         <span>{data?.name}</span>
       </div>
-      {data.name === 'Sports Card' && (
+      {data.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1 && (
         <>
           <ul className={styles.list_with_checkmark}>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              Receive Access to ALL Plays for the Sport(s) of Your Choice
+              Receive Access to&nbsp;<b>ALL</b>&nbsp;Plays for the&nbsp;<b>Sport(s)</b>&nbsp;of Your Choice
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              Customized Dashboard Including Automated Record Tracking
+              <b>Customized Dashboard</b>&nbsp;Including&nbsp;<b>Automated Record Tracking</b>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              Weekly, Monthly, Season & Playoff Packages Available.
+              <b>Advanced Stats</b>&nbsp;for each bet,&nbsp;<b>Weekly Pro Tip & Bankroll Strategies</b>
             </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <b>Weekly, Monthly, Season & Playoff</b>&nbsp;Packages Available.
+            </li>
+            
           </ul>
           <div className={styles.extra_info}>
-            * Soccer includes all Major Leagues and Tournaments Including the English Premier
-            League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others.
+            * Soccer Includes&nbsp;<b>All Major Leagues and Tournaments</b>&nbsp;Including the English Premier
+            League, La Liga, Serie A, Bundesliga, UEFA Champions League, amongst others.
           </div>
         </>
       )}
-      {data.name === 'Fantasy' && (
-        <ul className={styles.list_with_checkmark}>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            DFS Lineups for Single Game & Tournament Style Contests
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Includes Advanced Stats, Projected Points, Player Props & Other Key Metrics
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Weekly, Monthly & Annual Packages Available
-          </li>
-        </ul>
+      {data.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1 && (
+        <>
+          <ul className={styles.list_with_checkmark}>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Daily Fantasy Lineups ("DFS") for<b>&nbsp;Single Game & Tournament</b>&nbsp;Style Contests
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Formats Included for<b>&nbsp;DraftKings, Fanduel & Yahoo Sportsbooks</b>
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <b>&nbsp;Advanced Stats, Projected Points, Player Prop Comps</b>&nbsp;& Other Key Stats
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <b>&nbsp;Daily, Weekly & Monthly</b>&nbsp;Packages Available*
+            </li>
+          </ul>
+        </>
       )}
-      {data.name === 'VIP All Access' && (
-        <ul className={styles.list_with_checkmark}>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Receive Access to ALL Plays for ALL Sports, Including BONUS Plays
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Sports Include NBA, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Customized Dashboard Including Automated Record Tracking
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
-          </li>
-          <li>
-            <NormalCheckIcon className={styles.list_check_icon} />
-            Daily, Weekly, Monthly & Annual Packages Available.
-          </li>
-        </ul>
+      {data.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1 && (
+        <>
+          <ul className={styles.list_with_checkmark}>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Receive Access to&nbsp;<strong>ALL</strong>&nbsp;Plays for&nbsp;<strong>ALL</strong>&nbsp;Sports, Including&nbsp;<strong>BONUS</strong>&nbsp;Plays
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              Sports Include NBA, NFL, SOCCER, NCAAF, NCAAB, UFC & Formula 1
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <strong>Customized Dashboard</strong>&nbsp;Including Automated Record Tracking
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <strong>Advanced Stats</strong>&nbsp;for each bet,&nbsp;<strong>Weekly Pro Tips & Bankroll Strategies</strong>
+            </li>
+            <li>
+              <NormalCheckIcon className={styles.list_check_icon} />
+              <strong>Daily, Weekly, Monthly & Annual</strong>&nbsp;Packages Available*.
+            </li>
+          </ul>
+          <div className={styles.extra_info}>
+            *The&nbsp;<strong>Daily Card</strong>&nbsp;includes <Link href="/"><a>TheDailyStakes Guaranteed Protection</a></Link>. The&nbsp;<strong>Annual Package</strong>&nbsp;can be cancelled at any time & includes access to&nbsp;<strong>in-game wager plays</strong>. 
+          </div>
+        </>
       )}
     </div>
   );
@@ -259,7 +273,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <div className={styles.sectionTitle}>View our Membership Packages</div>
+          <div className={styles.sectionTitle}>Our Membership packages</div>
           <Row>
             <div className={styles.packagesCol}>
               {packages?.map((pack: Package) => (
@@ -275,19 +289,15 @@ export default function Registration({ packages, token, subscriptions }: PagePro
               <ul className={styles.list_with_checkmark}>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Access to TheDailyStakes Monthly Newsletter
+                  <b>Free</b> Monthly Sports Betting Picks & Optimal DFS Lineups
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Free Monthly Sports Betting Picks & Optimal DFS Lineups
+                  Access to <b>Premium Content</b> Including Yesterday’s Plays
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  Access to Content Including Yesterday&#39;s Plays
-                </li>
-                <li>
-                  <NormalCheckIcon className={styles.list_check_icon} />
-                  Exclusive Subscription Based Discounts & Insights
+                  <b>Exclusive</b> Subscription Based Discounts & Insights
                 </li>
               </ul>
               <form autoComplete="off">
@@ -366,20 +376,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                     />
                   </Col>
                 </Row>
-                <Row justify="space-between">
-                  <Col className={styles.termsSection}>
-                    <input type="checkbox" name="terms" onChange={changeTermsConfirmed} />
-                    <div className={styles.termsContent}>
-                      <div className={styles.title}></div>
-                      <div>
-                        By creating an account above, you consent to The Daily Stakes, Inc.&#39;s{' '}
-                        <a href="/terms">Terms of Service</a> and{' '}
-                        <a href="/privacy">Privacy Policy</a>. We use your email to provide you with
-                        news, updates, and promotions.
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
+              
                 <br></br>
                 <Row justify="space-between">
                   <Col span={24}>
@@ -389,6 +386,16 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                       onClick={onSignup}>
                       Register Now
                     </Button>
+                  </Col>
+                </Row>
+                <Row justify="center">
+                  <Col className={styles.termsSection}>
+                    <div className={styles.termsContent}>
+                      By creating an account above, you consent to The Daily Stakes, Inc.&#39;s{' '}
+                      <a href="/terms">Terms of Service</a> and{' '}
+                      <a href="/privacy">Privacy Policy</a>. We use your email to provide you with
+                      news, updates, and promotions.
+                    </div>
                   </Col>
                 </Row>
               </form>

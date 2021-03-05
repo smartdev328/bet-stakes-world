@@ -9,7 +9,7 @@ const LockSportsCard = () => {
         You need to purchase this package in order to view the picks
       </div>
       <Row className={styles.rowClass}>
-        <Col lg={10} className={styles.leftCard}>
+        <Col lg={10} md={24} sm={24} className={styles.leftCard}>
           <div className={styles.leftOuterDiv}>
             <p className={styles.vipText}>VIP ALL ACCESS CARD</p>
             <p className={styles.allPlayText}>ALL PLAYS. ALL SPORTS</p>
@@ -29,10 +29,10 @@ const LockSportsCard = () => {
             </div>
           </div>
         </Col>
-        <Col lg={4} className={styles.orColumn}>
+        <Col lg={4} md={24} sm={24} className={styles.orColumn}>
           <p className={styles.orText}>Or</p>
         </Col>
-        <Col lg={10} className={styles.rightCard}>
+        <Col lg={10} md={24} sm={24} className={styles.rightCard}>
           <div className={styles.rightOuterDiv}>
             <p className={styles.vipText}>SPORTS CARD</p>
             <p className={styles.allPlayText}>ALL PLAYS FOR THE SPORT(S) OF YOUR CHOICE</p>

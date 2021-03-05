@@ -31,8 +31,8 @@ function WhereBuyGear() {
             <img
               src="/images/fanatics-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={110}
+              width={140}
+              height={180}
             />
           </Col>
 
@@ -40,8 +40,8 @@ function WhereBuyGear() {
             <img
               src="/images/fansedge-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={110}
+              width={126}
+              height={180}
             />
           </Col>
 
@@ -49,8 +49,8 @@ function WhereBuyGear() {
             <img
               src="/images/sports-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={100}
+              width={120}
+              height={130}
             />
           </Col>
         </Row>

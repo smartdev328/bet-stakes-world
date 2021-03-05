@@ -109,7 +109,7 @@ function SportEntryActive({
                   </div>
                 </div>
 
-                {game.detail.length > 0 ? (
+                {game.detail && game.detail.length > 0 ? (
                   <>
                     <div
                       onClick={() => changeDetailsVisibleAt(index)}

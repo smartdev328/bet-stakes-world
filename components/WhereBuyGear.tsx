@@ -54,6 +54,7 @@ function WhereBuyGear() {
               alt="DailyStakes Company"
               width={200}
               height={60}
+              style={{ paddingBottom: '8px' }}
               className={styles.image_style}
             />
           </Col>

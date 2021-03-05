@@ -84,6 +84,10 @@
 
 .company_logo {
   margin: 0.8em 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
 }
 
 .sidebarBlock.fantasyLineupIncludes .sidebarBlockContent {

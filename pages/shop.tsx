@@ -316,7 +316,7 @@ function Intro() {
           </div>
         </div>
       </Row>
-      <ul>
+      <ul className={styles.list}>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
           Sports Include NBA, MLB, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
@@ -334,23 +334,6 @@ function Intro() {
           Monthly & Annual Packages Include In-Game Bets
         </li>
       </ul>
-      {/* <div className={styles.extra_info}>
-        *The DailyStakes Protection: For the Daily VIP All Access Card only, if over 50% of the
-        plays are losses, the next day is FREE*
-      </div> */}
-      {/* <div className={styles.protection_container}>
-        <div className={styles.protection_image_div}>
-          <img src="/images/ds-protectionn.png" className={styles.protection_image} />
-        </div>
-
-        <div>
-          <p className={styles.protection_details}>
-            IF OVER 50% OF THE DAILY VIP ALL ACCES CARD ARE LOSSES FOR A
-            <br className={styles.endline_protection} /> GIVEN DAY, THE NEXT DAY’S PICKS ARE
-            AUTOMATICALLY FREE. NO <br className={styles.endline_protection} /> QUESTIONS ASKED.
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 }
@@ -444,7 +427,7 @@ function ProductsAndCartBox({
           <img src="/images/ds-protectionn.png" className={styles.protection_image} />
         </div>
 
-        <div>
+        <div className={styles.protection_detail}>
           <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
           <p className={styles.protection_details}>
             IF OVER 50% OF THE DAILY VIP ALL ACCES CARD ARE LOSSES FOR A

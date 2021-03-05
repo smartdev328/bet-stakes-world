@@ -1,9 +1,10 @@
 .sportTileBtn {
-  padding: 0 10px;
   position: relative;
   margin-right: 8px;
   overflow: hidden;
   display: inline-block;
+  width: 55px;
+  text-align: center;
 }
 .sportTileBtn span {
   font-weight: bold;
@@ -13,23 +14,23 @@
 }
 .sportTile_NBA,
 .sportTile_NCAAB {
-  background: #EC4C15;
+  background: #ec4c15;
 }
 .sportTile_NFL,
 .sportTile_NCAAF {
-  background: #91442A;
+  background: #91442a;
 }
 .sportTile_MLB {
-  background: #1878FB;
+  background: #1878fb;
 }
 .sportTile_UFC {
-  background: #F9282B;
+  background: #f9282b;
 }
 .sportTile_F1 {
   background: #505054;
 }
 .sportTile_SOCCER {
-  background: #6DCF40;
+  background: #6dcf40;
 }
 .sportTile_NBA > svg,
 .sportTile_NCAAB > svg {
@@ -42,7 +43,7 @@
   transform: translateY(-50%);
 }
 .sportTile_NFL > svg,
-.sportTile_NCAAF > svg  {
+.sportTile_NCAAF > svg {
   width: 300%;
   position: absolute;
   z-index: 20;

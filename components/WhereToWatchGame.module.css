@@ -4,6 +4,11 @@
   margin-left: 16px;
   margin-bottom: 24px;
 }
+
+.image_style {
+  object-fit: cover;
+}
+
 .sidebarBlockTitle {
   display: flex;
   align-items: center;

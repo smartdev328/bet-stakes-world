@@ -17,7 +17,7 @@ function DailyFantasyLineups() {
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
-        <span>Daily Fantasy Lineups</span>
+        <span>DAILY FANTASY LINEUPS</span>
       </div>
       <p className={styles.date}>Thursday, February 25 2021</p>
       <div className={styles.sidebarBlockContent}>

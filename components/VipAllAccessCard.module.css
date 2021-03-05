@@ -23,7 +23,7 @@
   color: #f1f1f1;
 }
 .sidebarBlockContent {
-  padding: 16px 0 0 0;
+  padding: 0px 0 0 0;
 }
 .accordionTitle {
   display: flex;
@@ -78,6 +78,7 @@
 .date {
   font-weight: 700;
   font-size: 11px;
+  margin-bottom: 0px;
 }
 
 .label {

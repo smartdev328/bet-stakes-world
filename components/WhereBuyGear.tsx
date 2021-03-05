@@ -23,6 +23,7 @@ function WhereBuyGear() {
                 alt="DailyStakes Company"
                 width={84}
                 height={79}
+                className={styles.image_style}
               />
             </a>
           </Col>
@@ -31,8 +32,9 @@ function WhereBuyGear() {
             <img
               src="/images/fanatics-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={110}
+              width={200}
+              height={60}
+              className={styles.image_style}
             />
           </Col>
 
@@ -40,8 +42,9 @@ function WhereBuyGear() {
             <img
               src="/images/fansedge-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={110}
+              width={200}
+              height={100}
+              className={styles.image_style}
             />
           </Col>
 
@@ -49,8 +52,10 @@ function WhereBuyGear() {
             <img
               src="/images/sports-company.png"
               alt="DailyStakes Company"
-              width={106}
-              height={100}
+              width={200}
+              height={60}
+              style={{ paddingBottom: '8px' }}
+              className={styles.image_style}
             />
           </Col>
         </Row>

@@ -66,7 +66,6 @@ const SportTile = ({ sport }: SportTilePropsType) => {
     <div
       className={`${styles.sportTileBtn} ${styles['sportTile_' + selectedSport.id]}`}
       style={{ background: selectedSport.background }}>
-      {selectedSport.logo()}
       <span>{selectedSport.name.toLowerCase() === 'formula 1' ? 'F1' : selectedSport.name}</span>
     </div>
   );

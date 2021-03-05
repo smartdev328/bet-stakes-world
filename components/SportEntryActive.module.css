@@ -85,6 +85,18 @@
   background: #6dcf40;
 }
 
+.game_schedule_time {
+  margin-bottom: -3px;
+}
+.game_schedule_time img {
+  width: 20px;
+  height: 20px;
+  margin: 0 12px 0 6px;
+}
+.game_schedule_time span {
+  font-size: 16px;
+  text-transform: uppercase;
+}
 .game_info {
   margin-top: 8px;
   display: flex;

@@ -60,12 +60,16 @@ function SportEntryActive({
               <div className={styles.game} key={game.id}>
                 <div className={styles.game_subinfo}>
                   <SportTile sport={game.sport.name} />
-                  <span>Game Starts @ {moment(game.publish_date).format('hh:mm a')}</span>
+                  <span>{`Published at ${moment(game.publish_date).format('hh:mm A')} EST`}</span>
                 </div>
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
                     {game.schedules.map((schedule: Schedule) => (
                       <>
+                        <Row align="middle" className={styles.game_schedule_time}>
+                          <img src="/images/seven-clock.png" alt="" />
+                          <span>{`${moment(schedule.time).format('hh:mm A')} EST`}</span>
+                        </Row>
                         <Row>
                           <div className={styles.game_team1}>
                             <img

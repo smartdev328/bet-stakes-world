@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './LockSportsCard.module.css';
-import { Row, Button, Col, notification } from 'antd';
+import { Row, Button, Col } from 'antd';
 
 const LockSportsCard = () => {
   return (

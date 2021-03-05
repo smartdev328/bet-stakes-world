@@ -19,7 +19,8 @@ import {
   WhereToWatchGame,
   WhereBuyGear,
   VipAllAccessCard,
-  BankRollManagement
+  BankRollManagement,
+  LockFantasyCard
 } from '@components/index';
 import { AntiClockIcon, DateRangeIcon, LockIcon } from '@components/SvgIcons';
 import styles from '@styles/FantasyDailyLineups.module.css';
@@ -173,8 +174,19 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           />
         </div>
 
+        <div className={styles.laptop_view}>
+          <VipAllAccessCard />
+          <DailyFantasyLineups />
+        </div>
+
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
+            <Row className={styles.content}>
+              <Col sm={24} md={18} className={styles.contentMainCol}>
+                <LockFantasyCard />
+              </Col>
+            </Row>
+
             <Row className={styles.content}>
               <Col sm={24} md={18} className={styles.contentMainCol}>
                 {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}

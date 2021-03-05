@@ -1,0 +1,189 @@
+.subscribenow {
+  background: #1a1a1a;
+  padding: 50px;
+  margin-bottom: 50px;
+}
+
+.subscribenow_desc {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.orText {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 38px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.leftCard {
+  background: #ffffff;
+}
+
+.rightCard {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vipText {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #1a1a1a;
+  padding-top: 8px;
+}
+
+.allPlayText {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 19px;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.leftOuterDiv {
+  height: 270px;
+  width: 100%;
+}
+
+.rightOuterDiv {
+  height: 220px;
+  width: 100%;
+}
+
+.imageAndDetailDivForRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.imageAndDetailDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 30px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.bestValueText {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 184.4%;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.dailyCardText {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 140%;
+  text-align: center;
+  color: #000000;
+}
+.subscribe_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7.5px 24px;
+
+  background: #ffc700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowClass {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.orColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.imagesContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.images {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+@media (max-width: 600px) {
+  .rowClass {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .subscribenow_desc {
+    font-family: Saira;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+
+    text-align: center;
+
+    color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .orColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 17px;
+  }
+
+  .subscribenow {
+    background-image: url('/images/background_sport_card.png');
+
+    padding: 50px;
+    margin-bottom: 50px;
+  }
+}

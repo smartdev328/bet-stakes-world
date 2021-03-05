@@ -27,7 +27,9 @@ const LockSportsCard = () => {
             </div>
 
             <div className={styles.buttonContainer}>
-              <Link href="/shop?plan=all"><Button className={styles.subscribe_btn}>Go to Shop Page</Button></Link>
+              <Link href="/shop?plan=all">
+                <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+              </Link>
             </div>
           </div>
         </Col>
@@ -94,7 +96,9 @@ const LockSportsCard = () => {
               </div>
             </div>
             <div className={styles.buttonContainer}>
-              <Link href="/shop?plan=sports_card"><Button className={styles.subscribe_btn}>Go to Shop Page</Button></Link>
+              <Link href="/shop?plan=sports_card">
+                <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+              </Link>
             </div>
           </div>
         </Col>

@@ -14,7 +14,10 @@ const LockFantasyCard = () => {
         <Col lg={10} md={24} sm={24} className={styles.rightCard}>
           <div className={styles.rightOuterDiv}>
             <p className={styles.vipText}>fantasy daily card</p>
-            <p className={styles.allPlayText}>Includes Access to Main Slate & Single Slate Tournaments for DraftKings, Fanduel & Yahoo Sports Formats.</p>
+            <p className={styles.allPlayText}>
+              Includes Access to Main Slate & Single Slate Tournaments for DraftKings, Fanduel &
+              Yahoo Sports Formats.
+            </p>
             <div className={styles.imageAndDetailDivForRight}>
               <div className={styles.imagesContainer}>
                 <img
@@ -38,7 +41,9 @@ const LockFantasyCard = () => {
               </div>
             </div>
             <div className={styles.buttonContainer}>
-              <Link href="/shop?plan=fantasy"><Button className={styles.subscribe_btn}>Go to Shop Page</Button></Link>
+              <Link href="/shop?plan=fantasy">
+                <Button className={styles.subscribe_btn}>Go to Shop Page</Button>
+              </Link>
             </div>
           </div>
         </Col>

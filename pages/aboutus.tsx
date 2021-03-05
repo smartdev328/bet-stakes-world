@@ -38,7 +38,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
               </Row>
               <Row className={styles.row}>
                 <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
-                  <p className={styles.aboutUs_headings}>THE DS MISSION</p>
+                  <p className={styles.aboutUs_headings}>
+                    THE DS <br /> MISSION
+                  </p>
                 </Col>
                 <Col lg={16} md={24}>
                   <p className={styles.dsMission_details}>
@@ -50,7 +52,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
               <Row className={styles.row}>
                 <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
-                  <p className={styles.aboutUs_headings}>THE DS &nbsp; &nbsp; STORY</p>
+                  <p className={styles.aboutUs_headings}>
+                    THE DS <br /> STORY
+                  </p>
                 </Col>
                 <Col lg={16} md={24}>
                   <p className={styles.dsStory_details}>
@@ -74,7 +78,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
               <Row className={styles.row}>
                 <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
-                  <p className={styles.aboutUs_headings}>THE DS PURPOSE</p>
+                  <p className={styles.aboutUs_headings}>
+                    THE DS <br /> PURPOSE
+                  </p>
                 </Col>
                 <Col lg={16} md={24}>
                   <p>
@@ -120,7 +126,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
               </Row>
               <Row className={styles.row}>
                 <Col lg={8} md={24} className={styles.aboutUs_headings_col}>
-                  <p className={styles.aboutUs_headings}>THE DS COVERAGE</p>
+                  <p className={styles.aboutUs_headings}>
+                    THE DS <br /> COVERAGE
+                  </p>
                 </Col>
 
                 <Col lg={16} md={24} className={styles.coverage_main}>

@@ -949,14 +949,18 @@ function ProductsAndCartBoxForSportsCard({
           });
         }
       } else {
-        newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
-        setActiveSport2(undefined);
+        if (sport.id === activeSport2.id) {
+          newCart = newCart.filter((cart) => cart.sports?.id !== sport.id);
+          setActiveSport2(undefined);
+        } else {
+          setActiveSport2(sport);
+        }
       }
       const itemsFromCart = cartItems.filter(
         (cartIt) => cartIt.plan.package === pack.id && cartIt.sports?.id === sport.id
       );
       if (itemsFromCart.length > 0) {
-        setActivePlan1(itemsFromCart[0].plan);
+        setActivePlan2(itemsFromCart[0].plan);
       }
     }
     changeTempCart(pack, newCart);

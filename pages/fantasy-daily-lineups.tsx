@@ -85,6 +85,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   const [infoForCurrentTab, setInfoForCurrentTab] = useState<FantasyTabInfo | undefined>(undefined);
   const [unlockedSports, setUnlockedSports] = useState<Sport[]>([]);
   const [lineupSalary, setLineupSalary] = useState<number>(0);
+  const [showLockView, setShowLockView] = useState<boolean>(false);
 
   const router = useRouter();
   const { sport: querySport } = router.query;
@@ -163,7 +164,10 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
         <div className={styles.container}>
           <TopSection
             unlockedSports={unlockedSports}
-            openUnlockModal={() => {}}
+            openUnlockModal={(sport: Sport) => {
+              setShowLockView(!unlockedSports.some((item: Sport) => item.id === sport.id));
+              setSelectedSport(sport.name);
+            }}
             activeSport={selectedSport}
             activeTab={activeTab}
             sports={sports}
@@ -183,13 +187,11 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           <div className={styles.container}>
             <Row className={styles.content}>
               <Col sm={24} md={18} className={styles.contentMainCol}>
-                <LockFantasyCard />
-              </Col>
-            </Row>
-
-            <Row className={styles.content}>
-              <Col sm={24} md={18} className={styles.contentMainCol}>
-                {!loading && <LineupsList data={lineupList} selectedSport={selectedSport} />}
+                {showLockView ? (
+                  <LockFantasyCard />
+                ) : (
+                  !loading && <LineupsList data={lineupList} selectedSport={selectedSport} />
+                )}
                 {loading && (
                   <div className={styles.loadingSpin}>
                     <Spin size="large" />

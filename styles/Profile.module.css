@@ -29,7 +29,7 @@
 }
 
 .actionBtns {
-  padding: 50px 0 20px;
+  padding: 50px 0 80px;
 }
 .saveBtn, .cancelBtn {
   font-weight: bold;
@@ -46,7 +46,7 @@
   background: transparent;
 }
 .saveBtn {
-  margin-left: 24px;
+  margin-right: 36px;
   background-color: #FFC700;
 }
 
@@ -96,6 +96,7 @@
   color: #000000;
   display: block;
   margin-bottom: 8px;
+  text-transform: uppercase;
 }
 .formGroup input, .formGroup .countrySelectBox {
   border: 1px solid #C4C4C4;
@@ -363,4 +364,14 @@
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 20px;
+}
+
+.subscriptionSettings {
+  color: #1A1A1A;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 1.5em 0;
+}
+.subscriptionSettings a {
+  cursor: pointer;
 }

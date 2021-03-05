@@ -28,9 +28,9 @@ function PlanDropdown({
   let billingPlans: BillingPlan[] = [];
   if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1 && sport) {
     if (sport === 'UFC' || sport === 'FORMULA 1') {
-      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') > -1)
+      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') > -1);
     } else {
-      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') < 0)
+      billingPlans = pack.billing_plans.filter((plan) => plan.name.indexOf('EVENT BASED') < 0);
     }
   } else {
     billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
@@ -111,13 +111,13 @@ export default function CartDrawer({
       return 'SPORTS CARD';
     }
     return '';
-  }
+  };
   const getCartItemLogo = (packName: string, sportName: string) => {
     if (packName.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
       return '/images/sports/vip.svg';
     }
     return `/images/sports/${sportName.toLowerCase()}.svg`;
-  }
+  };
 
   let totalPrice = 0;
   cartItems.forEach((item) => {
@@ -147,10 +147,7 @@ export default function CartDrawer({
             {cartItems.map((item, index) => (
               <div key={index} className={styles.cartItem}>
                 <div className={styles.cartItemMain}>
-                  <img
-                    src={getCartItemLogo(item.pack.name, item.sports?.name || '')}
-                    alt=''
-                  />
+                  <img src={getCartItemLogo(item.pack.name, item.sports?.name || '')} alt="" />
                   <div className={styles.cartItemInfo}>
                     <div className={styles.cartItemInfoRow}>
                       <span className={styles.cartItemName}>{getCartItemName(item.pack.name)}</span>
@@ -189,7 +186,9 @@ export default function CartDrawer({
                 <Button
                   type={'link'}
                   className={styles.removeCartItemBtn}
-                  onClick={() => removeCartAt(index)}>Remove</Button>
+                  onClick={() => removeCartAt(index)}>
+                  Remove
+                </Button>
               </div>
             ))}
           </div>
@@ -217,9 +216,7 @@ export default function CartDrawer({
               }}>
               Continue to checkout
             </Button>
-            <Button
-              className={`${styles.actionBtn} ${styles.keepShoppingBtn}`}
-              onClick={onClose}>
+            <Button className={`${styles.actionBtn} ${styles.keepShoppingBtn}`} onClick={onClose}>
               Keep Shopping
             </Button>
           </div>

@@ -6,10 +6,7 @@ import { Row, Button, Upload, Col, notification } from 'antd';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/Profile.module.css';
-import {
-  ProfileValidateType,
-  UserProfile,
-} from '@type/Users';
+import { ProfileValidateType, UserProfile } from '@type/Users';
 import { validateEmail } from '@utils/common';
 import { PageProps } from '@type/Main';
 import UsersAPIs from '@apis/user.apis';
@@ -121,7 +118,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
       }
     });
     return changed;
-  }
+  };
   const validateForm = (data: ProfileFormType) => {
     const newValidation = Object.assign({}, formValidation);
     let isValid = true;
@@ -281,13 +278,24 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
             onLogoChange={onLogoChange}
           />
           <div className={styles.subscriptionSettings}>
-            MANAGE YOUR SUBSCRIPTIONS AND PAYMENT METHODS <Link href="https://dashboard.stripe.com/"><a><strong>HERE</strong></a></Link>
+            MANAGE YOUR SUBSCRIPTIONS AND PAYMENT METHODS{' '}
+            <Link href="https://dashboard.stripe.com/">
+              <a>
+                <strong>HERE</strong>
+              </a>
+            </Link>
           </div>
           <Row className={styles.actionBtns} justify={'center'}>
-            <Button className={styles.saveBtn} disabled={!isAllValid || !formChanged} onClick={onSaveChanges}>
+            <Button
+              className={styles.saveBtn}
+              disabled={!isAllValid || !formChanged}
+              onClick={onSaveChanges}>
               Save
             </Button>
-            <Button className={styles.cancelBtn} disabled={!isAllValid || !formChanged} onClick={resetChanges}>
+            <Button
+              className={styles.cancelBtn}
+              disabled={!isAllValid || !formChanged}
+              onClick={resetChanges}>
               Cancel
             </Button>
           </Row>
@@ -412,9 +420,7 @@ function ProfileInfo({
         <div className={styles.sectionTitle}>Change Password</div>
         <Row className={styles.rowWithTwoChild}>
           <Col span={12}>
-            <Row
-              className={styles.resetPassword}
-              justify="space-between">
+            <Row className={styles.resetPassword} justify="space-between">
               <Col span={24} className={styles.formGroup}>
                 <label>Old Password*</label>
                 <input

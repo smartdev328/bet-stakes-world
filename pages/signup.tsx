@@ -102,29 +102,36 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
           <ul className={styles.list_with_checkmark}>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div>Receive Access to&nbsp;<b>ALL</b>&nbsp;Plays for the&nbsp;<b>Sport(s)</b>&nbsp;of Your Choice</div>
+              <div>
+                Receive Access to&nbsp;<b>ALL</b>&nbsp;Plays for the&nbsp;<b>Sport(s)</b>&nbsp;of
+                Your Choice
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><b>Customized Dashboard</b>&nbsp;Including&nbsp;<b>Automated Record Tracking</b></div>
+              <div>
+                <b>Customized Dashboard</b>&nbsp;Including&nbsp;<b>Automated Record Tracking</b>
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><b>Advanced Stats</b>&nbsp;for each bet,&nbsp;<b>Weekly Pro Tip & Bankroll Strategies</b></div>
+              <div>
+                <b>Advanced Stats</b>&nbsp;for each bet,&nbsp;
+                <b>Weekly Pro Tip & Bankroll Strategies</b>
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><b>Weekly, Monthly, Season & Playoff</b>&nbsp;Packages Available.</div>
+              <div>
+                <b>Weekly, Monthly, Season & Playoff</b>&nbsp;Packages Available.
+              </div>
             </li>
-            
           </ul>
           <div className={styles.sportsCards}>
             <div className={styles.sectionTitle}>Sports Covered*</div>
             <div className={styles.sportsTypeContent}>
               {SPORTS_INFO.map((sport: SportInfoType, index: number) => (
-                <Button
-                  key={index}
-                  className={styles.dropdownBtnWrapper}>
+                <Button key={index} className={styles.dropdownBtnWrapper}>
                   <div
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
                     style={{
@@ -138,8 +145,9 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
             </div>
           </div>
           <div className={styles.extra_info}>
-            * Soccer Includes&nbsp;<b>All Major Leagues and Tournaments</b>&nbsp;Including the English Premier
-            League, La Liga, Serie A, Bundesliga, UEFA Champions League, amongst others.
+            * Soccer Includes&nbsp;<b>All Major Leagues and Tournaments</b>&nbsp;Including the
+            English Premier League, La Liga, Serie A, Bundesliga, UEFA Champions League, amongst
+            others.
           </div>
         </>
       )}
@@ -148,28 +156,36 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
           <ul className={styles.list_with_checkmark}>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div>Daily Fantasy Lineups ("DFS") for<b>&nbsp;Single Game & Tournament</b>&nbsp;Style Contests</div>
+              <div>
+                Daily Fantasy Lineups (&rdquo;DFS&rdquo;) for<b>&nbsp;Single Game & Tournament</b>
+                &nbsp;Style Contests
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div>Formats Included for<b>&nbsp;DraftKings, Fanduel & Yahoo Sportsbooks</b></div>
+              <div>
+                Formats Included for<b>&nbsp;DraftKings, Fanduel & Yahoo Sportsbooks</b>
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><b>&nbsp;Advanced Stats, Projected Points, Player Prop Comps</b>&nbsp;& Other Key Stats</div>
+              <div>
+                <b>&nbsp;Advanced Stats, Projected Points, Player Prop Comps</b>&nbsp;& Other Key
+                Stats
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><b>&nbsp;Daily, Weekly & Monthly</b>&nbsp;Packages Available*</div>
+              <div>
+                <b>&nbsp;Daily, Weekly & Monthly</b>&nbsp;Packages Available*
+              </div>
             </li>
           </ul>
           <div className={styles.sportsCards}>
             <div className={styles.sectionTitle}>Sports Covered</div>
             <div className={styles.sportsTypeContent}>
               {SPORTS_INFO.slice(0, 3).map((sport: SportInfoType, index: number) => (
-                <Button
-                  key={index}
-                  className={styles.dropdownBtnWrapper}>
+                <Button key={index} className={styles.dropdownBtnWrapper}>
                   <div
                     className={`${styles.dropdownBtn} ${styles['dropdown_' + sport.id]}`}
                     style={{
@@ -185,9 +201,21 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
           <div className={styles.sportsCards}>
             <div className={styles.sectionTitle}>Sportsbook Formats Included</div>
             <div className={styles.sportsTypeContent}>
-              <img src="/images/draftkings-square-logo.png" alt="" className={styles.fantasy_sportsbook} />
-              <img src="/images/Fanduel-square-logo.png" alt="" className={styles.fantasy_sportsbook} />
-              <img src="/images/yahoo-daily-fantasy-square-logo.png" alt="" className={styles.fantasy_sportsbook} />
+              <img
+                src="/images/draftkings-square-logo.png"
+                alt=""
+                className={styles.fantasy_sportsbook}
+              />
+              <img
+                src="/images/Fanduel-square-logo.png"
+                alt=""
+                className={styles.fantasy_sportsbook}
+              />
+              <img
+                src="/images/yahoo-daily-fantasy-square-logo.png"
+                alt=""
+                className={styles.fantasy_sportsbook}
+              />
             </div>
           </div>
         </>
@@ -197,7 +225,10 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
           <ul className={styles.list_with_checkmark}>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div>Receive Access to&nbsp;<strong>ALL</strong>&nbsp;Plays for&nbsp;<strong>ALL</strong>&nbsp;Sports, Including&nbsp;<strong>BONUS</strong>&nbsp;Plays</div>
+              <div>
+                Receive Access to&nbsp;<strong>ALL</strong>&nbsp;Plays for&nbsp;<strong>ALL</strong>
+                &nbsp;Sports, Including&nbsp;<strong>BONUS</strong>&nbsp;Plays
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
@@ -205,15 +236,22 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><strong>Customized Dashboard</strong>&nbsp;Including Automated Record Tracking</div>
+              <div>
+                <strong>Customized Dashboard</strong>&nbsp;Including Automated Record Tracking
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><strong>Advanced Stats</strong>&nbsp;for each bet,&nbsp;<strong>Weekly Pro Tips & Bankroll Strategies</strong></div>
+              <div>
+                <strong>Advanced Stats</strong>&nbsp;for each bet,&nbsp;
+                <strong>Weekly Pro Tips & Bankroll Strategies</strong>
+              </div>
             </li>
             <li>
               <NormalCheckIcon className={styles.list_check_icon} />
-              <div><strong>Daily, Weekly, Monthly & Annual</strong>&nbsp;Packages Available*.</div>
+              <div>
+                <strong>Daily, Weekly, Monthly & Annual</strong>&nbsp;Packages Available*.
+              </div>
             </li>
           </ul>
           <div className={styles.vipBestValue}>
@@ -221,7 +259,12 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
             <span>Best Value!</span>
           </div>
           <div className={styles.extra_info}>
-            *The&nbsp;<strong>Daily Card</strong>&nbsp;includes <Link href="/"><a>TheDailyStakes Guaranteed Protection</a></Link>. The&nbsp;<strong>Annual Package</strong>&nbsp;can be cancelled at any time & includes access to&nbsp;<strong>in-game wager plays</strong>. 
+            *The&nbsp;<strong>Daily Card</strong>&nbsp;includes{' '}
+            <Link href="/">
+              <a>TheDailyStakes Guaranteed Protection</a>
+            </Link>
+            . The&nbsp;<strong>Annual Package</strong>&nbsp;can be cancelled at any time & includes
+            access to&nbsp;<strong>in-game wager plays</strong>.
           </div>
         </>
       )}
@@ -245,7 +288,6 @@ export default function Registration({ packages, token, subscriptions }: PagePro
     verify_password: undefined
   });
   const [selectedBillingPlans, setSelectedBillingPlans] = useState<PackageBillingPlan[]>([]);
-  const [termsConfirmed, setTermsConfirmed] = useState<boolean>(false);
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formValidation, setFormValidation] = useState<CreateUserValidateType>({
@@ -388,15 +430,21 @@ export default function Registration({ packages, token, subscriptions }: PagePro
               <ul className={styles.list_with_checkmark}>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  <div><b>Free</b> Monthly Sports Betting Picks & Optimal DFS Lineups</div>
+                  <div>
+                    <b>Free</b> Monthly Sports Betting Picks & Optimal DFS Lineups
+                  </div>
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  <div>Access to <b>Premium Content</b> Including Yesterday’s Plays</div>
+                  <div>
+                    Access to <b>Premium Content</b> Including Yesterday’s Plays
+                  </div>
                 </li>
                 <li>
                   <NormalCheckIcon className={styles.list_check_icon} />
-                  <div><b>Exclusive</b> Subscription Based Discounts & Insights</div>
+                  <div>
+                    <b>Exclusive</b> Subscription Based Discounts & Insights
+                  </div>
                 </li>
               </ul>
               <form autoComplete="off">
@@ -475,13 +523,13 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                     />
                   </Col>
                 </Row>
-              
+
                 <br></br>
                 <Row justify="space-between">
                   <Col span={24}>
                     <Button
                       className={styles.registerBtn}
-                      disabled={!isFormValid || !termsConfirmed}
+                      disabled={!isFormValid}
                       onClick={onSignup}>
                       Register Now
                     </Button>

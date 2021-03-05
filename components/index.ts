@@ -22,3 +22,4 @@ export { default as WhereToWatchGame } from './WhereToWatchGame';
 export { default as VipAllAccessCard } from './VipAllAccessCard';
 export { default as BankRollManagement } from './BankRollManagement';
 export { default as DSProtection } from './DSProtection';
+export { default as LockSportsCard } from './LockSportsCard';

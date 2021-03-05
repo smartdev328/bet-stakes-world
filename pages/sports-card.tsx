@@ -16,7 +16,8 @@ import {
   VipAllAccessCard,
   DailyFantasyLineups,
   WhereToWatchGame,
-  WhereBuyGear
+  WhereBuyGear,
+  LockSportsCard
 } from '@components/index';
 import { AllSportsBtnBgIcon, LockIcon } from '@components/SvgIcons';
 
@@ -120,6 +121,7 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
             }}
           />
         </div>
+
         <div className={styles.containerWrapper}>
           {openUnlockModal && packages && (
             <UnLockItemModal
@@ -130,6 +132,16 @@ export default function SportsCard({ token, subscriptions, sports, packages }: P
           )}
           <div className={styles.container}>
             <Row className={styles.content}>
+              <Col sm={24} md={18} className={styles.contentMainCol}>
+                <LockSportsCard />
+              </Col>
+            </Row>
+            <Row className={styles.content}>
+              <div className={styles.laptop_view}>
+                <VipAllAccessCard />
+                <DailyFantasyLineups />
+              </div>
+
               <Col sm={24} md={18} className={styles.contentMainCol}>
                 {SportBetTypes.map((type) => (
                   <ListGames
@@ -271,6 +283,7 @@ function TopSection({
           ))}
         </div>
       </Row>
+
       <br></br>
     </>
   );

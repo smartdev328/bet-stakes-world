@@ -1,0 +1,38 @@
+.subscribenow {
+  background: #1a1a1a;
+  padding: 50px;
+  margin-bottom: 50px;
+}
+
+.subscribenow_desc {
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.orText {
+  /* position: absolute;
+  width: 33px;
+  height: 38px;
+  left: 503px;
+  top: 333px; */
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 38px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.leftCard {
+  background: #ffffff;
+}
+
+.rightCard {
+  background: #ffffff;
+}

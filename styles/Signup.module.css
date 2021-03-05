@@ -119,7 +119,7 @@
 
 /* Packages Column */
 .packagesCol, .registrationCol {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .packagesCol {
   width: 640px;
@@ -155,11 +155,9 @@
   margin-bottom: 18px;
   position: relative;
   animation: all linear 1s;
-}
-.package.selected {
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
   border: 1px solid #1A1A1A;
   box-sizing: border-box;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
 }
 .package .sportsCards,
 .package .billingPlans {
@@ -322,13 +320,14 @@
   stroke-width: 4.8px;
 }
 .sportsCards {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .sportsTypeContent {
   margin: -4px;
+  max-width: 460px;
 }
 .extra_info {
-  margin-bottom: 18px;
+  margin-bottom: 8px;
 }
 
 /* Registration Form Column */
@@ -371,7 +370,7 @@
   font-weight: 400;
   color: #000000;
   text-align: center;
-  width: 560px;
+  max-width: 560px;
   margin: 3em auto 0;
 }
 .termsContent a {
@@ -483,6 +482,32 @@
     margin: 30px 0;
   }
 }
+.fantasy_sportsbook {
+  width: 50px;
+  height: 50px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.vipBestValue {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.vipBestValue img {
+  width: 72px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.vipBestValue span {
+  font-family: "Rock Salt";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000;
+  margin-left: 10px;
+}
 
 @media (max-width: 856px) {
   .packagesCol {
@@ -493,6 +518,9 @@
 }
 
 @media (max-width: 600px) {
+  .registrationCol {
+    width: 100%;
+  }
   .sectionTitle {
     font-size: 18px;
     line-height: 28px;

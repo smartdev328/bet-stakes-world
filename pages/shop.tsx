@@ -257,17 +257,10 @@ type MembershipOfferingsPropsType = {
   changePlan: (_: string) => void;
 };
 
-function MembershipOfferings({
-  currentPlan,
-  changePlan,
-}: MembershipOfferingsPropsType) {
+function MembershipOfferings({ currentPlan, changePlan }: MembershipOfferingsPropsType) {
   return (
-    <div
-      className={styles.membershipOffers_plans}>
-      <div
-        className={`${styles.plan} ${
-          currentPlan === 'sports_card' && styles.active
-        }`}>
+    <div className={styles.membershipOffers_plans}>
+      <div className={`${styles.plan} ${currentPlan === 'sports_card' && styles.active}`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('sports_card')}>
             <div className={styles.plan_content_title}>Sports Card</div>
@@ -278,9 +271,7 @@ function MembershipOfferings({
         </div>
       </div>
       <div
-        className={`${styles.plan} ${styles.main_plan} ${
-          currentPlan === 'all' && styles.active
-        }`}>
+        className={`${styles.plan} ${styles.main_plan} ${currentPlan === 'all' && styles.active}`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('all')}>
             <div className={styles.plan_content_title}>VIP ALL ACCESS CARD</div>
@@ -294,10 +285,7 @@ function MembershipOfferings({
         </div>
         <div className={styles.plan_extra_content}>Best&nbsp;&nbsp;Deal!</div>
       </div>
-      <div
-        className={`${styles.plan} ${
-          currentPlan === 'fantasy' && styles.active
-        }`}>
+      <div className={`${styles.plan} ${currentPlan === 'fantasy' && styles.active}`}>
         <div className={styles.plan_content}>
           <div className={styles.plan_content_info} onClick={() => changePlan('fantasy')}>
             <div className={styles.plan_content_title}>DAILY FANTASY CARD</div>
@@ -328,7 +316,7 @@ function Intro() {
           </div>
         </div>
       </Row>
-      <ul>
+      <ul className={styles.list}>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
           Sports Include NBA, MLB, NFL, Soccer, NCAAF, NCAAB, UFC & Formula 1
@@ -346,10 +334,6 @@ function Intro() {
           Monthly & Annual Packages Include In-Game Bets
         </li>
       </ul>
-      <div className={styles.extra_info}>
-        *The DailyStakes Protection: For the Daily VIP All Access Card only, if over 50% of the
-        plays are losses, the next day is FREE*
-      </div>
     </div>
   );
 }
@@ -443,12 +427,12 @@ function ProductsAndCartBox({
           <img src="/images/ds-protectionn.png" className={styles.protection_image} />
         </div>
 
-        <div>
+        <div className={styles.protection_detail}>
           <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
           <p className={styles.protection_details}>
-            IF over 50% of the plays on theCard are losses for a{' '}
-            <br className={styles.endline_protection} /> given day, the next day’s picks is
-            automatically FREE.
+            IF OVER 50% OF THE DAILY VIP ALL ACCES CARD ARE LOSSES FOR A
+            <br className={styles.endline_protection} /> GIVEN DAY, THE NEXT DAY’S PICKS ARE
+            AUTOMATICALLY FREE. NO <br className={styles.endline_protection} /> QUESTIONS ASKED.
           </p>
         </div>
       </div>
@@ -1252,14 +1236,23 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
               decimalScale={2}
               value={totalPrice}
             />
-            {showDetails && <CaretUpOutlined className={styles.caret_icon} onClick={() => setShowDetails(false)} />}
-            {!showDetails && <CaretDownOutlined className={styles.caret_icon} onClick={() => setShowDetails(true)} />}
+            {showDetails && (
+              <CaretUpOutlined
+                className={styles.caret_icon}
+                onClick={() => setShowDetails(false)}
+              />
+            )}
+            {!showDetails && (
+              <CaretDownOutlined
+                className={styles.caret_icon}
+                onClick={() => setShowDetails(true)}
+              />
+            )}
           </div>
           <Button className={styles.addToCartBtn} onClick={() => addToCart(pack, cartItems)}>
             Add to Cart
           </Button>
         </div>
-        
       </div>
     </div>
   );

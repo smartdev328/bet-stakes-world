@@ -270,8 +270,14 @@
 }
 
 .introSection {
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
+
+.list {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
 .introSectionBg {
   background: #1a1a1a;
   border: 1.5px solid #ffc700;
@@ -1021,8 +1027,12 @@
   }
 }
 .protection_image {
-  height: 130px;
-  width: 130px;
+  height: 110px;
+  width: 110px;
+}
+
+.protection_detail {
+  margin-left: 15px;
 }
 
 .protection_heading {
@@ -1087,5 +1097,8 @@
     display: flex;
     align-items: flex-start !important;
     width: 100%;
+  }
+  .protection_detail {
+    margin-left: 0px;
   }
 }

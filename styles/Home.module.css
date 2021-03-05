@@ -642,7 +642,6 @@ li .square_icon {
     display: flex;
     flex-direction: column-reverse;
     margin-right: 0;
-    margin-bottom: 2em;
   }
   .main_plan {
     order: 0;
@@ -2014,6 +2013,7 @@ li .square_icon {
 
   .protection_div_mobile {
     display: flex;
+    padding-bottom: 20px;
   }
   .plan_extra_content_mobile {
     font-family: 'Rock Salt';

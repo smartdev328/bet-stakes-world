@@ -10,10 +10,10 @@ const DSProtection = () => {
       </div>
 
       <div>
-        <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
+        <p className={styles.protection_heading}>Only applicable to vip daily card</p>
         <p className={styles.protection_details}>
-          IF over 50% of the plays on theCard are losses for a given day, the next day’s picks is
-          automatically FREE.
+          If over 50% of the Daily VIP All Access Card are losses for a given day, the next day’s
+          picks are automatically free. No questions asked.
         </p>
       </div>
     </>

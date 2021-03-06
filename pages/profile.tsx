@@ -338,7 +338,7 @@ function ProfileInfo({
   return (
     <>
       <form autoComplete="off" id="profileForm">
-        <Row className={styles.rowWithTwoChild}>
+        <Row className={`${styles.rowWithTwoChild} ${styles.mainInfo}`}>
           <Col span={12}>
             <Row>
               <div className={styles.sectionTitle}>Profile</div>

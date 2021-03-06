@@ -65,7 +65,7 @@
 
 /* Profile Form */
 .sectionTitle {
-  font-weight: normal;
+  font-weight: 500;
   font-size: 24px;
   line-height: 38px;
   color: #000000;
@@ -77,12 +77,7 @@
   .sectionTitle {
     font-size: 20px;
     line-height: 32px;
-  }
-}
-@media (max-width: 600px) {
-  .sectionTitle {
-    font-size: 18px;
-    line-height: 28px;
+    margin-top: 16px;
   }
 }
 
@@ -188,7 +183,7 @@
     max-width: 100%;
   }
   .profileLogoWrapper {
-    padding: 20px 0;
+    padding: 20px 0 5px;
   }
   .profileLogo {
     width: 180px;
@@ -365,7 +360,16 @@
   overflow: hidden;
   margin-bottom: 20px;
 }
-
+@media (max-width: 600px) {
+  .avatarLogo {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 12px;
+  }
+  .mainInfo.rowWithTwoChild {
+    flex-direction: column-reverse;
+  }
+}
 .subscriptionSettings {
   color: #1A1A1A;
   font-weight: 400;

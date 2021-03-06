@@ -258,6 +258,18 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
       setLogoFile(undefined);
     }
   };
+  const createCustomerPortal = () => {
+    UsersAPIs.createCustomerPortal().then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          window.location.href = data.data.url;
+        } else {
+          notification['error']({
+            message: 'Create Stripe Customer Portal Error',
+          });
+        }
+      });
+  }
 
   let isAllValid = false;
   isAllValid = !Object.values(formValidation).some((x) => x !== true);
@@ -279,11 +291,9 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
           />
           <div className={styles.subscriptionSettings}>
             MANAGE YOUR SUBSCRIPTIONS AND PAYMENT METHODS{' '}
-            <Link href="https://dashboard.stripe.com/">
-              <a>
-                <strong>HERE</strong>
-              </a>
-            </Link>
+            <a onClick={createCustomerPortal}>
+              <strong>HERE</strong>
+            </a>
           </div>
           <Row className={styles.actionBtns} justify={'center'}>
             <Button

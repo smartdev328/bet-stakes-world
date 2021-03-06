@@ -117,6 +117,15 @@ function getOverallRecord() {
   });
 }
 
+function createCustomerPortal() {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/users/customer-portal`, {
+    method: 'POST',
+    headers
+  });
+}
+
+
 export default {
   createUser,
   login,
@@ -128,5 +137,6 @@ export default {
   updateProfile,
   uploadLogo,
   changePassword,
-  getOverallRecord
+  getOverallRecord,
+  createCustomerPortal
 };

@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { Row, Button, Upload, Col, notification } from 'antd';
 
 import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
@@ -259,17 +258,18 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
     }
   };
   const createCustomerPortal = () => {
-    UsersAPIs.createCustomerPortal().then((res) => res.json())
+    UsersAPIs.createCustomerPortal()
+      .then((res) => res.json())
       .then((data) => {
         if (data.status === 'success') {
           window.location.href = data.data.url;
         } else {
           notification['error']({
-            message: 'Create Stripe Customer Portal Error',
+            message: 'Create Stripe Customer Portal Error'
           });
         }
       });
-  }
+  };
 
   let isAllValid = false;
   isAllValid = !Object.values(formValidation).some((x) => x !== true);

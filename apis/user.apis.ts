@@ -125,7 +125,6 @@ function createCustomerPortal() {
   });
 }
 
-
 export default {
   createUser,
   login,

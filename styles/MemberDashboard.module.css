@@ -169,8 +169,9 @@
 .package_status {
   font-style: normal;
   font-weight: 500;
-  font-size: 20.6px;
-  line-height: 40px;
+  font-size: 24px;
+  line-height: 28px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -189,13 +190,13 @@
   justify-content: center;
 }
 .package_card_img {
-  width: 165px;
+  height: 165px;
 }
 .package_card:hover .package_card_content {
   background-color: #f1f1f1;
 }
 .package_title {
-  padding: 40px 0px 0;
+  padding: 20px 0px 0;
 }
 .package_title h3 {
   font-style: normal;
@@ -211,6 +212,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 28.3px;
+  margin-bottom: 0;
   text-transform: capitalize;
 }
 .package_desc {
@@ -257,8 +259,8 @@
 }
 .full_height {
   height: 100%;
-  padding-top: 130px !important;
-  padding-bottom: 130px !important;
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -311,6 +313,24 @@
 }
 .nowrapRow {
   flex-wrap: nowrap;
+}
+
+.packageOverall {
+  display: table;
+  margin: 20px 0;
+}
+.packageOverallRow {
+  display: table-row;
+}
+.packageOverallRow span {
+  display: table-cell;
+  color: #A3A3A3;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 1px 4px;
 }
 
 @media (max-width: 1400px) {
@@ -460,21 +480,26 @@
   }
   .package_card {
     margin-right: 16px;
+    width: 240px;
   }
   .package_status {
-    font-size: 12px;
+    font-size: 18px;
     line-height: 25px;
+    height: 48px;
   }
   .package_card_content {
-    padding: 16px;
+    padding: 20px 16px 20px;
+  }
+  .package_title {
+    padding: 16px 0 0;
   }
   .package_title h3 {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 24px;
+    line-height: 28px;
   }
   .package_title p {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 1em;
   }
   .package_desc {
     font-size: 12px;
@@ -491,6 +516,9 @@
   .package_card h1 {
     font-size: 20px;
     line-height: 24px;
+  }
+  .packageOverall {
+    margin: 16px 0;
   }
 }
 @media (max-width: 600px) {

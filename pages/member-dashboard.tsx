@@ -24,7 +24,7 @@ import {
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
-import { UserSubscription } from '@type/Users';
+import { Overall, OverallInfoType, OverallList, UserSubscription } from '@type/Users';
 import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
 import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
@@ -35,6 +35,12 @@ import { BillingPlan, Package } from '@type/Packages';
 import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 import checkoutApis from '@apis/checkout.apis';
 import { CheckoutSessionType } from '@type/Cart';
+
+const EmptyOverall = {
+  loss: 0,
+  wins: 0,
+  draw: 0
+};
 
 function HeroBanner() {
   return (
@@ -49,17 +55,8 @@ function HeroBanner() {
   );
 }
 
-function TopSection({ profileName, initialName }: { profileName: string; initialName: string }) {
-  const [overallInfo, setOverallInfo] = useState<string>('');
-  useEffect(() => {
-    UsersAPIs.getOverallRecord()
-      .then((res) => res.json())
-      .then((data) => {
-        const { wins, loss, draw } = data.data.summary;
-        setOverallInfo(`${wins}-${draw}-${loss}`);
-      });
-  });
-
+function TopSection({ profileName, initialName, overallInfo }: { profileName: string; initialName: string, overallInfo: Overall }) {
+  const { wins = 0, draw = 0, loss = 0 } = overallInfo;
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
@@ -69,7 +66,7 @@ function TopSection({ profileName, initialName }: { profileName: string; initial
           <div className={styles.avatar}>{initialName}</div>
         </Row>
         <Col className={styles.welcome_right}>
-          <strong>Overall Record:</strong>&nbsp;{overallInfo}
+          <strong>Overall Record:</strong>&nbsp;{`${wins}-${draw}-${loss}`}
         </Col>
       </Row>
     </>
@@ -78,10 +75,12 @@ function TopSection({ profileName, initialName }: { profileName: string; initial
 
 function CurrentPackages({
   subscriptions,
-  packages
+  packages,
+  overallInfo
 }: {
   subscriptions: UserSubscription[];
   packages: Package[];
+  overallInfo: OverallList[];
 }) {
   const router = useRouter();
 
@@ -120,6 +119,14 @@ function CurrentPackages({
     });
     return vipSubscription.concat(sportSubscription, fantasySubscription);
   };
+  const getOverallRecord = (subscription: UserSubscription) => {
+    const overallRecord = overallInfo.find((item) => item.subscription_id.toString() === subscription.id);
+    const { wins, loss, draw } = overallRecord?.win_record || EmptyOverall;
+    return {
+      record: `${wins}-${draw}-${loss}`,
+      units: overallRecord?.unit_profitability || 0
+    };
+  }
 
   return (
     <div className={styles.current_packages}>
@@ -127,57 +134,50 @@ function CurrentPackages({
       <div className={styles.block_content}>
         {sortSubscriptions().map((subscription) => (
           <div className={styles.package_card} key={subscription.id}>
-            {!subscription.is_active && (
-              <div className={styles.package_status}>{`Expired ${Math.floor(
-                moment.duration(moment().diff(moment(subscription.valid_till))).asDays()
-              )} days ago`}</div>
-            )}
+            <div className={styles.package_status}>
+              {subscription.plan.package === vipAllAccessPack && <span>VIP ALL ACCESS CARD</span>}
+              {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
+              {subscription.plan.package === fantasyPack && <span>DAILY FANTASY CARD</span>}
+            </div>
             <div className={styles.package_card_content}>
               {subscription.plan.package === vipAllAccessPack && (
                 <img
                   alt="VIP All Access Background"
-                  src="/images/sports_card_bg.png"
+                  src="/images/vip.svg"
                   className={styles.package_card_img}
                 />
               )}
               {subscription.plan.package !== vipAllAccessPack && (
                 <img
                   alt="Sports Logo"
-                  src={
-                    subscription.sports[0]?.logo
-                      ? subscription.sports[0]?.logo
-                      : '/images/daily_lineups_bg.png'
-                  }
+                  src={`/images/sports/${subscription.sports[0].name.toLowerCase()}.svg`}
                   className={styles.package_card_img}
                 />
               )}
               <div className={styles.package_title}>
-                {subscription.plan.package === vipAllAccessPack && <h3>VIP All Access</h3>}
-                {subscription.plan.package === sportsCardPack && <h3>Sports Card</h3>}
-                {subscription.plan.package === fantasyPack && <h3>Fantasy</h3>}
-                {subscription.plan.package !== fantasyPack && (
-                  <p>{subscription.plan.duration.toLowerCase()} Picks</p>
-                )}
-                {subscription.plan.package === fantasyPack && (
-                  <p>{subscription.plan.duration.toLowerCase()} lineups</p>
-                )}
+                {subscription.sports[0] && <h3>{subscription.sports[0].name}</h3>}
+                {!subscription.sports[0] && <h3>VIP</h3>}
+                <p>
+                  {subscription.plan.duration.toUpperCase()} ACCESS
+                </p>
               </div>
-              <p className={styles.package_desc}>
-                {subscription.sports[0] && subscription.sports[0].name}
-                {!subscription.sports[0] && <span>&nbsp;</span>}
-              </p>
-              {subscription.is_active && (
-                <Button
-                  onClick={() => {
-                    goToPackage(subscription.plan, subscription.sports[0]);
-                  }}
-                  className={styles.cta_btn}>
-                  View Picks
-                </Button>
-              )}
-              {!subscription.is_active && (
-                <Button className={styles.cta_btn}>Reactivate Package</Button>
-              )}
+              
+              <div className={styles.packageOverall}>
+                <div className={styles.packageOverallRow}>
+                  <span>record:</span><span>{getOverallRecord(subscription).record}</span>
+                </div>
+                <div className={styles.packageOverallRow}>
+                  <span>profit:</span>
+                  <span>{`${getOverallRecord(subscription).units > 0 ? '+' + getOverallRecord(subscription).units : getOverallRecord(subscription).units} unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
+                </div>
+              </div>
+              <Button
+                onClick={() => {
+                  goToPackage(subscription.plan, subscription.sports[0]);
+                }}
+                className={styles.cta_btn}>
+                {subscription.plan.package === fantasyPack ? 'VIEW LINEUPS' : 'VIEW PLAYS'}
+              </Button>
             </div>
           </div>
         ))}
@@ -410,6 +410,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [profileName, setProfileName] = useState<string>('');
   const [initialName, setInitialName] = useState<string>('');
   const [session, setSession] = useState<CheckoutSessionType | undefined>(undefined);
+  const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
   const router = useRouter();
   const { session_id: sessionId } = router.query;
 
@@ -435,6 +436,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
           );
         }
       });
+      UsersAPIs.getOverallRecord()
+        .then((res) => res.json())
+        .then((data) => {
+          setOverallInfo(data.data);
+        });
   }, []);
 
   useEffect(() => {
@@ -484,10 +490,10 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection profileName={profileName} initialName={initialName} />
+          <TopSection profileName={profileName} initialName={initialName} overallInfo={overallInfo.summary || EmptyOverall} />
           <Row className={styles.nowrapRow}>
             <Col sm={24} md={18} className={styles.current_packages_container}>
-              {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} />}
+              {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} overallInfo={overallInfo.list || []} />}
               <div className={styles.laptop_view}>
                 <VipAllAccessCard />
                 <DailyFantasyLineups />

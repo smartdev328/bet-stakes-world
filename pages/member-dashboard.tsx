@@ -133,53 +133,57 @@ function CurrentPackages({
       <div className={styles.block_title}>Current Packages</div>
       <div className={styles.block_content}>
         {sortSubscriptions().map((subscription) => (
-          <div className={styles.package_card} key={subscription.id}>
-            <div className={styles.package_status}>
-              {subscription.plan.package === vipAllAccessPack && <span>VIP ALL ACCESS CARD</span>}
-              {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
-              {subscription.plan.package === fantasyPack && <span>DAILY FANTASY CARD</span>}
-            </div>
-            <div className={styles.package_card_content}>
-              {subscription.plan.package === vipAllAccessPack && (
-                <img
-                  alt="VIP All Access Background"
-                  src="/images/vip.svg"
-                  className={styles.package_card_img}
-                />
-              )}
-              {subscription.plan.package !== vipAllAccessPack && (
-                <img
-                  alt="Sports Logo"
-                  src={`/images/sports/${subscription.sports[0].name.toLowerCase()}.svg`}
-                  className={styles.package_card_img}
-                />
-              )}
-              <div className={styles.package_title}>
-                {subscription.sports[0] && <h3>{subscription.sports[0].name}</h3>}
-                {!subscription.sports[0] && <h3>VIP</h3>}
-                <p>
-                  {subscription.plan.duration.toUpperCase()} ACCESS
-                </p>
-              </div>
-              
-              <div className={styles.packageOverall}>
-                <div className={styles.packageOverallRow}>
-                  <span>record:</span><span>{getOverallRecord(subscription).record}</span>
+          <>
+            {subscription.is_active && (
+              <div className={styles.package_card} key={subscription.id}>
+                <div className={styles.package_status}>
+                  {subscription.plan.package === vipAllAccessPack && <span>VIP ALL ACCESS CARD</span>}
+                  {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
+                  {subscription.plan.package === fantasyPack && <span>DAILY FANTASY CARD</span>}
                 </div>
-                <div className={styles.packageOverallRow}>
-                  <span>profit:</span>
-                  <span>{`${getOverallRecord(subscription).units > 0 ? '+' + getOverallRecord(subscription).units : getOverallRecord(subscription).units} unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
+                <div className={styles.package_card_content}>
+                  {subscription.plan.package === vipAllAccessPack && (
+                    <img
+                      alt="VIP All Access Background"
+                      src="/images/vip.svg"
+                      className={styles.package_card_img}
+                    />
+                  )}
+                  {subscription.plan.package !== vipAllAccessPack && (
+                    <img
+                      alt="Sports Logo"
+                      src={`/images/sports/${subscription.sports[0].name.toLowerCase()}.svg`}
+                      className={styles.package_card_img}
+                    />
+                  )}
+                  <div className={styles.package_title}>
+                    {subscription.sports[0] && <h3>{subscription.sports[0].name}</h3>}
+                    {!subscription.sports[0] && <h3>VIP</h3>}
+                    <p>
+                      {subscription.plan.duration.toUpperCase()} ACCESS
+                    </p>
+                  </div>
+                  
+                  <div className={styles.packageOverall}>
+                    <div className={styles.packageOverallRow}>
+                      <span>record:</span><span>{getOverallRecord(subscription).record}</span>
+                    </div>
+                    <div className={styles.packageOverallRow}>
+                      <span>profit:</span>
+                      <span>{`${getOverallRecord(subscription).units > 0 ? '+' + getOverallRecord(subscription).units : getOverallRecord(subscription).units} unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      goToPackage(subscription.plan, subscription.sports[0]);
+                    }}
+                    className={styles.cta_btn}>
+                    {subscription.plan.package === fantasyPack ? 'VIEW LINEUPS' : 'VIEW PLAYS'}
+                  </Button>
                 </div>
               </div>
-              <Button
-                onClick={() => {
-                  goToPackage(subscription.plan, subscription.sports[0]);
-                }}
-                className={styles.cta_btn}>
-                {subscription.plan.package === fantasyPack ? 'VIEW LINEUPS' : 'VIEW PLAYS'}
-              </Button>
-            </div>
-          </div>
+            )}
+          </>
         ))}
         <div className={styles.package_card}>
           <Link href="/shop">

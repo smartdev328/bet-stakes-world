@@ -543,7 +543,7 @@ function BetOnSports() {
                   {item.name === 'VIP' ? <p className={styles.best_deal_text}>best Deal!</p> : null}
                   <div className={styles.sports_card}>
                     <div
-                      className={`${styles.sports_card_box} ${item.style} ${
+                      className={`${styles.sports_card_box_mobile} ${item.style} ${
                         item.selected ? item.selectedStyle : ''
                       }`}
                       onClick={() => toggleSelectCard(item.value)}>
@@ -620,8 +620,9 @@ function BetOnSports() {
       </div>
 
       {/* older code of sports is below */}
-
-      <Button className={styles.mobile_checkout_btn}>Continue to SHOP page</Button>
+      <Link href="/shop">
+        <Button className={styles.mobile_checkout_btn}>Continue to SHOP page</Button>
+      </Link>
     </div>
   );
 }

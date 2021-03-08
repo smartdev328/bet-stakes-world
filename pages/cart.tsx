@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Button, Dropdown, Menu, notification, Spin } from 'antd';
+import { Button, Dropdown, Menu, message, notification, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
@@ -227,12 +227,46 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const [isTryingLogin, setIsTryingLogin] = useState<boolean>(false);
   const [cartForVisitor] = useState<boolean>(!token);
   const [userProfile, setUserProfile] = useState<UserProfile | undefined>();
+  const [isValidating, setIsValidating] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const stripe = useStripe();
 
   useEffect(() => {
     setTempCartItems(cartItems);
+
+    // Cart Validate
+    if (cartItems.length > 0 && !isValidating) {
+      setIsValidating(true);
+      const checkoutItems: CheckoutItem[] = [];
+      cartItems.forEach((item) => {
+        // Add To Subscriptions
+        const subscriptionParams: CheckoutItem = {
+          plan_id: item.plan.id,
+          sports: item.sports !== undefined ? [item.sports.id] : []
+        };
+        checkoutItems.push(subscriptionParams);
+      });
+      CheckoutAPIs.validateCart({ items: checkoutItems })
+        .then((res) => res.json())
+        .then((dt) => {
+          if (dt.status !== 'success') {
+            const { data } = dt.response;
+            data.forEach((item: any) => {
+              const cartItem = cartItems.find(cartIt => cartIt.plan.id === item.plan && cartIt.sports?.id === item.sports[0]);
+              message.error(
+              {
+                content: `An active subscription already exists under your account for ${cartItem?.plan.name} package. Please remove this membership package from cart to avoid a duplicative purchase`,
+                style: {
+                  maxWidth: '800px',
+                  margin: 'auto',
+                },
+              });
+            })
+          }
+          setIsValidating(false);
+        });
+    }
   }, [cartItems]);
 
   useEffect(() => {

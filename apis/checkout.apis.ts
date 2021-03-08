@@ -27,8 +27,18 @@ function completeCheckout(sessionId: string) {
   });
 }
 
+function validateCart(payload: CreateCheckoutSessionParams) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/checkout/cart/validate`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers
+  });
+}
+
 export default {
   createSession,
   completeCheckout,
-  loadSession
+  loadSession,
+  validateCart
 };

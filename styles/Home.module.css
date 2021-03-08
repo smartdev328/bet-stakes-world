@@ -401,6 +401,7 @@ li .square_icon {
   width: 425px;
   margin-right: 35px;
   text-align: left;
+  margin-bottom: 2em;
 }
 .plan_content {
   border: 1px solid #1a1a1a;
@@ -2018,7 +2019,8 @@ li .square_icon {
 
   .protection_div_mobile {
     display: flex;
-    padding-bottom: 20px;
+    padding-bottom: 0.5em;
+    margin-top: -1.5em;
   }
   .plan_extra_content_mobile {
     font-family: 'Rock Salt';

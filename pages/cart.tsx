@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Button, Dropdown, Menu, message, notification, Spin } from 'antd';
+import { Button, Dropdown, Menu, notification, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useSelector, useDispatch } from 'react-redux';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
@@ -9,7 +9,7 @@ import NumberFormat from 'react-number-format';
 
 import { AppLayout, BannerSportsAndMatches, CartSignupForm } from '@components/index';
 import styles from '@styles/Cart.module.css';
-import { CartItem, CheckoutItem } from '@type/Cart';
+import { CartItem, CheckoutItem, CartItemValidation } from '@type/Cart';
 import PackageAPIs from '@apis/package.apis';
 import { PageProps } from '@type/Main';
 import { BillingPlan, Package } from '@type/Packages';
@@ -228,6 +228,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   const [cartForVisitor] = useState<boolean>(!token);
   const [userProfile, setUserProfile] = useState<UserProfile | undefined>();
   const [isValidating, setIsValidating] = useState<boolean>(false);
+  const [cartItemsValidation, setCartItemsValidation] = useState<CartItemValidation[]>([]);
 
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -252,17 +253,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
         .then((dt) => {
           if (dt.status !== 'success') {
             const { data } = dt.response;
-            data.forEach((item: any) => {
-              const cartItem = cartItems.find(cartIt => cartIt.plan.id === item.plan && cartIt.sports?.id === item.sports[0]);
-              message.error(
-              {
-                content: `An active subscription already exists under your account for ${cartItem?.plan.name} package. Please remove this membership package from cart to avoid a duplicative purchase`,
-                style: {
-                  maxWidth: '800px',
-                  margin: 'auto',
-                },
-              });
-            })
+            setCartItemsValidation(data);
           }
           setIsValidating(false);
         });
@@ -451,37 +442,44 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                         </span>
                       </div>
                     </div>
-                    <div className={styles.cartItemPlans}>
-                      <div className={styles.cartItemPlansContent}>
-                        {packages?.map((pack, idx: number) => (
-                          <React.Fragment key={idx}>
-                            {pack.id === item.plan.package && pack.description !== 'add-on' && (
-                              <PlanDropdown
-                                pack={pack}
-                                sport={item.sports?.name}
-                                selectedPlan={item.plan}
-                                changePlan={(plan) => changedPlan(index, plan)}
-                              />
-                            )}
-                          </React.Fragment>
-                        ))}
+                    <div className={styles.cartItemDetails}>
+                      <div className={styles.cartItemPlans}>
+                        <div className={styles.cartItemPlansContent}>
+                          {packages?.map((pack, idx: number) => (
+                            <React.Fragment key={idx}>
+                              {pack.id === item.plan.package && pack.description !== 'add-on' && (
+                                <PlanDropdown
+                                  pack={pack}
+                                  sport={item.sports?.name}
+                                  selectedPlan={item.plan}
+                                  changePlan={(plan) => changedPlan(index, plan)}
+                                />
+                              )}
+                            </React.Fragment>
+                          ))}
+                        </div>
                       </div>
+                      <div className={styles.cartItemPrice}>
+                        <NumberFormat
+                          displayType="text"
+                          thousandSeparator={true}
+                          prefix={'$'}
+                          fixedDecimalScale
+                          decimalScale={2}
+                          value={item.plan.price}
+                        />
+                      </div>
+                      <Button
+                        type={'link'}
+                        className={styles.removeCartBtn}
+                        icon={<MinusIcon className={styles.minusIcon} />}
+                        onClick={() => removeCartAt(index)}></Button>
+                      {cartItemsValidation.findIndex(it => it.plan === item.plan.id && it.sports[0] === item.sports?.id) > -1 && (
+                        <div className={styles.cartItemValidationError}>
+                          {`An active subscription already exists under your account for this package. Please remove this membership package from cart to avoid a duplicative purchase`}
+                        </div>
+                      )}
                     </div>
-                    <div className={styles.cartItemPrice}>
-                      <NumberFormat
-                        displayType="text"
-                        thousandSeparator={true}
-                        prefix={'$'}
-                        fixedDecimalScale
-                        decimalScale={2}
-                        value={item.plan.price}
-                      />
-                    </div>
-                    <Button
-                      type={'link'}
-                      className={styles.removeCartBtn}
-                      icon={<MinusIcon className={styles.minusIcon} />}
-                      onClick={() => removeCartAt(index)}></Button>
                   </div>
                 </div>
               ))}

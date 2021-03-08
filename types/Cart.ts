@@ -38,3 +38,8 @@ export type CheckoutSessionType = {
   amount_total?: number;
   currency?: number;
 };
+
+export type CartItemValidation = {
+  plan: string;
+  sports: number[];
+};

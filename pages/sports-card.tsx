@@ -121,11 +121,6 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>
-              <div className={styles.laptop_view}>
-                <VipAllAccessCard />
-                <DailyFantasyLineups />
-              </div>
-
               <Col sm={24} md={18} className={styles.contentMainCol}>
                 {showLockView ? (
                   <LockSportsCard />

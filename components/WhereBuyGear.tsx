@@ -52,7 +52,7 @@ function WhereBuyGear() {
             <img
               src="/images/sports-company.png"
               alt="DailyStakes Company"
-              width={200}
+              width={170}
               height={60}
               style={{ paddingBottom: '8px' }}
               className={styles.image_style}

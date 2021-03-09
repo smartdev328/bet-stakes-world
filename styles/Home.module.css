@@ -1034,6 +1034,9 @@ li .square_icon {
   left: -200%;
   height: 200%;
 }
+.vip_box {
+  height: 100%;
+}
 .nfl_box .sports_card_image {
   transform: rotate(90deg);
   height: 200%;
@@ -1984,6 +1987,7 @@ li .square_icon {
   width: 100%;
   height: 280px;
   position: absolute;
+  object-fit: cover;
 }
 
 .best_deal_text {
@@ -2042,4 +2046,5 @@ li .square_icon {
 
 .vip_box_active {
   border: 2px solid #ffc700;
+  background-color: #ffc700;
 }

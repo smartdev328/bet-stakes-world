@@ -9,7 +9,7 @@ const DSProtection = () => {
         <img src="/images/ds-protectionn.png" className={styles.protection_image} />
       </div>
 
-      <div>
+      <div className={styles.protection_details_div}>
         <p className={styles.protection_heading}>Only applicable to vip daily card</p>
         <p className={styles.protection_details}>
           If over 50% of the Daily VIP All Access Card are losses for a given day, the next day’s

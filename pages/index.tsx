@@ -395,7 +395,7 @@ function BetOnSports() {
       name: 'VIP',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
       image: <img src={'/images/vip.svg'} className={styles.vip_sport_card} />,
-      style: styles.nba_box,
+      style: styles.vip_box,
       value: SpoortCardName.vip,
       selectedStyle: styles.vip_box_active,
       selected: selectedCards.vip
@@ -513,7 +513,9 @@ function BetOnSports() {
       </div>
       <div className={styles.bet_on_sports_desc}>
         <p>Select the sport(s) you would like to bet and continue to the shop page</p>
-        <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
+        <Link href="/shop">
+          <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
+        </Link>
       </div>
 
       <div className={styles.mobile_column_display}>

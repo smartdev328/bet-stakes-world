@@ -88,8 +88,8 @@ const Merchandise = ({ token, subscriptions }: PageProps) => {
             <p className={styles.coming_soon}>coming soon!</p>
 
             <p className={styles.signup_text}>
-              SIGN UP BELOW FOR EARLY UPDATES AND EXCLUSIVE ACCESS TO OUR HOODIES, CREWNECKS AND
-              SHIRTS
+              SIGN UP BELOW FOR EARLY UPDATES AND EXCLUSIVE <br className={styles.br_class} />
+              ACCESS TO OUR HOODIES, CREWNECKS AND SHIRTS
             </p>
             <div className={styles.newsletterFormContainer}>
               <label htmlFor="newsletter_email" className={styles.email_text}>

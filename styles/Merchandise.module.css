@@ -1,45 +1,36 @@
 .outer_div {
   background-color: #1a1a1a;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* height: 1000px; */
 }
 
 .dailyStake {
-  width: 1412px;
-  height: 142px;
+  padding-top: 50px;
   font-family: Saira;
   font-style: normal;
   font-weight: 800;
-  font-size: 100px;
-  line-height: 117.9%;
+  font-size: 70px;
+
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
 }
 
 .merchandise {
-  width: 1370px;
-  height: 140px;
   font-family: Saira;
   font-style: normal;
   font-weight: 800;
-  font-size: 100px;
-  line-height: 117.9%;
+  font-size: 70px;
+
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
 }
 
 .coming_soon {
-  width: 1214px;
-  height: 152px;
   font-family: Rock Salt;
   font-style: normal;
   font-weight: normal;
-  font-size: 120px;
+  font-size: 90px;
   line-height: 184.4%;
   text-align: center;
   text-transform: uppercase;
@@ -54,12 +45,10 @@
 }
 
 .signup_text {
-  width: 780px;
-  height: 42px;
   font-family: Saira;
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 129.9%;
   text-align: center;
   color: #ffffff;
@@ -82,7 +71,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 30px;
+  padding-bottom: 50px;
 }
 
 .email_text {
@@ -112,4 +101,65 @@
   border-radius: 0;
   border: 1px solid #ffffff;
   outline: none;
+  padding-left: 5px;
+}
+
+.br_class {
+  display: block;
+}
+
+.newsletterForm_email::placeholder {
+  color: #ffffff;
+  opacity: 1; /* Firefox */
+}
+
+.newsletterForm_email:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #ffffff;
+}
+
+.newsletterForm_email::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .dailyStake {
+    padding-top: 0px;
+    font-size: 35px;
+  }
+  .merchandise {
+    font-size: 35px;
+  }
+  .coming_soon {
+    font-size: 32px;
+    line-height: 50%;
+    padding-top: 30px;
+  }
+
+  .signup_text {
+    font-size: 16px;
+    line-height: 100%;
+    padding: 25px;
+  }
+  .br_class {
+    display: none;
+  }
+  .outer_div {
+    height: 90vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .button_outerDiv {
+    padding-bottom: 0px;
+  }
+
+  .newsletterForm_email {
+    width: 300px;
+    height: 40px;
+
+    font-size: 16px;
+  }
 }

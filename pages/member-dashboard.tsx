@@ -460,6 +460,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
 
   useEffect(() => {
     if (session && sessionId) {
+      dispatch({ type: 'UPDATE_CART', payload: [] });
       checkoutApis
         .completeCheckout(sessionId.toString())
         .then((res) => res.json())
@@ -473,7 +474,6 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             notification['info']({
               message: 'Checkout was completed!'
             });
-            dispatch({ type: 'UPDATE_CART', payload: [] });
             router.replace('/member-dashboard');
           }
         })
@@ -482,7 +482,6 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             message: 'Checkout Session Error!',
             description: error.message
           });
-          dispatch({ type: 'UPDATE_CART', payload: [] });
           router.replace('/member-dashboard');
         });
     }

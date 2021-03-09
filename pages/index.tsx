@@ -395,7 +395,7 @@ function BetOnSports() {
       name: 'VIP',
       description: 'ACCESS TO ALL PLAYS & PARLAYS FOR ALL SPORTS',
       image: <img src={'/images/vip.svg'} className={styles.vip_sport_card} />,
-      style: styles.nba_box,
+      style: styles.vip_box,
       value: SpoortCardName.vip,
       selectedStyle: styles.vip_box_active,
       selected: selectedCards.vip

@@ -49,4 +49,13 @@
   .protection_details {
     font-size: 12px;
   }
+  .protection_details_div {
+    width: 250px;
+  }
+  .protection_image_div {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100px;
+  }
 }

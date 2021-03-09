@@ -31,6 +31,11 @@
   justify-content: center;
   display: flex;
   align-items: center;
+  width: 130px;
+}
+
+.protection_details_div {
+  width: 400px;
 }
 
 @media (max-width: 600px) {

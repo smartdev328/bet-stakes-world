@@ -107,11 +107,10 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             sports={sports}
             unlockedItems={unlockedItems}
             changeActiveSport={(sport: number) => {
-              setShowLockView(!unlockedItems.some((item: number) => item === sport));
               setActiveSport(sport);
             }}
-            openUnlockModal={(sport: Sport) => {
-              setShowLockView(!unlockedItems.some((item: number) => item === sport.id));
+            openUnlockModal={(status) => {
+              setShowLockView(status);
             }}
             filterChanged={(filter) => {
               setFilterType(filter);
@@ -178,7 +177,7 @@ function HeroBanner() {
 type TopSectionPropsType = {
   unlockedItems: number[];
   sports: Sport[];
-  openUnlockModal: (_: Sport) => void;
+  openUnlockModal: (_: boolean) => void;
   changeActiveSport: (_: number) => void;
   filterChanged: (_: string) => void;
 };
@@ -192,6 +191,10 @@ function TopSection({
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
+    initStatus();
+  }, [unlockedItems]);
+
+  const initStatus = () => {
     const selectedStatus = sports.map((sport: Sport) => {
       const unlockedItemIndex = unlockedItems.findIndex((item: number) => item === sport.id);
       if (unlockedItemIndex > -1) {
@@ -200,22 +203,31 @@ function TopSection({
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, [unlockedItems]);
+    changeActiveSport(-1);
+  }
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      const newItems = items.fill(1);
+      const newItems = items.map(item => {
+        if (item === 2) {
+          return 1;
+        }
+        return item;
+      });
       newItems[index] = 2;
       setSportsStatus(newItems);
       changeActiveSport(sports[index].id);
+      openUnlockModal(false);
     } else if (items[index] === 2) {
       const newItems = items.slice();
       newItems[index] = 1;
       setSportsStatus(newItems);
       changeActiveSport(-1);
+      openUnlockModal(false);
     } else {
-      openUnlockModal(sports[index]);
+      initStatus();
+      openUnlockModal(true);
     }
   };
 
@@ -227,7 +239,13 @@ function TopSection({
           <VipAllAccessCard />
           <DailyFantasyLineups />
         </div>
-        <Button className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}>
+        <Button
+          className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
+          onClick={() => {
+            initStatus();
+            openUnlockModal(true);
+          }}
+        >
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <LockIcon className={styles.lock_icon} />
             <span>VIP ALL ACCESS CARD</span>

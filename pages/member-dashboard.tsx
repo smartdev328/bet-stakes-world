@@ -25,7 +25,7 @@ import {
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
 import { Overall, OverallInfoType, OverallList, UserSubscription } from '@type/Users';
-import WeeklyTipsAPIs from '@apis/weeklyTips.apis';
+import WeeklyTipsAPIs from '@apis/utils.apis';
 import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
 import { Sport } from '@type/Sports';
@@ -421,7 +421,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const dispatch = useDispatch();
 
   useEffect(() => {
-    WeeklyTipsAPIs.getLastTip()
+    WeeklyTipsAPIs.getWeeklyLastTip()
       .then((res) => res.json())
       .then((data) => {
         setWeeklyTip(data);
@@ -482,6 +482,8 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             message: 'Checkout Session Error!',
             description: error.message
           });
+          dispatch({ type: 'UPDATE_CART', payload: [] });
+          router.replace('/member-dashboard');
         });
     }
   }, [session]);

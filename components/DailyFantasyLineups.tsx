@@ -1,32 +1,51 @@
 import { Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Markdown from 'react-markdown';
+import moment from 'moment';
 
 import styles from './DailyFantasyLineups.module.css';
 import { MinusEncloseIcon, PlusEncloseIcon, WinnerCupIcon } from './SvgIcons';
-import { MOCK_DailyFantasyLineups } from '@constants/index';
 import SportTile from './SportTile';
+import UtilsAPIs from '@apis/utils.apis';
+import { SidebarCardInfo } from '@type/Main';
 
 function DailyFantasyLineups() {
   const [showContent, setShowContent] = useState<boolean[]>([]);
+  const [info, setInfo] = useState<SidebarCardInfo | undefined>(undefined);
+
   const toggleDetailsAt = (id: number) => {
     showContent[id] = !showContent[id];
     setShowContent(showContent.slice());
   };
 
+  useEffect(() => {
+    UtilsAPIs.getSidebarInfo()
+      .then((res) => res.json())
+      .then((data) => {
+        const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'MULTIPLE')[0];
+        vipSidebar.date = data.published_at;
+        setInfo(vipSidebar);
+      });
+  }, []);
+
+  if (!info) {
+    return null;
+  }
+
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
-        <span>DAILY FANTASY LINEUPS</span>
+        <span>{info.package.name}</span>
       </div>
-      <p className={styles.date}>Thursday, February 25 2021</p>
+      <p className={styles.date}>{moment(info.date).format('dddd, MMMM DD YYYY')}</p>
       <div className={styles.sidebarBlockContent}>
-        {MOCK_DailyFantasyLineups.map((data, index) => (
+        {info.sports.map((data, index) => (
           <React.Fragment key={index}>
             <div className={styles.accordionTitle}>
               <div>
-                <SportTile sport={data.sport} />
-                <strong>{data.title}</strong>
+                <SportTile sport={data.sport.name} />
+                <strong>{data.description}</strong>
               </div>
               {showContent[index] && (
                 <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
@@ -41,20 +60,7 @@ function DailyFantasyLineups() {
             </div>
             {showContent[index] && (
               <div className={styles.accordionContent}>
-                <ul>
-                  {data.content.map((content) => (
-                    <li className={styles.fantasyLineupContent} key={content.label}>
-                      <div>
-                        <span className={styles.fantasyLineupContentlabel}>{content.label}</span>
-                        <ul className={styles.fantasyLineupContentFeatures}>
-                          {content.features.map((feature) => (
-                            <li key={feature}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <Markdown source={data.detail} />
               </div>
             )}
           </React.Fragment>

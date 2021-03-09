@@ -1,32 +1,50 @@
 import { Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import Markdown from 'react-markdown';
 
 import styles from './VipAllAccessCard.module.css';
 import { MinusEncloseIcon, PlusEncloseIcon, WinnerCupIcon } from './SvgIcons';
-import { MOCK_VipAllAccessCard } from '@constants/index';
 import SportTile from './SportTile';
+import UtilsAPIs from '@apis/utils.apis';
+import { SidebarCardInfo } from '@type/Main';
 
 function VipAllAccessCard() {
   const [showContent, setShowContent] = useState<boolean[]>([]);
+  const [info, setInfo] = useState<SidebarCardInfo | undefined>(undefined);
+
   const toggleDetailsAt = (id: number) => {
     showContent[id] = !showContent[id];
     setShowContent(showContent.slice());
   };
 
+  useEffect(() => {
+    UtilsAPIs.getSidebarInfo()
+      .then((res) => res.json())
+      .then((data) => {
+        const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'ALL')[0];
+        vipSidebar.date = data.published_at;
+        setInfo(vipSidebar);
+      });
+  }, []);
+
+  if (!info) {
+    return null;
+  }
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
-        <span>VIP ALL ACCESS CARD</span>
+        <span>{info.package.name}</span>
       </div>
-      <p className={styles.date}>Thursday, February 25 2021</p>
+      <p className={styles.date}>{moment(info.date).format('dddd, MMMM DD YYYY')}</p>
       <div className={styles.sidebarBlockContent}>
-        {MOCK_VipAllAccessCard.map((data, index) => (
+        {info.sports.map((data, index) => (
           <React.Fragment key={index}>
             <div className={styles.accordionTitle}>
               <div>
-                <SportTile sport={data.sport} />
-                <strong>{data.title}</strong>
+                <SportTile sport={data.sport.name} />
+                <strong>{data.description}</strong>
               </div>
               {showContent[index] && (
                 <Button ghost className={styles.ghostBtn} onClick={() => toggleDetailsAt(index)}>
@@ -41,15 +59,7 @@ function VipAllAccessCard() {
             </div>
             {showContent[index] && (
               <div className={styles.accordionContent}>
-                <ul>
-                  {data.content.map((content) => (
-                    <li className={styles.fantasyLineupContent} key={content.label}>
-                      <div>
-                        <span className={styles.label}>{content.label}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <Markdown source={data.detail} />
               </div>
             )}
           </React.Fragment>

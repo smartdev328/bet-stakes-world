@@ -160,3 +160,26 @@ export type PromiseResponse = {
     message: string;
   };
 };
+
+export type SidebarCardSport = {
+  description: string;
+  detail: string;
+  sport: {
+    name: string;
+    logo: {
+      url: string;
+    }
+  }
+}
+
+export type SidebarCardInfo = {
+  date: string;
+  package: {
+    access: 'ALL' | 'MULTIPLE',
+    logo: {
+      url: string;
+    },
+    name: string;
+  },
+  sports: SidebarCardSport[];
+};

@@ -1102,3 +1102,11 @@
     margin-left: 0px;
   }
 }
+
+.hover {
+  cursor: pointer;
+}
+
+.faq_open {
+  font-weight: bold !important;
+}

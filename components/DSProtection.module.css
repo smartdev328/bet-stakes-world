@@ -1,6 +1,6 @@
 .protection_image {
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 170px;
 }
 
 .protection_heading {
@@ -30,7 +30,7 @@
 .protection_image_div {
   justify-content: center;
   display: flex;
-  align-items: center;
+  align-items: start;
   width: 130px;
 }
 
@@ -40,8 +40,8 @@
 
 @media (max-width: 600px) {
   .protection_image {
-    height: 110px;
-    width: 100px;
+    height: 170px;
+    width: 120px;
   }
   .protection_heading {
     font-size: 12px;
@@ -55,7 +55,7 @@
   .protection_image_div {
     justify-content: center;
     display: flex;
-    align-items: center;
+    align-items: start;
     width: 100px;
   }
 }

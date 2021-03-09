@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import Link from 'next/link';
 import { AppLayout } from '@components/index';
 import { PageProps } from '@type/Main';
 import styles from '@styles/Static.module.css';
@@ -158,7 +158,9 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                     <h5 className={styles.dsCoverage_subheadings_interesting}>
                       INTERESTED IN WINNING WITH US?
                     </h5>
-                    <Button className={styles.checkout_btn}>Continue to Shop</Button>
+                    <Link href="/shop">
+                      <Button className={styles.checkout_btn}>Continue to Shop</Button>
+                    </Link>
                   </div>
                 </Col>
               </Row>

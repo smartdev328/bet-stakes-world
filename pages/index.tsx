@@ -513,7 +513,9 @@ function BetOnSports() {
       </div>
       <div className={styles.bet_on_sports_desc}>
         <p>Select the sport(s) you would like to bet and continue to the shop page</p>
-        <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
+        <Link href="/shop">
+          <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
+        </Link>
       </div>
 
       <div className={styles.mobile_column_display}>

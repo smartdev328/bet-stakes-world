@@ -40,6 +40,7 @@ type CartTotalWidgetProps = {
   cartItems: CartItem[];
   onCheckout: () => void;
   disabled: boolean;
+  changeDiscountCode: (_: string) => void;
 };
 
 function CartTotalWidget({
@@ -47,7 +48,8 @@ function CartTotalWidget({
   cartItems,
   mobile,
   onCheckout,
-  disabled
+  disabled,
+  changeDiscountCode
 }: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
@@ -80,7 +82,7 @@ function CartTotalWidget({
           <span>N/A</span>
         </div>
         <div className={styles.couponRow}>
-          <input placeholder="Enter Coupon Code" />
+          <input placeholder="Enter Coupon Code" onChange={(e) => changeDiscountCode(e.target.value)} />
           <Button disabled className={styles.couponBtn}>
             Apply Coupon
           </Button>
@@ -225,19 +227,24 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   });
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [isTryingLogin, setIsTryingLogin] = useState<boolean>(false);
-  const [cartForVisitor] = useState<boolean>(!token);
+  const [cartForVisitor, setCartForVisitor] = useState<boolean>(!token);
   const [userProfile, setUserProfile] = useState<UserProfile | undefined>();
   const [isValidating, setIsValidating] = useState<boolean>(false);
   const [cartItemsValidation, setCartItemsValidation] = useState<CartItemValidation[]>([]);
+  const [discountCode, setDiscountCode] = useState<string>('');
 
   const dispatch = useDispatch();
   const stripe = useStripe();
 
   useEffect(() => {
+    setCartForVisitor(!token);
+  }, [token]);
+
+  useEffect(() => {
     setTempCartItems(cartItems);
 
     // Cart Validate
-    if (cartItems.length > 0 && !isValidating) {
+    if (cartItems.length > 0 && !isValidating && token) {
       setIsValidating(true);
       const checkoutItems: CheckoutItem[] = [];
       cartItems.forEach((item) => {
@@ -307,7 +314,8 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
       checkoutItems.push(subscriptionParams);
     });
     CheckoutAPIs.createSession({
-      items: checkoutItems
+      items: checkoutItems,
+      promotion_code: discountCode
     })
       .then((res) => res.json())
       .then(async (data) => {
@@ -330,7 +338,6 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
           const { error } = await stripe.redirectToCheckout({
             sessionId: checkoutSessionId
           });
-          setProceeding(false);
           if (error) {
             notification['error']({
               message: 'Checkout Error!',
@@ -338,6 +345,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
             });
           }
         }
+        setProceeding(false);
       })
       .catch((error) => {
         setProceeding(false);
@@ -488,6 +496,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               mobile={false}
               loading={proceeding}
               cartItems={tempCartItems}
+              changeDiscountCode={(val) => setDiscountCode(val)}
               disabled={
                 !cartForVisitor
                   ? tempCartItems.length === 0
@@ -520,6 +529,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
           <CartTotalWidget
             mobile={true}
             loading={proceeding}
+            changeDiscountCode={(val) => setDiscountCode(val)}
             disabled={
               !cartForVisitor
                 ? tempCartItems.length === 0

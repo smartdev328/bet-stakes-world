@@ -31,6 +31,7 @@ export type CheckoutItem = {
 
 export type CreateCheckoutSessionParams = {
   items: CheckoutItem[];
+  promotion_code?: string;
 };
 
 export type CheckoutSessionType = {

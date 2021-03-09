@@ -16,12 +16,23 @@ function BettingFundamentals({ isFantasy, showContentAt, toggleDetailsAt }: Prop
   return (
     <div className={styles.sidebarBlock}>
       <div className={styles.sidebarBlockTitle}>
-        <img
-          src={'/images/sport-daily.svg'}
-          height="24px"
-          width="24px"
-          style={{ paddingRight: '4px' }}
-        />
+        {!isFantasy && (
+          <img
+            src={'/images/sport-daily.svg'}
+            height="24px"
+            width="24px"
+            style={{ paddingRight: '6px' }}
+          />
+        )}
+        {isFantasy && (
+          <img
+            src={'/images/daily_fantasy_icon.svg'}
+            height="24px"
+            width="24px"
+            style={{ paddingRight: '4px' }}
+          />
+        )}
+
         {!isFantasy && <span>Sports Betting Fundamentals</span>}
         {isFantasy && <span>Daily Fantasy Fundamentals</span>}
       </div>

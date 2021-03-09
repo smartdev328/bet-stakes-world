@@ -178,10 +178,6 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
           />
         </div>
 
-        <div className={styles.laptop_view}>
-          <VipAllAccessCard />
-          <DailyFantasyLineups />
-        </div>
         <div className={styles.containerWrapper}>
           <div className={styles.container}>
             <Row className={styles.content}>

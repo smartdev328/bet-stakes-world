@@ -32,7 +32,7 @@ function FAQs({ title }: { title: string }) {
                 <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
               )}
               <span
-                className={styles.hover && isOpen ? styles.faq_open : null}
+                className={`${styles.hover} ${isOpen ? styles.faq_open : null}`}
                 onClick={() => toggleFAQ(index)}>
                 {faq}
               </span>

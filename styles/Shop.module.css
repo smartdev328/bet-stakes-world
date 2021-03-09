@@ -1102,3 +1102,7 @@
     margin-left: 0px;
   }
 }
+
+.hover {
+  cursor: pointer;
+}

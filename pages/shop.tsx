@@ -364,7 +364,9 @@ function FAQs({ title, currentPlan }: FAQPropsType) {
               {faqIsVisible[index] && (
                 <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
               )}
-              <span>{faq}</span>
+              <span className={styles.hover} onClick={() => toggleFAQ(index)}>
+                {faq}
+              </span>
             </div>
             {faqIsVisible[index] && (
               <p dangerouslySetInnerHTML={{ __html: FAQsDesc[currentPlan][index] }}></p>

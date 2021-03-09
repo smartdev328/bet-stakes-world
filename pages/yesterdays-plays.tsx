@@ -158,6 +158,8 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
                   </>
                 )}
                 <div className={styles.laptop_view}>
+                  <VipAllAccessCard />
+                  <DailyFantasyLineups />
                   <CommonSportsBook />
                   <WhereToWatchGame />
                   <WhereBuyGear />
@@ -262,10 +264,6 @@ function TopSection({ sports, onSelectChange }: TopSectionPropsType) {
     <>
       <DashboardHeader title={'Yesterdays plays'} />
       <Row className={styles.sportsCardList} justify={'center'}>
-        <div className={styles.laptop_view}>
-          <VipAllAccessCard />
-          <DailyFantasyLineups />
-        </div>
         <Button
           className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
           onClick={onUnlockAll}>

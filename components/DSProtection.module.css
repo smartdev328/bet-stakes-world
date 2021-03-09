@@ -1,6 +1,6 @@
 .protection_image {
-  height: 200px;
-  width: 170px;
+  height: 150px;
+  width: 150px;
 }
 
 .protection_heading {
@@ -8,7 +8,7 @@
   font-family: Saira;
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   text-transform: uppercase;
   color: #000000;
@@ -20,7 +20,7 @@
   font-family: Saira;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 12px;
   text-align: center;
   text-transform: uppercase;
   color: #000000;
@@ -40,8 +40,8 @@
 
 @media (max-width: 600px) {
   .protection_image {
-    height: 170px;
-    width: 120px;
+    height: 110px;
+    width: 110px;
   }
   .protection_heading {
     font-size: 12px;

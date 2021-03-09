@@ -399,3 +399,10 @@
     align-items: center;
   }
 }
+
+.hover {
+  cursor: pointer;
+}
+.faq_open {
+  font-weight: bold !important;
+}

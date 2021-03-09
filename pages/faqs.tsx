@@ -9,8 +9,10 @@ import { FAQsDescPage, FAQsTitlePage } from '@constants/index';
 
 function FAQs({ title }: { title: string }) {
   const [faqIsVisible, setFaqIsVisible] = useState<boolean[]>([]);
+  const [isOpen, setIOpen] = useState<boolean>(false);
 
   const toggleFAQ = (index: number) => {
+    setIOpen(!isOpen);
     const updated = faqIsVisible.slice();
     updated[index] = !updated[index];
     setFaqIsVisible(updated);
@@ -29,7 +31,11 @@ function FAQs({ title }: { title: string }) {
               {faqIsVisible[index] && (
                 <MinusIcon className={styles.faqIcon} onClick={() => toggleFAQ(index)} />
               )}
-              <span>{faq}</span>
+              <span
+                className={styles.hover && isOpen ? styles.faq_open : null}
+                onClick={() => toggleFAQ(index)}>
+                {faq}
+              </span>
             </div>
             {faqIsVisible[index] && (
               <p dangerouslySetInnerHTML={{ __html: FAQsDescPage[index] }}></p>

@@ -482,6 +482,8 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             message: 'Checkout Session Error!',
             description: error.message
           });
+          dispatch({ type: 'UPDATE_CART', payload: [] });
+          router.replace('/member-dashboard');
         });
     }
   }, [session]);

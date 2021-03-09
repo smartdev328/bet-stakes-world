@@ -1,56 +1,48 @@
 .outer_div {
   background-color: #1a1a1a;
   width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* height: 1000px; */
 }
 
 .dailyStake {
   width: 1412px;
   height: 142px;
-
   font-family: Saira;
   font-style: normal;
   font-weight: 800;
   font-size: 100px;
   line-height: 117.9%;
-  /* or 118px */
-
   text-align: center;
   text-transform: uppercase;
-
   color: #ffffff;
 }
 
 .merchandise {
   width: 1370px;
   height: 140px;
-
   font-family: Saira;
   font-style: normal;
   font-weight: 800;
   font-size: 100px;
   line-height: 117.9%;
-  /* or 118px */
-
   text-align: center;
   text-transform: uppercase;
-
   color: #ffffff;
 }
 
 .coming_soon {
   width: 1214px;
   height: 152px;
-
   font-family: Rock Salt;
   font-style: normal;
   font-weight: normal;
   font-size: 120px;
   line-height: 184.4%;
-  /* or 221px */
-
   text-align: center;
   text-transform: uppercase;
-
   color: #ffffff;
 }
 
@@ -59,30 +51,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 20px;
-  padding-bottom: 20px; */
 }
 
 .signup_text {
   width: 780px;
   height: 42px;
-
   font-family: Saira;
   font-style: normal;
   font-weight: 500;
   font-size: 28px;
   line-height: 129.9%;
-  /* or 36px */
-
   text-align: center;
-
   color: #ffffff;
 }
 
-.checkout_btn {
+.signup_btn {
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -94,6 +77,13 @@
   width: 260px;
   margin-top: 30px;
 }
+.button_outerDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
 
 .email_text {
   font-family: Saira;
@@ -103,24 +93,23 @@
   line-height: 19px;
   display: flex;
   align-items: center;
-
   color: #ffffff;
   margin-top: 30px;
 }
 
 .newsletterForm_email {
-  width: 300px;
-  height: 56px;
-  padding: 16px 24px;
-  box-sizing: border-box;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  width: 400px;
+  height: 40px;
+  font-family: Saira;
+  font-style: normal;
   font-weight: normal;
   font-size: 16px;
-  line-height: 25px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  color: #ffffff;
   border-radius: 0;
-  border: none;
+  border: 1px solid #ffffff;
   outline: none;
-  border: solid 2px #fff;
-  transition: border ease-in 0.2s;
 }

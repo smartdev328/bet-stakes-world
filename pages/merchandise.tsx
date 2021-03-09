@@ -7,6 +7,10 @@ const url =
 import { validateEmail } from '@utils/common';
 import dynamic from 'next/dynamic';
 import { notification } from 'antd';
+import { PageProps } from '@type/Main';
+import AppHeader from '../components/AppHeader';
+import { getDayOfWeek, getMonthString } from '@utils/common';
+
 const Button = dynamic(() => import('antd/lib/button'));
 
 type SubscriptionFormProps = {
@@ -54,43 +58,60 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
         className={styles.newsletterForm_email}
       />
       <br />
-      <Button className={styles.checkout_btn} onClick={submit}>
-        Signup
-      </Button>
+      <div className={styles.button_outerDiv}>
+        <Button className={styles.signup_btn} onClick={submit}>
+          Signup
+        </Button>
+      </div>
     </>
   );
 }
 
-const Merchandise = () => {
+const Merchandise = ({ token, subscriptions }: PageProps) => {
+  const today = new Date();
   return (
-    <div className={styles.outer_div}>
-      <div className={styles.innerDiv}>
-        <p className={styles.dailyStake}>thedailystakes</p>
-        <p className={styles.merchandise}>merchandise</p>
-        <p className={styles.coming_soon}>coming soon!</p>
+    <>
+      <AppHeader
+        winningRate={72}
+        curRecord={'96 - 36'}
+        token={token}
+        subscriptions={subscriptions}
+        currentDateTime={`${getDayOfWeek(today)}, ${getMonthString(today)} ${
+          today.getDate() < 10 ? '0' + today.getDate() : today.getDate()
+        } ${today.getFullYear()}`}
+      />
+      <main style={{ overflow: 'hidden' }}>
+        <div className={styles.outer_div}>
+          <div className={styles.innerDiv}>
+            <p className={styles.dailyStake}>thedailystakes</p>
+            <p className={styles.merchandise}>merchandise</p>
+            <p className={styles.coming_soon}>coming soon!</p>
 
-        <p className={styles.signup_text}>
-          SIGN UP BELOW FOR EARLY UPDATES AND EXCLUSIVE ACCESS TO OUR HOODIES, CREWNECKS AND SHIRTS
-        </p>
-        <div className={styles.newsletterFormContainer}>
-          <label htmlFor="newsletter_email" className={styles.email_text}>
-            Email
-          </label>
-          <div>
-            <MailchimpSubscribe
-              url={url}
-              render={({ subscribe, status, message }: FormHooks<{ EMAIL: string }>) => (
-                <CustomForm
-                  status={status}
-                  message={message}
-                  onValidated={(formData) => subscribe(formData)}
+            <p className={styles.signup_text}>
+              SIGN UP BELOW FOR EARLY UPDATES AND EXCLUSIVE ACCESS TO OUR HOODIES, CREWNECKS AND
+              SHIRTS
+            </p>
+            <div className={styles.newsletterFormContainer}>
+              <label htmlFor="newsletter_email" className={styles.email_text}>
+                Email
+              </label>
+              <div>
+                <MailchimpSubscribe
+                  url={url}
+                  render={({ subscribe, status, message }: FormHooks<{ EMAIL: string }>) => (
+                    <CustomForm
+                      status={status}
+                      message={message}
+                      onValidated={(formData) => subscribe(formData)}
+                    />
+                  )}
                 />
-              )}
-            />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 export default Merchandise;

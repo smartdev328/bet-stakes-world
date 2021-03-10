@@ -25,7 +25,6 @@ function DailyFantasyLineups() {
         if (data) {
           const fantasySidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'MULTIPLE')[0];
           if (fantasySidebar) {
-            fantasySidebar.date = data.published_at;
             setInfo(fantasySidebar);
           }
         }
@@ -42,7 +41,7 @@ function DailyFantasyLineups() {
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
         <span>{info.package.name}</span>
       </div>
-      <p className={styles.date}>{moment(info.date).format('dddd, MMMM DD YYYY')}</p>
+      <p className={styles.date}>{moment(info.show_date).format('dddd, MMMM DD YYYY')}</p>
       <div className={styles.sidebarBlockContent}>
         {info.sports.map((data, index) => (
           <React.Fragment key={index}>

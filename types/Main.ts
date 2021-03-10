@@ -173,7 +173,7 @@ export type SidebarCardSport = {
 }
 
 export type SidebarCardInfo = {
-  date: string;
+  show_date: string;
   package: {
     access: 'ALL' | 'MULTIPLE',
     logo: {

@@ -25,7 +25,6 @@ function VipAllAccessCard() {
         if (data) {
           const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'ALL')[0];
           if (vipSidebar) {
-            vipSidebar.date = data.published_at;
             setInfo(vipSidebar);
           }
         }
@@ -41,7 +40,7 @@ function VipAllAccessCard() {
         <WinnerCupIcon className={styles.sidebarBlockTitleIcon} />
         <span>{info.package.name}</span>
       </div>
-      <p className={styles.date}>{moment(info.date).format('dddd, MMMM DD YYYY')}</p>
+      <p className={styles.date}>{moment(info.show_date).format('dddd, MMMM DD YYYY')}</p>
       <div className={styles.sidebarBlockContent}>
         {info.sports.map((data, index) => (
           <React.Fragment key={index}>

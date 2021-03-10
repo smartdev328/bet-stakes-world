@@ -71,7 +71,19 @@ function MyApp({ Component, pageProps }) {
     if (parsedToken) {
       const res2 = await SubscriptionsAPIs.getSubscriptions(parsedToken.id);
       const data2 = await res2.json();
-      setSubscriptions(data2);
+      const userSubscriptions = [];
+      data2.forEach((subscription) => {
+        if (subscription.sports.length > 0) {
+          subscription.sports.forEach(sport => {
+            const newSubscription = { ...subscription };
+            newSubscription.sports = [sport];
+            userSubscriptions.push(newSubscription);
+          })
+        } else {
+          userSubscriptions.push(subscription);
+        }
+      });
+      setSubscriptions(userSubscriptions);
     }
     setParsedToken(parsedToken);
   };

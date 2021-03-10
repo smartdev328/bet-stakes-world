@@ -65,7 +65,7 @@ function SportEntryActive({
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
                     {game.schedules.map((schedule: Schedule) => (
-                      <>
+                      <React.Fragment key={schedule.id}>
                         <Row align="middle" className={styles.game_schedule_time}>
                           <img src="/images/seven-clock.png" alt="" />
                           <span>{`${moment(schedule.time).format('hh:mm A')} EST`}</span>
@@ -95,7 +95,7 @@ function SportEntryActive({
                             <span>{schedule.home_team.name}</span>
                           </div>
                         </Row>
-                      </>
+                      </React.Fragment>
                     ))}
                     <Row align={'top'} wrap={false}>
                       <LongArrowIcon className={styles.long_arrow_icon} />

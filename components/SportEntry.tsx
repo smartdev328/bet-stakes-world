@@ -23,8 +23,8 @@ function SportEntry({ plays, loading }: PropsType) {
         )}
         {!loading && plays.length === 0 && <div className={styles.noData}>No Plays</div>}
         {!loading &&
-          plays.map((game: YesterdayPlayInfoType, index: number) => (
-            <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={index}>
+          plays.map((game: YesterdayPlayInfoType) => (
+            <div className={`${styles.game} ${game.patriots && styles.is_patriots}`} key={game.id}>
               <div className={styles.game_status}>{game.outcome?.slice(0, 1)}</div>
               <div className={styles.game_main}>
                 <div className={styles.game_subinfo}>
@@ -34,7 +34,7 @@ function SportEntry({ plays, loading }: PropsType) {
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
                     {game.schedules.map((schedule: Schedule) => (
-                      <>
+                      <React.Fragment key={schedule.id}>
                         <Row align="middle" className={styles.game_schedule_time}>
                           <img src="/images/seven-clock.png" alt="" />
                           <span>{`${moment(schedule.time).format('hh:mm A')} EST`}</span>
@@ -64,7 +64,7 @@ function SportEntry({ plays, loading }: PropsType) {
                             <span>{schedule.home_team.name}</span>
                           </div>
                         </Row>
-                      </>
+                      </React.Fragment>
                     ))}
                     <Row
                       align={'middle'}

@@ -132,10 +132,10 @@ function CurrentPackages({
     <div className={styles.current_packages}>
       <div className={styles.block_title}>Current Packages</div>
       <div className={styles.block_content}>
-        {sortSubscriptions().map((subscription) => (
-          <>
+        {sortSubscriptions().map((subscription, index) => (
+          <React.Fragment key={index}>
             {subscription.is_active && (
-              <div className={styles.package_card} key={subscription.id}>
+              <div className={styles.package_card}>
                 <div className={styles.package_status}>
                   {subscription.plan.package === vipAllAccessPack && <span>VIP ALL ACCESS CARD</span>}
                   {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
@@ -183,7 +183,7 @@ function CurrentPackages({
                 </div>
               </div>
             )}
-          </>
+          </React.Fragment>
         ))}
         <div className={styles.package_card}>
           <Link href="/shop">
@@ -367,7 +367,8 @@ function EarliestGames({
           hideDetailsAt={hideDetailsAt}
           games={games}
           showDetailsAt={showDetailsAt}
-          changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
+          changeDetailsVisibleAt={changeDetailsVisibleAt}
+        />
       )}
     </div>
   );
@@ -410,9 +411,7 @@ function YesterdayPlays() {
         <strong>{`10 Wins in ${14} Games`}</strong>
         <span>{moment().subtract(0, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
-      <>
-        <SportEntry loading={fetchMoreLoading} plays={games} />
-      </>
+      <SportEntry loading={fetchMoreLoading} plays={games} />
     </div>
   );
 }

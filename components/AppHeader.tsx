@@ -91,16 +91,6 @@ function SubMenu({
                 </a>
               </Link>
             </div>
-            <div className={styles.submenu_item_for_pane}>
-              {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
-                <Link href="/sports-card">
-                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                    <span>Sports Card</span>
-                  </a>
-                </Link>
-              )}
-            </div>
             <div className={styles.submenu_item}>
               {(hasPackage(PACKAGE_NAMES.VIP_ALL_ACCESS) || subscriptionStatus === 'visitor') && (
                 <Link href="/vip-all-access-card">
@@ -112,11 +102,21 @@ function SubMenu({
               )}
             </div>
             <div className={styles.submenu_item_for_pane}>
+              {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
+                <Link href="/sports-card">
+                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                    <span>Sports Card</span>
+                  </a>
+                </Link>
+              )}
+            </div>
+            <div className={styles.submenu_item_for_pane}>
               {(hasPackage(PACKAGE_NAMES.FANTASY) || subscriptionStatus === 'visitor') && (
                 <Link href="/fantasy-daily-lineups">
                   <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                     {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                    <span>FANTASY PICKS</span>
+                    <span>DAILY FANTASY CARD</span>
                   </a>
                 </Link>
               )}
@@ -154,16 +154,6 @@ function SubMenu({
                   </a>
                 </Link>
               </div>
-              <div className={styles.submenu_item_for_pane}>
-                {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
-                  <Link href="/sports-card">
-                    <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                      {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                      <span>Sports Card</span>
-                    </a>
-                  </Link>
-                )}
-              </div>
               <div className={styles.submenu_item}>
                 {(hasPackage(PACKAGE_NAMES.VIP_ALL_ACCESS) || subscriptionStatus === 'visitor') && (
                   <Link href="/vip-all-access-card">
@@ -174,13 +164,22 @@ function SubMenu({
                   </Link>
                 )}
               </div>
-
+              <div className={styles.submenu_item_for_pane}>
+                {(hasPackage(PACKAGE_NAMES.SPORTS_CARD) || subscriptionStatus === 'visitor') && (
+                  <Link href="/sports-card">
+                    <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
+                      {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                      <span>Sports Card</span>
+                    </a>
+                  </Link>
+                )}
+              </div>
               <div className={styles.submenu_item_for_pane}>
                 {(hasPackage(PACKAGE_NAMES.FANTASY) || subscriptionStatus === 'visitor') && (
                   <Link href="/fantasy-daily-lineups">
                     <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
                       {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
-                      <span>FANTASY PICKS</span>
+                      <span>DAILY FANTASY CARD</span>
                     </a>
                   </Link>
                 )}

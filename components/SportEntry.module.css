@@ -137,11 +137,10 @@
 }
 
 .yesterday_plays .game {
-  zoom: 0.5;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #C4C4C4;
-  padding: 32px;
+  padding: 24px 0;
 }
 
 .yesterday_plays .game_main {
@@ -153,11 +152,11 @@
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
-  font-size: 75.1868px;
+  font-size: 65px;
   line-height: 117.9%;
   text-align: center;
   color: #000000;
-  width: 100px;
+  width: 70px;
   margin: 0 24px 0 0;
 }
 
@@ -165,12 +164,13 @@
   font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 117.9%;
   text-align: center;
   color: #000000;
   margin-left: 30px;
   white-space: normal;
+  max-width: 150px;
 }
 
 .yesterday_plays .earliest_games_header a {
@@ -206,20 +206,9 @@
   overflow: hidden;
   display: inline-block;
   overflow: hidden;
-  width: max-content;
 }
-
-.yesterday_plays .strikeLine {
-  position: absolute;
-  top: -7px;
-  left: -6px;
-  font-family: 'Rock Salt';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 70px;
-  letter-spacing: -0.235em;
-  color: #000000;
-  white-space: normal;
+.yesterday_plays .desc_line.loss {
+  text-decoration: line-through;
 }
 
 .desc_line span {
@@ -405,6 +394,9 @@
     font-size: 26px;
     margin: 0 10px 0 -5px;
     width: 30px;
+  }
+  .game_score {
+    max-width: 100%;
   }
 }
 

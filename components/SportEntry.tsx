@@ -68,25 +68,14 @@ function SportEntry({ plays, loading }: PropsType) {
                     ))}
                     <Row
                       align={'middle'}
-                      className={`${styles.desc_line_section} ${
-                        game.outcome === 'LOSS' && styles.has_patriots
-                      }`}>
-                      <div className={styles.desc_line}>
-                        <span>{game.bet_text}</span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
-                      </div>
-                      <div className={styles.desc_line}>
-                        <span>
+                      className={styles.desc_line_section}>
+                      <div className={`${styles.desc_line} ${game.outcome === 'LOSS' ? styles.loss : ''}`}>
+                        <span>{game.bet_text}</span><span>
                           &nbsp;(
                           {`${game.odds > 0 ? '+' : ''}${
                             game.odds
                           } odds | ${game.odds_decimal.toFixed(2)}x)`}
                         </span>
-                        {game.outcome === 'LOSS' && (
-                          <div className={styles.strikeLine}>--------------------------—</div>
-                        )}
                       </div>
                     </Row>
                   </div>

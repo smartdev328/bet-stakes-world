@@ -236,8 +236,12 @@
 .dropdownBtnVIPAll {
   padding: 0 12px;
   width: 152px;
-  background: #1a1a1a;
+  background: #FFC700;
+  color: #1a1a1a;
   z-index: 22;
+}
+.dropdownBtnVIPAll svg path {
+  fill: #1a1a1a;
 }
 .dropdownBtnVIPAll span {
   text-align: center;

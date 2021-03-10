@@ -112,6 +112,7 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
             openUnlockModal={(status) => {
               setShowLockView(status);
             }}
+            activeSport={activeSport}
             filterChanged={(filter) => {
               setFilterType(filter);
             }}
@@ -177,6 +178,7 @@ function HeroBanner() {
 type TopSectionPropsType = {
   unlockedItems: number[];
   sports: Sport[];
+  activeSport: number;
   openUnlockModal: (_: boolean) => void;
   changeActiveSport: (_: number) => void;
   filterChanged: (_: string) => void;
@@ -185,6 +187,7 @@ type TopSectionPropsType = {
 function TopSection({
   unlockedItems,
   sports,
+  activeSport,
   openUnlockModal,
   changeActiveSport
 }: TopSectionPropsType) {
@@ -203,7 +206,6 @@ function TopSection({
       return 0;
     });
     setSportsStatus(selectedStatus);
-    changeActiveSport(-1);
   }
 
   const onUnlockItemAt = (index: number) => {
@@ -227,6 +229,7 @@ function TopSection({
       openUnlockModal(false);
     } else {
       initStatus();
+      changeActiveSport(sports[index].id);
       openUnlockModal(true);
     }
   };
@@ -243,6 +246,7 @@ function TopSection({
           className={`${styles.dropdownBtnWrapper} ${styles.dropdownBtnWrapperAll}`}
           onClick={() => {
             initStatus();
+            changeActiveSport(-1);
             openUnlockModal(true);
           }}
         >
@@ -269,7 +273,7 @@ function TopSection({
                 }`}
                 style={{
                   background:
-                    sportsStatus[index] === 2
+                    sportsStatus[index] === 2 || activeSport === sport.id
                       ? SPORTS_INFO.filter(
                           (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                         )[0]?.background

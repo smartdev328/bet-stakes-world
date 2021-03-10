@@ -1358,9 +1358,12 @@ li .square_icon {
 }
 .testimonial_image {
   max-height: 440px;
-  margin-right: 45px;
-  width: auto;
-  margin-left: auto;
+  min-height: 400px;
+  width: 350px;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .testimonial_content_right {
   padding-left: 45px;

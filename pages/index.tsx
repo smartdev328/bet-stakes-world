@@ -666,13 +666,13 @@ function Testimonials() {
             <div className={styles.testimonial_content}>
               <LazyLoad height={590}>
                 <img
-                  src="/images/testimonial1.png"
+                  src="/images/testimonial1.jpeg"
                   alt="Testimonial Background"
                   className={styles.testimonial_image}
                 />
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
-                <div className={styles.testimonial_title}>Carl ***** | New Jersey</div>
+                <div className={styles.testimonial_title}>Carl ***** | Canada </div>
                 <div className={styles.testimonial_desc}>VIP All Access</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
@@ -694,7 +694,7 @@ function Testimonials() {
             <div className={styles.testimonial_content}>
               <LazyLoad height={590}>
                 <img
-                  src="/images/testimonial1.png"
+                  src="/images/testimonial2.png"
                   alt="Testimonial Background"
                   className={styles.testimonial_image}
                 />
@@ -721,13 +721,13 @@ function Testimonials() {
             <div className={styles.testimonial_content}>
               <LazyLoad height={590}>
                 <img
-                  src="/images/testimonial1.png"
+                  src="/images/testimonial3.png"
                   alt="Testimonial Background"
                   className={styles.testimonial_image}
                 />
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
-                <div className={styles.testimonial_title}>Jason ****** | Colorado</div>
+                <div className={styles.testimonial_title}>Jason ****** | New Jersey </div>
                 <div className={styles.testimonial_desc}>NFL Sports Card</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
@@ -747,13 +747,13 @@ function Testimonials() {
             <div className={styles.testimonial_content}>
               <LazyLoad height={590}>
                 <img
-                  src="/images/testimonial1.png"
+                  src="/images/testimonial4.jpeg"
                   alt="Testimonial Background"
                   className={styles.testimonial_image}
                 />
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
-                <div className={styles.testimonial_title}>Trevor **** | Michigan</div>
+                <div className={styles.testimonial_title}>Trevor **** | New Jersey </div>
                 <div className={styles.testimonial_desc}>Fantasy Sports & Football Cards</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
@@ -773,13 +773,13 @@ function Testimonials() {
             <div className={styles.testimonial_content}>
               <LazyLoad height={590}>
                 <img
-                  src="/images/testimonial1.png"
+                  src="/images/testimonial5.jpeg"
                   alt="Testimonial Background"
                   className={styles.testimonial_image}
                 />
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
-                <div className={styles.testimonial_title}>Marcus ****| Tennessee</div>
+                <div className={styles.testimonial_title}>Marcus ****| Colorado </div>
                 <div className={styles.testimonial_desc}>Fantasy Sports & VIP All Access Cards</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>

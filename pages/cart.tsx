@@ -306,12 +306,18 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     setProceeding(true);
     const checkoutItems: CheckoutItem[] = [];
     tempCartItems.forEach((item) => {
-      // Add To Subscriptions
-      const subscriptionParams: CheckoutItem = {
-        plan_id: item.plan.id,
-        sports: item.sports !== undefined ? [item.sports.id] : []
-      };
-      checkoutItems.push(subscriptionParams);
+      const idx = checkoutItems.findIndex(it => it.plan_id === item.plan.id);
+      if (idx > -1) {
+        if (item.sports?.id) {
+          checkoutItems[idx].sports.push(item.sports?.id);
+        }
+      } else {
+        const subscriptionParams: CheckoutItem = {
+          plan_id: item.plan.id,
+          sports: item.sports !== undefined ? [item.sports.id] : []
+        };
+        checkoutItems.push(subscriptionParams);
+      }
     });
     CheckoutAPIs.createSession({
       items: checkoutItems,

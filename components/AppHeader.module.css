@@ -344,6 +344,10 @@
   border-radius: 50px;
 }
 
+.hamburg_icon {
+  width: 36px;
+}
+
 .submenu {
   position: relative;
 }

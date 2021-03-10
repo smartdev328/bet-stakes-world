@@ -44,10 +44,12 @@
     width: 110px;
   }
   .protection_heading {
-    font-size: 12px;
+    font-size: 10px;
   }
   .protection_details {
-    font-size: 12px;
+    font-size: 8px;
+    line-height: 16px;
+    margin-top: -9px;
   }
   .protection_details_div {
     width: 250px;

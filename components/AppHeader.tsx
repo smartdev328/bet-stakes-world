@@ -449,7 +449,7 @@ export default function AppHeader({
               {!mobileNavVisible ? (
                 <Button
                   type="link"
-                  icon={<HamburgerMenuIcon className={styles.cart_icon} />}
+                  icon={<HamburgerMenuIcon className={styles.hamburg_icon} />}
                   onClick={showMobileNav}
                   aria-label="Mobile Menu Open Button"
                   className={styles.mobile_navbar_btn}></Button>

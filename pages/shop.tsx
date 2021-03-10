@@ -441,6 +441,7 @@ function ProductsAndCartBox({
           </p>
         </div>
       </div>
+
       <div className={styles.sportsCards}>
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>

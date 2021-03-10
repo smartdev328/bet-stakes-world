@@ -1080,17 +1080,21 @@
   }
   .protection_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
   }
   .protection_details {
-    text-align: left;
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
   }
   .endline_protection {
     display: none;
   }
   .protection_heading {
-    text-align: left;
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
   }
   .protection_image_div {
     justify-content: flex-start !important;

@@ -408,6 +408,12 @@ export default function AppHeader({
                 <a>Yesterdays Plays</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="Merchandise" className={styles.navbarItem}>
+              <Link href="/merchandise">
+                <a>Merchandise</a>
+              </Link>
+            </Menu.Item>
+
             <Menu.Item key="About_Us" className={styles.navbarItem}>
               <Link href="/aboutus">
                 <a>About Us</a>
@@ -514,6 +520,12 @@ export default function AppHeader({
                     <a>Yesterdays Plays</a>
                   </Link>
                 </Menu.Item>
+                <Menu.Item key="Merchandise" className={styles.navbarItem}>
+                  <Link href="/merchandise">
+                    <a>Merchandise</a>
+                  </Link>
+                </Menu.Item>
+
                 <Menu.Item key="About_Us" className={styles.navbarItem}>
                   <Link href="/aboutus">
                     <a>About Us</a>

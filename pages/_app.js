@@ -36,7 +36,8 @@ const FULL_ACCESS_ROUTES = [
   '/yesterdays-plays',
   '/aboutus',
   '/terms',
-  '/privacy'
+  '/privacy',
+  '/merchandise'
 ];
 
 function MyApp({ Component, pageProps }) {

@@ -22,9 +22,13 @@ function VipAllAccessCard() {
     UtilsAPIs.getSidebarInfo()
       .then((res) => res.json())
       .then((data) => {
-        const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'ALL')[0];
-        vipSidebar.date = data.published_at;
-        setInfo(vipSidebar);
+        if (data) {
+          const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'ALL')[0];
+          if (vipSidebar) {
+            vipSidebar.date = data.published_at;
+            setInfo(vipSidebar);
+          }
+        }
       });
   }, []);
 

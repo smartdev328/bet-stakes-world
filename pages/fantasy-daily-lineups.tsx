@@ -164,13 +164,12 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
         <div className={styles.container}>
           <TopSection
             unlockedSports={unlockedSports}
-            openUnlockModal={(sport: Sport) => {
-              setShowLockView(!unlockedSports.some((item: Sport) => item.id === sport.id));
-              setSelectedSport(sport.name);
+            openUnlockModal={(sport, status) => {
+              setShowLockView(status);
+              setSelectedSport(sport);
             }}
             activeSport={selectedSport}
             activeTab={activeTab}
-            sports={sports}
             lineupSalary={lineupSalary}
             selectedCompany={selectedCompany}
             infoForCurrentTab={infoForCurrentTab}
@@ -228,10 +227,9 @@ type TopSectionPropsType = {
   activeSport: string;
   selectedCompany: string;
   activeTab: string;
-  sports: Sport[];
   infoForCurrentTab: FantasyTabInfo | undefined;
   lineupSalary: number;
-  openUnlockModal: (_: Sport) => void;
+  openUnlockModal: (sport: string, _: boolean) => void;
   onChangeOptions: (sport: string, company: string, lineupType: string) => void;
 };
 
@@ -242,13 +240,16 @@ function TopSection({
   activeSport,
   selectedCompany,
   activeTab,
-  sports,
   infoForCurrentTab,
   lineupSalary
 }: TopSectionPropsType) {
   const [sportsStatus, setSportsStatus] = useState<number[]>([]);
 
   useEffect(() => {
+    initStatus();
+  }, [unlockedSports]);
+
+  const initStatus = () => {
     const selectedStatus = SPORTS_INFO.map((sport: SportInfoType) => {
       const unlockedItemIndex = unlockedSports.findIndex((item: Sport) => item.name === sport.name);
       if (unlockedItemIndex > -1) {
@@ -260,7 +261,7 @@ function TopSection({
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }, [unlockedSports]);
+  }
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
@@ -276,8 +277,16 @@ function TopSection({
       });
       setSportsStatus(newItems);
       onChangeOptions(SPORTS_INFO[index].name, FANTASY_COMPANIES[0].name, FANTASY_TABS[0].id);
+      openUnlockModal(SPORTS_INFO[index].name, false);
     } else if (items[index] !== 2) {
-      openUnlockModal(sports[index]);
+      const newItems = items.map((item) => {
+        if (item === 2) {
+          return 1;
+        }
+        return item;
+      });
+      setSportsStatus(newItems);
+      openUnlockModal(SPORTS_INFO[index].name, true);
     }
   };
   const onSelectCompany = (name: string) => {
@@ -312,7 +321,7 @@ function TopSection({
                 }`}
                 style={{
                   background:
-                    sportsStatus[index] === 2
+                    sportsStatus[index] === 2 || activeSport === sport.name
                       ? SPORTS_INFO.filter(
                           (sp) => sp.name.toUpperCase() === sport.name.toUpperCase()
                         )[0]?.background
@@ -389,34 +398,13 @@ function TopSection({
         <Col span={18} className={styles.fantasyStats}>
           <Row align="middle" justify="space-between">
             <div className={styles.featureValue}>
-              <div className={styles.featureValueTitle}>Tournament</div>
-              <div className={styles.featureValueContent}>
-                {infoForCurrentTab?.stat.tournament ? (
-                  infoForCurrentTab?.stat.tournament
-                ) : (
-                  <span>&nbsp;</span>
-                )}
-              </div>
+              <Markdown source={infoForCurrentTab?.stat.tournament || ''} />
             </div>
             <div className={styles.featureValue}>
-              <div className={styles.featureValueTitle}>Beat the Score</div>
-              <div className={styles.featureValueContent}>
-                {infoForCurrentTab?.stat.beat_the_score ? (
-                  infoForCurrentTab?.stat.beat_the_score
-                ) : (
-                  <span>&nbsp;</span>
-                )}
-              </div>
+              <Markdown source={infoForCurrentTab?.stat.beat_the_score || ''} />
             </div>
             <div className={styles.featureValue}>
-              <div className={styles.featureValueTitle}>50/50s</div>
-              <div className={styles.featureValueContent}>
-                {infoForCurrentTab?.stat.fifty_to_fifty ? (
-                  infoForCurrentTab?.stat.fifty_to_fifty
-                ) : (
-                  <span>&nbsp;</span>
-                )}
-              </div>
+              <Markdown source={infoForCurrentTab?.stat.fifty_to_fifty || ''} />
             </div>
           </Row>
         </Col>

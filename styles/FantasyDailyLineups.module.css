@@ -810,7 +810,9 @@
 .featureValue:last-child {
   margin-right: 0;
 }
-
+.fantasyStats {
+  margin-bottom: 1em;
+}
 @media (max-width: 600px) {
   .fantasy_tab {
     width: auto;

@@ -267,11 +267,13 @@
   justify-content: center;
   cursor: pointer;
 }
+.no_subscription_text {
+  margin: 1em 0 2em;
+  font-size: 16px;
+  font-weight: 500;
+}
 
 /* Weekly Pro Tip */
-.weekly_pro_tip {
-  margin-left: 16px;
-}
 .weekly_pro_tip_right_panel {
   margin-left: 16px;
   overflow: hidden;

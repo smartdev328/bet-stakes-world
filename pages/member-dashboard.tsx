@@ -200,25 +200,29 @@ function CurrentPackages({
   );
 }
 
-function WeeklyProTip({ data }: { data: WeeklyTip | undefined }) {
+function WeeklyProTip({ data, subscriptions }: { data: WeeklyTip | undefined, subscriptions: UserSubscription[] }) {
   if (!data) {
     return <></>;
   }
   return (
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
-      <div className={styles.little_witty_intro}></div>
-      <div className={styles.block_content}>
-        <img
-          alt="Weekly Pro Tip Image"
-          src={data.photo.url}
-          className={styles.weekly_pro_tip_img}
-        />
-        <div className={styles.weekly_pro_tip_right_panel}>
-          <h4 className={styles.weekly_description_title}>{data.title}</h4>
-          <ReactMarkdown className={styles.weekly_pro_tip_desc}>{data.detail}</ReactMarkdown>
+      {subscriptions.length === 0 && (
+        <p className={styles.no_subscription_text}>In order to view the weekly pro tip, you must have an active membership package.</p>
+      )}
+      {subscriptions.length > 0 && (
+        <div className={styles.block_content}>
+          <img
+            alt="Weekly Pro Tip Image"
+            src={data.photo.url}
+            className={styles.weekly_pro_tip_img}
+          />
+          <div className={styles.weekly_pro_tip_right_panel}>
+            <h4 className={styles.weekly_description_title}>{data.title}</h4>
+            <ReactMarkdown className={styles.weekly_pro_tip_desc}>{data.detail}</ReactMarkdown>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -352,15 +356,19 @@ function EarliestGames({
           </Dropdown>
         </Row>
       </div>
-      <br></br>
-      <SportEntryActive
-        title={DashboardSportBetTypes[selectedBetType].name}
-        loading={loading}
-        hideSection={true}
-        hideDetailsAt={hideDetailsAt}
-        games={games}
-        showDetailsAt={showDetailsAt}
-        changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
+      {subscriptions.length === 0 && (
+        <p className={styles.no_subscription_text}>In order to view today’s sports betting plays, you must have an active membership package.</p>
+      )}
+      {subscriptions.length > 0 && (
+        <SportEntryActive
+          title={DashboardSportBetTypes[selectedBetType].name}
+          loading={loading}
+          hideSection={true}
+          hideDetailsAt={hideDetailsAt}
+          games={games}
+          showDetailsAt={showDetailsAt}
+          changeDetailsVisibleAt={changeDetailsVisibleAt}></SportEntryActive>
+      )}
     </div>
   );
 }
@@ -508,7 +516,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
               </div>
 
               <div className={styles.weekly_pro_tip_container}>
-                <WeeklyProTip data={weeklyTip} />
+                <WeeklyProTip data={weeklyTip} subscriptions={subscriptions} />
               </div>
 
               <div className={styles.yesterday_plays_col}>

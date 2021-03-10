@@ -298,7 +298,7 @@ function TopSection({
 
   return (
     <>
-      <DashboardHeader title={'Daily Fantasy'} />
+      <DashboardHeader title={'DAILY FANTASY CARD'} />
       <Row className={styles.sportsCardList} justify={'center'}>
         <div className={styles.laptop_view}>
           <VipAllAccessCard />
@@ -395,8 +395,8 @@ function TopSection({
             TheDailyStakes proposed Bankroll Allocation Based on Contest Types
           </p>
         </Col>
-        <Col span={18} className={styles.fantasyStats}>
-          <Row align="middle" justify="space-between">
+        <Col span={18} style={{ marginBottom: '1em' }}>
+          <Row align="middle" justify="space-between" className={styles.fantasyStats}>
             <div className={styles.featureValue}>
               <Markdown source={infoForCurrentTab?.stat.tournament || ''} />
             </div>
@@ -469,7 +469,7 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
                   <strong
                     className={
                       styles.daily_lineup_teams
-                    }>{`${lineup.schedule.home_team.name}@${lineup.schedule.team.name}`}</strong>
+                    }>{`${lineup.schedule?.home_team?.name}@${lineup.schedule?.team?.name}`}</strong>
                   <div>
                     <span>FPPG:&nbsp;</span>
                     <strong>{lineup.ffpg}</strong>

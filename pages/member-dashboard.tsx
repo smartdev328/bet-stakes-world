@@ -6,7 +6,9 @@ import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/ic
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReduxState } from '@redux/reducers';
+import { UserReducerState } from '@redux/reducers/user';
 
 import {
   AppLayout,
@@ -55,7 +57,17 @@ function HeroBanner() {
   );
 }
 
-function TopSection({ profileName, initialName, overallInfo }: { profileName: string; initialName: string, overallInfo: Overall }) {
+function TopSection({
+  profileName,
+  initialName,
+  overallInfo,
+  user
+}: {
+  profileName: string;
+  initialName: string;
+  overallInfo: Overall;
+  user: UserReducerState;
+}) {
   const { wins = 0, draw = 0, loss = 0 } = overallInfo;
   return (
     <>
@@ -63,7 +75,13 @@ function TopSection({ profileName, initialName, overallInfo }: { profileName: st
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
         <Row>
           <Col className={styles.welcome_left}>Welcome back {profileName} </Col>
-          <div className={styles.avatar}>{initialName}</div>
+          <div className={styles.avatar}>
+            {user.profile?.avatar?.url ? (
+              <img className={styles.avatar_image} src={user.profile?.avatar?.url} />
+            ) : (
+              initialName
+            )}
+          </div>
         </Row>
         <Col className={styles.welcome_right}>
           <strong>Overall Record:</strong>&nbsp;{`${wins}-${draw}-${loss}`}
@@ -120,13 +138,15 @@ function CurrentPackages({
     return vipSubscription.concat(sportSubscription, fantasySubscription);
   };
   const getOverallRecord = (subscription: UserSubscription) => {
-    const overallRecord = overallInfo.find((item) => item.subscription_id.toString() === subscription.id);
+    const overallRecord = overallInfo.find(
+      (item) => item.subscription_id.toString() === subscription.id
+    );
     const { wins, loss, draw } = overallRecord?.win_record || EmptyOverall;
     return {
       record: `${wins}-${draw}-${loss}`,
       units: overallRecord?.unit_profitability || 0
     };
-  }
+  };
 
   return (
     <div className={styles.current_packages}>
@@ -137,7 +157,9 @@ function CurrentPackages({
             {subscription.is_active && (
               <div className={styles.package_card}>
                 <div className={styles.package_status}>
-                  {subscription.plan.package === vipAllAccessPack && <span>VIP ALL ACCESS CARD</span>}
+                  {subscription.plan.package === vipAllAccessPack && (
+                    <span>VIP ALL ACCESS CARD</span>
+                  )}
                   {subscription.plan.package === sportsCardPack && <span>Sports Card</span>}
                   {subscription.plan.package === fantasyPack && <span>DAILY FANTASY CARD</span>}
                 </div>
@@ -159,18 +181,21 @@ function CurrentPackages({
                   <div className={styles.package_title}>
                     {subscription.sports[0] && <h3>{subscription.sports[0].name}</h3>}
                     {!subscription.sports[0] && <h3>VIP</h3>}
-                    <p>
-                      {subscription.plan.duration.toUpperCase()} ACCESS
-                    </p>
+                    <p>{subscription.plan.duration.toUpperCase()} ACCESS</p>
                   </div>
-                  
+
                   <div className={styles.packageOverall}>
                     <div className={styles.packageOverallRow}>
-                      <span>record:</span><span>{getOverallRecord(subscription).record}</span>
+                      <span>record:</span>
+                      <span>{getOverallRecord(subscription).record}</span>
                     </div>
                     <div className={styles.packageOverallRow}>
                       <span>profit:</span>
-                      <span>{`${getOverallRecord(subscription).units > 0 ? '+' + getOverallRecord(subscription).units : getOverallRecord(subscription).units} unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
+                      <span>{`${
+                        getOverallRecord(subscription).units > 0
+                          ? '+' + getOverallRecord(subscription).units
+                          : getOverallRecord(subscription).units
+                      } unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
                     </div>
                   </div>
                   <Button
@@ -200,7 +225,13 @@ function CurrentPackages({
   );
 }
 
-function WeeklyProTip({ data, subscriptions }: { data: WeeklyTip | undefined, subscriptions: UserSubscription[] }) {
+function WeeklyProTip({
+  data,
+  subscriptions
+}: {
+  data: WeeklyTip | undefined;
+  subscriptions: UserSubscription[];
+}) {
   if (!data) {
     return <></>;
   }
@@ -208,7 +239,9 @@ function WeeklyProTip({ data, subscriptions }: { data: WeeklyTip | undefined, su
     <div className={styles.weekly_pro_tip}>
       <div className={styles.block_title}>Weekly Pro Tip</div>
       {subscriptions.length === 0 && (
-        <p className={styles.no_subscription_text}>In order to view the weekly pro tip, you must have an active membership package.</p>
+        <p className={styles.no_subscription_text}>
+          In order to view the weekly pro tip, you must have an active membership package.
+        </p>
       )}
       {subscriptions.length > 0 && (
         <div className={styles.block_content}>
@@ -357,7 +390,9 @@ function EarliestGames({
         </Row>
       </div>
       {subscriptions.length === 0 && (
-        <p className={styles.no_subscription_text}>In order to view today’s sports betting plays, you must have an active membership package.</p>
+        <p className={styles.no_subscription_text}>
+          In order to view today’s sports betting plays, you must have an active membership package.
+        </p>
       )}
       {subscriptions.length > 0 && (
         <SportEntryActive
@@ -424,7 +459,9 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
   const router = useRouter();
   const { session_id: sessionId } = router.query;
-
+  const { user } = useSelector((state: ReduxState) => {
+    return state;
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -436,6 +473,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
     UsersAPIs.fetchProfile()
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+        dispatch({
+          type: 'USER_PROFILE',
+          payload: data
+        });
         if (data && data.full_name) {
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
@@ -447,11 +489,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
           );
         }
       });
-      UsersAPIs.getOverallRecord()
-        .then((res) => res.json())
-        .then((data) => {
-          setOverallInfo(data.data);
-        });
+    UsersAPIs.getOverallRecord()
+      .then((res) => res.json())
+      .then((data) => {
+        setOverallInfo(data.data);
+      });
   }, []);
 
   useEffect(() => {
@@ -502,10 +544,21 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
         <div className={styles.container}>
-          <TopSection profileName={profileName} initialName={initialName} overallInfo={overallInfo.summary || EmptyOverall} />
+          <TopSection
+            profileName={profileName}
+            initialName={initialName}
+            overallInfo={overallInfo.summary || EmptyOverall}
+            user={user}
+          />
           <Row className={styles.nowrapRow}>
             <Col sm={24} md={18} className={styles.current_packages_container}>
-              {packages && <CurrentPackages subscriptions={subscriptions} packages={packages} overallInfo={overallInfo.list || []} />}
+              {packages && (
+                <CurrentPackages
+                  subscriptions={subscriptions}
+                  packages={packages}
+                  overallInfo={overallInfo.list || []}
+                />
+              )}
               <div className={styles.laptop_view}>
                 <VipAllAccessCard />
                 <DailyFantasyLineups />

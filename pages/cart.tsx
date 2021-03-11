@@ -82,7 +82,10 @@ function CartTotalWidget({
           <span>N/A</span>
         </div>
         <div className={styles.couponRow}>
-          <input placeholder="Enter Coupon Code" onChange={(e) => changeDiscountCode(e.target.value)} />
+          <input
+            placeholder="Enter Coupon Code"
+            onChange={(e) => changeDiscountCode(e.target.value)}
+          />
           <Button disabled className={styles.couponBtn}>
             Apply Coupon
           </Button>
@@ -306,7 +309,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
     setProceeding(true);
     const checkoutItems: CheckoutItem[] = [];
     tempCartItems.forEach((item) => {
-      const idx = checkoutItems.findIndex(it => it.plan_id === item.plan.id);
+      const idx = checkoutItems.findIndex((it) => it.plan_id === item.plan.id);
       if (idx > -1) {
         if (item.sports?.id) {
           checkoutItems[idx].sports.push(item.sports?.id);
@@ -488,7 +491,9 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
                         className={styles.removeCartBtn}
                         icon={<MinusIcon className={styles.minusIcon} />}
                         onClick={() => removeCartAt(index)}></Button>
-                      {cartItemsValidation.findIndex(it => it.plan === item.plan.id && it.sports[0] === item.sports?.id) > -1 && (
+                      {cartItemsValidation.findIndex(
+                        (it) => it.plan === item.plan.id && it.sports[0] === item.sports?.id
+                      ) > -1 && (
                         <div className={styles.cartItemValidationError}>
                           {`An active subscription already exists under your account for this package. Please remove this membership package from cart to avoid a duplicative purchase`}
                         </div>

@@ -32,6 +32,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'simple-import-sort/imports': 'off'
+    'simple-import-sort/imports': 'off',
+    'no-irregular-whitespace': 'off'
   }
 };

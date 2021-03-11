@@ -29,7 +29,9 @@ function SportEntry({ plays, loading }: PropsType) {
               <div className={styles.game_main}>
                 <div className={styles.game_subinfo}>
                   <SportTile sport={game.sport?.name} />
-                  <span>{`Published Yesterday at ${moment(game.publish_date).format('hh:mm A')} EST`}</span>
+                  <span>{`Published Yesterday at ${moment(game.publish_date).format(
+                    'hh:mm A'
+                  )} EST`}</span>
                 </div>
                 <div className={styles.game_info}>
                   <div className={styles.game_teams}>
@@ -66,11 +68,13 @@ function SportEntry({ plays, loading }: PropsType) {
                         </Row>
                       </React.Fragment>
                     ))}
-                    <Row
-                      align={'middle'}
-                      className={styles.desc_line_section}>
-                      <div className={`${styles.desc_line} ${game.outcome === 'LOSS' ? styles.loss : ''}`}>
-                        <span>{game.bet_text}</span><span>
+                    <Row align={'middle'} className={styles.desc_line_section}>
+                      <div
+                        className={`${styles.desc_line} ${
+                          game.outcome === 'LOSS' ? styles.loss : ''
+                        }`}>
+                        <span>{game.bet_text}</span>
+                        <span>
                           &nbsp;(
                           {`${game.odds > 0 ? '+' : ''}${
                             game.odds

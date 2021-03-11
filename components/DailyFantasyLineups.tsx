@@ -23,7 +23,9 @@ function DailyFantasyLineups() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          const fantasySidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'MULTIPLE')[0];
+          const fantasySidebar = data.packages.filter(
+            (pack: SidebarCardInfo) => pack.package.access === 'MULTIPLE'
+          )[0];
           if (fantasySidebar) {
             setInfo(fantasySidebar);
           }

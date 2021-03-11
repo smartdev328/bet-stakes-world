@@ -149,15 +149,15 @@ export type Overall = {
   draw: number;
   loss: number;
   wins: number;
-}
+};
 
 export type OverallList = {
   subscription_id: number;
   unit_profitability: number;
   win_record: Overall;
-}
+};
 
 export type OverallInfoType = {
   list?: OverallList[];
   summary?: Overall;
-}
+};

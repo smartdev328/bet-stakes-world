@@ -168,18 +168,18 @@ export type SidebarCardSport = {
     name: string;
     logo: {
       url: string;
-    }
-  }
-}
+    };
+  };
+};
 
 export type SidebarCardInfo = {
   show_date: string;
   package: {
-    access: 'ALL' | 'MULTIPLE',
+    access: 'ALL' | 'MULTIPLE';
     logo: {
       url: string;
-    },
+    };
     name: string;
-  },
+  };
   sports: SidebarCardSport[];
 };

@@ -23,7 +23,9 @@ function VipAllAccessCard() {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          const vipSidebar = data.packages.filter((pack: SidebarCardInfo) => pack.package.access === 'ALL')[0];
+          const vipSidebar = data.packages.filter(
+            (pack: SidebarCardInfo) => pack.package.access === 'ALL'
+          )[0];
           if (vipSidebar) {
             setInfo(vipSidebar);
           }

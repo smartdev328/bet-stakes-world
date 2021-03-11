@@ -565,7 +565,10 @@ export default function AppHeader({
               <div className={styles.countdownBoxMobile}>
                 <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
                 <Row align="middle">
-                  <span className={styles.countdownBox_countdown_timer}>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
+                  <span
+                    className={
+                      styles.countdownBox_countdown_timer
+                    }>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
                   <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
                     <a className={styles.yellowBoldLink}>View Plays</a>
                   </Link>

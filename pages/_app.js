@@ -75,11 +75,11 @@ function MyApp({ Component, pageProps }) {
       const userSubscriptions = [];
       data2.forEach((subscription) => {
         if (subscription.sports.length > 0) {
-          subscription.sports.forEach(sport => {
+          subscription.sports.forEach((sport) => {
             const newSubscription = { ...subscription };
             newSubscription.sports = [sport];
             userSubscriptions.push(newSubscription);
-          })
+          });
         } else {
           userSubscriptions.push(subscription);
         }

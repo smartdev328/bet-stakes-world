@@ -6,7 +6,9 @@ import { PlusOutlined, CaretDownOutlined, CaretUpOutlined } from '@ant-design/ic
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReduxState } from '@redux/reducers';
+import { UserReducerState } from '@redux/reducers/user';
 
 import {
   AppLayout,
@@ -58,11 +60,14 @@ function HeroBanner() {
 function TopSection({
   profileName,
   initialName,
-  overallInfo
+
+  overallInfo,
+  user
 }: {
   profileName: string;
   initialName: string;
   overallInfo: Overall;
+  user: UserReducerState;
 }) {
   const { wins = 0, draw = 0, loss = 0 } = overallInfo;
   return (
@@ -71,7 +76,13 @@ function TopSection({
       <Row align={'middle'} justify={'space-between'} className={styles.welcome_row}>
         <Row>
           <Col className={styles.welcome_left}>Welcome back {profileName} </Col>
-          <div className={styles.avatar}>{initialName}</div>
+          <div className={styles.avatar}>
+            {user.profile?.avatar?.url ? (
+              <img className={styles.avatar_image} src={user.profile?.avatar?.url} />
+            ) : (
+              initialName
+            )}
+          </div>
         </Row>
         <Col className={styles.welcome_right}>
           <strong>Overall Record:</strong>&nbsp;{`${wins}-${draw}-${loss}`}
@@ -449,7 +460,9 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
   const router = useRouter();
   const { session_id: sessionId } = router.query;
-
+  const { user } = useSelector((state: ReduxState) => {
+    return state;
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -461,6 +474,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
     UsersAPIs.fetchProfile()
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+        dispatch({
+          type: 'USER_PROFILE',
+          payload: data
+        });
         if (data && data.full_name) {
           const names = data.full_name.split(' ');
           setProfileName(names[0]);
@@ -531,6 +549,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             profileName={profileName}
             initialName={initialName}
             overallInfo={overallInfo.summary || EmptyOverall}
+            user={user}
           />
           <Row className={styles.nowrapRow}>
             <Col sm={24} md={18} className={styles.current_packages_container}>

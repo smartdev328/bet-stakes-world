@@ -457,14 +457,22 @@ function ProductsAndCartBox({
               key={index}
               className={activePlan?.id === plan.id ? styles.active : ''}
               onClick={() => selectBillingPlan(plan)}>
-              <div className={styles.flexRow}>
-                {activePlan?.id === plan.id && (
-                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
-                )}
-                {activePlan?.id !== plan.id && (
-                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-                )}
-                <span className={styles.sportsCard_name}>{plan.duration}</span>
+              <div className={styles.flexRowForVip}>
+                <div>
+                  {activePlan?.id === plan.id && (
+                    <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                  )}
+                  {activePlan?.id !== plan.id && (
+                    <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                  )}
+                  <span className={styles.sportsCard_name}>{plan.duration}</span>
+                </div>
+                {plan.duration === 'MONTHLY' || plan.duration === 'ANNUAL' ? (
+                  <div className={styles.ingame_div}>
+                    <p className={styles.ingame_text}>IN-GAMES BETS</p>
+                    <p className={styles.included_text}>INCLUDED</p>
+                  </div>
+                ) : null}
               </div>
               <div className={styles.flexRow}>
                 <div className={`${styles.sportsCard_value} ${styles.origin}`}>

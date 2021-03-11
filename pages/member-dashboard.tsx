@@ -140,7 +140,7 @@ function CurrentPackages({
   };
   const getOverallRecord = (subscription: UserSubscription) => {
     const overallRecord = overallInfo.find(
-      (item) => item.subscription_id.toString() === subscription.id
+      (item) => item.subscription_id.toString() === subscription.id.toString()
     );
     const { wins, loss, draw } = overallRecord?.win_record || EmptyOverall;
     return {

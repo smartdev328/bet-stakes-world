@@ -695,7 +695,7 @@ export default function Terms({ token, subscriptions }: PageProps) {
               <Link href="/refund-policy">
                 <a>here</a>
               </Link>{' '}
-              or contact us at <a href="mailto:info@thedailystakes.com">infothedailystakes.com</a>.
+              or contact us at <a href="mailto:info@thedailystakes.com">info@thedailystakes.com</a>.
             </p>
 
             <h5>18. Miscellaneous</h5>
@@ -728,7 +728,7 @@ export default function Terms({ token, subscriptions }: PageProps) {
                 <a>Privacy Policy</a>
               </Link>
               , or this Site, please feel free to contact TDS by e-mail at{' '}
-              <a href="mailto:info@thedailystakes.com">infothedailystakes.com</a>
+              <a href="mailto:info@thedailystakes.com">info@thedailystakes.com</a>
             </p>
             <p>
               <em>These Terms of Use were last updated on March 8, 2021</em>

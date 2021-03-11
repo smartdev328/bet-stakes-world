@@ -38,7 +38,12 @@ const FULL_ACCESS_ROUTES = [
   '/terms',
   '/privacy',
   '/merchandise',
-  '/refund-policy'
+  '/refund-policy',
+  '/privacy/australia',
+  '/privacy/california',
+  '/privacy/nevada',
+  '/privacy/canada',
+  '/privacy/eu',
 ];
 
 function MyApp({ Component, pageProps }) {

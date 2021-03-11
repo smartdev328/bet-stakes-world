@@ -268,7 +268,7 @@ export default function AppHeader({
     const remainingTimeInterval = setInterval(() => {
       const remainingTime = getRemainingTime();
       setRemainingTime(remainingTime);
-    }, 10000);
+    }, 1000);
     return () => {
       clearInterval(remainingTimeInterval);
     };

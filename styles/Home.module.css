@@ -1364,6 +1364,7 @@ li .square_icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  object-fit: contain;
 }
 .testimonial_content_right {
   padding-left: 45px;

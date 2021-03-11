@@ -118,7 +118,8 @@
 }
 
 /* Packages Column */
-.packagesCol, .registrationCol {
+.packagesCol,
+.registrationCol {
   margin-top: 20px;
 }
 .packagesCol {
@@ -142,21 +143,21 @@
   align-items: flex-start;
   margin-bottom: 8px;
 }
-.list_with_checkmark  .list_check_icon {
+.list_with_checkmark .list_check_icon {
   width: 18px;
   margin-right: 6px;
   margin-top: 4px;
 }
 
 .package {
-  background: #FFFFFF;
-  border: 1px solid #C4C4C4;
+  background: #ffffff;
+  border: 1px solid #c4c4c4;
   padding: 24px 24px 18px;
   margin-bottom: 18px;
   position: relative;
   animation: all linear 1s;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
-  border: 1px solid #1A1A1A;
+  border: 1px solid #1a1a1a;
   box-sizing: border-box;
 }
 .package .sportsCards,
@@ -213,7 +214,7 @@
 }
 
 .optionBtn {
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   padding: 8px 12px;
   display: flex;
   justify-content: space-between;
@@ -226,12 +227,14 @@
   align-items: center;
   color: #000000;
 }
-.caret_up, .caret_down {
+.caret_up,
+.caret_down {
   margin-left: 8px;
   font-size: 14px !important;
   line-height: 14px !important;
 }
-.caret_up path, .caret_down path {
+.caret_up path,
+.caret_down path {
   fill: rgba(0, 0, 0, 0.54);
 }
 .dropdownBtnWrapper {
@@ -266,7 +269,7 @@
   left: -10%;
 }
 .dropdown_NFL > svg.sports_logo,
-.dropdown_NCAAF > .sports_logo  {
+.dropdown_NCAAF > .sports_logo {
   width: 300%;
   position: absolute;
   z-index: 20;
@@ -347,7 +350,7 @@
   text-transform: uppercase;
 }
 .formGroup input {
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   width: 100%;
   font-size: 12px;
   line-height: 19px;
@@ -375,14 +378,14 @@
 }
 .termsContent a {
   text-decoration: none;
-  color: #4778F9;
+  color: #4778f9;
 }
 .registerBtn {
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  color: #1A1A1A;
-  background: #FFC700;
+  color: #1a1a1a;
+  background: #ffc700;
   padding: 7.5px 24px;
   height: auto;
   width: 100%;
@@ -397,13 +400,14 @@
   font-weight: bold;
   font-size: 14px;
   line-height: 22px;
-  color: #C4C4C4;
+  color: #c4c4c4;
   padding: 0 10px;
 }
-.orText:before, .orText:after {
+.orText:before,
+.orText:after {
   content: '';
   flex: 1;
-  background: #C4C4C4;
+  background: #c4c4c4;
   height: 1px;
 }
 
@@ -414,7 +418,7 @@
   line-height: 25px;
   color: #101010;
   height: auto;
-  border: 1px solid #1A1A1A;
+  border: 1px solid #1a1a1a;
   padding: 7.5px 24px;
   margin: auto;
   margin-bottom: 20px;
@@ -447,7 +451,7 @@
   .list_with_checkmark li {
     font-size: 14px;
   }
-  .list_with_checkmark  .list_check_icon {
+  .list_with_checkmark .list_check_icon {
     width: 14px;
     margin-top: 2px;
   }
@@ -498,7 +502,7 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .vipBestValue span {
-  font-family: "Rock Salt";
+  font-family: 'Rock Salt';
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -529,4 +533,8 @@
     font-size: 18px;
     line-height: 140%;
   }
+}
+
+.create_account {
+  font-weight: bold !important;
 }

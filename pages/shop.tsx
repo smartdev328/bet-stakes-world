@@ -242,7 +242,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
 function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
-      <img src="/images/shop_dashboard.jpg" className={styles.bgImage} />
+      <img src="/images/blackbanner.jpg" className={styles.bgImage} />
       <div className={styles.heroBannerContent}>
         <h1>The Shop</h1>
       </div>

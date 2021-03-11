@@ -24,11 +24,11 @@ function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
       <LazyLoad>
-        <img src="/images/registration_page_bg.png" className={styles.bgImage} />
+        <img src="/images/blackbanner.jpg" className={styles.bgImage} />
       </LazyLoad>
       <div className={styles.heroBannerContent}>
         <h1>Registration</h1>
-        <p>Create an Account for Free</p>
+        <p className={styles.create_account}>Create an Account for Free</p>
       </div>
       <BannerSportsAndMatches />
     </div>

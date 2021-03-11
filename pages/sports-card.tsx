@@ -169,7 +169,7 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
 function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
-      <img src="/images/member_dashboard.jpg" className={styles.bgImage} />
+      <img src="/images/trianglebanner.jpg" className={styles.bgImage} />
       <BannerSportsAndMatches />
     </div>
   );
@@ -206,12 +206,12 @@ function TopSection({
       return 0;
     });
     setSportsStatus(selectedStatus);
-  }
+  };
 
   const onUnlockItemAt = (index: number) => {
     const items = sportsStatus.slice();
     if (items[index] === 1) {
-      const newItems = items.map(item => {
+      const newItems = items.map((item) => {
         if (item === 2) {
           return 1;
         }
@@ -248,8 +248,7 @@ function TopSection({
             initStatus();
             changeActiveSport(-1);
             openUnlockModal(true);
-          }}
-        >
+          }}>
           <div className={`${styles.dropdownBtn} ${styles.dropdownBtnAll}`}>
             <LockIcon className={styles.lock_icon} />
             <span>VIP ALL ACCESS CARD</span>

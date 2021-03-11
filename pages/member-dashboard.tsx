@@ -48,7 +48,7 @@ function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
       <img
-        src="/images/member_dashboard.jpg"
+        src="/images/FinalBanner.jpg"
         alt="Member Dashboard Background"
         className={styles.bgImage}
       />
@@ -60,6 +60,7 @@ function HeroBanner() {
 function TopSection({
   profileName,
   initialName,
+
   overallInfo,
   user
 }: {

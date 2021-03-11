@@ -314,7 +314,7 @@ export default function AppHeader({
       <Row justify="space-between" className={styles.header}>
         <Col span={7} className={styles.headerLeftCol}>
           <div className={styles.countdownBox}>
-            <div className={styles.countdownBox_desc}>Pick Release Countdown</div>
+            <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
             <div className={styles.countdownBox_countdown_timer}>
               <span>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
               <Tooltip placement="right" title="prompt text" color={'#f50'}>
@@ -323,7 +323,7 @@ export default function AppHeader({
             </div>
             <div>
               <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
-                <a className={styles.yellowBoldLink}>View Picks</a>
+                <a className={styles.yellowBoldLink}>View Plays</a>
               </Link>
             </div>
           </div>
@@ -554,6 +554,15 @@ export default function AppHeader({
                   </Button>
                 </Link>
               )}
+              <div className={styles.countdownBoxMobile}>
+                <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
+                <Row align="middle">
+                  <span className={styles.countdownBox_countdown_timer}>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
+                  <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
+                    <a className={styles.yellowBoldLink}>View Plays</a>
+                  </Link>
+                </Row>
+              </div>
             </div>
           )}
         </div>

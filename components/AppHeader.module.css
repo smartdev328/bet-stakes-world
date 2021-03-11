@@ -68,22 +68,23 @@
 .countdownBox_countdown_timer {
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 38px;
+  font-size: 23px;
+  line-height: 35px;
   display: flex;
   align-items: center;
   color: var(--backgroundColor);
+  text-transform: uppercase;
 }
 
 .countdownBox_countdown_timer > span {
-  width: 165px;
+  width: 170px;
 }
 
 .yellowBoldLink {
-  font-size: 14px;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
+  text-transform: uppercase;
   text-decoration-line: underline;
   text-align: left;
   color: var(--actionYellowColor);
@@ -268,6 +269,22 @@
   }
   .logo {
     max-width: 52%;
+  }
+  .countdownBoxMobile > div {
+    margin: 0.5em 0;
+    text-align: center;
+  }
+  .countdownBox_desc {
+    font-size: 14px;
+  }
+  .countdownBox_countdown_timer {
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .yellowBoldLink {
+    margin-left: 0.7em;
+    font-size: 16px;
+    line-height: 25px;
   }
 }
 

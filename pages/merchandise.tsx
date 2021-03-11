@@ -21,26 +21,32 @@ type SubscriptionFormProps = {
 
 function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
   const [email, setEmail] = useState<string>('');
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+
   useEffect(() => {
-    if (status === 'success') {
-      notification['info']({
-        message:
-          'You’ve successfully subscribed to TheDailyStakes Newsletter. Welcome to the team!',
-        description: null,
-        style: { background: '#ffc700' }
-      });
-    }
-    if (status === 'error') {
-      notification['error']({
-        message: 'Subscription Error!',
-        description: null
-      });
+    if (formSubmitted) {
+      if (status === 'success') {
+        notification['info']({
+          message:
+            'Thanks for signing up to TheDailyStakes merch! You\'ll be the first to know about our merchandise, including limited edition releases. Stay tuned!',
+          description: null,
+          style: { background: '#ffc700' }
+        });
+      }
+      if (status === 'error') {
+        const text = typeof message === 'string' ? message : '';
+        notification['error']({
+          message: 'Subscription Error!',
+          description: <div className={styles.notificationText} dangerouslySetInnerHTML={{ __html: text }}></div>
+        });
+      }
     }
   }, [status, message]);
   const emailChanged = (e: React.FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
   };
   const submit = () => {
+    setFormSubmitted(true);
     if (validateEmail(email)) {
       onValidated({
         EMAIL: email

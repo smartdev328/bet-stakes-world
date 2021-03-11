@@ -1039,7 +1039,9 @@ function ProductsAndCartBoxForSportsCard({
                   {activePlan1?.id !== plan.id && (
                     <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
                   )}
-                  <span className={styles.sportsCard_name}>{plan.duration}</span>
+                  <span className={styles.sportsCard_name}>
+                    {plan.duration === 'SEMI_ANNUAL' ? 'SEASON' : plan.duration}
+                  </span>
                 </div>
                 <div className={styles.flexRow}>
                   <div className={`${styles.sportsCard_value} ${styles.origin}`}>

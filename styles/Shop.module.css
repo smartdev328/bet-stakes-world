@@ -369,12 +369,12 @@
 }
 .sportsCard_name {
   font-weight: 600;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 107.9%;
   color: #000000;
   display: inline-block;
   text-align: left;
-  padding-left: 20px;
+  padding-left: 10px;
   text-transform: uppercase;
 }
 
@@ -880,7 +880,10 @@
 .flexRowForVip {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
+
 .sportsCard_value {
   text-align: center;
   padding: 0.5em 2em 0.5em 2.5em;
@@ -1158,4 +1161,24 @@
   .ingame_text {
     font-size: 8px;
   }
+}
+
+.row {
+  width: 100%;
+}
+
+.column1 {
+  display: flex;
+  align-items: center;
+}
+
+.column2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.list {
+  width: 100%;
 }

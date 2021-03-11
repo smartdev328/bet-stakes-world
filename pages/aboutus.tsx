@@ -134,7 +134,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
 
                   <div className={styles.sport_car_container}>
                     <img src="/images/about_ncaab.svg" className={styles.coverage_images} />
-                    <img src="/images/about_ncaff.svg" className={styles.coverage_images} />
+                    <img src="/images/about-ncaaf.svg" className={styles.coverage_images} />
                     <img src="/images/about_ufc.svg" className={styles.coverage_images} />
                     <img src="/images/about_f1.svg" className={styles.coverage_images} />
                   </div>

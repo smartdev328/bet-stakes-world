@@ -425,6 +425,13 @@ function ProductsAndCartBox({
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
+  const vipCardList = [
+    { faceValue: 199, pricePerDay: 199 },
+    { faceValue: 699, pricePerDay: 100 },
+    { faceValue: 1999, pricePerDay: 67 },
+    { faceValue: 5999, pricePerDay: 17 }
+  ];
+
   return (
     <>
       <div className={styles.protection_container}>
@@ -448,22 +455,34 @@ function ProductsAndCartBox({
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={activePlan?.id === plan.id ? styles.active : ''}
+              className={`${activePlan?.id === plan.id ? styles.active : ''} ${styles.list}`}
               onClick={() => selectBillingPlan(plan)}>
-              <div className={styles.flexRow}>
-                {activePlan?.id === plan.id && (
-                  <CheckedCircleIcon className={styles.checkedStatusIcon} />
-                )}
-                {activePlan?.id !== plan.id && (
-                  <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
-                )}
-                <span className={styles.sportsCard_name}>{plan.duration}</span>
+              <div className={styles.flexRowForVip}>
+                <div>
+                  {activePlan?.id === plan.id && (
+                    <CheckedCircleIcon className={styles.checkedStatusIcon} />
+                  )}
+                  {activePlan?.id !== plan.id && (
+                    <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
+                  )}
+                  <span className={styles.sportsCard_name}>{plan.duration}</span>
+                </div>
+                {plan.duration === 'MONTHLY' || plan.duration === 'ANNUAL' ? (
+                  <div className={styles.ingame_div}>
+                    <p className={styles.ingame_text}>IN-GAMES BETS</p>
+                    <p className={styles.included_text}>INCLUDED</p>
+                  </div>
+                ) : null}
               </div>
               <div className={styles.flexRow}>
                 <div className={`${styles.sportsCard_value} ${styles.origin}`}>
                   <div className={styles.sportsCard_value_title}>Reg</div>
-                  <div className={styles.sportsCard_value_price}>$199</div>
-                  <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                  <div className={styles.sportsCard_value_price}>
+                    ${vipCardList[index].faceValue}
+                  </div>
+                  <div className={styles.sportsCard_value_dayprice}>
+                    ${vipCardList[index].pricePerDay}/Day
+                  </div>
                 </div>
                 <div className={`${styles.sportsCard_value}`}>
                   <div className={styles.sportsCard_value_title}>Sale</div>
@@ -621,6 +640,12 @@ function ProductsAndCartBoxForFantasy({
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
+  const fantasyCardList = [
+    { faceValue: 29, pricePerDay: 29 },
+    { faceValue: 99, pricePerDay: 14 },
+    { faceValue: 299, pricePerDay: 10 }
+  ];
+
   return (
     <>
       <div className={styles.sportsCards}>
@@ -676,8 +701,12 @@ function ProductsAndCartBoxForFantasy({
               <div className={styles.flexRow}>
                 <div className={`${styles.sportsCard_value} ${styles.origin}`}>
                   <div className={styles.sportsCard_value_title}>Reg</div>
-                  <div className={styles.sportsCard_value_price}>$199</div>
-                  <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                  <div className={styles.sportsCard_value_price}>
+                    ${fantasyCardList[index].faceValue}
+                  </div>
+                  <div className={styles.sportsCard_value_dayprice}>
+                    $ {fantasyCardList[index].pricePerDay}/Day
+                  </div>
                 </div>
                 <div className={`${styles.sportsCard_value}`}>
                   <div className={styles.sportsCard_value_title}>Sale</div>
@@ -959,6 +988,12 @@ function ProductsAndCartBoxForSportsCard({
   pack.billing_plans.sort((a, b) => (a.price - b.price > 0 ? 1 : -1));
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
+  const sportsCardList = [
+    { faceValue: 399, pricePerDay: 57 },
+    { faceValue: 999, pricePerDay: 33 },
+    { faceValue: 2999, pricePerDay: 17 }
+  ];
+
   return (
     <>
       <div className={styles.sportsCards}>
@@ -1013,13 +1048,19 @@ function ProductsAndCartBoxForSportsCard({
                   {activePlan1?.id !== plan.id && (
                     <EmptyCircleIcon className={styles.uncheckedStatusIcon} />
                   )}
-                  <span className={styles.sportsCard_name}>{plan.duration}</span>
+                  <span className={styles.sportsCard_name}>
+                    {plan.duration === 'SEMI_ANNUAL' ? 'SEASON' : plan.duration}
+                  </span>
                 </div>
                 <div className={styles.flexRow}>
                   <div className={`${styles.sportsCard_value} ${styles.origin}`}>
                     <div className={styles.sportsCard_value_title}>Reg</div>
-                    <div className={styles.sportsCard_value_price}>$199</div>
-                    <div className={styles.sportsCard_value_dayprice}>$199/Day</div>
+                    <div className={styles.sportsCard_value_price}>
+                      ${sportsCardList[index].faceValue}
+                    </div>
+                    <div className={styles.sportsCard_value_dayprice}>
+                      ${sportsCardList[index].pricePerDay}/Day
+                    </div>
                   </div>
                   <div className={`${styles.sportsCard_value}`}>
                     <div className={styles.sportsCard_value_title}>Sale</div>

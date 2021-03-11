@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Row, Button, Spin, Col } from 'antd';
+import { Row, Button, Spin } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';

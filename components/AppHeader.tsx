@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
-
+import UsersAPIs from '@apis/user.apis';
 import {
   IdentityIcon,
   LockIcon,
@@ -255,6 +255,14 @@ export default function AppHeader({
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: 'LOAD_CART' });
+    UsersAPIs.fetchProfile()
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({
+          type: 'USER_PROFILE',
+          payload: data
+        });
+      });
     const remainingTime = getRemainingTime();
     setRemainingTime(remainingTime);
     const remainingTimeInterval = setInterval(() => {

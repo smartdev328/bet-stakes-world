@@ -8,7 +8,8 @@ import {
   LOG_OUT,
   FORGOT_PASS_REQUEST,
   FORGOT_PASS_FAILURE,
-  FORGOT_PASS_SUCCESS
+  FORGOT_PASS_SUCCESS,
+  USER_PROFILE
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
 import {
@@ -128,6 +129,12 @@ export function userReducer(state = initialState, action: UserStateAction) {
       return {
         ...state,
         ...{ error: action.error, loading: false, message: null }
+      };
+
+    case USER_PROFILE:
+      return {
+        ...state,
+        ...{ profile: action.payload }
       };
 
     case LOG_OUT:

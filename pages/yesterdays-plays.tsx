@@ -221,7 +221,7 @@ function SubscribeNow() {
 function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
-      <img src="/images/member_dashboard.jpg" className={styles.bgImage} />
+      <img src="/images/trianglebanner.jpg" className={styles.bgImage} />
       <BannerSportsAndMatches />
     </div>
   );

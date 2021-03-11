@@ -75,20 +75,20 @@ export const FAQsARR = {
     'What is The DailyStakes Protection?',
     'What is In-game betting?',
     'Are the VIP All Access Plays guaranteed winners?',
-    'What is your refund policy?'
+    'What is your cancellation and refund policy?'
   ],
   sports_card: [
     'What does the Sports Card include?',
     'Which sports does the Sports Card cover?',
     'What is In-game betting?',
     'Are the Sports Card Plays guaranteed winners?',
-    'What is your refund policy?'
+    'What is your cancellation and refund policy?'
   ],
   fantasy: [
     'What does the Fantasy Package include?',
     'Which sports does the Fantasy Package cover?',
     'Are the Fantasy lineups guaranteed winners?',
-    'What is your refund policy?'
+    'What is your cancellation and refund policy?'
   ]
 };
 
@@ -99,20 +99,20 @@ export const FAQsDesc = {
     'The DailyStakes Protection applies only to the Daily VIP All Access Card. If over 50% of the Daily VIP All Access Card are losses for a given day, the next day’s picks are FREE. No questions asked. For example, if 6 picks are released and 4 are losses for a given day. The Daily VIP All Access Card for the next day is free. ** <br><br> This does not happen often, however when it does, we aim to look out in the best interest of our clients and endorse a win-win outcome.',
     'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
     'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+    'Our refund policy can be found <a href="/refund-policy">here</a>. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
   ],
   sports_card: [
     'The Sports Card includes all picks released for the selected sport(s) of your choice. A breakdown of key stats and trends are included with each pick. A unit is associated with each pick for bankroll management purposes. The Sports Card card also includes our Weekly Pro tip.',
     'You have the option to select amongst the following sports: NBA, NFL, MLB, Soccer*, NCAAF, NCAAB, UFC, and Formula 1. A sports package for multiple sports can be purchased at varying time frames <br><br>Example: A monthly NBA package & a weekly Soccer package can be purchased at the same time <br><br>*Soccer includes all Major Leagues and Tournaments Including the English Premier League, MLS, La Liga, Serie A, Bundesliga, UEFA Champions League, & others. ',
     'In-game betting has been one of the most lucrative ways of betting for our users. It is simply wagering on a game while it’s happening live. Odds for sportsbooks for the "in-game" will normally change during a timeout or commercial break.',
     'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analyses, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. In order to even a turn in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+    'Our refund policy can be found <a href="/refund-policy">here</a>. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
   ],
   fantasy: [
     'The Fantasy Card includes optimal Daily Fantasy Sports (“DFS”) lineups for both single game and tournament style formats tailored for the following sportsbooks: DraftKings, Fanduel, and Yahoo Sports. Advanced stats for each selected player are provided such as projected points, expected value, player prop comparison, amongst other insightful statistics.',
     'Fantasy Packages can be purchased for any or all of the following sports: NBA, NFL, MLB.',
     'Guaranteed winners do not exist in the daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night.',
-    'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+    'Our refund policy can be found <a href="/refund-policy">here</a>. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
   ]
 };
 
@@ -176,7 +176,7 @@ export const FAQsTitlePage = [
   'What is the Weekly Pro Tip?',
   'What types of bets do you provide?',
   'Are the plays guaranteed winners?',
-  'What is your refund policy?'
+  'What is your cancellation and refund policy?'
 ];
 
 export const FAQsDescPage = [
@@ -194,7 +194,7 @@ export const FAQsDescPage = [
   'The Weekly Pro Tip provides insights and advice from a “sharp” point of view. A sharp is a professional bettor. We aim to arm our users with the best available knowledge in order for them to become better, and more importantly consistently profitable bettors, whether you’re a casual, a fan, or a sharp.',
   'Our sports betting packages i.e., VIP All Access & Sports Card includes straight bets, parlays, player props, bonus wildcard parlays, amongst other bet types. Our Fantasy Packages includes lineups for tournaments (i.e. main slate) contests and single game contests (e.g. 50/50, Beat The Score), along with recommendations as to which tournaments to enter to maximize profit.',
   'Guaranteed winners do not exist in the sports betting and daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc.  <br><br>In order to break even in sports betting a winning rate required is 52.4% & The DailyStakes has built a proven track record & credibility to consistently provide winners for its clients.',
-  'Our refund policy can be found here. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
+  'Our refund policy can be found <a href="/refund-policy">here</a>. Cancellations are available on any packages exceeding one month based on the remaining time left for a the purchased membership package(s).'
 ];
 
 export const CREDIT_COUNTRIES = [

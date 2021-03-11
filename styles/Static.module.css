@@ -62,6 +62,9 @@
   margin-right: 20px;
   cursor: pointer;
 }
+.faqs p a {
+  color: #1878FB;
+}
 
 @media (max-width: 1400px) {
   .content {
@@ -405,4 +408,25 @@
 }
 .faq_open {
   font-weight: bold !important;
+}
+
+/* Privacy Page */
+.privacy a {
+  color: #1878FB;
+}
+.privacy ul {
+  padding-left: 1.4em;
+}
+.privacy ul li {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 0.5em;
+}
+.privacy h5 {
+  margin-top: 1.5em;
+}
+.privacy h6 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0.5em 0;
 }

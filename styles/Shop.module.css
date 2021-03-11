@@ -527,6 +527,9 @@
 .faqs ul li p {
   margin: 0 0 1.5em 40px;
 }
+.faqs p a {
+  color: #1878FB;
+}
 .faqIcon {
   width: 20px;
   height: 20px;

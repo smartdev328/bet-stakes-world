@@ -37,7 +37,8 @@ const FULL_ACCESS_ROUTES = [
   '/aboutus',
   '/terms',
   '/privacy',
-  '/merchandise'
+  '/merchandise',
+  '/refund-policy'
 ];
 
 function MyApp({ Component, pageProps }) {

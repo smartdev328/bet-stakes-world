@@ -43,7 +43,11 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
         const text = typeof message === 'string' ? message : '';
         notification['error']({
           message: 'Subscription Error!',
-          description: <div className={styles.notificationText} dangerouslySetInnerHTML={{ __html: text }}></div>
+          description: (
+            <div
+              className={styles.notificationText}
+              dangerouslySetInnerHTML={{ __html: text }}></div>
+          )
         });
       }
     }

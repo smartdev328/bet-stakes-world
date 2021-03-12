@@ -28,7 +28,7 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
       if (status === 'success') {
         notification['info']({
           message:
-            'Thanks for signing up to TheDailyStakes merch! You\'ll be the first to know about our merchandise, including limited edition releases. Stay tuned!',
+            "Thanks for signing up to TheDailyStakes merch! You'll be the first to know about our merchandise, including limited edition releases. Stay tuned!",
           description: null,
           style: { background: '#ffc700' }
         });
@@ -37,7 +37,11 @@ function CustomForm({ status, message, onValidated }: SubscriptionFormProps) {
         const text = typeof message === 'string' ? message : '';
         notification['error']({
           message: 'Subscription Error!',
-          description: <div className={styles.notificationText} dangerouslySetInnerHTML={{ __html: text }}></div>
+          description: (
+            <div
+              className={styles.notificationText}
+              dangerouslySetInnerHTML={{ __html: text }}></div>
+          )
         });
       }
     }

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import { API_BASE_URL } from '@constants/';
 import { UserSubscription } from '@type/Users';
 import { tokenAuthHeaders } from '@utils/common';
@@ -19,19 +21,13 @@ export function getTodaySportEntries(
 ) {
   const headers = tokenAuthHeaders();
   const sportFilter = sport ? `&sport[0]=${sport}` : '';
-  const today = new Date();
-  const startTimestampOfToday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  ).getTime();
   let subscriptionsQuery = '';
   subscriptions.map((subscription, index) => {
     subscriptionsQuery += `&subscription[${index}]=${subscription.id}`;
   });
   const typeFilter = type ? `&type=${type}` : '';
   return fetch(
-    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${startTimestampOfToday}${typeFilter}${sportFilter}${subscriptionsQuery}`,
+    `${API_BASE_URL}/sports-entries?_sort=publish_date:ASC&publish_date_gte=${moment().unix()}${typeFilter}${sportFilter}${subscriptionsQuery}`,
     {
       method: 'GET',
       headers

@@ -36,9 +36,18 @@ function validateCart(payload: CreateCheckoutSessionParams) {
   });
 }
 
+function validateDiscount(code: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/checkout/coupon/${code}`, {
+    method: 'GET',
+    headers
+  });
+}
+
 export default {
   createSession,
   completeCheckout,
   loadSession,
-  validateCart
+  validateCart,
+  validateDiscount
 };

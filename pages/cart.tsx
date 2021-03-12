@@ -40,6 +40,7 @@ type CartTotalWidgetProps = {
   cartItems: CartItem[];
   onCheckout: () => void;
   disabled: boolean;
+  discountCode: string;
   changeDiscountCode: (_: string) => void;
 };
 
@@ -49,14 +50,41 @@ function CartTotalWidget({
   mobile,
   onCheckout,
   disabled,
+  discountCode,
   changeDiscountCode
 }: CartTotalWidgetProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [coupon, setCoupon] = useState<any | undefined>(undefined);
+
+  const applyDiscount = () => {
+    // Validate Discount
+    CheckoutAPIs.validateDiscount(discountCode)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 400) {
+          notification['error']({
+            message: 'Discount Error!',
+            description: data.message
+          });
+        } else {
+          const { coupon } = data.data;
+          setCoupon(coupon);
+        }
+      })
+  }
 
   let totalPrice = 0;
   cartItems.forEach((item) => {
     totalPrice += item.plan.price;
   });
+  if (coupon) {
+    if (coupon.amount_off) {
+      totalPrice -= coupon.amount_off;
+    } else if (coupon.percent_off) {
+      totalPrice = totalPrice * (100 - coupon.percent_off) / 100;
+    }
+  }
+
   return (
     <div className={`${styles.totalPriceWidget} ${mobile && styles.isMobileVisible}`}>
       <LazyLoad>
@@ -79,14 +107,16 @@ function CartTotalWidget({
         </div>
         <div className={styles.discountRow}>
           <span>Discount:</span>
-          <span>N/A</span>
+          {!coupon && <span>N/A</span>}
+          {coupon && coupon.amount_off && <span>{`$${coupon.amount_off}`}</span>}
+          {coupon && coupon.percent_off && <span>{`${coupon.percent_off}%`}</span>}
         </div>
         <div className={styles.couponRow}>
           <input
             placeholder="Enter Coupon Code"
             onChange={(e) => changeDiscountCode(e.target.value)}
           />
-          <Button disabled className={styles.couponBtn}>
+          <Button disabled={!discountCode} className={styles.couponBtn} onClick={applyDiscount}>
             Apply Coupon
           </Button>
         </div>
@@ -507,6 +537,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
               mobile={false}
               loading={proceeding}
               cartItems={tempCartItems}
+              discountCode={discountCode}
               changeDiscountCode={(val) => setDiscountCode(val)}
               disabled={
                 !cartForVisitor
@@ -540,6 +571,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
           <CartTotalWidget
             mobile={true}
             loading={proceeding}
+            discountCode={discountCode}
             changeDiscountCode={(val) => setDiscountCode(val)}
             disabled={
               !cartForVisitor

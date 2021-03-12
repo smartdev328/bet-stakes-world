@@ -384,14 +384,17 @@
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
-  color: #5A5A5A;
-  background: #959799;
   box-sizing: border-box;
   width: 160px;
-  border: 1px solid #959799;
   border-radius: 0;
+  background: #ffc700;
+  border: none;
+  color: #1a1a1a;
 }
-
+.couponRow .couponBtn:disabled {
+  background: #959799;
+  color: #5A5A5A;
+}
 .checkoutBtn {
   padding: 19.5px 30px;
   background: #FFC700;

@@ -469,7 +469,7 @@ function ProductsAndCartBox({
                 </div>
                 {plan.duration === 'MONTHLY' || plan.duration === 'ANNUAL' ? (
                   <div className={styles.ingame_div}>
-                    <p className={styles.ingame_text}>IN-GAMES BETS</p>
+                    <p className={styles.ingame_text}>IN-GAME BETS</p>
                     <p className={styles.included_text}>INCLUDED</p>
                   </div>
                 ) : null}

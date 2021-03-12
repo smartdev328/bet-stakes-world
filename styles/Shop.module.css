@@ -889,6 +889,7 @@
 
 .sportsCard_value {
   text-align: center;
+  width: 170px;
   padding: 0.5em 2em 0.5em 2.5em;
 }
 .sportsCard_value_title {
@@ -939,6 +940,9 @@
   .sportsCard_name {
     font-size: 32px;
     line-height: 44px;
+  }
+  .sportsCard_value {
+    width: 160px;
   }
   .sportsCard_value_title {
     font-size: 14px;

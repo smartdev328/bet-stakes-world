@@ -506,7 +506,7 @@ export default function AppHeader({
                   onClick={openLoginModal}
                   className={styles.cart_btn}></Button>
               )}
-              {token && (
+              {token && user.profile && user.profile.avatar && (
                 <Dropdown
                   overlay={accountMenu}
                   placement="bottomLeft"
@@ -517,6 +517,17 @@ export default function AppHeader({
                     icon={<img src={user.profile?.avatar?.url} className={styles.cart_icon} />}
                     aria-label="User Profile Button"
                     className={styles.cart_btn}></Button>
+                </Dropdown>
+              )}
+              {token && user.profile && !user.profile.avatar && (
+                <Dropdown
+                  overlay={accountMenu}
+                  placement="bottomLeft"
+                  transitionName=""
+                  trigger={['click']}>
+                  <div className={styles.profileLogo}>
+                    <span>{`${user.profile.full_name?.split(' ')[0][0] || ''}${user.profile.full_name?.split(' ')[1][0] || ''}`}</span>
+                  </div>
                 </Dropdown>
               )}
             </div>

@@ -254,10 +254,19 @@ function SportsCardPackage({ data }: AccessCardPackagePropsType) {
               </div>
             </li>
           </ul>
-          <div className={styles.vipBestValue}>
-            <img src="/images/mark-vip2.svg" alt="" />
-            <span>Best Value!</span>
-          </div>
+          <Row>
+            <Col span={12}>
+              <div className={styles.vipBestValue}>
+                <img src="/images/mark-vip2.svg" alt="" />
+                <span>Best Value!</span>
+              </div>
+            </Col>
+            <Col span={12}>
+              <div className={styles.vipBestValue}>
+                <img src="/images/ds-protectionn.png" className={styles.protection_image} />
+              </div>
+            </Col>
+          </Row>
           <div className={styles.extra_info}>
             *The&nbsp;<strong>Daily Card</strong>&nbsp;includes{' '}
             <Link href="/">

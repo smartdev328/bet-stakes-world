@@ -660,3 +660,15 @@ a.locked:active {
   border: solid 1px #c4c4c4;
   font-size: 12px;
 }
+.profileLogo {
+  border: solid 2px #fff;
+  border-radius: 50%;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffc700;
+  font-weight: 600;
+}

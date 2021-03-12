@@ -327,7 +327,7 @@ function HeroBanner() {
 function LogoFromName({ first_name, last_name }: { first_name: string; last_name: string }) {
   return (
     <div className={styles.profileLogo}>
-      <span>{`${first_name[0]}${last_name[0]}`}</span>
+      <span>{`${first_name[0] || ''}${last_name[0] || ''}`}</span>
     </div>
   );
 }
@@ -418,7 +418,7 @@ function ProfileInfo({
               )}
               {!profileForm.avatar && (
                 <>
-                  <LogoFromName first_name="Nicolas" last_name="Patrick" />
+                  <LogoFromName first_name={profileForm.first_name ? profileForm.first_name : ''} last_name={profileForm.last_name ? profileForm.last_name : ''} />
                 </>
               )}
               <Upload key={profileForm.tempAvatar} onChange={onLogoChange} multiple={false}>

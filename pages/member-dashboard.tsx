@@ -412,10 +412,17 @@ function EarliestGames({
 function YesterdayPlays() {
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [offset, setOffset] = useState<number>(0);
+  const [totalCount, setTotalCount] = useState<number>(0);
   const [fetchMoreLoading, setFetchMoreLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // Fetch Earliest games
+    // Fetch count of Yesterday Plays
+    SportsAPIs.getYesterdaySportEntriesCount()
+      .then((res) => res.json())
+      .then((data) => {
+        setTotalCount(data);
+      });
+    // Fetch Yesterday Plays
     onLoadMore();
   }, []);
 
@@ -447,6 +454,18 @@ function YesterdayPlays() {
         <span>{moment().subtract(0, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
       <SportEntry loading={fetchMoreLoading} plays={games} />
+      {totalCount > offset && (
+        <Row>
+          <Col sm={24} md={24} className="text-center">
+            <Button
+              loading={fetchMoreLoading}
+              onClick={onLoadMore}
+              className={styles.loadMoreBtn}>
+              Load More
+            </Button>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

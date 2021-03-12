@@ -74,27 +74,16 @@ const SPORTS_INFO = [
 ];
 
 export default function YesterdaysPlays({ token, subscriptions, sports }: PageProps) {
-  const [activeSport, setActiveSport] = useState<number>(-1);
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
-  const [offset, setOffset] = useState<number>(0);
-  const [fetchMoreLoading, setFetchMoreLoading] = useState<boolean>(false);
   const [entireLoading, setEntireLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    onLoadMore();
-  }, []);
 
   // Update Filters
   const updateFilters = (sportId: number, status: boolean) => {
-    if (status) {
-      setActiveSport(sportId);
-    }
     setEntireLoading(true);
-    SportsAPIs.getYesterdaySportEntries(0, status ? sportId : undefined)
+    SportsAPIs.getYesterdaySportEntries(0, status ? sportId : undefined, 1000)
       .then((res) => res.json())
       .then((data) => {
         setGames(data);
-        setOffset(data.length);
         setEntireLoading(false);
       })
       .catch((error) => {
@@ -102,25 +91,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
           message: 'Registration Error!',
           description: error.message
         });
-        setFetchMoreLoading(false);
-      });
-  };
-
-  const onLoadMore = () => {
-    setFetchMoreLoading(true);
-    SportsAPIs.getYesterdaySportEntries(offset, activeSport > 0 ? activeSport : undefined)
-      .then((res) => res.json())
-      .then((data) => {
-        setGames(games.concat(data));
-        setOffset(offset + data.length);
-        setFetchMoreLoading(false);
-      })
-      .catch((error) => {
-        notification['error']({
-          message: 'Registration Error!',
-          description: error.message
-        });
-        setFetchMoreLoading(false);
+        setEntireLoading(false);
       });
   };
 
@@ -143,19 +114,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
               <Col span={18} className={styles.contentMainCol}>
                 {!token && <SubscribeNow />}
                 {token && (
-                  <>
-                    <SportEntry loading={entireLoading} plays={games} />
-                    <Row>
-                      <Col sm={24} md={18} className="text-center">
-                        <Button
-                          loading={fetchMoreLoading}
-                          onClick={onLoadMore}
-                          className={styles.loadMoreBtn}>
-                          Load More
-                        </Button>
-                      </Col>
-                    </Row>
-                  </>
+                  <SportEntry loading={entireLoading} plays={games} />
                 )}
                 <div className={styles.laptop_view}>
                   <VipAllAccessCard />

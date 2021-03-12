@@ -1128,6 +1128,7 @@
 .ingame_div {
   display: flex;
   flex-direction: column;
+  margin-bottom: -0.5em;
 }
 
 .ingame_text {
@@ -1136,10 +1137,9 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 184.4%;
-
   text-align: center;
   text-transform: uppercase;
-
+  margin-bottom: 5px;
   color: #000000;
 }
 
@@ -1149,10 +1149,9 @@
   font-weight: normal;
   font-size: 8px;
   line-height: 184.4%;
-
   text-align: center;
   text-transform: uppercase;
-
+  margin-bottom: 0;
   color: #000000;
 }
 

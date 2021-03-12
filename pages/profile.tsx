@@ -401,7 +401,7 @@ function ProfileInfo({
             </Row>
             <Row>
               <Col span={24} className={styles.formGroup}>
-                <label>Mobile Number</label>
+                <label>MOBILE NUMBER (FOR IN-GAME BETS)</label>
                 <input
                   name="mobile_number"
                   value={profileForm.mobile_number}

@@ -10,7 +10,6 @@ export { default as ForgotPasswordModal } from './ForgotPassword';
 export { default as ResetPasswordModal } from './ResetPassword';
 export { default as CartDrawer } from './CartDrawer';
 export { default as CartSignupForm } from './CartSignupForm';
-export { default as CartLoginForm } from './CartLoginForm';
 export { default as CartBillingInfo } from './CartBillingInfo';
 export { default as SportEntry } from './SportEntry';
 export { default as SportEntryActive } from './SportEntryActive';

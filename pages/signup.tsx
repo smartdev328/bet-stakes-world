@@ -415,6 +415,31 @@ export default function Registration({ packages, token, subscriptions }: PagePro
     setIsFormValid(isValid);
   };
 
+  let vipAllAccessPack: Package | undefined = undefined,
+    fantasyPack: Package | undefined = undefined,
+    sportsCardPack: Package | undefined = undefined;
+  const sortedPackages: Package[] = [];
+  if (packages) {
+    packages?.forEach((pack) => {
+      if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+        vipAllAccessPack = pack;
+      } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+        fantasyPack = pack;
+      } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+        sportsCardPack = pack;
+      }
+    });
+    if (vipAllAccessPack) {
+      sortedPackages.push(vipAllAccessPack);
+    }
+    if (sportsCardPack) {
+      sortedPackages.push(sportsCardPack);
+    }
+    if (fantasyPack) {
+      sortedPackages.push(fantasyPack);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -426,7 +451,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
           <div className={styles.sectionTitle}>Our Membership packages</div>
           <Row>
             <div className={styles.packagesCol}>
-              {packages?.map((pack: Package) => (
+              {sortedPackages?.map((pack: Package) => (
                 <SportsCardPackage
                   key={pack.id}
                   data={pack}

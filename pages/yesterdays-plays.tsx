@@ -77,6 +77,22 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [entireLoading, setEntireLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    SportsAPIs.getYesterdaySportEntries(0, undefined, 1000)
+      .then((res) => res.json())
+      .then((data) => {
+        setGames(data);
+        setEntireLoading(false);
+      })
+      .catch((error) => {
+        notification['error']({
+          message: 'Registration Error!',
+          description: error.message
+        });
+        setEntireLoading(false);
+      });
+  }, []);
+
   // Update Filters
   const updateFilters = (sportId: number, status: boolean) => {
     setEntireLoading(true);

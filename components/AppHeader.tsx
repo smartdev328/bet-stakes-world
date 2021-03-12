@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Menu, Row, Col, Dropdown, Tooltip } from 'antd';
+import { Menu, Row, Col, Dropdown } from 'antd';
 import Link from 'next/link';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
@@ -226,7 +226,13 @@ function getRemainingTime(): RemainingTimeType {
   return DefaultRemainingTime;
 }
 
-function DateBar({ currentDateTime, userSubscriptions }: { currentDateTime: string, userSubscriptions: UserSubscription[] }) {
+function DateBar({
+  currentDateTime,
+  userSubscriptions
+}: {
+  currentDateTime: string;
+  userSubscriptions: UserSubscription[];
+}) {
   return (
     <div className={styles.dateBar}>
       <Link href={userSubscriptions.length > 0 ? '/member-dashboard' : '/shop'}>

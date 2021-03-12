@@ -401,6 +401,11 @@ export default function AppHeader({
         <div className={styles.container}>
           <div className={styles.navbarSide}></div>
           <Menu mode="horizontal" className={styles.navbar}>
+            <Menu.Item key="Home" className={styles.navbarItem}>
+              <Link href="/">
+                <a>HOME</a>
+              </Link>
+            </Menu.Item>
             <Menu.Item key="SHOP" className={styles.navbarItem}>
               <Link href="/shop">
                 <a>SHOP</a>
@@ -415,12 +420,16 @@ export default function AppHeader({
                 <a>Yesterdays Plays</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="Merchandise" className={styles.navbarItem}>
-              <Link href="/merchandise">
-                <a>Merchandise</a>
+            <Menu.Item key="Sportsbook_reviews" className={styles.navbarItem}>
+              <Link href="https://blog.thedailystakes.com/category/sportsbook-reviews/">
+                <a target="_blank">Sportsbook Reviews</a>
               </Link>
             </Menu.Item>
-
+            <Menu.Item key="Daily_insights" className={styles.navbarItem}>
+              <Link href="https://blog.thedailystakes.com/">
+                <a target="_blank">The Daily Insights</a>
+              </Link>
+            </Menu.Item>
             <Menu.Item key="About_Us" className={styles.navbarItem}>
               <Link href="/aboutus">
                 <a>About Us</a>
@@ -513,26 +522,37 @@ export default function AppHeader({
             <div className={styles.mobileNavContent}>
               <DateBar currentDateTime={currentDateTime} />
               <Menu mode="vertical" className={styles.navbar}>
+                <Menu.Item key="Home" className={styles.navbarItem}>
+                  <Link href="/">
+                    <a>HOME</a>
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="SHOP" className={styles.navbarItem}>
                   <Link href="/shop">
                     <a>SHOP</a>
                   </Link>
                 </Menu.Item>
                 <SubMenu subscriptions={userSubscriptions} token={token} />
-                {/* <Menu.Item key="Sports_News" className={styles.navbarItem}>
-                  Sports News
-                </Menu.Item> */}
                 <Menu.Item key="Yesterdays_Plays" className={styles.navbarItem}>
                   <Link href="/yesterdays-plays">
                     <a>Yesterdays Plays</a>
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="Merchandise" className={styles.navbarItem}>
+                <Menu.Item key="Sportsbook_reviews" className={styles.navbarItem}>
+                  <Link href="https://blog.thedailystakes.com/category/sportsbook-reviews/">
+                    <a target="_blank">Sportsbook Reviews</a>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="Daily_insights" className={styles.navbarItem}>
+                  <Link href="https://blog.thedailystakes.com/">
+                    <a target="_blank">The Daily Insights</a>
+                  </Link>
+                </Menu.Item>
+                {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
                   <Link href="/merchandise">
                     <a>Merchandise</a>
                   </Link>
-                </Menu.Item>
-
+                </Menu.Item> */}
                 <Menu.Item key="About_Us" className={styles.navbarItem}>
                   <Link href="/aboutus">
                     <a>About Us</a>
@@ -542,7 +562,7 @@ export default function AppHeader({
                   Merchandise
                 </Menu.Item> */}
               </Menu>
-              {userSubscriptions.length && (
+              {userSubscriptions.length > 0 && (
                 <Link href="/member-dashboard">
                   <Button
                     type="primary"
@@ -552,7 +572,7 @@ export default function AppHeader({
                   </Button>
                 </Link>
               )}
-              {!userSubscriptions.length && (
+              {userSubscriptions.length === 0 && (
                 <Link href="/signup">
                   <Button
                     type="primary"

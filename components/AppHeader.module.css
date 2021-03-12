@@ -313,7 +313,7 @@
 }
 
 .navbarContainer .navbar {
-  width: 876px;
+  width: 1024px;
   background: transparent;
   border-bottom: none;
   display: flex;
@@ -510,8 +510,8 @@ a.locked:active {
   .navbar .navbarItem,
   .navbar .submenu_main_item {
     font-weight: bold;
-    font-size: 32px;
-    line-height: 32px;
+    font-size: 30px;
+    line-height: 30px;
     color: #ffffff;
     padding: 0 0 !important;
     height: auto;

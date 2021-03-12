@@ -26,7 +26,7 @@ import {
 } from '@components/index';
 import styles from '@styles/MemberDashboard.module.css';
 import { EarliestGameInfoType, PageProps, YesterdayPlayInfoType } from '@type/Main';
-import { Overall, OverallInfoType, OverallList, UserSubscription } from '@type/Users';
+import { UserSubscription } from '@type/Users';
 import WeeklyTipsAPIs from '@apis/utils.apis';
 import SportsAPIs from '@apis/sport.apis';
 import { WeeklyTip } from '@type/WeeklyTips';
@@ -38,11 +38,11 @@ import { PACKAGE_NAMES, SportBetTypes } from '@constants/';
 import checkoutApis from '@apis/checkout.apis';
 import { CheckoutSessionType } from '@type/Cart';
 
-const EmptyOverall = {
-  loss: 0,
-  wins: 0,
-  draw: 0
-};
+// const EmptyOverall = {
+//   loss: 0,
+//   wins: 0,
+//   draw: 0
+// };
 
 function HeroBanner() {
   return (
@@ -60,16 +60,15 @@ function HeroBanner() {
 function TopSection({
   profileName,
   initialName,
-
-  overallInfo,
+  // overallInfo,
   user
 }: {
   profileName: string;
   initialName: string;
-  overallInfo: Overall;
+  // overallInfo: Overall;
   user: UserReducerState;
 }) {
-  const { wins = 0, draw = 0, loss = 0 } = overallInfo;
+  // const { wins = 0, draw = 0, loss = 0 } = overallInfo;
   return (
     <>
       <DashboardHeader title={'Member Dashboard'} />
@@ -84,9 +83,9 @@ function TopSection({
             )}
           </div>
         </Row>
-        <Col className={styles.welcome_right}>
+        {/* <Col className={styles.welcome_right}>
           <strong>Overall Record:</strong>&nbsp;{`${wins}-${draw}-${loss}`}
-        </Col>
+        </Col> */}
       </Row>
     </>
   );
@@ -95,11 +94,11 @@ function TopSection({
 function CurrentPackages({
   subscriptions,
   packages,
-  overallInfo
+  // overallInfo
 }: {
   subscriptions: UserSubscription[];
   packages: Package[];
-  overallInfo: OverallList[];
+  // overallInfo: OverallList[];
 }) {
   const router = useRouter();
 
@@ -138,16 +137,16 @@ function CurrentPackages({
     });
     return vipSubscription.concat(sportSubscription, fantasySubscription);
   };
-  const getOverallRecord = (subscription: UserSubscription) => {
-    const overallRecord = overallInfo.find(
-      (item) => item.subscription_id.toString() === subscription.id.toString()
-    );
-    const { wins, loss, draw } = overallRecord?.win_record || EmptyOverall;
-    return {
-      record: `${wins}-${draw}-${loss}`,
-      units: overallRecord?.unit_profitability || 0
-    };
-  };
+  // const getOverallRecord = (subscription: UserSubscription) => {
+  //   const overallRecord = overallInfo.find(
+  //     (item) => item.subscription_id.toString() === subscription.id.toString()
+  //   );
+  //   const { wins, loss, draw } = overallRecord?.win_record || EmptyOverall;
+  //   return {
+  //     record: `${wins}-${draw}-${loss}`,
+  //     units: overallRecord?.unit_profitability || 0
+  //   };
+  // };
 
   return (
     <div className={styles.current_packages}>
@@ -184,8 +183,8 @@ function CurrentPackages({
                     {!subscription.sports[0] && <h3>VIP</h3>}
                     <p>{subscription.plan.duration.toUpperCase()} ACCESS</p>
                   </div>
-
-                  <div className={styles.packageOverall}>
+                  <br /><br />
+                  {/* <div className={styles.packageOverall}>
                     <div className={styles.packageOverallRow}>
                       <span>record:</span>
                       <span>{getOverallRecord(subscription).record}</span>
@@ -198,7 +197,7 @@ function CurrentPackages({
                           : getOverallRecord(subscription).units
                       } unit${getOverallRecord(subscription).units > 0 ? 's' : ''}`}</span>
                     </div>
-                  </div>
+                  </div> */}
                   <Button
                     onClick={() => {
                       goToPackage(subscription.plan, subscription.sports[0]);
@@ -457,7 +456,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [profileName, setProfileName] = useState<string>('');
   const [initialName, setInitialName] = useState<string>('');
   const [session, setSession] = useState<CheckoutSessionType | undefined>(undefined);
-  const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
+  // const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
   const router = useRouter();
   const { session_id: sessionId } = router.query;
   const { user } = useSelector((state: ReduxState) => {
@@ -490,11 +489,11 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
           );
         }
       });
-    UsersAPIs.getOverallRecord()
-      .then((res) => res.json())
-      .then((data) => {
-        setOverallInfo(data.data);
-      });
+    // UsersAPIs.getOverallRecord()
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setOverallInfo(data.data);
+    //   });
   }, []);
 
   useEffect(() => {
@@ -548,7 +547,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
           <TopSection
             profileName={profileName}
             initialName={initialName}
-            overallInfo={overallInfo.summary || EmptyOverall}
+            // overallInfo={overallInfo.summary || EmptyOverall}
             user={user}
           />
           <Row className={styles.nowrapRow}>
@@ -557,7 +556,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
                 <CurrentPackages
                   subscriptions={subscriptions}
                   packages={packages}
-                  overallInfo={overallInfo.list || []}
+                  // overallInfo={overallInfo.list || []}
                 />
               )}
               <div className={styles.laptop_view}>

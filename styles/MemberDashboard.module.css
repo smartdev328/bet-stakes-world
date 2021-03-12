@@ -276,13 +276,14 @@
 
 /* Weekly Pro Tip */
 .weekly_pro_tip_right_panel {
-  margin-left: 16px;
   overflow: hidden;
+  display: inline;
 }
 .weekly_pro_tip .block_content {
   background: #f9f9f9;
-  padding: 16px 24px;
-  flex-direction: column;
+  padding: 24px;
+  display: block;
+  margin: 1em 0 2em;
 }
 .weekly_pro_tip_intro {
   font-weight: bold;
@@ -291,21 +292,28 @@
   color: #6f6f6f;
 }
 .weekly_pro_tip_img {
-  max-width: 100%;
+  max-width: 60%;
   max-height: 400px;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 .weekly_pro_tip h4 {
   margin-top: 12px;
   font-weight: 900;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 24px;
   text-transform: uppercase;
   color: #000000;
+  margin: 0.2em 0 0.4em 0;
 }
 .weekly_pro_tip_desc {
   font-size: 16px;
   overflow-wrap: break-word;
   color: #000000;
+}
+.weekly_pro_tip_desc p {
+  margin-bottom: 0;
 }
 .weekly_pro_tip a {
   font-weight: bold;
@@ -534,11 +542,14 @@
     height: 16px;
   }
   .weekly_pro_tip .block_content {
+    display: flex;
     flex-direction: column !important;
     padding: 16px 16px;
   }
   .weekly_pro_tip_img {
-    height: 15∂0px;
+    height: auto;
+    max-width: 100%;
+    margin-right: 0;
   }
   .weekly_pro_tip h4 {
     font-size: 16px;
@@ -551,6 +562,9 @@
   .weekly_pro_tip_desc {
     font-size: 16px;
     line-height: 25px;
+  }
+  .weekly_pro_tip_desc p {
+    margin: 0;
   }
 }
 

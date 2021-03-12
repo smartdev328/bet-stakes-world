@@ -444,7 +444,7 @@ function YesterdayPlays() {
         <div className={styles.block_title}>Yesterday Plays</div>
       </div>
       <div className={styles.earliest_games_titlebar}>
-        <strong>{`10 Wins in ${14} Games`}</strong>
+        <strong>&nbsp;</strong>
         <span>{moment().subtract(0, 'days').format('h:mm a DD/MM/YYYY')}</span>
       </div>
       <SportEntry loading={fetchMoreLoading} plays={games} />

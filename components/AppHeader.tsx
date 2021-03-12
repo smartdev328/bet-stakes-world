@@ -226,10 +226,10 @@ function getRemainingTime(): RemainingTimeType {
   return DefaultRemainingTime;
 }
 
-function DateBar({ currentDateTime }: { currentDateTime: string }) {
+function DateBar({ currentDateTime, userSubscriptions }: { currentDateTime: string, userSubscriptions: UserSubscription[] }) {
   return (
     <div className={styles.dateBar}>
-      <Link href="/">
+      <Link href={userSubscriptions.length > 0 ? '/member-dashboard' : '/shop'}>
         <a>Today’s Bets</a>
       </Link>
       <div className={styles.dateBarDivider} />
@@ -325,12 +325,9 @@ export default function AppHeader({
             <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
             <div className={styles.countdownBox_countdown_timer}>
               <span>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
-              <Tooltip placement="right" title="prompt text" color={'#f50'}>
-                <span className={styles.moreInfo}>i</span>
-              </Tooltip>
             </div>
             <div>
-              <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
+              <Link href={userSubscriptions.length > 0 ? '/member-dashboard' : '/shop'}>
                 <a className={styles.yellowBoldLink}>View Plays</a>
               </Link>
             </div>
@@ -394,7 +391,7 @@ export default function AppHeader({
               </Dropdown>
             </div>
           )}
-          <DateBar currentDateTime={currentDateTime} />
+          <DateBar currentDateTime={currentDateTime} userSubscriptions={userSubscriptions} />
         </Col>
       </Row>
       <div className={styles.navbarContainer}>
@@ -520,7 +517,7 @@ export default function AppHeader({
           </Row>
           {mobileNavVisible && (
             <div className={styles.mobileNavContent}>
-              <DateBar currentDateTime={currentDateTime} />
+              <DateBar currentDateTime={currentDateTime} userSubscriptions={userSubscriptions} />
               <Menu mode="vertical" className={styles.navbar}>
                 <Menu.Item key="Home" className={styles.navbarItem}>
                   <Link href="/">

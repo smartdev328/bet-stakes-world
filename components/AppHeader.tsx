@@ -148,8 +148,8 @@ function SubMenu({
             <div className={styles.submenu_content_left}>
               <div className={styles.submenu_item}>
                 <Link href="/member-dashboard">
-                  <a className={subscriptionStatus !== 'paid' ? styles.locked : ''}>
-                    {subscriptionStatus !== 'paid' && <LockIcon className={styles.lock_icon} />}
+                  <a className={subscriptionStatus === 'visitor' ? styles.locked : ''}>
+                    {subscriptionStatus === 'visitor' && <LockIcon className={styles.lock_icon} />}
                     Member Dashboard
                   </a>
                 </Link>

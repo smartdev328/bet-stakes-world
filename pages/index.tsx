@@ -841,15 +841,14 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="/images/news_bg.jpg" alt="News Background" />
+                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/Group-273.png" alt="News Background" />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
-                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <h3>THE NBA IS ONE OF THE MOST POPULAR SPORTS TO BET ON, BUT YOU NEED TO READ THESE 5 TIPS BEFORE PLACING YOUR NEXT BET</h3>
                   <p className={styles.news_desc}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Betting strategies for the NBA
                   </p>
-                  <Link href="/">
+                  <Link href="https://blog.thedailystakes.com/nba-betting-strategies/">
                     <a>Read Article</a>
                   </Link>
                 </div>
@@ -859,15 +858,14 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="/images/news_bg.jpg" alt="News Background" />
+                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/Psychology-of-betting.jpg" alt="News Background" />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
-                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <h3>HOW PSYCHOLOGY AND TENDENCIES IMPACT SPORTS BETTORS AND TWO COMMON FALLACIES THAT CAUSE BETTORS TO LOSE MONEY</h3>
                   <p className={styles.news_desc}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sports Betting Psychology - Two Fallacies to Avoid
                   </p>
-                  <Link href="/">
+                  <Link href="https://blog.thedailystakes.com/sports-betting-psychology-two-fallacies-to-avoid/">
                     <a>Read Article</a>
                   </Link>
                 </div>
@@ -877,15 +875,48 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="/images/news_bg.jpg" alt="News Background" />
+                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/BASEBALL-Artile.png" alt="News Background" />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <p className={styles.news_info}>Formula 1 | July 31, 2020 @ 1:11 PM</p>
-                  <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                  <h3>BASEBALL IS ONE OF THE MOST PROFITABLE SPORTS TO BET ON. CHECK OUT OUR TIPS ON HOW TO MAKE SOME MONEY THIS SEASON!</h3>
                   <p className={styles.news_desc}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    MLB betting strategies
                   </p>
-                  <Link href="/">
+                  <Link href="https://blog.thedailystakes.com/mlb-betting-strategies/">
+                    <a>Read Article</a>
+                  </Link>
+                </div>
+                <div className="news_overlay" />
+              </div>
+            </div>
+            <div>
+              <div className={styles.news}>
+                <LazyLoad height={590}>
+                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/sports-betting.jpg" alt="News Background" />
+                </LazyLoad>
+                <div className={styles.news_content}>
+                  <h3>THE MOST UNDERRATED ELEMENT OF SPORTS BETTING? BANKROLL MANAGEMENT: HERE ARE SIX BETTING SYSTEMS YOU NEED TO KNOW</h3>
+                  <p className={styles.news_desc}>
+                    Six Sports Betting Bankroll Strategies All Bettors Need To Know
+                  </p>
+                  <Link href="https://blog.thedailystakes.com/sports-betting-bankroll-strategies-all-bettors-need-to-know/">
+                    <a>Read Article</a>
+                  </Link>
+                </div>
+                <div className="news_overlay" />
+              </div>
+            </div>
+            <div>
+              <div className={styles.news}>
+                <LazyLoad height={590}>
+                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/dfs.jpg" alt="News Background" />
+                </LazyLoad>
+                <div className={styles.news_content}>
+                  <h3>DRAFTKINGS, FANDUEL AND YAHOO SPORTS ALL OFFER EXCITING AND DEEP DAILY FANTASY EXPERIENCES BUT WHICH IS THE BEST?</h3>
+                  <p className={styles.news_desc}>
+                    Daily Fantasy Review: Draftkings, FanDuel and Yahoo Sports!
+                  </p>
+                  <Link href="https://blog.thedailystakes.com/draftkings-fanduel-and-yahoo-sports-all-offer-exciting-and-deep-daily-fantasy-experiences-but-which-is-the-best/">
                     <a>Read Article</a>
                   </Link>
                 </div>

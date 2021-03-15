@@ -136,11 +136,6 @@ function HeroBanner() {
 }
 
 function MembershipOfferings() {
-  const router = useRouter();
-  const goLearnMore = () => {
-    router.push('/shop');
-  };
-
   return (
     <div className={styles.membershipOffers}>
       <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
@@ -172,9 +167,11 @@ function MembershipOfferings() {
                 <li>Customized Dashboard Including Automated Record Tracking</li>
                 <li>Weekly, Monthly, Season & Playoff Packages Available. </li>
               </ul>
-              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
-                Learn More
-              </Button>
+              <Link href="/shop?plan=sports_card">
+                <Button className={styles.learn_more_btn}>
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -209,9 +206,11 @@ function MembershipOfferings() {
                 <li>Daily, Weekly, Monthly & Annual Packages Available. </li>
                 <li>Daily Card Includes TheDailyStakes Protection</li>
               </ul>
-              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
-                Learn More
-              </Button>
+              <Link href="/shop?plan=all">
+                <Button className={styles.learn_more_btn}>
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
           <div className={styles.protection_div}>
@@ -243,9 +242,11 @@ function MembershipOfferings() {
                 <li>Includes Advanced Stats, Projected Points, Player Props & Other Key Metrics</li>
                 <li>Weekly, Monthly & Annual Packages Available</li>
               </ul>
-              <Button className={styles.learn_more_btn} onClick={goLearnMore}>
-                Learn More
-              </Button>
+              <Link href="/shop?plan=fantasy">
+                <Button className={styles.learn_more_btn}>
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

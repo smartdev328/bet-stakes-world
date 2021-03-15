@@ -79,7 +79,7 @@ function CartTotalWidget({
   });
   if (coupon) {
     if (coupon.amount_off) {
-      totalPrice -= coupon.amount_off;
+      totalPrice -= coupon.amount_off / 100;
     } else if (coupon.percent_off) {
       totalPrice = totalPrice * (100 - coupon.percent_off) / 100;
     }
@@ -108,7 +108,16 @@ function CartTotalWidget({
         <div className={styles.discountRow}>
           <span>Discount:</span>
           {!coupon && <span>N/A</span>}
-          {coupon && coupon.amount_off && <span>{`$${coupon.amount_off}`}</span>}
+          {coupon && coupon.amount_off && (
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={true}
+              prefix={'$'}
+              fixedDecimalScale
+              decimalScale={2}
+              value={coupon.amount_off / 100}
+            />
+          )}
           {coupon && coupon.percent_off && <span>{`${coupon.percent_off}%`}</span>}
         </div>
         <div className={styles.couponRow}>

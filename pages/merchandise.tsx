@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '@styles/Merchandise.module.css';
 import MailchimpSubscribe, { FormHooks } from 'react-mailchimp-subscribe';
 const url =
-  '//thedailystakes.us19.list-manage.com/subscribe/post?u=aa5150b7c559aed8ed8c1eaf6&amp;id=4829d57c24';
+  '//thedailystakes.us19.list-manage.com/subscribe/post?u=aa5150b7c559aed8ed8c1eaf6&id=bc457c2a4a';
 
 import { validateEmail } from '@utils/common';
 import dynamic from 'next/dynamic';

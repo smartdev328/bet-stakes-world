@@ -821,9 +821,12 @@ function SportsNewsCarousel() {
       <div className={styles.news_carousel_bg}>
         <div className={styles.news_carousel_content}>
           <div className={styles.title_row}>
-            <span>THE DAILY INSIGHTS</span>
-            <Link href="/">
-              <a>View More</a>
+            <div>
+              <span>THE DAILY INSIGHTS</span>
+              <span className={styles.title_row_desc}>SPORTS BETTING STRATEGIES, ANALYTICS, & PREDICTIONS</span>
+            </div>
+            <Link href="https://blog.thedailystakes.com/">
+              <a target="_blank">View More</a>
             </Link>
           </div>
           <Carousel

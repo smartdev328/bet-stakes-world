@@ -496,6 +496,7 @@ li .square_icon {
   height: auto;
   width: 100%;
   margin-top: 0.6em;
+  text-transform: uppercase;
 }
 
 .plan_extra_content {
@@ -1521,6 +1522,12 @@ li .square_icon {
   line-height: 117.9%;
   text-transform: uppercase;
   color: #1a1a1a;
+  display: block;
+}
+.title_row .title_row_desc {
+  font-size: 21px;
+  font-weight: 600;
+  display: block;
 }
 .title_row a {
   font-style: normal;

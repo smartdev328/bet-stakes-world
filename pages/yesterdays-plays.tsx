@@ -5,7 +5,6 @@ import { Row, Button, Col, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import {
   AppLayout,
-  BannerSportsAndMatches,
   CommonSportsBook,
   DashboardHeader,
   SportEntry,
@@ -118,7 +117,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
       </Head>
 
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
-        <HeroBanner />
+        {/* <HeroBanner /> */}
 
         <div className={styles.container}>
           {sports.length > 0 && <TopSection sports={sports} onSelectChange={updateFilters} />}
@@ -189,15 +188,6 @@ function SubscribeNow() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function HeroBanner() {
-  return (
-    <div className={styles.heroBanner}>
-      <img src="/images/trianglebanner.jpg" className={styles.bgImage} />
-      <BannerSportsAndMatches />
     </div>
   );
 }

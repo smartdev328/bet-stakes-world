@@ -93,9 +93,9 @@ function TopSection({
 
 function CurrentPackages({
   subscriptions,
-  packages,
-  // overallInfo
-}: {
+  packages
+}: // overallInfo
+{
   subscriptions: UserSubscription[];
   packages: Package[];
   // overallInfo: OverallList[];
@@ -183,7 +183,8 @@ function CurrentPackages({
                     {!subscription.sports[0] && <h3>VIP</h3>}
                     <p>{subscription.plan.duration.toUpperCase()} ACCESS</p>
                   </div>
-                  <br /><br />
+                  <br />
+                  <br />
                   {/* <div className={styles.packageOverall}>
                     <div className={styles.packageOverallRow}>
                       <span>record:</span>
@@ -430,7 +431,7 @@ function YesterdayPlays() {
         });
         setFetchMoreLoading(false);
       });
-    }, []);
+  }, []);
 
   return (
     <div className={styles.yesterday_plays}>
@@ -446,10 +447,7 @@ function YesterdayPlays() {
         <Row>
           <Col sm={24} md={24} className="text-center">
             <Link href="/yesterdays-plays">
-              <Button
-                className={styles.loadMoreBtn}>
-                View More
-              </Button>
+              <Button className={styles.loadMoreBtn}>View More</Button>
             </Link>
           </Col>
         </Row>

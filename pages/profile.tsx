@@ -418,7 +418,10 @@ function ProfileInfo({
               )}
               {!profileForm.avatar && (
                 <>
-                  <LogoFromName first_name={profileForm.first_name ? profileForm.first_name : ''} last_name={profileForm.last_name ? profileForm.last_name : ''} />
+                  <LogoFromName
+                    first_name={profileForm.first_name ? profileForm.first_name : ''}
+                    last_name={profileForm.last_name ? profileForm.last_name : ''}
+                  />
                 </>
               )}
               <Upload key={profileForm.tempAvatar} onChange={onLogoChange} multiple={false}>

@@ -443,7 +443,6 @@ export default function AppHeader({
                 <a>About Us</a>
               </Link>
             </Menu.Item>
-            
           </Menu>
           <div className={styles.navbarSide}>
             {/* <Button
@@ -529,7 +528,9 @@ export default function AppHeader({
                   transitionName=""
                   trigger={['click']}>
                   <div className={styles.profileLogo}>
-                    <span>{`${user.profile.full_name?.split(' ')[0][0] || ''}${user.profile.full_name?.split(' ')[1][0] || ''}`}</span>
+                    <span>{`${user.profile.full_name?.split(' ')[0][0] || ''}${
+                      user.profile.full_name?.split(' ')[1][0] || ''
+                    }`}</span>
                   </div>
                 </Dropdown>
               )}
@@ -575,7 +576,6 @@ export default function AppHeader({
                     <a>About Us</a>
                   </Link>
                 </Menu.Item>
-                
               </Menu>
               {userSubscriptions.length > 0 && (
                 <Link href="/member-dashboard">

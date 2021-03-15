@@ -107,7 +107,7 @@ export function getFantasyPlayerEntries(parentId: string) {
 
 export function getYesterdaySportEntriesCount() {
   const headers = tokenAuthHeaders();
-  const yesterdayStartTimestamp = moment().subtract(1,'days').startOf('day').unix();
+  const yesterdayStartTimestamp = moment().subtract(1, 'days').startOf('day').unix();
   return fetch(
     `${API_BASE_URL}/sports-entries/count?publish_date_lt=${moment().unix()}&publish_date_gte=${yesterdayStartTimestamp}`,
     {
@@ -124,5 +124,5 @@ export default {
   getYesterdaySportEntries,
   getFantasyParentEntries,
   getFantasyPlayerEntries,
-  getYesterdaySportEntriesCount,
+  getYesterdaySportEntriesCount
 };

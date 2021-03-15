@@ -70,8 +70,8 @@ function CartTotalWidget({
           const { coupon } = data.data;
           setCoupon(coupon);
         }
-      })
-  }
+      });
+  };
 
   let totalPrice = 0;
   cartItems.forEach((item) => {
@@ -81,7 +81,7 @@ function CartTotalWidget({
     if (coupon.amount_off) {
       totalPrice -= coupon.amount_off / 100;
     } else if (coupon.percent_off) {
-      totalPrice = totalPrice * (100 - coupon.percent_off) / 100;
+      totalPrice = (totalPrice * (100 - coupon.percent_off)) / 100;
     }
   }
 

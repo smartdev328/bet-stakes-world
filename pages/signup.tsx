@@ -5,7 +5,6 @@ import { Row, Col, Button, notification } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { NormalCheckIcon } from '@components/SvgIcons';

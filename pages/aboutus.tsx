@@ -16,7 +16,8 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div>
           <div>
-            <br /><br />
+            <br />
+            <br />
             <div className={styles.aboutus_container}>
               <Row className={styles.row}>
                 <Col lg={9} md={24} className={styles.dsimage_container}>

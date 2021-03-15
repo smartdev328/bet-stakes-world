@@ -128,9 +128,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
             <Row className={styles.content}>
               <Col span={18} className={styles.contentMainCol}>
                 {!token && <SubscribeNow />}
-                {token && (
-                  <SportEntry loading={entireLoading} plays={games} />
-                )}
+                {token && <SportEntry loading={entireLoading} plays={games} />}
                 <div className={styles.laptop_view}>
                   <VipAllAccessCard />
                   <DailyFantasyLineups />

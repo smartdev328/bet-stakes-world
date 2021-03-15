@@ -433,14 +433,17 @@ export default function AppHeader({
                 <a target="_blank">The Daily Insights</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="Merchandise" className={styles.navbarItem}>
+              <Link href="/merchandise">
+                <a>Merchandise</a>
+              </Link>
+            </Menu.Item>
             <Menu.Item key="About_Us" className={styles.navbarItem}>
               <Link href="/aboutus">
                 <a>About Us</a>
               </Link>
             </Menu.Item>
-            {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
-              Merchandise
-            </Menu.Item> */}
+            
           </Menu>
           <div className={styles.navbarSide}>
             {/* <Button
@@ -562,19 +565,17 @@ export default function AppHeader({
                     <a target="_blank">The Daily Insights</a>
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
+                <Menu.Item key="Merchandise" className={styles.navbarItem}>
                   <Link href="/merchandise">
                     <a>Merchandise</a>
                   </Link>
-                </Menu.Item> */}
+                </Menu.Item>
                 <Menu.Item key="About_Us" className={styles.navbarItem}>
                   <Link href="/aboutus">
                     <a>About Us</a>
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item key="Merchandise" className={styles.navbarItem}>
-                  Merchandise
-                </Menu.Item> */}
+                
               </Menu>
               {userSubscriptions.length > 0 && (
                 <Link href="/member-dashboard">

@@ -509,10 +509,10 @@ function IntroForFantasy() {
     <div className={styles.introSection}>
       <Row align={'top'} wrap={false} className={styles.introSectionRow}>
         <div className={styles.introContent}>
-          <div className={styles.sectionTitle}>DAILY FANTASY CARD</div>
+          <div className={styles.sectionTitle}>DAILY FANTASY SPORTS CARD</div>
           <div className={styles.introDesc}>
-            Includes Access to Main Slate & Single Slate Tournaments for DraftKings, Fanduel & Yahoo
-            Sports Formats.
+            Includes Access to Main Slate & Single Slate Game Styles for DraftKings, Fanduel & Yahoo
+            Sports Contest Types.
           </div>
         </div>
       </Row>
@@ -523,11 +523,16 @@ function IntroForFantasy() {
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Projected Points, Expected Value, Player Prop Comparisons & Bankroll Tips
+          Premium Player Prop Recommendations
         </li>
         <li>
           <NormalCheckIcon className={styles.list_check_icon} />
-          Our Annual VIP Fantasy Package Includes NBA, NFL & MLB
+          Projected Points, Expected Value & Guidance on How to Allocate Your Bankroll based on
+          Contest Types.
+        </li>
+        <li>
+          <NormalCheckIcon className={styles.list_check_icon} />
+          Daily Fantasy Player Trends to help optimize your Season-Long Fantasy Lineups
         </li>
       </ul>
     </div>

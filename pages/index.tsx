@@ -140,7 +140,7 @@ function MembershipOfferings() {
     <div className={styles.membershipOffers}>
       <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
       <div className={styles.membershipOffers_desc}>
-        Upon signing up to one our packages, you will receive access to your customized member
+        Upon signing up to one of our packages, you will receive access to your customized member
         dashboard which will include your specified picks, key stats & trends, our weekly pro tip,
         hands on support & an expert bankroll management system.
       </div>
@@ -168,9 +168,7 @@ function MembershipOfferings() {
                 <li>Weekly, Monthly, Season & Playoff Packages Available. </li>
               </ul>
               <Link href="/shop?plan=sports_card">
-                <Button className={styles.learn_more_btn}>
-                  Learn More
-                </Button>
+                <Button className={styles.learn_more_btn}>Learn More</Button>
               </Link>
             </div>
           </div>
@@ -207,9 +205,7 @@ function MembershipOfferings() {
                 <li>Daily Card Includes TheDailyStakes Protection</li>
               </ul>
               <Link href="/shop?plan=all">
-                <Button className={styles.learn_more_btn}>
-                  Learn More
-                </Button>
+                <Button className={styles.learn_more_btn}>Learn More</Button>
               </Link>
             </div>
           </div>
@@ -236,16 +232,16 @@ function MembershipOfferings() {
                 <div className={styles.price}>$10.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>DFS Lineups for Single Game & Tournament Style Contests</li>
+                <li>DFS Lineups for Single Slate & Main Slate Game Styles</li>
+                <li>Premium Player Prop Recommendations</li>
                 <li>Sports Include NBA, NFL & MLB</li>
-                <li>Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks</li>
-                <li>Includes Advanced Stats, Projected Points, Player Props & Other Key Metrics</li>
-                <li>Weekly, Monthly & Annual Packages Available</li>
+                <li>
+                  Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks Contest Types
+                </li>
+                <li>Daily, Weekly, & Monthly Packages Available</li>
               </ul>
               <Link href="/shop?plan=fantasy">
-                <Button className={styles.learn_more_btn}>
-                  Learn More
-                </Button>
+                <Button className={styles.learn_more_btn}>Learn More</Button>
               </Link>
             </div>
           </div>
@@ -729,7 +725,7 @@ function Testimonials() {
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
                 <div className={styles.testimonial_title}>Jason ****** | New Jersey </div>
-                <div className={styles.testimonial_desc}>NFL Sports Card</div>
+                <div className={styles.testimonial_desc}>Soccer Sports Card</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
                   “Best source for sports betting out there. No fluff picks and they don&#39;t sell
@@ -754,13 +750,12 @@ function Testimonials() {
                 />
               </LazyLoad>
               <div className={styles.testimonial_content_right}>
-                <div className={styles.testimonial_title}>Trevor **** | New Jersey </div>
+                <div className={styles.testimonial_title}>Trevor **** | Michigan</div>
                 <div className={styles.testimonial_desc}>Fantasy Sports & Football Cards</div>
                 <Rate allowHalf defaultValue={5} disabled />
                 <div className={styles.testimonial_quote}>
-                  “I&#39;ve always been a fan of player props and DFS picks. TheDailyStakes takes on
-                  a unique approach to DFS & I love it. Affordable, consistent, and great
-                  information. Excited to jump on their CFB & NFL packages again. 5 stars!”
+                  “Affordable, consistent, and great information. Excited to jump on their CFB & NFL
+                  packages again. 5 stars!”
                 </div>
               </div>
             </div>
@@ -824,7 +819,9 @@ function SportsNewsCarousel() {
           <div className={styles.title_row}>
             <div>
               <span>THE DAILY INSIGHTS</span>
-              <span className={styles.title_row_desc}>SPORTS BETTING STRATEGIES, ANALYTICS, & PREDICTIONS</span>
+              <span className={styles.title_row_desc}>
+                SPORTS BETTING STRATEGIES, ANALYTICS, & PREDICTIONS
+              </span>
             </div>
             <Link href="https://blog.thedailystakes.com/">
               <a target="_blank">View More</a>
@@ -842,13 +839,17 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/Group-273.png" alt="News Background" />
+                  <img
+                    src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/Group-273.png"
+                    alt="News Background"
+                  />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <h3>THE NBA IS ONE OF THE MOST POPULAR SPORTS TO BET ON, BUT YOU NEED TO READ THESE 5 TIPS BEFORE PLACING YOUR NEXT BET</h3>
-                  <p className={styles.news_desc}>
-                    Betting strategies for the NBA
-                  </p>
+                  <h3>
+                    THE NBA IS ONE OF THE MOST POPULAR SPORTS TO BET ON, BUT YOU NEED TO READ THESE
+                    5 TIPS BEFORE PLACING YOUR NEXT BET
+                  </h3>
+                  <p className={styles.news_desc}>Betting strategies for the NBA</p>
                   <Link href="https://blog.thedailystakes.com/nba-betting-strategies/">
                     <a>Read Article</a>
                   </Link>
@@ -859,10 +860,16 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/Psychology-of-betting.jpg" alt="News Background" />
+                  <img
+                    src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/Psychology-of-betting.jpg"
+                    alt="News Background"
+                  />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <h3>HOW PSYCHOLOGY AND TENDENCIES IMPACT SPORTS BETTORS AND TWO COMMON FALLACIES THAT CAUSE BETTORS TO LOSE MONEY</h3>
+                  <h3>
+                    HOW PSYCHOLOGY AND TENDENCIES IMPACT SPORTS BETTORS AND TWO COMMON FALLACIES
+                    THAT CAUSE BETTORS TO LOSE MONEY
+                  </h3>
                   <p className={styles.news_desc}>
                     Sports Betting Psychology - Two Fallacies to Avoid
                   </p>
@@ -876,13 +883,17 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/BASEBALL-Artile.png" alt="News Background" />
+                  <img
+                    src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/BASEBALL-Artile.png"
+                    alt="News Background"
+                  />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <h3>BASEBALL IS ONE OF THE MOST PROFITABLE SPORTS TO BET ON. CHECK OUT OUR TIPS ON HOW TO MAKE SOME MONEY THIS SEASON!</h3>
-                  <p className={styles.news_desc}>
-                    MLB betting strategies
-                  </p>
+                  <h3>
+                    BASEBALL IS ONE OF THE MOST PROFITABLE SPORTS TO BET ON. CHECK OUT OUR TIPS ON
+                    HOW TO MAKE SOME MONEY THIS SEASON!
+                  </h3>
+                  <p className={styles.news_desc}>MLB betting strategies</p>
                   <Link href="https://blog.thedailystakes.com/mlb-betting-strategies/">
                     <a>Read Article</a>
                   </Link>
@@ -893,10 +904,16 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/sports-betting.jpg" alt="News Background" />
+                  <img
+                    src="https://blog.thedailystakes.com/wp-content/uploads/2021/01/sports-betting.jpg"
+                    alt="News Background"
+                  />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <h3>THE MOST UNDERRATED ELEMENT OF SPORTS BETTING? BANKROLL MANAGEMENT: HERE ARE SIX BETTING SYSTEMS YOU NEED TO KNOW</h3>
+                  <h3>
+                    THE MOST UNDERRATED ELEMENT OF SPORTS BETTING? BANKROLL MANAGEMENT: HERE ARE SIX
+                    BETTING SYSTEMS YOU NEED TO KNOW
+                  </h3>
                   <p className={styles.news_desc}>
                     Six Sports Betting Bankroll Strategies All Bettors Need To Know
                   </p>
@@ -910,10 +927,16 @@ function SportsNewsCarousel() {
             <div>
               <div className={styles.news}>
                 <LazyLoad height={590}>
-                  <img src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/dfs.jpg" alt="News Background" />
+                  <img
+                    src="https://blog.thedailystakes.com/wp-content/uploads/2021/03/dfs.jpg"
+                    alt="News Background"
+                  />
                 </LazyLoad>
                 <div className={styles.news_content}>
-                  <h3>DRAFTKINGS, FANDUEL AND YAHOO SPORTS ALL OFFER EXCITING AND DEEP DAILY FANTASY EXPERIENCES BUT WHICH IS THE BEST?</h3>
+                  <h3>
+                    DRAFTKINGS, FANDUEL AND YAHOO SPORTS ALL OFFER EXCITING AND DEEP DAILY FANTASY
+                    EXPERIENCES BUT WHICH IS THE BEST?
+                  </h3>
                   <p className={styles.news_desc}>
                     Daily Fantasy Review: Draftkings, FanDuel and Yahoo Sports!
                   </p>

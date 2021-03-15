@@ -85,9 +85,10 @@ export const FAQsARR = {
     'What is your cancellation and refund policy?'
   ],
   fantasy: [
-    'What does the Fantasy Package include?',
-    'Which sports does the Fantasy Package cover?',
-    'Are the Fantasy lineups guaranteed winners?',
+    'What does the Daily Fantasy Card include?',
+    'What is a Player Prop?',
+    'Which sports does the Fantasy Card cover?',
+    'Are the Daily Fantasy lineups guaranteed winners?',
     'What is your cancellation and refund policy?'
   ]
 };
@@ -109,9 +110,10 @@ export const FAQsDesc = {
     'Our cancellation and refund policy can be found <a href="/refund-policy">here</a>.'
   ],
   fantasy: [
-    'The Fantasy Card includes optimal Daily Fantasy Sports (“DFS”) lineups for both single game and tournament style formats tailored for the following sportsbooks: DraftKings, Fanduel, and Yahoo Sports. Advanced stats for each selected player are provided such as projected points, expected value, player prop comparison, amongst other insightful statistics.',
+    'The Fantasy Card includes optimal Daily Fantasy Sports (“DFS”) lineups for both single game and tournament style formats tailored for the following sportsbooks: DraftKings, Fanduel, and Yahoo Sports. Advanced stats for each selected player are provided such as projected points, expected value, player prop comparison, amongst other insightful statistics.<br><br>The Fantasy Card also includes proposed Player Props coupled with advanced stats & detailed player information which will help optimize your Seasonal Fantasy Contests. ',
+    'A Player Prop bet is simply a bet on whether an individual player will over-perform or underperform a line set by the sportsbook. For example: “Will Lebron James score more or less than 32.5 points?” If you think he will have more than 32.5 points then you would bet the “OVER”.',
     'Fantasy Packages can be purchased for any or all of the following sports: NBA, NFL, MLB.',
-    'Guaranteed winners do not exist in the daily fantasy world. However, The DailyStakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night.',
+    'Guaranteed winners do not exist in the daily fantasy world. However, The Daily Stakes does everything possible to cover all angles of our analysis including detailed matchup analysis, lineup optimizations, quantitative backtesting, line movement trends, etc. to ensure we release the most optimal picks for our users every night. ',
     'Our cancellation and refund policy can be found <a href="/refund-policy">here</a>.'
   ]
 };

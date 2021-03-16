@@ -1,13 +1,9 @@
 /* eslint-disable react/display-name */
 import React, { createRef, RefObject, useState } from 'react';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Carousel } from 'antd';
+import { Menu } from 'antd';
 import { CarouselRef } from 'antd/lib/carousel';
-
-import { ClickableArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
-import { SportInfoType, MatchSimpleType } from '@type/Main';
-import { MATCHES_MOCK } from '@constants/';
+import { SportInfoType } from '@type/Main';
 import styles from './BannerSportsAndMatches.module.css';
 
 const SPORTS_INFO = [

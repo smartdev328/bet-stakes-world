@@ -4,7 +4,7 @@ import { tokenAuthHeaders } from '@utils/common';
 
 function getSubscriptions(userId: number) {
   const headers = tokenAuthHeaders();
-  return fetch(`${API_BASE_URL}/subscriptions?owner=${userId}`, {
+  return fetch(`${API_BASE_URL}/subscriptions?owner=${userId}&&is_active=true`, {
     method: 'GET',
     headers
   });

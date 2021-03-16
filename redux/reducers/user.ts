@@ -9,6 +9,9 @@ import {
   FORGOT_PASS_REQUEST,
   FORGOT_PASS_FAILURE,
   FORGOT_PASS_SUCCESS,
+  RESET_PASS_REQUEST,
+  RESET_PASS_FAILURE,
+  RESET_PASS_SUCCESS,
   USER_PROFILE
 } from '../actions';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -130,7 +133,22 @@ export function userReducer(state = initialState, action: UserStateAction) {
         ...state,
         ...{ error: action.error, loading: false, message: null }
       };
-
+    case RESET_PASS_REQUEST:
+      return {
+        ...state,
+        ...{ loading: true, error: null }
+      };
+    case RESET_PASS_SUCCESS:
+      return {
+        ...state,
+        ...{ loading: false, error: null }
+      };
+    case RESET_PASS_FAILURE:
+      return {
+        ...state,
+        ...{ error: action.error, loading: false, message: null }
+      };
+  
     case USER_PROFILE:
       return {
         ...state,

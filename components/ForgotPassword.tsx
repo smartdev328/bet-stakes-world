@@ -78,7 +78,7 @@ function ForgotPassword() {
     dispatch({
       type: 'FORGOT_PASS',
       payload: {
-        identifier: formData.email
+        email: formData.email
       }
     });
     setFormSubmitted(true);
@@ -116,10 +116,10 @@ function ForgotPassword() {
           <h2>Forgot Password</h2>
           <Row>
             <Col span={24} className={styles.formGroup}>
-              <label>Email</label>
+              <label>EMAIL</label>
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder="EMAIL ADDRESS"
                 className={formValidation.email ? '' : styles.error}
                 onChange={(e) => changeFormData('email', e)}
               />
@@ -129,12 +129,8 @@ function ForgotPassword() {
               className={styles.signInBtn}
               disabled={!isFormValid}
               onClick={onSend}>
-              Send Verify Code
+              VERIFY PASSWORD
             </Button>
-          </Row>
-          <Row align={'middle'} justify={'center'} className={styles.register_row}>
-            <span>Do you want to reset password?&nbsp;&nbsp;</span>
-            <a onClick={openResetPassModal}>Reset Password</a>
           </Row>
         </div>
       </div>

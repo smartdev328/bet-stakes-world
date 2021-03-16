@@ -43,7 +43,8 @@ const FULL_ACCESS_ROUTES = [
   '/privacy/california',
   '/privacy/nevada',
   '/privacy/canada',
-  '/privacy/eu'
+  '/privacy/eu',
+  '/reset-password'
 ];
 
 function MyApp({ Component, pageProps }) {

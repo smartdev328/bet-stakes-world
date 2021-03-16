@@ -12,7 +12,7 @@ import {
   CloseIcon,
   HamburgerMenuIcon
 } from '@components/SvgIcons';
-import { LoginModal, ForgotPasswordModal, ResetPasswordModal } from '@components/index';
+import { LoginModal, ForgotPasswordModal } from '@components/index';
 import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
@@ -324,7 +324,6 @@ export default function AppHeader({
     <header className={`${styles.appHeader} ${mobileNavVisible && styles.open}`}>
       <LoginModal />
       <ForgotPasswordModal />
-      <ResetPasswordModal />
       <Row justify="space-between" className={styles.header}>
         <Col span={7} className={styles.headerLeftCol}>
           <div className={styles.countdownBox}>

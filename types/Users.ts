@@ -130,6 +130,11 @@ export type ResetPasswordForm = {
   passwordConfirmation: string;
 };
 
+export type ResetPasswordFormValidate = {
+  password: boolean;
+  passwordConfirmation: boolean;
+};
+
 export type LogoUploadForm = {
   files: UploadFile<any>;
   ref: string;

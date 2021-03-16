@@ -7,7 +7,6 @@ export { default as SportTile } from './SportTile';
 export { default as LoginModal } from './LoginModal';
 export { default as YellowCheckBox } from './YellowCheckBox';
 export { default as ForgotPasswordModal } from './ForgotPassword';
-export { default as ResetPasswordModal } from './ResetPassword';
 export { default as CartDrawer } from './CartDrawer';
 export { default as CartSignupForm } from './CartSignupForm';
 export { default as CartBillingInfo } from './CartBillingInfo';

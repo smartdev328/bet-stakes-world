@@ -1,3 +1,9 @@
+.frame {
+  height:80px;
+  width:1400px;
+  border:0px;
+  cursor:none;
+}
 .sports_and_matches {
   background: rgba(241, 241, 241, 0.4);
   padding: 16px 50px;
@@ -14,7 +20,7 @@
   width: 100%;
   position: relative;
   display: flex;
-  height: 72px;
+  height: 80px;
 }
 
 .dropdownBox {

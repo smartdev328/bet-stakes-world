@@ -139,7 +139,7 @@ export default function BannerSportsAndMatches() {
   return (
     <div className={styles.sports_and_matches}>
       <div className={styles.container}>
-        <div className={styles.dropdownBox}>
+        {/* <div className={styles.dropdownBox}>
           <Dropdown
             overlay={menu}
             onVisibleChange={changeMenuVisible}
@@ -155,15 +155,16 @@ export default function BannerSportsAndMatches() {
               {!sportMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
             </div>
           </Dropdown>
-        </div>
+        </div> */}
         <div className={styles.matchesCarouselView}>
-          {prevArrowVisible && (
+          {/* {prevArrowVisible && (
             <ClickableArrowIcon className={styles.arrow_back_icon} onClick={goCarouselBack} />
           )}
           {nextArrowVisible && (
             <ClickableArrowIcon className={styles.arrow_forward_icon} onClick={goCarouselNext} />
-          )}
-          <Carousel
+          )} */}
+          <iframe src="https://www.sportsbettingdime.com/" className={styles.frame}></iframe>
+          {/* <Carousel
             ref={carouselRef}
             dots={true}
             infinite={false}
@@ -208,7 +209,7 @@ export default function BannerSportsAndMatches() {
                 </div>
               </React.Fragment>
             ))}
-          </Carousel>
+          </Carousel> */}
         </div>
       </div>
       <div className={styles.gradient_bg}></div>

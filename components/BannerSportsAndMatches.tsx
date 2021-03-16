@@ -156,7 +156,10 @@ export default function BannerSportsAndMatches() {
           {nextArrowVisible && (
             <ClickableArrowIcon className={styles.arrow_forward_icon} onClick={goCarouselNext} />
           )} */}
-          <iframe src="https://www.sportsbettingdime.com/" className={styles.frame}></iframe>
+          <iframe
+            src="https://www.sportsbettingdime.com/"
+            scrolling="no"
+            className={styles.frame}></iframe>
           {/* <Carousel
             ref={carouselRef}
             dots={true}

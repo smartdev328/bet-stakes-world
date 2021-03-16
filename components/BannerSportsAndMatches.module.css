@@ -3,6 +3,8 @@
   width:1400px;
   border:0px;
   cursor:none;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .sports_and_matches {
   background: rgba(241, 241, 241, 0.4);

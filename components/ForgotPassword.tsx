@@ -84,13 +84,6 @@ function ForgotPassword() {
     setFormSubmitted(true);
   };
 
-  const openResetPassModal = () => {
-    dispatch({ type: 'OPEN_RESET_PASS_MODAL' });
-    setTimeout(() => {
-      closeModal();
-    }, 10);
-  };
-
   if (!modalOpen) {
     return null;
   }

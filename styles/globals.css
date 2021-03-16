@@ -332,7 +332,36 @@ a[disabled] {
   .news-carousel .slick-next {
     right: -8px;
   }
+  .ant-carousel .slick-dots-bottom {
+    bottom: -4px;
+  }
+  .hero-banner .ant-carousel .slick-dots li,
+  .testimonials-carousel .slick-dots li,
+  .sports-cards-carousel .slick-dots li {
+    border: 3px solid transparent;
+    height: 6px;
+    width: 6px;
+    margin: 0 2px;
+  }
+  .hero-banner .ant-carousel .slick-dots li.slick-active,
+  .testimonials-carousel .slick-dots li.slick-active,
+  .sports-cards-carousel .slick-dots li.slick-active {
+    border: 3px solid #FFFFFF;
+    width: 6px;
+  }
+  .hero-banner .ant-carousel .slick-dots li button,
+  .hero-banner .ant-carousel .slick-dots.slick-active li button,
+  .testimonials-carousel .slick-dots li button,
+  .testimonials-carousel .slick-dots li.slick-active button,
+  .sports-cards-carousel .slick-dots li button,
+  .sports-cards-carousel .slick-dots li.slick-active button {
+    width: 6px;
+    height: 6px;
+    padding: 3px;
+  }
+
 }
+
 @media (max-width: 400px) {
   .news-carousel .slick-prev {
     left: -12px;

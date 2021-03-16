@@ -4,6 +4,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
+import { Row, Col } from 'antd';
 
 import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
@@ -54,12 +55,11 @@ function HeroBanner() {
             </div>
             <ul>
               <span>
-                Complete sports analytics source for all major sports including NFL, NBA, MLB,
-                Soccer, NCAAF, NCAAB, Formula 1 & UFC.
+                Complete sports analytics source for all major sports including NFL, NBA, MLB, Soccer, NCAAF, NCAAB, Formula 1, and UFC
               </span>
               <li>
                 <div className={styles.square_icon} />
-                <span>Sports Betting Picks & Analysis</span>
+                <span>Sports Betting Picks</span>
               </li>
               <li>
                 <div className={styles.square_icon} />
@@ -77,52 +77,117 @@ function HeroBanner() {
           </div>
         </div>
         <div className={styles.heroBannerRight}>
-          <LazyLoad height={683}>
-            <img
-              src={'/images/hero_banner_right_2.svg'}
-              alt="Hero Banner Background Image"
-              className={styles.heroBannerRightBg}
-            />
-          </LazyLoad>
           <div className={styles.container}>
-            <Carousel autoplay className={styles.carousel}>
+            <Carousel autoplay autoplaySpeed={5000} className={styles.carousel}>
               <div>
-                <div className={styles.carousel_slide}>
-                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
+                <div className={`${styles.carousel_slide} ${styles.slide1}`}>
+                  <div className={styles.carousel_slide_text}>
+                    <h3>SUBSCRIBE NOW TO GET</h3>
+                    <h1>FREE ACCESS!</h1>
+                    <Row>
+                      <Col span={8} className={styles.feature}>FREE BETS</Col>
+                      <Col span={8} className={styles.feature}>PREDICTIONS</Col>
+                      <Col span={8} className={styles.feature}>DISCOUNTS</Col>
+                    </Row>
+                  </div>
                   <Link href="/signup">
-                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                    <a>
+                      <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                    </a>
                   </Link>
                 </div>
               </div>
               <div>
-                <div className={styles.carousel_slide}>
-                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup">
-                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                <div className={`${styles.carousel_slide} ${styles.slide2}`}>
+                  <div className={styles.carousel_slide_text}>
+                    <h1>NEW CUSTOMERS</h1>
+                    <div className={styles.discountInfo}>
+                      <span>50% OFF</span>
+                      <span>ANY PACKAGE AT CHECKOUT</span>
+                    </div>
+                    <div className={styles.discountCode}>
+                      <span>PROMO CODE:</span>
+                      <span>TEAMTDS</span>
+                    </div>
+                  </div>
+                  <Link href="/shop">
+                    <a>
+                      <Button className={styles.carousel_slide_subscribeBtn}>SHOP NOW</Button>
+                    </a>
                   </Link>
                 </div>
               </div>
               <div>
-                <div className={styles.carousel_slide}>
-                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup">
-                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                <div className={`${styles.carousel_slide} ${styles.slide3}`}>
+                  <div className={styles.carousel_slide_text}>
+                    <div className={styles.slide3_subtitle}>
+                      <span>MARCH MADNESS</span>
+                      <span>2021</span>
+                    </div>
+                    <div className={styles.slide3_title}>
+                      FOR MORE INFO, <br />VISIT OUR ARTICLE @ BLOG.THEDAILYSTAKES.COM
+                    </div>
+                  </div>
+                  <Button className={styles.carousel_slide_readmoreBtn}>READ MORE</Button>
+                </div>
+              </div>
+              <div>
+                <div className={`${styles.carousel_slide} ${styles.slide4}`}>
+                  <div className={styles.carousel_slide_text}>
+                    <h3>BUY THIS CARD & GET DFS FREE</h3>
+                    <Row>
+                      <Col span={12} className="text-center">
+                        <div className={`${styles.nbaCard} ${styles.nbaCardActive}`}>
+                          <div className={styles.nbaCardSvgWrapper}>
+                            <NBA_SVG className={styles.nbaCardActiveSvg}></NBA_SVG>
+                          </div>
+                          <div className={styles.nbaCardContent}>
+                            <div className={styles.nbaCardTitle}>NBA</div>
+                            <div className={styles.nbaCardDesc}>ACCCESS TO ALL PLAYS & PARLAYS FOR NBA</div>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col span={12} className="text-center">
+                        {/* NBA Card */}
+                        <div className={styles.nbaCard}>
+                          <div className={styles.nbaCardSvgWrapper}>
+                            <NBA_SVG className={styles.nbaCardSvg}></NBA_SVG>
+                          </div>
+                          <div className={styles.nbaCardContent}>
+                            <div className={styles.nbaCardTitle}>NBA dfs</div>
+                            <div className={styles.nbaCardDesc}>DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports</div>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                    <div className={styles.promoCode}>
+                      <span>PROMO CODE:</span>
+                      <div className={styles.promoCodeValue}>
+                        <span>DOUBLEDIP</span>
+                        <span className={styles.promoCodeDesc}>ONLY APPLICABLE TO MONTHLY ACCESS</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Link href="/shop?plan=sports_card">
+                    <a>
+                      <Button className={styles.carousel_slide_subscribeBtn}>View Plays</Button>
+                    </a>
                   </Link>
                 </div>
               </div>
               <div>
-                <div className={styles.carousel_slide}>
-                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup">
-                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <div className={styles.carousel_slide}>
-                  <div className={styles.carousel_slide_text}>Fermentum dolor bibendum eget at</div>
-                  <Link href="/signup">
-                    <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
+                <div className={`${styles.carousel_slide} ${styles.slide5}`}>
+                  <div className={styles.carousel_slide_text}>
+                    <h2>DON’T HAVE A BOOK  YET?</h2>
+                    <div className={styles.desc}>Thedailystakes HAS got you covered</div>
+                    <div className={styles.logos}>
+                      <img src="/images/logos.png" alt="" />
+                    </div>
+                  </div>
+                  <Link href="https://blog.thedailystakes.com/category/sportsbook-reviews/">
+                    <a target="_blank">
+                      <Button className={styles.carousel_slide_subscribeBtn}>Visit Now</Button>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -851,7 +916,7 @@ function SportsNewsCarousel() {
                   </h3>
                   <p className={styles.news_desc}>Betting strategies for the NBA</p>
                   <Link href="https://blog.thedailystakes.com/nba-betting-strategies/">
-                    <a>Read Article</a>
+                    <a target="_blank">Read Article</a>
                   </Link>
                 </div>
                 <div className="news_overlay" />
@@ -874,7 +939,7 @@ function SportsNewsCarousel() {
                     Sports Betting Psychology - Two Fallacies to Avoid
                   </p>
                   <Link href="https://blog.thedailystakes.com/sports-betting-psychology-two-fallacies-to-avoid/">
-                    <a>Read Article</a>
+                    <a target="_blank">Read Article</a>
                   </Link>
                 </div>
                 <div className="news_overlay" />
@@ -895,7 +960,7 @@ function SportsNewsCarousel() {
                   </h3>
                   <p className={styles.news_desc}>MLB betting strategies</p>
                   <Link href="https://blog.thedailystakes.com/mlb-betting-strategies/">
-                    <a>Read Article</a>
+                    <a target="_blank">Read Article</a>
                   </Link>
                 </div>
                 <div className="news_overlay" />
@@ -918,7 +983,7 @@ function SportsNewsCarousel() {
                     Six Sports Betting Bankroll Strategies All Bettors Need To Know
                   </p>
                   <Link href="https://blog.thedailystakes.com/sports-betting-bankroll-strategies-all-bettors-need-to-know/">
-                    <a>Read Article</a>
+                    <a target="_blank">Read Article</a>
                   </Link>
                 </div>
                 <div className="news_overlay" />
@@ -941,7 +1006,7 @@ function SportsNewsCarousel() {
                     Daily Fantasy Review: Draftkings, FanDuel and Yahoo Sports!
                   </p>
                   <Link href="https://blog.thedailystakes.com/draftkings-fanduel-and-yahoo-sports-all-offer-exciting-and-deep-daily-fantasy-experiences-but-which-is-the-best/">
-                    <a>Read Article</a>
+                    <a target="_blank">Read Article</a>
                   </Link>
                 </div>
                 <div className="news_overlay" />

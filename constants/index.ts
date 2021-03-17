@@ -1,5 +1,5 @@
-export const API_BASE_URL = process.env.API_BASE_URL;
-export const STRIPE_API_KEY = process.env.STRIPE_API_KEY;
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+export const STRIPE_API_KEY = process.env.NEXT_PUBLIC_STRIPE_API_KEY;
 
 export const SportBetTypes = [
   {

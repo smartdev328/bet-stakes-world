@@ -78,7 +78,7 @@ function HeroBanner() {
         </div>
         <div className={styles.heroBannerRight}>
           <div className={styles.container}>
-            <Carousel autoplay autoplaySpeed={5000} className={styles.carousel}>
+            <Carousel autoplay={false} initialSlide={0} autoplaySpeed={5000} className={styles.carousel}>
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide1}`}>
                   <div className={styles.carousel_slide_text}>

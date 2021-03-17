@@ -129,7 +129,7 @@ li .square_icon {
   width: 100%;
 }
 .carousel_slide {
-  padding: 50px;
+  padding: 50px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,6 +278,7 @@ li .square_icon {
   text-transform: uppercase;
   color: #000000;
   text-align: center;
+  margin-bottom: 1em;
   font-weight: 400;
 }
 .slide4 .promoCode {
@@ -285,7 +286,7 @@ li .square_icon {
   align-items: center;
   flex-flow: row nowrap;
   justify-content: center;
-  margin-bottom: -10px;
+  margin-bottom: -16px;
 }
 .slide4 .promoCode > span {
   font-weight: bold;
@@ -397,6 +398,226 @@ li .square_icon {
 }
 .slide5 .logos img {
   width: 100%;
+}
+
+@media (max-width: 1800px) {
+  .heroBannerLeft .main_desc {
+    font-size: 49px;
+  }
+  .slide1 h3 {
+    font-size: 38px;
+  }
+  .slide1 h1 {
+    font-size: 56px;
+    padding: 30px 0;
+  }
+  .slide1 .feature {
+    font-size: 24px;
+  }
+
+  /* Second Slide */
+  .slide2 h1 {
+    font-size: 46px;
+  }
+  .slide2 .discountInfo span {
+    font-size: 80px;
+    line-height: 1.2em;
+  }
+  .slide2 .discountInfo span:last-child {
+    font-size: 22px;
+  }
+  .slide2 .discountCode span {
+    font-size: 38px;
+  }
+  .slide2 .discountCode span:last-child {
+    font-size: 54px;
+  }
+
+  /* Third Slide */
+  .slide3_subtitle span {
+    font-size: 44px;
+  }
+  .slide3_title {
+    font-size: 40px;
+  }
+
+  /* Fourth Slide */
+  .slide4 h3 {
+    font-size: 24px;
+  }
+
+  .slide5 h2 {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  .slide5 .desc {
+    font-size: 28px;
+    width: 400px;
+  }
+  .slide5 .logos {
+    margin: 60px 0;
+  }
+}
+
+@media (max-width: 1560px) {
+  .heroBannerLeft .main_desc {
+    font-size: 44px;
+  }
+  .heroBannerLeft .second_desc span {
+    font-size: 64px;
+    line-height: 60px;
+    border-bottom-width: 11px;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 21px;
+    line-height: 21px;
+    padding-top: 10px;
+  }
+  .heroBannerLeft ul {
+    max-width: 700px;
+  }
+  .heroBannerLeft ul > span {
+    font-size: 22px;
+  }
+  .heroBannerLeft ul li {
+    font-size: 20px;
+  }
+  .slide1 h3 {
+    font-size: 36px;
+  }
+  .slide1 h1 {
+    font-size: 52px;
+  }
+  .slide1 .feature {
+    font-size: 23px;
+  }
+
+  /* Second Slide */
+  .slide2 h1 {
+    font-size: 40px;
+  }
+  .slide2 .discountInfo span {
+    font-size: 72px;
+    line-height: 1.2em;
+  }
+  .slide2 .discountInfo span:last-child {
+    font-size: 20px;
+  }
+  .slide2 .discountCode span {
+    font-size: 34px;
+  }
+  .slide2 .discountCode span:last-child {
+    font-size: 50px;
+  }
+
+  /* Third Slide */
+  .slide3_subtitle span {
+    font-size: 40px;
+  }
+  .slide3_subtitle span:last-child {
+    font-size: 18px;
+  }
+  .slide3_title {
+    font-size: 36px;
+  }
+
+  /* Fourth Slide */
+  .slide4 h3 {
+    font-size: 22px;
+  }
+  .slide4 .promoCode > span {
+    font-size: 32px;
+  }
+  .slide4 .promoCodeValue span {
+    font-size: 46px;
+  }
+  .slide4 .promoCodeValue span.promoCodeDesc {
+    font-size: 12px;
+  }
+
+  /* Fifth Slide */
+  .slide5 h2 {
+    font-size: 29px;
+    margin-bottom: 32px;
+  }
+  .slide5 .desc {
+    font-size: 28px;
+    width: 400px;
+  }
+  .slide5 .logos {
+    margin: 60px 0;
+  }
+}
+
+@media (max-width: 1420px) {
+  .heroBannerLeft .main_desc {
+    font-size: 38px;
+  }
+  .slide1 h3 {
+    font-size: 32px;
+  }
+  .slide1 h1 {
+    font-size: 46px;
+  }
+  .slide1 .feature {
+    font-size: 21px;
+  }
+
+  /* Second Slide */
+  .slide2 h1 {
+    font-size: 37px;
+  }
+  .slide2 .discountInfo span {
+    font-size: 72px;
+    line-height: 1.2em;
+  }
+  .slide2 .discountInfo span:last-child {
+    font-size: 20px;
+  }
+  .slide2 .discountCode span {
+    font-size: 30px;
+  }
+  .slide2 .discountCode span:last-child {
+    font-size: 46px;
+  }
+
+  /* Third Slide */
+  .slide3_subtitle span {
+    font-size: 36px;
+  }
+  .slide3_subtitle span:last-child {
+    font-size: 18px;
+  }
+  .slide3_title {
+    font-size: 33px;
+  }
+
+  /* Fourth Slide */
+  .slide4 h3 {
+    font-size: 20px;
+  }
+  .slide4 .promoCode > span {
+    font-size: 28px;
+  }
+  .slide4 .promoCodeValue span {
+    font-size: 42px;
+  }
+  .slide4 .promoCodeValue span.promoCodeDesc {
+    font-size: 11px;
+  }
+
+  /* Fifth Slide */
+  .slide5 h2 {
+    font-size: 25px;
+    margin-bottom: 32px;
+  }
+  .slide5 .desc {
+    font-size: 26px;
+    width: 360px;
+  }
+  .slide5 .logos {
+    margin: 60px 0 40px;
+  }
 }
 
 @media (max-width: 600px) {

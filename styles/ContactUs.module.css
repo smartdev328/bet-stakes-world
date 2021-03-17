@@ -1,0 +1,108 @@
+.containerWrapper {
+  position: relative;
+}
+.container {
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: auto;
+}
+
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+.container form {
+  max-width: 800px;
+  padding-bottom: 5em;
+}
+
+.sectionTitle {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 38px;
+  color: #000000;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  margin-top: 32px;
+}
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.formGroup {
+  margin-bottom: 32px;
+}
+.formGroup label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  color: #000000;
+  display: block;
+  margin-bottom: 8px;
+}
+.formGroup input,
+.formGroup textarea {
+  border: 1px solid #c4c4c4;
+  width: 100%;
+  font-size: 12px;
+  line-height: 19px;
+  padding: 10px 12px;
+}
+.formGroup input.error,
+.formGroup textarea.error {
+  border-color: rgb(236, 76, 21);
+}
+.formGroup textarea {
+  height: 150px;
+}
+.formGroup .extraText {
+  font-size: 12px;
+}
+
+.saveBtn {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  height: 48px;
+  width: 200px;
+  background: transparent;
+  background-color: #ffc700;
+  margin: 1em 0 2em;
+  cursor: pointer;
+}
+
+.uploadFiles {
+  border: dashed 1px #a9a8a8;
+  padding: 1em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.successMessage {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 2em 0;
+  text-align: center;
+  height: 200px;
+}
+
+.faq_link {
+  color: #0000ff;
+}

@@ -1,0 +1,1190 @@
+.containerWrapper {
+  position: relative;
+}
+.container {
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 18px;
+  }
+}
+
+/* Hero Banner */
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+.heroBannerContent {
+  width: 520px;
+  margin: auto;
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  padding-top: 56px;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.heroBannerContent h1 {
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+.heroBannerContent p {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 117.9%;
+  color: #fff;
+  margin: 0.5em 0;
+}
+@media (max-width: 992px) {
+  .heroBannerContent {
+    padding-top: 40px;
+    width: 450px;
+  }
+  .heroBannerContent h1 {
+    font-size: 56px;
+  }
+  .heroBannerContent p {
+    font-size: 20px;
+  }
+  .heroBanner .bgImage {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage {
+    height: 280px;
+  }
+  .heroBannerContent h1 {
+    font-size: 42px;
+  }
+  .heroBannerContent p {
+    font-size: 18px;
+  }
+  .heroBannerContent {
+    padding-top: 30px;
+    width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage {
+    height: 260px;
+  }
+  .heroBannerContent h1 {
+    font-size: 32px;
+  }
+  .heroBannerContent p {
+    font-size: 14px;
+  }
+  .heroBannerContent {
+    padding-top: 50px;
+    width: 300px;
+  }
+}
+
+/* Shop Plans */
+.membershipOffers_plans {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plan {
+  width: 425px;
+  margin-right: 35px;
+  text-align: left;
+}
+
+.plan_content {
+  border: 2px solid #1a1a1a;
+}
+.plan:last-child {
+  margin-right: 0;
+}
+.plan_content_info {
+  padding: 19px 0 22px;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+.main_plan img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  left: 50%;
+  width: 108%;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+.plan_content_title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+.plan_content_desc {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  display: flex;
+  justify-content: center;
+}
+.plan.active .plan_content_info {
+  background-color: #1a1a1a;
+}
+.plan.active .plan_content_title {
+  color: #fff;
+}
+.plan_content_desc span:last-child {
+  margin-left: 15px;
+}
+.plan_extra_content {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: 0.8em;
+}
+
+@media (max-width: 1400px) and (min-width: 1241px) {
+  .plan {
+    min-width: 360px;
+    max-width: 390px;
+    margin-right: 25px;
+    flex: 1;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1240px) and (min-width: 1025px) {
+  .plan {
+    min-width: 300px;
+    max-width: 360px;
+    margin-right: 20px;
+  }
+  .plan_content_title {
+    font-size: 20px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .plan_content_desc span:last-child {
+    margin-left: 10px;
+  }
+  .plan_content_details {
+    padding: 16px;
+  }
+  .plan_extra_content {
+    font-size: 20px;
+  }
+  .deal_circle {
+    width: 124%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .membershipOffers_plans {
+    flex-direction: column;
+  }
+  .plan {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+    margin-bottom: 2em;
+  }
+  .main_plan {
+    order: 0;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .main_plan img {
+    top: 40%;
+  }
+  .plan_extra_content {
+    font-size: 18px;
+    margin-top: 1em;
+  }
+  .deal_circle {
+    width: 128%;
+  }
+}
+
+@media (max-width: 600px) {
+  .membershipOffers_plans {
+    padding: 0 0;
+  }
+  .plan {
+    width: 100%;
+    max-width: 360px;
+  }
+  .plan_extra_content {
+    font-size: 16px;
+    margin-bottom: -0.5em;
+    margin-top: 8px;
+  }
+}
+
+/* Offering details */
+.offering_details {
+  padding: 40px 72px;
+}
+.sectionTitle {
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 140%;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.introSection {
+  /* margin-bottom: 50px; */
+}
+
+.list {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.introSectionBg {
+  background: #1a1a1a;
+  border: 1.5px solid #ffc700;
+  margin-right: 12px;
+  height: 100px;
+  width: 100px;
+}
+.introSectionBg img {
+  width: 100%;
+  height: 100%;
+}
+.introDesc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  color: #000000;
+  margin-top: 6px;
+  width: 400px;
+}
+.introSection ul {
+  margin: 24px 0;
+  padding: 0;
+}
+.introSection ul li {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 140%;
+  color: #000000;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.extra_info {
+  font-size: 14px;
+  line-height: 184.4%;
+  color: #000000;
+  width: 400px;
+}
+.list_check_icon {
+  width: 18px;
+  margin-right: 6px;
+  margin-top: 4px;
+}
+
+.sportsCards {
+  margin-bottom: 48px;
+  position: relative;
+}
+.sportsCards ul {
+  margin: 18px 0;
+  padding: 0;
+  width: 724px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.sportsCards ul li {
+  border: 1px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 32px 8px 16px;
+  margin: 0;
+  margin-bottom: 24px;
+  height: auto;
+  width: 700px;
+  cursor: pointer;
+  border: solid 1px #1a1a1a;
+  transition: all linear 0.3s;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+}
+.sportsCards.sportsCardsForSports ul li.active,
+.sportsCards.sportsCardsForFantasy ul li.active {
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #1a1a1a;
+}
+.sportsCards ul li.active {
+  border: 1px solid #ffc700;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+.sportsCards ul li svg {
+  width: 24px;
+  height: 24px;
+}
+.sportsCards.sportsCardsForSports ul li svg path,
+.sportsCards.sportsCardsForFantasy ul li svg path {
+  fill: #1a1a1a;
+}
+.sportsCard_name {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 107.9%;
+  color: #000000;
+  display: inline-block;
+  text-align: left;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+.packageAddOns {
+  margin-bottom: 48px;
+}
+.packageAddOns ul {
+  margin: 18px 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.packageAddOns ul li {
+  border: 1px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 8px 16px;
+  margin: 0;
+  margin-bottom: 24px;
+  height: 88px;
+  width: 560px;
+  cursor: pointer;
+  transition: all linear 0.3s;
+}
+.packageAddOns ul li.active {
+  border: 1px solid #1a1a1a;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.packageAddOns ul li svg {
+  width: 24px;
+  height: 24px;
+}
+.packageAddOns .sportsCard_name {
+  text-align: left;
+  width: auto;
+  line-height: 28px;
+  padding: 0;
+}
+.packageAddOns .sportsCard_name_row {
+  padding: 0 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.packageAddOns .sportsCard_name_row a {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  text-decoration: underline;
+}
+
+/* Cart Box */
+.cartBox {
+  position: absolute;
+  top: 0;
+  right: -50px;
+  width: 430px;
+  padding: 32px;
+  z-index: 10;
+  background: #1a1a1a;
+}
+.cartBox img {
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 150%;
+  height: auto;
+  z-index: 1;
+  opacity: 0.05;
+}
+.cartBoxContent {
+  position: relative;
+  z-index: 12;
+  text-align: center;
+}
+.cartBoxContent h4 {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 117.9%;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 0.7em 0;
+}
+.cartBoxContent p {
+  font-size: 18px;
+  line-height: 184.4%;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+.totalPrice {
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 68px;
+  color: #fff;
+  margin: 12px 0 28px;
+  border-bottom: 4px solid #fff;
+  display: inline-block;
+}
+.addToCartBtn {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #191919;
+  padding: 19.5px 95px;
+  background: #ffc700;
+  width: 100%;
+  height: auto;
+  border: none;
+  outline: none;
+}
+
+/* FAQ */
+.faqs h4 {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #000000;
+}
+.faqs ul {
+  margin: 28px 0 90px;
+  padding: 0;
+  list-style: none;
+}
+.faqs ul li {
+  border-top: 1px solid #c4c4c4;
+}
+
+.faqs ul li:last-child {
+  border-bottom: 1px solid #c4c4c4;
+}
+.faqs .faq_title {
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+.faqs ul li span {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 117.9%;
+  color: #000000;
+  text-transform: uppercase;
+}
+.faqs ul li p {
+  margin: 0 0 1.5em 40px;
+}
+.faqs p a {
+  color: #1878FB;
+}
+.faqIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.sportsTypeContent {
+  margin: 24px -8px;
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 600px;
+  width: auto;
+}
+.dropdownBtnWrapper {
+  height: auto;
+  border: none;
+  padding: 0;
+  margin: 8px 8px;
+}
+.dropdownBtnWrapper:disabled {
+  opacity: 0.8;
+}
+.dropdownBtn {
+  width: 138px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  line-height: 25px;
+  cursor: pointer;
+  position: relative;
+  z-index: 21;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+.dropdown_NBA > svg,
+.dropdown_NCAAB > svg {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdown_NFL > svg,
+.dropdown_NCAAF > svg {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -75%;
+  transform: rotate(90deg);
+  top: 50%;
+}
+.dropdown_MLB > svg {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
+.dropdown_UFC > svg {
+  width: 80%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 10%;
+}
+
+.dropdown_F1 > svg {
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 0;
+  top: -5%;
+}
+.dropdown_SOCCER > svg {
+  width: 120%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdownBtn > svg path {
+  fill: rgba(255, 255, 255, 0.3);
+}
+.dropdown_UFC > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.dropdown_F1 > svg path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.mobile_introDesc {
+  display: none;
+}
+@media (max-width: 1400px) {
+  .offering_details {
+    padding: 40px 42px;
+  }
+}
+@media (max-width: 1340px) {
+  .offering_details {
+    padding: 40px 0px;
+  }
+  .sportsCard_name {
+    font-size: 22px;
+  }
+  .cartBox {
+    right: -10px;
+    width: 420px;
+  }
+}
+@media (max-width: 1240px) {
+  .offering_details {
+    padding: 40px 0px 220px 0;
+    position: relative;
+    max-width: 1024px;
+    margin: auto;
+  }
+  .sportsCard_name {
+    font-size: 22px;
+  }
+  .cartBox {
+    bottom: 0;
+    right: -18px;
+    width: auto;
+    left: -18px;
+    overflow: hidden;
+    max-width: 586px;
+    margin: auto;
+  }
+  .cartBoxContentDesc {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+  }
+  .cartBoxContentDesc p {
+    text-align: left;
+  }
+  .addToCartBtn {
+    max-width: 340px;
+    font-size: 18px;
+    padding: 16px 95px;
+    font-weight: 800;
+  }
+  .packageAddOns ul li {
+    max-width: 49%;
+    height: 82px;
+  }
+  .packageAddOns .sportsCard_name {
+    font-size: 21px;
+    line-height: 20px;
+  }
+  .packageAddOns .sportsCard_name_row {
+    padding: 0 12px 0 16px;
+  }
+  .packageAddOns .sportsCard_name_row a {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .totalPrice {
+    margin: 0;
+  }
+}
+@media (max-width: 1024px) {
+  .packageAddOns ul li {
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .introContent {
+    flex: 1;
+  }
+  .introDesc {
+    font-size: 16px;
+    width: auto;
+    max-width: 400px;
+  }
+  .faqs ul li span {
+    font-size: 16px;
+  }
+  .packageAddOns {
+    margin-bottom: 32px;
+  }
+  .extra_info {
+    max-width: 400px;
+    width: 100%;
+  }
+  .sportsTypeContent {
+    margin: 12px -7px;
+  }
+  .dropdownBtnWrapper {
+    margin: 7px;
+  }
+  .dropdownBtn {
+    width: 123px;
+    height: 60px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 692px) {
+  .sportsCards ul {
+    width: 100%;
+  }
+  .sportsCards ul li {
+    width: 100%;
+  }
+  .sportsCard_name {
+    width: auto;
+    flex: 1;
+    text-align: left;
+    padding-left: 16px;
+    font-size: 20px;
+  }
+  .faqs h4 {
+    font-size: 20px;
+  }
+  .faqs ul li span {
+    font-size: 14px;
+  }
+  .packageAddOns .sportsCard_name {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .introSectionBg {
+    width: 80px;
+    height: 80px;
+  }
+  .cartBox {
+    position: relative;
+    width: 100%;
+    right: 0;
+    left: 0;
+    padding: 24px;
+    margin-bottom: 3em;
+  }
+  .cartBoxContent p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .sportsCards {
+    margin-bottom: 20px;
+  }
+  .offering_details {
+    padding: 0;
+  }
+  .sectionTitle {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .sportsCard_name {
+    font-size: 18px;
+  }
+  .faqs h4 {
+    font-size: 18px;
+  }
+  .faqIcon {
+    margin-right: 10px;
+  }
+  .introContent .introDesc {
+    display: none;
+  }
+  .mobile_introDesc {
+    display: block;
+  }
+  .introSectionRow {
+    align-items: center;
+  }
+  .packageAddOns ul li {
+    flex-flow: row wrap;
+    height: auto;
+    padding: 16px;
+  }
+  .sportsCards ul li {
+    padding: 8px 14px;
+  }
+  .packageAddOns .sportsCard_name_row {
+    padding: 0 0px 0 14px;
+    width: calc(100% - 24px);
+    flex: none;
+  }
+  .packageAddOns .sportsCard_name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .faqs ul li p {
+    margin: 0 0 1.5em 24px;
+    font-size: 14px;
+  }
+  .cartBoxContent h4 {
+    display: none;
+  }
+  .cartBoxContentDesc {
+    flex-flow: row wrap;
+    flex-direction: column;
+  }
+  .cartBoxContentDesc p {
+    line-height: 170%;
+  }
+  .totalPrice {
+    font-size: 28px;
+    line-height: 34px;
+    border-bottom: 3px solid #fff;
+    margin: 0.3em 0 0.3em;
+  }
+  .addToCartBtn {
+    font-size: 16px;
+    padding: 10px 95px;
+  }
+  .sportsTypeContent {
+    margin: 10px -5px;
+  }
+  .dropdownBtnWrapper {
+    margin: 5px;
+  }
+  .dropdownBtn {
+    width: 100px;
+    height: 46px;
+    font-size: 12px;
+  }
+}
+
+.emptyContent {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexRow {
+  display: flex;
+  align-items: center;
+}
+.flexRowForVip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sportsCard_value {
+  text-align: center;
+  width: 170px;
+  padding: 0.5em 2em 0.5em 2.5em;
+}
+.sportsCard_value_title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #000000;
+  padding-bottom: 0.3em;
+}
+.sportsCard_value_price {
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 122.4%;
+}
+.sportsCard_value_dayprice {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 900;
+}
+.sportsCard_value.origin .sportsCard_value_price,
+.sportsCard_value.origin .sportsCard_value_dayprice {
+  color: #767676;
+  text-decoration: line-through;
+}
+.sportsCard_value_content {
+  position: relative;
+}
+.sportsCard_value_content img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 150%;
+  width: 180%;
+}
+.noItem {
+  font-size: 16px;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .sportsCards ul li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+  }
+  .sportsCard_name {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .sportsCard_value {
+    width: 160px;
+  }
+  .sportsCard_value_title {
+    font-size: 14px;
+    padding-bottom: 0.5em;
+  }
+  .sportsCard_value_price {
+    font-size: 30px;
+  }
+  .sportsCard_value_dayprice {
+    font-size: 16px;
+  }
+}
+
+/* cartBoxItem */
+.cartBoxItem {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 16px;
+  align-items: center;
+  margin-bottom: 0.2em;
+  width: 100%;
+}
+.closeIconBtn {
+  width: auto;
+  height: auto;
+  border: none;
+  margin-left: 1em;
+  display: inline-block;
+  line-height: 1em;
+}
+.closeIconBtn .closeIcon path {
+  fill: #ffc700;
+}
+.cartBoxItem .cartBoxItemName {
+  flex: 1;
+  text-align: left;
+  margin-right: 1em;
+}
+.cartBox .caret_icon {
+  display: none;
+}
+@media (max-width: 600px) {
+  .cartBox {
+    padding: 8px 16px;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    margin: 0;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.45);
+  }
+  .cartBoxItem:first-child {
+    padding-top: 0.5em;
+  }
+  .cartBoxItem .cartBoxItemName {
+    font-size: 14px;
+  }
+  .closeIconBtn .closeIcon {
+    width: 14px;
+    height: 14px;
+  }
+  .cartBoxContentDesc {
+    justify-content: center;
+    margin: 0;
+  }
+  .totalPrice {
+    font-size: 28px;
+  }
+  .addToCartBtn {
+    max-width: 120px;
+    padding: 6px;
+  }
+  .totalPriceRow {
+    position: relative;
+  }
+  .cartBoxContentDesc {
+    display: none;
+  }
+  .cartBoxContentDesc.showDetails {
+    display: block;
+  }
+  .cartBox .caret_icon {
+    position: absolute;
+    top: 50%;
+    right: -1.5em;
+    transform: translateY(-50%);
+    display: block;
+    font-size: 16px;
+    color: #979797;
+  }
+  .cartBox .ctaRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.protection_image {
+  height: 110px;
+  width: 110px;
+}
+
+.protection_detail {
+  margin-left: 15px;
+}
+
+.protection_heading {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  text-transform: uppercase;
+  color: #000000;
+  padding-top: 15px;
+}
+
+.protection_details {
+  text-transform: uppercase;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: left;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: -7px;
+}
+
+.protection_image_div {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.protection_container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.endline_protection {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .protection_image {
+    height: 130px;
+    width: 130px;
+  }
+  .protection_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .protection_details {
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
+  }
+  .endline_protection {
+    display: none;
+  }
+  .protection_heading {
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
+  }
+  .protection_image_div {
+    justify-content: flex-start !important;
+    display: flex;
+    align-items: flex-start !important;
+    width: 100%;
+  }
+  .protection_detail {
+    margin-left: 0px;
+  }
+}
+
+.hover {
+  cursor: pointer;
+}
+
+.faq_open {
+  font-weight: bold !important;
+}
+
+.ingame_div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -0.5em;
+}
+
+.ingame_text {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.included_text {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  color: #000000;
+}
+
+@media (max-width: 600px) {
+  .included_text {
+    font-size: 6px;
+  }
+
+  .ingame_text {
+    font-size: 8px;
+  }
+}
+
+.row {
+  width: 100%;
+}
+
+.column1 {
+  display: flex;
+  align-items: center;
+}
+
+.column2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.list {
+  width: 100%;
+}

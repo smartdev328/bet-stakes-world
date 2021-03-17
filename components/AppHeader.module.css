@@ -1,0 +1,674 @@
+.header {
+  background-color: var(--primaryColor);
+  padding: 25px 50px;
+}
+
+.header .headerLeftCol {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.header .headerRightCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.header .headerMainCol {
+  text-align: center;
+}
+
+.logo {
+  width: 418px;
+  height: 72px;
+}
+
+.info {
+  color: #fff;
+  margin: 0;
+}
+
+.info span {
+  display: block;
+  color: #ffc700;
+}
+
+.info strong {
+  font-weight: 600;
+}
+
+.countdownBox {
+  position: relative;
+}
+
+.countdownBox:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -14px;
+  width: 6px;
+  height: 100%;
+  background-color: var(--actionYellowColor);
+}
+
+.countdownBox_desc {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--backgroundColor);
+}
+
+.countdownBox_countdown_timer {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  color: var(--backgroundColor);
+  text-transform: uppercase;
+}
+
+.countdownBox_countdown_timer > span {
+  width: 170px;
+}
+
+.yellowBoldLink {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-transform: uppercase;
+  text-decoration-line: underline;
+  text-align: left;
+  color: var(--actionYellowColor);
+}
+
+.dateBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dateBar a {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--backgroundColor);
+}
+
+.dateBar .dateBarDivider {
+  background-color: #c4c4c4;
+  width: 2px;
+  height: 25px;
+  margin: 0 13px;
+}
+.ctaBtns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.ctaBtns .subscribeBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  background-color: var(--lightGreyColor);
+  margin-right: 14px;
+  padding: 7.5px 24px;
+  height: auto;
+  outline: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all ease-in 0.3s;
+}
+
+.ctaBtns .loginBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 6.5px 24px;
+  color: var(--lightGreyColor);
+  border: 1px solid var(--lightGreyColor);
+  height: auto;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all ease-in 0.3s;
+}
+.ctaBtns .myDashboardBtn {
+  background: #ffc700;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 6.5px 24px;
+  border: 1px solid #ffc700;
+  box-sizing: border-box;
+  color: #101010;
+  margin-right: 14px;
+  transition: all ease-in 0.3s;
+}
+.ctaBtns .profileBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 6.5px 24px;
+  background: #959799;
+  color: #ffffff;
+  border: 1px solid #f1f1f1;
+  height: auto;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all ease-in 0.3s;
+  cursor: pointer;
+}
+.ctaBtns .myDashboardBtn:hover,
+.ctaBtns .loginBtn:hover,
+.ctaBtns .subscribeBtn:hover,
+.ctaBtns .profileBtn:hover {
+  color: #fff;
+  background: rgb(255 199 0 / 50%);
+}
+.user_icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+@media (max-width: 1272px) {
+  .ctaBtns .profileBtn,
+  .ctaBtns .myDashboardBtn {
+    font-size: 13px;
+  }
+}
+@media (max-width: 1240px) {
+  .appHeader.open {
+    background-color: var(--primaryColor);
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  .header {
+    padding: 25px 30px;
+  }
+  .countdownBox_desc,
+  .ctaBtns .subscribeBtn,
+  .ctaBtns .loginBtn,
+  .yellowBoldLink,
+  .dateBar a,
+  .info {
+    font-size: 13px;
+  }
+  .dateBar .dateBarDivider {
+    height: 20px;
+  }
+  .ctaBtns .subscribeBtn,
+  .ctaBtns .loginBtn,
+  .ctaBtns .profileBtn,
+  .ctaBtns .myDashboardBtn {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .user_icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 1024px) {
+  .header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .header .headerLeftCol {
+    display: none;
+  }
+  .header .headerRightCol {
+    display: none;
+  }
+  .header .headerMainCol {
+    width: 100%;
+    max-width: 100%;
+    flex: 1;
+  }
+  .logo {
+    width: 340px;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 10px 0;
+  }
+  .info {
+    font-size: 12px;
+    line-height: 19px;
+  }
+  .info span {
+    display: block;
+    color: #ffc700;
+  }
+  .logo {
+    max-width: 52%;
+  }
+  .countdownBoxMobile > div {
+    margin: 0.5em 0;
+    text-align: center;
+  }
+  .countdownBox_desc {
+    font-size: 14px;
+  }
+  .countdownBox_countdown_timer {
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .yellowBoldLink {
+    margin-left: 0.7em;
+    font-size: 16px;
+    line-height: 25px;
+  }
+}
+
+/* Navbar Section */
+.navbarContainer {
+  background-color: var(--primaryColor);
+  border-top: 1px solid #ebebeb;
+  padding: 0 50px;
+  position: relative;
+}
+
+.navbarContainer .container {
+  max-width: 1474px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.navbarContainer .navbarSide {
+  flex: 1;
+  min-height: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbarContainer .navbar {
+  width: 1124px;
+  background: transparent;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar .navbarItem {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 18px 0 !important;
+  margin: 0 16px !important;
+}
+.navbar .navbarItem a {
+  color: #fff;
+}
+.navbar .navbarItem:active,
+.navbar .navbarItem:hover {
+  color: #ffffff !important;
+  border-bottom-color: transparent !important;
+}
+.navbarSide .cart_btn {
+  position: relative;
+  margin-left: 8px;
+}
+
+.navbarSide .cart_btn .text {
+  position: absolute;
+  top: -5px;
+  left: 53%;
+  transform: translateX(-50%);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+.cart_icon {
+  width: 36px;
+  border-radius: 50px;
+}
+
+.hamburg_icon {
+  width: 36px;
+}
+
+.submenu {
+  position: relative;
+}
+
+.submenu_desc {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #656565;
+}
+.submenu_item,
+.submenu_item_for_pane {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 184.4%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 1em;
+}
+.submenu_item a,
+.submenu_item_for_pane a {
+  display: flex;
+  align-items: center;
+}
+.locked {
+  cursor: default;
+}
+a.locked:active {
+  pointer-events: none;
+}
+.submenu_item a:hover svg path,
+.submenu_item_for_pane a:hover svg path {
+  fill: #40a9ff;
+}
+.submenu_main_item {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 19px 0 !important;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 16px !important;
+  display: flex;
+  align-items: center;
+}
+.caret_up,
+.caret_down {
+  font-size: 12px;
+  line-height: 12px;
+  margin-left: 3px;
+}
+.submenu_main_item:active,
+.submenu_main_item:hover {
+  color: #ffffff;
+}
+.submenu:hover .submenu_main_item span + .caret_down {
+  display: none;
+}
+.submenu .submenu_main_item span + .caret_up {
+  display: none;
+}
+.submenu:hover .submenu_main_item span + .caret_up {
+  display: inline-block;
+}
+.submenu_content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primaryColor);
+  padding: 16px 16px 20px;
+  width: 700px;
+  border-top: 1px solid #e5e5e5;
+  display: none;
+  z-index: 100;
+}
+.submenu:hover .submenu_content {
+  display: flex;
+}
+.pane,
+.submenu_content_left {
+  width: 50%;
+}
+.pane .submenu_item {
+  margin: 0.25em 0;
+}
+.pane .submenu_item a {
+  display: flex;
+  align-items: center;
+}
+.pane .submenu_item a:hover .lock_icon path {
+  fill: #40a9ff;
+}
+.lock_icon {
+  width: 9px;
+  margin-right: 5px;
+}
+.navbarContainer .mobilecontainer {
+  display: none;
+}
+.mobilesubmenu {
+  display: none;
+}
+@media (max-width: 1240px) {
+  .navbarContainer {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+@media (max-width: 1024px) {
+  .navbarContainer .container {
+    display: none;
+  }
+  .navbar .navbarItem {
+    font-size: 15px;
+  }
+  .navbarSide .cart_btn .text {
+    left: 52%;
+  }
+  .cart_icon {
+    width: 22px;
+    height: 22px;
+  }
+  .navbarContainer .navbar {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: -18px;
+    background: #1a1a1a;
+    width: calc(100% + 36px);
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+  .navbarContainer .navbarSide {
+    padding: 16px 0;
+  }
+  .navbarContainer .navbarLeftSide {
+    justify-content: flex-start;
+  }
+  .navbar .navbarItem,
+  .navbar .submenu_main_item {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    padding: 0 0 !important;
+    height: auto;
+    margin: 0.4em 0 !important;
+    border-bottom: 3px solid transparent;
+    display: inline-flex;
+  }
+  .navbar .submenu_main_item.active {
+    border-bottom-color: #fff;
+  }
+  .submenu_item,
+  .submenu_item .navbarItem,
+  .submenu_item_for_pane {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 184.4%;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  .pane .submenu_item {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 25px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  .navbarContainer .mobilecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbarContainer .mobilecontainer > div {
+    width: 100%;
+  }
+  .submenu {
+    display: none;
+  }
+  .mobilesubmenu {
+    display: block;
+  }
+  .mobilesubmenu .submenu_content {
+    position: static;
+    border-top: none;
+    display: flex;
+    padding: 10px 4px 20px;
+  }
+  .pane,
+  .submenu_content_left {
+    width: 100%;
+  }
+  .submenu_item,
+  .submenu_item_for_pane {
+    margin-left: 16px;
+    margin-bottom: 0;
+  }
+  .submenu_item_for_pane > div {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.4em 0;
+    cursor: pointer;
+    border-bottom: solid 3px transparent;
+  }
+  .submenu_item_for_pane > div span {
+    line-height: 1.1em;
+  }
+  .pane {
+    padding-left: 16px;
+  }
+  .pane > div:last-child {
+    margin-bottom: 1em;
+  }
+  .submenu_item_for_pane > div.paneActive {
+    border-bottom: solid 3px #fff;
+  }
+  .subscribeBtn {
+    width: 335px;
+    height: 40px;
+    background: #ffc700;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 25px;
+    color: #101010;
+    border: none;
+    margin: 20px 0;
+  }
+  .mobileNavContent {
+    overflow-y: auto;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobileNavContent .navbar {
+    position: static;
+    width: 100%;
+    padding: 20px 4px;
+    border: none;
+  }
+
+  .dateBar {
+    padding: 10px 0;
+  }
+  .dateBar a {
+    font-size: 16px;
+    color: #fff;
+  }
+  .dateBar .dateBarDivider {
+    height: 25px;
+    border-left-color: #fff;
+  }
+  .lock_icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.mobileSubscribeBtn {
+  width: 100%;
+  background: #ffc700;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  border: none;
+  margin: 20px 0;
+  padding: 10.5px 16px;
+  height: auto;
+  max-width: 600px;
+}
+
+.countdownBox_countdown_timer > .moreInfo {
+  color: #c4c4c4;
+  cursor: pointer;
+  font-style: italic;
+  font-family: serif;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: solid 1px #c4c4c4;
+  font-size: 12px;
+}
+.profileLogo {
+  border: solid 2px #fff;
+  border-radius: 50%;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1A1A1A;
+  font-weight: 600;
+}

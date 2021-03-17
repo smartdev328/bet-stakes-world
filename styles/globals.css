@@ -1,7 +1,16 @@
 :root {
-  --backgroundColor: #f7f7f7;
-  --primaryColor: #191a1b;
-  --textColorSecondary: rgba(0, 0, 0, 0.45);
+  --backgroundColor: #E5E5E5;
+  --primaryColor: #1a1a1a;
+  --darkGreyColor: #373D40;
+  --lightGreyColor: #F1F1F1;
+  --actionYellowColor: #FFC700;
+  --mediumGreyColor : #959799;
+  --sportNBAColor: #EC4C15;
+  --sportNFLColor: #91442A;
+  --sportMLBColor: #1878FB;
+  --sportUFCColor: #F9282B;
+  --sportFormula1Color: #505054;
+  --sportSoccerColor: #6DCF40;
 }
 
 *,
@@ -28,8 +37,11 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Saira', sans-serif;
+}
+
+* {
+  font-family: 'Saira', sans-serif;
 }
 
 a {
@@ -39,4 +51,414 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: Saira;
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 85px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h2 {
+  font-family: Saira;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 75px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h3 {
+  font-family: Saira;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 57px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h4 {
+  font-family: Saira;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h5 {
+  font-family: Saira;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+p {
+  font-family: Saira;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+}
+
+.text-links {
+  font-family: Saira;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+@media screen and (max-width: 600px) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"], 
+  input[type="tel"], input[type="url"]{ font-size: 16px !important; transform: scaleY(0.9); }
+}
+
+.yellow-blod-link {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration-line: underline;
+  color: #FFC700;
+}
+
+.black-blod-link {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration-line: underline;
+  color: #1A1A1A;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
+}
+a:hover {
+  color: #40a9ff;
+}
+a:active {
+  color: #096dd9;
+}
+a:active,
+a:hover {
+  text-decoration: none;
+  outline: 0;
+}
+a:focus {
+  text-decoration: none;
+  outline: 0;
+}
+a[disabled] {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.slick-slide, .slick-slide *{ outline: none !important; }
+
+.ant-carousel .slick-list .slick-slide[aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.news-carousel .slick-list .slick-slide[aria-hidden="true"] {
+  visibility: visible;
+}
+
+.hero-banner .ant-carousel .slick-dots li,
+.testimonials-carousel .slick-dots li,
+.sports-cards-carousel .slick-dots li {
+  border: 4px solid transparent;
+  height: 8px;
+  width: 8px;
+}
+
+.hero-banner .ant-carousel .slick-dots li.slick-active,
+.testimonials-carousel .slick-dots li.slick-active,
+.sports-cards-carousel .slick-dots li.slick-active {
+  border: 4px solid #FFFFFF;
+  width: 8px;
+}
+
+.hero-banner .ant-carousel .slick-dots li button,
+.hero-banner .ant-carousel .slick-dots.slick-active li button,
+.testimonials-carousel .slick-dots li button,
+.testimonials-carousel .slick-dots li.slick-active button,
+.sports-cards-carousel .slick-dots li button,
+.sports-cards-carousel .slick-dots li.slick-active button {
+  width: 8px;
+  height: 8px;
+  background: #FFC700;
+  opacity: 1;
+  box-sizing: border-box;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.hero-banner .slick-dots li button:before,
+.testimonials-carousel  .slick-dots li button:before,
+.sports-cards-carousel .slick-dots li button:before {
+  display: none;
+}
+
+.matches-carousel .slick-dots {
+  display: none !important;
+}
+.sports-cards-carousel {
+  width: 100%;
+}
+.sports-cards-carousel .slick-list {
+  overflow: visible;
+}
+.ant-carousel {
+  width: 100%;
+}
+.sports-cards-carousel .slick-dots-bottom {
+  bottom: -50px;
+}
+.testimonials-carousel {
+  max-width: 1200px;
+  margin: auto;
+}
+.news-carousel  .slick-list {
+  overflow: visible;
+}
+.news-carousel .slick-slide {
+  transition: all 0.3s ease;
+}
+.news-carousel .slick-slide.slick-active > div {
+  transform: scale(1.15);
+  position: relative;
+  z-index: 12;
+}
+
+.news-carousel .slick-prev,
+.news-carousel .slick-next {
+  background: #fff !important;
+  z-index: 11;
+  width: auto;
+  height: auto;
+  padding: 8px;
+}
+.news-carousel .slick-prev {
+  left: -100px;
+}
+.news-carousel .slick-next {
+  right: -100px;
+}
+.news-carousel .slick-prev svg,
+.news-carousel .slick-next svg {
+  width: 12px;
+  height: 12px;
+}
+.news-carousel .slick-prev svg {
+  transform: rotate(-180deg);
+}
+.news-carousel .news_overlay {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+.news-carousel .slick-slide.slick-active .news_overlay {
+  background: radial-gradient(99.13% 99.13% at 15.09% 83.39%, rgba(4, 4, 4, 0.74) 48.66%, rgba(0, 0, 0, 0) 100%);
+  z-index: 9;
+}
+.news-carousel .slick-track {
+  display: flex;
+}
+@media (max-width: 992px) {
+  .news-carousel .slick-prev {
+    left: -5px;
+  }
+  .news-carousel .slick-next {
+    right: -5px;
+  }
+  .news-carousel .slick-prev,
+  .news-carousel .slick-next {
+    padding: 6px;
+  }
+  .news-carousel .slick-prev svg,
+  .news-carousel .slick-next svg {
+    width: 10px;
+    height: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .news-carousel .slick-prev {
+    left: -8px;
+  }
+  .news-carousel .slick-next {
+    right: -8px;
+  }
+  .ant-carousel .slick-dots-bottom {
+    bottom: -4px;
+  }
+  .hero-banner .ant-carousel .slick-dots li,
+  .testimonials-carousel .slick-dots li,
+  .sports-cards-carousel .slick-dots li {
+    border: 3px solid transparent;
+    height: 6px;
+    width: 6px;
+    margin: 0 2px;
+  }
+  .hero-banner .ant-carousel .slick-dots li.slick-active,
+  .testimonials-carousel .slick-dots li.slick-active,
+  .sports-cards-carousel .slick-dots li.slick-active {
+    border: 3px solid #FFFFFF;
+    width: 6px;
+  }
+  .hero-banner .ant-carousel .slick-dots li button,
+  .hero-banner .ant-carousel .slick-dots.slick-active li button,
+  .testimonials-carousel .slick-dots li button,
+  .testimonials-carousel .slick-dots li.slick-active button,
+  .sports-cards-carousel .slick-dots li button,
+  .sports-cards-carousel .slick-dots li.slick-active button {
+    width: 6px;
+    height: 6px;
+    padding: 3px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .news-carousel .slick-prev {
+    left: -12px;
+  }
+  .news-carousel .slick-next {
+    right: -12px;
+  }
+}
+
+/* Testimonials Arrow Btn */
+.testimonials-carousel .slick-prev,
+.testimonials-carousel .slick-next {
+  background: #fff !important;
+  z-index: 11;
+  width: auto;
+  height: auto;
+  padding: 8px;
+}
+.testimonials-carousel .slick-prev {
+  left: -100px;
+}
+.testimonials-carousel .slick-next {
+  right: -100px;
+}
+.testimonials-carousel .slick-prev svg,
+.testimonials-carousel .slick-next svg {
+  width: 12px;
+  height: 12px;
+}
+.testimonials-carousel .slick-prev svg {
+  transform: rotate(-180deg);
+}
+@media (max-width: 1500px) {
+  .testimonials-carousel .slick-prev {
+    left: -60px;
+  }
+  .testimonials-carousel .slick-next {
+    right: -60px;
+  }
+}
+@media (max-width: 1400px) {
+  .testimonials-carousel .slick-prev {
+    left: -20px;
+  }
+  .testimonials-carousel .slick-next {
+    right: -20px;
+  }
+}
+@media (max-width: 1240px) {
+  .testimonials-carousel .slick-prev {
+    left: 0px;
+  }
+  .testimonials-carousel .slick-next {
+    right: 0px;
+  }
+}
+@media (max-width: 992px) {
+  .testimonials-carousel .slick-prev {
+    left: -15px;
+  }
+  .testimonials-carousel .slick-next {
+    right: -15px;
+  }
+  .testimonials-carousel .slick-prev,
+  .testimonials-carousel .slick-next {
+    padding: 6px;
+  }
+  .testimonials-carousel .slick-prev svg,
+  .testimonials-carousel .slick-next svg {
+    width: 10px;
+    height: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .testimonials-carousel .slick-prev {
+    left: -8px;
+  }
+  .testimonials-carousel .slick-next {
+    right: -8px;
+  }
+}
+@media (max-width: 400px) {
+  .testimonials-carousel .slick-prev {
+    left: -12px;
+  }
+  .testimonials-carousel .slick-next {
+    right: -12px;
+  }
+}
+
+.profile-credit-card .rccs {
+  margin-left: 0;
+  margin-top: 22px;
+}
+.profile-credit-card .rccs__card {
+  margin-bottom: 25px;
+  height: 165px;
+  margin-left: 0;
+  margin-right: auto;
 }

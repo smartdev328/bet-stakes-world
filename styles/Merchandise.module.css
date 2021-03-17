@@ -1,0 +1,170 @@
+.outer_div {
+  background-color: #1a1a1a;
+  width: 100%;
+  height: 100%;
+}
+
+.dailyStake {
+  padding-top: 50px;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 70px;
+
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.merchandise {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 70px;
+
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.coming_soon {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 90px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.innerDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup_text {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 129.9%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.signup_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: #1a1a1a;
+  background: #ffc700;
+  line-height: 25px;
+  height: 40px;
+  width: 260px;
+  margin-top: 30px;
+}
+.button_outerDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.email_text {
+  font-family: Saira;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  margin-top: 30px;
+}
+
+.newsletterForm_email {
+  width: 400px;
+  height: 40px;
+  font-family: Saira;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 0;
+  border: 1px solid #ffffff;
+  outline: none;
+  padding-left: 5px;
+}
+
+.br_class {
+  display: block;
+}
+
+.newsletterForm_email::placeholder {
+  color: #ffffff;
+  opacity: 1; /* Firefox */
+}
+
+.newsletterForm_email:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #ffffff;
+}
+
+.newsletterForm_email::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #ffffff;
+}
+
+.notificationText a {
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .dailyStake {
+    padding-top: 0px;
+    font-size: 35px;
+  }
+  .merchandise {
+    font-size: 35px;
+  }
+  .coming_soon {
+    font-size: 32px;
+    line-height: 50%;
+    padding-top: 30px;
+  }
+
+  .signup_text {
+    font-size: 16px;
+    line-height: 100%;
+    padding: 25px;
+  }
+  .br_class {
+    display: none;
+  }
+  .outer_div {
+    height: 90vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .button_outerDiv {
+    padding-bottom: 0px;
+  }
+
+  .newsletterForm_email {
+    width: 300px;
+    height: 40px;
+
+    font-size: 16px;
+  }
+}

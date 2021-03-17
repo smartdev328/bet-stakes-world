@@ -8,8 +8,12 @@
         "alias": {
           "@components": "./components",
           "@styles": "./styles",
-          "@types": "./types",
-          "@redux": "./redux"
+          "@type": "./types",
+          "@redux": "./redux",
+          "@images": "./public/images",
+          "@apis": ["./apis"],
+          "@utils": ["./utils"],
+          "@constants": "./constants/index.ts"
         }
       }
     ],

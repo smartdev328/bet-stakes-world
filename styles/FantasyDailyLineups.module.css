@@ -1,0 +1,935 @@
+.container {
+  max-width: 1480px;
+  padding: 0 50px;
+  margin: auto;
+}
+@media (max-width: 1240px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentMainCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .contentSideCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
+/* Hero Banner */
+.heroBanner {
+  position: relative;
+  width: 100%;
+}
+
+.heroBanner .bgImage {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 992px) {
+  .heroBanner .bgImage {
+    height: 320px;
+  }
+}
+@media (max-width: 768px) {
+  .heroBanner .bgImage {
+    height: 280px;
+  }
+}
+@media (max-width: 600px) {
+  .heroBanner .bgImage {
+    height: 240px;
+  }
+}
+
+.topSection {
+  padding: 24px 0;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.topSection .right,
+.topSection .left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.topSection .left {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}
+.topSection .left p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+}
+.thick_star_btn,
+.caret_down_btn {
+  height: auto;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.thick_star_btn {
+  margin-right: 12px;
+}
+.caret_down_btn {
+  margin-left: 10px;
+}
+
+.topSection .right {
+  justify-content: flex-end;
+}
+.sms_send_btn {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  background: #000;
+  padding: 13px 16px;
+  height: auto;
+  border: none;
+}
+.sms_send_btn:hover {
+  background-color: rgba(26, 26, 26, 0.9);
+}
+.sms_send_btn path {
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.sms_send_btn:hover path {
+  fill: #40a9ff;
+}
+
+.mobile_phone_icon {
+  width: 14px;
+  margin-right: 5px;
+}
+.config_btn {
+  margin-left: 26px;
+  border: none;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+.config_btn_icon {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 992px) {
+  .topSection {
+    padding: 20px 0;
+  }
+  .topSection .left {
+    font-size: 28px;
+    line-height: 42px;
+  }
+  .thick_star_btn {
+    margin-right: 8px;
+  }
+  .thick_star_icon {
+    width: 28px;
+  }
+  .caret_down_icon {
+    width: 16px;
+  }
+  .caret_down_btn {
+    margin-left: 7px;
+  }
+  .sms_send_btn {
+    font-size: 14px;
+    line-height: 22px;
+    padding: 11px 14px;
+  }
+  .config_btn {
+    margin-left: 22px;
+  }
+  .config_btn_icon {
+    width: 26px;
+  }
+  .topSection .left p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+@media (max-width: 786px) {
+  .topSection .right {
+    display: none;
+  }
+  .topSection {
+    padding: 12px 0;
+  }
+  .topSection .left {
+    max-width: 100%;
+    flex: 1;
+  }
+  .thick_star_icon {
+    width: 22px;
+  }
+  .caret_down_icon {
+    width: 18px;
+  }
+  .topSection .left {
+    font-size: 24px;
+    line-height: 38px;
+  }
+  .topSection .left p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.dropdownBtnWrapper {
+  height: auto;
+  border: none;
+  padding: 0;
+  margin: 4px 8px;
+}
+.dropdownBtn {
+  width: 138px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  line-height: 25px;
+  cursor: pointer;
+  position: relative;
+  z-index: 21;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+.dropdown_NBA > .sports_logo {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdown_NFL > svg.sports_logo {
+  width: 300%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -75%;
+  transform: rotate(90deg);
+  top: 50%;
+}
+.dropdown_MLB > svg.sports_logo {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
+
+.mlb_sports_logo {
+  width: 180%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -40%;
+  top: -120%;
+}
+.dropdown_UFC > svg.sports_logo {
+  width: 80%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 10%;
+}
+
+.dropdown_F1 > svg.sports_logo {
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: 0;
+  top: -5%;
+}
+.dropdown_SOCCER > svg.sports_logo {
+  width: 120%;
+  position: absolute;
+  z-index: 20;
+  height: auto;
+  left: -10%;
+}
+.dropdownBtn > svg.sports_logo path {
+  fill: rgba(255, 255, 255, 0.3);
+}
+.dropdown_UFC > svg.sports_logo path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.dropdown_F1 > svg.sports_logo path {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 4.8px;
+}
+.sportsCardList {
+  margin-top: 40px;
+  flex-flow: row nowrap;
+}
+.sportsCardListCarousel {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+.lock_icon {
+  height: 18px;
+  margin-bottom: 1px;
+  margin-right: 2px;
+}
+.dropdownBtnAllBg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 136%;
+}
+.optionsRow {
+  margin: 40px 0;
+}
+
+.sportsbook {
+  margin-right: 30px;
+}
+.optionsRow .sportsbook_logo {
+  height: 60px;
+  border: solid 1px #000;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.1em;
+  width: 120px;
+  background: #000;
+}
+.optionsRow .sportsbook_logo.selected {
+  background: #ffc700;
+}
+.optionsRow .sportsbook_logo svg {
+  height: 100%;
+}
+.optionsRow .sportsbook_logo svg path {
+  fill: #fff;
+}
+.optionsRow .sportsbook_logo.draft_kings {
+  padding: 0.2em 0.3em 0.1em 0.1em;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy {
+  padding: 5px 8px;
+  margin-right: 0;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy svg {
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+.optionsRow .sportsbook_logo.yahoo_fantasy svg path {
+  fill: #000;
+}
+.optionsRow .selected.yahoo_fantasy svg {
+  background: #000;
+}
+.optionsRow .sportsbook_logo.selected svg path {
+  fill: #000;
+}
+.optionsRow .selected.yahoo_fantasy svg path {
+  fill: #ffc700;
+}
+.sportsbook .sportsbook_name {
+  text-align: center;
+  font-size: 12px;
+}
+
+.optionsRow span {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 38px;
+  text-align: center;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  .sportsCardList {
+    flex-flow: column wrap;
+    align-items: center;
+  }
+  .dropdownBtnAll {
+    margin: 1.5em 8px;
+  }
+}
+@media (max-width: 600px) {
+  .sportsCardListCarousel {
+    width: calc(100% + 8px);
+    margin: 0 -4px;
+  }
+  .dropdownBtnWrapper {
+    margin: 4px 4px;
+    flex: 1;
+  }
+  .dropdownBtn {
+    width: 100%;
+    height: 58px;
+  }
+  .optionsRow {
+    margin: 30px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sportsbook {
+    margin-right: 0;
+  }
+  .optionsRow .sportsbook_logo {
+    width: 105px;
+    margin-right: 12px;
+    padding-right: 0.3em;
+    padding-left: 0.3em;
+    height: 54px;
+  }
+}
+
+/* Lineup Item */
+
+.daily_lineup {
+  padding-bottom: 30px;
+}
+
+.daily_lineup_sidebar {
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  width: 64px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.daily_lineup_sidebar_bg {
+  position: absolute;
+  top: 50%;
+  left: -75%;
+  height: auto;
+  width: 400px;
+  transform: translateY(-50%);
+}
+
+.daily_lineup_sidebar_bg path {
+  fill: rgba(255, 255, 255, 0.1);
+}
+.daily_lineup_sidebar_content {
+  position: relative;
+  z-index: 2;
+}
+.daily_lineup_sidebar .divider {
+  width: 100%;
+  height: 2px;
+  background-color: #f9f9f9;
+  margin: 10px 0;
+}
+.daily_lineup_sidebar span {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 94.4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #f9f9f9;
+}
+
+.daily_lineup_sidebar img {
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  display: block;
+}
+
+.daily_lineup_main {
+  padding: 30px 0 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+
+.daily_lineup_main_content h4 {
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+
+.daily_lineup_main_content > div {
+  font-size: 32px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #373d40;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 18px;
+}
+
+.daily_lineup_main_content > div strong {
+  margin-right: 24px;
+}
+.daily_lineup_teams {
+  margin-bottom: 0.5em;
+}
+.daily_lineup_value {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 94.4%;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 4px 0px;
+  color: #000000;
+  border-bottom: 6px solid #000000;
+}
+.daily_lineup_details {
+  margin-top: -10px;
+}
+.hide_details {
+  display: flex;
+  align-items: center;
+}
+.hide_details:after,
+.hide_details:before {
+  display: block;
+  content: '';
+  height: 1px;
+  background: #c4c4c4;
+  flex: 1;
+}
+.hide_details_btn {
+  padding: 0 12px;
+  cursor: pointer;
+}
+.hide_details_btn span {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000000;
+}
+.hide_details_btn .caret_down svg,
+.hide_details_btn .caret_up svg {
+  width: 12px;
+  margin-left: 8px;
+}
+.hide_details_btn .caret_down path,
+.hide_details_btn .caret_up path {
+  fill: rgba(0, 0, 0, 0.54);
+}
+.details_properties {
+  padding: 40px 20px;
+  border-bottom: solid 1px #c4c4c4;
+}
+.details_property {
+  max-width: 320px;
+  font-size: 16px;
+}
+.details_property > div {
+  margin-left: 1em;
+}
+.details_property > .details_property_title {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  margin-bottom: 1em;
+  margin-left: 0;
+}
+.details_property_title span {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 94.4%;
+  text-transform: uppercase;
+  color: #000000;
+  margin-left: 8px;
+}
+
+.details_property p, .details_property div {
+  margin-bottom: 0;
+  margin-left: 1em;
+  white-space: pre-line;
+}
+.details_property_title p,
+.details_property_title div {
+  margin-left: 0;
+}
+.details_property_title .user_double_icon {
+  height: 16px;
+}
+.details_property_title .date_range_icon {
+  width: 24px;
+}
+
+@media (max-width: 1400px) {
+  .daily_lineup_main_content h4 {
+    font-size: 60px;
+  }
+  .daily_lineup_main_content > div {
+    font-size: 28px;
+  }
+  .daily_lineup_value {
+    font-size: 28px;
+  }
+  .details_properties {
+    padding: 40px 80px;
+  }
+  .details_property {
+    width: 300px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .daily_lineup_main_content h4 {
+    font-size: 56px;
+  }
+  .daily_lineup_main_content > div {
+    font-size: 24px;
+  }
+  .daily_lineup_main {
+    padding: 20px 0 20px 20px;
+  }
+  .daily_lineup_value {
+    font-size: 24px;
+  }
+  .details_properties {
+    padding: 35px 50px;
+  }
+  .details_property {
+    width: 270px;
+  }
+  .hide_details_btn span {
+    font-size: 16px;
+  }
+  .daily_lineup_sidebar span {
+    font-size: 21px;
+  }
+  .details_property_title span {
+    font-size: 20px;
+  }
+  .details_property p {
+    font-size: 15px;
+  }
+  .daily_lineup_details {
+    margin-top: -11px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .daily_lineup {
+    padding-bottom: 20px;
+  }
+  .daily_lineup_main_content h4 {
+    font-size: 48px;
+  }
+  .daily_lineup_main_content > div {
+    font-size: 20px;
+  }
+  .daily_lineup_main {
+    padding: 20px 0 20px 20px;
+  }
+  .daily_lineup_value {
+    font-size: 22px;
+  }
+  .details_properties {
+    padding: 35px 50px;
+  }
+  .details_property {
+    width: 240px;
+    margin-bottom: 1em;
+  }
+  .hide_details_btn span {
+    font-size: 16px;
+  }
+  .details_property_title span {
+    font-size: 18px;
+  }
+  .details_property p {
+    font-size: 14px;
+  }
+  .daily_lineup_sidebar {
+    width: 52px;
+    padding: 0 8px;
+  }
+  .daily_lineup_sidebar img {
+    width: 28px;
+    height: 28px;
+  }
+  .daily_lineup_sidebar span {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 930px) {
+  .daily_lineup_main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hide_details_btn span {
+    font-size: 15px;
+  }
+  .daily_lineup_details {
+    margin-top: -12px;
+  }
+  .details_property {
+    width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .details_properties {
+    padding: 10px 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .daily_lineup_sidebar {
+    width: 42px;
+    padding: 0 8px;
+  }
+  .daily_lineup_sidebar img {
+    width: 24px;
+    height: 24px;
+  }
+  .daily_lineup_sidebar span {
+    font-size: 14px;
+  }
+  .daily_lineup {
+    padding-bottom: 24px;
+  }
+  .daily_lineup_main {
+    padding: 6px 0 20px 16px;
+  }
+  .daily_lineup_main_content h4 {
+    font-size: 32px;
+  }
+  .daily_lineup_main_content > div {
+    font-size: 16px;
+  }
+  .daily_lineup_main_content > div > strong {
+    margin-bottom: 0.5em;
+  }
+  .hide_details_btn span {
+    font-size: 13px;
+  }
+  .daily_lineup_details {
+    margin-top: -11px;
+  }
+  .daily_lineup_value {
+    border-bottom-width: 4px;
+  }
+  .details_property {
+    width: 100%;
+  }
+}
+
+/* Fantasy Tabs */
+.fantasy_tab {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1em;
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #000;
+  color: #fff;
+  margin-right: 20px;
+  border: solid 1px #000;
+}
+.fantasy_tab.selected {
+  color: #000;
+  background: #ffc700;
+  font-weight: 800;
+}
+.optionsRow .financialValues {
+  margin-left: 50px;
+}
+.fantasyLineupInfo {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1em;
+  margin-bottom: 1.5em;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 0.5em;
+}
+.featureValue {
+  margin-right: 30px;
+  background: #f9f9f9;
+  padding: 16px;
+  display: inline-block;
+  min-width: 250px;
+  flex: 1;
+  margin-right: 30px;
+  height: 100%;
+}
+.featureValue h1, .featureValue h2, .featureValue h3, .featureValue h4, .featureValue h5 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 47px;
+  margin-bottom: 0;
+}
+.featureValue p {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featureValue:last-child {
+  margin-right: 0;
+}
+.fantasyStats {
+  height: 100%;
+}
+@media (max-width: 600px) {
+  .fantasy_tab {
+    width: auto;
+    margin-bottom: 32px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-right: 16px;
+  }
+  .fantasyStats {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .fantasy_tab:last-child {
+    margin-right: 0;
+  }
+  p.fantasyLineupInfo {
+    display: none;
+  }
+  .optionsRow .financialValues {
+    font-size: 18px;
+    line-height: 36px;
+    margin-left: 10px;
+    width: 100%;
+    text-align: left;
+  }
+  .optionsRow .financialValues span {
+    font-size: 18px;
+    line-height: 36px;
+  }
+  .fantasyLineupInfo {
+    font-size: 22px;
+    line-height: 36px;
+    margin-bottom: 1.5em;
+  }
+  .featureValue {
+    margin: 0 0 20px 0;
+  }
+  .featureValue h1, .featureValue h2, .featureValue h3, .featureValue h4, .featureValue h5 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .featureValue p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.loadingSpin {
+  text-align: center;
+  margin: 3em 0;
+}
+
+.noData {
+  font-size: 18px;
+  padding: 2em 0;
+  font-style: italic;
+  text-align: center;
+}
+
+.image_NFL {
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: 51px;
+  top: 194px;
+  transform: scale(2.7) rotate(90deg);
+}
+
+.image_MLB {
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: -75px;
+  bottom: 25px;
+}
+
+.image_NBA {
+  position: absolute;
+  height: auto;
+  width: 200px;
+  left: -75px;
+  bottom: 25px;
+}
+
+.image_MLB path {
+  fill: rgba(255, 255, 255, 0.1);
+}
+
+.image_NFL path {
+  fill: rgba(255, 255, 255, 0.1);
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mobile_view {
+    display: none;
+  }
+  .laptop_view {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .laptop_view {
+    display: none;
+  }
+}

@@ -1,0 +1,100 @@
+.sidebarBlock {
+  background: #f1f1f1;
+  padding: 16px;
+  margin-left: 16px;
+  margin-bottom: 24px;
+}
+.image_style {
+  object-fit: cover;
+}
+.sidebarBlockTitle {
+  display: flex;
+  align-items: center;
+}
+.sidebarBlockTitleIcon {
+  width: 16px;
+  height: 22px;
+  margin-right: 8px;
+}
+.sidebarBlockTitle span {
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1a1a1a;
+}
+.sidebarBlockContent {
+  padding: 16px 0;
+  min-height: 200px;
+}
+.sidebarBlockContent .ctaBtns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.agressiveBtn {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 117.9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #1a1a1a;
+  border: 1px solid #434343;
+  flex: 1;
+}
+.conservativeBtn {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 117.9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #000000;
+  border: 1px solid #434343;
+  margin-left: 10px;
+  flex: 1;
+}
+.sidebarBlockContent p {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 117.9%;
+  color: #000000;
+  margin-bottom: 1em;
+}
+.sidebarBlockContent .footer_desc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 117.9%;
+  color: #000000;
+}
+
+@media (max-width: 600px) {
+  .sidebarBlock {
+    width: 100%;
+    margin-left: 0;
+  }
+  .sidebarBlockContent {
+    padding-bottom: 5px;
+  }
+}
+
+.company_logo {
+  margin: 0.8em 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+}
+
+.sidebarBlock.fantasyLineupIncludes .sidebarBlockContent {
+  margin-top: 0.8em;
+}
+.sidebarBlock.fantasyLineupIncludes .sidebarBlockContent p {
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 1.2em;
+}

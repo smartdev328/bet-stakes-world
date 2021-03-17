@@ -1,122 +1,2303 @@
-.container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
+.heroBanner {
+  height: 700px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.main {
-  padding: 5rem 0;
-  flex: 1;
+.heroBannerLeft {
+  flex: 8;
+  padding-top: 112px;
+  background: url('/images/hero_banner_left_bg.png') no-repeat;
+  background-color: #373d40;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-end;
+  background-size: 100% 100%;
 }
 
-.footer {
+.heroBannerLeft .container {
   width: 100%;
-  height: 100px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.footer img {
-  margin-left: 0.5rem;
+.heroBannerLeft .main_desc {
+  padding: 0 50px 0 70px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 52px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
 }
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
+.heroBannerLeft .second_desc {
+  padding: 12px 0;
+  margin: 1em 0 2em;
+  background: #ffc700;
+  position: relative;
   text-align: center;
 }
 
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+.heroBannerLeft .second_desc span {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 68px;
+  line-height: 64px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  border-bottom: 14px solid #1a1a1a;
+  display: inline-block;
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+.heroBannerLeft .second_desc .tagline {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 24px;
+  letter-spacing: 0em;
+  color: white;
+  border-bottom: none;
+  padding-top: 16px;
+  display: block;
 }
 
-.grid {
+.heroBannerLeft ul {
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  max-width: 840px;
+  text-align: center;
+}
+.heroBannerLeft ul > span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 117.9%;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  line-height: inherit;
+  margin-bottom: 1em;
+}
+.heroBannerLeft ul li {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 117.9%;
+  color: #ffffff;
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  margin-left: 15%;
+}
+li .square_icon {
+  width: 9px;
+  height: 9px;
+  background-color: #ffc700;
+  margin-right: 10px;
+}
+
+/* HeroBanner Right */
+.heroBanner {
+  position: relative;
+}
+.heroBannerRight {
+  flex: 5;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+.heroBannerRight .container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 112px;
+  padding-right: 0px;
+}
+.heroBannerRightBg {
+  width: 900px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-42%, 30%);
+  z-index: 0;
+}
+.carousel {
+  width: 100%;
+}
+.carousel_slide {
+  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-  margin-top: 3rem;
+  height: 604px;
+  flex-direction: column;
+}
+.carousel_slide_text {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 18.5px 0;
+}
+.carousel_slide_subscribeBtn,
+.carousel_slide_readmoreBtn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  min-width: 160px;
+  line-height: 22px;
+  padding: 14px 10px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #000000;
+  background-color: #ffc700;
+  border: none;
+  margin-top: 30px;
+}
+.carousel_slide_readmoreBtn {
+  background: #FFFFFF;
 }
 
-.card {
-  margin: 1rem;
-  flex-basis: 45%;
-  padding: 1.5rem;
+.slide1 {
+  background: #959799;
+}
+.slide1 h3 {
+  font-weight: bold;
+  font-size: 42px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-align: center;
+
+}
+.slide1 h1 {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  padding: 30px 0;
+  text-align: center;
+
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.slide1 .feature {
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-size: 26px;
+}
+
+/* Second Slide */
+.slide2 {
+  background: #1A1A1A;
+}
+.slide2 h1 {
+  font-family: 'Rock Salt';
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.slide2 .discountInfo span {
+  font-weight: bold;
+  font-size: 80px;
+  text-align: center;
+  color: #FFC700;
+  display: block;
+  line-height: 1.2em;
+}
+.slide2 .discountInfo span:last-child {
+  font-size: 22px;
+}
+.slide2 .discountCode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide2 .discountCode span {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 184.4%;
+  color: #ffffff;
+}
+.slide2 .discountCode span:last-child {
+  font-size: 56px;
+  margin-left: 10px;
+}
+
+/* Third Slide */
+.slide3 {
+  background: #005EB8;
+  padding: 40px;
+}
+.slide3_subtitle {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.slide3_subtitle span {
+  font-family: 'Rock Salt';
+  font-size: 48px;
+  line-height: 1.1em;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.slide3_subtitle span:last-child {
+  font-size: 20px;
+}
+.slide3_title {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 118%;
   text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  margin: 70px 0 30px;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+/* Fourth Slide */
+.slide4 {
+  background: rgba(0, 0, 0, 0.08);
+}
+.slide4 h3 {
+  font-family: 'Rock Salt';
+  font-size: 26px;
+  line-height: 184.4%;
+  text-transform: uppercase;
+  color: #000000;
+  text-align: center;
+  font-weight: 400;
+}
+.slide4 .promoCode {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin-bottom: -10px;
+}
+.slide4 .promoCode > span {
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 184.4%;
+  text-align: center;
+  color: #000000;
+}
+.slide4 .promoCodeValue {
+  position: relative;
+  margin-left: 10px;
+}
+.slide4 .promoCodeValue span {
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 184.4%;
+  text-align: center;
+  color: #EC4C15;
+}
+.slide4 .promoCodeValue span.promoCodeDesc {
+  position: absolute;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1A1A1A;
+  top: 77%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.nbaCard {
+  width: 144px;
+  background-color: #1A1A1A;
+  margin: auto;
+}
+.nbaCardActive {
+  background-color: #EC4C15;
+}
+.nbaCardSvgWrapper {
+  height: 160px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.nbaCard .nbaCardActiveSvg,
+.nbaCard .nbaCardSvg {
+  transform: rotate(90deg);
+  width: 650px;
+  top: -290px;
+  left: -200px;
+  position: absolute;
+  height: auto;
+}
+.nbaCard .nbaCardActiveSvg path,
+.nbaCard .nbaCardSvg path {
+  fill: #fff;
+}
+.nbaCardContent {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  text-align: left;
+  padding: 5px 8px;
+  height: 78px;
+}
+.nbaCardTitle {
+  font-weight: 900;
+  font-size: 29px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1A1A1A;
+}
+.nbaCardDesc {
+  font-weight: 900;
+  font-size: 9px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #A3A3A3;
 }
 
-.card h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.slide5 {
+  background: rgba(24, 120, 251, 0.08);
 }
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.slide5 h2 {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 24px;
 }
-
-.logo {
-  height: 1em;
+.slide5 .desc {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  width: 400px;
+  margin: auto;
+}
+.slide5 .logos {
+  margin: 60px 0;
+}
+.slide5 .logos img {
+  width: 100%;
 }
 
 @media (max-width: 600px) {
-  .grid {
-    width: 100%;
+  .heroBanner {
     flex-direction: column;
+    height: auto;
+  }
+  .heroBannerLeft {
+    flex: none;
+    height: 530px;
+    padding-top: 136px;
+  }
+  .heroBannerLeft .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  .heroBannerLeft .main_desc {
+    font-size: 28px;
+    margin-right: 20px;
+    padding: 0;
+    text-align: left;
+    max-width: 300px;
+  }
+  .heroBannerLeft .second_desc {
+    margin-left: -16px;
+    text-align: left;
+    padding-left: 16px;
+    margin-bottom: 1em;
+  }
+  .heroBannerLeft .second_desc span {
+    font-size: 28px;
+    line-height: 117.9%;
+    border-bottom: 5px solid #1a1a1a;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 14px;
+    padding: 0;
+  }
+  .heroBannerLeft ul li {
+    font-size: 12px;
+    text-align: left;
+    margin: 10px 0;
+    width: 100%;
+  }
+  li .square_icon {
+    margin-right: 10px;
+    margin-top: 0;
+    width: 6px;
+    height: 6px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 14px;
+    text-align: left;
+  }
+  .heroBannerRight {
+    height: 220px;
+    flex: none;
+  }
+  .heroBannerRight .container {
+    padding-right: 0;
+    padding-top: 0;
+  }
+  .heroBannerRightBg {
+    width: 800px;
+    transform: translate(-40%, -30%);
+  }
+  .carousel {
+    max-width: 100%;
+  }
+  .carousel_slide {
+    padding: 0;
+    height: 220px;
+    justify-content: flex-start;
+  }
+  .carousel_slide_text {
+    font-size: 20px;
+    line-height: 100%;
+    max-width: 300px;
+    margin: 0;
+    width: 100%;
+  }
+  .carousel_slide_readmoreBtn,
+  .carousel_slide_subscribeBtn {
+    padding: 6px 10px;
+    margin-top: 20px;
+    font-size: 14px;
+    min-width: 120px;
+  }
+  .heroBannerLeft ul span {
+    font-size: 14px;
+  }
+
+  /* Slide 1 */
+  .slide1 h3 {
+    font-size: 20px;
+    line-height: 28px;
+    margin: 4px auto 8px;
+  }
+  .slide1 h1 {
+    font-size: 30px;
+    padding: 0;
+    line-height: 58px;
+  }
+  .slide1 .feature {
+    font-size: 12px;
+    margin: 0;
+  }
+  /* Slide 2 */
+  .slide2 h1 {
+    font-size: 25px;
+    line-height: 184.4%;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+  .slide2 .discountInfo span {
+    font-size: 35px;
+    line-height: 1.2em;
+  }
+  .slide2 .discountInfo span:last-child {
+    font-size: 8px;
+  }
+  .slide2 .discountCode span {
+    font-size: 16px;
+  }
+  .slide2 .discountCode span:last-child {
+    font-size: 28px;
+    margin-left: 5px;
+  }
+  .slide2 .carousel_slide_subscribeBtn {
+    margin-top: 0;
+  }
+  /* Slide 3 */
+  .slide3_subtitle {
+    margin: 20px 0;
+  }
+  .slide3_subtitle span {
+    font-size: 24px;
+  }
+  .slide3_subtitle span:last-child {
+    font-size: 12px;
+  }
+  .slide3_title {
+    font-size: 19px;
+    margin: 20px 0 0;
+  }
+  /* Slide 4 */
+  .slide4 h3 {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .slide4 .promoCode > span {
+    font-size: 14px;
+  }
+  .slide4 .promoCodeValue span {
+    font-size: 20px;
+  }
+  .slide4 .promoCodeValue span.promoCodeDesc {
+    font-size: 5px;
+    white-space: nowrap;
+    top: 82%;
+  }
+  .nbaCard {
+    width: 46px;
+  }
+  .nbaCardSvgWrapper {
+    height: 46px;
+    width: 100%;
+  }
+  .nbaCard .nbaCardActiveSvg,
+  .nbaCard .nbaCardSvg {
+    width: 200px;
+    top: -90px;
+    left: -60px;
+  }
+  .nbaCardContent {
+    padding: 0px 2px;
+    height: 24px;
+  }
+  .nbaCardTitle {
+    font-size: 9px;
+  }
+  .nbaCardDesc {
+    font-size: 3px;
+  }
+  /* Slide 5 */
+  .slide5 h2 {
+    font-size: 18px;
+    margin: 16px 0;
+  }
+  .slide5 .desc {
+    font-size: 18px;
+    width: 240px;
+  }
+  .slide5 .logos {
+    margin: 16px 0 0;
+  }
+}
+
+/* Memebership Offerings Section */
+.membershipOffers {
+  text-align: center;
+  padding: 138px 50px 150px;
+}
+.membershipOffers_title {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-bottom: 0.5em;
+}
+.membershipOffers_desc {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 129.9%;
+  text-align: center;
+  color: #000000;
+  max-width: 880px;
+  margin: auto;
+}
+.membershipOffers_plans {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plan {
+  width: 425px;
+  margin-right: 35px;
+  text-align: left;
+  margin-bottom: 2em;
+}
+.plan_content {
+  border: 1px solid #1a1a1a;
+}
+.plan:last-child {
+  margin-right: 0;
+}
+.plan_content_info {
+  padding: 16px 0 21px;
+  background: #fff;
+}
+.plan_content_title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+.plan_content_desc {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #a3a3a3;
+  display: flex;
+  justify-content: center;
+}
+.plan_content_desc span:last-child {
+  margin-left: 15px;
+}
+.plan_content_details {
+  background: #1a1a1a;
+  padding: 32px;
+}
+.price_view {
+  padding: 18px;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 184.4%;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 6px;
+  position: relative;
+}
+.price_view .price {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 88px;
+  line-height: 100%;
+  color: #ffffff;
+  border-bottom: solid 8px #fff;
+  margin: 16px 0;
+  padding: 0;
+  display: inline-block;
+}
+.plan_content_details_desc {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 1em;
+}
+.plan_content_details_desc li {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  color: #ffffff;
+  display: flex;
+  align-items: flex-start;
+}
+.plan_content_details_desc li:before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #ffc700;
+  margin-right: 10px;
+  margin-top: 13px;
+}
+.learn_more_btn {
+  background: #ffc700;
+  padding: 11.5px 24px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  border: none;
+  height: auto;
+  width: 100%;
+  margin-top: 0.6em;
+  text-transform: uppercase;
+}
+
+.plan_extra_content {
+  font-family: 'Rock Salt';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 35px;
+  line-height: 184.4%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: 1em;
+  padding-bottom: 8px;
+}
+.deal_circle {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 115%;
+}
+
+@media (max-width: 1400px) and (min-width: 1241px) {
+  .membershipOffers {
+    padding: 118px 50px 130px;
+  }
+  .membershipOffers_title {
+    font-size: 62px;
+  }
+  .membershipOffers_desc {
+    font-size: 30px;
+  }
+  .plan {
+    min-width: 360px;
+    max-width: 390px;
+    margin-right: 25px;
+    flex: 1;
+    text-align: left;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .plan_content_details {
+    padding: 24px;
+  }
+  .price_view {
+    padding: 15px;
+    font-size: 13px;
+  }
+  .price_view .price {
+    font-size: 80px;
+    margin: 12px 0;
+  }
+  .learn_more_btn {
+    padding: 10.5px 24px;
+  }
+  .plan_extra_content {
+    font-size: 40px;
+  }
+  .deal_circle {
+    width: 128%;
+  }
+}
+
+@media (max-width: 1240px) and (min-width: 1025px) {
+  .membershipOffers {
+    padding: 98px 30px 100px;
+  }
+  .membershipOffers_title {
+    font-size: 54px;
+    margin-bottom: 0.3em;
+  }
+  .membershipOffers_desc {
+    font-size: 24px;
+    max-width: 75%;
+  }
+  .plan {
+    min-width: 300px;
+    max-width: 360px;
+    margin-right: 20px;
+  }
+  .plan_content_info {
+    padding: 14px 0 16px;
+  }
+  .plan_content_title {
+    font-size: 20px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .plan_content_desc span:last-child {
+    margin-left: 10px;
+  }
+  .plan_content_details {
+    padding: 16px;
+  }
+  .price_view {
+    padding: 14px;
+    font-size: 12px;
+  }
+  .plan_content_details_desc li {
+    font-size: 14px;
+  }
+  .plan_content_details_desc li:before {
+    margin-right: 6px;
+    margin-top: 11px;
+  }
+  .price_view .price {
+    font-size: 70px;
+    margin: 8px 0;
+  }
+  .learn_more_btn {
+    padding: 7.5px 24px;
+    font-size: 14px;
+  }
+  .plan_extra_content {
+    font-size: 36px;
+  }
+  .deal_circle {
+    width: 124%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .membershipOffers {
+    padding: 78px 18px 60px;
+  }
+  .membershipOffers_title {
+    font-size: 48px;
+    margin-bottom: 0.5em;
+    padding: 0 1em;
+  }
+  .membershipOffers_desc {
+    font-size: 20px;
+    max-width: 640px;
+  }
+  .membershipOffers_plans {
+    flex-direction: column;
+  }
+  .plan {
+    order: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-right: 0;
+  }
+  .main_plan {
+    order: 0;
+  }
+  .plan_content_info {
+    padding: 16px 0;
+  }
+  .plan_content_title {
+    font-size: 24px;
+  }
+  .plan_content_desc {
+    font-size: 13px;
+  }
+  .price_view {
+    padding: 16px;
+    font-size: 13px;
+  }
+  .price_view .price {
+    font-size: 82px;
+  }
+  .plan_extra_content {
+    font-size: 42px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  .deal_circle {
+    width: 115%;
+  }
+}
+
+@media (max-width: 600px) {
+  .membershipOffers {
+    padding: 38px 20px 0px;
+  }
+  .membershipOffers_title {
+    font-size: 40px;
+    line-height: 117.9%;
+  }
+  .membershipOffers_desc {
+    font-size: 18px;
+    line-height: 129.9%;
+  }
+  .plan {
+    width: 100%;
+    max-width: 360px;
+  }
+  .plan_extra_content {
+    font-size: 32px;
+    line-height: 59px;
+  }
+  .plan_content_desc {
+    font-size: 12px;
+  }
+  .price_view .price {
+    font-size: 64px;
+    margin: 12px 0;
+  }
+  .price_view {
+    font-size: 12px;
+  }
+  .plan_content_details_desc li {
+    font-size: 12px;
+  }
+  .plan_content_details_desc li:before {
+    margin-right: 8px;
+    margin-top: 10px;
+  }
+  .learn_more_btn {
+    font-size: 12.6px;
+    line-height: 19px;
+    padding: 10px 24px;
+  }
+  .plan_content_details {
+    padding: 24px;
+  }
+}
+
+/* Our Daily Standards */
+.daily_standards {
+  padding: 120px 50px 50px;
+  background-color: #1a1a1a;
+  background-size: cover;
+  position: relative;
+}
+.daily_standards_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.daily_standards_title {
+  max-width: 1100px;
+  margin: auto;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #f1f1f1;
+  padding-bottom: 90px;
+}
+.daily_standards_list {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.daily_standards_item {
+  width: 46%;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 75px;
+}
+.daily_standards_icon {
+  width: 62px;
+  height: 62px;
+}
+.daily_standards_content {
+  margin-left: 22px;
+}
+.daily_standards_content h4 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 52px;
+  display: flex;
+  align-items: center;
+  color: #f1f1f1;
+  display: inline-block;
+  margin: 0;
+}
+.daily_standards_content_title {
+  position: relative;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+.wave_img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.daily_standards_content p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #ffffff;
+}
+
+@media (max-width: 1240px) {
+  .daily_standards {
+    padding: 80px 30px 20px;
+  }
+  .daily_standards_title {
+    font-size: 62px;
+    padding-bottom: 50px;
+  }
+  .daily_standards_item {
+    width: 47%;
+  }
+  .daily_standards_content_title {
+    margin-bottom: 20px;
+  }
+  .daily_standards_content p {
+    font-size: 17px;
+  }
+  .daily_standards_icon {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .daily_standards {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .daily_standards_title {
+    text-align: center;
+  }
+  .daily_standards_list {
+    flex-flow: column;
+    align-items: center;
+  }
+  .daily_standards_item {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .daily_standards {
+    padding: 40px 18px 20px;
+  }
+  .daily_standards_title {
+    font-size: 40px;
+    line-height: 117.9%;
+    padding-bottom: 40px;
+  }
+  .daily_standards_content h4 {
+    font-size: 28px;
+    line-height: 44px;
+  }
+  .daily_standards_content p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .daily_standards_icon {
+    width: 42px;
+    height: 42px;
+    margin-left: 12px;
+  }
+  .daily_standards_item {
+    margin-bottom: 25px;
+    margin-right: 4px;
+  }
+}
+
+/* Bets On All Sports */
+.bet_on_sports {
+  background: #f1f1f1;
+  padding: 200px 50px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bet_on_sports_title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+.bet_on_sports_desc {
+  display: flex;
+  align-items: center;
+  max-width: 870px;
+  margin: auto;
+  margin-top: 2em;
+}
+.bet_on_sports_desc p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 117.9%;
+  color: #1a1a1a;
+  margin: 0;
+}
+.checkout_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  color: #1a1a1a;
+  background: #ffc700;
+  margin-left: 55px;
+  padding: 15.5px 24px;
+  border: none;
+  height: auto;
+}
+.sports_cards {
+  padding: 100px 0;
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1450px;
+}
+.sports_card {
+  width: 220px;
+  margin: 0 6px;
+  margin-bottom: 24px;
+}
+.sports_card_box {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+  height: 390px;
+}
+.sports_card_box:hover {
+  transform: scale(1.1, 1.1);
+  border: 2px solid #1a1a1a;
+  box-sizing: border-box;
+  z-index: 10;
+  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+}
+.sports_card_checkmark {
+  width: 24px;
+  height: 24px;
+  top: 16px;
+  left: 16px;
+  position: absolute;
+  z-index: 3;
+}
+
+.sports_card_image path {
+  fill: #fff;
+}
+.sports_card h3 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 28px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+.sports_card .desc {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #a3a3a3;
+}
+.sports_card .desc div {
+  margin-bottom: 4px;
+}
+.sports_card_box_content {
+  padding: 14px 16px;
+  margin-top: 280px;
+  position: relative;
+  height: 100%;
+  z-index: 3;
+  background-color: #fff;
+}
+.sports_card ul {
+  margin-top: 14px;
+  list-style: none;
+  padding-left: 0;
+}
+.sports_card li {
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  color: #646464;
+  display: flex;
+  align-items: flex-start;
+}
+
+.sports_card li:before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #c4c4c4;
+  margin-right: 10px;
+  margin-top: 13px;
+}
+
+.nba_box_active {
+  background: #ec4c15;
+  border: 2px solid #1a1a1a;
+}
+
+.nfl_box_active {
+  background: #91442a;
+  border: 2px solid #1a1a1a;
+}
+.mlb_box_active {
+  background: #1878fb;
+  border: 2px solid #1a1a1a;
+}
+.ufc_box_active {
+  background: #f9282b;
+  border: 2px solid #1a1a1a;
+}
+.f1_box_active {
+  background: #505054;
+  border: 2px solid #1a1a1a;
+}
+.soccer_box_active {
+  background: #6dcf40;
+  border: 2px solid #1a1a1a;
+}
+.sports_card_image {
+  position: absolute;
+}
+.nba_box .sports_card_image {
+  transform: rotate(-90deg);
+  top: -143%;
+  left: -200%;
+  height: 200%;
+}
+.vip_box {
+  height: 100%;
+}
+.nfl_box .sports_card_image {
+  transform: rotate(90deg);
+  height: 200%;
+  top: 30%;
+  left: -120%;
+}
+.mlb_box .sports_card_image {
+  height: 75%;
+  left: -95%;
+  top: -3%;
+}
+.ufc_box .sports_card_image {
+  height: 55%;
+  top: 5%;
+  left: -60%;
+}
+.ufc_box .sports_card_image path {
+  fill: transparent;
+  stroke-width: 4.8px;
+}
+.f1_box .sports_card_image {
+  height: 38%;
+  left: -165%;
+  top: 10%;
+}
+.f1_box .sports_card_image path {
+  fill: transparent;
+  stroke: #fff;
+}
+.soccer_box .sports_card_image {
+  transform: rotate(-90deg);
+  height: 56%;
+  left: -210%;
+  top: 26%;
+}
+.sports_cards {
+  width: 100%;
+  justify-content: center;
+}
+.mobile_checkout_btn {
+  display: none;
+}
+
+.mobile_display_buttons {
+  color: white;
+  background: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  height: auto;
+  padding: 15.5px 24px 15.5px 24px;
+  width: 250px;
+}
+.mobile_column_display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .mobile_column_display {
+    display: flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .laptop_display {
+    display: none;
+  }
+}
+
+@media (max-width: 1500px) {
+  .bet_on_sports_title {
+    font-size: 62px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 30px;
+  }
+  .nba_box .sports_card_image {
+    top: -133%;
+    left: -230%;
+    height: 160%;
+  }
+  .nfl_box .sports_card_image {
+    height: 200%;
+    top: 38%;
+    left: -140%;
+  }
+  .mlb_box .sports_card_image {
+    height: 75%;
+    left: -115%;
+    top: -3%;
+  }
+  .ufc_box .sports_card_image {
+    height: 55%;
+    top: 5%;
+    left: -75%;
+  }
+  .ufc_box .sports_card_image path {
+    fill: transparent;
+    stroke-width: 4.8px;
+  }
+  .f1_box .sports_card_image {
+    height: 38%;
+    left: -192%;
+    top: 10%;
+  }
+  .soccer_box .sports_card_image {
+    height: 56%;
+    left: -239%;
+    top: 24%;
+  }
+  .sports_card li {
+    font-size: 14px;
+  }
+  .sports_card_box_content {
+    margin-top: 260px;
+  }
+  .sports_card {
+    width: 200px;
+  }
+}
+@media (max-width: 1400px) {
+  .sports_card_box:hover {
+    transform: scale(1, 1);
+    border: 0px solid #1a1a1a;
+    z-index: 1;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+  }
+
+  .bet_on_sports {
+    padding: 100px 30px 50px;
+  }
+  .bet_on_sports_title {
+    font-size: 58px;
+    text-align: center;
+    max-width: 870px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 26px;
+  }
+  .sports_cards {
+    justify-content: center;
+    max-width: 1082px;
+    overflow: hidden;
+    padding: 100px 30px;
+  }
+  .sports_card {
+    width: 240px;
+    margin: 24px 16px;
+  }
+  .nba_box .sports_card_image {
+    top: -109%;
+    left: -180%;
+    height: 130%;
+  }
+  .nfl_box .sports_card_image {
+    height: 170%;
+    top: 50%;
+    left: -118%;
+  }
+  .mlb_box .sports_card_image {
+    height: 83%;
+    left: -79%;
+    top: -8%;
+  }
+  .ufc_box .sports_card_image {
+    height: 54%;
+    top: 5%;
+    left: -52%;
+  }
+  .f1_box .sports_card_image {
+    height: 40%;
+    left: -150%;
+    top: 10%;
+  }
+  .soccer_box .sports_card_image {
+    height: 56%;
+    left: -190%;
+    top: 25%;
+  }
+  .sports_card_box_content {
+    margin-top: 280px;
+  }
+}
+@media (max-width: 1240px) {
+  .bet_on_sports {
+    padding: 100px 30px 50px;
+  }
+}
+@media (max-width: 1152px) {
+  .sports_cards {
+    max-width: 862px;
+    padding: 70px 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .bet_on_sports {
+    padding: 100px 18px 50px;
+  }
+  .bet_on_sports_title {
+    font-size: 52px;
+    max-width: 720px;
+  }
+  .bet_on_sports_desc {
+    flex-direction: column;
+    text-align: center;
+  }
+  .checkout_btn {
+    margin-top: 1.5em;
+    margin-left: 0;
+  }
+}
+@media (max-width: 882px) {
+  .sports_cards {
+    max-width: 550px;
+    padding: 50px 12px 40px 75px;
+  }
+  .sports_cards_for_vip {
+    max-width: 550px;
+    padding: 50px 12px 40px;
+  }
+  .sports_card {
+    width: 240px;
+    margin: 24px 8px;
+  }
+}
+@media (max-width: 600px) {
+  .sports_card_box_mobile {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+    height: 390px;
+  }
+  .sports_cards {
+    justify-content: end;
+    max-width: 100vw;
+    overflow: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-width: 100vw;
+    justify-content: end;
+    padding: 20px 0px 20px 70px;
+  }
+
+  .sports_cards_for_vip {
+    padding: 20px 12px 20px;
+  }
+
+  .sports_card {
+    width: 240px;
+  }
+  .bet_on_sports_title {
+    font-size: 32px;
+    line-height: 117.9%;
+    max-width: 380px;
+  }
+  .bet_on_sports_desc p {
+    font-size: 18px;
+    line-height: 117.9%;
+  }
+  .checkout_btn {
+    display: none;
+  }
+  .mobile_checkout_btn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+    color: #1a1a1a;
+    height: auto;
+    padding: 15.5px 24px;
+    display: block;
+    background: #ffc700;
+    margin-bottom: 25px;
+    border: none;
+  }
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 100px 50px 60px;
+  background-color: #1a1a1a;
+  background-size: cover;
+  position: relative;
+}
+.testimonials_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.testimonial_top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.testimonial_top:before,
+.testimonial_top:after {
+  content: '';
+  flex: 1;
+  height: 24px;
+  background: #fff;
+}
+.black_star {
+  width: 98px;
+  margin: 0 28px;
+}
+.testimonial_content {
+  display: flex;
+  align-items: center;
+  margin: 75px 0 100px;
+}
+.testimonial_content > div {
+  width: 50%;
+}
+.testimonial_image {
+  max-height: 440px;
+  min-height: 400px;
+  width: 350px;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+}
+.testimonial_content_right {
+  padding-left: 45px;
+  padding-right: 10px;
+}
+.testimonial_title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 38px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.testimonial_desc {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 38px;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+.testimonial_quote {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 38px;
+  color: #ffff;
+  margin-top: 16px;
+}
+
+@media (max-width: 1240px) {
+  .testimonials {
+    padding: 70px 30px 60px;
+  }
+  .testimonial_top:before,
+  .testimonial_top:after {
+    height: 20px;
+  }
+  .black_star {
+    width: 78px;
+  }
+  .testimonial_image {
+    max-width: 440px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .testimonials {
+    padding: 50px 30px 40px;
+  }
+  .testimonial_top:before,
+  .testimonial_top:after {
+    height: 16px;
+  }
+  .black_star {
+    width: 60px;
+  }
+  .testimonial_content {
+    margin: 75px 0 100px;
+    flex-direction: column;
+  }
+  .testimonial_content > div {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 0;
+  }
+  .testimonial_image {
+    max-width: 440px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials {
+    padding: 30px 18px 30px;
+  }
+  .testimonial_top:before,
+  .testimonial_top:after {
+    height: 14px;
+  }
+  .black_star {
+    width: 48px;
+  }
+  .testimonial_content {
+    margin: 20px 0 70px;
+  }
+  .testimonial_title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .testimonial_desc {
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 8px;
+  }
+  .testimonial_quote {
+    font-size: 16px;
+    line-height: 25px;
+    margin-top: 20px;
+  }
+}
+
+/* Sports News Carousel */
+.news_carousel {
+  background-size: 100% 100%;
+  overflow: hidden;
+  position: relative;
+}
+.news_carousel_bg {
+  padding: 200px 150px 200px;
+  position: relative;
+}
+.news_carousel_bg_overlay {
+  background-color: rgba(202, 202, 202, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.news_carousel_bgimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.news_carousel_content {
+  max-width: 1300px;
+  margin: auto;
+  margin-bottom: 60px;
+}
+.title_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 128px;
+}
+.title_row span {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 117.9%;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  display: block;
+}
+.title_row .title_row_desc {
+  font-size: 21px;
+  font-weight: 600;
+  display: block;
+}
+.title_row a {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 38px;
+  text-decoration-line: underline;
+  color: #101010;
+}
+
+.news {
+  padding: 32px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  height: 480px;
+  width: 700px;
+  margin: 0 38px;
+}
+.news img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+}
+.news_content {
+  position: relative;
+  z-index: 10;
+  width: 620px;
+}
+
+.news_info {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+.news_desc {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  margin: 0.6em 0;
+}
+.news h3 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 44px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.news a {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 31px;
+  text-decoration-line: underline;
+  color: #ffc700;
+}
+.next_arrow {
+  width: 12px;
+  height: 12px;
+  padding: 8px;
+}
+.prev_arrow {
+  width: 12px;
+  height: 12px;
+  padding: 8px;
+}
+
+@media (max-width: 1240px) {
+  .news_carousel_bg {
+    padding: 160px 150px;
+  }
+  .title_row {
+    margin-bottom: 108px;
+  }
+  .title_row span {
+    font-size: 58px;
+  }
+  .title_row a {
+    font-size: 20px;
+  }
+  .news_info {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .news h3 {
+    font-size: 38px;
+    line-height: 42px;
+  }
+  .news_desc {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .news a {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  .news {
+    padding: 24px;
+    height: 420px;
+    width: 620px;
+    margin: 0px 32px;
+  }
+  .title_row {
+    margin-left: -70px;
+    margin-right: -70px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .news_carousel_bg {
+    padding: 160px 140px;
+  }
+  .title_row {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .news_carousel_bg {
+    padding: 100px 18px;
+  }
+  .title_row {
+    margin-bottom: 98px;
+  }
+  .title_row span {
+    font-size: 58px;
+  }
+  .title_row a {
+    font-size: 20px;
+  }
+  .news_info {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .news h3 {
+    font-size: 35px;
+    line-height: 40px;
+  }
+  .news_desc {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .news a {
+    font-size: 17px;
+    line-height: 28px;
+  }
+  .news {
+    padding: 20px;
+    height: 360px;
+    width: 540px;
+    margin: 0px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .news_carousel_bg {
+    padding: 50px 18px;
+  }
+  .title_row {
+    margin: 0;
+    margin-bottom: 58px;
+  }
+  .title_row span {
+    font-size: 40px;
+  }
+  .title_row a {
+    font-size: 15px;
+  }
+  .news_info {
+    font-size: 11px;
+    line-height: 18px;
+  }
+  .news h3 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .news_desc {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .news a {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .news {
+    padding: 16px;
+    height: 320px;
+    width: 420px;
+    margin: 0px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .news_carousel_bg {
+    padding: 50px 18px;
+  }
+  .title_row {
+    margin: 0;
+    margin-bottom: 58px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .title_row span {
+    font-size: 32px;
+  }
+  .title_row a {
+    font-size: 14px;
+  }
+  .news_info {
+    font-size: 8px;
+    line-height: 13px;
+    margin-bottom: 8px;
+  }
+  .news h3 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .news_desc {
+    font-size: 10px;
+    line-height: 12px;
+  }
+  .news a {
+    font-size: 10px;
+    line-height: 14px;
+  }
+  .news {
+    padding: 12px;
+    height: 220px;
+    width: 260px;
+    margin: 0px 16px;
+  }
+}
+
+/* Subscribe Now Btn */
+
+.subscribenow {
+  background: #1a1a1a;
+  padding: 198px 50px 180px;
+}
+.subscribenow_container {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.subscribenow_left {
+  width: 55%;
+  position: relative;
+}
+.subscribenow_curve {
+  position: absolute;
+  top: -80px;
+  right: -50px;
+  width: 140px;
+}
+.subscribenow_title1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 100px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.subscribenow_title2 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 100px;
+  text-transform: uppercase;
+  color: #ffc700;
+}
+.subscribenow_desc {
+  margin-top: 22px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  color: #f1f1f1;
+}
+
+.subscribenow_right {
+  width: 45%;
+  padding-left: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.btn_circle img {
+  height: 175px;
+}
+.subscribe_btn {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #050505;
+  background: #fff;
+  border: none;
+  padding: 23.5px 57px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: auto;
+  transform: translate(-50%, -45%);
+}
+
+@media (max-width: 1420px) {
+  .subscribenow {
+    padding: 178px 50px 160px;
+  }
+  .subscribenow_left {
+    max-width: 640px;
+  }
+  .subscribenow_curve {
+    top: -90px;
+    right: -25px;
+    width: 140px;
+  }
+  .subscribenow_title1 {
+    font-size: 54px;
+    line-height: 72px;
+  }
+  .subscribenow_title2 {
+    font-size: 86px;
+    line-height: 92px;
+  }
+  .subscribenow_desc {
+    font-size: 24px;
+    line-height: 38px;
+  }
+  .btn_circle img {
+    height: 160px;
+  }
+  .subscribe_btn {
+    transform: translate(-50%, -45%);
+    padding: 20.5px 53px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .subscribenow {
+    padding: 178px 30px 160px;
+  }
+  .subscribenow_container {
+    max-width: 1000px;
+  }
+  .subscribenow_title1 {
+    font-size: 46px;
+    line-height: 62px;
+  }
+  .subscribenow_title2 {
+    font-size: 76px;
+    line-height: 82px;
+  }
+  .subscribenow_desc {
+    font-size: 20px;
+    line-height: 36px;
+  }
+  .btn_circle img {
+    height: 140px;
+  }
+  .subscribe_btn {
+    padding: 16.5px 46px;
+  }
+}
+@media (max-width: 1024px) {
+  .subscribenow {
+    padding: 148px 20px 130px;
+  }
+  .subscribenow_container {
+    max-width: 780px;
+  }
+  .subscribenow_left {
+    max-width: 420px;
+  }
+  .subscribenow_title1 {
+    font-size: 36px;
+    line-height: 62px;
+  }
+  .subscribenow_title2 {
+    font-size: 66px;
+    line-height: 68px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .btn_circle img {
+    height: 120px;
+  }
+  .subscribe_btn {
+    padding: 12.5px 40px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@media (max-width: 824px) {
+  .subscribenow {
+    padding: 78px 20px 80px;
+  }
+  .subscribenow_container {
+    max-width: 780px;
+    flex-direction: column;
+  }
+  .subscribenow_left {
+    text-align: center;
+    width: 100%;
+  }
+  .subscribenow_curve {
+    display: none;
+  }
+  .subscribenow_title1 {
+    font-size: 30px;
+    line-height: 42px;
+  }
+  .subscribenow_title2 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .subscribenow_right {
+    margin-top: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .subscribenow {
+    padding: 58px 20px 60px;
+  }
+  .subscribenow_title1 {
+    font-size: 24px;
+    line-height: 28px;
+    width: 180px;
+    margin: 0px auto 0.3em;
+  }
+  .subscribenow_title2 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  .subscribenow_desc {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .subscribenow_right {
+    margin-top: 40px;
+    width: 100%;
+  }
+  .btn_circle img {
+    height: auto;
+    width: 100%;
+    max-width: 340px;
+  }
+  .subscribe_btn {
+    padding: 10.5px 28px;
+  }
+}
+
+.vip_sport_card {
+  width: 100%;
+  height: 280px;
+  position: absolute;
+  object-fit: cover;
+}
+
+.best_deal_text {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 184.4%;
+  /* or 30px */
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.plan_extra_content_mobile {
+  display: none;
+}
+
+.protection_div_mobile {
+  display: none;
+}
+
+.protection_div {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .protection_div {
+    display: none;
+  }
+
+  .protection_div_mobile {
+    display: flex;
+    padding-bottom: 0.5em;
+    margin-top: -1.5em;
+  }
+  .plan_extra_content_mobile {
+    font-family: 'Rock Salt';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin-top: 1em;
+    display: block;
+    padding-bottom: 4px;
+  }
+  .plan_extra_content {
+    display: none;
+  }
+}
+
+.vip_box_active {
+  border: 2px solid #ffc700;
+  background-color: #ffc700;
+}
+
+@media (max-width: 600px) {
+  .membershipOffers_plans {
+    padding: 30px 0;
   }
 }

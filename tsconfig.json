@@ -20,11 +20,15 @@
     "baseUrl": "./",
     "paths": {
       "@styles/*": ["./styles/*"],
-      "@types/*": ["./types/*"],
+      "@type/*": ["./types/*"],
       "@redux/*": ["./redux/*"],
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@images/*": ["./public/images/*"],
+      "@apis/*": ["./apis/*"],
+      "@utils/*": ["./utils/*"],
+      "@constants/*": ["./constants/index.ts"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "utils/gtag.js"]
 }

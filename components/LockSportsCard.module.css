@@ -1,0 +1,187 @@
+.subscribenow {
+  background: #1a1a1a;
+  padding: 50px;
+  margin-bottom: 50px;
+}
+
+.subscribenow_desc {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 57px;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.orText {
+  font-family: Rock Salt;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 38px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.leftCard, .rightCard {
+  background: #ffffff;
+  width: 240px;
+  padding: 20px;
+  flex: none;
+}
+
+.vipText {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: left;
+  color: #1a1a1a;
+  margin-bottom: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.allPlayText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 19px;
+  text-align: left;
+  color: #1a1a1a;
+  margin: 0;
+  height: 40px;
+}
+
+.leftOuterDiv {
+  width: 100%;
+}
+
+.rightOuterDiv {
+  width: 100%;
+}
+.rightOuterDiv .allPlayText {
+  font-size: 10px;
+  line-height: 16px;
+  height: 38px;
+}
+
+.imageAndDetailDivForRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 4px;
+}
+
+.imageAndDetailDiv {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.imageAndDetailDiv img {
+  margin-right: 8px;
+  height: auto;
+}
+.bestValueText {
+  font-family: Rock Salt;
+  font-size: 13px;
+  line-height: 184.4%;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.dailyCardText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 140%;
+  color: #000000;
+  margin-bottom: 0;
+}
+.subscribe_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7.5px 24px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 25px;
+  color: #101010;
+  background: #ffc700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-top: 0.2em;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowClass {
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-top: 40px;
+  justify-content: center;
+}
+
+.orColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.imagesContainer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.images {
+  padding-right: 5px;
+  padding-left: 5px;
+  width: 52px;
+  height: 42px;
+}
+
+@media (max-width: 600px) {
+  .rowClass {
+    padding-right: 0px;
+    padding-left: 0px;
+    /* padding-top: 40px; */
+  }
+
+  .subscribenow_desc {
+    font-family: Saira;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+
+    text-align: center;
+
+    color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .orColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 17px;
+  }
+
+  .subscribenow {
+    padding: 50px;
+    margin-bottom: 50px;
+  }
+}

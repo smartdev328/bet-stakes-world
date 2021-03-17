@@ -127,37 +127,37 @@ export const MOCK_BetFundaments = [
   },
   {
     id: 2,
-    title: 'Moneyline',
+    title: 'MONEYLINE',
     content:
       'This is the simplest type of bet to grasp. Betting the Moneyline simply means that your team needs to win the game. The minus sign next to the odds denotes the favorite & the plus sign denotes the underdog team.'
   },
   {
     id: 3,
-    title: 'Spread',
+    title: 'SPREAD',
     content:
       'Also known as the point spread & one of the most popular forms of betting. A favorite gives points and an underdog gets points. The minus sign (favorite) denotes that that team has to win by more than that margin while the plus sign (underdog) indicates that the other team can lose by that margin, or win the game, and they cover the spread in either case. (Ex: Lakers -5 means the Lakers have to win by more than 5 points to cover the spread).'
   },
   {
     id: 4,
-    title: 'Prop Bet',
+    title: 'PROP BETS',
     content:
       'Prop bets are a more exciting way to enhance betting beyond the Moneyline or Point Spread. It provides you a way to place wagers beyond only game outcomes. Player Props are amongst the most popular prop bets..'
   },
   {
     id: 5,
-    title: 'Over/Unders',
+    title: 'OVER/UNDERS',
     content:
       'Also known as a totals bets is wagering on the total for a particular game that is set by oddsmakers based on a particular matchup and how the game will unfold from a scoring point of view. As a person betting on a totals bet, you would need to select if the total number of points scored by both teams will be over or under the total set by oddsmakers.'
   },
   {
     id: 6,
-    title: 'Parlay',
+    title: 'PARLAYS',
     content:
       'A parlay is a single bet that combines two or more wagers. In order to win the bet, the player must win all the wagers for a given parlay. If one of the bets fall through, the entire bet is lost. If the players wins all the wagers for a given parlay, the player wins a greater payout compared to placing the bets separately. '
   },
   {
     id: 7,
-    title: 'Bonus Wildcard Plays',
+    title: 'BONUS WILDCARD PLAYS',
     content:
       "These are unofficial bets proposed by TheDailyStakes. They're intended to be wagered in small amounts making them low risk high return plays. We all love stacked parlays and having a bit of skin in the game for a large wildcard play is always enticing for sports fans, casuals & bettors."
   }
@@ -269,73 +269,67 @@ export const MOCK_DailyFantasyLineups = [
 export const MOCK_FantasyFundaments = [
   {
     id: 0,
-    title: 'Mock Lineup',
+    title: 'MOCK LINEUP',
     content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+      'A DFS lineup that involves entering into a contest as early as possible to secure your entry. Certain contests occur on the condition that the total number of entries for that given contest need to be filled. Once it has reached capacity, no further entries can be made. Mocking up your lineups allows you to reserve your spot for popular contests which may have higher payouts & win probabilities.'
   },
 
   {
     id: 1,
-    title: 'Tournament',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    title: 'TOURNAMENT',
+    content: 'High-paying contests with guaranteed prize pools.'
   },
   {
     id: 2,
-    title: 'Beat the Score',
+    title: 'BEAT THE SCORE',
     content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+      "This is a tournament where the prize pool is shared evenly across all winners. The score to beat is set by Fanduel. For instance, if the score to beat is 270 points, and your lineup totals 280 points, then you'll automatically split the total prize amongst all winners."
   },
   {
     id: 3,
-    title: 'Multipliers',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    title: 'MULTIPLIERS',
+    content: 'Double your money or play for more (i.e. Triple, Quadruple your original stake).'
   },
   {
     id: 4,
-    title: 'Head to Head',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    title: 'HEAD TO HEAD',
+    content: 'Compete against a single opponent, winner takes all.'
   },
   {
     id: 5,
-    title: '3-100 Players',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    title: '3-100 PLAYERS',
+    content: 'Compete against fewer players (i.e. 100 players) with multiple payout structures.'
   },
   {
     id: 6,
     title: '50/50s',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    content: 'Finish in the top half to win .'
   }
 ];
 
 export const MOCK_BankRoll = [
   {
     id: 1,
-    title: 'What is a unit? ',
+    title: 'WHAT IS A UNIT? ',
     content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+      'A unit represents a percentage of your bankroll and should generally represent between 1 to 5 percent of your bankroll.'
   },
   {
     id: 2,
-    title: 'What should my unit % be?',
+    title: 'WHAT SHOULD MY UNIT & BE?',
     content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+      'Setting a unit percentage for your bankroll is completely at the users discretion.The higher the unit percentage, the more aggressive your bankroll.For example, for a $5, 000 starting bankroll, a 1 unit wager would represent $100, i.e. 2% of your bankroll.'
   },
   {
     id: 3,
-    title: 'TheDailyStakes Recommendation',
-    content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+    title: 'THEDAILYSTAKES RECOMMENDATION',
+    content: 'TheDailyStakes recommends setting 1 unit as 2% of your bankroll.'
   },
   {
     id: 4,
-    title: 'Other Bankroll Systems',
+    title: 'OTHER BANKROLL SYSTEMS',
     content:
-      'Also known as bookmakers, sportsbooks, or bookies, are people who are licensed to create betting lines and take wagers.'
+      'The unit system is considered to be a baseline bankroll management system. For information on more advanced bankroll systems, view our article <a target="_blank" href="https://blog.thedailystakes.com/sports-betting-bankroll-strategies-all-bettors-need-to-know/">here</a>.'
   }
 ];
 

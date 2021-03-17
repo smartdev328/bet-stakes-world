@@ -48,7 +48,11 @@ function BankrollManagment({ showContentAt, toggleDetailsAt }: PropsType) {
                 </>
               )}
             </div>
-            {showContentAt[index] && <div className={styles.accordionContent}>{data.content}</div>}
+            {showContentAt[index] && (
+              <div
+                className={styles.accordionContent}
+                dangerouslySetInnerHTML={{ __html: data.content }}></div>
+            )}
           </React.Fragment>
         ))}
       </div>

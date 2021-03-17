@@ -280,7 +280,14 @@ function AppFooter({ token }: { token: JWT | null }) {
       {/* Footer Info */}
       <div className={styles.infobar}>
         <div className={styles.infobarRow}>
-          <span>Copyright © 2021 The Daily Stakes All Rights Reserved</span>
+          <span>
+            We are not a sportsbook and do not take any wagers. Furthermore, we do not endorse
+            illegal online sports betting. If you or someone you know has a gambling problem and
+            wants help, call 1-800 GAMBLER. This service is intended for adult users only.
+            <span>
+              <br></br> <br></br>Copyright © 2021 The Daily Stakes All Rights Reserved
+            </span>
+          </span>
         </div>
       </div>
     </footer>

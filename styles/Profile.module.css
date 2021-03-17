@@ -39,6 +39,7 @@
   height: 54px;
   width: 120px;
   background: transparent;
+  text-transform: uppercase;
 }
 .saveBtn:disabled, .cancelBtn:disabled,
 .saveBtn:disabled:hover, .cancelBtn:disabled:hover {

@@ -361,6 +361,7 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 184.4%;
+  text-transform: uppercase;
   color: #FFFFFF;
 }
 .couponRow {
@@ -725,6 +726,7 @@
 }
 .noCart {
   font-size: 16px;
+  text-transform: uppercase;
   padding: 1em 0;
 }
 

@@ -170,6 +170,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 4px 0;
+  text-transform: uppercase;
 }
 .menuList ul li .icon_title {
   margin-left: 5px;
@@ -202,8 +203,9 @@
   opacity: 0.9;
   font-style: normal;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 18px;
   line-height: 34px;
+  text-transform: uppercase;
   color: #2E2E2E;
   padding: 8px;
   height: auto;
@@ -213,6 +215,7 @@
 .loginBtn, .profileBtn {
   margin-left: 40px;
   width: 220px;
+  text-transform: uppercase;
   height: auto;
   color: #d7d7d7;
   background: transparent;
@@ -220,7 +223,7 @@
   opacity: 0.9;
   font-style: normal;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 18px;
   line-height: 34px;
   padding: 8px;
   transition: all ease-in 0.3s;

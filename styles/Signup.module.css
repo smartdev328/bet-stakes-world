@@ -209,9 +209,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 19px;
-  text-transform: capitalize;
   margin-bottom: 8px;
   display: block;
+  text-transform: uppercase;
 }
 
 .optionBtn {
@@ -387,7 +387,7 @@
   line-height: 25px;
   color: #1a1a1a;
   background: #ffc700;
-  padding: 7.5px 24px;
+  padding: 10.5px 24px;
   height: auto;
   width: 100%;
   margin-top: 2em;

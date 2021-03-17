@@ -535,7 +535,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                       className={styles.registerBtn}
                       disabled={!isFormValid}
                       onClick={onSignup}>
-                      Register Now
+                      SUBSCRIBE NOW
                     </Button>
                   </Col>
                 </Row>

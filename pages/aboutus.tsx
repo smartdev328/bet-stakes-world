@@ -125,43 +125,48 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 </Col>
 
                 <Col lg={15} md={24} className={styles.coverage_main}>
-                  <h5 className={styles.dsCoverage_subheadings}>SPORTS</h5>
-                  <div className={styles.sport_car_container}>
-                    <img src="/images/about_nba.svg" className={styles.coverage_images} />
-                    <img src="/images/about_nfl.svg" className={styles.coverage_images} />
-                    <img src="/images/about_mbl.svg" className={styles.coverage_images} />
-                    <img src="/images/about_soccer.svg" className={styles.coverage_images} />
+                  <div className={styles.dsCoverage_sportGroup}>
+                    <h5 className={styles.dsCoverage_subheadings}>SPORTS</h5>
+                    <div className={styles.sport_car_container}>
+                      <img src="/images/about_nba.svg" className={styles.coverage_images} />
+                      <img src="/images/about_nfl.svg" className={styles.coverage_images} />
+                      <img src="/images/about_mbl.svg" className={styles.coverage_images} />
+                      <img src="/images/about_soccer.svg" className={styles.coverage_images} />
+                    </div>
+                    <div className={styles.sport_car_container}>
+                      <img src="/images/about_ncaab.svg" className={styles.coverage_images} />
+                      <img src="/images/about-ncaaf.svg" className={styles.coverage_images} />
+                      <img src="/images/about_ufc.svg" className={styles.coverage_images} />
+                      <img src="/images/about_f1.svg" className={styles.coverage_images} />
+                    </div>
                   </div>
-
-                  <div className={styles.sport_car_container}>
-                    <img src="/images/about_ncaab.svg" className={styles.coverage_images} />
-                    <img src="/images/about-ncaaf.svg" className={styles.coverage_images} />
-                    <img src="/images/about_ufc.svg" className={styles.coverage_images} />
-                    <img src="/images/about_f1.svg" className={styles.coverage_images} />
+                  <div className={styles.dsCoverage_sportGroup}>
+                    <h5 className={styles.dsCoverage_subheadings}>DAILY FANTASY LINEUPS</h5>
+                    <div className={styles.sport_car_container}>
+                      <img src="/images/about_nba.svg" className={styles.coverage_images} />
+                      <img src="/images/about_nfl.svg" className={styles.coverage_images} />
+                      <img src="/images/about_mbl.svg" className={styles.coverage_images} />
+                    </div>
                   </div>
-                  <h5 className={styles.dsCoverage_subheadings}>DAILY FANTASY LINEUPS</h5>
-                  <div className={styles.sport_car_container}>
-                    <img src="/images/about_nba.svg" className={styles.coverage_images} />
-                    <img src="/images/about_nfl.svg" className={styles.coverage_images} />
-                    <img src="/images/about_mbl.svg" className={styles.coverage_images} />
-                  </div>
-
-                  <h5 className={styles.dsCoverage_subheadings_sportsbook}>
-                    SPORTSBOOK FORMATS INCLUDED
-                  </h5>
-                  <div className={styles.sport_car_container}>
-                    <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
-                    <img src="/images/about_fanduel.png" className={styles.sportsbook_images} />
-                    <img src="/images/about_daily.png" className={styles.sportsbook_images} />
-                  </div>
-
-                  <div className={styles.button_div}>
-                    <h5 className={styles.dsCoverage_subheadings_interesting}>
-                      INTERESTED IN WINNING WITH US?
+                  <div className={styles.dsCoverage_sportFantasyGroup}>
+                    <h5 className={styles.dsCoverage_subheadings_sportsbook}>
+                      SPORTSBOOK FORMATS INCLUDED
                     </h5>
-                    <Link href="/shop">
-                      <Button className={styles.checkout_btn}>Continue to Shop</Button>
-                    </Link>
+                    <div className={styles.sport_car_container}>
+                      <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
+                      <img src="/images/about_fanduel.png" className={styles.sportsbook_images} />
+                      <img src="/images/about_daily.png" className={styles.sportsbook_images} />
+                    </div>
+                  </div>
+                  <div className={styles.dsCoverage_sportGroup}>
+                    <div className={styles.button_div}>
+                      <h5 className={styles.dsCoverage_subheadings_interesting}>
+                        INTERESTED IN WINNING WITH US?
+                      </h5>
+                      <Link href="/shop">
+                        <Button className={styles.checkout_btn}>Continue to Shop</Button>
+                      </Link>
+                    </div>
                   </div>
                 </Col>
               </Row>

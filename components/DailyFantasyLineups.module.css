@@ -18,8 +18,9 @@
 }
 .sidebarBlockTitle span {
   font-weight: 900;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
   color: #f1f1f1;
 }
 .sidebarBlockContent {
@@ -40,7 +41,7 @@
   font-size: 13px;
   line-height: 22px;
   color: #f1f1f1;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 .accordionTitleIcon {
   width: 16px;

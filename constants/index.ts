@@ -1,6 +1,5 @@
-export const API_BASE_URL = 'https://api.tdsdevelopment.info';
-export const STRIPE_API_KEY =
-  'pk_test_51H3m5pEPT82q25ZMP07C58HuGdSSWPLbZx2d7dBI0xbAXMLvXbidZK8AdTdDTC5G64jVoxXm9gv8K1PZrMGbqqBf00Mc6dlaF0';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+export const STRIPE_API_KEY = process.env.NEXT_PUBLIC_STRIPE_API_KEY;
 
 export const SportBetTypes = [
   {

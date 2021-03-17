@@ -207,7 +207,7 @@
   font-family: Saira;
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 140%;
   margin-bottom: 0px;
 }
@@ -218,11 +218,12 @@
   font-family: Saira;
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 140%;
   white-space: pre-wrap;
   width: 300px;
   margin-bottom: 0px;
+  margin-top: 1em;
 }
 
 .dsCoverage_subheadings_sportsbook {
@@ -231,7 +232,7 @@
   font-family: Saira;
   font-style: normal;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 15px;
   line-height: 140%;
   margin-bottom: 0px;
 }
@@ -242,8 +243,14 @@
 
 .sportsbook_images {
   padding: 5px;
-  width: 75px;
-  height: 75px;
+  width: 83px;
+  height: 82px;
+}
+.sportsbook_images:first-child {
+  padding-left: 0;
+}
+.sportsbook_images:last-child {
+  padding-right: 0;
 }
 
 .checkout_btn {
@@ -255,11 +262,11 @@
   background: #ffc700;
   margin-left: 8px;
   margin-right: 50px;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 15.5px 24px;
-  border: none;
   height: 80px;
   white-space: pre-wrap;
+  text-transform: uppercase;
   width: 160px;
 }
 
@@ -411,6 +418,9 @@
 }
 
 /* Privacy Page */
+.privacy h3 {
+  text-transform: uppercase;
+}
 .privacy a {
   color: #1878FB;
 }
@@ -429,4 +439,13 @@
   font-size: 16px;
   font-weight: 400;
   margin: 0.5em 0;
+}
+
+/* About Us */
+.dsCoverage_sportGroup,
+.dsCoverage_sportFantasyGroup {
+  margin-bottom: 1em;
+}
+.dsCoverage_sportFantasyGroup .dsCoverage_subheadings_sportsbook {
+
 }

@@ -236,7 +236,7 @@ function DateBar({
   return (
     <div className={styles.dateBar}>
       <Link href={userSubscriptions.length > 0 ? '/member-dashboard' : '/shop'}>
-        <a>Today’s Bets</a>
+        <a>TODAY’S BETS</a>
       </Link>
       <div className={styles.dateBarDivider} />
       <Link href="/">

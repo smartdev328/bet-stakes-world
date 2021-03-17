@@ -227,10 +227,10 @@ function MembershipOfferings() {
                 <span className={styles.price}>$199.00</span>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>Receive Access to ALL Plays for the Sport(s) of Your Choice</li>
-                <li>Sports Include NBA, NFL, Soccer, MLB, NCAAF, NCAAB, UFC & Formula 1</li>
-                <li>Customized Dashboard Including Automated Record Tracking</li>
-                <li>Weekly, Monthly, Season & Playoff Packages Available. </li>
+                <li><span>Receive Access to ALL Plays for the Sport(s) of Your Choice</span></li>
+                <li><span>Sports Include NBA, NFL, Soccer, MLB, NCAAF, NCAAB, UFC & Formula 1</span></li>
+                <li><span>Customized Dashboard Including Automated Record Tracking</span></li>
+                <li><span>Weekly, Monthly, Season & Playoff Packages Available.</span></li>
               </ul>
               <Link href="/shop?plan=sports_card">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -261,13 +261,11 @@ function MembershipOfferings() {
                 <div className={styles.price}>$79.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>Receive Access to ALL Plays for ALL Sports, Including BONUS Plays</li>
-                <li>Customized Dashboard Including Automated Record Tracking</li>
-                <li>
-                  Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
-                </li>
-                <li>Daily, Weekly, Monthly & Annual Packages Available. </li>
-                <li>Daily Card Includes TheDailyStakes Protection</li>
+                <li><span>Receive Access to ALL Plays for ALL Sports, Including BONUS Plays</span></li>
+                <li><span>Customized Dashboard Including Automated Record Tracking</span></li>
+                <li><span>Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies</span></li>
+                <li><span>Daily, Weekly, Monthly & Annual Packages Available.</span></li>
+                <li><span>Daily Card Includes TheDailyStakes Protection</span></li>
               </ul>
               <Link href="/shop?plan=all">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -297,13 +295,11 @@ function MembershipOfferings() {
                 <div className={styles.price}>$10.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li>DFS Lineups for Single Slate & Main Slate Game Styles</li>
-                <li>Premium Player Prop Recommendations</li>
-                <li>Sports Include NBA, NFL & MLB</li>
-                <li>
-                  Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks Contest Types
-                </li>
-                <li>Daily, Weekly, & Monthly Packages Available</li>
+                <li><span>DFS Lineups for Single Slate & Main Slate Game Styles</span></li>
+                <li><span>Premium Player Prop Recommendations</span></li>
+                <li><span>Sports Include NBA, NFL & MLB</span></li>
+                <li><span>Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks Contest Types</span></li>
+                <li><span>Daily, Weekly, & Monthly Packages Available</span></li>
               </ul>
               <Link href="/shop?plan=fantasy">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -576,7 +572,7 @@ function BetOnSports() {
       <div className={styles.bet_on_sports_desc}>
         <p>Select the sport(s) you would like to bet and continue to the shop page</p>
         <Link href="/shop">
-          <Button className={styles.checkout_btn}>Continue to SHOP page</Button>
+          <Button className={styles.checkout_btn}>Continue to SHOP</Button>
         </Link>
       </div>
 

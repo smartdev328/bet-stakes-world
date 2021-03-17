@@ -55,6 +55,7 @@
   color: #000000;
   display: block;
   margin-bottom: 8px;
+  text-transform: uppercase;
 }
 .formGroup input,
 .formGroup textarea {
@@ -85,6 +86,7 @@
   background: transparent;
   background-color: #ffc700;
   margin: 1em 0 2em;
+  text-transform: uppercase;
   cursor: pointer;
 }
 

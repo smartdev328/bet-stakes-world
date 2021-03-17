@@ -137,7 +137,7 @@ function LoginModal() {
           <Row align={'middle'} justify={'center'} className={styles.register_row}>
             <span>Don&rsquo;t have an account?&nbsp;&nbsp;</span>
             <Link href="/signup">
-              <a>Register Now</a>
+              <a>Subscribe Now</a>
             </Link>
           </Row>
           {/* <Button className={styles.register_facebook_btn}>Registor With Facebook</Button>

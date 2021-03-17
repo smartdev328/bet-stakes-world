@@ -672,3 +672,7 @@ a.locked:active {
   background: #1A1A1A;
   font-weight: 600;
 }
+
+.sportMenu a {
+  text-transform: uppercase;
+}

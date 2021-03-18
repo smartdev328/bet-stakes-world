@@ -122,6 +122,9 @@
   .logo {
     max-width: 75%;
   }
+  .newsletterForm_email {
+    transform: none !important;
+  }
 }
 
 /* Main Footer */

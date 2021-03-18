@@ -23,7 +23,7 @@ function HeroBanner() {
   return (
     <div className={styles.heroBanner}>
       <LazyLoad>
-        <img src="/images/cart_page_bg.png" className={styles.bgImage} />
+        <img src="/images/blackbanner.jpg" className={styles.bgImage} />
       </LazyLoad>
       <div className={styles.heroBannerContent}>
         <h1>YOUR CART</h1>

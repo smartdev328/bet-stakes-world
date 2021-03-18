@@ -1,11 +1,20 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { AppLayout } from '@components/index';
+import { AppLayout, BannerSportsAndMatches } from '@components/index';
 import { PageProps } from '@type/Main';
 import styles from '@styles/Static.module.css';
 import { Row, Col } from 'antd';
 import dynamic from 'next/dynamic';
+import React from 'react';
 const Button = dynamic(() => import('antd/lib/button'));
+
+function HeroBanner() {
+  return (
+    <div className={styles.heroBanner}>
+      <BannerSportsAndMatches />
+    </div>
+  );
+}
 
 export default function AboutUs({ token, subscriptions }: PageProps) {
   return (
@@ -14,6 +23,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
         <title>The Daily Stakes - About Us</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
+        <HeroBanner />
         <div>
           <div>
             <br />

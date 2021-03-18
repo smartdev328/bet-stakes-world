@@ -11,7 +11,8 @@ import {
   DailyFantasyLineups,
   WhereToWatchGame,
   WhereBuyGear,
-  VipAllAccessCard
+  VipAllAccessCard,
+  BannerSportsAndMatches
 } from '@components/index';
 
 import styles from '@styles/YesterdaysPlays.module.css';
@@ -72,6 +73,14 @@ const SPORTS_INFO = [
   }
 ];
 
+function HeroBanner() {
+  return (
+    <div className={styles.heroBanner}>
+      <BannerSportsAndMatches />
+    </div>
+  );
+}
+
 export default function YesterdaysPlays({ token, subscriptions, sports }: PageProps) {
   const [games, setGames] = useState<YesterdayPlayInfoType[]>([]);
   const [entireLoading, setEntireLoading] = useState<boolean>(false);
@@ -117,7 +126,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
       </Head>
 
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
-        {/* <HeroBanner /> */}
+        <HeroBanner />
 
         <div className={styles.container}>
           {sports.length > 0 && <TopSection sports={sports} onSelectChange={updateFilters} />}

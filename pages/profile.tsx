@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Row, Button, Upload, Col, notification } from 'antd';
 
-import { AppLayout, DashboardHeader } from '@components/index';
+import { AppLayout, BannerSportsAndMatches, DashboardHeader } from '@components/index';
 import styles from '@styles/Profile.module.css';
 import { ProfileValidateType, UserProfile } from '@type/Users';
 import { validateEmail } from '@utils/common';
@@ -19,6 +19,14 @@ type ProfileFormType = UserProfile & {
   verify_password: string | undefined;
   tempAvatar: string | undefined;
 };
+
+function HeroBanner() {
+  return (
+    <div className={styles.heroBanner}>
+      <BannerSportsAndMatches />
+    </div>
+  );
+}
 
 export default function MemberProfile({ token, subscriptions }: PageProps) {
   const [profileForm, setProfileForm] = useState<ProfileFormType>({
@@ -280,7 +288,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
         <title>The Daily Stakes - Sports Card</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
-        {/* <HeroBanner /> */}
+        <HeroBanner />
         <div className={styles.container}>
           <DashboardHeader title={'Settings'} />
           <ProfileInfo

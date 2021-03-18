@@ -33,7 +33,7 @@
   position: absolute;
   top: 104px;
   left: 50%;
-  padding-top: 26px;
+  padding-top: 10px;
   text-align: center;
   transform: translateX(-50%);
 }

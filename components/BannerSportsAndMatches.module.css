@@ -7,8 +7,8 @@
   overflow-x: hidden;
 }
 .sports_and_matches {
-  background: rgba(241, 241, 241, 0.8);
-  padding: 16px 50px;
+  background: #000;
+  padding: 0px 50px;
   position: absolute;
   z-index: 2;
   top: 0;
@@ -90,7 +90,7 @@
   top: 0;
   right: 0;
   width: 100%;
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 83.37%, #f1f1f1a3 100%);
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 83.37%, #656e7359 100%);
   transform: matrix(-1, 0, 0, 1, 0, 0);
   z-index: 4;
   height: 100%;

@@ -1472,28 +1472,28 @@ li .square_icon {
 }
 
 .nba_box_active {
-  background: #ec4c15;
+  background: #ec4c15 !important;
   border: 2px solid #1a1a1a;
 }
 
 .nfl_box_active {
-  background: #91442a;
+  background: #91442a !important;
   border: 2px solid #1a1a1a;
 }
 .mlb_box_active {
-  background: #1878fb;
+  background: #1878fb !important;
   border: 2px solid #1a1a1a;
 }
 .ufc_box_active {
-  background: #f9282b;
+  background: #f9282b !important;
   border: 2px solid #1a1a1a;
 }
 .f1_box_active {
-  background: #505054;
+  background: #505054 !important;
   border: 2px solid #1a1a1a;
 }
 .soccer_box_active {
-  background: #6dcf40;
+  background: #6dcf40 !important;
   border: 2px solid #1a1a1a;
 }
 .sports_card_image {
@@ -1564,6 +1564,12 @@ li .square_icon {
   height: auto;
   padding: 15.5px 24px 15.5px 24px;
   width: 250px;
+  border: solid 2px transparent;
+}
+.mobile_display_buttons.active {
+  background-color: transparent;
+  color: black;
+  border-color: black;
 }
 .mobile_column_display {
   display: flex;
@@ -1742,6 +1748,9 @@ li .square_icon {
   }
 }
 @media (max-width: 600px) {
+  .bet_on_sports_desc p {
+    margin-bottom: 1em;
+  }
   .sports_card_box_mobile {
     position: relative;
     overflow: hidden;

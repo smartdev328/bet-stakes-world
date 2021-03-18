@@ -1040,7 +1040,7 @@ function ProductsAndCartBoxForSportsCard({
         <div className={styles.sectionTitle}>Select Card Type</div>
         <ul>
           {billingPlans
-            .filter((plan) => plan.name.indexOf('EVENT BASED') < 0)
+            .filter((plan) => plan.name.toUpperCase().indexOf('EVENT BASED') < 0)
             .map((plan: BillingPlan, index: number) => (
               <li
                 key={index}
@@ -1119,7 +1119,7 @@ function ProductsAndCartBoxForSportsCard({
           </div>
           <ul>
             {billingPlans
-              .filter((plan) => plan.name.indexOf('EVENT BASED') > -1)
+              .filter((plan) => plan.name.toUpperCase().indexOf('EVENT BASED') > -1)
               .map((plan: BillingPlan, index: number) => (
                 <li
                   key={`event-based-plan-${index}`}

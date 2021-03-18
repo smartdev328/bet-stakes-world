@@ -463,7 +463,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   const [session, setSession] = useState<CheckoutSessionType | undefined>(undefined);
   // const [overallInfo, setOverallInfo] = useState<OverallInfoType>({});
   const router = useRouter();
-  const { session_id: sessionId } = router.query;
+  const { session_id: sessionId, status } = router.query;
   const { user } = useSelector((state: ReduxState) => {
     return state;
   });
@@ -509,8 +509,22 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         setSession(undefined);
       }
     }
-    fetchSession();
-  }, [sessionId]);
+    if (sessionId && status === 'cancelled') {
+      checkoutApis.sendAbandonmentMessage(sessionId.toString()).then((res) => res.json())
+        .then((data) => {
+          if (data.status >= 400) {
+            notification['error']({
+              message: 'Abandonment Message Error!',
+              description: data.message
+            });
+          } else {
+            router.push('/member-dashboard');
+          }
+        });
+    } else {
+      fetchSession();
+    }
+  }, [sessionId, status]);
 
   useEffect(() => {
     if (session && sessionId) {

@@ -44,10 +44,20 @@ function validateDiscount(code: string) {
   });
 }
 
+function sendAbandonmentMessage(sessionId: string) {
+  const headers = tokenAuthHeaders();
+  return fetch(`${API_BASE_URL}/app/checkout/sessions/${sessionId}/cancelled`, {
+    method: 'PATCH',
+    headers
+  });
+}
+
+
 export default {
   createSession,
   completeCheckout,
   loadSession,
   validateCart,
-  validateDiscount
+  validateDiscount,
+  sendAbandonmentMessage
 };

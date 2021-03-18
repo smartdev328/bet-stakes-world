@@ -419,6 +419,7 @@ function OurDailyStandards() {
 }
 
 function BetOnSports() {
+  const [activePack, setActivePack] = useState<string>('');
   const [selectedCards, setSelectedCards] = useState<SportCardsSelectionType>({
     nba: false,
     nfl: false,
@@ -578,18 +579,27 @@ function BetOnSports() {
 
       <div className={styles.mobile_column_display}>
         <Button
-          className={styles.mobile_display_buttons}
-          onClick={() => setSportsDataForMobile(sportsData.slice(0, 1))}>
+          className={`${styles.mobile_display_buttons} ${activePack === 'vip' ? styles.active : ''}`}
+          onClick={() => {
+            setSportsDataForMobile(sportsData.slice(0, 1));
+            setActivePack('vip');
+          }}>
           VIP ALL ACCESS CARD
         </Button>
         <Button
-          className={styles.mobile_display_buttons}
-          onClick={() => setSportsDataForMobile(sportsData.slice(1, 9))}>
+          className={`${styles.mobile_display_buttons} ${activePack === 'sports_card' ? styles.active : ''}`}
+          onClick={() => {
+            setSportsDataForMobile(sportsData.slice(1, 9));
+            setActivePack('sports_card');
+          }}>
           SPORTS CARD
         </Button>
         <Button
-          className={styles.mobile_display_buttons}
-          onClick={() => setSportsDataForMobile(sportsData.slice(9, 13))}>
+          className={`${styles.mobile_display_buttons} ${activePack === 'fantasy' ? styles.active : ''}`}
+          onClick={() => {
+            setSportsDataForMobile(sportsData.slice(9, 13));
+            setActivePack('fantasy');
+          }}>
           DAILY FANTASY CARD
         </Button>
         <div>

@@ -21,8 +21,6 @@ function CommonSportsBook() {
               <img
                 src="/images/fanduel.png"
                 alt="Fanduel Logo"
-                width={107}
-                height={26}
                 className={styles.image_style}
               />
             </a>
@@ -32,19 +30,15 @@ function CommonSportsBook() {
               <img
                 src="/images/draftkings.png"
                 alt="Draftkings SportsBook Logo"
-                width={109}
-                height={29}
                 className={styles.image_style}
               />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <a href="https://betway.com/">
+            <a href="https://www.pointsbet.com/">
               <img
                 src="/images/betway.png"
                 alt="Betway Logo"
-                width={98}
-                height={32}
                 className={styles.image_style}
               />
             </a>
@@ -54,30 +48,24 @@ function CommonSportsBook() {
               <img
                 src="/images/williamhill.png"
                 alt="WilliamHill SportsBook Logo"
-                width={120}
-                height={34}
                 className={styles.image_style}
               />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <a href="https://www.bet365.com/#/HO/">
+            <a href="https://www.bet365.com/">
               <img
                 src="/images/bet365.png"
                 alt="Bet365 Logo"
-                width={94}
-                height={31}
                 className={styles.image_style}
               />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
-            <a href="https://www.williamhill.com/us">
+            <a href="https://www.888sport.com/">
               <img
                 src="/images/888sport.png"
                 alt="888Sports Logo"
-                width={120}
-                height={34}
                 className={styles.image_style}
               />
             </a>

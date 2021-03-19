@@ -13,6 +13,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  max-height: 80px;
+}
+.company_logo:nth-child(2n) {
+  padding-left: 8px;
+}
+.company_logo:nth-child(2n + 1) {
+  padding-right: 8px;
+}
+.company_logo img {
+  width: 100%;
+  object-fit: contain;
 }
 .sidebarBlockTitle {
   display: flex;

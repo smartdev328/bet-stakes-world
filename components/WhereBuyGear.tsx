@@ -21,42 +21,40 @@ function WhereBuyGear() {
               <img
                 src="/images/dailystakes-company.png"
                 alt="DailyStakes Company"
-                width={84}
-                height={79}
                 className={styles.image_style}
               />
             </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img
-              src="/images/fanatics-company.png"
-              alt="DailyStakes Company"
-              width={200}
-              height={60}
-              className={styles.image_style}
-            />
+            <a href="https://www.fanatics.com/">
+              <img
+                src="/images/fanatics-company.png"
+                alt="Fanatics Company"
+                className={styles.image_style}
+              />
+            </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img
-              src="/images/fansedge-company.png"
-              alt="DailyStakes Company"
-              width={200}
-              height={100}
-              className={styles.image_style}
-            />
+            <a href="https://www.fansedge.com/">
+              <img
+                src="/images/fansedge-company.png"
+                alt="FansEdge Company"
+                className={styles.image_style}
+              />
+            </a>
           </Col>
 
           <Col span={12} className={styles.company_logo}>
-            <img
-              src="/images/sports-company.png"
-              alt="DailyStakes Company"
-              width={170}
-              height={60}
-              style={{ paddingBottom: '8px' }}
-              className={styles.image_style}
-            />
+            <a href="https://www.sportsmemorabilia.com/">
+              <img
+                src="/images/sports-company.png"
+                alt="SportsMemorabilia Company"
+                style={{ paddingBottom: '8px' }}
+                className={styles.image_style}
+              />
+            </a>
           </Col>
         </Row>
       </div>

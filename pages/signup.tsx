@@ -543,7 +543,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
                   <Col className={styles.termsSection}>
                     <div className={styles.termsContent}>
                       By creating an account above, you consent to The Daily Stakes, Inc.&#39;s{' '}
-                      <a href="/terms">Terms of Service</a> and{' '}
+                      <a href="/terms">Terms & Conditions</a> and{' '}
                       <a href="/privacy">Privacy Policy</a>. We use your email to provide you with
                       news, updates, and promotions.
                     </div>

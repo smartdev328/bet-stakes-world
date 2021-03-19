@@ -77,9 +77,19 @@
   margin-top: 2em;
   display: flex;
   align-items: center;
+  max-height: 80px;
   justify-content: center;
 }
-
+.company_logo:nth-child(2n) {
+  padding-left: 8px;
+}
+.company_logo:nth-child(2n + 1) {
+  padding-right: 8px;
+}
+.company_logo img {
+  width: 100%;
+  object-fit: contain;
+}
 @media (max-width: 600px) {
   .sidebarBlock {
     width: 100%;

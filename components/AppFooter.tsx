@@ -160,44 +160,44 @@ function AppFooter({ token }: { token: JWT | null }) {
               <div className={styles.menuList}>
                 <ul>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>NBA</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>NFL</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>MLB</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>NCAAF</a>
                     </Link>
                   </li>
                 </ul>
                 <ul>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>NCAAB</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>SOCCER</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>UFC</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/shop?plan=sports_card">
                       <a>FORMULA 1</a>
                     </Link>
                   </li>
@@ -270,7 +270,7 @@ function AppFooter({ token }: { token: JWT | null }) {
             <a className={styles.navbarItem}>FAQ</a>
           </Link>
           <Link href="/terms">
-            <a className={styles.navbarItem}>Terms of use</a>
+            <a className={styles.navbarItem}>Terms & Conditions</a>
           </Link>
           <Link href="/privacy">
             <a className={styles.navbarItem}>Privacy Policy</a>

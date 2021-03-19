@@ -90,7 +90,16 @@
   width: 100%;
   display: flex;
 }
-
+.company_logo:nth-child(2n) {
+  padding-left: 8px;
+}
+.company_logo:nth-child(2n + 1) {
+  padding-right: 8px;
+}
+.company_logo img {
+  width: 100%;
+  object-fit: contain;
+}
 .sidebarBlock.fantasyLineupIncludes .sidebarBlockContent {
   margin-top: 0.8em;
 }

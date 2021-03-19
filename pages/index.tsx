@@ -78,7 +78,7 @@ function HeroBanner() {
         </div>
         <div className={styles.heroBannerRight}>
           <div className={styles.container}>
-            <Carousel autoplay={false} initialSlide={0} autoplaySpeed={5000} className={styles.carousel}>
+            <Carousel autoplay={true} arrows autoplaySpeed={6000} className={styles.carousel}>
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide1}`}>
                   <div className={styles.carousel_slide_text}>
@@ -128,7 +128,11 @@ function HeroBanner() {
                       FOR MORE INFO, <br />VISIT OUR ARTICLE @ BLOG.THEDAILYSTAKES.COM
                     </div>
                   </div>
-                  <Button className={styles.carousel_slide_readmoreBtn}>READ MORE</Button>
+                  <Link href="https://blog.thedailystakes.com/after-a-one-year-hiatus-march-madness-is-back-before-you-fill-your-ncaa-bracket-read-our-preview-for-an-inside-look-at-the-matchups/">
+                    <a target="_blank">
+                      <Button className={styles.carousel_slide_readmoreBtn}>READ MORE</Button>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div>

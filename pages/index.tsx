@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { Row, Col } from 'antd';
 
 import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
-import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
+import { StarSvg, ClickableArrowIcon, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import {
   PageProps,
@@ -43,6 +43,16 @@ export default function Home({ token, subscriptions }: PageProps) {
 }
 
 function HeroBanner() {
+  const NextArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="next_arrow slick-next">
+      <ClickableArrowIcon onClick={() => {}} className={styles.home_banner_next} />
+    </div>
+  );
+  const PrevArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
+    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="prev_arrow slick-prev">
+      <ClickableArrowIcon onClick={() => {}} className={styles.home_banner_prev} />
+    </div>
+  );
   return (
     <section className="hero-banner">
       <div className={styles.heroBanner}>
@@ -78,7 +88,14 @@ function HeroBanner() {
         </div>
         <div className={styles.heroBannerRight}>
           <div className={styles.container}>
-            <Carousel autoplay={true} arrows autoplaySpeed={6000} className={styles.carousel}>
+            <Carousel
+              autoplay={true}
+              arrows
+              autoplaySpeed={6000}
+              className={styles.carousel}
+              nextArrow={<NextArrow />}
+              prevArrow={<PrevArrow />}
+            >
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide1}`}>
                   <div className={styles.carousel_slide_text}>

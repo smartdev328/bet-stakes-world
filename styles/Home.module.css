@@ -2556,3 +2556,14 @@ li .square_icon {
     padding: 30px 0;
   }
 }
+
+.home_banner_prev, .home_banner_next {
+  width: 12px;
+}
+.home_banner_prev path, .home_banner_next path {
+  fill: #fff;
+}
+.home_banner_prev {
+  transform: rotate(-180deg) translateX(-6px);
+
+}

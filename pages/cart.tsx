@@ -140,7 +140,9 @@ function CartTotalWidget({
       <div className={styles.totalPriceWidgetContentMobile}>
         {showDetails && <h5>Cart Totals</h5>}
         <div className={styles.priceRow}>
-          <div className={styles.totalCount}>{cartItems.length} Items</div>
+          <div className={styles.totalCount}>
+            {cartItems.length > 0 ? `${cartItems.length} Items` : 'No Items'}
+          </div>
           <div className={styles.totalPrice}>
             <NumberFormat
               displayType="text"
@@ -165,13 +167,27 @@ function CartTotalWidget({
           <>
             <div className={styles.discountRow}>
               <span>Discount:</span>
-              <span>N/A</span>
+              {!coupon && <span>N/A</span>}
+              {coupon && coupon.amount_off && (
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  fixedDecimalScale
+                  decimalScale={2}
+                  value={coupon.amount_off / 100}
+                />
+              )}
+              {coupon && coupon.percent_off && <span>{`${coupon.percent_off}%`}</span>}
             </div>
           </>
         )}
         <div className={styles.couponRow}>
-          <input placeholder="Enter Coupon Code" />
-          <Button disabled className={styles.couponBtn}>
+          <input
+            placeholder="Enter Coupon Code"
+            onChange={(e) => changeDiscountCode(e.target.value)}
+          />
+          <Button disabled={!discountCode} className={styles.couponBtn} onClick={applyDiscount}>
             Apply Coupon
           </Button>
         </div>
@@ -180,7 +196,7 @@ function CartTotalWidget({
           disabled={disabled}
           className={styles.checkoutBtn}
           onClick={onCheckout}>
-          Place Order
+          CHECKOUT
         </Button>
       </div>
     </div>

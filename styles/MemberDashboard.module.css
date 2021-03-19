@@ -61,8 +61,16 @@
   }
 }
 @media (max-width: 600px) {
+  .heroBanner {
+    height: 172px;
+  }
   .heroBanner .bgImage {
-    height: 240px;
+    height: 92px;
+    width: auto;
+    transform: translate(-50%, 0);
+    position: relative;
+    left: 50%;
+    top: 80px;
   }
 }
 

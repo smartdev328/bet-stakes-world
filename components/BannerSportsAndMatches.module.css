@@ -218,14 +218,13 @@
   }
   .sports_and_matches .container {
     flex-direction: column;
-    height: auto;
   }
   .dropdownBox {
     margin: 0;
 
   }
   .matchesCarouselView {
-    padding: 16px 8px;
+    padding: 0;
   }
   .arrow_back_icon {
     left:  15px;

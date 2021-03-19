@@ -41,7 +41,7 @@
 }
 @media (max-width: 600px) {
   .heroBanner {
-    height: 118px;
+    height: 80px;
   }
   .heroBanner .bgImage {
     height: 240px;

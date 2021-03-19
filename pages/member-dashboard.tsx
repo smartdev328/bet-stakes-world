@@ -509,49 +509,49 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
         setSession(undefined);
       }
     }
-    if (sessionId && status === 'cancelled') {
-      checkoutApis.sendAbandonmentMessage(sessionId.toString()).then((res) => res.json())
-        .then((data) => {
-          if (data.status >= 400) {
-            notification['error']({
-              message: 'Abandonment Message Error!',
-              description: data.message
-            });
-          } else {
-            router.push('/member-dashboard');
-          }
-        });
-    } else {
-      fetchSession();
-    }
+    fetchSession();
   }, [sessionId, status]);
 
   useEffect(() => {
     if (session && sessionId) {
-      dispatch({ type: 'UPDATE_CART', payload: [] });
-      checkoutApis
-        .completeCheckout(sessionId.toString())
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.statusCode > 200) {
+      if (status === 'cancelled') {
+        checkoutApis.sendAbandonmentMessage(sessionId.toString()).then((res) => res.json())
+          .then((data) => {
+            if (data.status >= 400) {
+              notification['error']({
+                message: 'Abandonment Message Error!',
+                description: data.message
+              });
+            } else {
+              router.push('/member-dashboard');
+            }
+          });
+      } else {
+        dispatch({ type: 'UPDATE_CART', payload: [] });
+        checkoutApis
+          .completeCheckout(sessionId.toString())
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.statusCode > 200) {
+              notification['error']({
+                message: 'Checkout Session Error!',
+                description: data.message
+              });
+            } else {
+              notification['info']({
+                message: 'Checkout was completed!'
+              });
+              router.replace('/member-dashboard');
+            }
+          })
+          .catch((error) => {
             notification['error']({
               message: 'Checkout Session Error!',
-              description: data.message
-            });
-          } else {
-            notification['info']({
-              message: 'Checkout was completed!'
+              description: error.message
             });
             router.replace('/member-dashboard');
-          }
-        })
-        .catch((error) => {
-          notification['error']({
-            message: 'Checkout Session Error!',
-            description: error.message
           });
-          router.replace('/member-dashboard');
-        });
+        }
     }
   }, [session]);
 

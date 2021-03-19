@@ -85,7 +85,7 @@
 }
 @media (max-width: 600px) {
   .heroBanner .bgImage {
-    height: 200px;
+    height: 170px;
   }
   .heroBannerContent h1 {
     font-size: 36px;
@@ -94,7 +94,7 @@
     font-size: 14px;
   }
   .heroBannerContent {
-    padding-top: 34px;
+    padding-top: 0;
     width: 300px;
   }
 }

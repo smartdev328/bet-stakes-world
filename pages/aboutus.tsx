@@ -163,7 +163,10 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                       SPORTSBOOK FORMATS INCLUDED
                     </h5>
                     <div className={styles.sport_car_container}>
-                      <img src="/images/about_draftkings.png" className={styles.sportsbook_images} />
+                      <img
+                        src="/images/about_draftkings.png"
+                        className={styles.sportsbook_images}
+                      />
                       <img src="/images/about_fanduel.png" className={styles.sportsbook_images} />
                       <img src="/images/about_daily.png" className={styles.sportsbook_images} />
                     </div>

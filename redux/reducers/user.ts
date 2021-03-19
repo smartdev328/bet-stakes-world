@@ -148,7 +148,7 @@ export function userReducer(state = initialState, action: UserStateAction) {
         ...state,
         ...{ error: action.error, loading: false, message: null }
       };
-  
+
     case USER_PROFILE:
       return {
         ...state,

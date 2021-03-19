@@ -16,7 +16,7 @@ export type SVGIconPropType = {
 
 export type ClickableArrowIconProps = {
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export type SportInfoType = {

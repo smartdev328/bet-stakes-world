@@ -515,7 +515,9 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   useEffect(() => {
     if (session && sessionId) {
       if (status === 'cancelled') {
-        checkoutApis.sendAbandonmentMessage(sessionId.toString()).then((res) => res.json())
+        checkoutApis
+          .sendAbandonmentMessage(sessionId.toString())
+          .then((res) => res.json())
           .then((data) => {
             if (data.status >= 400) {
               notification['error']({
@@ -551,7 +553,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
             });
             router.replace('/member-dashboard');
           });
-        }
+      }
     }
   }, [session]);
 

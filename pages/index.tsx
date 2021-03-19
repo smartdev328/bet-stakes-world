@@ -45,12 +45,12 @@ export default function Home({ token, subscriptions }: PageProps) {
 function HeroBanner() {
   const NextArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
     <div {...props} key={`next_${currentSlide}_${slideCount}`} className="next_arrow slick-next">
-      <ClickableArrowIcon onClick={() => {}} className={styles.home_banner_next} />
+      <ClickableArrowIcon className={styles.home_banner_next} />
     </div>
   );
   const PrevArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
     <div {...props} key={`next_${currentSlide}_${slideCount}`} className="prev_arrow slick-prev">
-      <ClickableArrowIcon onClick={() => {}} className={styles.home_banner_prev} />
+      <ClickableArrowIcon className={styles.home_banner_prev} />
     </div>
   );
   return (
@@ -65,7 +65,8 @@ function HeroBanner() {
             </div>
             <ul>
               <span>
-                Complete sports analytics source for all major sports including NFL, NBA, MLB, Soccer, NCAAF, NCAAB, Formula 1, and UFC
+                Complete sports analytics source for all major sports including NFL, NBA, MLB,
+                Soccer, NCAAF, NCAAB, Formula 1, and UFC
               </span>
               <li>
                 <div className={styles.square_icon} />
@@ -94,17 +95,22 @@ function HeroBanner() {
               autoplaySpeed={6000}
               className={styles.carousel}
               nextArrow={<NextArrow />}
-              prevArrow={<PrevArrow />}
-            >
+              prevArrow={<PrevArrow />}>
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide1}`}>
                   <div className={styles.carousel_slide_text}>
                     <h3>SUBSCRIBE NOW TO GET</h3>
                     <h1>FREE ACCESS!</h1>
                     <Row>
-                      <Col span={8} className={styles.feature}>FREE BETS</Col>
-                      <Col span={8} className={styles.feature}>PREDICTIONS</Col>
-                      <Col span={8} className={styles.feature}>DISCOUNTS</Col>
+                      <Col span={8} className={styles.feature}>
+                        FREE BETS
+                      </Col>
+                      <Col span={8} className={styles.feature}>
+                        PREDICTIONS
+                      </Col>
+                      <Col span={8} className={styles.feature}>
+                        DISCOUNTS
+                      </Col>
                     </Row>
                   </div>
                   <Link href="/signup">
@@ -142,7 +148,8 @@ function HeroBanner() {
                       <span>2021</span>
                     </div>
                     <div className={styles.slide3_title}>
-                      FOR MORE INFO, <br />VISIT OUR ARTICLE @ BLOG.THEDAILYSTAKES.COM
+                      FOR MORE INFO, <br />
+                      VISIT OUR ARTICLE @ BLOG.THEDAILYSTAKES.COM
                     </div>
                   </div>
                   <Link href="https://blog.thedailystakes.com/after-a-one-year-hiatus-march-madness-is-back-before-you-fill-your-ncaa-bracket-read-our-preview-for-an-inside-look-at-the-matchups/">
@@ -164,7 +171,9 @@ function HeroBanner() {
                           </div>
                           <div className={styles.nbaCardContent}>
                             <div className={styles.nbaCardTitle}>NBA</div>
-                            <div className={styles.nbaCardDesc}>ACCCESS TO ALL PLAYS & PARLAYS FOR NBA</div>
+                            <div className={styles.nbaCardDesc}>
+                              ACCCESS TO ALL PLAYS & PARLAYS FOR NBA
+                            </div>
                           </div>
                         </div>
                       </Col>
@@ -176,7 +185,9 @@ function HeroBanner() {
                           </div>
                           <div className={styles.nbaCardContent}>
                             <div className={styles.nbaCardTitle}>NBA dfs</div>
-                            <div className={styles.nbaCardDesc}>DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports</div>
+                            <div className={styles.nbaCardDesc}>
+                              DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports
+                            </div>
                           </div>
                         </div>
                       </Col>
@@ -185,7 +196,9 @@ function HeroBanner() {
                       <span>PROMO CODE:</span>
                       <div className={styles.promoCodeValue}>
                         <span>DOUBLEDIP</span>
-                        <span className={styles.promoCodeDesc}>ONLY APPLICABLE TO MONTHLY ACCESS</span>
+                        <span className={styles.promoCodeDesc}>
+                          ONLY APPLICABLE TO MONTHLY ACCESS
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -199,7 +212,7 @@ function HeroBanner() {
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide5}`}>
                   <div className={styles.carousel_slide_text}>
-                    <h2>DON’T HAVE A BOOK  YET?</h2>
+                    <h2>DON’T HAVE A BOOK YET?</h2>
                     <div className={styles.desc}>Thedailystakes HAS got you covered</div>
                     <div className={styles.logos}>
                       <img src="/images/logos.png" alt="" />
@@ -248,10 +261,18 @@ function MembershipOfferings() {
                 <span className={styles.price}>$199.00</span>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li><span>Receive Access to ALL Plays for the Sport(s) of Your Choice</span></li>
-                <li><span>Sports Include NBA, NFL, Soccer, MLB, NCAAF, NCAAB, UFC & Formula 1</span></li>
-                <li><span>Customized Dashboard Including Automated Record Tracking</span></li>
-                <li><span>Weekly, Monthly, Season & Playoff Packages Available.</span></li>
+                <li>
+                  <span>Receive Access to ALL Plays for the Sport(s) of Your Choice</span>
+                </li>
+                <li>
+                  <span>Sports Include NBA, NFL, Soccer, MLB, NCAAF, NCAAB, UFC & Formula 1</span>
+                </li>
+                <li>
+                  <span>Customized Dashboard Including Automated Record Tracking</span>
+                </li>
+                <li>
+                  <span>Weekly, Monthly, Season & Playoff Packages Available.</span>
+                </li>
               </ul>
               <Link href="/shop?plan=sports_card">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -282,11 +303,23 @@ function MembershipOfferings() {
                 <div className={styles.price}>$79.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li><span>Receive Access to ALL Plays for ALL Sports, Including BONUS Plays</span></li>
-                <li><span>Customized Dashboard Including Automated Record Tracking</span></li>
-                <li><span>Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies</span></li>
-                <li><span>Daily, Weekly, Monthly & Annual Packages Available.</span></li>
-                <li><span>Daily Card Includes TheDailyStakes Protection</span></li>
+                <li>
+                  <span>Receive Access to ALL Plays for ALL Sports, Including BONUS Plays</span>
+                </li>
+                <li>
+                  <span>Customized Dashboard Including Automated Record Tracking</span>
+                </li>
+                <li>
+                  <span>
+                    Advanced Stats for Each Bet, Weekly Pro Tips & Bankroll Management Strategies
+                  </span>
+                </li>
+                <li>
+                  <span>Daily, Weekly, Monthly & Annual Packages Available.</span>
+                </li>
+                <li>
+                  <span>Daily Card Includes TheDailyStakes Protection</span>
+                </li>
               </ul>
               <Link href="/shop?plan=all">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -316,11 +349,24 @@ function MembershipOfferings() {
                 <div className={styles.price}>$10.00</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
-                <li><span>DFS Lineups for Single Slate & Main Slate Game Styles</span></li>
-                <li><span>Premium Player Prop Recommendations</span></li>
-                <li><span>Sports Include NBA, NFL & MLB</span></li>
-                <li><span>Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks Contest Types</span></li>
-                <li><span>Daily, Weekly, & Monthly Packages Available</span></li>
+                <li>
+                  <span>DFS Lineups for Single Slate & Main Slate Game Styles</span>
+                </li>
+                <li>
+                  <span>Premium Player Prop Recommendations</span>
+                </li>
+                <li>
+                  <span>Sports Include NBA, NFL & MLB</span>
+                </li>
+                <li>
+                  <span>
+                    Lineup Formats Included for DraftKings, Fanduel & Yahoo Sportsbooks Contest
+                    Types
+                  </span>
+                </li>
+                <li>
+                  <span>Daily, Weekly, & Monthly Packages Available</span>
+                </li>
               </ul>
               <Link href="/shop?plan=fantasy">
                 <Button className={styles.learn_more_btn}>Learn More</Button>
@@ -600,7 +646,9 @@ function BetOnSports() {
 
       <div className={styles.mobile_column_display}>
         <Button
-          className={`${styles.mobile_display_buttons} ${activePack === 'vip' ? styles.active : ''}`}
+          className={`${styles.mobile_display_buttons} ${
+            activePack === 'vip' ? styles.active : ''
+          }`}
           onClick={() => {
             setSportsDataForMobile(sportsData.slice(0, 1));
             setActivePack('vip');
@@ -608,7 +656,9 @@ function BetOnSports() {
           VIP ALL ACCESS CARD
         </Button>
         <Button
-          className={`${styles.mobile_display_buttons} ${activePack === 'sports_card' ? styles.active : ''}`}
+          className={`${styles.mobile_display_buttons} ${
+            activePack === 'sports_card' ? styles.active : ''
+          }`}
           onClick={() => {
             setSportsDataForMobile(sportsData.slice(1, 9));
             setActivePack('sports_card');
@@ -616,7 +666,9 @@ function BetOnSports() {
           SPORTS CARD
         </Button>
         <Button
-          className={`${styles.mobile_display_buttons} ${activePack === 'fantasy' ? styles.active : ''}`}
+          className={`${styles.mobile_display_buttons} ${
+            activePack === 'fantasy' ? styles.active : ''
+          }`}
           onClick={() => {
             setSportsDataForMobile(sportsData.slice(9, 13));
             setActivePack('fantasy');

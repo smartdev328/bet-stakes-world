@@ -98,7 +98,7 @@ export function NFL_SVG({ className }: SVGIconPropType) {
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg">
-      <g >
+      <g>
         <path d="M104.367 270.771H102.208V292.147H104.367V270.771Z" fill="#91442A" />
         <path d="M115.163 270.772H113.004V292.147H115.163V270.772Z" fill="#91442A" />
         <path d="M125.959 270.772H123.799V292.147H125.959V270.772Z" fill="#91442A" />
@@ -525,7 +525,7 @@ export function UFC_SVG({ className }: SVGIconPropType) {
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg">
-      <g >
+      <g>
         <path
           d="M1.15845 176.548L176.564 1.14258H424.38L599.786 176.548V424.364L424.38 599.77H176.564L1.15845 424.364V176.548Z"
           stroke="#fff"
@@ -552,7 +552,7 @@ export function F1_SVG({ className }: SVGIconPropType) {
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg">
-      <g >
+      <g>
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -584,7 +584,7 @@ export function SOCCER_SVG({ className }: SVGIconPropType) {
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg">
-      <g >
+      <g>
         <path
           d="M625.005 227.884V6.51436L1195.75 6.51436V139.661H1201.33V0.945312L619.428 0.945312V227.791H622.217C623.146 227.837 624.076 227.837 625.005 227.884Z"
           fill="#6DCF40"

@@ -52,7 +52,6 @@ function sendAbandonmentMessage(sessionId: string) {
   });
 }
 
-
 export default {
   createSession,
   completeCheckout,

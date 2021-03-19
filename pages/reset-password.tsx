@@ -8,10 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppLayout } from '@components/index';
 import { ReduxState } from '@redux/reducers';
 import styles from '@styles/ResetPassword.module.css';
-import {
-  ResetPasswordForm,
-  ResetPasswordFormValidate
-} from '@type/Users';
+import { ResetPasswordForm, ResetPasswordFormValidate } from '@type/Users';
 import { PageProps } from '@type/Main';
 
 export default function ResetPassword({ token, subscriptions }: PageProps) {
@@ -29,7 +26,7 @@ export default function ResetPassword({ token, subscriptions }: PageProps) {
   });
   const [formValidation, setFormValidation] = useState<ResetPasswordFormValidate>({
     passwordConfirmation: true,
-    password: true,
+    password: true
   });
 
   useEffect(() => {
@@ -94,20 +91,20 @@ export default function ResetPassword({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-      <title>The Daily Stakes - Reset Password</title>
+        <title>The Daily Stakes - Reset Password</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.logo_section}>
               <LazyLoad>
-                  <img
+                <img
                   src={'/images/logo.svg'}
                   width={418}
                   height={72}
                   alt="App Logo"
                   className={styles.logo}
-                  />
+                />
               </LazyLoad>
             </div>
             <div className={`${styles.signInForm} ${styles.resetPassForm}`}>
@@ -116,19 +113,19 @@ export default function ResetPassword({ token, subscriptions }: PageProps) {
                 <Col span={24} className={styles.formGroup}>
                   <label>New Password</label>
                   <input
-                      type="password"
-                      placeholder="************"
-                      className={formValidation.password ? '' : styles.error}
-                      onChange={(e) => changeFormData('password', e)}
+                    type="password"
+                    placeholder="************"
+                    className={formValidation.password ? '' : styles.error}
+                    onChange={(e) => changeFormData('password', e)}
                   />
                 </Col>
                 <Col span={24} className={styles.formGroup}>
                   <label>Confirm Password</label>
                   <input
-                      type="password"
-                      placeholder="************"
-                      className={formValidation.passwordConfirmation ? '' : styles.error}
-                      onChange={(e) => changeFormData('passwordConfirmation', e)}
+                    type="password"
+                    placeholder="************"
+                    className={formValidation.passwordConfirmation ? '' : styles.error}
+                    onChange={(e) => changeFormData('passwordConfirmation', e)}
                   />
                 </Col>
                 <Button

@@ -18,11 +18,7 @@ function CommonSportsBook() {
         <Row>
           <Col span={12} className={styles.company_logo}>
             <a href="https://sportsbook.fanduel.com/">
-              <img
-                src="/images/fanduel.png"
-                alt="Fanduel Logo"
-                className={styles.image_style}
-              />
+              <img src="/images/fanduel.png" alt="Fanduel Logo" className={styles.image_style} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -36,11 +32,7 @@ function CommonSportsBook() {
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.pointsbet.com/">
-              <img
-                src="/images/betway.png"
-                alt="Betway Logo"
-                className={styles.image_style}
-              />
+              <img src="/images/betway.png" alt="Betway Logo" className={styles.image_style} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
@@ -54,20 +46,12 @@ function CommonSportsBook() {
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.bet365.com/">
-              <img
-                src="/images/bet365.png"
-                alt="Bet365 Logo"
-                className={styles.image_style}
-              />
+              <img src="/images/bet365.png" alt="Bet365 Logo" className={styles.image_style} />
             </a>
           </Col>
           <Col span={12} className={styles.company_logo}>
             <a href="https://www.888sport.com/">
-              <img
-                src="/images/888sport.png"
-                alt="888Sports Logo"
-                className={styles.image_style}
-              />
+              <img src="/images/888sport.png" alt="888Sports Logo" className={styles.image_style} />
             </a>
           </Col>
         </Row>

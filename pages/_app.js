@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { datadogLogs } from '@datadog/browser-logs';
+import { datadogRum } from '@datadog/browser-rum';
 
 import { wrapper } from '../redux/store';
 import { parseJwt } from '@utils/common';
@@ -130,6 +132,23 @@ function MyApp({ Component, pageProps }) {
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
     tracesSampleRate: 1.0
+  });
+
+  datadogLogs.init({
+    clientToken: 'pub4614e0a967b5e49c49b8f7d989ac1a03',
+    site: 'thedailystakes.com',
+    env: 'prod'
+  });
+
+  datadogRum.init({
+    applicationId: '781be1fa-72e4-4e94-ba48-25dbbd835c92',
+    clientToken: 'pubd148f33b27ca03257e31ce1974419432',
+    site: 'datadoghq.com',
+    service: 'thedailystakes.com',
+    env: 'production',
+    version: '1.0.0',
+    sampleRate: 100,
+    trackInteractions: true
   });
 
   return (

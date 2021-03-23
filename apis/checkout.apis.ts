@@ -37,10 +37,13 @@ function validateCart(payload: CreateCheckoutSessionParams) {
 }
 
 function validateDiscount(code: string) {
-  const headers = tokenAuthHeaders();
+  // const headers = tokenAuthHeaders();
   return fetch(`${API_BASE_URL}/app/checkout/coupon/${code}`, {
     method: 'GET',
-    headers
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
   });
 }
 

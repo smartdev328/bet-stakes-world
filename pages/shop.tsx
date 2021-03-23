@@ -134,7 +134,7 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Shop</title>
+        <title>TheDailyStakes - Shop</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         {packages && (

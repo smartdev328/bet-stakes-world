@@ -469,7 +469,7 @@ export default function Cart({ packages, token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Cart</title>
+        <title>TheDailyStakes - Cart</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

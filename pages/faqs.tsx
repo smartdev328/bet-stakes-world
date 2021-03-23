@@ -49,7 +49,7 @@ export default function FAQsPage({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - FAQ</title>
+        <title>TheDailyStakes - FAQ</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>

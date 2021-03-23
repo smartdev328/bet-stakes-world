@@ -122,7 +122,7 @@ export default function YesterdaysPlays({ token, subscriptions, sports }: PagePr
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Yesterdays plays</title>
+        <title>TheDailyStakes - Yesterdays plays</title>
       </Head>
 
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>

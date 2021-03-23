@@ -560,7 +560,7 @@ export default function MemberDashboard({ token, subscriptions, sports, packages
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Member Dashboard</title>
+        <title>TheDailyStakes - Member Dashboard</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

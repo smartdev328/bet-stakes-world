@@ -8,7 +8,7 @@ export default function Privacy({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Nevada Privacy</title>
+        <title>TheDailyStakes - Nevada Privacy</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>

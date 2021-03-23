@@ -285,7 +285,7 @@ export default function MemberProfile({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Sports Card</title>
+        <title>TheDailyStakes - Sports Card</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

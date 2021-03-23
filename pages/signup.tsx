@@ -415,7 +415,7 @@ export default function Registration({ packages, token, subscriptions }: PagePro
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Registration</title>
+        <title>TheDailyStakes - Registration</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

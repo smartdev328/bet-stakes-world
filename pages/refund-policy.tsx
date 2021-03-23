@@ -9,7 +9,7 @@ export default function RefundPolicy({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Cancellation and Refund Policy</title>
+        <title>TheDailyStakes - Cancellation and Refund Policy</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>

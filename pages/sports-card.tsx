@@ -98,7 +98,7 @@ export default function SportsCard({ token, subscriptions, sports }: PageProps) 
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Sports Card</title>
+        <title>TheDailyStakes - Sports Card</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

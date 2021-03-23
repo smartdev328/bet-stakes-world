@@ -20,7 +20,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - About Us</title>
+        <title>TheDailyStakes - About Us</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />
@@ -33,7 +33,7 @@ export default function AboutUs({ token, subscriptions }: PageProps) {
                 <Col lg={9} md={24} className={styles.dsimage_container}>
                   <img
                     src="/images/about-us-dailystake.svg"
-                    alt="The Daily Stakes"
+                    alt="TheDailyStakes"
                     className={styles.dailystake_image}
                   />
                 </Col>

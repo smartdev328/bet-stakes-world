@@ -157,7 +157,7 @@ export default function FantasyDailyLineupsPage({ token, subscriptions, sports }
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Daily Fantasy</title>
+        <title>TheDailyStakes - Daily Fantasy</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <HeroBanner />

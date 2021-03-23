@@ -9,7 +9,7 @@ export default function Terms({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Terms</title>
+        <title>TheDailyStakes - Terms</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>

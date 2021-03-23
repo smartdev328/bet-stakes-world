@@ -91,7 +91,7 @@ export default function ResetPassword({ token, subscriptions }: PageProps) {
   return (
     <>
       <Head>
-        <title>The Daily Stakes - Reset Password</title>
+        <title>TheDailyStakes - Reset Password</title>
       </Head>
       <AppLayout token={token} subscriptions={subscriptions} bgColor={'#ffffff'}>
         <div className={styles.container}>

@@ -490,52 +490,56 @@ function LineupsList({ data, selectedSport }: { data: DailyLineupType[]; selecte
               </div>
             </div>
           </Row>
-          <div className={styles.daily_lineup_details}>
-            <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
-              <div className={styles.hide_details_btn}>
-                <span>View details</span>
-                {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
-                {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+          {lineup?.stat ? (
+            <div className={styles.daily_lineup_details}>
+              <div onClick={() => changeDetailsVisibleAt(index)} className={styles.hide_details}>
+                <div className={styles.hide_details_btn}>
+                  <span>View details</span>
+                  {showDetailsAt[index] && <CaretUpOutlined className={styles.caret_up} />}
+                  {!showDetailsAt[index] && <CaretDownOutlined className={styles.caret_down} />}
+                </div>
               </div>
-            </div>
-            {showDetailsAt[index] && (
-              <Row className={styles.details_properties} justify={'space-between'}>
-                {lineup?.stat?.this_season && (
-                  <div className={styles.details_property}>
-                    <div className={styles.details_property_title}>
-                      <AntiClockIcon className={styles.anti_clock_icon} />
-                      <span>THIS SEASON</span>
-                    </div>
-                    <Markdown source={lineup?.stat?.this_season} />
-                  </div>
-                )}
-                {lineup?.stat?.projected_points && (
-                  <div className={styles.details_property}>
-                    <div className={styles.details_property_title}>
-                      <div>
-                        <img
-                          alt=""
-                          src="/images/user-double.png"
-                          className={styles.user_double_icon}
-                        />
+              {showDetailsAt[index] && (
+                <Row className={styles.details_properties} justify={'space-between'}>
+                  {lineup?.stat?.this_season && (
+                    <div className={styles.details_property}>
+                      <div className={styles.details_property_title}>
+                        <AntiClockIcon className={styles.anti_clock_icon} />
+                        <span>THIS SEASON</span>
                       </div>
-                      <span>PROJECTED POINTS BY THE DAILY STAKES </span>
+                      <Markdown source={lineup?.stat?.this_season} />
                     </div>
-                    <Markdown source={lineup?.stat?.projected_points} />
-                  </div>
-                )}
-                {lineup?.stat?.player_props && (
-                  <div className={styles.details_property}>
-                    <div className={styles.details_property_title}>
-                      <DateRangeIcon className={styles.date_range_icon} />
-                      <span>PLAYER PROPS BY THE Sportbooks</span>
+                  )}
+                  {lineup?.stat?.projected_points && (
+                    <div className={styles.details_property}>
+                      <div className={styles.details_property_title}>
+                        <div>
+                          <img
+                            alt=""
+                            src="/images/user-double.png"
+                            className={styles.user_double_icon}
+                          />
+                        </div>
+                        <span>PROJECTED POINTS BY THE DAILY STAKES </span>
+                      </div>
+                      <Markdown source={lineup?.stat?.projected_points} />
                     </div>
-                    <Markdown source={lineup?.stat?.player_props} />
-                  </div>
-                )}
-              </Row>
-            )}
-          </div>
+                  )}
+                  {lineup?.stat?.player_props && (
+                    <div className={styles.details_property}>
+                      <div className={styles.details_property_title}>
+                        <DateRangeIcon className={styles.date_range_icon} />
+                        <span>PLAYER PROPS BY THE Sportbooks</span>
+                      </div>
+                      <Markdown source={lineup?.stat?.player_props} />
+                    </div>
+                  )}
+                </Row>
+              )}
+            </div>
+          ) : (
+            <div className={styles.border_line} />
+          )}
         </div>
       ))}
     </div>

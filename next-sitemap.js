@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: 'https://www.tdsdevelopment.info',
+  siteUrl: 'https://www.thedailystakes.com',
   generateRobotsTxt: true
 };

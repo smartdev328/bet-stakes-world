@@ -107,26 +107,8 @@ export default function Shop({ token, subscriptions, packages, sports }: PagePro
     setTempCartItems(newItems);
   };
 
-  const addToCart = (pack: Package, items: CartItem[]) => {
-    if (items.length === 0) {
-      return;
-    }
-    const newItems = cartItems.filter((item) => item.plan.package !== pack.id);
-    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
-      items.forEach((item) => {
-        newItems.push(item);
-      });
-    } else {
-      items.forEach((item) => {
-        const idx = newItems.findIndex(
-          (cartIt) => cartIt.plan.id === item.plan.id && cartIt.sports?.id === item.sports?.id
-        );
-        if (idx < 0) {
-          newItems.push(item);
-        }
-      });
-    }
-    dispatch({ type: 'UPDATE_CART', payload: newItems });
+  const addToCart = () => {
+    dispatch({ type: 'UPDATE_CART', payload: tempCartItems });
     setIsDrawerOpen(true);
   };
   const closeDrawer = () => {
@@ -1173,9 +1155,10 @@ type CartBoxProps = {
 function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false);
 
-  const removeItemAt = (index: number) => {
+  const removeItemAt = (item: CartItem) => {
     const newCart = cartItems.slice();
-    newCart.splice(index, 1);
+    const idx = newCart.findIndex((cartIt: CartItem) => cartIt.sports?.id === item.sports?.id && cartIt.plan.id === item.plan.id);
+    newCart.splice(idx, 1);
     changeCart(newCart);
   };
 
@@ -1218,7 +1201,7 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
                   />
                   <Button
                     ghost
-                    onClick={() => removeItemAt(index)}
+                    onClick={() => removeItemAt(item)}
                     className={styles.closeIconBtn}
                     icon={<CloseIcon className={styles.closeIcon} />}
                   />
@@ -1231,7 +1214,7 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
                 <div
                   className={
                     styles.cartBoxItemName
-                  }>{`Sport Card - ${item.sports?.name} - ${item.plan.duration}`}</div>
+                  }>{`Sport Card - ${item.sports?.name} - ${item.plan.duration === 'SEMI_ANNUAL' ? 'SEASON' : item.plan.duration}`}</div>
                 <div>
                   <NumberFormat
                     displayType="text"
@@ -1241,7 +1224,7 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
                   />
                   <Button
                     ghost
-                    onClick={() => removeItemAt(index)}
+                    onClick={() => removeItemAt(item)}
                     className={styles.closeIconBtn}
                     icon={<CloseIcon className={styles.closeIcon} />}
                   />
@@ -1264,7 +1247,7 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
                   />
                   <Button
                     ghost
-                    onClick={() => removeItemAt(index)}
+                    onClick={() => removeItemAt(item)}
                     className={styles.closeIconBtn}
                     icon={<CloseIcon className={styles.closeIcon} />}
                   />

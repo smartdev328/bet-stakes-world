@@ -38,7 +38,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             defer
           />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" type="image/png" href="/favicon.png" />
           <meta charSet="UTF-8" />
           <meta
             name="viewport"

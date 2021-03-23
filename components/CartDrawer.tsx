@@ -65,7 +65,9 @@ function PlanDropdown({
       transitionName=""
       trigger={['click']}>
       <div className={styles.optionBtn}>
-        <span>{`${tempPlan?.duration === 'SEMI_ANNUAL' ? 'SEASON' : tempPlan.duration} ACCESS`}</span>
+        <span>{`${
+          tempPlan?.duration === 'SEMI_ANNUAL' ? 'SEASON' : tempPlan.duration
+        } ACCESS`}</span>
         {packTypeMenuOpen && <CaretUpOutlined className={styles.caret_up} />}
         {!packTypeMenuOpen && <CaretDownOutlined className={styles.caret_down} />}
       </div>

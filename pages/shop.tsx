@@ -1157,7 +1157,9 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
 
   const removeItemAt = (item: CartItem) => {
     const newCart = cartItems.slice();
-    const idx = newCart.findIndex((cartIt: CartItem) => cartIt.sports?.id === item.sports?.id && cartIt.plan.id === item.plan.id);
+    const idx = newCart.findIndex(
+      (cartIt: CartItem) => cartIt.sports?.id === item.sports?.id && cartIt.plan.id === item.plan.id
+    );
     newCart.splice(idx, 1);
     changeCart(newCart);
   };
@@ -1211,10 +1213,9 @@ function CartBox({ pack, cartItems, addToCart, changeCart }: CartBoxProps) {
           {cartItems.length > 0 &&
             sportsCartItems.map((item, index) => (
               <div key={index} className={styles.cartBoxItem}>
-                <div
-                  className={
-                    styles.cartBoxItemName
-                  }>{`Sport Card - ${item.sports?.name} - ${item.plan.duration === 'SEMI_ANNUAL' ? 'SEASON' : item.plan.duration}`}</div>
+                <div className={styles.cartBoxItemName}>{`Sport Card - ${item.sports?.name} - ${
+                  item.plan.duration === 'SEMI_ANNUAL' ? 'SEASON' : item.plan.duration
+                }`}</div>
                 <div>
                   <NumberFormat
                     displayType="text"

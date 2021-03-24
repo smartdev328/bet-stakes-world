@@ -743,7 +743,7 @@ li .square_icon {
     font-size: 16px;
   }
   .slide2 .discountCode span:last-child {
-    font-size: 28px;
+    font-size: 25px;
     margin-left: 5px;
   }
   .slide2 .carousel_slide_subscribeBtn {
@@ -813,6 +813,15 @@ li .square_icon {
   }
   .slide5 .logos {
     margin: 16px 0 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .heroBannerLeft .second_desc span {
+    font-size: 27px;
+  }
+  .heroBannerLeft .second_desc .tagline {
+    font-size: 13px;
   }
 }
 

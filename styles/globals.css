@@ -472,3 +472,11 @@ a[disabled] {
   z-index: 99;
 }
 
+@media (max-width: 600px) {
+  .hero-banner .slick-next {
+    display: none !important;
+  }
+  .hero-banner .slick-prev {
+    display: none !important;
+  }
+}

@@ -575,6 +575,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 18px;
 }
 .earliest_games_header .dropdownBtn {
   background: rgba(236, 236, 236, 0.3);

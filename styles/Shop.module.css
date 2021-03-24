@@ -270,7 +270,7 @@
 }
 
 .introSection {
-  /* margin-bottom: 50px; */
+  margin-bottom: 2em;
 }
 
 .list {
@@ -538,7 +538,7 @@
 }
 
 .sportsTypeContent {
-  margin: 24px -8px;
+  margin: 8px -8px;
   display: flex;
   flex-flow: row wrap;
   max-width: 600px;
@@ -1082,6 +1082,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-bottom: 1em;
 }
 .endline_protection {
   display: block;

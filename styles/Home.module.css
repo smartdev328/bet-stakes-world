@@ -627,7 +627,7 @@ li .square_icon {
   }
   .heroBannerLeft {
     flex: none;
-    height: 530px;
+    height: 300px;
     padding-top: 86px;
   }
   .heroBannerLeft .container {
@@ -655,6 +655,9 @@ li .square_icon {
   .heroBannerLeft .second_desc .tagline {
     font-size: 14px;
     padding: 0;
+  }
+  .heroBannerLeft ul {
+    display: none;
   }
   .heroBannerLeft ul li {
     font-size: 12px;
@@ -1165,6 +1168,10 @@ li .square_icon {
   .plan {
     width: 100%;
     max-width: 360px;
+    margin: 0 auto 1.5em;
+  }
+  .plan:last-child {
+    margin: 0 auto 1.5em;
   }
   .plan_extra_content {
     font-size: 32px;

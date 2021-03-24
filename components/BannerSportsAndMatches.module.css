@@ -100,6 +100,7 @@
   position: relative;
   flex: 1;
   overflow: hidden;
+  border-bottom: solid 3px #000;
 }
 .arrow_back_icon, .arrow_forward_icon {
   width: 12px;

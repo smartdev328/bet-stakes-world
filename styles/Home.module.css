@@ -758,6 +758,7 @@ li .square_icon {
   }
   .slide3_subtitle span {
     font-size: 24px;
+    white-space: nowrap;
   }
   .slide3_subtitle span:last-child {
     font-size: 12px;

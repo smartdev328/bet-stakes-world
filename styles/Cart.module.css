@@ -44,7 +44,7 @@
   position: absolute;
   top: 104px;
   left: 50%;
-  padding-top: 30px;
+  padding-top: 0;
   text-align: center;
   transform: translateX(-50%);
 }

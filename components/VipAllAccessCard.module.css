@@ -67,6 +67,9 @@
 .accordionContent ul li {
   display: flex;
 }
+.accordionContent ul li > * {
+  flex: 1;
+}
 .accordionContent ul li:before {
   content: '';
   display: block;
@@ -75,6 +78,7 @@
   background: #ffc700;
   margin-right: 10px;
   margin-top: 11px;
+  flex: none;
 }
 
 .date {

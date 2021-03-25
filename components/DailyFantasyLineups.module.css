@@ -69,6 +69,9 @@
   flex-flow: row wrap;
   margin: 4px 0;
 }
+.accordionContent ul li > * {
+  flex: 1;
+}
 .accordionContent ul li:before {
   content: '';
   display: block;
@@ -77,6 +80,7 @@
   background: #ffc700;
   margin-right: 10px;
   margin-top: 10px;
+  flex: none;
 }
 .accordionContent ul li ul {
   padding-left: 10px;

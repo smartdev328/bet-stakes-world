@@ -253,7 +253,7 @@ function WeeklyProTip({
           />
           <div className={styles.weekly_pro_tip_right_panel}>
             <h4 className={styles.weekly_description_title}>{data.title}</h4>
-            <ReactMarkdown className={styles.weekly_pro_tip_desc}>{data.detail}</ReactMarkdown>
+            <ReactMarkdown className={styles.weekly_pro_tip_desc} source={data.detail} />
           </div>
         </div>
       )}

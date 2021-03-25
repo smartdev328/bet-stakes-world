@@ -66,6 +66,7 @@
 }
 .accordionContent ul li {
   display: flex;
+  flex-flow: row nowrap;
 }
 .accordionContent ul li > * {
   flex: 1;

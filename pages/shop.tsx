@@ -424,7 +424,7 @@ function ProductsAndCartBox({
         <div className={styles.protection_detail}>
           <p className={styles.protection_heading}>Only applicable to vip daily cards</p>
           <p className={styles.protection_details}>
-            IF OVER 50% OF THE DAILY VIP ALL ACCES CARD ARE LOSSES FOR A
+            IF OVER 50% OF THE DAILY VIP ALL ACCESS CARD ARE LOSSES FOR A
             <br className={styles.endline_protection} /> GIVEN DAY, THE NEXT DAY’S PICKS ARE
             AUTOMATICALLY FREE. NO <br className={styles.endline_protection} /> QUESTIONS ASKED.
           </p>

@@ -437,7 +437,9 @@ function ProductsAndCartBox({
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={`${activePlan?.id === plan.id ? styles.active : ''} ${styles.list} ${plan.duration === 'WEEKLY' ? styles.weekly : ''}`}
+              className={`${activePlan?.id === plan.id ? styles.active : ''} ${styles.list} ${
+                plan.duration === 'WEEKLY' ? styles.weekly : ''
+              }`}
               onClick={() => selectBillingPlan(plan)}>
               <div className={styles.flexRowForVip}>
                 <div className={styles.nameRow}>

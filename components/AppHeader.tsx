@@ -17,7 +17,6 @@ import styles from './AppHeader.module.css';
 import { JWT } from '@type/Main';
 import { UserSubscription } from '@type/Users';
 import { ReduxState } from '@redux/reducers';
-import moment from 'moment-timezone';
 import { PACKAGE_NAMES } from '@constants/';
 
 const Button = dynamic(() => import('antd/lib/button'));
@@ -28,18 +27,6 @@ type HeaderProps = {
   currentDateTime: string;
   token: JWT | null;
   subscriptions: UserSubscription[];
-};
-
-type RemainingTimeType = {
-  hrs: number;
-  mins: number;
-  secs: number;
-};
-
-const DefaultRemainingTime = {
-  hrs: 0,
-  mins: 0,
-  secs: 0
 };
 
 type SubscriptionStatus = 'visitor' | 'unpaid' | 'paid';
@@ -198,32 +185,6 @@ function SubMenu({
       </div>
     </>
   );
-}
-
-function getRemainingTime(): RemainingTimeType {
-  const now = new Date(); //todays date
-  const todayM = now.getMonth() + 1 < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1;
-  const end = moment.tz(
-    `${now.getFullYear()}-${todayM}-${
-      now.getDate() < 10 ? '0' + now.getDate() : now.getDate()
-    } 18:00`,
-    'America/Toronto'
-  );
-  let diff = Math.abs(moment().diff(end, 'seconds'));
-  if (diff > 0) {
-    const days = Math.floor(diff / 86400);
-    diff = diff - 86400 * days;
-    const hrs = Math.floor(diff / 3600);
-    diff = diff - 3600 * hrs;
-    const mins = Math.floor(diff / 60);
-    diff = diff - 60 * mins;
-    return {
-      hrs,
-      mins,
-      secs: Math.floor(diff)
-    };
-  }
-  return DefaultRemainingTime;
 }
 
 function DateBar({
@@ -580,9 +541,9 @@ export default function AppHeader({
                   </Button>
                 </Link>
               )}
-                <Link href="/shop">
-                  <a className={styles.joinNowMobileBtn}>Join Now For $1</a>
-                </Link>
+              <Link href="/shop">
+                <a className={styles.joinNowMobileBtn}>Join Now For $1</a>
+              </Link>
             </div>
           )}
         </div>

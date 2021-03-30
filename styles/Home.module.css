@@ -203,24 +203,31 @@ li .square_icon {
   background: #1A1A1A;
 }
 .slide2 h1 {
-  font-family: 'Rock Salt';
-  font-weight: normal;
-  font-size: 50px;
+  font-weight: 700;
+  font-size: 60px;
   line-height: 184.4%;
   text-align: center;
   text-transform: uppercase;
   color: #FFFFFF;
+  margin-top: -0.8em;
+  margin-bottom: 0;
+}
+.slide2 .discountInfo {
+  display: flex;
+  align-items: center;
 }
 .slide2 .discountInfo span {
   font-weight: bold;
-  font-size: 80px;
+  font-size: 70px;
   text-align: center;
-  color: #FFC700;
-  display: block;
+  color: #fff;
   line-height: 1.2em;
 }
 .slide2 .discountInfo span:last-child {
-  font-size: 22px;
+  font-size: 160px;
+  color: #ffc700;
+  line-height: 1.2em;
+  margin-left: 16px;
 }
 .slide2 .discountCode {
   display: flex;
@@ -229,13 +236,18 @@ li .square_icon {
 }
 .slide2 .discountCode span {
   font-weight: bold;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 184.4%;
   color: #ffffff;
 }
 .slide2 .discountCode span:last-child {
-  font-size: 56px;
+  font-size: 58px;
   margin-left: 10px;
+  color: #ffc700;
+}
+.slide2 .carousel_slide_subscribeBtn {
+  background: #fff;
+  margin-top: 1em;
 }
 
 /* Third Slide */
@@ -417,20 +429,20 @@ li .square_icon {
 
   /* Second Slide */
   .slide2 h1 {
-    font-size: 46px;
+    font-size: 52px;
   }
   .slide2 .discountInfo span {
-    font-size: 80px;
-    line-height: 1.2em;
+    font-size: 60px;
   }
   .slide2 .discountInfo span:last-child {
-    font-size: 22px;
+    font-size: 120px;
+    line-height: 1.5em;
   }
   .slide2 .discountCode span {
-    font-size: 38px;
+    font-size: 28px;
   }
   .slide2 .discountCode span:last-child {
-    font-size: 54px;
+    font-size: 50px;
   }
 
   /* Third Slide */
@@ -494,20 +506,20 @@ li .square_icon {
 
   /* Second Slide */
   .slide2 h1 {
-    font-size: 40px;
+    font-size: 48px;
   }
   .slide2 .discountInfo span {
-    font-size: 72px;
-    line-height: 1.2em;
+    font-size: 56px;
   }
   .slide2 .discountInfo span:last-child {
-    font-size: 20px;
+    font-size: 110px;
+    line-height: 1.7em;
   }
   .slide2 .discountCode span {
-    font-size: 34px;
+    font-size: 24px;
   }
   .slide2 .discountCode span:last-child {
-    font-size: 50px;
+    font-size: 48px;
   }
 
   /* Third Slide */
@@ -568,17 +580,16 @@ li .square_icon {
     font-size: 37px;
   }
   .slide2 .discountInfo span {
-    font-size: 72px;
-    line-height: 1.2em;
+    font-size: 45px;
   }
   .slide2 .discountInfo span:last-child {
-    font-size: 20px;
+    font-size: 100px;
   }
   .slide2 .discountCode span {
-    font-size: 30px;
+    font-size: 22px;
   }
   .slide2 .discountCode span:last-child {
-    font-size: 46px;
+    font-size: 36px;
   }
 
   /* Third Slide */
@@ -730,27 +741,27 @@ li .square_icon {
   }
   /* Slide 2 */
   .slide2 h1 {
-    font-size: 25px;
-    line-height: 184.4%;
+    font-size: 20px;
+    line-height: 2.2em;
     margin-top: 8px;
     margin-bottom: 0;
   }
   .slide2 .discountInfo span {
-    font-size: 35px;
-    line-height: 1.2em;
+    font-size: 32px;
   }
   .slide2 .discountInfo span:last-child {
-    font-size: 8px;
+    font-size: 80px;
+    line-height: 0.6em;
   }
   .slide2 .discountCode span {
-    font-size: 16px;
+    font-size: 14px;
   }
   .slide2 .discountCode span:last-child {
-    font-size: 25px;
+    font-size: 24px;
     margin-left: 5px;
   }
   .slide2 .carousel_slide_subscribeBtn {
-    margin-top: 0;
+    margin-top: 0.5em;
   }
   /* Slide 3 */
   .slide3_subtitle {

@@ -123,19 +123,19 @@ function HeroBanner() {
               <div>
                 <div className={`${styles.carousel_slide} ${styles.slide2}`}>
                   <div className={styles.carousel_slide_text}>
-                    <h1>NEW CUSTOMERS</h1>
+                    <h1>VIP ALL ACCESS</h1>
                     <div className={styles.discountInfo}>
-                      <span>50% OFF</span>
-                      <span>ANY PACKAGE AT CHECKOUT</span>
+                      <span>1 WEEK FOR</span>
+                      <span>$1</span>
                     </div>
                     <div className={styles.discountCode}>
                       <span>PROMO CODE:</span>
-                      <span>TEAMTDS</span>
+                      <span>ONEDOLLAR</span>
                     </div>
                   </div>
                   <Link href="/shop">
                     <a>
-                      <Button className={styles.carousel_slide_subscribeBtn}>SHOP NOW</Button>
+                      <Button className={styles.carousel_slide_subscribeBtn}>JOIN NOW</Button>
                     </a>
                   </Link>
                 </div>

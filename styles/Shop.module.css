@@ -359,6 +359,69 @@
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
 }
+.sportsCards ul li.active.weekly {
+  background: #ffc700;
+  border: solid 1px #1a1a1a;
+}
+.sportsCards ul li.active.weekly .checkedStatusIcon path {
+  fill: #1a1a1a;
+}
+.new_weekly_plan .price_row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.new_weekly_plan .price_row span {
+  text-transform: uppercase;
+  color: #1a1a1a;
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1em;
+}
+.new_weekly_plan .price_row span:last-child {
+  font-weight: bold;
+  font-size: 54px;
+  margin-left: 4px;
+}
+.new_weekly_plan .promocode_row {
+  display: flex;
+  align-items: center;
+  margin-top: -0.7em;
+}
+.new_weekly_plan .promocode_row span {
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 184.4%;
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+.new_weekly_plan .promocode_row span:last-child {
+  font-size: 18px;
+  margin-left: 5px;
+}
+.sportsCards ul li.active.weekly .new_weekly_plan span {
+  color: #fff;
+  text-shadow: 1px 2px 5px black;
+}
+
+@media (max-width: 600px) {
+  .new_weekly_plan .price_row span {
+    font-size: 14px;
+  }
+  .new_weekly_plan .price_row span:last-child {
+    font-size: 36px;
+  }
+  .new_weekly_plan .promocode_row {
+    margin-top: -0.5em;
+  }
+  .new_weekly_plan .promocode_row span {
+    font-size: 8px;
+  }
+  .new_weekly_plan .promocode_row span:last-child {
+    font-size: 12px;
+  }
+}
+
 .sportsCards ul li svg {
   width: 24px;
   height: 24px;
@@ -886,11 +949,14 @@
   justify-content: space-between;
   width: 100%;
 }
-
+.flexRowForVip .nameRow {
+  display: flex;
+  align-items: center;
+}
 .sportsCard_value {
   text-align: center;
-  width: 170px;
-  padding: 0.5em 2em 0.5em 2.5em;
+  width: 150px;
+  padding: 0.5em 1.5em 0.5em 2em;
 }
 .sportsCard_value_title {
   font-weight: 600;
@@ -942,7 +1008,7 @@
     line-height: 44px;
   }
   .sportsCard_value {
-    width: 160px;
+    width: 140px;
   }
   .sportsCard_value_title {
     font-size: 14px;

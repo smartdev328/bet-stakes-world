@@ -437,10 +437,10 @@ function ProductsAndCartBox({
           {billingPlans.map((plan: BillingPlan, index: number) => (
             <li
               key={index}
-              className={`${activePlan?.id === plan.id ? styles.active : ''} ${styles.list}`}
+              className={`${activePlan?.id === plan.id ? styles.active : ''} ${styles.list} ${plan.duration === 'WEEKLY' ? styles.weekly : ''}`}
               onClick={() => selectBillingPlan(plan)}>
               <div className={styles.flexRowForVip}>
-                <div>
+                <div className={styles.nameRow}>
                   {activePlan?.id === plan.id && (
                     <CheckedCircleIcon className={styles.checkedStatusIcon} />
                   )}
@@ -449,6 +449,18 @@ function ProductsAndCartBox({
                   )}
                   <span className={styles.sportsCard_name}>{plan.duration}</span>
                 </div>
+                {plan.duration === 'WEEKLY' ? (
+                  <div className={styles.new_weekly_plan}>
+                    <div className={styles.price_row}>
+                      <span>1 week for</span>
+                      <span>$1</span>
+                    </div>
+                    <div className={styles.promocode_row}>
+                      <span>Promo code:</span>
+                      <span>OneDollar</span>
+                    </div>
+                  </div>
+                ) : null}
                 {plan.duration === 'MONTHLY' || plan.duration === 'ANNUAL' ? (
                   <div className={styles.ingame_div}>
                     <p className={styles.ingame_text}>IN-GAME BETS</p>
@@ -469,9 +481,15 @@ function ProductsAndCartBox({
                 <div className={`${styles.sportsCard_value}`}>
                   <div className={styles.sportsCard_value_title}>Sale</div>
                   <div className={styles.sportsCard_value_content}>
-                    <LazyLoad>
-                      <img src="/images/shop-plan-yellow-circle.svg" alt="" />
-                    </LazyLoad>
+                    {activePlan?.id === plan.id && plan.duration === 'WEEKLY' ? (
+                      <LazyLoad>
+                        <img src="/images/shop-plan-white-circle.svg" alt="" />
+                      </LazyLoad>
+                    ) : (
+                      <LazyLoad>
+                        <img src="/images/shop-plan-yellow-circle.svg" alt="" />
+                      </LazyLoad>
+                    )}
                     <div className={styles.sportsCard_value_price}>${plan.price}</div>
                     <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
                   </div>

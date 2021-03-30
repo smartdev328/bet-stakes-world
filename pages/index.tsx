@@ -4,7 +4,6 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
-import { Row, Col } from 'antd';
 
 import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
 import { StarSvg, ClickableArrowIcon, CarouselArrowIcon } from '@components/SvgIcons';
@@ -43,16 +42,6 @@ export default function Home({ token, subscriptions }: PageProps) {
 }
 
 function HeroBanner() {
-  const NextArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
-    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="next_arrow slick-next">
-      <ClickableArrowIcon className={styles.home_banner_next} />
-    </div>
-  );
-  const PrevArrow = ({ currentSlide, slideCount, ...props }: SlickArrowType) => (
-    <div {...props} key={`next_${currentSlide}_${slideCount}`} className="prev_arrow slick-prev">
-      <ClickableArrowIcon className={styles.home_banner_prev} />
-    </div>
-  );
   return (
     <section className="hero-banner">
       <div className={styles.heroBanner}>
@@ -89,143 +78,24 @@ function HeroBanner() {
         </div>
         <div className={styles.heroBannerRight}>
           <div className={styles.container}>
-            <Carousel
-              autoplay={false}
-              arrows
-              autoplaySpeed={6000}
-              className={styles.carousel}
-              nextArrow={<NextArrow />}
-              prevArrow={<PrevArrow />}>
-              <div>
-                <div className={`${styles.carousel_slide} ${styles.slide1}`}>
-                  <div className={styles.carousel_slide_text}>
-                    <h3>SUBSCRIBE NOW TO GET</h3>
-                    <h1>FREE ACCESS!</h1>
-                    <Row>
-                      <Col span={8} className={styles.feature}>
-                        FREE BETS
-                      </Col>
-                      <Col span={8} className={styles.feature}>
-                        PREDICTIONS
-                      </Col>
-                      <Col span={8} className={styles.feature}>
-                        DISCOUNTS
-                      </Col>
-                    </Row>
-                  </div>
-                  <Link href="/signup">
-                    <a>
-                      <Button className={styles.carousel_slide_subscribeBtn}>Subscribe Now</Button>
-                    </a>
-                  </Link>
+            <div className={`${styles.carousel_slide} ${styles.slide2}`}>
+              <div className={styles.carousel_slide_text}>
+                <h1>VIP ALL ACCESS</h1>
+                <div className={styles.discountInfo}>
+                  <span>1 WEEK FOR</span>
+                  <span>$1</span>
+                </div>
+                <div className={styles.discountCode}>
+                  <span>PROMO CODE:</span>
+                  <span>ONEDOLLAR</span>
                 </div>
               </div>
-              <div>
-                <div className={`${styles.carousel_slide} ${styles.slide2}`}>
-                  <div className={styles.carousel_slide_text}>
-                    <h1>VIP ALL ACCESS</h1>
-                    <div className={styles.discountInfo}>
-                      <span>1 WEEK FOR</span>
-                      <span>$1</span>
-                    </div>
-                    <div className={styles.discountCode}>
-                      <span>PROMO CODE:</span>
-                      <span>ONEDOLLAR</span>
-                    </div>
-                  </div>
-                  <Link href="/shop">
-                    <a>
-                      <Button className={styles.carousel_slide_subscribeBtn}>JOIN NOW</Button>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <div className={`${styles.carousel_slide} ${styles.slide3}`}>
-                  <div className={styles.carousel_slide_text}>
-                    <div className={styles.slide3_subtitle}>
-                      <span>MARCH MADNESS</span>
-                      <span>2021</span>
-                    </div>
-                    <div className={styles.slide3_title}>
-                      FOR MORE INFO, <br />
-                      VISIT OUR ARTICLE @ BLOG.THEDAILYSTAKES.COM
-                    </div>
-                  </div>
-                  <Link href="https://blog.thedailystakes.com/after-a-one-year-hiatus-march-madness-is-back-before-you-fill-your-ncaa-bracket-read-our-preview-for-an-inside-look-at-the-matchups/">
-                    <a target="_blank">
-                      <Button className={styles.carousel_slide_readmoreBtn}>READ MORE</Button>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <div className={`${styles.carousel_slide} ${styles.slide4}`}>
-                  <div className={styles.carousel_slide_text}>
-                    <h3>BUY THIS CARD & GET DFS FREE</h3>
-                    <Row>
-                      <Col span={12} className="text-center">
-                        <div className={`${styles.nbaCard} ${styles.nbaCardActive}`}>
-                          <div className={styles.nbaCardSvgWrapper}>
-                            <NBA_SVG className={styles.nbaCardActiveSvg}></NBA_SVG>
-                          </div>
-                          <div className={styles.nbaCardContent}>
-                            <div className={styles.nbaCardTitle}>NBA</div>
-                            <div className={styles.nbaCardDesc}>
-                              ACCCESS TO ALL PLAYS & PARLAYS FOR NBA
-                            </div>
-                          </div>
-                        </div>
-                      </Col>
-                      <Col span={12} className="text-center">
-                        {/* NBA Card */}
-                        <div className={styles.nbaCard}>
-                          <div className={styles.nbaCardSvgWrapper}>
-                            <NBA_SVG className={styles.nbaCardSvg}></NBA_SVG>
-                          </div>
-                          <div className={styles.nbaCardContent}>
-                            <div className={styles.nbaCardTitle}>NBA dfs</div>
-                            <div className={styles.nbaCardDesc}>
-                              DAILY FANTASY LINEUPS for fanduel, draftkings & Yahoo Sports
-                            </div>
-                          </div>
-                        </div>
-                      </Col>
-                    </Row>
-                    <div className={styles.promoCode}>
-                      <span>PROMO CODE:</span>
-                      <div className={styles.promoCodeValue}>
-                        <span>DOUBLEDIP</span>
-                        <span className={styles.promoCodeDesc}>
-                          ONLY APPLICABLE TO MONTHLY ACCESS
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link href="/shop?plan=sports_card">
-                    <a>
-                      <Button className={styles.carousel_slide_subscribeBtn}>View Plays</Button>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-              <div>
-                <div className={`${styles.carousel_slide} ${styles.slide5}`}>
-                  <div className={styles.carousel_slide_text}>
-                    <h2>DON’T HAVE A BOOK YET?</h2>
-                    <div className={styles.desc}>Thedailystakes HAS got you covered</div>
-                    <div className={styles.logos}>
-                      <img src="/images/logos.png" alt="" />
-                    </div>
-                  </div>
-                  <Link href="https://blog.thedailystakes.com/category/sportsbook-reviews/">
-                    <a target="_blank">
-                      <Button className={styles.carousel_slide_subscribeBtn}>Visit Now</Button>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            </Carousel>
+              <Link href="/shop">
+                <a>
+                  <Button className={styles.carousel_slide_subscribeBtn}>JOIN NOW</Button>
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
         <BannerSportsAndMatches />

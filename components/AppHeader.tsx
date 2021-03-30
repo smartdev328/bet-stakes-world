@@ -206,7 +206,7 @@ function getRemainingTime(): RemainingTimeType {
   const end = moment.tz(
     `${now.getFullYear()}-${todayM}-${
       now.getDate() < 10 ? '0' + now.getDate() : now.getDate()
-    } 19:00`,
+    } 18:00`,
     'America/Toronto'
   );
   let diff = Math.abs(moment().diff(end, 'seconds'));

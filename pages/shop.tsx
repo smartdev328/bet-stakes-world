@@ -408,10 +408,10 @@ function ProductsAndCartBox({
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   const vipCardList = [
-    { faceValue: 199, pricePerDay: 199 },
-    { faceValue: 699, pricePerDay: 100 },
-    { faceValue: 1999, pricePerDay: 67 },
-    { faceValue: 5999, pricePerDay: 17 }
+    { faceValue: 39, pricePerDay: 39 },
+    { faceValue: 99, pricePerDay: 14 },
+    { faceValue: 299, pricePerDay: 10 },
+    { faceValue: 999, pricePerDay: 3 }
   ];
 
   return (
@@ -628,9 +628,9 @@ function ProductsAndCartBoxForFantasy({
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   const fantasyCardList = [
-    { faceValue: 29, pricePerDay: 29 },
-    { faceValue: 99, pricePerDay: 14 },
-    { faceValue: 299, pricePerDay: 10 }
+    { faceValue: 29, pricePerDay: 4 },
+    { faceValue: 199, pricePerDay: 7 },
+    { faceValue: 499, pricePerDay: 3 }
   ];
 
   return (
@@ -976,9 +976,9 @@ function ProductsAndCartBoxForSportsCard({
   const billingPlans = pack.billing_plans.filter((plan) => plan.description !== 'add-on');
 
   const sportsCardList = [
-    { faceValue: 399, pricePerDay: 57 },
-    { faceValue: 999, pricePerDay: 33 },
-    { faceValue: 2999, pricePerDay: 17 }
+    { faceValue: 29, pricePerDay: 4 },
+    { faceValue: 199, pricePerDay: 7 },
+    { faceValue: 499, pricePerDay: 3 }
   ];
 
   return (
@@ -1119,8 +1119,8 @@ function ProductsAndCartBoxForSportsCard({
                   <div className={styles.flexRow}>
                     <div className={`${styles.sportsCard_value} ${styles.origin}`}>
                       <div className={styles.sportsCard_value_title}>Reg</div>
-                      <div className={styles.sportsCard_value_price}>$99</div>
-                      <div className={styles.sportsCard_value_dayprice}>$99/Day</div>
+                      <div className={styles.sportsCard_value_price}>$20</div>
+                      <div className={styles.sportsCard_value_dayprice}>$20/Day</div>
                     </div>
                     <div className={`${styles.sportsCard_value}`}>
                       <div className={styles.sportsCard_value_title}>Sale</div>

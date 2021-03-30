@@ -258,7 +258,7 @@ function MembershipOfferings() {
                 <div>
                   <strong>1 sport weekly</strong> Starting at
                 </div>
-                <span className={styles.price}>$199.00</span>
+                <span className={styles.price}>$19.99</span>
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>
@@ -300,7 +300,7 @@ function MembershipOfferings() {
                 <div>
                   <strong>All sports Daily</strong> Starting at
                 </div>
-                <div className={styles.price}>$79.00</div>
+                <div className={styles.price}>$9.99</div>
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>

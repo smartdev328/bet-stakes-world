@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
 
 import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
-import { StarSvg, ClickableArrowIcon, CarouselArrowIcon } from '@components/SvgIcons';
+import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
 import { F1_SVG, NBA_SVG, NFL_SVG, UFC_SVG, SOCCER_SVG, MLB_SVG } from '@components/SportIcons';
 import {
   PageProps,

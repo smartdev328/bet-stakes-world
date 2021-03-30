@@ -5,7 +5,7 @@
 
 .header .headerLeftCol {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   text-align: left;
 }
 
@@ -680,4 +680,18 @@ a.locked:active {
 
 .sportMenu a {
   text-transform: uppercase;
+}
+.joinNowMobileBtn {
+  color: #1a1a1a;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: block;
+  font-weight: 700;
+  background: #ffc700;
+  border: 1px solid #1a1a1a;
+  width: 100%;
+  padding: 10.5px 16px;
+  text-align: center;
+  border-radius: 3px;
+  margin-bottom: 4em;
 }

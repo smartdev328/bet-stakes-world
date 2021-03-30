@@ -251,7 +251,6 @@ export default function AppHeader({
   token,
   subscriptions: userSubscriptions
 }: HeaderProps) {
-  const [remainingTime, setRemainingTime] = useState<RemainingTimeType>(DefaultRemainingTime);
   const [mobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   const { items: cartItems } = useSelector((state: ReduxState) => state.cart);
 
@@ -269,15 +268,6 @@ export default function AppHeader({
           payload: data
         });
       });
-    const remainingTime = getRemainingTime();
-    setRemainingTime(remainingTime);
-    const remainingTimeInterval = setInterval(() => {
-      const remainingTime = getRemainingTime();
-      setRemainingTime(remainingTime);
-    }, 1000);
-    return () => {
-      clearInterval(remainingTimeInterval);
-    };
   }, []);
 
   const openLoginModal = () => {
@@ -326,16 +316,10 @@ export default function AppHeader({
       <ForgotPasswordModal />
       <Row justify="space-between" className={styles.header}>
         <Col span={7} className={styles.headerLeftCol}>
-          <div className={styles.countdownBox}>
-            <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
-            <div className={styles.countdownBox_countdown_timer}>
-              <span>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
-            </div>
-            <div>
-              <Link href={userSubscriptions.length > 0 ? '/member-dashboard' : '/shop'}>
-                <a className={styles.yellowBoldLink}>View Plays</a>
-              </Link>
-            </div>
+          <div className={styles.ctaBtns}>
+            <Link href="/shop">
+              <a className={styles.myDashboardBtn}>Join Now For $1</a>
+            </Link>
           </div>
         </Col>
         <Col span={10} className={styles.headerMainCol}>
@@ -596,18 +580,9 @@ export default function AppHeader({
                   </Button>
                 </Link>
               )}
-              <div className={styles.countdownBoxMobile}>
-                <div className={styles.countdownBox_desc}>PLAYS RELEASE COUNTDOWN</div>
-                <Row align="middle">
-                  <span
-                    className={
-                      styles.countdownBox_countdown_timer
-                    }>{`${remainingTime.hrs}h ${remainingTime.mins}m ${remainingTime.secs}s`}</span>
-                  <Link href={userSubscriptions.length ? '/member-dashboard' : '/shop'}>
-                    <a className={styles.yellowBoldLink}>View Plays</a>
-                  </Link>
-                </Row>
-              </div>
+                <Link href="/shop">
+                  <a className={styles.joinNowMobileBtn}>Join Now For $1</a>
+                </Link>
             </div>
           )}
         </div>

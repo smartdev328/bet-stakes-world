@@ -4,6 +4,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { useRouter } from 'next/router';
+import NumberFormat from 'react-number-format';
 
 import { AppLayout, BannerSportsAndMatches, DSProtection } from '@components/index';
 import { StarSvg, CarouselArrowIcon } from '@components/SvgIcons';
@@ -15,13 +16,16 @@ import {
   SportCardsSelection,
   SpoortCardName
 } from '@type/Main';
+import PackageAPIs from '@apis/package.apis';
 import styles from '@styles/Home.module.css';
+import { BillingPlan, Package } from '@type/Packages';
+import { PACKAGE_NAMES } from '@constants/';
 
 const Carousel = dynamic(() => import('antd/lib/carousel'));
 const Rate = dynamic(() => import('antd/lib/rate'));
 const Button = dynamic(() => import('antd/lib/button'));
 
-export default function Home({ token, subscriptions }: PageProps) {
+export default function Home({ token, subscriptions, packages }: PageProps) {
   return (
     <>
       <Head>
@@ -30,7 +34,7 @@ export default function Home({ token, subscriptions }: PageProps) {
       </Head>
       <AppLayout token={token} subscriptions={subscriptions}>
         <HeroBanner />
-        <MembershipOfferings />
+        {packages && <MembershipOfferings packages={packages} />}
         <OurDailyStandards />
         <BetOnSports />
         <Testimonials />
@@ -104,7 +108,20 @@ function HeroBanner() {
   );
 }
 
-function MembershipOfferings() {
+function MembershipOfferings({ packages }: { packages: Package[] }) {
+  let vipAllAccessPlan: BillingPlan | undefined,
+  fantasyPlan: BillingPlan | undefined,
+  sportsCardPlan: BillingPlan | undefined;
+  packages?.forEach((pack) => {
+    if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.VIP_ALL_ACCESS) > -1) {
+      vipAllAccessPlan = pack.billing_plans.filter(plan => plan.duration === 'DAILY')[0];
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.FANTASY) > -1) {
+      fantasyPlan = pack.billing_plans.filter(plan => plan.duration === 'DAILY')[0];
+    } else if (pack.name.toUpperCase().indexOf(PACKAGE_NAMES.SPORTS_CARD) > -1) {
+      sportsCardPlan = pack.billing_plans.filter(plan => plan.duration === 'DAILY')[0];
+    }
+  });
+
   return (
     <div className={styles.membershipOffers}>
       <div className={styles.membershipOffers_title}>Our Membership Offerings</div>
@@ -128,7 +145,15 @@ function MembershipOfferings() {
                 <div>
                   <strong>1 sport weekly</strong> Starting at
                 </div>
-                <span className={styles.price}>$19.99</span>
+                <NumberFormat
+                  displayType="text"
+                  className={styles.price}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  fixedDecimalScale
+                  decimalScale={2}
+                  value={sportsCardPlan?.price || '0.00'}
+                />
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>
@@ -170,7 +195,15 @@ function MembershipOfferings() {
                 <div>
                   <strong>All sports Daily</strong> Starting at
                 </div>
-                <div className={styles.price}>$9.99</div>
+                <NumberFormat
+                  displayType="text"
+                  className={styles.price}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  fixedDecimalScale
+                  decimalScale={2}
+                  value={vipAllAccessPlan?.price || '0.00'}
+                />
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>
@@ -216,7 +249,15 @@ function MembershipOfferings() {
                 <div>
                   <strong>Daily Lineups</strong> Starting at
                 </div>
-                <div className={styles.price}>$10.00</div>
+                <NumberFormat
+                  displayType="text"
+                  className={styles.price}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                  fixedDecimalScale
+                  decimalScale={2}
+                  value={fantasyPlan?.price || '0.00'}
+                />
               </div>
               <ul className={styles.plan_content_details_desc}>
                 <li>
@@ -1004,4 +1045,15 @@ function SubscribeNow() {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await PackageAPIs.getPackages();
+  const packages = await res.json();
+
+  return {
+    props: {
+      packages
+    }
+  };
 }

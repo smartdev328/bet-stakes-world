@@ -25,6 +25,7 @@ import PackageAPIs from '@apis/package.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { Sport } from '@type/Sports';
 import { ReduxState } from '@redux/reducers';
+import { getDayPrice } from '@utils/common';
 import { FAQsARR, FAQsDesc, PACKAGE_NAMES } from '@constants/';
 
 type ProductsAndCartBoxProps = {
@@ -36,35 +37,6 @@ type ProductsAndCartBoxProps = {
   updateCart: (_: CartItem[]) => void;
 };
 const NON_UFC_F1 = 'NON_UFC_F1';
-
-const getDayPrice = (plan: BillingPlan) => {
-  let dayPrice = plan.price;
-  switch (plan.duration) {
-    case 'DAILY':
-      dayPrice = plan.price;
-      break;
-    case 'EVERY_3_DAYS':
-      dayPrice = Math.round(plan.price / 3);
-      break;
-    case 'WEEKLY':
-      dayPrice = Math.round(plan.price / 7);
-      break;
-    case 'MONTHLY':
-      dayPrice = Math.round(plan.price / 30);
-      break;
-    case 'QUARTERLY':
-      dayPrice = Math.round(plan.price / 90);
-      break;
-    case 'ANNUAL':
-      dayPrice = Math.round(plan.price / 360);
-      break;
-    case 'SEMI_ANNUAL':
-      dayPrice = Math.round(plan.price / 180);
-      break;
-    default:
-  }
-  return dayPrice;
-};
 
 export default function Shop({ token, subscriptions, packages, sports }: PageProps) {
   const { query } = useRouter();

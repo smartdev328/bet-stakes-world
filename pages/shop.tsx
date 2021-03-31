@@ -25,7 +25,6 @@ import PackageAPIs from '@apis/package.apis';
 import { BillingPlan, Package } from '@type/Packages';
 import { Sport } from '@type/Sports';
 import { ReduxState } from '@redux/reducers';
-import { getDayPrice } from '@utils/common';
 import { FAQsARR, FAQsDesc, PACKAGE_NAMES } from '@constants/';
 
 type ProductsAndCartBoxProps = {

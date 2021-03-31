@@ -448,9 +448,6 @@ function ProductsAndCartBox({
                   <div className={styles.sportsCard_value_price}>
                     ${vipCardList[index].faceValue}
                   </div>
-                  <div className={styles.sportsCard_value_dayprice}>
-                    ${vipCardList[index].pricePerDay}/Day
-                  </div>
                 </div>
                 <div className={`${styles.sportsCard_value}`}>
                   <div className={styles.sportsCard_value_title}>Sale</div>
@@ -465,7 +462,6 @@ function ProductsAndCartBox({
                       </LazyLoad>
                     )}
                     <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                    <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
                   </div>
                 </div>
               </div>
@@ -683,9 +679,6 @@ function ProductsAndCartBoxForFantasy({
                   <div className={styles.sportsCard_value_price}>
                     ${fantasyCardList[index].faceValue}
                   </div>
-                  <div className={styles.sportsCard_value_dayprice}>
-                    $ {fantasyCardList[index].pricePerDay}/Day
-                  </div>
                 </div>
                 <div className={`${styles.sportsCard_value}`}>
                   <div className={styles.sportsCard_value_title}>Sale</div>
@@ -694,7 +687,6 @@ function ProductsAndCartBoxForFantasy({
                       <img src="/images/shop-plan-yellow-circle.svg" alt="" />
                     </LazyLoad>
                     <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                    <div className={styles.sportsCard_value_dayprice}>${getDayPrice(plan)}/Day</div>
                   </div>
                 </div>
               </div>
@@ -1037,9 +1029,6 @@ function ProductsAndCartBoxForSportsCard({
                     <div className={styles.sportsCard_value_price}>
                       ${sportsCardList[index].faceValue}
                     </div>
-                    <div className={styles.sportsCard_value_dayprice}>
-                      ${sportsCardList[index].pricePerDay}/Day
-                    </div>
                   </div>
                   <div className={`${styles.sportsCard_value}`}>
                     <div className={styles.sportsCard_value_title}>Sale</div>
@@ -1048,9 +1037,6 @@ function ProductsAndCartBoxForSportsCard({
                         <img src="/images/shop-plan-yellow-circle.svg" alt="" />
                       </LazyLoad>
                       <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                      <div className={styles.sportsCard_value_dayprice}>
-                        ${getDayPrice(plan)}/Day
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -1112,7 +1098,6 @@ function ProductsAndCartBoxForSportsCard({
                     <div className={`${styles.sportsCard_value} ${styles.origin}`}>
                       <div className={styles.sportsCard_value_title}>Reg</div>
                       <div className={styles.sportsCard_value_price}>$20</div>
-                      <div className={styles.sportsCard_value_dayprice}>$20/Day</div>
                     </div>
                     <div className={`${styles.sportsCard_value}`}>
                       <div className={styles.sportsCard_value_title}>Sale</div>
@@ -1121,9 +1106,6 @@ function ProductsAndCartBoxForSportsCard({
                           <img src="/images/shop-plan-yellow-circle.svg" alt="" />
                         </LazyLoad>
                         <div className={styles.sportsCard_value_price}>${plan.price}</div>
-                        <div className={styles.sportsCard_value_dayprice}>
-                          ${getDayPrice(plan)}/Day
-                        </div>
                       </div>
                     </div>
                   </div>
